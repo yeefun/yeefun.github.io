@@ -1,0 +1,589 @@
+$color_white: #eaeaea
+$color_purple_background: #424358
+$color_pink: #f687a8
+$color_pink_light: #f6a3a8
+$color_blue: #d8dafa
+
+// preparation
+*
+  font-family: "Crimson Text", "source-han-serif-tc", serif
+  color: $color_white
+  box-sizing: border-box
+  position: relative
+  // border: solid #eaeaea 0.1px
+  font-size: 0px
+  vertical-align: top
+
+html
+  font-size: 10px
+
+html, body
+  margin: 0px
+  padding: 0px
+  background-color: $color_purple_background
+  
+.container
+  margin: 0px 10px 0px 10px
+
+// paragraph
+
+p
+  margin: 0px
+  font-size: 1.8rem
+  letter-spacing: 1.8px
+  line-height: 36px
+  font-weight: 200
+
+.emphasis
+  font-size: 3.2rem
+  font-weight: 600
+  letter-spacing: 4px
+  line-height: 48px
+
+.emphasis_white
+  margin-bottom: 30px
+
+.text_small
+  font-size: 1.4rem
+  font-weight: 200
+  letter-spacing: 1.5px
+  line-height: 26px
+  color: $color_blue
+
+// cover
+.picture_top
+  width: 100%
+  margin-bottom: 102px
+
+// intro
+.container_intro
+  margin-bottom: 204px
+  & p
+    text-align: center
+    width: calc((840 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-bottom: 204px
+  & .emphasis
+    text-align: center
+    width: calc((840 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    letter-spacing: 12px
+  // text-align: justify
+  // text-justify: inter-ideograph
+  // -ms-text-justify: inter-ideograph
+  // -webkit-text-align-last: justify
+  // -moz-text-align-last: justify
+  // &::after
+  //   content: ""
+  //   display: inline-block
+  //   width: 100%
+
+// explain
+.container_explain
+  margin-bottom: 102px
+  & p
+    text-align: center
+    width: calc((840 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+  
+.picture_explain
+  width: 100%
+  
+// monopo
+.container_monopo
+  margin-bottom: 135px
+  top: -28px
+  > .emphasis
+    margin-left: calc((210 / 1260) * 100%)
+  & p
+    display: inline-block
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((105 / 1260) * 100%)
+  & img
+    width: calc((443.4 / 1260) * 100%)
+    top: 10px
+
+// axe
+.container_axe
+  margin-bottom: 204px
+  & p
+    display: inline-block
+    width: calc((292 / 1260) * 100%)
+    vertical-align: middle
+  
+.anima_axe
+  display: inline-block
+  width: calc((300.26 / 1260) * 100%)
+  margin-left: calc((210 / 1260) * 100%)
+  margin-right: calc((122.5 / 1260) * 100%)
+  vertical-align: middle
+  & .america
+    width: 100%
+    animation: america 2s infinite ease
+    z-index: 2
+  & .taiwan
+    width: 100%
+
+// opium
+.container_opium
+  margin-bottom: 255px
+  > .emphasis
+    margin-left: calc((210 / 1260) * 100%)
+    
+.text_opium
+  display: inline-block
+  width: calc((350 / 1260) * 100%)
+  margin-left: calc((210 / 1260) * 100%)
+  margin-right: calc((140 / 1260) * 100%)
+
+.text_opium_ps
+  display: inline-block
+  width: calc((300 / 1260) * 100%)
+  & .emphasis
+    color: $color_pink_light
+    margin-bottom: 12%
+    &:before
+      content: "“"
+      font-family: "思源宋體"
+    &:after
+      content: "”"
+      font-family: "思源宋體"
+  & p
+    color: $color_pink_light
+    text-align: right
+    font-weight: 500
+    margin-bottom: 36%
+  & .text_small
+    float: right
+    width: 70%
+
+// mnp_decline
+.container_mnp_decline
+  margin-bottom: 114px
+  & p
+    display: inline-block
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((70 / 1260) * 100%)
+  & img
+    width: calc((437.74 / 1260) * 100%)
+    top: 10px
+
+// smoke_damage
+.container_smoke_damage
+  margin-bottom: 204px
+  & p
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-bottom: 20px
+  & img
+    width: calc((713.36 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+
+// country & dong
+.container_countrydong
+  margin-bottom: 204px
+  
+.anima_country
+  display: inline-block
+  width: calc((300.43 / 1260) * 100%)
+  margin-left: calc((210 / 1260) * 100%)
+  vertical-align: middle
+  animation: country 3s infinite linear
+
+.anima_dong
+  display: inline-block
+  width: calc((300.43 / 1260) * 100%)
+  // margin-right: calc((210 / 1260) * 100%)
+  vertical-align: middle
+  animation: dong 3s infinite linear
+  
+.text_countrydong
+  display: inline-block
+  width: calc((239.14 / 1260) * 100%)
+  text-align: center
+  vertical-align: middle
+  animation: text_countrydong 3s infinite linear
+
+// fight
+.container_fight_text
+  margin-bottom: 204px
+  & p
+    text-align: center
+    margin-right: auto
+    margin-left: auto
+
+.container_fight_anima
+  margin-bottom: 204px
+    
+.health
+  width: calc((279 / 1260) * 100%)
+  margin-left: calc((130.98 / 1260) * 100%)
+
+.arrow_left
+  width: calc((158.3 / 1260) * 100%)
+  left: 3px
+  z-index: 1
+  animation: arrow_fight 2s infinite cubic-bezier(0.2,0.8,0.8,0.2)
+  
+.legis
+  width: calc((121.43 / 1260) * 100%)
+  animation: legis 2s infinite cubic-bezier(0.2,0.8,0.8,0.2)
+
+.arrow_right
+  width: calc((157.3 / 1260) * 100%)
+  right: 3px
+  animation: arrow_fight 2s infinite cubic-bezier(0.2,0.8,0.8,0.2)
+  
+.business
+  width: calc((282.01 / 1260) * 100%)
+  // margin-right: calc((130.98 / 1260) * 100%)
+
+// smoke_law
+.container_smoke_law
+  margin-bottom: 204px
+  & p
+    text-align: center
+    margin-right: auto
+    margin-left: auto
+
+// problem
+.container_problem
+  margin-bottom: 194px
+  & .anima_problem, .text_problem
+    display: inline-block
+  & .anima_problem
+    width: calc((300.18 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((122.5 / 1260) * 100%)
+  & .text_problem
+    width: calc((275 / 1260) * 100%)
+    vertical-align: top
+    & p
+      margin-top: 28%
+
+.soci_problem, .indivi_problem
+  width: 100%
+  display: block
+
+.indivi_problem
+  animation: indivi_problem 2s infinite ease-in-out
+  top: -10px
+
+// public_damage
+.container_public_damage
+  margin-bottom: 204px
+  & .emphasis
+    margin-left: calc((210 / 1260) * 100%)
+  & p
+    display: inline-block
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((140 / 1260) * 100%)
+  & img
+    width: calc((420 / 1260) * 100%)
+    top: 10px
+
+// damage for child
+.container_damage_child
+  margin-bottom: 163px
+  & p
+    display: inline-block
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((140 / 1260) * 100%)
+  & img
+    width: calc((350 / 1260) * 100%)
+    top: 10px
+    
+// third-hand smoke
+.container_3rd_hand
+  margin-bottom: 178.5px
+  & p
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-bottom: 20px
+  & img
+    width: calc((819.69 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+
+// smoke_change
+.container_change
+  margin-bottom: 357px
+  & p
+    margin-bottom: 153px
+    text-align: center
+  & .respect, .prohibit
+    width: calc((122.72 / 1260) * 100%)
+  & .respect
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((594.56 / 1260) * 100%)
+    animation: respect 4s infinite ease-in-out
+  & .prohibit
+    animation: prohibit 4s infinite ease-in-out
+
+// not over
+.container_notover
+  margin-bottom: 255px
+  & .text_notover
+    margin-left: calc((210 / 1260) * 100%)
+    
+// health community
+.container_community
+  margin-bottom: 153px
+  & .emphasis
+    margin-left: calc((210 / 1260) * 100%)
+  & p
+    display: inline-block
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-right: calc((135 / 1260) * 100%)
+
+.commu_front, .commu_back
+  width: calc((360 / 1260) * 100%)
+  position: absolute
+
+.commu_back
+  opacity: 0.2
+  animation: commu 2s infinite ease-in
+
+// surcharge of tobacco
+.container_surcharge
+  margin-bottom: 163.5px
+  & p
+    width: calc((350 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+    margin-bottom: 127.5px
+  & img
+    width: calc((657.61 / 1260) * 100%)
+    margin-left: calc((210 / 1260) * 100%)
+
+// prison of public damage
+.container_prison
+  margin-bottom: 214.5px
+  & p
+    text-align: center
+.picture_prison
+  width: 100%
+  margin-bottom: 153px
+
+// over
+.container_over
+  margin-bottom: 204px
+  & p
+    text-align: center
+    padding-bottom: 153px
+    &:after
+      content: ""
+      position: absolute
+      bottom: 0px
+      left: 50%
+      transform: translateX(-50%)
+      width: 70px
+      border-top: solid 0.5px #d8dafa
+
+// footer
+.footer
+  margin-bottom: 76.5px
+.footer_left
+  display: inline-block
+  margin-left: calc((210 / 1260) * 100%)
+  margin-right: calc((140 / 1260) * 100%)
+  width: calc((350 / 1260) * 100%)
+  & p
+    font-weight: 600
+    padding-bottom: 2px
+    margin-bottom: 16px
+    &:after
+      content: ""
+      position: absolute
+      left: 0px
+      bottom: 0px
+      width: 140px
+      border-top: solid #d8dafa 0.5px
+
+.footer_right
+  display: inline-block
+  position: absolute
+  margin-right: calc((210 / 1260) * 100%)
+  width: calc((350 / 1260) * 100%)
+  & p
+    font-weight: 600
+    padding-bottom: 2px
+    margin-bottom: 14.5px
+    &:after
+      content: ""
+      position: absolute
+      left: 0px
+      bottom: 0px
+      width: 280px
+      border-top: solid #d8dafa 0.5px
+
+.copyright
+  display: inline-block
+  position: absolute
+  bottom: 0px
+
+.footer_block
+  height: 10px
+  background-color: #bdc9fb
+      
+// keyframes
+
+// america is like axe
+@keyframes america
+  0%
+    top: 0px
+  50%
+    top: 38px
+  100%
+    top: 0px
+
+// country & dong
+@keyframes country
+  0%
+    left: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+    opacity: 1
+  20%
+    left: calc((67.5 / 1260) * 100%)
+    transform: rotate(36deg)
+  40%
+    left: calc((135 / 1260) * 100%)
+    transform: rotate(144deg)
+  60%
+    left: calc((202.5 / 1260) * 100%)
+    transform: rotate(252deg)
+  80%
+    left: calc((270 / 1260) * 100%)
+    transform: rotate(360deg)
+  90%
+    left: calc((270 / 1260) * 100%)
+    transform: rotate(360deg)
+    opacity: 0
+  95%
+    left: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+    opacity: 0
+  100%
+    left: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+    opacity: 0.5
+
+@keyframes dong
+  0%
+    right: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+    opacity: 1
+  20%
+    right: calc((67.5 / 1260) * 100%)
+    transform: rotate(-36deg)
+  40%
+    right: calc((135 / 1260) * 100%)
+    transform: rotate(-144deg)
+  60%
+    right: calc((202.5 / 1260) * 100%)
+    transform: rotate(-252deg)
+  80%
+    right: calc((270 / 1260) * 100%)
+    transform: rotate(-360deg)
+  90%
+    right: calc((270 / 1260) * 100%)
+    transform: rotate(-360deg)
+    opacity: 0
+  95%
+    right: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+    opacity: 0
+  100%
+    opacity: 0.5
+    right: calc((0 / 1260) * 100%)
+    transform: rotate(0deg)
+
+@keyframes text_countrydong
+  0%
+    opacity: 0
+  20%
+    opacity: 0
+  40%
+    opacity: 0.5
+  50%
+    opacity: 1
+  100%
+    opacity: 1
+
+// fight
+@keyframes legis
+  0%
+    transform: translateX(0px)
+  25%
+    transform: translateX(-12px) rotate(-5deg)
+  50%
+    transform: translateX(0px)
+  75%
+    transform: translateX(12px) rotate(5deg)
+  100%
+    transform: translateX(0px)
+
+@keyframes arrow_fight
+  0%
+    transform: translateX(0px)
+  25%
+    transform: translateX(-16px)
+  50%
+    transform: translateX(0px)
+  75%
+    transform: translateX(16px)
+  100%
+    transform: translateX(0px)
+
+// problem
+@keyframes indivi_problem
+  0%
+    opacity: 1
+    transform: translateY(0px)
+  25%
+    opacity: 1
+    transform: translateY(0px)
+  75%
+    transform: translateY(-240px)
+    opacity: 0
+  100%
+    opacity: 0
+
+// change
+@keyframes respect
+  0%
+    transform: rotate(0deg)
+    left: 0px
+  10%
+    transform: rotate(0deg)
+    left: 0px
+  45%
+    opacity: 1
+  80%
+    left: calc((734 / 1260) * 100%)
+    transform: rotate(360deg)
+    opacity: 0
+  100%
+    opacity: 0
+
+@keyframes prohibit
+  0%
+    opacity: 0
+  70%
+    opacity: 0
+  80%
+    opacity: 1
+  100%
+    opacity: 1
+  
+// health community
+@keyframes commu
+  0%
+    opacity: 0.2
+  50%
+    opacity: 1
+  100%
+    opacity: 0.2 
