@@ -1,7 +1,5 @@
-/*--- Color --- */
-/*--- Font --- */
-/*--- Component --- */
-/*--- Preprocessing --- */
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 * {
   font-family: "Noto Sans TC", sans-serif;
 }
