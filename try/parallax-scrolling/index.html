@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>The F2E -  Parallax Scrolling (full)</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/notosanstc.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<!-- 
+設計稿：https://hexschool.github.io/THE_F2E_Design/week8-parallax%20scrolling/#artboard0
+說明：https://www.facebook.com/groups/173311386703334/permalink/210968242937648/
+影片：
+https://www.youtube.com/watch?v=xViDpVyIBoU
+
+-->
+<!--
+尚未完成：
+  - 三角形與圓形的滾動動畫;
+  - 最後的動畫;
+  - 依選項而給不同結果;
+
+問題：
+  - 在滾動部分，有時會因為無法滑到最底，而無法調用函數 onComplete (JS: 197, 307);
+
+-->
+<div class="blue" id="bgBegin">
+  <div class="rect black"></div>
+  <div class="circle blueDark"></div>
+  <svg id="beginStar" width="365" height="370">
+    <polygon points="182.5,0 0,313 365,313"></polygon>
+    <polygon points="0,57 182.5,370 365,57"></polygon>
+  </svg>
+  <header>
+    <h1>幾何人格小測驗</h1>
+    <h3>你是哪類人？方塊、三角，或圓形？</h3>
+  </header>
+  <article class="question">
+    <p class="qnumber">問題 1</p>
+    <h2>如果有一天，你能用足以改變世界規律的力量做一件事，你會…</h2>
+    <p class="qremind">選你心中第一個浮現的答案！</p>
+    <section class="answer">
+      <div class="a1">
+        <p>摧毀所有人類</p>
+      </div>
+      <div class="a1">
+        <p>讓戰爭不再發生</p>
+      </div>
+      <div class="a1">
+        <p>長生不老</p>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="blueDark" id="bgQ2">
+  <div class="shape">
+    <div class="rect pink"></div>
+    <svg width="148" height="128">
+      <polygon points="74,0 0,128 148,128"></polygon>
+    </svg>
+    <div class="circle black"></div>
+  </div>
+  <article class="question">
+    <p class="qnumber">問題 2</p>
+    <h2>快遲到了，此時你遇到一條岔路，但不知道怎麼走，這時你會…</h2>
+    <p class="qremind">選你心中第一個浮現的答案！</p>
+    <section class="answer">
+      <div class="a2">
+        <p>向左走</p>
+      </div>
+      <div class="a2">
+        <p>向右走</p>
+      </div>
+      <div class="a2">
+        <p>打開 Google 地圖</p>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="pink" id="bgQ3">
+  <div class="shape">
+    <svg width="260" height="224">
+      <polygon points="130,0 0,224 260,224"></polygon>
+    </svg>
+    <div class="rect blue"></div>
+    <div class="circle black"></div>
+  </div>
+  <article class="question">
+    <p class="qnumber">問題 3</p>
+    <h2>你正在考試，但你完全沒準備，以致於一題都不會寫，這時你會…</h2>
+    <p class="qremind">選你心中第一個浮現的答案！</p>
+    <section class="answer">
+      <div class="a3">
+        <p>趴下去睡覺</p>
+      </div>
+      <div class="a3">
+        <p>隨便填答案</p>
+      </div>
+      <div class="a3">
+        <p>全部都選 C</p>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="blue" id="bgCalc">
+  <div class="shape">
+    <div class="rect blueDark"></div>
+    <div class="circle white"></div>
+    <svg width="224" height="194">
+      <polygon points="112,0 0,194 224,194"></polygon>
+    </svg>
+  </div>
+  <article class="calcText" id="calcText2">
+    <h2>結果產生中…</h2>
+    <p>往下持續滾動，將出現測驗結果</p>
+  </article>
+  <div class="scrollShape" id="scrollShape1">
+    <div class="pink" id="scrollRect1"></div>
+    <div class="blueDark" id="scrollRect2"></div>
+    <div class="blueDark" id="scrollRect3"></div>
+    <div class="black" id="scrollRect4"></div>
+    <div class="black" id="scrollRect5"></div>
+    <div class="pink" id="scrollRect6"></div>
+    <div class="blueDark" id="scrollRect7"></div>
+    <div class="pink" id="scrollRect8"></div>
+    <div class="black" id="scrollRect9"></div>
+    <div class="pink" id="scrollRect10"></div>
+    <div class="pink" id="scrollRect11"></div>
+  </div>
+  <article class="calcText" id="calcText3">
+    <h2>你是…</h2>
+    <p>往下持續滾動，將出現測驗結果</p>
+  </article>
+</div>
+<div id="bgResult">
+  <article class="resultTitle">
+    <p>你的人格類型是</p>
+    <h2>矩形</h2>
+  </article>
+  <div class="resultShape" id="resultRect">
+    <div class="black" id="resultRect1"></div>
+    <div class="pink" id="resultRect2"></div>
+    <div id="resultRect3"></div>
+  </div>
+  <div class="rect pink" id="moveRect1"></div>
+  <div class="rect pink" id="moveRect2"></div>
+  <div class="rect pink" id="moveRect3"></div>
+  <div class="rect black" id="moveRect4"></div>
+  <div class="rect black" id="moveRect5"></div>
+  <div class="rect black" id="moveRect6"></div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineLite.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
