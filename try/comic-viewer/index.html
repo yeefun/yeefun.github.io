@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>The F2E - Comic Viewer</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp"
+	    crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG"
+	    crossorigin="anonymous">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:400,700,700i'>
+
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<!-- 
+設計稿：https://hexschool.github.io/THE_F2E_Design/week5-comic%20viewer/
+說明：https://www.facebook.com/groups/173311386703334/permalink/195225401178599/
+
+-->
+	<!--
+尚未完成：
+  - 全螢幕模式;
+  - 優化圖片切換（儘量減少使用者等待時間，卻又不是全部頁面直接載入造成伺服器 loading）;
+  - 優化 JS 代碼（將重複的代碼變為 function）;
+  - 點擊的小動畫，給使用者點擊回饋;
+  - 搞懂 JS 打問號之處;
+  - 難道 ".comic-preview" 不能當左or右邊碰到底時，才剛好更換到第一頁or最後一頁，並顯示上or下一章節嗎？（現在的情況是右邊可以，當左邊不行）
+-->
+	<nav>
+		<div class="logo">Comicomic</div>
+	</nav>
+	<main class="comic-home">
+		<div>
+			<div class="ad ad__top">
+				<div class="ad__cross">×</div>
+			</div>
+			<article class="comic-intro">
+				<div class="comic-intro__img"></div>
+				<section class="comic-intro__text">
+					<h1 class="comic-intro__name">MY HEXSCHOOL</h1>
+					<div class="comic-intro__content">
+						<div class="comic-intro__item comic-intro__genre">
+							<h2>Genres</h2>
+							<p>Fusce/vehicula/dolor</p>
+						</div>
+						<div class="comic-intro__item comic-intro__author">
+							<h2>Author</h2>
+							<p>Namae Shiranai</p>
+						</div>
+						<div class="comic-intro__item comic-intro__status">
+							<h2>Status</h2>
+							<p>Ongoing</p>
+						</div>
+						<div class="comic-intro__item comic-intro__rate">
+							<h2>Rate</h2>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="far fa-star"></i>
+						</div>
+						<div class="comic-intro__summary">
+							<h2>Summary</h2>
+							<p>If your banker breaks, you snap; if your apothecary by mistake sends you poison in your pills, you die.
+								<br/>
+								<br/>Therefore, I say, I saw that this situation of mine was the precise situation of every mortal that has this Siamese
+								connexion with a plurality of other mortals.</p>
+						</div>
+					</div>
+				</section>
+			</article>
+			<div class="ad ad__middle">
+				<div class="ad__cross">×</div>
+			</div>
+			<section class="comic-chapter">
+				<div class="comic-chapter__title">All Chapters</div>
+				<div class="comic-chapter__content">
+					<div class="comic-chapter__item">
+						<p>Chapter 1: The F2E Challenge Start!</p>
+					</div>
+					<div class="comic-chapter__item">
+						<p>Chapter 2: Todo List is Going Crazy!</p>
+						<div class="new">NEW</div>
+					</div>
+				</div>
+			</section>
+			<div class="ad ad__bottom">
+				<div class="ad__cross">×</div>
+			</div>
+		</div>
+	</main>
+	<main class="comic-reader">
+		<div>
+			<div class="ad ad__top">
+				<div class="ad__cross">×</div>
+			</div>
+			<section class="comic-tool">
+				<div class="comic-tool__name">My Hexschool</div>
+				<div class="arrow-right"></div>
+				<div class="select comic-tool__chapter">
+					<div class="select-click"></div>
+					<ul class="select__display">
+						<li>Chapter 2</li>
+					</ul>
+					<ul class="select__option select__option--chapter hide"></ul>
+					<div class="select__arrow">
+						<div class="arrow-top"></div>
+						<div class="arrow-bottom"></div>
+					</div>
+				</div>
+				<div class="select comic-tool__page">
+					<div class="select-click"></div>
+					<ul class="select__display">
+						<li>Page 01</li>
+					</ul>
+					<ul class="select__option select__option--page hide"></ul>
+					<div class="select__arrow">
+						<div class="arrow-top"></div>
+						<div class="arrow-bottom"></div>
+					</div>
+				</div>
+				<div class="comic-tool__theme">
+					<i class="fas fa-sun"></i>
+					<div class="theme-switch">
+						<div class="theme-switch__bright"></div>
+						<div class="theme-switch__dark"></div>
+					</div>
+					<i class="far fa-moon"></i>
+				</div>
+			</section>
+			<div class="ad ad__middle">
+				<div class="ad__cross">×</div>
+			</div>
+			<section class="comic-screen">
+				<i class="fas fa-angle-left prev-page"></i>
+				<img class="comic-screen__page" src="https://hexschool.github.io/THE_F2E_Design/week5-comic%20viewer/assets/storyboard-1.png"
+				    alt="" />
+				<i class="fas fa-angle-right next-page"></i>
+			</section>
+			<div class="chapter-tooltips">
+				<div class="chapter-tooltip prev hide">PREV CHAPTER</div>
+				<div class="chapter-tooltip next hide">NEXT CHAPTER</div>
+			</div>
+			<section class="comic-preview">
+				<div class="mask mask--prev">
+					<i class="fas fa-angle-double-left"></i>
+				</div>
+				<div class="page-wrapper"></div>
+				<div class="mask mask--next">
+					<i class="fas fa-angle-double-right"></i>
+				</div>
+			</section>
+			<div class="ad ad__bottom">
+				<div class="ad__cross">×</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/index.js"></script>
+
+</body>
+
+</html>
