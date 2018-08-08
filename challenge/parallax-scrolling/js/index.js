@@ -16,7 +16,7 @@ $("#bgBegin .rect").one("animationend", function () {
 	begin.to("#bgBegin .rect", 0.8, {
 		scale: 8,
 		ease: Power0.easeNone,
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgBegin .rect").remove();
 		}
 	}).
@@ -24,7 +24,7 @@ $("#bgBegin .rect").one("animationend", function () {
 	to("#bgBegin .circle", 0.8, {
 			scale: 8,
 			ease: Power0.easeNone,
-			onComplete: function() {
+			onComplete: function () {
 				$("#bgBegin .circle").remove();
 			}
 		},
@@ -36,14 +36,14 @@ $("#bgBegin .rect").one("animationend", function () {
 		"-=0.6").
 	to("#beginStar", 1, {
 		opacity: 0,
-		onComplete: function() {
+		onComplete: function () {
 			$("#beginStar").remove();
 		}
 	}).
 
 	to("header", 1, {
 			opacity: 0,
-			onComplete: function() {
+			onComplete: function () {
 				$("header").remove();
 				$("#bgBegin .question, #bgQ2").show();
 				$("body").css("overflow", "auto");
@@ -52,14 +52,14 @@ $("#bgBegin .rect").one("animationend", function () {
 		"-=1").
 	from("#bgBegin .question", 1.2, {
 		opacity: 0,
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgBegin").css("height", "auto");
 		}
 	}).
 
 	to("#bgQ2 .shape", 1, {
 		width: 422,
-		onStart: function() {
+		onStart: function () {
 			canClick = true;
 		}
 	}).
@@ -75,7 +75,7 @@ $("#bgBegin .rect").one("animationend", function () {
 		"q1ShapeEnter").
 	to("#bgQ2 .circle", 1, {
 			top: 504,
-			onComplete: function() {
+			onComplete: function () {
 				$("#bgQ2 .rect").css("animation-name", "q1Rect");
 				$("#bgQ2 svg").css("animation-name", "q1Tri");
 				$("#bgQ2 .circle").css("animation-name", "q1Cir");
@@ -93,7 +93,7 @@ $(".answer .a1").click(function () {
 	canClick = false;
 
 	var q2 = new TimelineLite({
-		onStart: function() {
+		onStart: function () {
 			$("#bgQ2").css({
 				height: "100vh",
 				overflow: "auto"
@@ -105,7 +105,7 @@ $(".answer .a1").click(function () {
 
 	q2.to("#bgQ2", 0.4, {
 		width: "100%",
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgBegin").remove();
 			$("#bgQ2 .question, #bgQ3").show();
 			$("#bgQ2").css("flex-shrink", "initial");
@@ -118,7 +118,7 @@ $(".answer .a1").click(function () {
 
 	to("#bgQ3 .shape", 0.8, {
 		width: 422,
-		onStart: function() {
+		onStart: function () {
 			canClick = true;
 		}
 	}).
@@ -134,7 +134,7 @@ $(".answer .a1").click(function () {
 		"q2ShapeEnter-=0.1").
 	to("#bgQ3 .circle", 1, {
 			top: 370,
-			onComplete: function() {
+			onComplete: function () {
 				$("#bgQ3 svg").css("animation-name", "q2Tri");
 				$("#bgQ3 .rect").css("animation-name", "q2Rect");
 				$("#bgQ3 .circle").css("animation-name", "q2Cir");
@@ -152,7 +152,7 @@ $(".answer .a2").click(function () {
 	canClick = false;
 
 	var q3 = new TimelineLite({
-		onStart: function() {
+		onStart: function () {
 			$("#bgQ3").css({
 				height: "100vh",
 				overflow: "auto"
@@ -164,7 +164,7 @@ $(".answer .a2").click(function () {
 
 	q3.to("#bgQ3", 0.4, {
 		width: "100%",
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgQ2").remove();
 			$("#bgQ3 .question, #bgCalc").show();
 			$("#bgQ3").css("flex-shrink", "initial");
@@ -173,14 +173,14 @@ $(".answer .a2").click(function () {
 
 	from("#bgQ3 .question", 0.8, {
 		opacity: 0,
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgQ3").css("height", "auto");
 		}
 	}).
 
 	to("#bgCalc .shape", 0.8, {
 		width: 422,
-		onStart: function() {
+		onStart: function () {
 			canClick = true;
 		}
 	}).
@@ -196,7 +196,7 @@ $(".answer .a2").click(function () {
 		"q3ShapeEnter-=0.1").
 	to("#bgCalc svg", 1, {
 			top: 426,
-			onComplete: function() {
+			onComplete: function () {
 				$("#bgCalc .circle").css("animation-name", "q3Cir");
 				$("#bgCalc .rect").css("animation-name", "q3Rect");
 				$("#bgCalc svg").css("animation-name", "q3Tri");
@@ -212,7 +212,7 @@ $(".answer .a3").click(function () {
 	if (!canClick) return;
 
 	var beforeCalc = new TimelineLite({
-		onStart: function() {
+		onStart: function () {
 			$("#bgQ3 .question, #bgCalc .shape").remove();
 			$("#bgCalc").css({
 				display: "flex",
@@ -222,14 +222,20 @@ $(".answer .a3").click(function () {
 	});
 
 	var calc = new TimelineLite({
-		onStart: function() {
+		onStart: function () {
 			calc.pause();
+			$(window).scroll(function () {
+				var scrollY = window.scrollY;
+				var pageHeight = $("body").height() - window.innerHeight;
+				var scrollProgress = scrollY / pageHeight;
+				calc.progress(scrollProgress);
+			});
 		}
 	});
 
 	beforeCalc.to("#bgCalc", 0.4, {
 		width: "100%",
-		onComplete: function() {
+		onComplete: function () {
 			$("#bgQ3").remove();
 			$("#bgCalc #calcText2").css("display", "flex");
 			$("#bgCalc").css("position", "fixed");
@@ -247,14 +253,6 @@ $(".answer .a3").click(function () {
 	add(calc);
 
 	// Calc
-	$(window).scroll(function () {
-		var scrollY = window.scrollY;
-		var pageHeight = $("body").height() - window.innerHeight;
-		var scrollProgress = scrollY / pageHeight;
-		console.log(scrollProgress)
-		calc.progress(scrollProgress);
-	});
-
 	calc.to("#scrollRect1", 0.4, {
 		top: "-8%",
 		left: ww + 64
@@ -347,7 +345,7 @@ $(".answer .a3").click(function () {
 
 	to("#scrollRect11", 0.6, {
 			transform: "scale(" + ww + ") translate(-50%, 36%) rotate(30deg)",
-			onComplete: function() {
+			onComplete: function () {
 				$("#bgCalc").css("background-color", "#ff3c82");
 				$("#scrollRect11, #calcText2, #scrollShape1").remove();
 				$("#calcText3").css("display", "flex");
@@ -365,7 +363,7 @@ $(".answer .a3").click(function () {
 var result = function result() {
 
 	var result = new TimelineLite({
-		onStart: function() {
+		onStart: function () {
 			$("#bgResult").css("display", "flex");
 			$("body").css("height", "unset");
 			$("#bgCalc").remove();
