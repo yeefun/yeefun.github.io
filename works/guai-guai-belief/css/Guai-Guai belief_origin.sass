@@ -1,0 +1,1616 @@
+/* CSS reset */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+	margin: 0
+	padding: 0
+	border: 0
+	font-size: 100%
+	font: inherit
+	vertical-align: baseline
+
+// HTML5 display-role reset for older browsers
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+	display: block
+body
+	line-height: 1
+ol, ul
+	list-style: none
+blockquote, q
+	quotes: none
+blockquote
+	&:before, &:after
+		content: ''
+		content: none
+q
+	&:before, &:after
+		content: ''
+		content: none
+table
+	border-collapse: collapse
+	border-spacing: 0
+
+/* prepare */
+
+// import
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css)
+
+// color
+$color-blue: #102d53
+$color-green: #17816f
+$color-yellow: #e5830e
+$color-red: #db2b18
+$color-gray: #edebde
+
+// font
+$font-base-size: 10px
+$font-base-height: 10px
+
+// mixin
+@mixin mx-auto
+	margin-left: auto
+	margin-right: auto
+
+/* main */
+
+// common
+*
+	position: relative
+
+// html
+// 	overflow: -moz-hidden-unscrollable // 不能直接用 hidden，不然 Chrome 的其它 hidden 會失效。
+// 	height: 100%
+
+body
+	font-family: "Roboto Condensed", "Noto Sans TC", sans-serif
+	background-color: $color-gray
+	font-weight: 300
+	// -ms-overflow-style: none
+	// height: 100%
+	// width: calc(100vw + 18px)
+	// overflow: auto
+	// &::-webkit-scrollbar
+	// 	display: none
+
+p
+	color: $color-blue
+	letter-spacing: 0.5px
+	font-size: $font-base-size*1.8
+	word-wrap: break-word
+
+span
+	font-family: "Noto Sans TC", sans-serif
+
+.small-text
+	font-size: $font-base-height*1.4
+	color: $color-green
+
+.mb-zero
+	margin-bottom: 0px !important
+
+h3
+	color: $color-blue
+	letter-spacing: 0.5px
+	font-size: $font-base-size*2
+	line-height: $font-base-height*3.6
+
+button
+	color: $color-blue
+	letter-spacing: 0.5px
+	font-size: $font-base-size*1.8
+	line-height: $font-base-height*2.8
+	font-weight: 300
+	cursor: pointer
+	background-color: transparent
+	padding: 8px 16px
+	border-radius: 8px
+	border: 0.8px solid $color-blue
+	user-select: none
+
+a
+	cursor: pointer
+	border-bottom: 0.8px solid
+	&:link
+		text-decoration: none
+	&:visited
+		text-decoration: none
+	&:hover
+		text-decoration: none
+		border-bottom: 0px
+	&:active
+		text-decoration: none
+
+.multi-choice-descri
+	font-size: $font-base-size*1.8
+	line-height: $font-base-height*3.2
+	text-align: center
+
+.multi-choice-que
+	text-align: center
+	font-size: $font-base-size*1.8
+	line-height: $font-base-height*3.2
+
+.multi-choice-num
+	text-align: center
+	font-size: $font-base-size*3.6
+	font-family: "Source Sans Pro", sans-serif
+	font-style: italic
+
+.multi-choice-opt, .multi-choice-ans
+	font-size: $font-base-size*1.8
+	line-height: $font-base-height*3.2
+
+.arrow-divide
+	+mx-auto
+	height: 10px
+	width: 10px
+	border: solid $color-blue
+	border-radius: 0.8px
+	border-width: 1.8px 0px 0px 1.2px
+	transform: rotate(-135deg)
+.ardv-1
+	animation: arrow-1 2s ease infinite
+.ardv-2
+	top: -2px
+	animation: arrow-2 2s ease infinite
+
+.content-display
+	display: none
+	// width: 100vw
+
+// navbar
+.navbar
+	background-color: #edebd3
+	padding: 24px 48px 20px 36px
+	transition: 0.2s
+	& img
+		width: 66.1px
+		height: 100%
+		padding-bottom: 8px
+		margin-right: 16px
+	& .nav-text
+		font-size: $font-base-size*1.6
+		line-height: $font-base-height*2.4
+		letter-spacing: 1.2px
+		font-weight: 300
+		font-family: "Source Code Pro", "Noto Sans TC", sans-serif
+		padding: 6px 0px
+		transition: 0.2s
+	& a
+		border-bottom: none
+	& .navbar-toggler
+		top: -4.8px
+		border-radius: 6px
+		border: 1.2px solid rgba(150,149,141,0.4)
+		transition: 0.2s
+		padding: 4px 12px 6px 12px
+		&:focus
+			outline: none
+		&:hover
+			box-shadow: 0px 0px 0px 1.6px rgba(150, 149, 141, 0.4)
+		& span
+			width: 16px
+			height: 16px
+
+.navbar-light .navbar-nav .nav-link
+	color: $color-blue
+	&:hover
+		color: $color-green
+
+// opening
+header
+	overflow: hidden
+	// width: 100vw
+	& .openimg-top, .openimg-bottom
+		min-width: 997.91px
+	& .openimg-top
+		top: 0
+	& .openimg-bottom
+		bottom: 0
+	& .head-title
+		display: none
+		margin-top: 48px
+		margin-bottom: 52px
+	& h1, h2
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-weight: 700
+	& h1
+		font-size: $font-base-size*3.2
+		line-height: $font-base-height*4
+		& span
+			font-weight: 400
+	& h2
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+	& .subtitle
+		margin-top: 24px
+		left: -16px
+		& img, h2
+			display: inline-block
+			vertical-align: middle
+		& img
+			width: 99.2px
+			margin-right: 24px
+	& .opening
+		// display: none
+		margin-top: 56px
+		margin-bottom: 56px
+		& p
+			+mx-auto
+			opacity: 0
+			display: flex
+			text-align: center
+			font-size: $font-base-size*2
+			line-height: $font-base-height*3.6
+			overflow: hidden
+			white-space: nowrap
+			border-right: 0.8px solid transparent
+			&:nth-child(1)
+				width: 266.5px
+				animation: opening1 2.8s steps(13) both, cursor1 1s steps(1) 4
+				animation-delay: 2.1s
+			&:nth-child(2)
+				width: 266.5px
+				animation: opening2 2.8s steps(13) both, cursor2 1s steps(1) 4
+				animation-delay: 6.1s
+			&:nth-child(3)
+				width: 205px
+				animation: opening3 1.8s steps(10) both, cursor3 1s steps(1) 2
+				animation-delay: 10.1s
+			&:nth-child(4)
+				width: 266.5px
+				animation: opening4 2.8s steps(13) both, cursor4 1s steps(1) 4
+				animation-delay: 12.1s
+			&:nth-child(5)
+				width: 248px
+				animation: opening5 2.8s steps(12) both, cursor5 1s steps(1) 4
+				animation-delay: 16.1s
+			&:nth-child(6)
+				opacity: 1
+				width: 1px
+				animation: cursor6 0.8s steps(1) 1
+				animation-delay: 20.1s
+			&:nth-child(7)
+				width: 225.5px
+				animation: opening7 1.8s steps(11) both, cursor7 1s steps(1) 3
+				animation-delay: 21.1s
+			&:nth-child(8)
+				opacity: 1
+				width: 1px
+				animation: cursor8 0.8s steps(1) 1
+				animation-delay: 24.1s
+			&:nth-child(9)
+				width: 225.5px
+				animation: opening9 1.8s steps(11) both, cursor9 1s steps(1) 3
+				animation-delay: 25.1s
+			&:nth-child(10)
+				width: 287.8px
+				animation: opening10 3s steps(14) both, cursor10 1s steps(1) infinite
+				animation-delay: 28.1s
+
+// keyframes
+// opening
+@keyframes opening1
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 266.5px
+		opacity: 1
+@keyframes opening2
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 266.5px
+		opacity: 1
+@keyframes opening3
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 205px
+		opacity: 1
+@keyframes opening4
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 266.5px
+		opacity: 1
+@keyframes opening5
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 248px
+		opacity: 1
+@keyframes opening7
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 225.5px
+		opacity: 1
+@keyframes opening9
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 225.5px
+		opacity: 1
+@keyframes opening10
+	0%
+		width: 0
+		opacity: 1
+	100%
+		width: 287.8px
+		opacity: 1
+
+// cursor
+@keyframes cursor1
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor2
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor3
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor4
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor5
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor6
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor7
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor8
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor9
+	50%
+		border-color: rgba(16,45,83,0.8)
+@keyframes cursor10
+	50%
+		border-color: rgba(16,45,83,0.8)
+
+// image of engineer
+.engin-img
+	& .container
+		margin-top: 80px
+	& .multi-choice-descri
+		margin-bottom: 32px
+	& .btn-choice-play
+		margin-left: 16px
+		margin-right: 16px
+	& .img-choice-ans
+		margin-bottom: 32px
+		& .grade
+			text-align: center
+			font-size: $font-base-height*16
+			font-weight: 300
+			font-style: italic
+			margin-right: 8px
+		& .respond
+			line-height: $font-base-height*3.2
+			margin-left: 8px
+	& button
+		margin: 0px 3.2px 16px 3.2px
+		transition: 0.2s ease
+		&:hover
+			box-shadow: -1.6px 1.6px 0px 0px rgba(16,45,83,0.8)
+			transform: translate(1.6px,-1.6px)
+			font-weight: 400
+		&:focus
+			outline: none
+
+// intro
+.belief-intro
+	& .container
+		margin-top: 24px
+		margin-bottom: 32px
+	& p
+		line-height: $font-base-height*3.2
+		margin-bottom: 16px
+		text-align: justify
+		& .small-text-plus
+			font-family: "Roboto Condensed", sans-serif
+	& .belief-picture
+		overflow: hidden
+		margin: 32px 16px 12px 16px
+		border-radius: 12px
+		border: 0.8px solid $color-green
+		box-shadow: 4px 2px 0px 0px rgba(23, 129, 111, 0.8)
+		& img
+			max-width: 100%
+			vertical-align: middle
+	& .picture-note
+		font-size: $font-base-size*1.6
+		line-height: $font-base-height*2.8
+		margin-bottom: 0px
+		margin-left: 16px
+		margin-right: 16px
+		text-align: center
+		color: $color-green
+	& .note-end
+		margin-bottom: 32px
+
+// engineer how to practice
+.practice
+	opacity: 0
+	transform: translateY(20px)
+	& .container
+		margin-top: 24px
+		margin-bottom: 16px
+	& .multi-choice-descri
+		margin-bottom: 24px
+	& .mtc-1, .mtc-2, .mtc-3
+		&:after
+			content: ""
+			position: absolute
+			left: 50%
+			transform: translateX(-50%)
+			bottom: 0
+			width: 32px
+			height: 1px
+			border-bottom: 0.8px dashed $color-blue
+		& .multi-choice-opt
+			cursor: pointer
+			transition: 0.2s ease
+			&:hover
+				transform: translate(1.6px,-1.6px)
+	& .multi-choice
+		padding-top: 8px
+		padding-bottom: 32px
+		margin-bottom: 64px
+		& .multi-choice-num
+			margin-bottom: 8px
+			top: -16px
+		& .multi-choice-que
+			margin-bottom: 8px
+		& .multi-choice-opt
+			text-align: center
+			padding: 24px 8px
+		& .num
+			font-family: "Source Sans Pro", sans-serif
+			text-align: center
+		& .mtco-img
+			padding: 24px 16px
+		& img
+			+mx-auto
+			width: 92%
+			height: 92%
+			display: block
+		& .multi-choice-ans
+			text-align
+			position: absolute
+			left: 50%
+			top: 50%
+			transform: translate(-50%,-50%)
+			cursor: pointer
+			z-index: -1
+		& .yellow-text, .green-text, .red-text
+			font-size: $font-base-size*2.4
+			line-height: $font-base-height*3.4
+			font-weight: 400
+			z-index: 99
+		& #guai-yt, #guai-gt, #guai-rt, .mtca
+			transition: 0.32s ease
+		& #guai-red
+			top: 2px
+	& .mtc-3
+		margin-bottom: 48px
+	& .mtc-4
+		margin-bottom: 0px
+
+// Guai-Guai & bye-bye
+.byebye
+	opacity: 0
+	transform: translateY(20px)
+	& p 
+		line-height: $font-base-height*3.2
+		margin-bottom: 16px
+		text-align: justify
+
+// is Guai-Guai superstitious?
+.superstition
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .scientist
+		margin-top: 16px
+		margin-bottom: 16px
+		& p 
+			line-height: $font-base-height*3.2
+			text-align: justify
+			margin-bottom: 16px
+		& .message
+			margin: 32px 16px
+			& .name
+				line-height: $font-base-height*2
+				font-size: $font-base-size*1.6
+				top: 6px
+			& .name-1
+				color: $color-green
+			& .name-2
+				text-align: right
+				color: $color-yellow
+			& .name-plus
+				top: 28px
+			& .mesg-1
+				padding-left: 12px
+			& .mesg-2
+				padding-right: 12px
+			& .content
+				padding: 24px 32px
+				border: 1.6px solid
+				border-radius: 12px
+			& .ct-1
+				border-color: $color-green
+				box-shadow: 4px 2px 0px 0px rgba(23,129,111,0.8)
+				& p
+					color: $color-green
+			& .ct-2
+				border-color: $color-yellow
+				box-shadow: -4px 2px 0px 0px rgba(229,131,14,0.8)
+				& p
+					color: $color-yellow
+			& .point1
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-green
+				transform: rotate(-90deg)
+				left: -28px
+				top: 18px
+			& .point2
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(-90deg)
+				left: -24px
+				top: 16px
+			& .point3
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-yellow
+				transform: rotate(90deg)
+				right: -28px
+				top: 18px
+			& .point4
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(90deg)
+				right: -24px
+				top: 16px
+
+// low-tolerant of risk
+.low-tolerant-risk
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .risk-text
+		margin-top: 16px
+		margin-bottom: 16px
+		& p 
+			line-height: $font-base-height*3.2
+			margin-bottom: 16px
+			text-align: justify
+		& a
+			color: $color-blue
+			border-bottom-color: $color-green
+			&:link
+				color: $color-blue
+			&:hover
+				color: $color-green
+			&:active
+				color: $color-blue
+		& .message
+			margin: 32px 16px
+			& .name
+				line-height: $font-base-height*2
+				font-size: $font-base-size*1.6
+				top: 6px
+			& .name-2
+				text-align: right
+				color: $color-yellow
+			& .mesg-2
+				padding-right: 12px
+			& .content
+				padding: 24px 32px
+				border: 1.6px solid
+				border-radius: 12px
+			& .ct-2
+				border-color: $color-yellow
+				box-shadow: -4px 2px 0px 0px rgba(229,131,14,0.8)
+				& p
+					color: $color-yellow
+			& .point3
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-yellow
+				transform: rotate(90deg)
+				right: -28px
+				top: 18px
+			& .point4
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(90deg)
+				right: -24px
+				top: 16px
+
+// three types of believers
+.believer-type
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .three-types
+		margin-top: 16px
+		margin-bottom: 16px
+		& .types-text
+			& p
+				line-height: $font-base-height*3.2
+				margin-bottom: 16px
+				text-align: justify
+		& .believer-graph
+			margin-left: 16px
+			margin-right: 16px
+			& .axis
+				font-size: $font-base-size*1.8
+				line-height: $font-base-height*3.2
+				& .axis-text2
+					text-align: right
+			& .axis-top
+				margin-top: 24px
+			& .arrow-top
+				margin-top: 16px
+				margin-bottom: 40px
+			& .arrow-bottom
+				margin-top: 40px
+				margin-bottom: 16px
+			& .arrow-left, .arrow-right
+				height: 16px
+				width: 16px
+				border: solid $color-blue
+				border-radius: 3.2px
+			& .arrow-left
+				border-width: 2.4px 0px 0px 2.4px
+				transform: rotate(-45deg)
+			& .arrow-right
+				border-width: 2.4px 2.4px 0px 0px
+				transform: rotate(45deg)
+				float: right
+			& .arrow-body
+				height: 16px
+				&:after
+					content: ""
+					position: absolute
+					width: 140%
+					height: 1px
+					left: 50%
+					top: 50%
+					transform: translateX(-50%)
+					border-top: 1.6px solid $color-blue
+					border-radius: 3.2px
+			& button
+				transition: 0.2s ease
+				margin: 0px 2px
+				background-color: $color-gray
+				&:hover
+					box-shadow: -1.6px 1.6px 0px 0px rgba(16,45,83,0.8)
+					transform: translate(1.6px,-1.6px)
+					font-weight: 400
+				&:focus
+					outline: none
+			& .type:after
+				content: ""
+				position: absolute
+				width: 64%
+				height: 1px
+				left: 50%
+				top: 50%
+				transform: translateX(-50%)
+				border-top: 0.8px solid $color-blue
+				border-radius: 3.2px
+				z-index: -2
+			& .respond
+				margin-top: 40px
+				margin-bottom: 32px
+				padding: 24px 32px
+				border: 1.6px solid $color-green
+				border-radius: 12px
+				box-shadow: 4px 2px 0px 0px rgba(23, 129, 111, 0.8)
+				& .descri
+					color: $color-green
+				& .point1
+					position: absolute
+					border-width: 20px
+					border-style: solid
+					border-color: transparent
+					border-bottom-color: $color-green
+					top: -41px
+				& .point2
+					position: absolute
+					border-width: 20px
+					border-style: solid
+					border-color: transparent
+					border-bottom-color: $color-gray
+					top: -37px
+		& .descri
+			+mx-auto
+			font-size: $font-base-size*1.8
+			line-height: $font-base-height*3.2
+			text-align: justify
+		& h4
+			letter-spacing: 0.5px
+			font-size: $font-base-size*2
+			line-height: $font-base-height*3.2
+			+mx-auto
+			text-align: center
+			margin-bottom: 8px
+			font-weight: 400
+		& .factor
+			margin: 32px 16px
+			margin-top: 40px
+			padding: 24px 32px
+			border: 1.6px solid $color-blue
+			border-radius: 12px
+			box-shadow: 0px 2px 0px 0px rgba(16, 45, 83, 0.8)
+			& .descri
+				margin-bottom: 24px
+			& .descri-3
+				margin-bottom: 0px
+			& h4
+				text-align: left
+				color: $color-blue
+			& .point1
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-blue
+				left: 5.4%
+				top: -41px
+			& .point2
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				left: 4.8%
+				top: -37px
+
+// double-sided of Guai-Guai
+.double-side
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .double-side-test
+		margin-top: 16px
+		margin-bottom: 16px
+		& .multi-choice-descri
+			margin-bottom: 24px
+		& .mtc-1
+			&:after
+				content: ""
+				position: absolute
+				left: 50%
+				transform: translateX(-50%)
+				bottom: 0
+				width: 32px
+				height: 1px
+				border-bottom: 0.8px dashed $color-blue
+		& .mtc-1, .mtc-2
+			& .multi-choice-opt
+				cursor: pointer
+				transition: 0.2s ease
+				&:hover
+					transform: translate(1.6px,-1.6px)
+		& .multi-choice
+			padding-top: 8px
+			padding-bottom: 32px
+			margin-bottom: 64px
+			& .multi-choice-num
+				margin-bottom: 8px
+				top: -16px
+			& .multi-choice-que
+				margin-bottom: 8px
+			& .multi-choice-opt
+				text-align: center
+				padding: 24px 8px
+			& .num
+				font-family: "Source Sans Pro", sans-serif
+				text-align: center
+			& .mtco-img
+				padding: 24px 16px
+			& img
+				+mx-auto
+				max-width: 100%
+				width: 92%
+				display: block
+			& .multi-choice-ans
+				text-align: cneter
+				position: absolute
+				left: 50%
+				top: 50%
+				transform: translate(-50%,-50%)
+				cursor: pointer
+				z-index: -1
+			& .yellow-text, .green-text, .red-text
+				font-size: $font-base-size*2.4
+				line-height: $font-base-height*3.4
+				font-weight: 400
+			& .mtca
+				transition: 0.32s ease
+		& .mtc-2
+			margin-bottom: 0px
+	& .no-blame
+		opacity: 0
+		transform: translateY(20px)
+		margin-top: 24px
+		margin-bottom: 16px
+		& p 
+			line-height: $font-base-height*3.2
+			margin-bottom: 16px
+			text-align: justify
+		& .small-text-plus
+			font-family: "Roboto Condensed", sans-serif
+
+// collective symbol
+.collective-symbol
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .collective-picture
+		margin-top: 16px
+		margin-bottom: 16px
+		& p 
+			line-height: $font-base-height*3.2
+			margin-bottom: 16px
+			text-align: justify
+		& .picture
+			margin-top: 40px
+			margin-bottom: 32px
+			margin-left: 16px
+			margin-right: 16px
+			padding: 24px 32px
+			border: 1.6px solid $color-blue
+			border-radius: 12px
+			box-shadow: 0px 2px 0px 0px rgba(16, 45, 83, 0.8)
+			& p
+				color: $color-blue
+			& .point1
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-blue
+				left: 5.4%
+				top: -41px
+			& .point2
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				left: 4.8%
+				top: -37px
+
+// Guai-Guai is funny
+.funny
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& .funny-message
+		margin-top: 16px
+		margin-bottom: 16px
+		& p
+			line-height: $font-base-height*3.2
+			margin-bottom: 16px
+			text-align: justify
+		& .message
+			margin: 32px 16px
+			& .name
+				line-height: $font-base-height*2
+				font-size: $font-base-size*1.6
+				top: 6px
+			& .name-1
+				color: $color-green
+			& .name-2
+				text-align: right
+				color: $color-yellow
+			& .mesg-1
+				padding-left: 12px
+			& .mesg-2
+				padding-right: 12px
+			& .content
+				padding: 24px 32px
+				border: 1.6px solid
+				border-radius: 12px
+			& .ct-1
+				border-color: $color-green
+				box-shadow: 4px 2px 0px 0px rgba(23, 129, 111, 0.8)
+				& p
+					color: $color-green
+			& .ct-2
+				border-color: $color-yellow
+				box-shadow: -4px 2px 0px 0px rgba(229, 131, 14, 0.8)
+				& p
+					color: $color-yellow
+			& .point1
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-green
+				transform: rotate(-90deg)
+				left: -28px
+				top: 18px
+			& .point2
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(-90deg)
+				left: -24px
+				top: 16px
+			& .point3
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-yellow
+				transform: rotate(90deg)
+				right: -28px
+				top: 18px
+			& .point4
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(90deg)
+				right: -24px
+				top: 16px
+
+// marketing-strategy
+.marketing-strategy
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& h3
+		text-align: center
+		color: $color-blue
+		letter-spacing: 1.6px
+		font-size: $font-base-size*2.4
+		line-height: $font-base-height*3.4
+		font-weight: 700
+		margin: 32px 0px
+	& a
+		color: $color-blue
+		border-bottom-color: $color-green
+		&:link
+			color: $color-blue
+		&:hover
+			color: $color-green
+		&:active
+			color: $color-blue
+	& .borrow-example
+		margin-top: 16px
+		margin-bottom: 48px
+		& p
+			line-height: $font-base-height*3.2
+			margin-bottom: 16px
+			text-align: justify
+		& .message
+			margin: 32px 16px
+			& .name
+				line-height: $font-base-height*2
+				font-size: $font-base-size*1.6
+				top: 6px
+			& .name-1
+				color: $color-green
+			& .name-2
+				color: $color-yellow
+			& .name-3
+				text-align: right
+				color: $color-yellow
+			& .name-plus
+				top: 28px
+			& .content
+				padding: 24px 32px
+				border: 1.6px solid
+				border-radius: 12px
+			& .mesg-1
+				padding-left: 12px
+				& .content
+					border-color: $color-green
+					box-shadow: 4px 2px 0px 0px rgba(23, 129, 111, 0.8)
+				& p
+					color: $color-green
+				& .point1
+					border-bottom-color: $color-green
+			& .mesg-2
+				padding-left: 12px
+				& .content
+					border-color: $color-yellow
+					box-shadow: 4px 2px 0px 0px rgba(229, 131, 14, 0.8)
+				& p
+					color: $color-yellow
+				& .point1
+					border-bottom-color: $color-yellow
+			& .mesg-3
+				padding-right: 12px
+				& .content
+					border-color: $color-yellow
+					box-shadow: -4px 2px 0px 0px rgba(229, 131, 14, 0.8)
+				& p
+					color: $color-yellow
+			& .point1
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				transform: rotate(-90deg)
+				left: -28px
+				top: 18px
+			& .point2
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(-90deg)
+				left: -24px
+				top: 16px
+			& .point3
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-yellow
+				transform: rotate(90deg)
+				right: -28px
+				top: 18px
+			& .point4
+				position: absolute
+				border-width: 20px
+				border-style: solid
+				border-color: transparent
+				border-bottom-color: $color-gray
+				transform: rotate(90deg)
+				right: -24px
+				top: 16px
+		& .mesg-4
+			margin-bottom: 0px
+			& .p-end
+				font-size: $font-base-size*2
+				line-height: $font-base-height*3.2
+				font-weight: 500
+
+// end of call-on
+.end-callon
+	opacity: 0
+	transform: translateY(20px)
+	overflow: hidden
+	& img
+		max-width: 72.27px
+		min-width: 50.84px
+		height: 150px
+		width: 100%
+		vertical-align: middle
+	& .end-text
+		margin: 16px 0px
+		& p
+			text-align: justify
+			margin-left: 16px
+			margin-right: 16px
+			color: $color-blue
+			line-height: $font-base-height*2.8
+			margin-bottom: 18px
+
+// footer
+footer
+	margin-top: 48px
+	margin-bottom: 48px
+	& p
+		line-height: $font-base-height*3.2
+		margin-bottom: 16px
+		text-align: justify
+	& cite
+		display: block
+		font-size: $font-base-size*1.6
+		line-height: $font-base-height*2.8
+		margin-bottom: 12px
+		text-align: justify
+		color: $color-green
+		letter-spacing: 0.5px
+		word-wrap: break-word
+	& .message
+		margin: 32px 16px
+		& .name
+			line-height: $font-base-height*2
+			font-size: $font-base-size*1.6
+			top: 6px
+		& .name-1
+			color: $color-green
+		& .name-2
+			text-align: right
+			color: $color-yellow
+			top: -6px
+		& .mesg-1
+			padding-left: 12px
+		& .mesg-2
+			padding-right: 12px
+		& .content
+			padding: 24px 32px
+			border: 1.6px solid
+			border-radius: 12px
+		& .ct-1
+			border-color: $color-green
+			box-shadow: 4px 2px 0px 0px rgba(23, 129, 111, 0.8)
+			& p
+				color: $color-green
+		& .ct-2
+			border-color: $color-yellow
+			box-shadow: -4px 2px 0px 0px rgba(229, 131, 14, 0.8)
+			& p
+				color: $color-yellow
+				font-family: "Source Sans Pro", "Noto Sans TC", sans-serif
+		& .point1
+			position: absolute
+			border-width: 20px
+			border-style: solid
+			border-color: transparent
+			border-bottom-color: $color-green
+			transform: rotate(-90deg)
+			left: -28px
+			top: 18px
+		& .point2
+			position: absolute
+			border-width: 20px
+			border-style: solid
+			border-color: transparent
+			border-bottom-color: $color-gray
+			transform: rotate(-90deg)
+			left: -24px
+			top: 16px
+		& .point3
+			position: absolute
+			border-width: 20px
+			border-style: solid
+			border-color: transparent
+			border-bottom-color: $color-yellow
+			transform: rotate(90deg)
+			right: -28px
+			top: 18px
+		& .point4
+			position: absolute
+			border-width: 20px
+			border-style: solid
+			border-color: transparent
+			border-bottom-color: $color-gray
+			transform: rotate(90deg)
+			right: -24px
+			top: 16px
+		& a
+			color: $color-green
+			border-bottom-color: $color-blue
+			&:link
+				color: $color-green
+			&:hover
+				color: $color-blue
+			&:active
+				color: $color-green
+	& .message-1
+		margin-top: 0px
+	& .message-end
+		margin-bottom: 0px
+		& .content
+			border-color: $color-blue
+			box-shadow: 0px 2px 0px 0px rgba(16, 45, 83, 0.8)
+		& p
+			text-align: center
+			font-family: "Source Sans Pro", "Noto Sans TC", sans-serif
+
+// display
+// header, .low-tolerant-risk, .double-side, .collective-symbol, .funny, .engin-img, .practice, .marketing-strategy, .superstition
+	// display: none
+	
+/* addClass */
+
+// common
+.slide
+	animation: slide 0.8s forwards ease
+@keyframes slide
+	0%
+		opacity: 0
+		transform: translateY(20px)
+	100%
+		opacity: 1
+		transform: translateY(0px)
+
+.fw-medium
+	font-weight: 400
+.green-text
+	color: $color-green
+.yellow-text
+	color: $color-yellow
+.red-text
+	color: $color-red
+
+// image of engineer
+.stop-nav
+.stop-btn
+.disabled-btn
+	border-color: #96958d
+	color: #96958d
+
+/* keyframes */
+
+arrow-divide
+@keyframes arrow-1
+	0%
+		top: 0px
+	50%
+		top: 8px
+	100%
+		top: 0px
+@keyframes arrow-2
+	0%
+		top: -2px
+	50%
+		top: 6px
+	100%
+		top: -2px
+
+/* media queries */
+
+@media (min-width: 1200px)
+	.navbar
+		background-color: rgba(237,235,211,0.4)
+
+@media (max-width: 767px)
+	.navbar
+		padding: 24px 40px 20px 32px
+
+@media (max-width: 575px)
+
+	// navbar
+	.navbar
+		padding: 24px 32px 20px 24px
+
+	// engineer how to practice
+	.practice .multi-choice img
+		width: 72%
+	
+	// scientist
+	.superstition .scientist .message
+		& .mesg-1
+			padding-left: 16px
+		& .point1
+			left: -24px
+		& .point2
+			left: -20px
+		& .mesg-2
+			padding-right: 16px
+		& .point3
+			right: -24px
+		& .point4
+			right: -20px
+	
+	// low-tolerant-risk
+	.low-tolerant-risk .risk-text .message
+		& .mesg-2
+			padding-right: 16px
+		& .point3
+			right: -24px
+		& .point4
+			right: -20px
+	
+	// Guai-Guai is funny
+	.funny .funny-message .message
+		& .mesg-1
+			padding-left: 16px
+		& .point1
+			left: -24px
+		& .point2
+			left: -20px
+		& .mesg-2
+			padding-right: 16px
+		& .point3
+			right: -24px
+		& .point4
+			right: -20px
+
+	// borrow-example
+	.marketing-strategy .borrow-example .message
+		& .mesg-1, .mesg-2
+			padding-left: 16px
+		& .point1
+			left: -24px
+		& .point2
+			left: -20px
+		& .mesg-3
+			padding-right: 16px
+		& .point3
+			right: -24px
+		& .point4
+			right: -20px
+	
+	// footer
+	footer .message
+		& .mesg-1
+			padding-left: 16px
+		& .point1
+			left: -24px
+		& .point2
+			left: -20px
+		& .mesg-2
+			padding-right: 16px
+		& .point3
+			right: -24px
+		& .point4
+			right: -20px
+
+@media (max-width: 481px)
+	// opening
+	.title
+		margin-left: -4.1%
+	
+	// scientist
+	.superstition .scientist .message
+		& .mesg-1
+			padding-left: 24px
+		& .point1
+			left: -16px
+		& .point2
+			left: -12px
+		& .mesg-2
+			padding-right: 24px
+		& .point3
+			right: -16px
+		& .point4
+			right: -12px
+	
+	// low-tolerant-risk
+	.low-tolerant-risk .risk-text .message
+		& .mesg-2
+			padding-right: 24px
+		& .point3
+			right: -16px
+		& .point4
+			right: -12px
+	
+	// Guai-Guai is funny
+	.funny .funny-message .message
+		& .mesg-1
+			padding-left: 24px
+		& .point1
+			left: -16px
+		& .point2
+			left: -12px
+		& .mesg-2
+			padding-right: 24px
+		& .point3
+			right: -16px
+		& .point4
+			right: -12px
+
+	// borrow-example
+	.marketing-strategy .borrow-example .message
+		& .mesg-1, .mesg-2
+			padding-left: 24px
+		& .point1
+			left: -16px
+		& .point2
+			left: -12px
+		& .mesg-3
+			padding-right: 24px
+		& .point3
+			right: -16px
+		& .point4
+			right: -12px
+	
+	// footer
+	footer .message
+		& .mesg-1
+			padding-left: 24px
+		& .point1
+			left: -16px
+		& .point2
+			left: -12px
+		& .mesg-2
+			padding-right: 24px
+		& .point3
+			right: -16px
+		& .point4
+			right: -12px
+	
+@media (max-width: 421px)
+	// opening
+	.title
+		margin-left: -8.3%
+
+@media (max-width: 401px)
+	// opening
+	.title
+		margin-left: -12.4%
+
+	// scientist
+	.superstition .scientist .message
+		& .mesg-1
+			padding-left: 28px
+		& .point1
+			left: -12px
+		& .point2
+			left: -8px
+		& .mesg-2
+			padding-right: 28px
+		& .point3
+			right: -12px
+		& .point4
+			right: -8px
+
+	// low-tolerant-risk
+	.low-tolerant-risk .risk-text .message
+		& .mesg-2
+			padding-right: 28px
+		& .point3
+			right: -12px
+		& .point4
+			right: -8px
+	
+	// Guai-Guai is funny
+	.funny .funny-message .message
+		& .mesg-1
+			padding-left: 28px
+		& .point1
+			left: -12px
+		& .point2
+			left: -8px
+		& .mesg-2
+			padding-right: 28px
+		& .point3
+			right: -12px
+		& .point4
+			right: -8px
+	
+	// borrow-example
+	.marketing-strategy .borrow-example .message
+		& .mesg-1, .mesg-2
+			padding-left: 28px
+		& .point1
+			left: -12px
+		& .point2
+			left: -8px
+		& .mesg-3
+			padding-right: 28px
+		& .point3
+			right: -12px
+		& .point4
+			right: -8px
+	
+	// footer
+	footer .message
+		& .mesg-1
+			padding-left: 28px
+		& .point1
+			left: -12px
+		& .point2
+			left: -8px
+		& .mesg-2
+			padding-right: 28px
+		& .point3
+			right: -12px
+		& .point4
+			right: -8px
