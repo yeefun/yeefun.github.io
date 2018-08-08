@@ -221,7 +221,6 @@ $(".answer .a3").click(function () {
 		}
 	});
 
-
 	var calc = new TimelineLite({
 		onStart: function() {
 			calc.pause();
@@ -252,6 +251,7 @@ $(".answer .a3").click(function () {
 		var scrollY = window.scrollY;
 		var pageHeight = $("body").height() - window.innerHeight;
 		var scrollProgress = scrollY / pageHeight;
+		console.log(scrollProgress)
 		calc.progress(scrollProgress);
 	});
 
