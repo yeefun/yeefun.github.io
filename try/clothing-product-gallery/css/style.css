@@ -1,0 +1,511 @@
+/*--- Color --- */
+/*--- Font --- */
+/*--- Component --- */
+/*--- Preprocessing --- */
+* {
+  position: relative;
+  font-family: "Roboto", "Microsoft JhengHei", sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: "Roboto", "Microsoft JhengHei", sans-serif;
+  text-align: center;
+}
+
+.container {
+  display: inline-grid;
+  grid: auto-flow 100px/repeat(8, 120px);
+  padding: 32px;
+  text-align: left;
+  /* Header */
+  /* Clothes-Card */
+  /* Product */
+}
+.container.product {
+  display: none;
+}
+.container .logo {
+  width: 131px;
+  background-color: #000000;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 27px;
+  cursor: pointer;
+}
+.container .logo:hover {
+  background-color: #fff;
+  color: #000000;
+  outline: 1px solid #000000;
+}
+.container .img {
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+.container .num, .container .name, .container .label {
+  font-size: 4.8rem;
+  font-weight: 900;
+  line-height: 48px;
+}
+.container .type, .container .intro-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-style: italic;
+}
+.container .rect {
+  border: 20px solid #50e3c2;
+  z-index: -1;
+}
+.container .rect-solid {
+  background-color: #50e3c2;
+  z-index: -1;
+}
+.container .pattern {
+  width: 240px;
+  height: 100px;
+  background-image: url("https://hexschool.github.io/THE_F2E_Design/week4-product%20gallery/assets/pattern%20unit.svg");
+}
+.container header {
+  grid-area: 1/auto/1/span 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container header .logo {
+  margin-bottom: 5px;
+}
+.container header .title {
+  font-size: 7.2rem;
+  font-weight: 900;
+  line-height: 85px;
+}
+.container .clothes-card {
+  display: grid;
+  /* Img */
+  /* Num */
+  /* Type */
+  /* Name */
+  /* Rect */
+  /* Pattern */
+}
+.container .clothes-card--l1 {
+  grid-template: repeat(6, 100px)/repeat(6, 120px);
+  grid-area: 2/1/span 6/span 6;
+}
+.container .clothes-card--l1:hover .img {
+  -webkit-transform: translate(8px, 8px);
+          transform: translate(8px, 8px);
+}
+.container .clothes-card--r1 {
+  grid-template: repeat(4, 100px)/repeat(4, 120px);
+  grid-area: 3/-5/span 4/span 4;
+}
+.container .clothes-card--r1:hover .img {
+  -webkit-transform: translate(-8px, 8px);
+          transform: translate(-8px, 8px);
+}
+.container .clothes-card--l2 {
+  grid-template: repeat(4, 100px)/repeat(5, 120px);
+  grid-area: 8/1/span 4/span 5;
+}
+.container .clothes-card--l2:hover .img {
+  -webkit-transform: translate(8px, -8px);
+          transform: translate(8px, -8px);
+}
+.container .clothes-card--r2 {
+  grid-template: repeat(7, 100px)/repeat(3, 120px);
+  grid-area: 7/-4/span 7/span 3;
+}
+.container .clothes-card--r2:hover .img {
+  -webkit-transform: translate(-8px, -8px);
+          transform: translate(-8px, -8px);
+}
+.container .clothes-card--l3 {
+  grid-template: repeat(4, 100px)/repeat(6, 120px);
+  grid-area: 12/1/span 4/span 6;
+}
+.container .clothes-card--l3:hover .img {
+  -webkit-transform: scaleX(-1) translate(8px, -8px);
+          transform: scaleX(-1) translate(8px, -8px);
+}
+.container .clothes-card--r3 {
+  grid-template: repeat(6, 100px)/repeat(5, 120px);
+  grid-area: 14/4/span 6/span 5;
+}
+.container .clothes-card--r3:hover .img {
+  -webkit-transform: translate(-8px, 8px);
+          transform: translate(-8px, 8px);
+}
+.container .clothes-card--l4 {
+  grid-template: repeat(5, 100px)/repeat(3, 120px);
+  grid-area: 16/1/span 5/span 3;
+}
+.container .clothes-card--l4:hover .img {
+  -webkit-transform: translate(8px, -8px);
+          transform: translate(8px, -8px);
+}
+.container .clothes-card__img {
+  transition: 0.4s;
+}
+.container .clothes-card__img--l1 {
+  grid-area: 2/1/span 4/span 4;
+  background-image: url("https://images.unsplash.com/photo-1513827379601-9dba5099a3f9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1acdd78f34ee75aade9e313251bb1695&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__img--r1 {
+  grid-area: 2/2/span 2/span 2;
+  background-image: url("https://images.unsplash.com/photo-1514632542677-48fae74a01b2?ixlib=rb-0.3.5&s=50945fdb784e64361154c62785542531&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__img--l2 {
+  grid-area: 2/1/span 2/span 4;
+  background-image: url("https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0f994eef47e5fb1a67849703cc961b3&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__img--r2 {
+  grid-area: 3/2/span 4/span 2;
+  background-image: url("https://images.unsplash.com/photo-1484516758160-69878111a911?ixlib=rb-0.3.5&s=593101f82127d40025c1d27fa186ccc7&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__img--l3 {
+  grid-area: 2/3/span 2/span 2;
+  background-image: url("https://images.unsplash.com/photo-1525448198276-222de3961638?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=43fb25556cdbd191e520c7f28739e40d&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+.container .clothes-card__img--r3 {
+  grid-area: 2/2/span 4/span 4;
+  background-image: url("https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c497a29f229085d9574ee8b6eeef8c&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__img--l4 {
+  grid-area: 2/1/span 4/span 2;
+  background-image: url("https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=63ff45d79414b3166b08b800a32018be&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container .clothes-card__num--l1 {
+  grid-area: -2 / 1/auto/auto;
+}
+.container .clothes-card__num--r1 {
+  grid-area: 1/-2/auto/auto;
+  justify-self: end;
+}
+.container .clothes-card__num--l2 {
+  grid-area: -2 / -2/auto/auto;
+}
+.container .clothes-card__num--r2 {
+  grid-area: -3 / 1/auto/auto;
+  place-self: end;
+}
+.container .clothes-card__num--l3 {
+  grid-area: 3/2/auto/auto;
+  align-self: end;
+}
+.container .clothes-card__num--r3 {
+  grid-area: 3/1/auto/auto;
+  place-self: end;
+}
+.container .clothes-card__num--l4 {
+  grid-area: -2 / -2/auto/auto;
+  place-self: end;
+}
+.container .clothes-card__type {
+  line-height: 28px;
+}
+.container .clothes-card__type--l1 {
+  grid-area: 4/-3/auto/span 2;
+  top: 2.5px;
+  align-self: end;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.container .clothes-card__type--r1 {
+  grid-area: 1/1/auto/span 2;
+  place-self: end;
+}
+.container .clothes-card__type--l2 {
+  grid-area: -2 / 1/auto/span 2;
+  justify-self: end;
+}
+.container .clothes-card__type--r2 {
+  grid-area: 1/-2/span 2/auto;
+  place-self: end center;
+  bottom: 5px;
+  -webkit-writing-mode: vertical-rl;
+          writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+}
+.container .clothes-card__type--l3 {
+  grid-area: 2/-3/auto/span 2;
+}
+.container .clothes-card__type--r3 {
+  grid-area: -2 / -4/auto/span 2;
+  justify-self: center;
+}
+.container .clothes-card__type--l4 {
+  grid-area: 1/1/auto/span 2;
+  align-self: end;
+}
+.container .clothes-card__name:before {
+  content: attr(data-name);
+  position: absolute;
+  overflow: hidden;
+  height: 22px;
+  top: -16px;
+  left: 1px;
+  color: rgba(0, 0, 0, 0.3);
+}
+.container .clothes-card__name:after {
+  content: attr(data-name);
+  position: absolute;
+  overflow: hidden;
+  height: 15px;
+  top: -25px;
+  left: 1px;
+  color: rgba(0, 0, 0, 0.1);
+}
+.container .clothes-card__name--l1 {
+  grid-area: 2/1/auto/span 3;
+  top: -16px;
+}
+.container .clothes-card__name--r1 {
+  grid-area: -2 / 3/auto/span 2;
+  align-self: center;
+}
+.container .clothes-card__name--l2 {
+  grid-area: 1/2/auto/span 3;
+  place-self: end;
+}
+.container .clothes-card__name--r2 {
+  grid-area: 2/1/auto/auto;
+  place-self: end;
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.container .clothes-card__name--l3 {
+  grid-area: 2/1/auto/span 3;
+  place-self: end start;
+  z-index: 1;
+}
+.container .clothes-card__name--r3 {
+  grid-area: 1/3/auto/span 3;
+  align-self: end;
+}
+.container .clothes-card__name--l4 {
+  grid-area: 1/3/auto/auto;
+  align-self: end;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.container .clothes-card__rect--l1 {
+  width: 240px;
+  height: 200px;
+  grid-area: 1/3/span 3/span 3;
+  place-self: center;
+}
+.container .clothes-card__rect--r1 {
+  width: 240px;
+  height: 200px;
+  grid-area: 1/3/span 2/span 2;
+}
+.container .clothes-card__rect--l2 {
+  width: 240px;
+  height: 200px;
+  grid-area: 2/3/span 3/span 3;
+  place-self: center;
+}
+.container .clothes-card__rect--r2 {
+  width: 240px;
+  height: 200px;
+  grid-area: 1/1/span 4/span 3;
+  place-self: center;
+}
+.container .clothes-card__rect--l3 {
+  width: 240px;
+  height: 100px;
+  grid-area: -3 / 2/span 2/span 2;
+  align-self: center;
+}
+.container .clothes-card__rect--r3 {
+  width: 480px;
+  height: 200px;
+  grid-area: -4 / 2/span 3/span 4;
+  align-self: center;
+}
+.container .clothes-card__rect--l4 {
+  width: 240px;
+  height: 400px;
+  grid-area: 1/1/span 5/span 3;
+  place-self: center;
+}
+.container .clothes-card__rect-solid {
+  width: 240px;
+  height: 200px;
+}
+.container .clothes-card__rect-solid--r1 {
+  grid-area: 1/2/span 3/span 3;
+  place-self: center;
+}
+.container .clothes-card__rect-solid--l2 {
+  grid-area: 1/1/span 3/span 2;
+  align-self: center;
+}
+.container .clothes-card__rect-solid--r3 {
+  grid-area: -4 / 1/span 2/span 3;
+  justify-self: center;
+}
+.container .clothes-card__rect-solid--l4 {
+  grid-area: -3 / 2/span 2/span 2;
+}
+.container .clothes-card__pattern--l1 {
+  grid-area: -3 / 1/span 2/span 3;
+  place-self: center;
+}
+.container .clothes-card__pattern--r2 {
+  grid-area: -3 / 2/span 2/span 2;
+  align-self: center;
+}
+.container .clothes-card__pattern--l3 {
+  grid-area: 1/1/span 2/span 3;
+  place-self: center;
+}
+.container.product {
+  /* Top Demo */
+  /* Intro */
+  /* Bottom Demo */
+}
+.container.product .logo {
+  grid-area: 1/2/auto/span 2;
+  align-self: center;
+}
+.container.product .fa-arrow-left {
+  grid-area: 1/1/auto/auto;
+  place-self: center end;
+  right: 8px;
+  font-size: 2.8rem;
+  cursor: pointer;
+}
+.container.product .fa-arrow-left:hover + .logo {
+  background-color: #fff;
+  color: #000000;
+  outline: 1px solid #000000;
+}
+.container.product .top-demo {
+  display: grid;
+  grid-template: repeat(6, 100px)/repeat(8, 120px);
+  grid-area: 2/1/span 6/span 8;
+}
+.container.product .top-demo__img {
+  grid-area: 2/2/span 4/span 6;
+  background-image: url("https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c497a29f229085d9574ee8b6eeef8c&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+  background-size: cover;
+  background-position: center;
+}
+.container.product .top-demo__num {
+  grid-area: -3 / 1/auto/auto;
+  place-self: end;
+  -webkit-writing-mode: vertical-rl;
+          writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+.container.product .top-demo__label {
+  grid-area: -2 / 2/auto/auto;
+  place-self: start;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+.container.product .top-demo__name-1 {
+  grid-area: 1/-4/auto/span 2;
+  place-self: end;
+}
+.container.product .top-demo__name-2 {
+  grid-area: 1/-2/auto/auto;
+  align-self: end;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.container.product .top-demo__rect {
+  width: 480px;
+  height: 200px;
+  grid-area: 4/4/span 3/span 5;
+  place-self: center;
+}
+.container.product .top-demo__rect-solid {
+  width: 240px;
+  height: 200px;
+  grid-area: 1/1/span 3/span 3;
+  place-self: center;
+}
+.container.product .clothes-intro {
+  display: grid;
+  grid-template: repeat(4, 100px)/repeat(6, 120px);
+  grid-area: 8/2/span 5/span 6;
+}
+.container.product .clothes-intro__title {
+  grid-area: 1/1/auto/span 3;
+  place-self: end start;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.container.product .clothes-intro__content-title {
+  grid-area: 2/2/auto/span 3;
+}
+.container.product .clothes-intro__content-subtitle {
+  grid-area: 2/2/auto/span 4;
+  align-self: end;
+  bottom: 15px;
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 36px;
+}
+.container.product .clothes-intro__content-para {
+  grid-area: 3/2/auto/span 5;
+  font-size: 1.6rem;
+  line-height: 24px;
+}
+.container.product .bottom-demo {
+  display: grid;
+  grid-template: repeat(7, 100px)/repeat(8, 120px);
+  grid-area: 14/1/span 7/span 8;
+}
+.container.product .bottom-demo__img-top {
+  grid-area: 1/2/span 3/span 3;
+  background-image: url("https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f48976340279ffce098f21bb046acc87&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+  z-index: 1;
+}
+.container.product .bottom-demo__img-bottom {
+  grid-area: 3/4/span 4/span 4;
+  background-image: url("https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=787976dcde91781727f476692b203ee9&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+}
+.container.product .bottom-demo__rect {
+  width: 480px;
+  height: 200px;
+  grid-area: 2/1/span 3/span 5;
+  place-self: center;
+}
+.container.product .bottom-demo__rect-solid {
+  width: 240px;
+  height: 200px;
+  grid-area: 2/-4/span 2/span 3;
+  justify-self: center;
+}
+.container.product .bottom-demo__pattern {
+  grid-area: -3 / 2/span 2/span 3;
+  place-self: center;
+}
