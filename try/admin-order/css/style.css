@@ -1,0 +1,399 @@
+* {
+	position: relative;
+	font-family: "Work Sans", "Microsoft JhengHei", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: #f2f2f2;
+	font-family: "Work Sans", "Microsoft JhengHei", sans-serif;
+}
+
+/*--- Navbar --- */
+header {
+	height: 70px;
+	padding-right: 42px;
+	padding-left: 42px;
+	display: flex;
+	align-items: center;
+	background-color: #000000;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+header .title {
+	margin-right: 80px;
+	font-size: 2.4rem;
+}
+
+header nav {
+	align-self: stretch;
+}
+
+header ul,
+header .identity {
+	font-size: 1.6rem;
+}
+
+header ul {
+	height: 100%;
+	display: flex;
+}
+
+header ul li {
+	display: flex;
+	align-items: center;
+	color: #9b9b9b;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+header ul li+li {
+	margin-left: 40px;
+}
+
+header ul li:hover {
+	color: #ffffff;
+}
+
+header ul li.active {
+	color: #ffffff;
+}
+
+header ul li.active:after {
+	content: "";
+	width: 80px;
+	height: 4px;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	background-color: #ffffff;
+}
+
+header .identity {
+	margin-left: auto;
+}
+
+/*--- Main --- */
+.pt-0 {
+	padding-top: 0 !important;
+	border-top: none !important;
+}
+
+.pb-0 {
+	padding-bottom: 0 !important;
+}
+
+main {
+	padding: 30px 42px 42px 42px;
+}
+
+main .main-block {
+	border-radius: 3px;
+	box-shadow: 0 0 10px 5px #ebebeb;
+	background-color: #ffffff;
+}
+
+main h1 {
+	font-size: 2.4rem;
+	font-weight: 700;
+	line-height: 28px;
+}
+
+main .overview {
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+main .overview .time-interval {
+	display: flex;
+	align-items: center;
+	align-self: flex-end;
+	font-size: 1.6rem;
+	font-weight: 500;
+	line-height: 20px;
+	color: #9b9b9b;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+main .overview .time-interval .date {
+	cursor: pointer;
+}
+
+main .overview .time-interval .date--to {
+	margin-right: 20px;
+}
+
+main .overview .time-interval i {
+	font-size: 1.6rem;
+	margin-right: 8px;
+	margin-left: 8px;
+	color: #000000;
+}
+
+main .overview .time-interval .interval-select {
+	cursor: pointer;
+}
+
+main .overview .time-interval .option {
+	display: none;
+}
+
+main .activity-summary {
+	margin-bottom: 18px;
+	display: flex;
+	justify-content: space-between;
+}
+
+main .activity-summary section {
+	width: 300px;
+	height: 138px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+main .activity-summary section+section {
+	margin-left: 20px;
+}
+
+main .activity-summary section .title {
+	height: 24px;
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+}
+
+main .activity-summary section .title i {
+	font-size: 2.2rem;
+	margin-right: 8px;
+}
+
+main .activity-summary section .title i.fa-hand-holding-usd {
+	font-size: 2.4rem;
+}
+
+main .activity-summary section .title h2 {
+	font-size: 1.6rem;
+	font-weight: 500;
+}
+
+main .activity-summary section .number {
+	font-size: 3.6rem;
+	font-weight: 700;
+	line-height: 44px;
+}
+
+main .activity-summary section .number.green {
+	color: #7ed321;
+}
+
+main .activity-summary section .number.red {
+	color: #d0021b;
+}
+
+main .activity-summary section .number.blue {
+	color: #4a90e2;
+}
+
+main #line-chart {
+	height: 406px;
+	margin-bottom: 20px;
+	padding: 30px 40px;
+}
+
+main #line-chart i {
+	margin-right: 8px;
+	font-size: 1.8rem;
+	vertical-align: text-bottom;
+}
+
+main #line-chart i.fa-hand-holding-usd {
+	font-size: 2rem;
+}
+
+main .main-bottom {
+	height: 456px;
+	display: flex;
+	justify-content: space-between;
+}
+
+main .main-bottom--left {
+	padding-right: 10px;
+}
+
+main .main-bottom--right {
+	padding-left: 10px;
+}
+
+main .main-bottom article {
+	width: 50%;
+}
+
+main .main-bottom .main-block {
+	padding: 30px 40px;
+}
+
+main .main-bottom h1 {
+	margin-bottom: 30px;
+}
+
+main .main-bottom .remark {
+	font-size: 1.6rem;
+	line-height: 18px;
+	color: #9b9b9b;
+}
+
+main .main-bottom .transaction-website {
+	font-weight: 500;
+}
+
+main .main-bottom .transaction-website section {
+	padding-top: 24px;
+	padding-bottom: 24px;
+	border-top: 1px solid #ebebeb;
+	display: flex;
+	align-items: center;
+}
+
+main .main-bottom .transaction-website section .website {
+	width: 45px;
+	height: 45px;
+	font-size: 4.5rem;
+	margin-right: 20px;
+}
+
+main .main-bottom .transaction-website section .website:before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+main .main-bottom .transaction-website section .remark {
+	font-weight: 500;
+}
+
+main .main-bottom .transaction-website section .visitor {
+	margin-left: auto;
+	margin-right: 20px;
+	font-size: 2rem;
+}
+
+main .main-bottom .transaction-website section i {
+	font-size: 18px;
+	margin-right: 8px;
+}
+
+main .main-bottom .transaction-website section i.fa-arrow-up {
+	color: #7ed321;
+}
+
+main .main-bottom .transaction-website section i.fa-arrow-down {
+	color: #d0021b;
+}
+
+main .main-bottom .transaction-website section .rate {
+	width: 34px;
+	font-size: 1.6rem;
+	text-align: right;
+	cursor: pointer;
+}
+
+main .main-bottom .transaction-website section .rate.rise {
+	color: #7ed321;
+}
+
+main .main-bottom .transaction-website section .rate.fall {
+	color: #d0021b;
+}
+
+main .main-bottom .latest-orders section {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-top: 1px solid #ebebeb;
+	display: flex;
+	align-items: center;
+}
+
+main .main-bottom .latest-orders .img {
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+	background-size: cover;
+	background-position: top center;
+}
+
+main .main-bottom .latest-orders .img--1 {
+	background-image: url("https://static.boredpanda.com/blog/wp-content/uploads/2017/08/white-models-sell-black-girl-magic-shirts-zazzle-1.jpg");
+}
+
+main .main-bottom .latest-orders .img--2 {
+	background-image: url("https://ae01.alicdn.com/kf/HTB1v.D.KpXXXXbMXVXXq6xXFXXXc/New-Men-Hooded-jacket-casual-shirt-Slim-cotton-jacket-coat-male-models-in-Europe-and-America.jpg_640x640.jpg");
+}
+
+main .main-bottom .latest-orders .img--3 {
+	background-image: url("https://www.lulus.com/images/product/xlarge/136682.jpg");
+}
+
+main .main-bottom .latest-orders h2 {
+	margin-bottom: 8px;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 24px;
+}
+
+main .main-bottom .latest-orders .datetime,
+main .main-bottom .latest-orders .name {
+	display: flex;
+	align-items: center;
+}
+
+main .main-bottom .latest-orders .datetime {
+	margin-bottom: 8px;
+}
+
+main .main-bottom .latest-orders i {
+	margin-right: 8px;
+	color: #757575;
+}
+
+main .main-bottom .latest-orders .total-money {
+	position: absolute;
+	right: 0;
+	bottom: 20px;
+}
+
+main .main-bottom .latest-orders .total-money .total-text {
+	margin-bottom: 2px;
+	font-size: 1.4rem;
+	line-height: 16px;
+	text-align: right;
+}
+
+main .main-bottom .latest-orders .total-money .money {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 24px;
+}

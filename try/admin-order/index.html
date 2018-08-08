@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>The F2E - Admin Order</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,700'>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe"
+	    crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css" integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA"
+	    crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV"
+	    crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<!-- 
+設計稿：https://hexschool.github.io/THE_F2E_Design/week3-admin%20order/
+說明：https://www.facebook.com/groups/173311386703334/permalink/184948512206288/
+-->
+	<header>
+		<div class="title">Shoptime</div>
+		<nav>
+			<ul>
+				<li class="active">Home</li>
+				<li>ORDERS</li>
+				<li>PRODUCT</li>
+			</ul>
+		</nav>
+		<div class="identity">ADMIN</div>
+	</header>
+	<main>
+		<section class="overview">
+			<h1>OVERVIEW</h1>
+			<div class="time-interval">
+				<div class="date date--from">2018/6/6</div>
+				<i class="fas fa-caret-right"></i>
+				<div class="date date--to">2018/6/13</div>
+				<ul class="interval-select">
+					<li>Weekly
+						<i class="fas fa-caret-down"></i>
+						<ul class="option">
+							<li>Daily</li>
+							<li>Weekly</li>
+							<li>Monthly</li>
+							<li>Yearly</li>
+							<li>Custom</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<article class="activity-summary">
+			<section class="main-block">
+				<div class="title">
+					<i class="fas fa-hand-holding-usd"></i>
+					<h2>TOTAL REVENUE</h2>
+				</div>
+				<div class="number green">54,540</div>
+			</section>
+			<section class="main-block">
+				<div class="title">
+					<i class="fas fa-exclamation-triangle"></i>
+					<h2>TOTAL COST</h2>
+				</div>
+				<div class="number red">12,660</div>
+			</section>
+			<section class="main-block">
+				<div class="title">
+					<i class="fas fa-money-bill"></i>
+					<h2>NET INCOME</h2>
+				</div>
+				<div class="number blue">41,880</div>
+			</section>
+		</article>
+		<article class="main-block" id="line-chart"></article>
+		<section class="main-bottom">
+			<article class="main-bottom--left">
+				<div class="transaction-website main-block">
+					<h1>Transaction Website</h1>
+					<div class="transaction-website__content">
+						<section class="pt-0">
+							<i class="fab fa-facebook website"></i>
+							<span class="remark">facebook.com</span>
+							<span class="visitor">45,836</span>
+							<i class="fas fa-arrow-up"></i>
+							<span class="rate rise">20%</span>
+						</section>
+						<section>
+							<i class="fab fa-google website"></i>
+							<span class="remark">google.com</span>
+							<span class="visitor">23,582</span>
+							<i class="fas fa-arrow-up"></i>
+							<span class="rate rise">12%</span>
+						</section>
+						<section>
+							<i class="fab fa-amazon website"></i>
+							<span class="remark">amazon.com</span>
+							<span class="visitor">2,489</span>
+							<i class="fas fa-arrow-down"></i>
+							<span class="rate fall">15%</span>
+						</section>
+						<section class="pb-0">
+							<i class="fab fa-wordpress-simple website"></i>
+							<span class="remark">wordpress.com</span>
+							<span class="visitor">1,057</span>
+							<i class="fas fa-arrow-down"></i>
+							<span class="rate fall">30%</span>
+						</section>
+					</div>
+				</div>
+			</article>
+			<article class="main-bottom--right">
+				<div class="latest-orders main-block">
+					<h1>Latest Orders</h1>
+					<div class="latest-orders__content">
+						<section class="pt-0">
+							<div class="img img--1"></div>
+							<div class="info">
+								<h2>Vintage T-shirt</h2>
+								<div class="datetime">
+									<i class="fas fa-clock"></i>
+									<span class="remark">2018/6/13 13:42</span>
+								</div>
+								<div class="name">
+									<i class="fas fa-user"></i>
+									<span class="remark">Belle Willis</span>
+								</div>
+							</div>
+							<div class="total-money">
+								<div class="total-text">Total</div>
+								<div class="money">3,200</div>
+							</div>
+						</section>
+						<section>
+							<div class="img img--2"></div>
+							<div class="info">
+								<h2>Cowboy Jacket</h2>
+								<div class="datetime">
+									<i class="fas fa-clock"></i>
+									<span class="remark">2018/6/13 10:45</span>
+								</div>
+								<div class="name">
+									<i class="fas fa-user"></i>
+									<span class="remark">Adrian Cummings</span>
+								</div>
+							</div>
+							<div class="total-money">
+								<div class="total-text">Total</div>
+								<div class="money">2,800</div>
+							</div>
+						</section>
+						<section class="pb-0">
+							<div class="img img--3"></div>
+							<div class="info">
+								<h2>Coach Coat</h2>
+								<div class="datetime">
+									<i class="fas fa-clock"></i>
+									<span class="remark">2018/6/13 8:26</span>
+								</div>
+								<div class="name">
+									<i class="fas fa-user"></i>
+									<span class="remark">Lura Holland</span>
+								</div>
+							</div>
+							<div class="total-money">
+								<div class="total-text">Total</div>
+								<div class="money">1,600</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</article>
+		</section>
+	</main>
+	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.common.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="js/index.js"></script>
+
+</body>
+
+</html>
