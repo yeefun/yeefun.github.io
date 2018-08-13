@@ -1,0 +1,125 @@
+// 
+  設計稿：https://hexschool.github.io/THE_F2E_Design/week3-admin%20order/
+  說明：https://www.facebook.com/groups/173311386703334/permalink/184948512206288/
+header
+  .title Shoptime
+  nav
+    ul
+      li.active Home
+      li ORDERS
+      li PRODUCT
+  .identity ADMIN
+main
+  section.overview
+    h1 OVERVIEW
+    .time-interval
+      //- input(type="date", value="2018-06-06")
+      //- i.fas.fa-caret-right
+      //- input(type="date", value="2018-06-13")
+      //- select
+      //-   option(value="Daily") Daily
+      //-   option(value="Weekly", selected) Weekly
+      //-   option(value="Monthly") Monthly
+      //-   option(value="Yearly") Yearly
+      //-   option(value="Custom") Custom
+      .date.date--from 2018/6/6
+      i.fas.fa-caret-right
+      .date.date--to 2018/6/13
+      ul.interval-select
+        li Weekly
+          i.fas.fa-caret-down
+          ul.option
+            li Daily
+            li Weekly
+            li Monthly
+            li Yearly
+            li Custom
+  article.activity-summary
+    section.main-block
+      .title
+        i.fas.fa-hand-holding-usd
+        h2 TOTAL REVENUE
+      .number.green 54,540
+    section.main-block
+      .title
+        i.fas.fa-exclamation-triangle
+        h2 TOTAL COST
+      .number.red 12,660
+    section.main-block
+      .title
+        i.fas.fa-money-bill
+        h2 NET INCOME
+      .number.blue 41,880
+  article#line-chart.main-block
+  section.main-bottom
+    article.main-bottom--left
+      .transaction-website.main-block
+        h1 Transaction Website
+        .transaction-website__content
+          section.pt-0
+            i.fab.fa-facebook.website
+            span.remark facebook.com
+            span.visitor 45,836
+            i.fas.fa-arrow-up
+            span.rate.rise 20%
+          section
+            i.fab.fa-google.website
+            span.remark google.com
+            span.visitor 23,582
+            i.fas.fa-arrow-up
+            span.rate.rise 12%
+          section
+            i.fab.fa-amazon.website
+            span.remark amazon.com
+            span.visitor 2,489
+            i.fas.fa-arrow-down
+            span.rate.fall 15%
+          section.pb-0
+            i.fab.fa-wordpress-simple.website
+            span.remark wordpress.com
+            span.visitor 1,057
+            i.fas.fa-arrow-down
+            span.rate.fall 30%
+    article.main-bottom--right
+      .latest-orders.main-block
+        h1 Latest Orders
+        .latest-orders__content
+          section.pt-0
+            .img.img--1
+            .info
+              h2 Vintage T-shirt
+              .datetime
+                i.fas.fa-clock
+                span.remark 2018/6/13  13:42
+              .name
+                i.fas.fa-user
+                span.remark Belle Willis
+            .total-money
+              .total-text Total
+              .money 3,200
+          section
+            .img.img--2
+            .info
+              h2 Cowboy Jacket
+              .datetime
+                i.fas.fa-clock
+                span.remark 2018/6/13  10:45
+              .name
+                i.fas.fa-user
+                span.remark Adrian Cummings
+            .total-money
+              .total-text Total
+              .money 2,800
+          section.pb-0
+            .img.img--3
+            .info
+              h2 Coach Coat
+              .datetime
+                i.fas.fa-clock
+                span.remark 2018/6/13  8:26
+              .name
+                i.fas.fa-user
+                span.remark Lura Holland
+            .total-money
+              .total-text Total
+              .money 1,600

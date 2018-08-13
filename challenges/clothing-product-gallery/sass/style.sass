@@ -1,0 +1,408 @@
+/*--- Color ---*/
+$colorGreen: #50e3c2
+$colorGrey: rgba(#000,0.3)
+$colorLightGrey: rgba(#000,0.1)
+$colorBlack: #000000
+
+/*--- Font ---*/
+$fontTitle: 7.2rem
+$fontTitle-sm: 4.8rem
+$fontTitle-xs: 2.4rem
+$fontSubtitle: 2.4rem
+$fontLogo: 2.0rem
+$fontPara: 1.6rem
+
+/*--- Component ---*/
+=size($w,$h:$w)
+  width: $w
+  height: $h
+
+/*--- Preprocessing ---*/
+*
+  position: relative
+  font-family: "Roboto", "Microsoft JhengHei", sans-serif
+
+*, *:before, *:after
+  box-sizing: border-box
+
+html
+  font-size: 10px
+
+body
+  font-family: "Roboto", "Microsoft JhengHei", sans-serif
+  text-align: center
+  
+.container
+  display: inline-grid
+  grid: auto-flow 100px / repeat(8, 120px)
+  padding: 32px
+  text-align: left
+  &.product
+    display: none
+  & .logo
+    width: 131px
+    // height: 27px // 為什麼設定 height 沒作用？（似乎是因為 grid-auto-rows 設 100px 加上 flex-direction 設 column 的關係）
+    background-color: $colorBlack
+    color: #fff
+    font-size: $fontLogo
+    font-weight: 900
+    text-align: center
+    line-height: 27px
+    cursor: pointer
+    &:hover
+      background-color: #fff
+      color: $colorBlack
+      outline: 1px solid $colorBlack
+  & .img
+    background-size: cover
+    background-position: center
+    cursor: pointer
+  & .num, .name, .label
+    font-size: $fontTitle-sm
+    font-weight: 900
+    line-height: 48px
+  & .type, .intro-title
+    font-size: $fontTitle-xs
+    font-weight: 700
+    font-style: italic
+  & .rect
+    border: 20px solid $colorGreen
+    z-index: -1
+  & .rect-solid
+    background-color: $colorGreen
+    z-index: -1
+  & .pattern
+    +size(240px,100px)
+    background-image: url("https://hexschool.github.io/THE_F2E_Design/week4-product%20gallery/assets/pattern%20unit.svg")
+  
+  /* Header */
+  & header
+    grid-area: 1 / auto / 1 / span 8
+    display: flex
+    flex-direction: column
+    align-items: center
+    & .logo
+      margin-bottom: 5px
+    & .title
+      font-size: $fontTitle
+      font-weight: 900
+      line-height: 85px
+
+  /* Clothes-Card */
+  & .clothes-card
+    display: grid
+    &--l1
+      grid-template: repeat(6, 100px) / repeat(6, 120px)
+      grid-area: 2 / 1 / span 6 / span 6
+      &:hover .img
+        transform: translate(8px, 8px)
+    &--r1
+      grid-template: repeat(4, 100px) / repeat(4, 120px)
+      grid-area: 3 / -5 / span 4 / span 4
+      &:hover .img
+        transform: translate(-8px, 8px)
+    &--l2
+      grid-template: repeat(4, 100px) / repeat(5, 120px)
+      grid-area: 8 / 1 / span 4 / span 5
+      &:hover .img
+        transform: translate(8px, -8px)
+    &--r2
+      grid-template: repeat(7, 100px) / repeat(3, 120px)
+      grid-area: 7 / -4 / span 7 / span 3
+      &:hover .img
+        transform: translate(-8px, -8px)
+    &--l3
+      grid-template: repeat(4, 100px) / repeat(6, 120px)
+      grid-area: 12 / 1 / span 4 / span 6
+      &:hover .img
+        transform: scaleX(-1) translate(8px, -8px)
+    &--r3
+      grid-template: repeat(6, 100px) / repeat(5, 120px)
+      grid-area: 14 / 4 / span 6 / span 5
+      &:hover .img
+        transform: translate(-8px, 8px)
+    &--l4
+      grid-template: repeat(5, 100px) / repeat(3, 120px)
+      grid-area: 16 / 1 / span 5 / span 3
+      &:hover .img
+        transform: translate(8px, -8px)
+
+    /* Img */
+    &__img
+      transition: 0.4s
+      &--l1
+        grid-area: 2 / 1 / span 4 / span 4
+        background-image: url("https://images.unsplash.com/photo-1513827379601-9dba5099a3f9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1acdd78f34ee75aade9e313251bb1695&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &--r1
+        grid-area: 2 / 2 / span 2 / span 2
+        background-image: url("https://images.unsplash.com/photo-1514632542677-48fae74a01b2?ixlib=rb-0.3.5&s=50945fdb784e64361154c62785542531&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &--l2
+        grid-area: 2 / 1 / span 2 / span 4
+        background-image: url("https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0f994eef47e5fb1a67849703cc961b3&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &--r2
+        grid-area: 3 / 2 / span 4 / span 2
+        background-image: url("https://images.unsplash.com/photo-1484516758160-69878111a911?ixlib=rb-0.3.5&s=593101f82127d40025c1d27fa186ccc7&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &--l3
+        grid-area: 2 / 3 / span 2 / span 2
+        background-image: url("https://images.unsplash.com/photo-1525448198276-222de3961638?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=43fb25556cdbd191e520c7f28739e40d&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+        transform: scaleX(-1) // Why?
+      &--r3
+        grid-area: 2 / 2 / span 4 / span 4
+        background-image: url("https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c497a29f229085d9574ee8b6eeef8c&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &--l4
+        grid-area: 2 / 1 / span 4 / span 2
+        background-image: url("https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=63ff45d79414b3166b08b800a32018be&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+
+    /* Num */
+    &__num
+      &--l1
+        grid-area: #{-2} / 1 / auto / auto
+      &--r1
+        grid-area: 1 / -2 / auto / auto
+        justify-self: end
+      &--l2
+        grid-area: #{-2} / -2 / auto / auto
+      &--r2
+        grid-area: #{-3} / 1 / auto / auto
+        place-self: end
+      &--l3
+        grid-area: 3 / 2 / auto / auto
+        align-self: end
+      &--r3
+        grid-area: 3 / 1 / auto / auto
+        place-self: end
+      &--l4
+        grid-area: #{-2} / -2 / auto / auto
+        place-self: end
+    
+    /* Type */
+    &__type
+      line-height: 28px
+      &--l1
+        grid-area: 4 / -3 / auto / span 2
+        top: 2.5px
+        align-self: end
+        transform-origin: bottom left
+        transform: rotate(90deg)
+      &--r1
+        grid-area: 1 / 1 / auto / span 2
+        place-self: end
+      &--l2
+        grid-area: #{-2} / 1 / auto / span 2
+        justify-self: end
+      &--r2
+        grid-area: 1 / -2 / span 2 / auto
+        place-self: end center
+        bottom: 5px
+        writing-mode: vertical-rl
+        -ms-writing-mode: tb-rl
+      &--l3
+        grid-area: 2 / -3 / auto / span 2
+      &--r3
+        grid-area: #{-2} / -4 / auto / span 2
+        justify-self: center
+      &--l4
+        grid-area: 1 / 1 / auto / span 2
+        align-self: end
+
+    /* Name */
+    &__name
+      &:before
+        content: attr(data-name)
+        position: absolute
+        overflow: hidden
+        height: 22px
+        top: -16px
+        left: 1px
+        color: $colorGrey
+      &:after
+        content: attr(data-name)
+        position: absolute
+        overflow: hidden
+        height: 15px
+        top: -25px
+        left: 1px
+        color: $colorLightGrey
+      &--l1
+        grid-area: 2 / 1 / auto / span 3
+        top: -16px
+      &--r1
+        grid-area: #{-2} / 3 / auto / span 2
+        align-self: center
+      &--l2
+        grid-area: 1 / 2 / auto / span 3
+        place-self: end
+      &--r2
+        grid-area: 2 / 1 / auto / auto
+        place-self: end
+        transform-origin: bottom right
+        transform: rotate(-90deg)
+      &--l3
+        grid-area: 2 / 1 / auto / span 3
+        place-self: end start
+        z-index: 1
+      &--r3
+        grid-area: 1 / 3 / auto / span 3
+        align-self: end
+      &--l4
+        grid-area: 1 / 3 / auto / auto
+        align-self: end
+        transform-origin: bottom left
+        transform: rotate(90deg)
+        
+    /* Rect */
+    &__rect
+      &--l1
+        +size(240px,200px)
+        grid-area: 1 / 3 / span 3 / span 3
+        place-self: center
+      &--r1
+        +size(240px,200px)
+        grid-area: 1 / 3 / span 2 / span 2
+      &--l2
+        +size(240px,200px)
+        grid-area: 2 / 3 / span 3 / span 3
+        place-self: center
+      &--r2
+        +size(240px,200px)
+        grid-area: 1 / 1 / span 4 / span 3
+        place-self: center
+      &--l3
+        +size(240px,100px)
+        grid-area: #{-3} / 2 / span 2 / span 2
+        align-self: center
+      &--r3
+        +size(480px,200px)
+        grid-area: #{-4} / 2 / span 3 / span 4
+        align-self: center
+      &--l4
+        +size(240px,400px)
+        grid-area: 1 / 1 / span 5 / span 3
+        place-self: center
+      
+    &__rect-solid
+      +size(240px,200px)
+      &--r1
+        grid-area: 1 / 2 / span 3 / span 3
+        place-self: center
+      &--l2
+        grid-area: 1 / 1 / span 3 / span 2
+        align-self: center
+      &--r3
+        grid-area: #{-4} / 1 / span 2 / span 3
+        justify-self: center
+      &--l4
+        grid-area: #{-3} / 2 / span 2 /  span 2
+    
+    /* Pattern */
+    &__pattern
+      &--l1
+        grid-area: #{-3} / 1 / span 2 / span 3
+        place-self: center
+      &--r2
+        grid-area: #{-3} / 2 / span 2 / span 2
+        align-self: center
+      &--l3
+        grid-area: 1 / 1 / span 2 / span 3
+        place-self: center
+  
+  /* Product */
+  &.product
+    & .logo
+      grid-area: 1 / 2 / auto / span 2
+      align-self: center
+    & .fa-arrow-left
+      grid-area: 1 / 1 / auto / auto
+      place-self: center end
+      right: 8px
+      font-size: 2.8rem
+      cursor: pointer
+      &:hover + .logo
+        background-color: #fff
+        color: $colorBlack
+        outline: 1px solid $colorBlack
+    
+    /* Top Demo */
+    & .top-demo
+      display: grid
+      grid-template: repeat(6, 100px) / repeat(8, 120px)
+      grid-area: 2 / 1 / span 6 / span 8
+      &__img
+        grid-area: 2 / 2 / span 4 / span 6
+        background-image: url("https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c497a29f229085d9574ee8b6eeef8c&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+        background-size: cover
+        background-position: center
+      &__num
+        grid-area: #{-3} / 1 / auto / auto
+        place-self: end
+        writing-mode: vertical-rl
+        -ms-writing-mode: tb-rl
+        transform: rotate(-180deg)
+      &__label
+        grid-area: #{-2} / 2 / auto / auto
+        place-self: start
+        transform: rotate(-180deg)
+      &__name-1
+        grid-area: 1 / -4 / auto / span 2
+        place-self: end
+      &__name-2
+        grid-area: 1 / -2 / auto / auto
+        align-self: end
+        transform-origin: bottom left
+        transform: rotate(90deg)
+      &__rect
+        +size(480px,200px)
+        grid-area: 4 / 4 / span 3 / span 5
+        place-self: center
+      &__rect-solid
+        +size(240px,200px)
+        grid-area: 1 / 1 / span 3 / span 3
+        place-self: center
+    
+    /* Intro */
+    & .clothes-intro
+      display: grid
+      grid-template: repeat(4, 100px) / repeat(6, 120px)
+      grid-area: 8 / 2 / span 5 / span 6
+      &__title
+        grid-area: 1 / 1 / auto / span 3
+        place-self: end start
+        transform-origin: bottom left
+        transform: rotate(90deg)
+      &__content-title
+        grid-area: 2 / 2 / auto / span 3
+      &__content-subtitle
+        grid-area: 2 / 2 / auto / span 4
+        align-self: end
+        bottom: 15px
+        font-size: $fontSubtitle
+        font-weight: 900
+        line-height: 36px
+      &__content-para
+        grid-area: 3 / 2 / auto / span 5
+        font-size: $fontPara
+        line-height: 24px
+    
+    /* Bottom Demo */
+    & .bottom-demo
+      display: grid
+      grid-template: repeat(7, 100px) / repeat(8, 120px)
+      grid-area: 14 / 1 / span 7 / span 8
+      &__img-top
+        grid-area: 1 / 2 / span 3 / span 3
+        background-image: url("https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f48976340279ffce098f21bb046acc87&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+        z-index: 1
+      &__img-bottom
+        grid-area: 3 / 4 / span 4 / span 4
+        background-image: url("https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=787976dcde91781727f476692b203ee9&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb")
+      &__rect
+        +size(480px,200px)
+        grid-area: 2 / 1 / span 3 / span 5
+        place-self: center
+      &__rect-solid
+        +size(240px,200px)
+        grid-area: 2 / -4 / span 2 / span 3
+        justify-self: center
+      &__pattern
+        grid-area: #{-3} / 2 / span 2 / span 3
+        place-self: center

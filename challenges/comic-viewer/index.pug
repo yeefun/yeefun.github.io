@@ -1,0 +1,111 @@
+// 
+  設計稿：https://hexschool.github.io/THE_F2E_Design/week5-comic%20viewer/
+  說明：https://www.facebook.com/groups/173311386703334/permalink/195225401178599/
+
+//
+  尚未完成：
+    - 全螢幕模式;
+    - 優化圖片切換（儘量減少使用者等待時間，卻又不是全部頁面直接載入造成伺服器 loading）;
+    - 優化 JS 代碼（將重複的代碼變為 function）;
+    - 點擊的小動畫，給使用者點擊回饋;
+    - 搞懂 JS 打問號之處;
+    - 難道 ".comic-preview" 不能當左or右邊碰到底時，才剛好更換到第一頁or最後一頁，並顯示上or下一章節嗎？（現在的情況是右邊可以，當左邊不行）
+    
+body
+  nav
+    .logo Comicomic
+  main.comic-home
+    div
+      .ad.ad__top
+        .ad__cross ×
+      article.comic-intro
+        .comic-intro__img
+        section.comic-intro__text
+          h1.comic-intro__name MY HEXSCHOOL
+          .comic-intro__content
+            .comic-intro__item.comic-intro__genre
+              h2 Genres
+              p Fusce/vehicula/dolor
+            .comic-intro__item.comic-intro__author
+              h2 Author
+              p Namae Shiranai
+            .comic-intro__item.comic-intro__status
+              h2 Status
+              p Ongoing
+            .comic-intro__item.comic-intro__rate
+              h2 Rate
+              i.fas.fa-star
+              i.fas.fa-star
+              i.fas.fa-star
+              i.fas.fa-star
+              i.far.fa-star
+            .comic-intro__summary
+              h2 Summary
+              p If your banker breaks, you snap; if your apothecary by mistake sends you poison in your pills, you die. 
+                br
+                br
+                | Therefore, I say, I saw that this situation of mine was the precise situation of every mortal that has this Siamese connexion with a plurality of other mortals.
+      .ad.ad__middle
+        .ad__cross ×
+      section.comic-chapter
+        .comic-chapter__title All Chapters
+        .comic-chapter__content
+          .comic-chapter__item
+            p Chapter 1: The F2E Challenge Start!
+          .comic-chapter__item
+            p Chapter 2: Todo List is Going Crazy!
+            .new NEW
+      .ad.ad__bottom
+        .ad__cross ×
+
+  main.comic-reader
+    div
+      .ad.ad__top
+        .ad__cross ×
+      section.comic-tool
+        .comic-tool__name My Hexschool
+        .arrow-right
+        .select.comic-tool__chapter
+          .select-click
+          ul.select__display
+            li Chapter 2
+          ul.select__option.select__option--chapter.hide
+            //- li Chapter 1
+            //- li.current Chapter 2
+          .select__arrow
+            .arrow-top
+            .arrow-bottom
+        .select.comic-tool__page
+          .select-click
+          ul.select__display
+            li Page 01
+          ul.select__option.select__option--page.hide
+            //- li.current Page 01
+            //- li Page 02
+          .select__arrow
+            .arrow-top
+            .arrow-bottom
+        .comic-tool__theme
+          i.fas.fa-sun
+          .theme-switch
+            .theme-switch__bright
+            .theme-switch__dark
+          i.far.fa-moon
+      .ad.ad__middle
+        .ad__cross ×
+      section.comic-screen
+        i.fas.fa-angle-left.prev-page
+        img.comic-screen__page(src="https://hexschool.github.io/THE_F2E_Design/week5-comic%20viewer/assets/storyboard-1.png", alt="")
+        i.fas.fa-angle-right.next-page
+      
+      .chapter-tooltips
+        .chapter-tooltip.prev.hide PREV CHAPTER
+        .chapter-tooltip.next.hide NEXT CHAPTER
+      section.comic-preview
+        .mask.mask--prev
+          i.fas.fa-angle-double-left
+        .page-wrapper
+        .mask.mask--next
+          i.fas.fa-angle-double-right
+      .ad.ad__bottom
+        .ad__cross ×

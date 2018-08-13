@@ -1,0 +1,476 @@
+/*--- Color ---*/
+$colorBlue: #1469ff
+$colorBlueDark: #0027c8
+$colorPink: #ff3c82
+$colorBlack: #111
+$colorWhite: #eee
+
+/*--- Font ---*/
+$fontTitle: 6.4rem
+$fontSubtitle: 3.6rem
+$fontSubtitle-sm: 2.0rem
+$fontPara: 1.8rem
+
+/*--- Component ---*/
+=size($w, $h:$w)
+  width: $w
+  height: $h
+  
+=alignCenter
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+/*--- Preprocessing ---*/
+*
+  // position: relative
+  font-family: "Noto Sans TC", sans-serif
+
+*, *:before, *:after
+  box-sizing: border-box
+
+html
+  font-size: 10px
+
+body
+  display: flex
+  font-family: "Noto Sans TC", sans-serif
+  overflow: hidden
+  
+  // for scroll
+  // height: 1500vh
+  
+  // temp
+  // overflow: auto
+  
+/*--- Main ---*/
+.blue
+  background-color: $colorBlue
+.blueDark
+  background-color: $colorBlueDark
+.pink
+  background-color: $colorPink
+.black
+  background-color: $colorBlack
+.white
+  background-color: $colorWhite
+.circle
+  border-radius: 50%
+
+// Question (Common)
+.question
+  & .qnumber
+    margin-bottom: 16px
+    font-size: $fontTitle
+    font-weight: 700
+    text-shadow: -4px 4px 0 rgba($colorBlack, 0.2)
+  & h2
+    width: 380px
+    margin-bottom: 16px
+    font-size: $fontSubtitle
+    font-weight: 700
+    letter-spacing: 2px
+    line-height: 52px
+  & .qremind
+    margin-bottom: 32px
+    font-size: $fontSubtitle-sm
+    font-weight: 300
+  & .answer
+    margin-bottom: 72px
+    & > div
+      +size(380px, 56px)
+      display: flex
+      justify-content: center
+      align-items: center
+      border: 1.6px solid $colorWhite
+      border-radius: 28px
+      color: $colorWhite
+      text-align: center
+      cursor: pointer
+      transition: all 0.4s
+      & + div
+        margin-top: 16px
+      &:hover
+        background-color: $colorWhite
+        &.a1
+          color: $colorBlue
+        &.a2
+          color: $colorBlueDark
+        &.a3
+          color: $colorPink
+    & p
+      position: relative
+      top: -0.8px
+      font-size: $fontPara
+
+// Calculator Text (Common)
+.calcText
+  display: none
+  flex-direction: column
+  align-items: center
+  color: $colorWhite
+  z-index: 1
+  & h2
+    margin-right: -8px
+    margin-bottom: 24px
+    font-size: $fontTitle
+    font-weight: 700
+    letter-spacing: 8px
+  & p
+    margin-right: -4px
+    font-size: $fontSubtitle-sm
+    font-weight: 300
+    letter-spacing: 4px
+      
+// Begin
+#bgBegin
+  width: 100%
+  height: 100vh
+  & .rect
+    +size(434px)
+    +alignCenter
+    animation: beginRect 4s 0.8s cubic-bezier(0.77, 0, 0.175, 1)
+    @keyframes beginRect
+      0%
+        transform: translate(-50%, -50%) rotate(0deg)
+      100%
+        transform: translate(-50%, -50%) rotate(-360deg)
+  & .circle
+    +size(534px)
+    +alignCenter
+    animation: beginCir 4s 0.8s cubic-bezier(0.77, 0, 0.175, 1)
+    @keyframes beginCir
+      0%, 50%, 100%
+        +size(534px)
+      25%
+        +size(584px)
+      75%
+        +size(484px)
+  & #beginStar
+    +alignCenter
+    fill: $colorPink
+    animation: beginStar 4s 0.8s cubic-bezier(0.77, 0, 0.175, 1)
+    @keyframes beginStar
+      0%
+        transform: translate(-50%, -50%) rotate(0deg)
+      100%
+        transform: translate(-50%, -50%) rotate(360deg)
+  & header
+    color: $colorWhite
+    +alignCenter
+    text-align: center
+    & h1
+      margin-right: -24px
+      margin-bottom: 24px
+      font-size: $fontTitle
+      font-weight: 700
+      letter-spacing: 24px
+    & h3
+      margin-right: -4px
+      font-size: $fontSubtitle-sm
+      font-weight: 300
+      letter-spacing: 4px
+  & article
+    display: none
+    padding-top: 72px
+    padding-left: 120px
+    letter-spacing: 1.2px
+    & .qnumber
+      color: $colorPink
+    & h2
+      color: $colorWhite
+    & .qremind
+      color: $colorBlueDark
+
+// Question 2
+#bgQ2
+  position: relative
+  display: none
+  flex-shrink: 0
+  order: 2
+  margin-left: auto
+  & .shape
+    height: 100%
+    position: relative
+    overflow: hidden
+    & > *
+      position: absolute
+      top: 120%
+  & .rect
+    +size(180px)
+    left: 70px
+    animation: 5s linear infinite
+    @keyframes q1Rect
+      100%
+        transform: rotate(360deg)
+  & svg
+    left: 300px
+    fill: $colorWhite
+    animation: 5s linear infinite
+    @keyframes q1Tri
+      100%
+        transform: rotate(-360deg)
+  & .circle
+    +size(402px)
+    left: 82px
+    animation: 5s linear infinite alternate
+    @keyframes q1Cir
+      50%
+        top: 488px
+        left: 66px
+      100%
+        top: 512px
+        left: 90px
+  & article
+    display: none
+    position: absolute
+    right: 120px
+    padding-top: 72px
+    letter-spacing: 1.2px
+    & .qnumber
+      color: $colorPink
+    & h2
+      color: $colorWhite
+    & .qremind
+      color: $colorBlue
+
+// Question 3
+#bgQ3
+  display: none
+  position: relative
+  height: auto
+  flex-shrink: 0
+  order: 1
+  & .shape
+    height: 100%
+    position: relative
+    overflow: hidden
+    & > *
+      position: absolute
+      top: 120%
+  & svg
+    fill: $colorWhite
+    right: 62px
+    transform-origin: 40% 40%
+    transform: rotate(148deg)
+    animation: 5s linear infinite
+    @keyframes q2Tri
+      100%
+        transform: rotate(508deg)
+  & .rect
+    +size(320px)
+    right: 260px
+    transform: rotate(54deg)
+    animation: 5s linear infinite
+    @keyframes q2Rect
+      100%
+        transform: rotate(-306deg)
+  & .circle
+    +size(192px)
+    right: 140px
+    animation: 5s linear infinite
+    @keyframes q2Cir
+      25%
+        top: 358px
+        right: 128px
+      75%
+        top: 386px
+        right: 156px
+      100%
+        top: 370px
+        right: 140px
+  & article
+    display: none
+    padding-top: 72px
+    padding-left: 120px
+    letter-spacing: 1.2px
+    & .qnumber
+      color: $colorWhite
+    & h2
+      color: $colorBlack
+    & .qremind
+      color: $colorBlack
+
+// Calculator
+#bgCalc
+  display: none
+  flex-shrink: 0
+  justify-content: center
+  align-items: center
+  order: 1
+  & .shape
+    height: 100%
+    position: relative
+    overflow: hidden
+    & > *
+      position: absolute
+      top: 110%
+  & .circle
+    +size(280px)
+    left: 211px
+    animation: 5s linear infinite
+    @keyframes q3Cir
+      25%
+        top: -24px
+        left: 227px
+      75%
+        top: -72px
+        left: 179px
+      100%
+        top: -40px
+        left: 211px
+  & .rect
+    +size(274px)
+    left: 65px
+    transform: rotate(92deg)
+    animation: 5s linear infinite alternate
+    @keyframes q3Rect
+      100%
+        transform: rotate(68deg)
+  & svg
+    left: 200px
+    fill: $colorBlack
+    transform: rotate(-150deg)
+    animation: 5s linear infinite
+    @keyframes q3Tri
+      100%
+        transform: rotate(210deg)
+  & #calcText3
+    color: $colorBlack
+  & .scrollShape
+    +size(100%, 100vh)
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    & > *
+      position: absolute
+  & #scrollRect1
+    +size(320px)
+    top: calc(100% + 64px)
+    left: 16%
+    transform: rotate(124deg)
+  & #scrollRect2
+    +size(200px)
+    top: calc(100% + 42px)
+    left: 10%
+    transform: rotate(-315deg)
+  & #scrollRect3
+    +size(124px)
+    bottom: 24%
+    right: calc(100% + 22px)
+    transform: rotate(113deg)
+  & #scrollRect4
+    +size(304px)
+    top: calc(100% + 64px)
+    left: 36%
+    transform: rotate(-315deg)
+  & #scrollRect5
+    +size(420px)
+    bottom: -12%
+    right: calc(100% + 50px)
+    transform: rotate(-285deg)
+  & #scrollRect6
+    +size(104px)
+    top: calc(100% + 20px)
+    left: 70%
+    transform: rotate(300deg)
+  & #scrollRect7
+    +size(132px)
+    bottom: 28%
+    right: calc(100% + 30px)
+    transform: rotate(-315deg)
+    z-index: 2
+  & #scrollRect8
+    +size(320px)
+    top: calc(100% + 62px)
+    left: 6%
+    transform: rotate(124deg)
+    z-index: 2
+  & #scrollRect9
+    +size(304px)
+    bottom: 24%
+    right: calc(100% + 64px)
+    transform: rotate(-315deg)
+    z-index: 2
+  & #scrollRect10
+    +size(104px)
+    bottom: -8%
+    right: calc(100% + 20px)
+    transform: rotate(300deg)
+    z-index: 2
+  & #scrollRect11
+    +size(8px)
+    top: 100%
+    right: 100%
+    transform-origin: bottom left
+    transform: translate(-50%, 36%) rotate(30deg)
+    z-index: 2
+    
+// Result
+.resultTitle
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: center
+  flex-shrink: 0
+  color: $colorWhite
+  margin-bottom: 40px
+  z-index: 99
+  & p
+    margin-right: -4px
+    margin-bottom: 20px
+    font-size: $fontSubtitle-sm
+    font-weight: 300
+    letter-spacing: 4px
+  & h2
+    margin-right: -8px
+    font-size: $fontTitle
+    font-weight: 700
+    letter-spacing: 8px
+
+#bgResult
+  +size(100%, 100vh)
+  position: relative
+  display: none
+  flex-direction: column
+  align-items: center
+  padding-top: 28vh
+  background-color: $colorBlueDark
+  overflow: hidden
+  & .resultShape
+    position: relative
+    bottom: 0
+    &#resultRect
+      +size(440px)
+      & > *
+        position: absolute
+        +size(440px)
+        top: 100%
+  & #resultRect1
+    top: 30px
+    right: 33px
+  & #resultRect2
+    top: 52px
+    left: 1px
+  & #resultRect3
+    left: 21px
+    border: 5px solid $colorWhite
+  & .rect
+    +size(52px)
+    position: absolute
+    bottom: calc(100% + 12px)
+    transform: rotate(45deg)
+  & #moveRect1
+    left: 3.1%
+  & #moveRect2
+    left: 25.3%
+  & #moveRect3
+    left: 83.3%
+  & #moveRect4
+    left: 5.7%
+  & #moveRect5
+    left: 71.6%
+  & #moveRect6
+    left: 97.5%
