@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+html(lang="zh-Hant-TW")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title The F2E - Todolist
+
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css")
+
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.2.0/css/regular.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css")
+
+        link(rel="stylesheet", href="css/style.css")
+    body
+        nav
+            section.navbar
+                .item.active 我的任務
+                .item 進行中
+                .item 已完成
+        section#todos.todos
+            .todos__add
+                input(type="text", placeholder="新增任務")
+                span +
+            .todos__todo
+                article.todo(v-for="(todo, idx) in todos")
+                    section.menu-head
+                        .menu-head__control
+                            input(type="checkbox", :id="idx")
+                            label(:for="idx")
+                            input(type="text", :placeholder="todo.title")
+                            i.far.fa-star
+                            i.far.fa-edit
+                        .menu-head__icon
+                            i.far.fa-calendar-alt
+                            span 8/20
+                            i.far.fa-file
+                            i.far.fa-comment-dots
+                    section.menu-body
+                        .menu-body__edit
+                            section.deadline
+                                .menu-body__subtitle
+                                    i.far.fa-calendar-alt
+                                    span 到期日
+                                .menu-body__input
+                                    input(type="date")
+                                    input(type="time")
+                            section.file
+                                .menu-body__subtitle
+                                    i.far.fa-file
+                                    span 附檔
+                                .menu-body__input
+                                    input(type="file")
+                                    input(type="button", value="+")
+                            section.comment
+                                .menu-body__subtitle
+                                    i.far.fa-comment-dots
+                                    span 附註
+                                .menu-body__input
+                                    textarea(placeholder="新增附註")
+                        .menu-body__decision
+                            .cancel
+                                span ×
+                                | 取消
+                            .save
+                                span +
+                                | 儲存
+            .todos__remain 剩下 3 個任務
+
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js")
+        script(src="js/script.js")

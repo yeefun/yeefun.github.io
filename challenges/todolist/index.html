@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>The F2E - Todolist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/regular.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+    <nav>
+      <section class="navbar">
+        <div class="item active">我的任務</div>
+        <div class="item">進行中</div>
+        <div class="item">已完成</div>
+      </section>
+    </nav>
+    <section class="todos" id="todos">
+      <div class="todos__add">
+        <input type="text" placeholder="新增任務"/><span>+</span>
+      </div>
+      <div class="todos__todo">
+        <article class="todo" v-for="(todo, idx) in todos">
+          <section class="menu-head">
+            <div class="menu-head__control">
+              <input type="checkbox" :id="idx"/>
+              <label :for="idx"></label>
+              <input type="text" :placeholder="todo.title"/><i class="far fa-star"></i><i class="far fa-edit"></i>
+            </div>
+            <div class="menu-head__icon"><i class="far fa-calendar-alt"></i><span>8/20</span><i class="far fa-file"></i><i class="far fa-comment-dots"></i></div>
+          </section>
+          <section class="menu-body">
+            <div class="menu-body__edit">
+              <section class="deadline">
+                <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
+                <div class="menu-body__input">
+                  <input type="date"/>
+                  <input type="time"/>
+                </div>
+              </section>
+              <section class="file">
+                <div class="menu-body__subtitle"><i class="far fa-file"></i><span>附檔</span></div>
+                <div class="menu-body__input">
+                  <input type="file"/>
+                  <input type="button" value="+"/>
+                </div>
+              </section>
+              <section class="comment">
+                <div class="menu-body__subtitle"><i class="far fa-comment-dots"></i><span>附註</span></div>
+                <div class="menu-body__input">
+                  <textarea placeholder="新增附註"></textarea>
+                </div>
+              </section>
+            </div>
+            <div class="menu-body__decision">
+              <div class="cancel"><span>×</span>取消</div>
+              <div class="save"><span>+</span>儲存</div>
+            </div>
+          </section>
+        </article>
+      </div>
+      <div class="todos__remain">剩下 3 個任務</div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
