@@ -228,6 +228,8 @@ nav {
       position: relative;
       left: 40px;
       color: #757575; }
+      .todo .menu-head__icon > div:first-child {
+        display: inline; }
       .todo .menu-head__icon i {
         font-size: 1.8rem; }
         .todo .menu-head__icon i.fa-calendar-alt {
@@ -292,13 +294,24 @@ nav {
           height: 35px; }
     .todo .menu-body .file {
       margin-bottom: 26px; }
-      .todo .menu-body .file > .menu-body__subtitle {
-        margin-bottom: 10px; }
+      .todo .menu-body .file__detail {
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 24px;
+        font-size: 1.6rem;
+        font-weight: 300; }
+      .todo .menu-body .file__name {
+        margin-bottom: 4px;
+        line-height: 20px; }
+      .todo .menu-body .file__upload-date {
+        line-height: 20px;
+        color: #757575; }
       .todo .menu-body .file input[type="file"] {
         display: none; }
       .todo .menu-body .file input[type="button"] {
         width: 32px;
         height: 32px;
+        vertical-align: middle;
         padding: 0;
         border: none;
         border-radius: 2px;

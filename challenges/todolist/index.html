@@ -13,13 +13,13 @@
   <body>
     <nav>
       <section class="navbar">
-        <div class="item active">我的任務</div>
-        <div class="item">進行中</div>
-        <div class="item">已完成</div>
+        <div class="item active" @click="all">我的任務</div>
+        <div class="item" @click="inProgress">待處理</div>
+        <div class="item" @click="completed">已處理</div>
       </section>
     </nav>
     <section class="todos" id="todos">
-      <div class="todos__add" v-if="add" @click="add=false">
+      <div class="todos__add" v-if="notAdd" @click="notAdd=false">
         <input type="text" placeholder="新增任務"/><span>+</span>
       </div>
       <div class="todos__new" v-else="v-else">
@@ -38,15 +38,19 @@
               <section class="deadline">
                 <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
                 <div class="menu-body__input">
-                  <input type="date"/>
-                  <input type="time"/>
+                  <input type="date" v-model="newTodo.date"/>
+                  <input type="time" v-model="newTodo.time"/>
                 </div>
               </section>
               <section class="file">
                 <div class="menu-body__subtitle"><i class="far fa-file"></i><span>附檔</span></div>
                 <div class="menu-body__input">
-                  <input type="file"/>
-                  <input type="button" value="+" @click="clickFile"/>
+                  <div class="file__detail" v-if="newTodo.fileName">
+                    <div class="file__name">{{newTodo.fileName}}</div>
+                    <div class="file__upload-date">{{newTodo.fileUploadDate}}</div>
+                  </div>
+                  <input type="file" @change="fileSelected($event)"/>
+                  <input type="button" value="+" @click="fileClick"/>
                 </div>
               </section>
               <section class="comment">
@@ -57,24 +61,24 @@
               </section>
             </div>
             <div class="menu-body__decision">
-              <div class="cancel" @click="add=true"><span>×</span>取消</div>
-              <div class="save" @click="addNewTodo"><span>+</span>新增</div>
+              <div class="cancel" @click="newTodoCancel"><span>×</span>取消</div>
+              <div class="save" @click="todoAdd"><span>+</span>新增</div>
             </div>
           </section>
         </article>
       </div>
       <div class="todos__todo">
-        <article class="todo" v-for="(todo, idx) in todos" :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) }">
+        <article class="todo" v-for="(todo, idx) in todos" :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open }">
           <section class="menu-head" :class="{ active: todo.star }">
             <div class="menu-head__control">
-              <input type="checkbox" :id="idx"/>
+              <input type="checkbox" :id="idx" @change="todoCompleted($event, idx)"/>
               <label :for="idx">
                 <div></div>
               </label>
-              <input type="text" placeholder="你的任務名稱" :value="todo.title"/><i class="far fa-star" :class="{ active: todo.star }" @click="todo.star=!todo.star"></i><i class="far fa-edit" :class="{ active: todo.open }" @click="todo.open=true"></i>
+              <input type="text" placeholder="你的任務名稱" v-model="todo.title"/><i class="far fa-star" :class="{ active: todo.star }" @click="todo.star=!todo.star"></i><i class="far fa-edit" :class="{ active: todo.open }" @click="todoEdit(idx)"></i>
             </div>
             <div class="menu-head__icon">
-              <div v-if="todo.date || todo.time"><i class="far fa-calendar-alt"></i><span>8/20</span></div><i class="far fa-file" v-if="todo.file"></i><i class="far fa-comment-dots" v-if="todo.comment"></i>
+              <div v-if="(todo.date || todo.time) &amp;&amp; !todo.open"><i class="far fa-calendar-alt"></i><span>{{setCalendar(idx)}}</span></div><i class="far fa-file" v-if="todo.fileName &amp;&amp; !todo.open"></i><i class="far fa-comment-dots" v-if="todo.comment &amp;&amp; !todo.open"></i>
             </div>
           </section>
           <section class="menu-body" v-show="todo.open">
@@ -82,26 +86,30 @@
               <section class="deadline">
                 <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
                 <div class="menu-body__input">
-                  <input type="date"/>
-                  <input type="time"/>
+                  <input type="date" v-model="todo.date"/>
+                  <input type="time" v-model="todo.time"/>
                 </div>
               </section>
               <section class="file">
                 <div class="menu-body__subtitle"><i class="far fa-file"></i><span>附檔</span></div>
                 <div class="menu-body__input">
-                  <input type="file"/>
-                  <input type="button" value="+" @click="clickFile"/>
+                  <div class="file__detail" v-if="todo.fileName">
+                    <div class="file__name">{{todo.fileName}}</div>
+                    <div class="file__upload-date">{{todo.fileUploadDate}}</div>
+                  </div>
+                  <input type="file" @change="fileSelected($event, idx)"/>
+                  <input type="button" value="+" @click="fileClick"/>
                 </div>
               </section>
               <section class="comment">
                 <div class="menu-body__subtitle"><i class="far fa-comment-dots"></i><span>附註</span></div>
                 <div class="menu-body__input">
-                  <textarea placeholder="新增附註">{{todo.comment}}</textarea>
+                  <textarea placeholder="新增附註" v-model="todo.comment"></textarea>
                 </div>
               </section>
             </div>
             <div class="menu-body__decision">
-              <div class="cancel" @click="todo.open=false"><span>×</span>取消</div>
+              <div class="cancel" @click="todoCancel(idx)"><span>×</span>取消</div>
               <div class="save" @click="todo.open=false"><span>+</span>儲存</div>
             </div>
           </section>

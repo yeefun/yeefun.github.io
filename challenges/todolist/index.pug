@@ -16,12 +16,12 @@ html(lang="zh-Hant-TW")
 
         nav
             section.navbar
-                .item.active 我的任務
-                .item 進行中
-                .item 已完成
+                .item.active(@click="all") 我的任務
+                .item(@click="inProgress") 待處理
+                .item(@click="completed") 已處理
 
         section#todos.todos
-            .todos__add(v-if="add", @click="add=false")
+            .todos__add(v-if="notAdd", @click="notAdd=false")
                 input(type="text", placeholder="新增任務")
                 span +
 
@@ -49,15 +49,18 @@ html(lang="zh-Hant-TW")
                                     i.far.fa-calendar-alt
                                     span 到期日
                                 .menu-body__input
-                                    input(type="date")
-                                    input(type="time")
+                                    input(type="date", v-model="newTodo.date")
+                                    input(type="time", v-model="newTodo.time")
                             section.file
                                 .menu-body__subtitle
                                     i.far.fa-file
                                     span 附檔
                                 .menu-body__input
-                                    input(type="file")
-                                    input(type="button", value="+", @click="clickFile")
+                                    div.file__detail(v-if="newTodo.fileName")
+                                        .file__name {{newTodo.fileName}}
+                                        .file__upload-date {{newTodo.fileUploadDate}}
+                                    input(type="file", @change="fileSelected($event)")
+                                    input(type="button", value="+", @click="fileClick")
                             section.comment
                                 .menu-body__subtitle
                                     i.far.fa-comment-dots
@@ -65,35 +68,35 @@ html(lang="zh-Hant-TW")
                                 .menu-body__input
                                     textarea(placeholder="新增附註", v-model="newTodo.comment")
                         .menu-body__decision
-                            .cancel(@click="add=true")
+                            .cancel(@click="newTodoCancel")
                                 span ×
                                 | 取消
-                            .save(@click="addNewTodo")
+                            .save(@click="todoAdd")
                                 span +
                                 | 新增
 
             .todos__todo
                 article.todo(
                     v-for="(todo, idx) in todos", 
-                    :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) }")
+                    :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open }")
                     section.menu-head(:class="{ active: todo.star }")
                         .menu-head__control
-                            input(type="checkbox", :id="idx")
+                            input(type="checkbox", :id="idx", @change="todoCompleted($event, idx)")
                             label(:for="idx")
                                 div
-                            input(type="text", placeholder="你的任務名稱", :value="todo.title")
+                            input(type="text", placeholder="你的任務名稱", v-model="todo.title")
                             i.far.fa-star(
                                 :class="{ active: todo.star }", 
                                 @click="todo.star=!todo.star")
                             i.far.fa-edit(
                                 :class="{ active: todo.open }", 
-                                @click="todo.open=true")
+                                @click="todoEdit(idx)")
                         .menu-head__icon
-                            div(v-if="todo.date || todo.time")
+                            div(v-if="(todo.date || todo.time) && !todo.open")
                                 i.far.fa-calendar-alt
-                                span 8/20
-                            i.far.fa-file(v-if="todo.file")
-                            i.far.fa-comment-dots(v-if="todo.comment")
+                                span {{setCalendar(idx)}}
+                            i.far.fa-file(v-if="todo.fileName && !todo.open")
+                            i.far.fa-comment-dots(v-if="todo.comment && !todo.open")
 
                     section.menu-body(v-show="todo.open")
                         .menu-body__edit
@@ -102,23 +105,26 @@ html(lang="zh-Hant-TW")
                                     i.far.fa-calendar-alt
                                     span 到期日
                                 .menu-body__input
-                                    input(type="date")
-                                    input(type="time")
+                                    input(type="date", v-model="todo.date")
+                                    input(type="time", v-model="todo.time")
                             section.file
                                 .menu-body__subtitle
                                     i.far.fa-file
                                     span 附檔
                                 .menu-body__input
-                                    input(type="file")
-                                    input(type="button", value="+", @click="clickFile")
+                                    div.file__detail(v-if="todo.fileName")
+                                        .file__name {{todo.fileName}}
+                                        .file__upload-date {{todo.fileUploadDate}}
+                                    input(type="file", @change="fileSelected($event, idx)")
+                                    input(type="button", value="+", @click="fileClick")
                             section.comment
                                 .menu-body__subtitle
                                     i.far.fa-comment-dots
                                     span 附註
                                 .menu-body__input
-                                    textarea(placeholder="新增附註") {{todo.comment}}
+                                    textarea(placeholder="新增附註", v-model="todo.comment")
                         .menu-body__decision
-                            .cancel(@click="todo.open=false")
+                            .cancel(@click="todoCancel(idx)")
                                 span ×
                                 | 取消
                             .save(@click="todo.open=false")
