@@ -27,7 +27,7 @@ html(lang="zh-Hant-TW")
 
             #todos__new(:class="{ open: !notAdd }")
                 article.todo.edit.icon-empty
-                    section.menu-head(:class="{ active: newTodo.star }")
+                    section.menu-head(:class="{ star: newTodo.star }")
                         .menu-head__control
                             span +
                             //- input(type="checkbox", id="new", v-model="newTodo.completed", @change="todoCompleted")
@@ -77,15 +77,13 @@ html(lang="zh-Hant-TW")
                                 | 新增
 
             #todos__todo
-                article.todo(
-                    v-for="(todo, idx) in todos", 
-                    :class="todoModes(idx)")
-                    section.menu-head(:class="{ active: todo.star }")
+                article.todo(draggable="true", v-for="(todo, idx) in todos", @dragstart="dragStart", @drag="drag", @dragend="dragEnd", @drop="drop", @dragenter="dragEnter", @dragover="dragOver", @dragleave="dragLeave", :class="todoModes(idx)" :style="{ order: idx }")
+                    section.menu-head(:class="{ star: todo.star }")
                         .menu-head__control
-                            input(type="checkbox", :id="idx", v-model="todo.completed", @change="todoCompleted")
-                            label(:for="idx")
+                            input(type="checkbox", :id="'checked'+idx", v-model="todo.completed", @change="todoCompleted($event, idx)")
+                            label(:for="'checked'+idx")
                                 div
-                            input(type="text", placeholder="你的任務名稱", v-model="todo.title")
+                            input(type="text", :id="'title'+idx", placeholder="你的任務名稱", v-model="todo.title")
                             i.far.fa-star(
                                 :class="{ active: todo.star }", 
                                 @click="todo.star=!todo.star")
@@ -135,4 +133,4 @@ html(lang="zh-Hant-TW")
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js")
-        script(src="js/script.js")
+        script(src="js/script-dist.js")
