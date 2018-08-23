@@ -1,17 +1,28 @@
 let navbar = new Vue({
     el: 'nav',
     methods: {
+        active(evt) {
+            let navItems = document.getElementsByClassName('item');
+            Array.from(navItems).forEach(item => {
+                item.classList.remove('active')
+            });
+            evt.currentTarget.classList.add('active');
+        },
         all(evt) {
             this.active(evt);
+            todos.modes.inProgress = false;
+            todos.modes.completed = false;
         },
         inProgress(evt) {
             this.active(evt);
+            todos.modes.inProgress = true;
+            todos.modes.completed = false;
         },
-        active(evt) {
-            let navItems = document.getElementsByClassName('item');
-            Array.from(navItems).forEach(item => item.classList.remove('active'));
-            evt.currentTarget.classList.add('active');
-        },
+        completed(evt) {
+            this.active(evt);
+            todos.modes.inProgress = false;
+            todos.modes.completed = true;
+        }
     }
 
 });
@@ -19,11 +30,15 @@ let navbar = new Vue({
 let todos = new Vue({
     el: '#todos',
     data: {
+        modes: {
+            completed: false,
+            inProgress: false
+        },
         notAdd: true,
         newTodo: {
             title: '',
             star: false,
-            completed: false,
+            // completed: false,
             date: '',
             time: '',
             fileName: '',
@@ -50,6 +65,15 @@ let todos = new Vue({
             comment: ''
         }],
     },
+    computed: {
+        todoRemain() {
+            let completedNum = this.todos.filter(todo => todo.completed === true);
+            if (this.modes.completed)
+                return `完成了 ${completedNum.length} 件任務`;
+            else
+                return `還剩 ${this.todos.length - completedNum.length} 件任務`;
+        }
+    },
     methods: {
         todoDataTransmit(transmitted, transmitter) {
             transmitted.title = transmitter.title;
@@ -59,12 +83,27 @@ let todos = new Vue({
             transmitted.fileUploadDate = transmitter.fileUploadDate;
             transmitted.comment = transmitter.comment;
         },
+        todoModes(idx) {
+            let todo = this.todos[idx];
+            return {
+                edit: todo.open,
+                'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open,
+                hide: (this.modes.inProgress && todo.completed) || (this.modes.completed && !todo.completed)
+                // 'in-progress': this.modes.inProgress && todo.completed,
+                // completed: this.modes.completed,
+            }
+        },
+        todoAddClick() {
+            this.notAdd = false;
+            document.getElementById('new-title').focus();
+        },
         todoAdd() {
             this.notAdd = true;
             let newTodo = {
                 title: this.newTodo.title,
                 open: false,
                 star: this.newTodo.star,
+                completed: false,
                 date: this.newTodo.date,
                 time: this.newTodo.time,
                 fileName: this.newTodo.fileName,
@@ -101,9 +140,6 @@ let todos = new Vue({
             // 資料備份;
             this.todoDataTransmit(backup, todo);
         },
-        // todoSave(idx) {
-        //     this.todos[idx].open = false;
-        // },
         todoCancel(idx) {
             let todo = this.todos[idx];
             let backup = this.backupTodos[idx];
@@ -112,8 +148,7 @@ let todos = new Vue({
             // 資料還原;
             this.todoDataTransmit(todo, backup);
         },
-        todoCompleted(evt, idx) {
-            this.todos[idx].completed = true;
+        todoCompleted(evt) {
             let checked = evt.currentTarget.checked;
             let inputTitle = evt.currentTarget.nextSibling.nextSibling.nextSibling.nextSibling;
             if (checked)

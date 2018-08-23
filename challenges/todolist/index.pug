@@ -20,19 +20,20 @@ html(lang="zh-Hant-TW")
                 .item(@click="inProgress") 待處理
                 .item(@click="completed") 已處理
 
-        section#todos.todos
-            .todos__add(v-if="notAdd", @click="notAdd=false")
+        section#todos
+            #todos__add(v-if="notAdd", @click="todoAddClick")
                 input(type="text", placeholder="新增任務")
                 span +
 
-            .todos__new(v-else)
+            #todos__new(:class="{ open: !notAdd }")
                 article.todo.edit.icon-empty
                     section.menu-head(:class="{ active: newTodo.star }")
                         .menu-head__control
-                            input(type="checkbox", id="new")
-                            label(for="new")
-                                div
-                            input(type="text", placeholder="你的任務名稱", v-model="newTodo.title")
+                            span +
+                            //- input(type="checkbox", id="new", v-model="newTodo.completed", @change="todoCompleted")
+                            //- label(for="new")
+                            //-     div
+                            input#new-title(type="text", placeholder="你的任務名稱", v-model="newTodo.title")
                             i.far.fa-star(
                                 :class="{ active: newTodo.star }", 
                                 @click="newTodo.star=!newTodo.star")
@@ -75,13 +76,13 @@ html(lang="zh-Hant-TW")
                                 span +
                                 | 新增
 
-            .todos__todo
+            #todos__todo
                 article.todo(
                     v-for="(todo, idx) in todos", 
-                    :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open }")
+                    :class="todoModes(idx)")
                     section.menu-head(:class="{ active: todo.star }")
                         .menu-head__control
-                            input(type="checkbox", :id="idx", @change="todoCompleted($event, idx)")
+                            input(type="checkbox", :id="idx", v-model="todo.completed", @change="todoCompleted")
                             label(:for="idx")
                                 div
                             input(type="text", placeholder="你的任務名稱", v-model="todo.title")
@@ -98,7 +99,7 @@ html(lang="zh-Hant-TW")
                             i.far.fa-file(v-if="todo.fileName && !todo.open")
                             i.far.fa-comment-dots(v-if="todo.comment && !todo.open")
 
-                    section.menu-body(v-show="todo.open")
+                    section.menu-body(:class="{ open: todo.open }")
                         .menu-body__edit
                             section.deadline
                                 .menu-body__subtitle
@@ -130,7 +131,7 @@ html(lang="zh-Hant-TW")
                             .save(@click="todo.open=false")
                                 span +
                                 | 儲存
-            .todos__remain 剩下 {{todos.length}} 個任務
+            #todos__remain {{todoRemain}}
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js")

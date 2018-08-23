@@ -70,15 +70,16 @@ nav {
       nav .item.active:after, nav .item:hover:after {
         background-color: #00408b; }
 
-.todos {
+#todos {
   width: 80%;
   max-width: 620px;
+  position: relative;
   display: inline-block; }
-  .todos__add {
+  #todos__add {
     position: relative;
     margin-bottom: 24px;
     color: #c8c8c8; }
-    .todos__add input {
+    #todos__add input {
       width: 100%;
       height: 64px;
       padding-left: 68px;
@@ -89,21 +90,72 @@ nav {
       outline: none;
       -webkit-box-sizing: border-box;
       box-sizing: border-box; }
-      .todos__add input::-webkit-input-placeholder {
+      #todos__add input::-webkit-input-placeholder {
         color: #c8c8c8; }
-      .todos__add input:-ms-input-placeholder {
+      #todos__add input:-ms-input-placeholder {
         color: #c8c8c8; }
-      .todos__add input::-ms-input-placeholder {
+      #todos__add input::-ms-input-placeholder {
         color: #c8c8c8; }
-      .todos__add input::placeholder {
+      #todos__add input::placeholder {
         color: #c8c8c8; }
-    .todos__add span {
+    #todos__add span {
       position: absolute;
       top: 6px;
       left: 32px;
       font-size: 4.8rem;
       font-weight: 200; }
-  .todos__remain {
+  #todos__new {
+    width: 100%;
+    position: absolute;
+    -webkit-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0); }
+    #todos__new.open {
+      position: static;
+      -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+      transform: scaleY(1);
+      -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -o-transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    #todos__new .menu-head {
+      position: relative; }
+      #todos__new .menu-head__control > span {
+        position: absolute;
+        top: 12px;
+        left: 32px;
+        font-size: 4.8rem;
+        font-weight: 200;
+        color: #c8c8c8; }
+      #todos__new .menu-head__control > input[type="text"] {
+        margin-left: 36px; }
+  #todos__todo .todo {
+    position: relative; }
+  #todos__todo .menu-body {
+    width: 100%;
+    position: absolute;
+    -webkit-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0); }
+    #todos__todo .menu-body.open {
+      position: static;
+      -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+      transform: scaleY(1);
+      -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -o-transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  #todos__remain {
     padding-left: 32px;
     margin-bottom: 28px;
     font-size: 2.4rem;
@@ -112,14 +164,16 @@ nav {
     text-align: left; }
 
 .todo {
+  margin-bottom: 8px;
   text-align: left;
-  color: #000;
-  margin-bottom: 8px; }
+  color: #000; }
   .todo.edit {
     margin-bottom: 24px; }
     .todo.edit .menu-head {
       border-bottom-right-radius: 0px;
       border-bottom-left-radius: 0px; }
+  .todo.hide {
+    display: none; }
   .todo.icon-empty .menu-head {
     padding-bottom: 20px; }
     .todo.icon-empty .menu-head__control {
@@ -130,7 +184,11 @@ nav {
     background-color: #f2f2f2;
     -webkit-transition: background-color 0.25s;
     -o-transition: background-color 0.25s;
-    transition: background-color 0.25s; }
+    transition: background-color 0.25s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
     .todo .menu-head.active {
       background-color: #fff2dc; }
     .todo .menu-head__control {

@@ -77,9 +77,10 @@ nav
             &:after
                 background-color: $colorBlueDark
 
-.todos
+#todos
     width: 80%
     max-width: 620px
+    position: relative
     display: inline-block
     &__add
         position: relative
@@ -103,11 +104,42 @@ nav
             left: 32px
             font-size: 4.8rem
             font-weight: 200
-    // &__new > .todo
-    //     & .menu-head
-    //         padding-bottom: 20px
-    //         &__control
-    //             margin-bottom: 0
+    &__new
+        width: 100%
+        position: absolute
+        transform-origin: 50% 0%
+        transform: scaleY(0)
+        // transition: transform 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+        &.open
+            position: static
+            transform: scaleY(1)
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+        & .menu-head
+            position: relative
+            // padding-left: 68px
+            &__control
+                > span
+                    position: absolute
+                    top: 12px
+                    left: 32px
+                    font-size: 4.8rem
+                    font-weight: 200
+                    color: $colorGrey
+                & > input[type="text"]
+                    margin-left: 36px
+    &__todo
+        & .todo
+            position: relative
+        & .menu-body
+            width: 100%
+            position: absolute
+            transform-origin: 50% 0%
+            transform: scaleY(0)
+            // transition: transform 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+            &.open
+                position: static
+                transform: scaleY(1)
+                transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)
     &__remain
         padding-left: 32px
         margin-bottom: 28px
@@ -118,11 +150,12 @@ nav
         text-align: left
 
 
-
 .todo
+    // position: relative
+    margin-bottom: 8px
     text-align: left
     color: $colorBlack
-    margin-bottom: 8px
+    // transition: margin 0.25s ease-out
     // & + .todo
     //     margin-top: 8px
     &.edit
@@ -133,6 +166,8 @@ nav
             border-bottom-left-radius: 0px
             // &__control
             //     margin-bottom: 0
+    &.hide
+        display: none
     &.icon-empty
         & .menu-head
             padding-bottom: 20px
@@ -145,6 +180,7 @@ nav
         // border-top-left-radius: 5px
         background-color: $colorGreyExtraLight
         transition: background-color 0.25s
+        user-select: none
         &.active
             background-color: $colorYellowLight
         &__control
@@ -222,11 +258,19 @@ nav
                 font-size: $fontRemark
                 // font-weight: 300
     & .menu-body
+        // width: 100%
+        // position: absolute
+        // transform-origin: center top
+        // transform: scaleY(0)
         border-top: 2px solid $colorGrey
         border-bottom-right-radius: 5px
         border-bottom-left-radius: 5px
         box-shadow: 0 4px 4px 0 $colorGrey
         background-color: $colorGreyExtraLight
+        // transition: transform 0.25s ease-in-out
+        // &.open
+        //     position: static
+        //     transform: scaleY(1)
         &__edit
             padding-top: 24px
             padding-bottom: 24px

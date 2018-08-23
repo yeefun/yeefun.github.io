@@ -18,19 +18,15 @@
         <div class="item" @click="completed">已處理</div>
       </section>
     </nav>
-    <section class="todos" id="todos">
-      <div class="todos__add" v-if="notAdd" @click="notAdd=false">
+    <section id="todos">
+      <div id="todos__add" v-if="notAdd" @click="todoAddClick">
         <input type="text" placeholder="新增任務"/><span>+</span>
       </div>
-      <div class="todos__new" v-else="v-else">
+      <div id="todos__new" :class="{ open: !notAdd }">
         <article class="todo edit icon-empty">
           <section class="menu-head" :class="{ active: newTodo.star }">
-            <div class="menu-head__control">
-              <input type="checkbox" id="new"/>
-              <label for="new">
-                <div></div>
-              </label>
-              <input type="text" placeholder="你的任務名稱" v-model="newTodo.title"/><i class="far fa-star" :class="{ active: newTodo.star }" @click="newTodo.star=!newTodo.star"></i><i class="far fa-edit active"></i>
+            <div class="menu-head__control"><span>+</span>
+              <input id="new-title" type="text" placeholder="你的任務名稱" v-model="newTodo.title"/><i class="far fa-star" :class="{ active: newTodo.star }" @click="newTodo.star=!newTodo.star"></i><i class="far fa-edit active"></i>
             </div>
           </section>
           <section class="menu-body">
@@ -67,11 +63,11 @@
           </section>
         </article>
       </div>
-      <div class="todos__todo">
-        <article class="todo" v-for="(todo, idx) in todos" :class="{ edit: todo.open, 'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open }">
+      <div id="todos__todo">
+        <article class="todo" v-for="(todo, idx) in todos" :class="todoModes(idx)">
           <section class="menu-head" :class="{ active: todo.star }">
             <div class="menu-head__control">
-              <input type="checkbox" :id="idx" @change="todoCompleted($event, idx)"/>
+              <input type="checkbox" :id="idx" v-model="todo.completed" @change="todoCompleted"/>
               <label :for="idx">
                 <div></div>
               </label>
@@ -81,7 +77,7 @@
               <div v-if="(todo.date || todo.time) &amp;&amp; !todo.open"><i class="far fa-calendar-alt"></i><span>{{setCalendar(idx)}}</span></div><i class="far fa-file" v-if="todo.fileName &amp;&amp; !todo.open"></i><i class="far fa-comment-dots" v-if="todo.comment &amp;&amp; !todo.open"></i>
             </div>
           </section>
-          <section class="menu-body" v-show="todo.open">
+          <section class="menu-body" :class="{ open: todo.open }">
             <div class="menu-body__edit">
               <section class="deadline">
                 <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
@@ -115,7 +111,7 @@
           </section>
         </article>
       </div>
-      <div class="todos__remain">剩下 {{todos.length}} 個任務</div>
+      <div id="todos__remain">{{todoRemain}}</div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
     <script src="js/script.js"></script>
