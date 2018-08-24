@@ -31,6 +31,17 @@ var navbar = new Vue({
 var todos = new Vue({
     el: '#todos',
     data: {
+        todoOrderZero: false,
+        todoModes: function todoModes(idx) {
+            var todo = this.todos[idx];
+            return {
+                edit: todo.open,
+                'edit-zero': todo.open && this.todoOrderZero,
+                'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open,
+                hide: this.modes.inProgress && todo.completed || this.modes.completed && !todo.completed
+            };
+        },
+
         modes: {
             completed: false,
             inProgress: false
@@ -39,7 +50,6 @@ var todos = new Vue({
         newTodo: {
             title: '',
             star: false,
-            // completed: false,
             date: '',
             time: '',
             fileName: '',
@@ -98,7 +108,8 @@ var todos = new Vue({
             fileName: 'elephant (3).png',
             fileUploadDate: '上傳時間 08/23 16:42',
             comment: '大象就是帥！'
-        }]
+        }],
+        todoDragged: null
     },
     computed: {
         todoRemain: function todoRemain() {
@@ -125,19 +136,12 @@ var todos = new Vue({
             transmitted.fileUploadDate = transmitter.fileUploadDate;
             transmitted.comment = transmitter.comment;
         },
-        todoModes: function todoModes(idx) {
-            var todo = this.todos[idx];
-            return {
-                edit: todo.open,
-                'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open,
-                hide: this.modes.inProgress && todo.completed || this.modes.completed && !todo.completed
-                // 'in-progress': this.modes.inProgress && todo.completed,
-                // completed: this.modes.completed,
-            };
-        },
         todoAddClick: function todoAddClick() {
             this.notAdd = false;
             document.getElementById('new-title').focus();
+            this.todos.forEach(function (todo) {
+                todo.open = false;
+            });
         },
         todoAdd: function todoAdd() {
             this.notAdd = true;
@@ -173,11 +177,19 @@ var todos = new Vue({
                 p === 'star' || p === 'completed' ? this.newTodo[p] = false : this.newTodo[p] = '';
             }
         },
-        todoEdit: function todoEdit(idx) {
+        todoEdit: function todoEdit(evt, idx) {
             var todo = this.todos[idx];
             var backup = this.backupTodos[idx];
 
+            // 1.先將所有 todo 關掉;
+            this.todos.forEach(function (todo) {
+                todo.open = false;
+            });
+            // 2.再開目前要編輯的;
             todo.open = true;
+
+            var todoOrder = evt.currentTarget.parentNode.parentNode.parentNode.style.order;
+            if (todoOrder === '0') this.todoOrderZero = true;else this.todoOrderZero = false;
 
             // 資料備份;
             this.todoDataTransmit(backup, todo);
@@ -222,44 +234,42 @@ var todos = new Vue({
             }
         },
         dragStart: function dragStart(evt) {
-            var oldIdx = this.index(evt.currentTarget);
-            evt.dataTransfer.setData('text/plain', oldIdx);
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
-        },
-        drag: function drag(evt) {
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
-            // evt.currentTarget.removeEventListener('dragleave', this.dragLeave);
+            // Firefox 要加，不然會不 work！
+            evt.dataTransfer.setData('text/plain', null);
+
+            this.todoDragged = evt.currentTarget;
+            evt.currentTarget.style.setProperty('transform', 'perspective(400px) translateY(-4px) rotate(-1.6deg) scale(1.001) rotateX(-4deg)');
+            evt.currentTarget.style.boxShadow = '2px 2px 16px rgba(0, 0, 0, 0.2)';
+            evt.currentTarget.style.zIndex = '99';
         },
         dragEnd: function dragEnd(evt) {
+            evt.currentTarget.style.transform = 'none';
             evt.currentTarget.style.boxShadow = 'none';
-        },
-        drop: function drop(evt) {
-            evt.preventDefault();
-            var oldIdx = evt.dataTransfer.getData('text/plain');
-            var dropped = evt.currentTarget;
-            var dragged = dropped.parentNode.childNodes[oldIdx];
-            var newOrder = dropped.style.order;
-            var oldOrder = dragged.style.order;
-            dropped.style.order = oldOrder;
-            dropped.style.boxShadow = 'none';
-            dragged.style.order = newOrder;
+            evt.currentTarget.style.zIndex = 'auto';
         },
         dragEnter: function dragEnter(evt) {
             evt.preventDefault();
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
         },
         dragOver: function dragOver(evt) {
             evt.preventDefault();
         },
-        dragLeave: function dragLeave(evt) {
+        drop: function drop(evt) {
             evt.preventDefault();
-            evt.currentTarget.style.boxShadow = 'none';
+            this.orderExchange(evt);
         },
         index: function index(node) {
             var children = node.parentNode.childNodes;
             for (var i = 0; i < children.length; i++) {
                 if (children[i] === node) return i;
             }
+        },
+        orderExchange: function orderExchange(evt) {
+            var dropped = evt.currentTarget;
+            var dragged = this.todoDragged;
+            var newOrder = dropped.style.order;
+            var oldOrder = dragged.style.order;
+            dropped.style.order = oldOrder;
+            dragged.style.order = newOrder;
         }
     }
 });

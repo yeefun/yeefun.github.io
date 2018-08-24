@@ -1,4 +1,4 @@
-// @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css)
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css)
     
 /* --- Color --- */
 $colorBlue: #4a90e2
@@ -30,14 +30,10 @@ $fontPlaceholder: 1.6rem
     height: $h
 
 /* --- Main --- */
-*
-    // border: 0.1px solid #000 !important
-    // box-sizing: border-box
-    
 html
     font-size: 10px
 body
-    font-family: "Noto Sans CJK TC", sans-serif
+    font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
     background-color: $colorGreyLight
     text-align: center
 
@@ -91,9 +87,8 @@ nav
             padding-left: 68px
             border: 2px solid $colorGrey
             border-radius: 5px
-            font-family: "Noto Sans CJK TC", sans-serif
+            font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
             font-size: $fontTitle
-            // font-weight: 300
             outline: none
             box-sizing: border-box
             &::placeholder
@@ -107,18 +102,14 @@ nav
     &__new
         width: 100%
         position: absolute
-        transform-origin: 50% 0%
-        transform: scaleY(0)
-        // transition: transform 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+        opacity: 0
         &.open
             position: static
-            transform: scaleY(1)
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+            opacity: 1
         & > .edit
             margin-top: 0
         & .menu-head
             position: relative
-            // padding-left: 68px
             &__control
                 > span
                     position: absolute
@@ -129,22 +120,29 @@ nav
                     color: $colorGrey
                 & > input[type="text"]
                     margin-left: 36px
+        & .menu-body
+            position: absolute
+            transform-origin: 50% 0%
+            transform: scaleY(0)
+            &.open
+                position: static
+                transform: scaleY(1)
+                transition: transform 0.25s ease-in-out
     &__todo
         display: flex
         flex-direction: column
         & .todo
             position: relative
-            cursor: grab
+            cursor: move
+            transition: all 0.25s ease-in-out
         & .menu-body
             width: 100%
             position: absolute
             transform-origin: 50% 0%
             transform: scaleY(0)
-            // transition: transform 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045)
             &.open
                 position: static
                 transform: scaleY(1)
-                // transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)
                 transition: transform 0.25s ease-in-out
     &__remain
         padding-left: 32px
@@ -157,20 +155,19 @@ nav
 
 
 .todo
-    // position: relative
     margin-bottom: 8px
     text-align: left
     color: $colorBlack
     transition: margin 0.25s ease-in-out
     &.edit
-        margin-top: 24px
+        margin-top: 16px
         margin-bottom: 24px
+        &-zero
+            margin-top: 0
+            margin-bottom: 24px
         & .menu-head
-            // padding-bottom: 20px
             border-bottom-right-radius: 0px
             border-bottom-left-radius: 0px
-            // &__control
-            //     margin-bottom: 0
     &.hide
         display: none
     &.icon-empty
@@ -179,13 +176,14 @@ nav
             &__control
                 margin-bottom: 0
     & .menu-head
+        position: relative
         padding: 20px 32px 16px 32px
         border-radius: 5px
-        // border-top-right-radius: 5px
-        // border-top-left-radius: 5px
         background-color: $colorGreyExtraLight
         transition: background-color 0.25s
         user-select: none
+        &:hover > .menu-head__drag-dot
+            opacity: 1
         &.star
             background-color: $colorYellowLight
         &__control
@@ -225,9 +223,8 @@ nav
                 padding: 0
                 border: none
                 background-color: transparent
-                font-family: "Noto Sans CJK TC", sans-serif
+                font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
                 font-size: $fontTitle
-                // font-weight: 300
                 color: $colorBlack
                 outline: none
                 &::placeholder
@@ -261,21 +258,25 @@ nav
             & span
                 margin-right: 16px
                 font-size: $fontRemark
-                // font-weight: 300
+        &__drag-dot
+            position: absolute
+            top: 50%
+            left: 8px
+            opacity: 0
+            transform: translateY(-50%)
+            transition: opacity 0.25s ease-in-out
+            & .dot
+                +size(4px)
+                border-radius: 50%
+                background-color: #d8d8d8
+                & + .dot
+                    margin-top: 8px
     & .menu-body
-        // width: 100%
-        // position: absolute
-        // transform-origin: center top
-        // transform: scaleY(0)
         border-top: 2px solid $colorGrey
         border-bottom-right-radius: 5px
         border-bottom-left-radius: 5px
         box-shadow: 0 4px 4px 0 $colorGrey
         background-color: $colorGreyExtraLight
-        // transition: transform 0.25s ease-in-out
-        // &.open
-        //     position: static
-        //     transform: scaleY(1)
         &__edit
             padding-top: 24px
             padding-bottom: 24px
@@ -287,7 +288,6 @@ nav
             & span
                 font-size: $fontSubtitle
                 line-height: 24px
-                // font-weight: 300
         & .deadline
             margin-bottom: 22px
             & input
@@ -296,12 +296,14 @@ nav
                 border: none
                 border-radius: 2px
                 outline: none
-                font-family: "Noto Sans CJK TC", sans-serif
+                font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
                 font-size: $fontPlaceholder
                 font-weight: 300
                 color: $colorGrey
                 box-sizing: border-box
                 cursor: pointer
+                &.has-value
+                    color: $colorBlack
                 &:focus
                     box-shadow: 0 0 4px $colorBlue, 0 0 0 1px $colorBlue
                     color: $colorBlack
@@ -332,8 +334,6 @@ nav
             &__upload-date
                 line-height: 20px
                 color: $colorGreyDark
-            // & > .menu-body__subtitle
-            //     margin-bottom: 10px
             & input[type="file"]
                 display: none
             & input[type="button"]
@@ -343,7 +343,7 @@ nav
                 border: none
                 border-radius: 2px
                 background-color: $colorGrey
-                font-family: "Noto Sans CJK TC", sans-serif
+                font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
                 font-size: 2.4rem
                 font-weight: 300
                 line-height: 32px
@@ -360,7 +360,7 @@ nav
                 padding: 8px 16px
                 border: none
                 border-radius: 2px
-                font-family: "Noto Sans CJK TC", sans-serif
+                font-family: "Noto Sans CJK TC", "思源黑體", "Noto Sans TC", sans-serif
                 font-size: $fontPlaceholder
                 font-weight: 300
                 line-height: 24px
@@ -387,7 +387,6 @@ nav
                 justify-content: center
                 align-items: center
                 font-size: 2.4rem
-                // font-weight: 300
                 transition: background-color 0.25s
                 cursor: pointer
             & .cancel

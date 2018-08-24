@@ -30,20 +30,12 @@ html(lang="zh-Hant-TW")
                     section.menu-head(:class="{ star: newTodo.star }")
                         .menu-head__control
                             span +
-                            //- input(type="checkbox", id="new", v-model="newTodo.completed", @change="todoCompleted")
-                            //- label(for="new")
-                            //-     div
                             input#new-title(type="text", placeholder="你的任務名稱", v-model="newTodo.title")
                             i.far.fa-star(
                                 :class="{ active: newTodo.star }", 
                                 @click="newTodo.star=!newTodo.star")
                             i.far.fa-edit.active
-                        //- .menu-head__icon
-                        //-     i.far.fa-calendar-alt
-                        //-     span 8/20
-                        //-     i.far.fa-file
-                        //-     i.far.fa-comment-dots
-                    section.menu-body
+                    section.menu-body(:class="{ open: !notAdd }")
                         .menu-body__edit
                             section.deadline
                                 .menu-body__subtitle
@@ -77,7 +69,7 @@ html(lang="zh-Hant-TW")
                                 | 新增
 
             #todos__todo
-                article.todo(draggable="true", v-for="(todo, idx) in todos", @dragstart="dragStart", @drag="drag", @dragend="dragEnd", @drop="drop", @dragenter="dragEnter", @dragover="dragOver", @dragleave="dragLeave", :class="todoModes(idx)" :style="{ order: idx }")
+                article.todo(draggable="true", v-for="(todo, idx) in todos", @dragstart="dragStart", @dragend="dragEnd", @dragenter="dragEnter", @dragover="dragOver", @drop="drop", :class="todoModes(idx)" :style="{ order: idx }")
                     section.menu-head(:class="{ star: todo.star }")
                         .menu-head__control
                             input(type="checkbox", :id="'checked'+idx", v-model="todo.completed", @change="todoCompleted($event, idx)")
@@ -89,13 +81,17 @@ html(lang="zh-Hant-TW")
                                 @click="todo.star=!todo.star")
                             i.far.fa-edit(
                                 :class="{ active: todo.open }", 
-                                @click="todoEdit(idx)")
+                                @click="todoEdit($event, idx)")
                         .menu-head__icon
                             div(v-if="(todo.date || todo.time) && !todo.open")
                                 i.far.fa-calendar-alt
                                 span {{setCalendar(idx)}}
                             i.far.fa-file(v-if="todo.fileName && !todo.open")
                             i.far.fa-comment-dots(v-if="todo.comment && !todo.open")
+                        .menu-head__drag-dot
+                            .dot
+                            .dot
+                            .dot
 
                     section.menu-body(:class="{ open: todo.open }")
                         .menu-body__edit
@@ -104,8 +100,8 @@ html(lang="zh-Hant-TW")
                                     i.far.fa-calendar-alt
                                     span 到期日
                                 .menu-body__input
-                                    input(type="date", v-model="todo.date")
-                                    input(type="time", v-model="todo.time")
+                                    input(type="date", v-model="todo.date", :class="{ 'has-value': todo.date }")
+                                    input(type="time", v-model="todo.time", :class="{ 'has-value': todo.date }")
                             section.file
                                 .menu-body__subtitle
                                     i.far.fa-file

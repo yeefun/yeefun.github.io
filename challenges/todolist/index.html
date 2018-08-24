@@ -29,7 +29,7 @@
               <input id="new-title" type="text" placeholder="你的任務名稱" v-model="newTodo.title"/><i class="far fa-star" :class="{ active: newTodo.star }" @click="newTodo.star=!newTodo.star"></i><i class="far fa-edit active"></i>
             </div>
           </section>
-          <section class="menu-body">
+          <section class="menu-body" :class="{ open: !notAdd }">
             <div class="menu-body__edit">
               <section class="deadline">
                 <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
@@ -64,17 +64,22 @@
         </article>
       </div>
       <div id="todos__todo">
-        <article class="todo" draggable="true" v-for="(todo, idx) in todos" @dragstart="dragStart" @drag="drag" @dragend="dragEnd" @drop="drop" @dragenter="dragEnter" @dragover="dragOver" @dragleave="dragLeave" :class="todoModes(idx)" :style="{ order: idx }">
+        <article class="todo" draggable="true" v-for="(todo, idx) in todos" @dragstart="dragStart" @dragend="dragEnd" @dragenter="dragEnter" @dragover="dragOver" @drop="drop" :class="todoModes(idx)" :style="{ order: idx }">
           <section class="menu-head" :class="{ star: todo.star }">
             <div class="menu-head__control">
               <input type="checkbox" :id="'checked'+idx" v-model="todo.completed" @change="todoCompleted($event, idx)"/>
               <label :for="'checked'+idx">
                 <div></div>
               </label>
-              <input type="text" :id="'title'+idx" placeholder="你的任務名稱" v-model="todo.title"/><i class="far fa-star" :class="{ active: todo.star }" @click="todo.star=!todo.star"></i><i class="far fa-edit" :class="{ active: todo.open }" @click="todoEdit(idx)"></i>
+              <input type="text" :id="'title'+idx" placeholder="你的任務名稱" v-model="todo.title"/><i class="far fa-star" :class="{ active: todo.star }" @click="todo.star=!todo.star"></i><i class="far fa-edit" :class="{ active: todo.open }" @click="todoEdit($event, idx)"></i>
             </div>
             <div class="menu-head__icon">
               <div v-if="(todo.date || todo.time) &amp;&amp; !todo.open"><i class="far fa-calendar-alt"></i><span>{{setCalendar(idx)}}</span></div><i class="far fa-file" v-if="todo.fileName &amp;&amp; !todo.open"></i><i class="far fa-comment-dots" v-if="todo.comment &amp;&amp; !todo.open"></i>
+            </div>
+            <div class="menu-head__drag-dot">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
             </div>
           </section>
           <section class="menu-body" :class="{ open: todo.open }">
@@ -82,8 +87,8 @@
               <section class="deadline">
                 <div class="menu-body__subtitle"><i class="far fa-calendar-alt"></i><span>到期日</span></div>
                 <div class="menu-body__input">
-                  <input type="date" v-model="todo.date"/>
-                  <input type="time" v-model="todo.time"/>
+                  <input type="date" v-model="todo.date" :class="{ 'has-value': todo.date }"/>
+                  <input type="time" v-model="todo.time" :class="{ 'has-value': todo.date }"/>
                 </div>
               </section>
               <section class="file">

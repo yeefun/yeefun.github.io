@@ -29,6 +29,16 @@ let navbar = new Vue({
 let todos = new Vue({
     el: '#todos',
     data: {
+        todoOrderZero: false,
+        todoModes(idx) {
+            let todo = this.todos[idx];
+            return {
+                edit: todo.open,
+                'edit-zero': todo.open && this.todoOrderZero,
+                'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open,
+                hide: (this.modes.inProgress && todo.completed) || (this.modes.completed && !todo.completed)
+            }
+        },
         modes: {
             completed: false,
             inProgress: false
@@ -37,7 +47,6 @@ let todos = new Vue({
         newTodo: {
             title: '',
             star: false,
-            // completed: false,
             date: '',
             time: '',
             fileName: '',
@@ -97,6 +106,7 @@ let todos = new Vue({
             fileUploadDate: '上傳時間 08/23 16:42',
             comment: '大象就是帥！'
         }],
+        todoDragged: null
     },
     computed: {
         todoRemain() {
@@ -123,19 +133,12 @@ let todos = new Vue({
             transmitted.fileUploadDate = transmitter.fileUploadDate;
             transmitted.comment = transmitter.comment;
         },
-        todoModes(idx) {
-            let todo = this.todos[idx];
-            return {
-                edit: todo.open,
-                'icon-empty': !(todo.date || todo.time || todo.file || todo.comment) || todo.open,
-                hide: (this.modes.inProgress && todo.completed) || (this.modes.completed && !todo.completed)
-                // 'in-progress': this.modes.inProgress && todo.completed,
-                // completed: this.modes.completed,
-            }
-        },
         todoAddClick() {
             this.notAdd = false;
             document.getElementById('new-title').focus();
+            this.todos.forEach(todo => {
+                todo.open = false;
+            });
         },
         todoAdd() {
             this.notAdd = true;
@@ -171,11 +174,22 @@ let todos = new Vue({
                 p === 'star' || p === 'completed' ? this.newTodo[p] = false : this.newTodo[p] = '';
             }
         },
-        todoEdit(idx) {
+        todoEdit(evt, idx) {
             let todo = this.todos[idx];
             let backup = this.backupTodos[idx];
 
+            // 1.先將所有 todo 關掉;
+            this.todos.forEach(todo => {
+                todo.open = false;
+            });
+            // 2.再開目前要編輯的;
             todo.open = true;
+
+            let todoOrder = evt.currentTarget.parentNode.parentNode.parentNode.style.order;
+            if (todoOrder === '0')
+                this.todoOrderZero = true;
+            else
+                this.todoOrderZero = false;
 
             // 資料備份;
             this.todoDataTransmit(backup, todo);
@@ -223,44 +237,42 @@ let todos = new Vue({
             }
         },
         dragStart(evt) {
-            let oldIdx = this.index(evt.currentTarget);
-            evt.dataTransfer.setData('text/plain', oldIdx);
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
-        },
-        drag(evt) {
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
-            // evt.currentTarget.removeEventListener('dragleave', this.dragLeave);
+            // Firefox 要加，不然會不 work！
+            evt.dataTransfer.setData('text/plain', null);
+            
+            this.todoDragged = evt.currentTarget;
+            evt.currentTarget.style.setProperty('transform', 'perspective(400px) translateY(-4px) rotate(-1.6deg) scale(1.001) rotateX(-4deg)');
+            evt.currentTarget.style.boxShadow = '2px 2px 16px rgba(0, 0, 0, 0.2)';
+            evt.currentTarget.style.zIndex = '99';
         },
         dragEnd(evt) {
+            evt.currentTarget.style.transform = 'none';
             evt.currentTarget.style.boxShadow = 'none';
-        },
-        drop(evt) {
-            evt.preventDefault();
-            let oldIdx = evt.dataTransfer.getData('text/plain');
-            let dropped = evt.currentTarget;
-            let dragged = dropped.parentNode.childNodes[oldIdx];
-            let newOrder = dropped.style.order;
-            let oldOrder = dragged.style.order;
-            dropped.style.order = oldOrder;
-            dropped.style.boxShadow = 'none';
-            dragged.style.order = newOrder;
+            evt.currentTarget.style.zIndex = 'auto';
         },
         dragEnter(evt) {
             evt.preventDefault();
-            evt.currentTarget.style.boxShadow = '4px 4px 16px rgba(0, 0, 0, 0.4)';
         },
         dragOver(evt) {
             evt.preventDefault();
         },
-        dragLeave(evt) {
+        drop(evt) {
             evt.preventDefault();
-            evt.currentTarget.style.boxShadow = 'none';
+            this.orderExchange(evt);
         },
         index(node) {
             let children = node.parentNode.childNodes;
             for (let i = 0; i < children.length; i++) {
                 if (children[i] === node) return i;
             }
+        },
+        orderExchange(evt) {
+            let dropped = evt.currentTarget;
+            let dragged = this.todoDragged
+            let newOrder = dropped.style.order;
+            let oldOrder = dragged.style.order;
+            dropped.style.order = oldOrder;
+            dragged.style.order = newOrder;
         }
     }
 });
