@@ -134,7 +134,7 @@ let todos = new Vue({
         dragged: null,
 
         // 放置被拖曳者在資料 todos 中的 index;
-        draggedIdx: NaN
+        draggedIdx: ''
     },
 
     computed: {
