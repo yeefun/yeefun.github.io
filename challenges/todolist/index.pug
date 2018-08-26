@@ -72,13 +72,13 @@ html(lang="zh-Hant-TW")
                 article.todo(draggable="true", v-for="(todo, idx) in todos", @dragstart="dragStart($event, idx)", @dragend="dragEnd", @dragenter="dragEnter", @dragover="dragOver", @drop="drop($event, idx)", :class="todoModes(idx)" :style="{ order: todo.order }")
                     section.menu-head(:class="{ star: todo.star }")
                         .menu-head__control
-                            input(type="checkbox", :id="'checked'+idx", v-model="todo.completed", @change="todoCompleted($event, idx)")
+                            input(type="checkbox", :id="'checked'+idx", v-model="todo.completed", @change="todoCompleted(idx)")
                             label(:for="'checked'+idx")
                                 div
-                            input(type="text", :id="'title'+idx", placeholder="你的任務名稱", v-model="todo.title")
+                            input(type="text", :id="'title'+idx", placeholder="你的任務名稱", v-model="todo.title", @blur="todoTitled(idx)")
                             i.far.fa-star(
                                 :class="{ active: todo.star }", 
-                                @click="todo.star=!todo.star")
+                                @click="todoStarred(idx)")
                             i.far.fa-edit(
                                 :class="{ active: todo.open }", 
                                 @click="todoEdit($event, idx)")
@@ -122,7 +122,7 @@ html(lang="zh-Hant-TW")
                             .cancel(@click="todoCancel(idx)")
                                 span ×
                                 | 取消
-                            .save(@click="todo.open=false")
+                            .save(@click="todoSave(idx)")
                                 span +
                                 | 儲存
             #todos__remain {{todoRemain}}

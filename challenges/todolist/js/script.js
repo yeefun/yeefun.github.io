@@ -70,66 +70,12 @@ let todos = new Vue({
         },
 
         // 放置 #todos__todo 的資料;
-        todos: [{
-            title: '今天你要完成什麼事情？',
-            order: 0,
-            open: false,
-            star: false,
-            completed: false,
-            date: '2018-08-25',
-            time: '11:30',
-            fileName: '',
-            fileUploadDate: '',
-            comment: '可以在這裡打下一些字，提醒自己~'
-        }, {
-            title: '明天你有什麼規劃？',
-            order: 1, // todos 的順序，綁到 style.order 屬性，為了之後的拖曳做準備;
-            open: false,
-            star: true,
-            completed: false,
-            date: '2018-08-26',
-            time: '14:40',
-            fileName: '',
-            fileUploadDate: '',
-            comment: '把詳細規劃事項打下來，不然會很容易忘記QQ'
-        }, {
-            title: '有什麼東西要寄給別人嗎？',
-            order: 2,
-            open: false,
-            star: false,
-            completed: true,
-            date: '',
-            time: '',
-            fileName: '活動企劃.docx',
-            fileUploadDate: '上傳時間 08/23 16:42',
-            comment: ''
-        }],
+        todos: [],
 
         // 放置 #todos__todo 的備份資料（這樣按下取消時才能還原）; 
         // 備份資料裡不用放 open, order, star, completed（因為這些在 .menu-head 就能操作，不歸 .menu-body 管）;
-        backupTodos: [{
-            title: '今天你要完成什麼事情？',
-            date: '2018-08-25',
-            time: '11:30',
-            fileName: '',
-            fileUploadDate: '',
-            comment: '可以在這裡打下一些字，提醒自己~'
-        },{
-            title: '明天你有什麼規劃？',
-            date: '2018-08-26',
-            time: '14:40',
-            fileName: '',
-            fileUploadDate: '',
-            comment: '把詳細規劃事項打下來，不然會很容易忘記QQ'
-        },{
-            title: '有什麼東西要寄給別人嗎？',
-            date: '',
-            time: '',
-            fileName: '活動企劃.docx',
-            fileUploadDate: '上傳時間 08/23 16:42',
-            comment: ''
-        }],
-        
+        backupTodos: [],
+
         // 放置被拖曳者 element;
         dragged: null,
 
@@ -148,6 +94,36 @@ let todos = new Vue({
         }
     },
 
+    created() {
+        if (localStorage.todos) {
+            this.todos = JSON.parse(localStorage.todos);
+            this.backupTodos = JSON.parse(localStorage.todos);
+        } else {
+            let todos = [{
+                title: '',
+                order: 0,
+                open: false,
+                star: false,
+                completed: false,
+                date: '',
+                time: '',
+                fileName: '',
+                fileUploadDate: '',
+                comment: ''
+            }];
+            let backupTodos = [{
+                date: '',
+                time: '',
+                fileName: '',
+                fileUploadDate: '',
+                comment: ''
+            }];
+            localStorage.todos = JSON.stringify(todos);
+            this.todos = todos;
+            this.backupTodos = backupTodos;
+        }
+    },
+
     mounted() {
         // 在 todos.$el 綁到 html 後，讓 checked todo title 唯讀;
         this.todos.forEach((todo, idx) => {
@@ -160,7 +136,6 @@ let todos = new Vue({
     methods: {
         // 使用於備份與還原;
         todoDataTransmit(transmitted, transmitter) {
-            transmitted.title = transmitter.title;
             transmitted.date = transmitter.date;
             transmitted.time = transmitter.time;
             transmitted.fileName = transmitter.fileName;
@@ -168,12 +143,12 @@ let todos = new Vue({
             transmitted.comment = transmitter.comment;
         },
 
-        // 打開新增任務介面;
+        // 打開新增任務;
         todoAddClick() {
-            // 1.先將所有 todo 關掉;
-            this.todos.forEach(todo => {
-                todo.open = false;
-            });
+            // 1.先將打開的 todo 關掉;
+            if (document.querySelector('.menu-body.open')) {
+                document.querySelector('.menu-body.open .save').click();
+            }
             // 2.再打開 #todos__add;
             this.notAdd = false;
 
@@ -214,10 +189,21 @@ let todos = new Vue({
                 todo.order += 1;
             });
 
+            // 讓 localStorage 的 order 值都加 1;
+            let localTodos = JSON.parse(localStorage.todos);
+            localTodos.forEach(localTodo => {
+                localTodo.order += 1;
+            });
+            localStorage.todos = JSON.stringify(localTodos);
+
             // 將新 todo 插入陣列最前面;
             this.todos.unshift(newTodo);
             // 將新 todo 備份插入陣列最前面;
             this.backupTodos.unshift(backupTodo);
+
+            // 將新 todo 存到 localStorage;
+            localTodos.unshift(newTodo);
+            localStorage.todos = JSON.stringify(localTodos);
 
             // 將 newTodo reset;
             for (let p in this.newTodo) {
@@ -240,10 +226,10 @@ let todos = new Vue({
             let todo = this.todos[idx];
             let backup = this.backupTodos[idx];
 
-            // 1.先將所有 todo 關掉;
-            this.todos.forEach(todo => {
-                todo.open = false;
-            });
+            // 1.先將打開的 todo 關掉;
+            if (document.querySelector('.menu-body.open')) {
+                document.querySelector('.menu-body.open .save').click();
+            }
             // 2.再開目前要編輯的;
             todo.open = true;
 
@@ -258,24 +244,74 @@ let todos = new Vue({
             this.todoDataTransmit(backup, todo);
         },
 
+        // 儲存 todo;
+        todoSave(idx) {
+            let todo = this.todos[idx];
+            todo.open = false;
+
+            // 把改動的 todo 存到 localStorage;
+            let localTodos = JSON.parse(localStorage.todos);
+            localTodos[idx] = todo;
+            localStorage.todos = JSON.stringify(localTodos);
+        },
+
         // 取消編輯 todo;
         todoCancel(idx) {
             let todo = this.todos[idx];
             let backup = this.backupTodos[idx];
             todo.open = false;
-            
+
             // 資料還原;
             this.todoDataTransmit(todo, backup);
         },
 
+        // 編輯 todo 的名稱;
+        todoTitled(idx) {
+            let todo = this.todos[idx];
+            let localTodos = JSON.parse(localStorage.todos);
+
+            // 更動 localStorage 的 title 值;
+            localTodos[idx].title = todo.title;
+            localStorage.todos = JSON.stringify(localTodos);
+        },
+
+        // 把 todo 打星號;
+        todoStarred(idx) {
+            let todo = this.todos[idx];
+            let localTodos = JSON.parse(localStorage.todos);
+
+            todo.star = !todo.star;
+
+            if (todo.star) {
+                // 更動 localStorage 的 star 值;
+                localTodos[idx].star = true;
+                localStorage.todos = JSON.stringify(localTodos);
+            } else {
+                // 更動 localStorage 的 star 值;
+                localTodos[idx].star = false;
+                localStorage.todos = JSON.stringify(localTodos);
+            }
+        },
+
         // 完成 todo;
-        todoCompleted(evt, idx) {
-            let checked = evt.currentTarget.checked;
+        todoCompleted(idx) {
+            let todo = this.todos[idx];
             let inputTitle = document.getElementById(`title${idx}`);
-            if (checked)
+            let localTodos = JSON.parse(localStorage.todos);
+
+            if (todo.completed) {
                 inputTitle.readOnly = true;
-            else
+
+                // 更動 localStorage 的 completed 值;
+                localTodos[idx].completed = true;
+                localStorage.todos = JSON.stringify(localTodos);
+            } else {
                 inputTitle.readOnly = false;
+
+                // 更動 localStorage 的 completed 值;
+                localTodos[idx].completed = false;
+                localStorage.todos = JSON.stringify(localTodos);
+            }
         },
 
         // 設定出現在 .menu-head__icon 的時間格式;
@@ -304,7 +340,7 @@ let todos = new Vue({
             let date = `${month < 10 ? `0${month}` : month}/${day < 10 ? `0${day}` : day} ${hours}:${minutes}`;
 
             // 判斷按下文件的是 new todo 或目前的 todo;
-            if(typeof idx !== 'undefined') {
+            if (typeof idx !== 'undefined') {
                 todo.fileName = file.name;
                 todo.fileUploadDate = `上傳時間 ${date}`;
             } else {
@@ -317,7 +353,7 @@ let todos = new Vue({
         dragStart(evt, draggedIdx) {
             // Firefox 要加，不然會不 work！
             evt.dataTransfer.setData('text/plain', null);
-            
+
             // 取得被拖曳者的 element、index;
             this.dragged = evt.currentTarget;
             this.draggedIdx = draggedIdx;
@@ -357,12 +393,15 @@ let todos = new Vue({
             let dragged = this.dragged;
             let newOrder = dropped.style.order;
             let oldOrder = dragged.style.order;
+            let localTodos = JSON.parse(localStorage.todos);
+
             dropped.style.order = oldOrder;
             dragged.style.order = newOrder;
 
-            // 除了交換 css 的，也要交換在 todos 資料裡的;
-            this.todos[droppedIdx].order = parseInt(oldOrder, 10);
-            this.todos[this.draggedIdx].order = parseInt(newOrder, 10);
+            // 除了交換 css 的，也要交換在 todos 資料裡的，也要更動 localStorage 的 order 值;
+            localTodos[droppedIdx].order = this.todos[droppedIdx].order = parseInt(oldOrder, 10);
+            localTodos[this.draggedIdx].order = this.todos[this.draggedIdx].order = parseInt(newOrder, 10);
+            localStorage.todos = JSON.stringify(localTodos);
         }
     }
 });
