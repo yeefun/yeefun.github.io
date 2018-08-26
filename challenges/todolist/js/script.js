@@ -71,8 +71,8 @@ let todos = new Vue({
 
         // 放置 #todos__todo 的資料;
         todos: [{
-            title: '今天你要完成什麼事情呢？',
-            order: '0',
+            title: '今天你要完成什麼事情？',
+            order: 0,
             open: false,
             star: false,
             completed: false,
@@ -82,8 +82,8 @@ let todos = new Vue({
             fileUploadDate: '',
             comment: '可以在這裡打下一些字，提醒自己~'
         }, {
-            title: '明天你有什麼規劃呢？',
-            order: '1', // todos 的順序，綁到 style.order 屬性，為了之後的拖曳做準備;
+            title: '明天你有什麼規劃？',
+            order: 1, // todos 的順序，綁到 style.order 屬性，為了之後的拖曳做準備;
             open: false,
             star: true,
             completed: false,
@@ -94,7 +94,7 @@ let todos = new Vue({
             comment: '把詳細規劃事項打下來，不然會很容易忘記QQ'
         }, {
             title: '有什麼東西要寄給別人嗎？',
-            order: '2',
+            order: 2,
             open: false,
             star: false,
             completed: true,
@@ -108,14 +108,14 @@ let todos = new Vue({
         // 放置 #todos__todo 的備份資料（這樣按下取消時才能還原）; 
         // 備份資料裡不用放 open, order, star, completed（因為這些在 .menu-head 就能操作，不歸 .menu-body 管）;
         backupTodos: [{
-            title: '今天你要完成什麼事情呢？',
+            title: '今天你要完成什麼事情？',
             date: '2018-08-25',
             time: '11:30',
             fileName: '',
             fileUploadDate: '',
             comment: '可以在這裡打下一些字，提醒自己~'
         },{
-            title: '明天你有什麼規劃呢？',
+            title: '明天你有什麼規劃？',
             date: '2018-08-26',
             time: '14:40',
             fileName: '',
@@ -188,7 +188,7 @@ let todos = new Vue({
             // 創建一個新的 todo;
             let newTodo = {
                 title: this.newTodo.title,
-                order: '0', // 新增 todo order 為 0（最前面）;
+                order: 0, // 新增 todo order 為 0（最前面）;
                 open: false,
                 star: this.newTodo.star,
                 completed: false,
@@ -361,8 +361,8 @@ let todos = new Vue({
             dragged.style.order = newOrder;
 
             // 除了交換 css 的，也要交換在 todos 資料裡的;
-            this.todos[droppedIdx].order = oldOrder;
-            this.todos[this.draggedIdx].order = newOrder;
+            this.todos[droppedIdx].order = parseInt(oldOrder, 10);
+            this.todos[this.draggedIdx].order = parseInt(newOrder, 10);
         }
     }
 });
