@@ -99,30 +99,6 @@ let todos = new Vue({
             this.todos = JSON.parse(localStorage.todos);
             this.backupTodos = JSON.parse(localStorage.todos);
         }
-        // } else {
-        //     let todos = [{
-        //         title: '',
-        //         order: 0,
-        //         open: false,
-        //         star: false,
-        //         completed: false,
-        //         date: '',
-        //         time: '',
-        //         fileName: '',
-        //         fileUploadDate: '',
-        //         comment: ''
-        //     }];
-        //     let backupTodos = [{
-        //         date: '',
-        //         time: '',
-        //         fileName: '',
-        //         fileUploadDate: '',
-        //         comment: ''
-        //     }];
-        //     localStorage.todos = JSON.stringify(todos);
-        //     this.todos = todos;
-        //     this.backupTodos = backupTodos;
-        // }
     },
 
     mounted() {
@@ -185,15 +161,16 @@ let todos = new Vue({
                 comment: ''
             }
 
+            // 如果 todos 有資料;
             if (this.todos.length) {
                 // 先將目前在場的 todo order 都加 1;
                 this.todos.forEach(todo => {
                     todo.order += 1;
                 });
 
-                // 將新 todo 插入陣列最前面;
+                // 將新 todo 插到陣列最前面;
                 this.todos.unshift(newTodo);
-                // 將新 todo 備份插入陣列最前面;
+                // 將新 todo 備份插到陣列最前面;
                 this.backupTodos.unshift(backupTodo);
 
                 let localTodos = JSON.parse(localStorage.todos);
@@ -205,14 +182,14 @@ let todos = new Vue({
                 localTodos.unshift(newTodo);
                 localStorage.todos = JSON.stringify(localTodos);
 
-            } else {
-                // 將新 todo 插入陣列最前面;
+            } else { // 如果 todos 沒有資料;
+                // 將新 todo 插到陣列最前面;
                 this.todos.unshift(newTodo);
-                // 將新 todo 備份插入陣列最前面;
+                // 將新 todo 備份插到陣列最前面;
                 this.backupTodos.unshift(backupTodo);
 
-                let localTodos = [];
                 // 將新 todo 存到 localStorage;
+                let localTodos = [];
                 localTodos.unshift(newTodo);
                 localStorage.todos = JSON.stringify(localTodos);
             }
