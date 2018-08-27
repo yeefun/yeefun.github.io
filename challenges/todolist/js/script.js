@@ -98,30 +98,31 @@ let todos = new Vue({
         if (localStorage.todos) {
             this.todos = JSON.parse(localStorage.todos);
             this.backupTodos = JSON.parse(localStorage.todos);
-        } else {
-            let todos = [{
-                title: '',
-                order: 0,
-                open: false,
-                star: false,
-                completed: false,
-                date: '',
-                time: '',
-                fileName: '',
-                fileUploadDate: '',
-                comment: ''
-            }];
-            let backupTodos = [{
-                date: '',
-                time: '',
-                fileName: '',
-                fileUploadDate: '',
-                comment: ''
-            }];
-            localStorage.todos = JSON.stringify(todos);
-            this.todos = todos;
-            this.backupTodos = backupTodos;
         }
+        // } else {
+        //     let todos = [{
+        //         title: '',
+        //         order: 0,
+        //         open: false,
+        //         star: false,
+        //         completed: false,
+        //         date: '',
+        //         time: '',
+        //         fileName: '',
+        //         fileUploadDate: '',
+        //         comment: ''
+        //     }];
+        //     let backupTodos = [{
+        //         date: '',
+        //         time: '',
+        //         fileName: '',
+        //         fileUploadDate: '',
+        //         comment: ''
+        //     }];
+        //     localStorage.todos = JSON.stringify(todos);
+        //     this.todos = todos;
+        //     this.backupTodos = backupTodos;
+        // }
     },
 
     mounted() {
@@ -184,26 +185,37 @@ let todos = new Vue({
                 comment: ''
             }
 
-            // 先將目前在場的 todo order 都加 1;
-            this.todos.forEach(todo => {
-                todo.order += 1;
-            });
+            if (this.todos.length) {
+                // 先將目前在場的 todo order 都加 1;
+                this.todos.forEach(todo => {
+                    todo.order += 1;
+                });
 
-            // 讓 localStorage 的 order 值都加 1;
-            let localTodos = JSON.parse(localStorage.todos);
-            localTodos.forEach(localTodo => {
-                localTodo.order += 1;
-            });
-            localStorage.todos = JSON.stringify(localTodos);
+                // 將新 todo 插入陣列最前面;
+                this.todos.unshift(newTodo);
+                // 將新 todo 備份插入陣列最前面;
+                this.backupTodos.unshift(backupTodo);
 
-            // 將新 todo 插入陣列最前面;
-            this.todos.unshift(newTodo);
-            // 將新 todo 備份插入陣列最前面;
-            this.backupTodos.unshift(backupTodo);
+                let localTodos = JSON.parse(localStorage.todos);
+                // 讓 localStorage 的 order 值都加 1;
+                localTodos.forEach(localTodo => {
+                    localTodo.order += 1;
+                });
+                // 將新 todo 存到 localStorage;
+                localTodos.unshift(newTodo);
+                localStorage.todos = JSON.stringify(localTodos);
 
-            // 將新 todo 存到 localStorage;
-            localTodos.unshift(newTodo);
-            localStorage.todos = JSON.stringify(localTodos);
+            } else {
+                // 將新 todo 插入陣列最前面;
+                this.todos.unshift(newTodo);
+                // 將新 todo 備份插入陣列最前面;
+                this.backupTodos.unshift(backupTodo);
+
+                let localTodos = [];
+                // 將新 todo 存到 localStorage;
+                localTodos.unshift(newTodo);
+                localStorage.todos = JSON.stringify(localTodos);
+            }
 
             // 將 newTodo reset;
             for (let p in this.newTodo) {
@@ -370,19 +382,8 @@ let todos = new Vue({
             evt.currentTarget.style.zIndex = 'auto';
         },
 
-        // drop target 被進入;
-        dragEnter(evt) {
-            evt.preventDefault();
-        },
-
-        // drop target 被滑過;
-        dragOver(evt) {
-            evt.preventDefault();
-        },
-
         // drop target 被放進;
         drop(evt, droppedIdx) {
-            evt.preventDefault();
             // 交換彼此的 style.order 屬性值;
             this.orderExchange(evt, droppedIdx);
         },
