@@ -14,7 +14,8 @@
 ## 練習筆記
 
 - Drag & Drop
-  - [[筆記] 製作可拖曳的元素（HTML5 Drag and Drop API）](https://pjchender.blogspot.com/2017/08/html5-drag-and-drop-api.html)
-  - [10 Best Drag And Drop JavaScript Libraries Of 2018](https://www.cssscript.com/best-drag-drop-javascript-libraries/)
-  - [[前端軍火庫]Dragula - 一步完成Drag & Drop](https://dotblogs.com.tw/wellwind/2016/12/19/front-end-dragula)
+  - [如何設計 “可拖曳元件“（Drag and Drop）？](https://designtongue.me/drag-and-drop-for-design-systems/)／設計大舌頭
+  - [[筆記] 製作可拖曳的元素（HTML5 Drag and Drop API）](https://pjchender.blogspot.com/2017/08/html5-drag-and-drop-api.html)／PJCHENder那些沒告訴你的小細節
+  - [10 Best Drag And Drop JavaScript Libraries Of 2018](https://www.cssscript.com/best-drag-drop-javascript-libraries/)／CSS Script: Free JavaScript / CSS / CSS3
+  - [[前端軍火庫]Dragula - 一步完成Drag & Drop](https://dotblogs.com.tw/wellwind/2016/12/19/front-end-dragula)／全端開發人員天梯
 
