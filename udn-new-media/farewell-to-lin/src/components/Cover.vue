@@ -1,0 +1,346 @@
+<template>
+  <article class="cover"
+  @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove">
+    <!-- muted for Chrome, otherwise video can't play-->
+    <video id="cover__video" class="cover__video" data-object-fit="cover" autoplay muted loop>
+      <source src="../assets/video/mobile_video.mp4" v-if="isMobileSize" type="video/mp4"/>
+      <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
+    </video>
+    <section class="cover__title-wrapper">
+      <div class="cover__title" :class="{ 'fade-in': isCoverTitleFadeIn,
+      'cover__title-move': isCoverTitleMove }" @transitionend="coverTitleFadeInEnd"
+      @webkitTransitionEnd="coverTitleFadeInEnd">
+        <p>雲</p>
+        <p>門</p>
+        <p>舞</p>
+        <p>集</p>
+        <p>45</p>
+        <p class="mb-0">年</p>
+      </div>
+      <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }">
+        <h2>比較長長長的副標</h2>
+      </div>
+    </section>
+    <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
+    <div class="cover__prompt" v-if="isCoverPromptExist">
+      <div class="cover__prompt-to-bottom">
+        <p>向下</p>
+        <p>滾動</p>
+      </div>
+      <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
+    </div>
+    <div class="cover__img" :class="{ 'fade-out': isCoverFadeOut }"
+    @transitionend.self="coverFadeOutEnd" @webkitTransitionEnd.self="coverFadeOutEnd">
+    <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
+    @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
+    <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
+    <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
+    <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
+    <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
+    </div>
+  </article>
+</template>
+
+<script>
+export default {
+  name: 'Cover',
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+      isDancerMove: false,
+      isCoverPromptExist: true,
+      isCoverFadeOut: false,
+      isCoverTitleFadeIn: false,
+      isCoverTitleMove: false,
+    };
+  },
+  created() {
+    window.addEventListener('resize', this.windowResize);
+  },
+  computed: {
+    isMobileSize() {
+      return this.windowWidth < 769;
+    },
+  },
+  methods: {
+    windowResize() {
+      this.windowWidth = window.innerWidth;
+    },
+    dancerClass(idx) {
+      const dancerClass = {
+        'dancer-move': this.isDancerMove,
+      };
+      dancerClass[`dancer${idx}`] = true;
+      dancerClass[`dancer${idx}-move`] = this.isDancerMove && idx !== 4 && idx !== 5;
+      return dancerClass;
+    },
+    dancerMove() {
+      this.isCoverPromptExist = false;
+      this.isDancerMove = true;
+    },
+    dancerMoveEnd() {
+      if (!this.isDancerMove) return;
+      this.isCoverFadeOut = true;
+    },
+    coverFadeOutEnd() {
+      this.isCoverTitleFadeIn = true;
+    },
+    coverTitleFadeInEnd() {
+      this.isCoverTitleMove = true;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.cover {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  // IE 11 can't work properly
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  &__video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__mask {
+    position: absolute;
+    background-color: #000;
+    // ORIGIN
+    // transition: opacity 5s 2s;
+    transition: opacity 3s 1s;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__prompt {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    &-to-bottom {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1.5px solid lightgrey;
+      border-radius: 50%;
+      color: lightgrey;
+      // ORIGIN
+      // opacity: 0.7;
+      font-size: 2.4rem;
+      line-height: 32px;
+      box-sizing: border-box;
+      animation: prompt-to-bottom 3s 1s infinite;
+
+      @keyframes prompt-to-bottom {
+        0% {
+          opacity: 0;
+        }
+
+        20% {
+          opacity: 0.5;
+        }
+
+        80% {
+          opacity: 1;
+        }
+
+        90% {
+          top: 50%;
+          opacity: 0.5;
+        }
+
+        100% {
+          top: 50%;
+          opacity: 0;
+        }
+      }
+
+      &--dashed {
+        border-style: dashed;
+        // ORIGIN
+        // opacity: 0.5;
+        animation-delay: 1.2s;
+      }
+    }
+  }
+
+  &__img {
+    position: absolute;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // ORIGIN
+    // transition: opacity 5s 2s;
+    transition: opacity 3s 1s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    & img {
+      height: 20vh;
+      width: auto;
+      position: relative;
+      // ORIGIN
+      // transition: all 1s;
+      transition: all 1.6s;
+    }
+  }
+
+  &__title-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    position: relative;
+    /*  for vertical center
+     ** noted "align-items: center;" can make BOX-MODEL (so include "margin-top") center
+     */
+    margin-top: 14px;
+    opacity: 0;
+    right: 0;
+    // ORIGIN
+    // transition: opacity 4s, right 0.5s 2s;
+    transition: opacity 2s, right 2s 0.5s;
+    color: #fff;
+
+    &-move {
+      right: 25%;
+    }
+
+    & p {
+      font-size: 3.2rem;
+      margin-bottom: 2.4vh;
+    }
+  }
+
+  &__subtitle {
+    position: relative;
+    opacity: 0;
+    transform: translate(54px, 30px);
+    right: 25%;
+    // ORIGIN
+    // transition: right 0.25s 2.25s;
+    transition: all 0.75s 1.75s;
+
+    @media screen and (min-width: 769px) {
+      transform: translate(144px, -16px);
+    }
+
+    &-move {
+      transform: translate(54px, 22px);
+      opacity: 1;
+
+      @media screen and (min-width: 769px) {
+        transform: translate(128px, -16px);
+      }
+    }
+
+    & h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+    }
+  }
+}
+
+.dancer-move {
+  // can't write only 0, otherwise IE can't work properly
+  top: 0vh !important;
+  left: 0vw !important;
+}
+
+.dancer1 {
+  top: -12vh;
+  left: 28vw;
+  transform: translateY(80%) rotate(38deg);
+
+  @media screen and (min-width: 769px) {
+    top: 34vh;
+    left: -6vw;
+    transform: translateY(80%);
+  }
+
+  &-move {
+    transform: translateY(80%) rotate(0deg);
+  }
+}
+
+.dancer2 {
+  top: 14vh;
+  left: 8vw;
+  transform: translateY(40%) rotate(-40deg);
+
+  @media screen and (min-width: 769px) {
+    top: -16vh;
+    left: -24vw;
+    transform: translateY(40%);
+  }
+
+  &-move {
+    transform: translateY(40%) rotate(0deg);
+  }
+}
+
+.dancer3 {
+  top: -24vh;
+  left: -26vw;
+  transform: rotate(-16deg);
+
+  @media screen and (min-width: 769px) {
+    top: 24vh;
+    left: -36vw;
+  }
+
+  &-move {
+    transform: rotate(0deg);
+  }
+}
+
+.dancer4 {
+  top: 14vh;
+  left: 30vw;
+  transform: translateY(-40%);
+
+  @media screen and (min-width: 769px) {
+    top: -34vh;
+    left: 24vw;
+    transform: translateY(-40%);
+  }
+}
+
+.dancer5 {
+  top: 12vh;
+  left: -32vw;
+  transform: translateY(-80%);
+
+  @media screen and (min-width: 769px) {
+    top: 4vh;
+    left: 32vw;
+    transform: translateY(-80%);
+  }
+}
+</style>
+
