@@ -7,18 +7,42 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
     <section class="cover__title-wrapper">
+      <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }">
+        <p>退</p>
+        <p>休</p>
+        <p>前</p>
+        <p>&ensp;</p>
+        <p>林</p>
+        <p>懷</p>
+        <p>民</p>
+        <p>給</p>
+        <p>土</p>
+        <p>地</p>
+        <p>的</p>
+        <p>情</p>
+        <p class="mb-0">書</p>
+      </div>
       <div class="cover__title" :class="{ 'fade-in': isCoverTitleFadeIn,
       'cover__title-move': isCoverTitleMove }" @transitionend="coverTitleFadeInEnd"
       @webkitTransitionEnd="coverTitleFadeInEnd">
-        <p>雲</p>
-        <p>門</p>
-        <p>舞</p>
-        <p>集</p>
-        <p>45</p>
-        <p class="mb-0">年</p>
-      </div>
-      <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }">
-        <h2>比較長長長的副標</h2>
+        <div class="cover__title-left">
+          <p>都</p>
+          <p>是</p>
+          <p>我</p>
+          <p>們</p>
+          <p>的</p>
+          <p>共</p>
+          <p class="mb-0">業</p>
+        </div>
+        <div>
+          <p>台</p>
+          <p>灣</p>
+          <p>無</p>
+          <p>論</p>
+          <p>好</p>
+          <p>壞</p>
+          <p class="mb-0">，</p>
+        </div>
       </div>
     </section>
     <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
@@ -59,7 +83,7 @@ export default {
   },
   computed: {
     isMobileSize() {
-      return this.windowWidth < 769;
+      return this.windowWidth < 576;
     },
   },
   methods: {
@@ -208,60 +232,95 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   &__title {
     position: relative;
+    transform: translateX(-21px);
+    left: 0%;
     /*  for vertical center
      ** noted "align-items: center;" can make BOX-MODEL (so include "margin-top") center
      */
-    margin-top: 14px;
+    // margin-top: 14px;
     opacity: 0;
-    right: 0;
+    // right: 0;
     // ORIGIN
     // transition: opacity 4s, right 0.5s 2s;
-    transition: opacity 2s, right 2s 0.5s;
+    // transition: opacity 2s, right 2s 0.5s;
+    transition: opacity 2s, transform 1s 0.5s;
     color: #fff;
+    font-weight: 700;
+    display: flex;
+
+    @media screen and (min-width: 576px) {
+      transform: translateX(0px);
+      transition: opacity 2s, left 2s 0.5s;
+    }
+
+    &-left {
+      margin-right: 20px;
+      @media screen and (min-width: 576px) {
+        margin-right: 28px;
+      }
+    }
 
     &-move {
-      right: 25%;
+      transform: translateX(0px);
+      @media screen and (min-width: 576px) {
+        left: 20%;
+      }
     }
 
     & p {
-      font-size: 3.2rem;
-      margin-bottom: 2.4vh;
+      font-size: 4.0rem;
+      // margin-bottom: 2.4vh;
+      margin-bottom: 12px;
+      @media screen and (min-width: 576px) {
+        font-size: 6.0rem;
+      }
     }
   }
 
   &__subtitle {
     position: relative;
+    transform: translate(-8px, 48px);
+    margin-right: 24px;
     opacity: 0;
-    transform: translate(54px, 30px);
-    right: 25%;
+    // transform: translate(54px, 30px);
+    // right: 25%;
     // ORIGIN
     // transition: right 0.25s 2.25s;
-    transition: all 0.75s 1.75s;
+    transition: all 0.75s 0.75s;
 
-    @media screen and (min-width: 769px) {
-      transform: translate(144px, -16px);
+    @media screen and (min-width: 576px) {
+      // transform: translate(144px, -16px);
+      left: 20%;
+      margin-right: 32px;
+      transform: translate(-8px, 48px);
+      transition: all 0.75s 1.75s;
     }
 
     &-move {
-      transform: translate(54px, 22px);
+      transform: translate(0px, 48px);
       opacity: 1;
 
-      @media screen and (min-width: 769px) {
-        transform: translate(128px, -16px);
-      }
+      // @media screen and (min-width: 576px) {
+      //   transform: translate(128px, -16px);
+      // }
     }
 
-    & h2 {
+    & p {
       color: #fff;
-      font-size: 1.4rem;
-      letter-spacing: 4px;
+      font-size: 1.8rem;
+      margin-bottom: 2px;
+      // letter-spacing: 4px;
+      @media screen and (min-width: 576px) {
+      // transform: translate(144px, -16px);
+        font-size: 2.8rem;
+      }
     }
   }
 }
@@ -277,7 +336,7 @@ export default {
   left: 28vw;
   transform: translateY(80%) rotate(38deg);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 576px) {
     top: 34vh;
     left: -6vw;
     transform: translateY(80%);
@@ -293,7 +352,7 @@ export default {
   left: 8vw;
   transform: translateY(40%) rotate(-40deg);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 576px) {
     top: -16vh;
     left: -24vw;
     transform: translateY(40%);
@@ -309,7 +368,7 @@ export default {
   left: -26vw;
   transform: rotate(-16deg);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 576px) {
     top: 24vh;
     left: -36vw;
   }
@@ -324,7 +383,7 @@ export default {
   left: 30vw;
   transform: translateY(-40%);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 576px) {
     top: -34vh;
     left: 24vw;
     transform: translateY(-40%);
@@ -336,7 +395,7 @@ export default {
   left: -32vw;
   transform: translateY(-80%);
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 576px) {
     top: 4vh;
     left: 32vw;
     transform: translateY(-80%);
