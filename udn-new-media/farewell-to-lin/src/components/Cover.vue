@@ -46,7 +46,7 @@
         </div>
       </div>
     </section>
-    <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
+    <!-- <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
     <div class="cover__prompt" v-if="isCoverPromptExist">
       <div class="cover__prompt-to-bottom">
         <p>向下</p>
@@ -62,7 +62,7 @@
     <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
     <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
     <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
-    </div>
+    </div> -->
   </article>
 </template>
 
