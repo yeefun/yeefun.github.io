@@ -7,7 +7,8 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
     <section class="cover__title-wrapper">
-      <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }">
+      <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
+      @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
         <p>休</p>
         <p>前</p>
@@ -23,8 +24,8 @@
         <p class="mb-0">書</p>
       </div>
       <div class="cover__title" :class="{ 'fade-in': isCoverTitleFadeIn,
-      'cover__title-move': isCoverTitleMove }" @transitionend="coverTitleFadeInEnd"
-      @webkitTransitionEnd="coverTitleFadeInEnd">
+      'cover__title-move': isCoverTitleMove }" @transitionend.once="coverTitleFadeInEnd"
+      @webkitTransitionEnd.once="coverTitleFadeInEnd">
         <div class="cover__title-left">
           <p>都</p>
           <p>是</p>
@@ -111,6 +112,9 @@ export default {
     },
     coverTitleFadeInEnd() {
       this.isCoverTitleMove = true;
+    },
+    subtitleMoveEnd() {
+      this.$root.$el.style.overflow = 'initial';
     },
   },
 };
