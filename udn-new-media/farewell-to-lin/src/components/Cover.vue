@@ -6,7 +6,7 @@
       <source src="../assets/video/mobile_video.mp4" v-if="isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
-    <section class="cover__title-wrapper">
+    <!-- <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -45,7 +45,7 @@
           <p class="mb-0">，</p>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
     <div class="cover__prompt" v-if="isCoverPromptExist">
       <div class="cover__prompt-to-bottom">

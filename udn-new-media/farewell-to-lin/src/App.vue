@@ -1,47 +1,59 @@
 <template>
   <div id="app" class="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <Page> -->
     <Cover></Cover>
-    <!-- </Page> -->
-    <!-- <div class="test"></div> -->
     <OpeningLine></OpeningLine>
     <Youtube></Youtube>
-    <Youtube></Youtube>
-    <Youtube></Youtube>
-    <!-- <div class="test"></div> -->
+    <PhotoScrollPage></PhotoScrollPage>
   </div>
 </template>
 
 <script>
 import Cover from './components/Cover.vue';
-// import Page from './components/Page.vue';
 import OpeningLine from './components/OpeningLine.vue';
 import Youtube from './components/Youtube.vue';
+import PhotoScrollPage from './components/PhotoScrollPage.vue';
 
 export default {
   name: 'app',
   components: {
     Cover,
-    // Page,
     OpeningLine,
     Youtube,
+    PhotoScrollPage,
   },
   data() {
     return {
+      bodyClass: document.body.classList,
       startScrollTime: new Date(),
       pageScrollY: 0,
     };
   },
   created() {
+    window.addEventListener('load', this.loadHandler);
+    window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('resize', this.resizeHandler);
     window.addEventListener('mousewheel', this.pageScroll);
     window.addEventListener('DOMMouseScroll', this.pageScroll);
-    window.addEventListener('touchmove', this.pageScroll);
+    // window.addEventListener('touchmove', this.pageScroll);
   },
   methods: {
+    loadHandler() {
+      if (window.innerWidth >= 576) {
+        this.bodyClass.add('hidden');
+      }
+    },
+    beforeunloadHandler() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant',
+      });
+    },
     resizeHandler() {
-      if (window.pageYOffset > 0) {
+      if (window.innerWidth < 576) {
+        this.bodyClass.remove('hidden');
+        this.$el.style.transform = 'translateY(0vh)';
+      } else {
+        if (window.pageYOffset === 0) this.bodyClass.add('hidden');
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
@@ -49,22 +61,20 @@ export default {
       }
     },
     pageScroll(evt) {
-      if (window.innerWidth < 576) return;
+      if (window.innerWidth < 576 || window.pageYOffset > 0) return;
       const currentTime = new Date();
       if (currentTime - this.startScrollTime < 800) return;
       const scrollDirection = -evt.wheelDelta || evt.detail;
-      const { body } = document;
       if (scrollDirection > 0) {
         if (this.pageScrollY === -200) {
-          body.classList.add('initial');
+          this.bodyClass.remove('hidden');
         } else if (this.pageScrollY === -300) {
           return;
         }
         this.pageScrollY -= 100;
       } else {
         if (this.pageScrollY === 0) return;
-        console.log(window.pageYOffset);
-        if (window.pageYOffset <= 0) body.classList.remove('initial');
+        if (window.pageYOffset <= 0) this.bodyClass.add('hidden');
         else return;
         this.pageScrollY += 100;
       }
@@ -81,8 +91,4 @@ export default {
   // overflow: hidden;
   transition: transform 1s;
 }
-
-// .test {
-//   height: 60px;
-// }
 </style>

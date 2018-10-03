@@ -1,16 +1,18 @@
 <template>
-  <section class="youtube">
+  <section class="container">
+    <div class="photo"></div>
+    <div class="content"></div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'Youtube',
+  name: 'PhotoScrollPage',
 };
 </script>
 
 <style scoped lang="scss">
-.youtube {
+.photo-container {
   height: 100vh;
   background-color: #000;
 }
