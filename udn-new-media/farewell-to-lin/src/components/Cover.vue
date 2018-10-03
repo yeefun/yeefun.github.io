@@ -80,7 +80,7 @@ export default {
     };
   },
   created() {
-    window.addEventListener('resize', this.windowResize);
+    window.addEventListener('resize', this.resizeHandler);
   },
   computed: {
     isMobileSize() {
@@ -88,7 +88,7 @@ export default {
     },
   },
   methods: {
-    windowResize() {
+    resizeHandler() {
       this.windowWidth = window.innerWidth;
     },
     dancerClass(idx) {
