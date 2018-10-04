@@ -31,6 +31,8 @@ export default {
     return {
       windowWidth: window.innerWidth,
       bodyClass: document.body.classList,
+      resizeTimer: null,
+      scrollTimer: null,
       startScrollTime: new Date(),
       pageScrollY: 0,
     };
@@ -61,34 +63,36 @@ export default {
       });
     },
     resizeHandler() {
-      this.windowWidth = window.innerWidth;
-      if (this.windowWidth < 576) {
-        this.bodyClass.remove('hidden');
-        this.$el.style.transform = 'translateY(0vh)';
-      } else {
-        if (window.pageYOffset === 0) this.bodyClass.add('hidden');
-        window.scrollTo({
-          top: 0,
-          behavior: 'instant',
-        });
-      }
+      if (this.resizeTimer) clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        if (this.windowWidth < 576 && window.innerWidth >= 576) {
+          window.scrollTo({
+            top: 0,
+            behavior: 'instant',
+          });
+          this.bodyClass.add('hidden');
+          this.pageScrollY = 0;
+        } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
+          this.bodyClass.remove('hidden');
+          this.$el.style.transform = 'translateY(0vh)';
+        }
+        this.windowWidth = window.innerWidth;
+      }, 400);
     },
     pageScroll(evt) {
       if (this.windowWidth < 576 || window.pageYOffset > 0) return;
       const currentTime = new Date();
-      if (currentTime - this.startScrollTime < 800) return;
+      if (currentTime - this.startScrollTime < 400) return;
       const scrollDirection = -evt.wheelDelta || evt.detail;
+      if (
+        (scrollDirection > 0 && this.pageScrollY === -300)
+        || (scrollDirection < 0 && this.pageScrollY === 0)
+        || (scrollDirection < 0 && window.pageYOffset > 0)) return;
       if (scrollDirection > 0) {
-        if (this.pageScrollY === -200) {
-          this.bodyClass.remove('hidden');
-        } else if (this.pageScrollY === -300) {
-          return;
-        }
+        if (this.pageScrollY === -200) this.bodyClass.remove('hidden');
         this.pageScrollY -= 100;
       } else {
-        if (this.pageScrollY === 0) return;
-        if (window.pageYOffset <= 0) this.bodyClass.add('hidden');
-        else return;
+        this.bodyClass.add('hidden');
         this.pageScrollY += 100;
       }
       this.$el.style.transform = `translateY(${this.pageScrollY}vh)`;
