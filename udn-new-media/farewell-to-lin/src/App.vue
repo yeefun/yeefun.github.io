@@ -3,7 +3,9 @@
     <Cover></Cover>
     <OpeningLine></OpeningLine>
     <Youtube></Youtube>
-    <PhotoScrollPage></PhotoScrollPage>
+    <component :is="isFixedPage"></component>
+    <Youtube></Youtube>
+    <ContentLight></ContentLight>
   </div>
 </template>
 
@@ -11,7 +13,9 @@
 import Cover from './components/Cover.vue';
 import OpeningLine from './components/OpeningLine.vue';
 import Youtube from './components/Youtube.vue';
-import PhotoScrollPage from './components/PhotoScrollPage.vue';
+import FixedPhotoPage from './components/FixedPhotoPage.vue';
+import ContentDark from './components/ContentDark.vue';
+import ContentLight from './components/ContentLight.vue';
 
 export default {
   name: 'app',
@@ -19,10 +23,13 @@ export default {
     Cover,
     OpeningLine,
     Youtube,
-    PhotoScrollPage,
+    FixedPhotoPage,
+    ContentDark,
+    ContentLight,
   },
   data() {
     return {
+      windowWidth: window.innerWidth,
       bodyClass: document.body.classList,
       startScrollTime: new Date(),
       pageScrollY: 0,
@@ -36,9 +43,14 @@ export default {
     window.addEventListener('DOMMouseScroll', this.pageScroll);
     // window.addEventListener('touchmove', this.pageScroll);
   },
+  computed: {
+    isFixedPage() {
+      return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
+    },
+  },
   methods: {
     loadHandler() {
-      if (window.innerWidth >= 576) {
+      if (this.windowWidth >= 576) {
         this.bodyClass.add('hidden');
       }
     },
@@ -49,19 +61,20 @@ export default {
       });
     },
     resizeHandler() {
-      if (window.innerWidth < 576) {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth < 576) {
         this.bodyClass.remove('hidden');
         this.$el.style.transform = 'translateY(0vh)';
       } else {
         if (window.pageYOffset === 0) this.bodyClass.add('hidden');
         window.scrollTo({
           top: 0,
-          behavior: 'smooth',
+          behavior: 'instant',
         });
       }
     },
     pageScroll(evt) {
-      if (window.innerWidth < 576 || window.pageYOffset > 0) return;
+      if (this.windowWidth < 576 || window.pageYOffset > 0) return;
       const currentTime = new Date();
       if (currentTime - this.startScrollTime < 800) return;
       const scrollDirection = -evt.wheelDelta || evt.detail;
