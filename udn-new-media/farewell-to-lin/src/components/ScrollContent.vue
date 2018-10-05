@@ -1,54 +1,12 @@
 <template>
-  <div id="app" class="app">
-    <!-- <ScrollContent> -->
-      <Cover></Cover>
-      <OpeningLine></OpeningLine>
-      <!-- <Youtube></Youtube> -->
-      <component :is="isFixedPage"></component>
-      <!-- <Youtube></Youtube> -->
-      <ContentLight></ContentLight>
-    <!-- </ScrollContent> -->
-  </div>
+  <section class="scroll-content">
+    <slot></slot>
+  </section>
 </template>
 
 <script>
-// import ScrollContent from './components/ScrollContent.vue';
-import Cover from './components/Cover.vue';
-import OpeningLine from './components/OpeningLine.vue';
-import Youtube from './components/Youtube.vue';
-import FixedPhotoPage from './components/FixedPhotoPage.vue';
-import ContentDark from './components/ContentDark.vue';
-import ContentLight from './components/ContentLight.vue';
-
 export default {
-  name: 'app',
-  components: {
-    // ScrollContent,
-    Cover,
-    OpeningLine,
-    Youtube,
-    FixedPhotoPage,
-    ContentDark,
-    ContentLight,
-  },
-  // data() {
-  //   return {
-  //     windowWidth: window.innerWidth,
-  //   };
-  // },
-  // created() {
-  //   window.addEventListener('resize', this.resizeHandler);
-  // },
-  // computed: {
-  //   isFixedPage() {
-  //     return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
-  //   },
-  // },
-  // methods: {
-  //   resizeHandler() {
-  //     this.windowWidth = window.innerWidth;
-  //   },
-  // },
+  name: 'ScrollContent',
   data() {
     return {
       windowWidth: window.innerWidth,
@@ -68,11 +26,11 @@ export default {
     window.addEventListener('DOMMouseScroll', this.pageScroll);
     // window.addEventListener('touchmove', this.pageScroll);
   },
-  computed: {
-    isFixedPage() {
-      return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
-    },
-  },
+  // computed: {
+  //   isFixedPage() {
+  //     return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
+  //   },
+  // },
   methods: {
     loadHandler() {
       if (this.windowWidth >= 576) {
@@ -137,9 +95,10 @@ export default {
 </script>
 
 <style lang="scss">
-.app {
+.scroll-content {
   height: 100vh;
   // overflow: hidden;
   transition: transform 1s;
 }
 </style>
+

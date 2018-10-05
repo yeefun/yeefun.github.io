@@ -1,7 +1,7 @@
 <template>
-  <section class="container">
-    <div class="photo"></div>
-    <div class="content"></div>
+  <section class="fixedPage">
+    <div class="fixedPage__photo"></div>
+    <div class="fixedPage__content"></div>
   </section>
 </template>
 
@@ -12,9 +12,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.photo-container {
-  height: 100vh;
+.fixedPage {
+  // height: 100vh;
   background-color: #000;
+  &__photo {
+    height: 100vh;
+    background-image: url('../assets/ContentImg/web_legacy.jpg');
+    background-size: cover;
+    background-position: center;
+  }
 }
 </style>
 
