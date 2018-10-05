@@ -80,6 +80,7 @@ export default {
 };
 </script>
 
-<style lang="scss" src="../css/content.scss">
+<style lang="scss">
+@import '../css/content.scss';
 </style>
 

@@ -8,7 +8,17 @@
   overflow-x: hidden;
   &--dark {
     color: #bcbcbc;
-    background-color: #000;
+    background-color: transparent;
+  }
+  &--photo-page {
+    position: relative;
+    width: 28%;
+    left: 16%;
+    padding-right: 0;
+    padding-left: 0;
+    // margin-top: 100vh;
+    // transition: margin-top 1s;
+    // visibility: hidden;
   }
 
   &__title {
@@ -22,6 +32,13 @@
     &--dark {
       color: #fff;
     }
+    &--photo-page {
+      font-size: 4.3rem;
+      letter-spacing: 10.9px;
+      line-height: 1.5;
+      margin-top: 148px;
+      margin-bottom: 50px;
+    }
   }
 
   &__subtitle {
@@ -30,7 +47,7 @@
     line-height: 1.64;
     letter-spacing: 2.2px;
     margin-top: 50px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     color: #fff;
   }
 
@@ -38,6 +55,7 @@
     font-size: 1.6rem;
     line-height: 1.75;
     letter-spacing: 1.3px;
+    // text-align: justify;
   }
 
   &__quote {
@@ -52,11 +70,19 @@
       padding-left: 50px;
       margin-top: 64px;
       margin-bottom: 64px;
+      &--photo-page {
+        padding-right: 0;
+        padding-left: 0;
+      }
     }
 
     &-speaker {
       text-align: right;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      letter-spacing: 1.4px;
+      &--photo-page {
+        text-align: left;
+      }
     }
   }
 

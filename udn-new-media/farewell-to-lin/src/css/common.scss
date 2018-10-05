@@ -3,6 +3,13 @@ html {
   font-family: Arial, "Microsoft JhengHei", sans-serif;
 }
 
+body {
+  background-color: #000;
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
+}
+
 .fade-out {
   opacity: 0 !important;
 }
@@ -15,6 +22,10 @@ html {
   margin-bottom: 0 !important;
 }
 
-.hidden {
-  overflow: hidden;
+.overflow-auto {
+  overflow: auto;
 }
+
+// .hidden {
+//   overflow: hidden;
+// }

@@ -12,7 +12,7 @@ export default {
 <style scoped lang="scss">
 .youtube {
   height: 100vh;
-  background-color: #000;
+  // background-color: #000;
 }
 </style>
 

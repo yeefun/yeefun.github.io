@@ -71,6 +71,13 @@ export default {
 };
 </script>
 
-<style lang="scss" src="../css/content.scss">
+<style lang="scss">
+@import '../css/content.scss';
+
+// .content {
+//   @media screen and (min-width: 576px) {
+//     margin-top: 100vh;
+//   }
+// }
 </style>
 
