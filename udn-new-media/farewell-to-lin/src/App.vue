@@ -100,10 +100,10 @@ export default {
             top: 0,
             behavior: 'instant',
           });
-          this.bodyClass.remove('overflow-auto');
+          // this.bodyClass.remove('overflow-auto');
           this.pageScrollY = 0;
         } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
-          this.bodyClass.add('overflow-auto');
+          // this.bodyClass.add('overflow-auto');
           this.pageScrollY = 0;
         }
         this.windowWidth = window.innerWidth;
@@ -235,7 +235,7 @@ export default {
 
 <style lang="scss">
 .app {
-  height: 100vh;
+  // height: 100vh;
   // overflow: hidden;
   // transition: transform 1s;
 }
