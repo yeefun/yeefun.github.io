@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
-    <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform">
-    <!-- <div id="page-content" class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" :style="pageTransform"> -->
+    <!-- <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform"> -->
+    <div id="page-content" class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" :style="pageTransform">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
@@ -45,8 +45,8 @@ export default {
       // throttle touchpad mousewheel event
       canScroll: true,
       pageScrollY: 0,
-      touchStartX: 0,
-      touchStartY: 0,
+      // touchStartX: 0,
+      // touchStartY: 0,
       // startScrollTime: new Date(),
     };
   },
@@ -73,9 +73,10 @@ export default {
       return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
     },
     pageTransform() {
-      // return {
-      return `transform: translateY(${this.pageScrollY}px)`;
-      // };
+      return {
+        'transform': `translateY(${this.pageScrollY}px)`,
+        // '-webkit-transform': `translateY(${this.pageScrollY}px)`,
+      };
     },
   },
   methods: {
@@ -107,13 +108,10 @@ export default {
         this.windowWidth = window.innerWidth;
       }, 400);
     },
-    pageTouchStart(evt) {
-      this.touchStartX = evt.touches[0].pageX;
-      this.touchStartY = evt.touches[0].pageY;
-      alert(this.touchStartX + '' + this.touchStartY);
-      // alert('hi');
-      this.pageScrollY -= window.innerHeight;
-    },
+    // pageTouchStart(evt) {
+    //   this.touchStartX = evt.touches[0].pageX;
+    //   this.touchStartY = evt.touches[0].pageY;
+    // },
     // pageTouchMove(evt) {
     //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
     //   if (this.scrollTimer) {
@@ -147,7 +145,7 @@ export default {
     // },
     // TODO 把事件委託給父層元素
     pageScroll(evt) {
-      console.log('done');
+      alert('trigger');
       if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
       if (this.scrollTimer) {
         clearTimeout(this.scrollTimer);
