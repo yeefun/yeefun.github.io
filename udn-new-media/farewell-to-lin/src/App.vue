@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart.prevent="pageTouchStart" @touchmove.prevent="pageTouchMove" :style="pageTransform">
+    <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
