@@ -40,14 +40,14 @@ export default {
     return {
       windowWidth: window.innerWidth,
       bodyClass: document.body.classList,
-      htmlClass: document.documentElement.classList,
+      root: document.documentElement,
       resizeTimer: null,
       scrollTimer: null,
       // throttle touchpad mousewheel event
       canScroll: true,
       pageScrollY: 0,
-      // touchStartX: 0,
-      // touchStartY: 0,
+      touchStartX: 0,
+      touchStartY: 0,
       // startScrollTime: new Date(),
     };
   },
@@ -101,12 +101,12 @@ export default {
             top: 0,
             behavior: 'instant',
           });
-          this.htmlClass.remove('overflow-auto');
-          this.bodyClass.remove('overflow-auto');
+          this.root.className = '';
+          this.bodyClass.remove('overflow-visible');
           this.pageScrollY = 0;
         } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
-          this.htmlClass.add('overflow-auto');
-          this.bodyClass.add('overflow-auto');
+          this.root.className += 'overflow-visible';
+          this.bodyClass.add('overflow-visible');
           this.pageScrollY = 0;
         }
         this.windowWidth = window.innerWidth;
@@ -118,35 +118,35 @@ export default {
     },
     pageTouchMove(evt) {
       if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
-      if (this.scrollTimer) {
-        clearTimeout(this.scrollTimer);
-        this.canScroll = false;
-      }
-      this.scrollTimer = setTimeout(() => {
-        setTimeout(() => {
-          this.canScroll = true;
-        }, 1000);
-        const moveEndX = evt.changedTouches[0].pageX;
-        const moveEndY = evt.changedTouches[0].pageY;
-        const deltaX = moveEndX - this.touchStartX;
-        const deltaY = moveEndY - this.touchStartY;
-        if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) return;
-          if (this.pageScrollY === -window.innerHeight * 2) {
-            this.$refs.scrollContent.style.marginTop = '0%';
-            this.htmlClass.add('overflow-auto');
-            this.bodyClass.add('overflow-auto');
-          }
-        } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) {
-            this.$refs.scrollContent.style.marginTop = '100%';
-            this.htmlClass.add('overflow-auto');
-            this.bodyClass.remove('overflow-auto');
-          }
-          if (this.pageScrollY === 0) return;
-          this.pageScrollY += window.innerHeight;
+      // if (this.scrollTimer) {
+      //   clearTimeout(this.scrollTimer);
+      //   this.canScroll = false;
+      // }
+      // this.scrollTimer = setTimeout(() => {
+      // setTimeout(() => {
+      //   this.canScroll = true;
+      // }, 1000);
+      const moveEndX = evt.changedTouches[0].pageX;
+      const moveEndY = evt.changedTouches[0].pageY;
+      const deltaX = moveEndX - this.touchStartX;
+      const deltaY = moveEndY - this.touchStartY;
+      if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
+        if (this.pageScrollY === -window.innerHeight * 3) return;
+        if (this.pageScrollY === -window.innerHeight * 2) {
+          this.$refs.scrollContent.style.marginTop = '0%';
+          this.root.className += 'overflow-visible';
+          this.bodyClass.add('overflow-visible');
         }
-      }, 200);
+      } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+        if (this.pageScrollY === -window.innerHeight * 3) {
+          this.$refs.scrollContent.style.marginTop = '100%';
+          this.root.className += 'overflow-visible';
+          this.bodyClass.remove('overflow-visible');
+        }
+        if (this.pageScrollY === 0) return;
+        this.pageScrollY += window.innerHeight;
+      }
+      // }, 200);
     },
     // TODO 把事件委託給父層元素
     pageScroll(evt) {
@@ -168,8 +168,8 @@ export default {
             // this.$refs.scrollContent.style.transform = 'translateY(0vh)';
             // this.$refs.scrollContent.style.willChange = 'margin-top';
             this.$refs.scrollContent.style.marginTop = '0%';
-            this.bodyhtml.add('overflow-auto');
-            this.bodyClass.add('overflow-auto');
+            this.root.className += 'overflow-visible';
+            this.bodyClass.add('overflow-visible');
             // setTimeout(() => {
             // }, 1000);
           }
@@ -180,8 +180,8 @@ export default {
             // this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$refs.scrollContent.style.marginTop = '100%';
             // this.$refs.scrollContent.style.willChange = 'auto';
-            this.htmlClass.remove('overflow-auto');
-            this.bodyClass.remove('overflow-auto');
+            this.root.className = '';
+            this.bodyClass.remove('overflow-visible');
           }
           if (this.pageScrollY === 0) return;
           this.pageScrollY += window.innerHeight;
