@@ -57,6 +57,8 @@ export default {
     // window.addEventListener('mousewheel', this.pageScroll);
     // window.addEventListener('DOMMouseScroll', this.pageScroll);
     // window.addEventListener('touchstart', this.pageTouchStart);
+  },
+  mounted() {
     const app = document.getElementById('app');
     const hammertime = new Hammer(app);
     hammertime.on('swipedown', () => {
