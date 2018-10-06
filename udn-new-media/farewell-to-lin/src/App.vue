@@ -1,11 +1,12 @@
 <template>
-  <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll">
-    <div class="page-content" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform">
+  <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
+  <div id="app">
+    <div class="page-content" :style="pageTransform">
     <!-- <div class="page-content"> -->
-      <Cover></Cover>
-      <OpeningLine></OpeningLine>
-      <Youtube></Youtube>
-      <component :is="isFixedPage"></component>
+      <!-- <Cover></Cover> -->
+      <!-- <OpeningLine></OpeningLine> -->
+      <!-- <Youtube></Youtube> -->
+      <component :is="isFixedPage" :photoName="photoName"></component>
     </div>
     <div class="scroll-content" ref="scrollContent">
       <PhotoPageContent v-if="windowWidth >= 576"></PhotoPageContent>
@@ -47,6 +48,7 @@ export default {
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
+      photoName: '',
       // startScrollTime: new Date(),
     };
   },
@@ -54,20 +56,7 @@ export default {
     // window.addEventListener('load', this.loadHandler);
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('resize', this.resizeHandler);
-    // window.addEventListener('mousewheel', this.pageScroll);
-    // window.addEventListener('DOMMouseScroll', this.pageScroll);
-    // window.addEventListener('touchstart', this.pageTouchStart);
   },
-  // mounted() {
-  //   const app = document.getElementById('app');
-  //   const hammertime = new Hammer(app);
-  //   hammertime.on('swipedown', () => {
-  //     this.pageScrollY -= window.innerHeight;
-  //   });
-  //   hammertime.on('swipeup', () => {
-  //     this.pageScrollY += window.innerHeight;
-  //   });
-  // },
   computed: {
     isFixedPage() {
       return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
@@ -91,98 +80,97 @@ export default {
         behavior: 'instant',
       });
     },
-    resizeHandler() {
-      if ((this.windowWidth < 576 && window.innerWidth < 576) || (this.windowWidth >= 576 && window.innerWidth >= 576)) return;
-      if (this.resizeTimer) clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
-        if (this.windowWidth < 576 && window.innerWidth >= 576) {
-          window.scrollTo({
-            top: 0,
-            behavior: 'instant',
-          });
-          this.root.className = '';
-          this.bodyClass.remove('overflow-visible');
-          this.pageScrollY = 0;
-        } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
-          this.root.className += 'overflow-visible';
-          this.bodyClass.add('overflow-visible');
-          this.pageScrollY = 0;
-        }
-        this.windowWidth = window.innerWidth;
-      }, 400);
-    },
-    pageTouchStart(evt) {
-      if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
-      this.touchStartX = evt.touches[0].pageX;
-      this.touchStartY = evt.touches[0].pageY;
-    },
-    pageTouchMove(evt) {
-      if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
-      if (this.scrollTimer) {
-        clearTimeout(this.scrollTimer);
-        this.canScroll = false;
-      }
-      this.scrollTimer = setTimeout(() => {
-        setTimeout(() => {
-          this.canScroll = true;
-        }, 1000);
-        const moveEndX = evt.changedTouches[0].pageX;
-        const moveEndY = evt.changedTouches[0].pageY;
-        const deltaX = moveEndX - this.touchStartX;
-        const deltaY = moveEndY - this.touchStartY;
-        if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) return;
-          if (this.pageScrollY === -window.innerHeight * 2) {
-            this.$refs.scrollContent.style.marginTop = '0%';
-            this.root.className += 'overflow-visible';
-            this.bodyClass.add('overflow-visible');
-          }
-          this.pageScrollY -= window.innerHeight;
-        } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) {
-            this.$refs.scrollContent.style.marginTop = '100%';
-            this.root.className += 'overflow-visible';
-            this.bodyClass.remove('overflow-visible');
-          }
-          if (this.pageScrollY === 0) return;
-          this.pageScrollY += window.innerHeight;
-        }
-      }, 200);
-    },
-    // TODO 把事件委託給父層元素
-    pageScroll(evt) {
-      if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
-      if (this.scrollTimer) {
-        clearTimeout(this.scrollTimer);
-        this.canScroll = false;
-      }
-      this.scrollTimer = setTimeout(() => {
-        setTimeout(() => {
-          this.canScroll = true;
-        }, 1000);
-        const scrollDirection = -evt.wheelDelta || evt.detail;
-        if (scrollDirection > 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) return;
-          if (this.pageScrollY === -window.innerHeight * 2) {
-            this.$refs.scrollContent.style.marginTop = '0%';
-            this.root.className += 'overflow-visible';
-            this.bodyClass.add('overflow-visible');
-          }
-          this.pageScrollY -= window.innerHeight;
-        } else {
-          if (this.pageScrollY === -window.innerHeight * 3) {
-            this.$refs.scrollContent.style.marginTop = '100%';
-            this.root.className = '';
-            this.bodyClass.remove('overflow-visible');
-          }
-          if (this.pageScrollY === 0) return;
-          this.pageScrollY += window.innerHeight;
-        }
-      }, 200);
-    },
+    // resizeHandler() {
+    //   if ((this.windowWidth < 576 && window.innerWidth < 576) || (this.windowWidth >= 576 && window.innerWidth >= 576)) return;
+    //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
+    //   this.resizeTimer = setTimeout(() => {
+    //     if (this.windowWidth < 576 && window.innerWidth >= 576) {
+    //       window.scrollTo({
+    //         top: 0,
+    //         behavior: 'instant',
+    //       });
+    //       this.root.className = '';
+    //       this.bodyClass.remove('overflow-visible');
+    //       this.pageScrollY = 0;
+    //     } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
+    //       this.root.className += 'overflow-visible';
+    //       this.bodyClass.add('overflow-visible');
+    //       this.pageScrollY = 0;
+    //     }
+    //     this.windowWidth = window.innerWidth;
+    //   }, 400);
+    // },
+    // pageTouchStart(evt) {
+    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   evt.preventDefault();
+    //   this.touchStartX = evt.touches[0].pageX;
+    //   this.touchStartY = evt.touches[0].pageY;
+    // },
+    // pageTouchMove(evt) {
+    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   evt.preventDefault();
+    //   if (this.scrollTimer) {
+    //     clearTimeout(this.scrollTimer);
+    //     this.canScroll = false;
+    //   }
+    //   this.scrollTimer = setTimeout(() => {
+    //     setTimeout(() => {
+    //       this.canScroll = true;
+    //     }, 1000);
+    //     const moveEndX = evt.changedTouches[0].pageX;
+    //     const moveEndY = evt.changedTouches[0].pageY;
+    //     const deltaX = moveEndX - this.touchStartX;
+    //     const deltaY = moveEndY - this.touchStartY;
+    //     if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
+    //       if (this.pageScrollY === -window.innerHeight * 3) return;
+    //       if (this.pageScrollY === -window.innerHeight * 2) {
+    //         this.$refs.scrollContent.style.transform = 'translateY(0vh)';
+    //         this.root.className += 'overflow-visible';
+    //         this.bodyClass.add('overflow-visible');
+    //       }
+    //       this.pageScrollY -= window.innerHeight;
+    //     } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+    //       if (this.pageScrollY === -window.innerHeight * 3) {
+    //         this.$refs.scrollContent.style.transform = 'translateY(100vh)';
+    //         this.root.className += 'overflow-visible';
+    //         this.bodyClass.remove('overflow-visible');
+    //       }
+    //       if (this.pageScrollY === 0) return;
+    //       this.pageScrollY += window.innerHeight;
+    //     }
+    //   }, 200);
+    // },
+    // pageScroll(evt) {
+    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   evt.preventDefault();
+    //   if (this.scrollTimer) {
+    //     clearTimeout(this.scrollTimer);
+    //     this.canScroll = false;
+    //   }
+    //   this.scrollTimer = setTimeout(() => {
+    //     setTimeout(() => {
+    //       this.canScroll = true;
+    //     }, 1000);
+    //     const scrollDirection = -evt.wheelDelta || evt.detail;
+    //     if (scrollDirection > 0) {
+    //       if (this.pageScrollY === -window.innerHeight * 3) return;
+    //       if (this.pageScrollY === -window.innerHeight * 2) {
+    //         this.$refs.scrollContent.style.transform = 'translateY(0vh)';
+    //         this.root.className += 'overflow-visible';
+    //         this.bodyClass.add('overflow-visible');
+    //       }
+    //       this.pageScrollY -= window.innerHeight;
+    //     } else {
+    //       if (this.pageScrollY === -window.innerHeight * 3) {
+    //         this.$refs.scrollContent.style.transform = 'translateY(100vh)';
+    //         this.root.className = '';
+    //         this.bodyClass.remove('overflow-visible');
+    //       }
+    //       if (this.pageScrollY === 0) return;
+    //       this.pageScrollY += window.innerHeight;
+    //     }
+    //   }, 200);
+    // },
     // resizeHandler() {
     //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
     //   this.resizeTimer = setTimeout(() => {
@@ -236,26 +224,18 @@ export default {
 
 <style lang="scss">
 .page-content {
-  // position: fixed;
   width: 100%;
-  // transition: transform 1s;
-  // z-index: 99;
+  background-color: #000;
   @media screen and (min-width: 576px) {
     position: fixed;
     top: 0;
     transition: transform 1s;
-    // will-change: transform;
-    // z-index: 99;
   }
 }
 .scroll-content {
   @media screen and (min-width: 576px) {
-    // position: relative;
-    // top: 100%;
     // transform: translateY(100vh);
-    // transition: transform 1s;
-    margin-top: 100%;
-    transition: margin-top 1s;
+    transition: transform 1s;
   }
 }
 </style>

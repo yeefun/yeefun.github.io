@@ -104,7 +104,7 @@
       font-size: 1.2rem;
       line-height: 2.33;
       letter-spacing: 1px;
-      padding-left: 30px;
+      padding-left: 32px;
       // color: #bcbcbc;
       margin-top: 8px;
       &--dark {
@@ -114,6 +114,17 @@
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.8);
         // color: #bcbcbc;
+      }
+      &--photo-page {
+        width: 20%;
+        max-width: 400px;
+        min-width: 240px;
+        right: 10%;
+        bottom: 70px;
+        color: #bcbcbc;
+        padding-left: 28px;
+        box-sizing: border-box;
+        margin-top: 0;
       }
     }
   }
