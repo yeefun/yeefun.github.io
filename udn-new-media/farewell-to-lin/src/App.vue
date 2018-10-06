@@ -97,9 +97,10 @@ export default {
       }, 400);
     },
     pageTouchStart(evt) {
-      this.touchStartX = evt.touches[0].pageX;
-      this.touchStartY = evt.touches[0].pageY;
-      alert('hi');
+      // this.touchStartX = evt.touches[0].pageX;
+      // this.touchStartY = evt.touches[0].pageY;
+      // alert('hi');
+      this.pageScrollY -= window.innerHeight;
     },
     pageTouchMove(evt) {
       // if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
@@ -111,25 +112,25 @@ export default {
         // setTimeout(() => {
         //   this.canScroll = true;
         // }, 1000);
-        const moveEndX = evt.changedTouches[0].pageX;
-        const moveEndY = evt.changedTouches[0].pageY;
-        const deltaX = moveEndX - this.touchStartX;
-        const deltaY = moveEndY - this.touchStartY;
-        if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) return;
-          if (this.pageScrollY === -window.innerHeight * 2) {
-            this.$refs.scrollContent.style.marginTop = '0%';
-            this.bodyClass.add('overflow-auto');
-          }
-        } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -window.innerHeight * 3) {
-            this.$refs.scrollContent.style.marginTop = '100%';
-            this.bodyClass.remove('overflow-auto');
-          }
-          if (this.pageScrollY === 0) return;
-          this.pageScrollY += window.innerHeight;
-        }
-        alert('hi-move');
+        // const moveEndX = evt.changedTouches[0].pageX;
+        // const moveEndY = evt.changedTouches[0].pageY;
+        // const deltaX = moveEndX - this.touchStartX;
+        // const deltaY = moveEndY - this.touchStartY;
+        // if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+        //   if (this.pageScrollY === -window.innerHeight * 3) return;
+        //   if (this.pageScrollY === -window.innerHeight * 2) {
+        //     this.$refs.scrollContent.style.marginTop = '0%';
+        //     this.bodyClass.add('overflow-auto');
+        //   }
+        // } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
+        //   if (this.pageScrollY === -window.innerHeight * 3) {
+        //     this.$refs.scrollContent.style.marginTop = '100%';
+        //     this.bodyClass.remove('overflow-auto');
+        //   }
+        //   if (this.pageScrollY === 0) return;
+        //   this.pageScrollY += window.innerHeight;
+        // }
+        // alert('hi-move');
       // }, 200);
     },
     // TODO 把事件委託給父層元素
