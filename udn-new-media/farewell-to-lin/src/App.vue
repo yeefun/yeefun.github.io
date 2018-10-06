@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="app">
-    <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform">
+    <!-- <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform"> -->
+    <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" :style="pageTransform">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
@@ -56,6 +57,14 @@ export default {
     // window.addEventListener('mousewheel', this.pageScroll);
     // window.addEventListener('DOMMouseScroll', this.pageScroll);
     // window.addEventListener('touchstart', this.pageTouchStart);
+    const app = document.getElementById('app');
+    const hammertime = new Hammer(app);
+    hammertime.on('swipedown', () => {
+      this.pageScrollY -= window.innerHeight;
+    });
+    hammertime.on('swipeup', () => {
+      this.pageScrollY += window.innerHeight;
+    });
   },
   computed: {
     isFixedPage() {
@@ -96,13 +105,13 @@ export default {
         this.windowWidth = window.innerWidth;
       }, 400);
     },
-    pageTouchStart(evt) {
-      // this.touchStartX = evt.touches[0].pageX;
-      // this.touchStartY = evt.touches[0].pageY;
-      // alert('hi');
-      this.pageScrollY -= window.innerHeight;
-    },
-    pageTouchMove(evt) {
+    // pageTouchStart(evt) {
+    //   // this.touchStartX = evt.touches[0].pageX;
+    //   // this.touchStartY = evt.touches[0].pageY;
+    //   // alert('hi');
+    //   this.pageScrollY -= window.innerHeight;
+    // },
+    // pageTouchMove(evt) {
       // if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
       // if (this.scrollTimer) {
       //   clearTimeout(this.scrollTimer);
@@ -132,7 +141,7 @@ export default {
         // }
         // alert('hi-move');
       // }, 200);
-    },
+    // },
     // TODO 把事件委託給父層元素
     pageScroll(evt) {
       if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
