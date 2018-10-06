@@ -99,6 +99,7 @@ export default {
     pageTouchStart(evt) {
       this.touchStartX = evt.touches[0].pageX;
       this.touchStartY = evt.touches[0].pageY;
+      alert('hi');
     },
     pageTouchMove(evt) {
       // if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
@@ -128,6 +129,7 @@ export default {
           if (this.pageScrollY === 0) return;
           this.pageScrollY += window.innerHeight;
         }
+        alert('hi-move');
       // }, 200);
     },
     // TODO 把事件委託給父層元素
