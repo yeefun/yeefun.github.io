@@ -117,7 +117,7 @@ export default {
       this.touchStartY = evt.touches[0].pageY;
     },
     pageTouchMove(evt) {
-      if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+      // if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
       // if (this.scrollTimer) {
       //   clearTimeout(this.scrollTimer);
       //   this.canScroll = false;
@@ -137,6 +137,7 @@ export default {
           this.root.className += 'overflow-visible';
           this.bodyClass.add('overflow-visible');
         }
+        this.pageScrollY -= window.innerHeight;
       } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
         if (this.pageScrollY === -window.innerHeight * 3) {
           this.$refs.scrollContent.style.marginTop = '100%';
