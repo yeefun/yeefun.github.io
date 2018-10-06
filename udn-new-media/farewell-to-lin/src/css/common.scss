@@ -1,3 +1,11 @@
+html, body {
+  height: 100%;
+  position: relative;
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
+}
+
 html {
   font-size: 10px !important;
   font-family: Arial, "Microsoft JhengHei", sans-serif;
@@ -5,9 +13,6 @@ html {
 
 body {
   background-color: #000;
-  @media screen and (min-width: 576px) {
-    overflow: hidden;
-  }
 }
 
 .fade-out {
