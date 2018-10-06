@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <!-- <div class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform"> -->
+    <!-- <div class="page-content" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove" :style="pageTransform"> -->
     <div id="page-content" class="page-content" @mousewheel.prevent="pageScroll" @DOMMouseScroll.prevent="pageScroll" :style="pageTransform">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
@@ -74,7 +74,7 @@ export default {
     },
     pageTransform() {
       return {
-        'transform': `translateY(${this.pageScrollY}px)`,
+        transform: `translateY(${this.pageScrollY}px)`,
         // '-webkit-transform': `translateY(${this.pageScrollY}px)`,
       };
     },
@@ -92,6 +92,7 @@ export default {
       });
     },
     resizeHandler() {
+      if ((this.windowWidth < 576 && window.innerWidth < 576) || (this.windowWidth >= 576 && window.innerWidth >= 576)) return;
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         if (this.windowWidth < 576 && window.innerWidth >= 576) {
@@ -145,7 +146,6 @@ export default {
     // },
     // TODO 把事件委託給父層元素
     pageScroll(evt) {
-      alert('trigger');
       if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
       if (this.scrollTimer) {
         clearTimeout(this.scrollTimer);
@@ -164,7 +164,7 @@ export default {
             // this.$refs.scrollContent.style.transform = 'translateY(0vh)';
             // this.$refs.scrollContent.style.willChange = 'margin-top';
             this.$refs.scrollContent.style.marginTop = '0%';
-            this.bodyClass.add('overflow-auto');
+            // this.bodyClass.add('overflow-auto');
             // setTimeout(() => {
             // }, 1000);
           }
@@ -175,7 +175,7 @@ export default {
             // this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$refs.scrollContent.style.marginTop = '100%';
             // this.$refs.scrollContent.style.willChange = 'auto';
-            this.bodyClass.remove('overflow-auto');
+            // this.bodyClass.remove('overflow-auto');
           }
           if (this.pageScrollY === 0) return;
           this.pageScrollY += window.innerHeight;
