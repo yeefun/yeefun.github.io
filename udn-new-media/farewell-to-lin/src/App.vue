@@ -101,15 +101,15 @@ export default {
       this.touchStartY = evt.touches[0].pageY;
     },
     pageTouchMove(evt) {
-      if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
-      if (this.scrollTimer) {
-        clearTimeout(this.scrollTimer);
-        this.canScroll = false;
-      }
-      this.scrollTimer = setTimeout(() => {
-        setTimeout(() => {
-          this.canScroll = true;
-        }, 1000);
+      // if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+      // if (this.scrollTimer) {
+      //   clearTimeout(this.scrollTimer);
+      //   this.canScroll = false;
+      // }
+      // this.scrollTimer = setTimeout(() => {
+        // setTimeout(() => {
+        //   this.canScroll = true;
+        // }, 1000);
         const moveEndX = evt.changedTouches[0].pageX;
         const moveEndY = evt.changedTouches[0].pageY;
         const deltaX = moveEndX - this.touchStartX;
@@ -128,7 +128,7 @@ export default {
           if (this.pageScrollY === 0) return;
           this.pageScrollY += window.innerHeight;
         }
-      }, 200);
+      // }, 200);
     },
     // TODO 把事件委託給父層元素
     pageScroll(evt) {
