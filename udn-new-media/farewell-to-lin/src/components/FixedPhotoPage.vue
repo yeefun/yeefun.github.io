@@ -1,15 +1,16 @@
 <template>
   <section class="fixed-page">
     <!-- <div class="fixed-page__photo" :style="{ backgroundImage: `url(${photo})` }"></div> -->
-    <!-- <transition name="photo-fade"> -->
+    <!-- <transition name="photo-fade" mode="out-in"> -->
       <div class="fixed-page__photo-wrapper">
         <transition name="photo-fade" mode="out-in">
-          <div class="fixed-page__photo" v-for="photo in photos" :key="photo.name" v-if="photoName === photo.name" :style="{ backgroundImage: `url(${photo.url})`}"></div>
+          <div class="fixed-page__photo" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" :style="{ backgroundImage: `url(${photo.url})`}"></div>
         </transition>
         <transition name="caption-fade" mode="out-in">
-          <div class="content__photo-caption content__photo-caption--dark content__photo-caption--photo-page" v-for="photo in photos" :key="photo.name" v-if="photoName === photo.name" v-html="photo.caption"></div>
+          <div class="content__photo-caption content__photo-caption--dark content__photo-caption--photo-page" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" v-html="photo.caption"></div>
         </transition>
       </div>
+    <!-- </transition> -->
     <div class="fixed-page__mask"></div>
   </section>
 </template>
@@ -17,6 +18,7 @@
 <script>
 import photoLegacy from '../assets/ContentImg/web_legacy.jpg';
 import photoWanderers from '../assets/ContentImg/web_wanderers.jpg';
+import photoWatermoon from '../assets/ContentImg/web_watermoon.jpg';
 
 export default {
   name: 'FixedPhotoPage',
@@ -30,6 +32,10 @@ export default {
       }, {
         name: 'wanderers',
         url: photoWanderers,
+        caption: '圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影',
+      }, {
+        name: 'watermoon',
+        url: photoWatermoon,
         caption: '圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影',
       }],
     };
@@ -66,11 +72,14 @@ export default {
   }
 }
 
-.photo-fade-enter-active, .photo-fade-leave-active {
+.photo-fade-enter-active {
   transition: opacity, 0.5s;
 }
-.caption-fade-enter-active, .caption-fade-leave-active {
-  transition: opacity, 0.5s 0.3s;
+.photo-fade-leave-active {
+  transition: opacity, 0.25s;
+}
+.caption-fade-enter-active {
+  transition: opacity, 0.5s 0.25s;
 }
 .photo-fade-enter, .caption-fade-enter, .photo-fade-leave-to, .caption-fade-leave-to {
   opacity: 0;

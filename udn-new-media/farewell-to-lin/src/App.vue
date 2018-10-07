@@ -1,4 +1,5 @@
 <template>
+<!-- TODO use wheel event -->
   <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
   <div id="app">
     <div class="page-content" :style="pageTransform">

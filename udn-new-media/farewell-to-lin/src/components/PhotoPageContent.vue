@@ -28,6 +28,35 @@
       <p><br></p>
       <p>20多年前一位計程車司機給了林懷民繼續前行的力量，那麼去年宣布退休後，大家都怎麼說呢？林懷民溫和地笑了：「現在他們都說，林老師，你辛苦了，好好休息。」最後一句話，是用閩南語說的。</p>
     </div>
+    <h3 class="content__subtitle">苦難228和精緻生活<br>都是台灣</h3>
+    <div class="content__text">
+      <p>1997年、解嚴後10年，雲門舞集有了追溯228、白色恐怖的《家族合唱》。台北藝術大學舞蹈系副教授陳雅萍在專文中形容《薪傳》與《家族合唱》可說是雲門台灣史的前後篇，兩支舞隔了20年，都是要喚醒台灣社會共同的記憶。</p>
+      <p><br></p>
+      <p>在《家族合唱》裡，林懷民蒐集了近200張老照片，找來各種方言口述歷史，帶台灣人民一起面對經歷苦難的時代。他曾說，《家族合唱》是他不得不編，卻又害怕去看的一齣作品，但他希望一直演，直到觀眾和他自己都不再害怕、不再有悲情，能夠凝眸面對這段歲月。 </p>
+      <p><br></p>
+      <p ref="photoWatermoon">再之後的《水月》（1998）、以及代表作行草三部曲（行草、松煙、狂草），則反映林懷民感受到的「精緻台灣」。「對我來說，《家族合唱》是台灣，《水月》也是台灣」，林懷民說，1998年的台灣生活已經漸走向中產、精緻，有愛樂電台也有誠品書店，社會已經不一樣了。</p>
+    </div>
+    <div class="content__quote-wrapper content__quote-wrapper--photo-page">
+      <blockquote class="content__quote">我也在這個生活裡，所以我後來的東西都是比較美學的。</blockquote>
+      <p class="content__quote-speaker content__quote-speaker--photo-page">林懷民</p>
+    </div>
+    <div class="content__text">
+      <p>1997年做談228、白色恐怖的《家族合唱》，隔年做精緻抽象的《水月》，林懷民也曾被疑問是否背棄什麼，但他認為，兩個作品只是反映不同時代的台灣。「一切要泛政治化嗎？一定要分左右前後嗎？」大家要這樣分，就變成這種局面，「但都不是，藝術與生活而已。」</p>
+    </div>
+    <h3 class="content__subtitle">能「ㄍㄧㄥ」45年的原因</h3>
+    <div class="content__text">
+      <p>採訪當天，窗外的雲門劇場園區傳來遊客朗笑，林懷民凝神諦聽，說這樣很好，有時他編舞遇到小難關，就去下面走走，當看到訪客怡然自在、開心跟他說謝謝，是他動力來源。</p>
+      <p><br></p>
+      <p>從林懷民創辦雲門以來，用他自己的話說，「從第一天就很疲累」。一ㄍㄧㄥ45年，林懷民放不了自己，也放不了別人，與他緊密工作過的人，都看過他時時刻刻全身繃緊到血脈賁張、張牙舞爪的樣子，讓大家膽顫心驚之餘，還暗暗祈禱他別心臟病發。 </p>
+      <p><br></p>
+      <p>但林懷民不曾因為疲累而放棄。觀衆看的開心、讓藝術服務人群，是林懷民成立雲門舞集最大的期待。回首雲門舞集45年時光，林懷民說，雲門的目光從不看向歐美劇場，「我們看的是老百姓，」他很希望雲門舞集的作品，能夠帶給台灣的老百姓一點點快樂、安靜的時光。</p>
+      <p><br></p>
+      <p>所以雲門舞集從1990年代開始，每年一定會到各地戶外公演，讓作品走出劇院、走進人民的生活，至今23年不輟。戶外廣場上每個觀眾感受和理解到的都不同，但只要在舞者演出的那段時間，觀眾能享受演出，露出一抹微笑或獲得短暫平靜，就是林懷民繼續下去的力量。</p>
+    </div>
+    <div class="content__quote-wrapper content__quote-wrapper--photo-page">
+      <blockquote class="content__quote">我個人跟雲門何其幸運，能看到大家對我們努力的結果，有比較好的、正面的回饋，這樣的對話非常重要。</blockquote>
+      <p class="content__quote-speaker content__quote-speaker--photo-page">林懷民</p>
+    </div>
   </section>
 </template>
 
@@ -45,8 +74,10 @@ export default {
   mounted() {
     window.addEventListener('scroll', () => {
       const currentTime = new Date();
-      if (currentTime - this.startScrollTime < 400) return;
-      if (window.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
+      if (currentTime - this.startScrollTime < 200) return;
+      if (window.pageYOffset >= this.$refs.photoWatermoon.offsetTop - this.marginTop) {
+        this.$parent.photoName = 'watermoon';
+      } else if (window.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
         this.$parent.photoName = 'wanderers';
       } else if (window.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
         this.$parent.photoName = 'legacy';
