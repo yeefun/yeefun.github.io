@@ -79,7 +79,7 @@ export default {
   transition: opacity, 0.25s;
 }
 .caption-fade-enter-active {
-  transition: opacity, 0.5s 0.25s;
+  transition: opacity, 0.5s 0.5s;
 }
 .photo-fade-enter, .caption-fade-enter, .photo-fade-leave-to, .caption-fade-leave-to {
   opacity: 0;

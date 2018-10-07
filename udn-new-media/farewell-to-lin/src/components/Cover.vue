@@ -71,7 +71,7 @@ export default {
   name: 'Cover',
   data() {
     return {
-      windowWidth: window.innerWidth,
+      windowWidth: document.documentElement.clientWidth,
       isDancerMove: false,
       isCoverPromptExist: true,
       isCoverFadeOut: false,
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     resizeHandler() {
-      this.windowWidth = window.innerWidth;
+      this.windowWidth = document.documentElement.clientWidth;
     },
     dancerClass(idx) {
       const dancerClass = {

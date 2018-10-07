@@ -1,8 +1,8 @@
 <template>
-<!-- TODO use wheel event -->
+<!-- FIXME use wheel event -->
   <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
   <div id="app">
-    <div class="page-content" :style="pageTransform">
+    <div class="page-content" :style="pageTransform" ref="pageContent">
     <!-- <div class="page-content"> -->
       <!-- <Cover></Cover> -->
       <!-- <OpeningLine></OpeningLine> -->
@@ -11,7 +11,7 @@
     </div>
     <div class="scroll-content" ref="scrollContent">
       <PhotoPageContent v-if="windowWidth >= 576"></PhotoPageContent>
-        <!-- <Youtube></Youtube> -->
+      <Youtube ref="youtube"></Youtube>
       <ContentLight></ContentLight>
     </div>
   </div>
@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-      windowWidth: window.innerWidth,
+      windowWidth: document.documentElement.clientWidth,
+      windowHeight: document.documentElement.clientHeight,
       bodyClass: document.body.classList,
       root: document.documentElement,
       resizeTimer: null,
@@ -50,6 +51,7 @@ export default {
       touchStartX: 0,
       touchStartY: 0,
       photoName: '',
+      beforeScrollY: window.pageYOffset,
       // startScrollTime: new Date(),
     };
   },
@@ -57,6 +59,7 @@ export default {
     // window.addEventListener('load', this.loadHandler);
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener('scroll', this.fixedPageMove);
   },
   computed: {
     isFixedPage() {
@@ -75,17 +78,46 @@ export default {
     //     this.bodyClass.add('hidden');
     //   }
     // },
+    // TODO avoid pageContent css transition
+    // TODO change this.pageScrollY
+    fixedPageMove() {
+      const afterScrollY = window.pageYOffset;
+      const deltaScrollY = afterScrollY - this.beforeScrollY;
+      const youtubeY = this.$refs.youtube.$el.offsetTop;
+      const youtubeYForScrollDown = youtubeY - this.windowHeight;
+      if ((deltaScrollY > 0 && this.pageScrollY === -this.windowHeight)
+        || (deltaScrollY > 0 && window.pageYOffset <= youtubeYForScrollDown)
+        || (deltaScrollY < 0 && this.pageScrollY === 0)) return;
+      // this.$refs.pageContent.style.transitionProperty = 'none';
+      if (deltaScrollY > 0 && window.pageYOffset >= youtubeYForScrollDown) {
+        if (youtubeY - window.pageYOffset >= 50) {
+          // this.pageScrollY = (this.windowHeight * 3) + (youtubeTop - window.pageYOffset);
+          this.pageScrollY = -(window.pageYOffset - youtubeYForScrollDown);
+        } else {
+          this.pageScrollY = -this.windowHeight;
+        }
+      } else if (deltaScrollY < 0 && window.pageYOffset < youtubeY) {
+        if (this.pageScrollY === 0) return;
+        if (window.pageYOffset - youtubeYForScrollDown >= 50) {
+          this.pageScrollY = -this.windowHeight + (youtubeY - window.pageYOffset);
+        } else {
+          this.pageScrollY = 0;
+        }
+      }
+      this.beforeScrollY = afterScrollY;
+    },
     beforeunloadHandler() {
       window.scrollTo({
         top: 0,
         behavior: 'instant',
       });
     },
+    // TODO dynamic set this.windowHeight
     // resizeHandler() {
-    //   if ((this.windowWidth < 576 && window.innerWidth < 576) || (this.windowWidth >= 576 && window.innerWidth >= 576)) return;
+    //   if ((this.windowWidth < 576 && document.documentElement.clientWidth < 576) || (this.windowWidth >= 576 && document.documentElement.clientWidth >= 576)) return;
     //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
     //   this.resizeTimer = setTimeout(() => {
-    //     if (this.windowWidth < 576 && window.innerWidth >= 576) {
+    //     if (this.windowWidth < 576 && document.documentElement.clientWidth >= 576) {
     //       window.scrollTo({
     //         top: 0,
     //         behavior: 'instant',
@@ -93,12 +125,12 @@ export default {
     //       this.root.className = '';
     //       this.bodyClass.remove('overflow-visible');
     //       this.pageScrollY = 0;
-    //     } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
+    //     } else if (this.windowWidth >= 576 && document.documentElement.clientWidth < 576) {
     //       this.root.className += 'overflow-visible';
     //       this.bodyClass.add('overflow-visible');
     //       this.pageScrollY = 0;
     //     }
-    //     this.windowWidth = window.innerWidth;
+    //     this.windowWidth = document.documentElement.clientWidth;
     //   }, 400);
     // },
     // pageTouchStart(evt) {
@@ -123,21 +155,21 @@ export default {
     //     const deltaX = moveEndX - this.touchStartX;
     //     const deltaY = moveEndY - this.touchStartY;
     //     if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-    //       if (this.pageScrollY === -window.innerHeight * 3) return;
-    //       if (this.pageScrollY === -window.innerHeight * 2) {
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 3) return;
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 2) {
     //         this.$refs.scrollContent.style.transform = 'translateY(0vh)';
     //         this.root.className += 'overflow-visible';
     //         this.bodyClass.add('overflow-visible');
     //       }
-    //       this.pageScrollY -= window.innerHeight;
+    //       this.pageScrollY -= document.documentElement.clientHeight;
     //     } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-    //       if (this.pageScrollY === -window.innerHeight * 3) {
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 3) {
     //         this.$refs.scrollContent.style.transform = 'translateY(100vh)';
     //         this.root.className += 'overflow-visible';
     //         this.bodyClass.remove('overflow-visible');
     //       }
     //       if (this.pageScrollY === 0) return;
-    //       this.pageScrollY += window.innerHeight;
+    //       this.pageScrollY += document.documentElement.clientHeight;
     //     }
     //   }, 200);
     // },
@@ -154,39 +186,39 @@ export default {
     //     }, 1000);
     //     const scrollDirection = -evt.wheelDelta || evt.detail;
     //     if (scrollDirection > 0) {
-    //       if (this.pageScrollY === -window.innerHeight * 3) return;
-    //       if (this.pageScrollY === -window.innerHeight * 2) {
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 3) return;
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 2) {
     //         this.$refs.scrollContent.style.transform = 'translateY(0vh)';
     //         this.root.className += 'overflow-visible';
     //         this.bodyClass.add('overflow-visible');
     //       }
-    //       this.pageScrollY -= window.innerHeight;
+    //       this.pageScrollY -= document.documentElement.clientHeight;
     //     } else {
-    //       if (this.pageScrollY === -window.innerHeight * 3) {
+    //       if (this.pageScrollY === -document.documentElement.clientHeight * 3) {
     //         this.$refs.scrollContent.style.transform = 'translateY(100vh)';
     //         this.root.className = '';
     //         this.bodyClass.remove('overflow-visible');
     //       }
     //       if (this.pageScrollY === 0) return;
-    //       this.pageScrollY += window.innerHeight;
+    //       this.pageScrollY += document.documentElement.clientHeight;
     //     }
     //   }, 200);
     // },
     // resizeHandler() {
     //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
     //   this.resizeTimer = setTimeout(() => {
-    //     if (this.windowWidth < 576 && window.innerWidth >= 576) {
+    //     if (this.windowWidth < 576 && document.documentElement.clientWidth >= 576) {
     //       window.scrollTo({
     //         top: 0,
     //         behavior: 'instant',
     //       });
     //       this.bodyClass.add('hidden');
     //       this.pageScrollY = 0;
-    //     } else if (this.windowWidth >= 576 && window.innerWidth < 576) {
+    //     } else if (this.windowWidth >= 576 && document.documentElement.clientWidth < 576) {
     //       this.bodyClass.remove('hidden');
     //       this.$el.style.transform = 'translateY(0vh)';
     //     }
-    //     this.windowWidth = window.innerWidth;
+    //     this.windowWidth = document.documentElement.clientWidth;
     //   }, 400);
     // },
   //   pageScroll(evt) {

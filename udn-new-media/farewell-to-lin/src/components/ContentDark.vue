@@ -67,7 +67,7 @@
       <p><br></p>
       <p>所以雲門舞集從1990年代開始，每年一定會到各地戶外公演，讓作品走出劇院、走進人民的生活，至今23年不輟。戶外廣場上每個觀眾感受和理解到的都不同，但只要在舞者演出的那段時間，觀眾能享受演出，露出一抹微笑或獲得短暫平靜，就是林懷民繼續下去的力量。</p>
     </div>
-    <div class="content__quote-wrapper">
+    <div class="content__quote-wrapper content__quote-wrapper--last">
       <blockquote class="content__quote">我個人跟雲門何其幸運，能看到大家對我們努力的結果，有比較好的、正面的回饋，這樣的對話非常重要。</blockquote>
       <p class="content__quote-speaker">林懷民</p>
     </div>
