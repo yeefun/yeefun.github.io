@@ -1,16 +1,22 @@
 <template>
   <section class="final-scene" ref="finalScene">
-    <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }">
+    <!-- <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }">
       <div class="final-scene__text--first" :class="{ 'fade-in': isTextFadeIn }">過去45年<br>林懷民用90齣舞作<br>不斷與台灣社會對話</div>
       <p><br></p>
       <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="textFadeInEnd" @webkitTransitionEnd.once="textFadeInEnd">退休前，<br>他最後有段話<br>想對現在的台灣說</div>
-    </div>
+    </div> -->
+    <Youtube></Youtube>
   </section>
 </template>
 
 <script>
+import Youtube from './Youtube.vue';
+
 export default {
   name: 'FinalScene',
+  components: {
+    Youtube,
+  },
   data() {
     return {
       // windowHeight: document.documentElement.clientHeight,
@@ -25,7 +31,7 @@ export default {
   },
   methods: {
     finalSceneFade() {
-      if (window.pageYOffset + this.root.clientHeight === this.root.scrollHeight) {
+      if (window.pageYOffset + this.root.clientHeight >= this.root.scrollHeight - 8) {
         this.isTextFadeIn = true;
       }
     },

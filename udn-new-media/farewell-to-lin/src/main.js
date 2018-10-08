@@ -11,3 +11,8 @@ Vue.config.productionTip = false;
 new Vue({
   render: h => h(App),
 }).$mount('#app');
+
+const tagContainYoutubeAPI = document.createElement('script');
+tagContainYoutubeAPI.src = 'https://www.youtube.com/iframe_api';
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tagContainYoutubeAPI, firstScriptTag);

@@ -12,7 +12,7 @@
     <div class="scroll-content" ref="scrollContent">
       <!-- <PhotoPageContent v-if="windowWidth >= 576"></PhotoPageContent> -->
       <!-- <Youtube ref="youtube"></Youtube> -->
-      <ContentLight></ContentLight>
+      <!-- <ContentLight></ContentLight> -->
       <FinalScene></FinalScene>
       <div></div>
     </div>
