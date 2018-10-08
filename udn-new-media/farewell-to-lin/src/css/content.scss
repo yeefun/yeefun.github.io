@@ -1,7 +1,9 @@
 .content {
   background-color: #fff;
   // color: #fff;
-  color: #474747;
+  // ASK mob #47 or web #2b
+  // color: #474747;
+  color: #2b2b2b;
   padding-right: 30px;
   padding-left: 30px;
   // prevent margin collapse
@@ -10,6 +12,11 @@
     color: #bcbcbc;
     background-color: transparent;
   }
+  // &--light {
+  //   @media screen and (min-width: 576px) {
+  //     max-width: 960px;
+  //   }
+  // }
   &--photo-page {
     position: relative;
     width: 36%;
@@ -36,11 +43,11 @@
     &--dark {
       color: #fff;
     }
-    &--photo-page {
+    &--photo-page, &--light {
       font-size: 4.3rem;
-      letter-spacing: 10.9px;
-      line-height: 1.5;
-      margin-top: 148px;
+      letter-spacing: 10.7px;
+      line-height: 1.56;
+      margin-top: 168px;
       margin-bottom: 50px;
     }
   }
@@ -60,6 +67,14 @@
     line-height: 1.75;
     letter-spacing: 1.3px;
     // text-align: justify;
+    &--light {
+      @media screen and (min-width: 768px) {
+        font-size: 1.8rem;
+        letter-spacing: 0.9px;
+        // ASK
+        // line-height: 1.56;
+      }
+    }
   }
 
   &__quote {
@@ -68,7 +83,16 @@
     color: #b98e49;
     letter-spacing: 2.2px;
     margin-bottom: 12px;
-
+    &--light {
+      @media screen and (min-width: 768px) {
+        font-size: 3rem;
+        line-height: 1.47;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+        // ASK only here bold?
+        font-weight: 700;
+      }
+    }
     &-wrapper {
       padding-right: 50px;
       padding-left: 50px;
@@ -87,6 +111,13 @@
       text-align: right;
       font-size: 1.4rem;
       letter-spacing: 1.4px;
+      &--light {
+        @media screen and (min-width: 768px) {
+          font-size: 1.8rem;
+          letter-spacing: 0.9px;
+          line-height: 1.56;
+        }
+      }
       &--photo-page {
         text-align: left;
       }
@@ -100,9 +131,15 @@
 
     &-wrapper {
       position: relative;
-      margin: 50px -30px;
+      margin: 48px -30px;
       &--dark {
         margin-bottom: 70px;
+      }
+      &--light {
+        @media screen and (min-width: 768px) {
+          margin-right: 0;
+          margin-left: 0;
+        }
       }
     }
 
@@ -121,6 +158,12 @@
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.8);
         // color: #bcbcbc;
+      }
+      &--light {
+        @media screen and (min-width: 768px) {
+          text-align: right;
+          padding-left: 0;
+        }
       }
       &--photo-page {
         width: 32%;

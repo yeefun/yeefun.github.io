@@ -7,12 +7,14 @@
       <!-- <Cover></Cover> -->
       <!-- <OpeningLine></OpeningLine> -->
       <!-- <Youtube></Youtube> -->
-      <component :is="isFixedPage" :photoName="photoName"></component>
+      <!-- <component :is="isFixedPage" :photoName="photoName"></component> -->
     </div>
     <div class="scroll-content" ref="scrollContent">
-      <PhotoPageContent v-if="windowWidth >= 576"></PhotoPageContent>
-      <Youtube ref="youtube"></Youtube>
+      <!-- <PhotoPageContent v-if="windowWidth >= 576"></PhotoPageContent> -->
+      <!-- <Youtube ref="youtube"></Youtube> -->
       <ContentLight></ContentLight>
+      <FinalScene></FinalScene>
+      <div></div>
     </div>
   </div>
 </template>
@@ -25,9 +27,12 @@ import FixedPhotoPage from './components/FixedPhotoPage.vue';
 import PhotoPageContent from './components/PhotoPageContent.vue';
 import ContentDark from './components/ContentDark.vue';
 import ContentLight from './components/ContentLight.vue';
+import FinalScene from './components/FinalScene.vue';
+import resize from './mixins/resize';
 
 export default {
   name: 'app',
+  mixins: [resize],
   components: {
     Cover,
     OpeningLine,
@@ -36,10 +41,10 @@ export default {
     PhotoPageContent,
     ContentDark,
     ContentLight,
+    FinalScene,
   },
   data() {
     return {
-      windowWidth: document.documentElement.clientWidth,
       windowHeight: document.documentElement.clientHeight,
       bodyClass: document.body.classList,
       root: document.documentElement,
@@ -63,7 +68,7 @@ export default {
   },
   computed: {
     isFixedPage() {
-      return this.windowWidth < 576 ? 'ContentDark' : 'FixedPhotoPage';
+      return this.isMobileSize ? 'ContentDark' : 'FixedPhotoPage';
     },
     pageTransform() {
       return {
@@ -80,32 +85,32 @@ export default {
     // },
     // TODO avoid pageContent css transition
     // TODO change this.pageScrollY
-    fixedPageMove() {
-      const afterScrollY = window.pageYOffset;
-      const deltaScrollY = afterScrollY - this.beforeScrollY;
-      const youtubeY = this.$refs.youtube.$el.offsetTop;
-      const youtubeYForScrollDown = youtubeY - this.windowHeight;
-      if ((deltaScrollY > 0 && this.pageScrollY === -this.windowHeight)
-        || (deltaScrollY > 0 && window.pageYOffset <= youtubeYForScrollDown)
-        || (deltaScrollY < 0 && this.pageScrollY === 0)) return;
-      // this.$refs.pageContent.style.transitionProperty = 'none';
-      if (deltaScrollY > 0 && window.pageYOffset >= youtubeYForScrollDown) {
-        if (youtubeY - window.pageYOffset >= 50) {
-          // this.pageScrollY = (this.windowHeight * 3) + (youtubeTop - window.pageYOffset);
-          this.pageScrollY = -(window.pageYOffset - youtubeYForScrollDown);
-        } else {
-          this.pageScrollY = -this.windowHeight;
-        }
-      } else if (deltaScrollY < 0 && window.pageYOffset < youtubeY) {
-        if (this.pageScrollY === 0) return;
-        if (window.pageYOffset - youtubeYForScrollDown >= 50) {
-          this.pageScrollY = -this.windowHeight + (youtubeY - window.pageYOffset);
-        } else {
-          this.pageScrollY = 0;
-        }
-      }
-      this.beforeScrollY = afterScrollY;
-    },
+    // fixedPageMove() {
+    //   const afterScrollY = window.pageYOffset;
+    //   const deltaScrollY = afterScrollY - this.beforeScrollY;
+    //   const youtubeY = this.$refs.youtube.$el.offsetTop;
+    //   const youtubeYForScrollDown = youtubeY - this.windowHeight;
+    //   if ((deltaScrollY > 0 && this.pageScrollY === -this.windowHeight)
+    //     || (deltaScrollY > 0 && window.pageYOffset <= youtubeYForScrollDown)
+    //     || (deltaScrollY < 0 && this.pageScrollY === 0)) return;
+    //   // this.$refs.pageContent.style.transitionProperty = 'none';
+    //   if (deltaScrollY > 0 && window.pageYOffset >= youtubeYForScrollDown) {
+    //     if (youtubeY - window.pageYOffset >= 50) {
+    //       // this.pageScrollY = (this.windowHeight * 3) + (youtubeTop - window.pageYOffset);
+    //       this.pageScrollY = -(window.pageYOffset - youtubeYForScrollDown);
+    //     } else {
+    //       this.pageScrollY = -this.windowHeight;
+    //     }
+    //   } else if (deltaScrollY < 0 && window.pageYOffset < youtubeY) {
+    //     if (this.pageScrollY === 0) return;
+    //     if (window.pageYOffset - youtubeYForScrollDown >= 50) {
+    //       this.pageScrollY = -this.windowHeight + (youtubeY - window.pageYOffset);
+    //     } else {
+    //       this.pageScrollY = 0;
+    //     }
+    //   }
+    //   this.beforeScrollY = afterScrollY;
+    // },
     beforeunloadHandler() {
       window.scrollTo({
         top: 0,
@@ -114,10 +119,10 @@ export default {
     },
     // TODO dynamic set this.windowHeight
     // resizeHandler() {
-    //   if ((this.windowWidth < 576 && document.documentElement.clientWidth < 576) || (this.windowWidth >= 576 && document.documentElement.clientWidth >= 576)) return;
+    //   if ((this.isMobileSize && document.documentElement.clientWidth < 576) || (this.windowWidth >= 576 && document.documentElement.clientWidth >= 576)) return;
     //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
     //   this.resizeTimer = setTimeout(() => {
-    //     if (this.windowWidth < 576 && document.documentElement.clientWidth >= 576) {
+    //     if (this.isMobileSize && document.documentElement.clientWidth >= 576) {
     //       window.scrollTo({
     //         top: 0,
     //         behavior: 'instant',
@@ -134,13 +139,13 @@ export default {
     //   }, 400);
     // },
     // pageTouchStart(evt) {
-    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   if (this.isMobileSize || window.pageYOffset > 0 || !this.canScroll) return;
     //   evt.preventDefault();
     //   this.touchStartX = evt.touches[0].pageX;
     //   this.touchStartY = evt.touches[0].pageY;
     // },
     // pageTouchMove(evt) {
-    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   if (this.isMobileSize || window.pageYOffset > 0 || !this.canScroll) return;
     //   evt.preventDefault();
     //   if (this.scrollTimer) {
     //     clearTimeout(this.scrollTimer);
@@ -174,7 +179,7 @@ export default {
     //   }, 200);
     // },
     // pageScroll(evt) {
-    //   if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+    //   if (this.isMobileSize || window.pageYOffset > 0 || !this.canScroll) return;
     //   evt.preventDefault();
     //   if (this.scrollTimer) {
     //     clearTimeout(this.scrollTimer);
@@ -207,7 +212,7 @@ export default {
     // resizeHandler() {
     //   if (this.resizeTimer) clearTimeout(this.resizeTimer);
     //   this.resizeTimer = setTimeout(() => {
-    //     if (this.windowWidth < 576 && document.documentElement.clientWidth >= 576) {
+    //     if (this.isMobileSize && document.documentElement.clientWidth >= 576) {
     //       window.scrollTo({
     //         top: 0,
     //         behavior: 'instant',
@@ -222,7 +227,7 @@ export default {
     //   }, 400);
     // },
   //   pageScroll(evt) {
-  //     if (this.windowWidth < 576 || window.pageYOffset > 0 || !this.canScroll) return;
+  //     if (this.isMobileSize || window.pageYOffset > 0 || !this.canScroll) return;
   //     // const currentTime = new Date();
   //     // if (currentTime - this.startScrollTime < 800) return;
   //     const scrollDirection = -evt.wheelDelta || evt.detail;
@@ -262,7 +267,7 @@ export default {
   @media screen and (min-width: 576px) {
     position: fixed;
     top: 0;
-    transition: transform 1s;
+    // transition: transform 1s；
   }
 }
 .scroll-content {

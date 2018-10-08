@@ -1,8 +1,9 @@
 html, body {
-  height: 100%;
+  // CONFUSED max-height can work on ipad? or height?
+  max-height: 100%;
   position: relative;
   @media screen and (min-width: 576px) {
-    // overflow: hidden;
+    overflow: hidden;
   }
 }
 

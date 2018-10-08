@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO change css animation to Vue animation -->
   <article class="cover"
   @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove">
     <!-- muted for Chrome, otherwise video can't play-->
@@ -67,25 +68,19 @@
 </template>
 
 <script>
+import resize from '../mixins/resize';
+
 export default {
   name: 'Cover',
+  mixins: [resize],
   data() {
     return {
-      windowWidth: document.documentElement.clientWidth,
       isDancerMove: false,
       isCoverPromptExist: true,
       isCoverFadeOut: false,
       isCoverTitleFadeIn: false,
       isCoverTitleMove: false,
     };
-  },
-  created() {
-    window.addEventListener('resize', this.resizeHandler);
-  },
-  computed: {
-    isMobileSize() {
-      return this.windowWidth < 576;
-    },
   },
   methods: {
     resizeHandler() {
