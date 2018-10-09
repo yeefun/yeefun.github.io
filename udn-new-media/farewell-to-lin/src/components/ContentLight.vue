@@ -60,7 +60,7 @@
         <p>「心胸狹小，路會愈走愈窄。」林懷民認為，台灣必須擁有更大的格局，才能真正自處。他也期待現在的年輕人，能撐出一股氣來，聚集成一大票人改變社會，「『我』當然很渺小，但當『我』變成『我們』時，就能做出一點事情來。」</p>
       </div>
       <div class="content__quote-wrapper">
-        <blockquote class="content__quote content__quote--light" v-if="isMobileSize">做出什麼事呢？<br>小事<br>但小事累積後就可能變成比較有規模的大事。</blockquote>
+        <blockquote class="content__quote content__quote--light" v-if="$root.isMobileSize">做出什麼事呢？<br>小事<br>但小事累積後就可能變成比較有規模的大事。</blockquote>
         <blockquote class="content__quote content__quote--light" v-else>做出什麼事呢？小事，但小事累積後就可能變成比較有規模的大事。</blockquote>
         <p class="content__quote-speaker content__quote-speaker--light">林懷民</p>
       </div>
@@ -70,11 +70,10 @@
 
 <script>
 // CONFUSED can't add '.js'
-import resize from '../mixins/resize';
+// import resize from '../mixins/resize';
 
 export default {
   name: 'ContentLight',
-  mixins: [resize],
 };
 </script>
 

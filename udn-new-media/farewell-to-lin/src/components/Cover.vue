@@ -4,7 +4,7 @@
   @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove">
     <!-- muted for Chrome, otherwise video can't play-->
     <video id="cover__video" class="cover__video" data-object-fit="cover" autoplay muted loop>
-      <source src="../assets/video/mobile_video.mp4" v-if="isMobileSize" type="video/mp4"/>
+      <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
     <!-- <section class="cover__title-wrapper">
@@ -68,11 +68,11 @@
 </template>
 
 <script>
-import resize from '../mixins/resize';
+// import resize from '../mixins/resize';
 
 export default {
   name: 'Cover',
-  mixins: [resize],
+  // mixins: [resize],
   data() {
     return {
       isDancerMove: false,
@@ -83,9 +83,9 @@ export default {
     };
   },
   methods: {
-    resizeHandler() {
-      this.windowWidth = document.documentElement.clientWidth;
-    },
+    // resizeHandler() {
+    //   this.windowWidth = document.documentElement.clientWidth;
+    // },
     dancerClass(idx) {
       const dancerClass = {
         'dancer-move': this.isDancerMove,

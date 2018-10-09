@@ -61,8 +61,6 @@
 </template>
 
 <script>
-// import photoLegacy from '../assets/ContentImg/web_legacy.jpg';
-
 export default {
   name: 'PhotoPageContent',
   data() {
@@ -73,14 +71,13 @@ export default {
   },
   created() {
     window.addEventListener('scroll', () => {
-      // console.log(this.$refs.photoWatermoon);
       const currentTime = new Date();
       if (currentTime - this.startScrollTime < 200) return;
-      if (window.pageYOffset >= this.$refs.photoWatermoon.offsetTop - this.marginTop) {
+      if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWatermoon.offsetTop - this.marginTop) {
         this.$parent.photoName = 'watermoon';
-      } else if (window.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
+      } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
         this.$parent.photoName = 'wanderers';
-      } else if (window.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
+      } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
         this.$parent.photoName = 'legacy';
       } else {
         this.$parent.photoName = '';
