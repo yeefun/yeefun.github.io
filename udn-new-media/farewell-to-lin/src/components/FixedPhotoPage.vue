@@ -4,7 +4,7 @@
     <!-- <transition name="photo-fade" mode="out-in"> -->
       <div class="fixed-page__photo-wrapper">
         <transition name="photo-fade" mode="out-in">
-          <div class="fixed-page__photo" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" :style="{ backgroundImage: `url(${photo.url})`}"></div>
+          <div class="fixed-page__photo" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" :style="{ backgroundImage: `url('${photo.url}')`}"></div>
         </transition>
         <transition name="caption-fade" mode="out-in">
           <div class="content__photo-caption content__photo-caption--dark content__photo-caption--photo-page" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" v-html="photo.caption"></div>

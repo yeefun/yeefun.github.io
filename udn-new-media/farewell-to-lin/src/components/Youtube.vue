@@ -9,7 +9,6 @@
 export default {
   name: 'Youtube',
   props: ['youtubeID'],
-  // mixins: [resize],
   // created() {
   //   let player;
   //   function onYouTubeIframeAPIReady() {
