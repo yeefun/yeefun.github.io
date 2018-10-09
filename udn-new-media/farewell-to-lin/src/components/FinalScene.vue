@@ -1,29 +1,27 @@
 <template>
   <section class="final-scene" ref="finalScene">
-    <!-- <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }">
+    <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }" @transitionend.self.once="isYoutubeFadeIn = true" @webkitTransitionEnd.self.once="isYoutubeFadeIn = true">
       <div class="final-scene__text--first" :class="{ 'fade-in': isTextFadeIn }">過去45年<br>林懷民用90齣舞作<br>不斷與台灣社會對話</div>
       <p><br></p>
       <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="textFadeInEnd" @webkitTransitionEnd.once="textFadeInEnd">退休前，<br>他最後有段話<br>想對現在的台灣說</div>
-    </div> -->
-    <Youtube></Youtube>
+    </div>
+    <div class="final-scene__youtube" :class="{ 'fade-in': isYoutubeFadeIn }">
+      <slot></slot>
+    </div>
   </section>
 </template>
 
 <script>
-import Youtube from './Youtube.vue';
 
 export default {
   name: 'FinalScene',
-  components: {
-    Youtube,
-  },
   data() {
     return {
-      // windowHeight: document.documentElement.clientHeight,
       // bodyClass: document.body.classList,
       root: document.documentElement,
       isTextFadeIn: false,
       isTextFadeOut: false,
+      isYoutubeFadeIn: false,
     };
   },
   created() {
@@ -38,29 +36,6 @@ export default {
     textFadeInEnd() {
       this.isTextFadeOut = true;
     },
-    // },
-  //   finalSceneMove() {
-  //     // const finalSceneY = this.$refs.finalScene.offsetTop。
-  //     // const finalSceneYForScrollDown = finalSceneY - this.windowHeight;
-  //     // if (window.pageYOffset + this.root.clientHeight === this.root.scrollHeight) {
-  //     if (window.pageYOffset > document.getElementById('test').offsetTop - this.windowHeight) {
-  //       console.log('done');
-  //       this.$refs.finalScene.style.transform = 'translateY(0px)';
-  //       window.scrollTo({
-  //         top: document.getElementById('test').offsetTop - this.windowHeight,
-  //         behavior: 'instant',
-  //       });
-  //       this.root.className = '';
-  //       this.bodyClass.remove('overflow-visible');
-  //       // console.log('success');
-  //       // window.scrollBy({
-  //       // top: this.windowHeight,
-  //       // behavior: 'smooth',
-  //       // });
-  //       // this.root.className = '';
-  //       // this.bodyClass.remove('overflow-visible');
-  //     }
-  //   },
   },
 };
 </script>
@@ -69,11 +44,16 @@ export default {
 .final-scene {
   height: 100vh;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
   &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #b98e49;
     font-size: 3.6rem;
     line-height: 1.67;
@@ -87,6 +67,10 @@ export default {
       opacity: 0;
       transition: opacity 2s 2s;
     }
+  }
+  &__youtube {
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 }
 </style>

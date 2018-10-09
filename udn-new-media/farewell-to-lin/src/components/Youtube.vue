@@ -1,12 +1,18 @@
 <template>
-  <section class="youtube">
-    <iframe class="youtube__player" id="player" src="http://www.youtube.com/embed/6u2vkJCamD8" frameborder="0"></iframe>
+  <section class="youtube" :style="{ 'padding-bottom': aspectRatio }">
+    <!-- TODO add "origin" -->
+    <iframe class="youtube__player" id="player" :src="`http://www.youtube.com/embed/${youtubeID}?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=0&iv_load_policy=3&loop=1`" frameborder="0"></iframe>
+    <!-- <iframe class="youtube__player" id="player" src="http://www.youtube.com/embed/aNwTvyITqBY?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=0&iv_load_policy=3&loop=1" frameborder="0" v-else></iframe> -->
   </section>
 </template>
 
 <script>
+import resize from '../mixins/resize';
+
 export default {
   name: 'Youtube',
+  props: ['youtubeID'],
+  mixins: [resize],
   // created() {
   //   let player;
   //   function onYouTubeIframeAPIReady() {
@@ -17,6 +23,12 @@ export default {
   //     });
   //   }
   // },
+  computed: {
+    aspectRatio() {
+      // console.log(this.windowHeight, this.windowWidth, window.innerWidth);
+      return `${(this.windowHeight / this.windowWidth) * 100}%`;
+    },
+  },
 };
 </script>
 
@@ -24,8 +36,6 @@ export default {
 .youtube {
   position: relative;
   // 9:16
-  // TODO JS dynamic set
-  padding-bottom: 177.8%;
   // height: 0;
   width: 100%;
   // height: 100vh;
