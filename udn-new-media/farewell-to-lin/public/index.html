@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-Hant" class="overflow-visible">
+<!-- <html lang="zh-Hant" class="overflow-visible"> -->
+<html lang="zh-Hant">
 
 <head>
   <meta charset="utf-8">
@@ -8,10 +9,49 @@
   <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
   <title>farewell-to-lin</title>
 
+  <!-- Facebook Pixel Code -->
+  <script>
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '285426731894626');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=285426731894626&ev=PageView&noscript=1" /></noscript>
+  <!-- End Facebook Pixel Code -->
+
 </head>
 
-<!-- <body class="overflow-auto"> -->
-<body class="overflow-visible">
+<body>
+<!-- <body class="overflow-visible"> -->
+
+  <div id="fb-root"></div>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>

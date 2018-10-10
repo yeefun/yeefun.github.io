@@ -82,7 +82,6 @@ export default {
 
 .content {
   &-wrapper {
-    max-width: 960px;
     margin-right: auto;
     margin-left: auto;
   }

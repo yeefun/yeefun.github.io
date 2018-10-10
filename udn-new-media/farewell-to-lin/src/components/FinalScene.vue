@@ -38,7 +38,7 @@ export default {
 <style lang="scss">
 .final-scene {
   height: 100vh;
-  background-color: #fff;
+  // background-color: #fff;
   position: relative;
   &__text {
     min-width: 376px;
