@@ -13,7 +13,8 @@
         <p>林懷民回憶，有次他應邀去歐洲導演，爸媽來看首演，之後他帶他們去歐洲玩，由於媽媽堅持省錢，三人擠一間房，現在回想充滿遺憾，「我後來去演出，人家都給我住很好的套房，我為什麼就不能讓他們住套房？」</p>
       </div>
       <figure class="content__photo-wrapper content__photo-wrapper--light">
-        <img class="content__photo" src="../assets/ContentImg/mob_childhood.jpg" alt="">
+        <img class="content__photo" src="../assets/ContentImg/mob_childhood.jpg" v-if="$root.isMobileSize" alt="">
+        <img class="content__photo" src="../assets/ContentImg/web_childhood.jpg" v-else alt="">
         <figcaption class="content__photo-caption content__photo-caption--light">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
       </figure>
       <div class="content__text content__text--light">
@@ -37,7 +38,8 @@
         <p>林懷民說，這說法於他個人不重要，但對團而言重要。「如果有一天我突然不來上班，絕對有場大混亂」，為了舞團，他必須尊敬這說法。</p>
       </div>
       <figure class="content__photo-wrapper content__photo-wrapper--light">
-        <img class="content__photo" src="../assets/ContentImg/mob_huimin.jpg" alt="">
+        <img class="content__photo" src="../assets/ContentImg/mob_huimin.jpg" v-if="$root.isMobileSize" alt="">
+        <img class="content__photo" src="../assets/ContentImg/web_huimin.jpg" v-else alt="">
         <figcaption class="content__photo-caption content__photo-caption--light">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
       </figure>
       <div class="content__text content__text--light">
@@ -82,6 +84,7 @@ export default {
 
 .content {
   &-wrapper {
+    max-width: 960px;
     margin-right: auto;
     margin-left: auto;
   }

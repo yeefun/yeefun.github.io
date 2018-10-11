@@ -33,7 +33,7 @@ export default {
 .share {
   display: flex;
   height: 20px;
-  margin-bottom: 48px;
+  // margin-bottom: 48px;
   &__fb-like-wrapper {
     margin-right: 8px;
   }

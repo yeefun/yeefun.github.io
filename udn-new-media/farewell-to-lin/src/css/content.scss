@@ -4,8 +4,8 @@
   // ASK mob #47 or web #2b
   // color: #474747;
   color: #2b2b2b;
-  // padding-right: 30px;
-  // padding-left: 30px;
+  padding-right: 24px;
+  padding-left: 24px;
   // prevent margin collapse
   overflow-x: hidden;
   &--dark {
@@ -131,7 +131,8 @@
 
     &-wrapper {
       position: relative;
-      margin: 48px -30px;
+      // margin: 48px -30px;
+      margin: 48px -24px;
       &--dark {
         margin-bottom: 70px;
       }
@@ -148,7 +149,8 @@
       font-size: 1.2rem;
       line-height: 2.33;
       letter-spacing: 1px;
-      padding-left: 32px;
+      // padding-left: 32px;
+      padding-left: 24px;
       // color: #bcbcbc;
       margin-top: 8px;
       &--dark {

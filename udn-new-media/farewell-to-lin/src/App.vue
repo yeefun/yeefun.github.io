@@ -3,26 +3,28 @@
   <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
   <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
-    <HeadBar></HeadBar>
+    <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
     <div class="page-content" :style="pageTransform" ref="pageContent">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
-      <!-- <Youtube :youtubeID="youtubeID('first')" ref="youtube"></Youtube> -->
+      <Youtube :youtubeID="youtubeID('first')"></Youtube>
       <!-- <Youtube></Youtube> -->
       <component :is="$root.isMobileSize ? 'ContentDark' : 'FixedPhotoPage'" :photoName="photoName"></component>
     </div>
     <div class="scroll-content" ref="scrollContent">
       <PhotoPageContent v-if="!$root.isMobileSize"></PhotoPageContent>
-      <Youtube :youtubeID="youtubeID('second')"></Youtube>
-      <div class="scroll-content__light" ref="scrollContent">
+      <!-- <Youtube :youtubeID="youtubeID('second')" ref="secondYoutube"></Youtube> -->
+      <div class="scroll-content__light" ref="contentLight">
         <ContentLight></ContentLight>
         <FinalScene>
-          <Youtube :youtubeID="youtubeID('third')"></Youtube>
+          <!-- <Youtube :youtubeID="youtubeID('third')"></Youtube> -->
         </FinalScene>
-        <div class="last-content">
+        <div class="last-content" v-show="isLastContentShow">
           <div class="last-content__left">
-            <Share></Share>
+            <div class="last-content__share">
+              <Share></Share>
+            </div>
             <Editor></Editor>
           </div>
           <Relate></Relate>
@@ -81,14 +83,17 @@ export default {
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
-      photoName: '',
+      photoName: null,
       beforeScrollY: window.pageYOffset,
+      isLastContentShow: false,
+      isHeadBarLight: false,
     };
   },
   created() {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
-    // window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener('resize', this.resizeHandler);
     window.addEventListener('scroll', this.fixedPageMove);
+    window.addEventListener('scroll', this.headBarChangeColor);
   },
   computed: {
     pageTransform() {
@@ -99,41 +104,50 @@ export default {
     },
   },
   methods: {
+    headBarChangeColor() {
+      if (this.$root.cacheWindow.pageYOffset > this.$refs.contentLight.offsetTop) {
+        this.isHeadBarLight = true;
+      } else {
+        this.isHeadBarLight = false;
+      }
+    },
     beforeunloadHandler() {
       this.$root.cacheWindow.scrollTo({
         top: 0,
         behavior: 'instant',
       });
     },
-    // TODO avoid pageContent css transition
-    // TODO change this.pageScrollY
     fixedPageMove() {
+      if (this.$root.isMobileSize) return;
+      if (this.beforeScrollY > 8) this.$refs.pageContent.style.transitionProperty = 'none';
       const afterScrollY = this.$root.cacheWindow.pageYOffset;
       const deltaScrollY = afterScrollY - this.beforeScrollY;
-      const youtubeY = this.$refs.youtube.$el.offsetTop;
-      const youtubeYForScrollDown = youtubeY - this.windowHeight;
-      if ((deltaScrollY > 0 && this.pageScrollY === -this.windowHeight)
-        || (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset <= youtubeYForScrollDown)
-        || (deltaScrollY < 0 && this.pageScrollY === 0)) return;
+      const youtubeY = this.$refs.secondYoutube.$el.offsetTop;
+      const youtubeYLess = youtubeY - this.$root.windowHeight;
+      if ((deltaScrollY > 0 && this.pageScrollY === -this.$root.windowHeight * 4)
+        || (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset <= youtubeYLess)
+        || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
       // this.$refs.pageContent.style.transitionProperty = 'none';
-      if (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset >= youtubeYForScrollDown) {
-        if (youtubeY - this.$root.cacheWindow.pageYOffset >= 50) {
-          // this.pageScrollY = (this.windowHeight * 3) + (youtubeTop - this.$root.cacheWindow.pageYOffset);
-          this.pageScrollY = -(this.$root.cacheWindow.pageYOffset - youtubeYForScrollDown);
+      if (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset >= youtubeYLess) {
+        if (youtubeY - this.$root.cacheWindow.pageYOffset >= 0) {
+          this.pageScrollY = -((this.$root.windowHeight * 3) + (this.$root.cacheWindow.pageYOffset - youtubeYLess));
+          // this.pageScrollY = -(this.$root.cacheWindow.pageYOffset - youtubeYLess);
         } else {
-          this.pageScrollY = -this.windowHeight;
+          // this.pageScrollY = -this.$root.windowHeight;
+          this.pageScrollY = -this.$root.windowHeight * 4;
         }
       } else if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset < youtubeY) {
-        if (this.pageScrollY === 0) return;
-        if (this.$root.cacheWindow.pageYOffset - youtubeYForScrollDown >= 50) {
-          this.pageScrollY = -this.windowHeight + (youtubeY - this.$root.cacheWindow.pageYOffset);
+        if (this.$root.cacheWindow.pageYOffset - youtubeYLess >= 0) {
+          // this.pageScrollY = -this.$root.windowHeight + (youtubeY - this.$root.cacheWindow.pageYOffset);
+          this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - this.$root.cacheWindow.pageYOffset));
         } else {
-          this.pageScrollY = 0;
+          // this.pageScrollY = 0;
+          this.pageScrollY = -this.$root.windowHeight * 3;
         }
       }
       this.beforeScrollY = afterScrollY;
     },
-    // TODO dynamic set this.windowHeight
+    // TODO dynamic set this.$root.windowWidth
     resizeHandler() {
       if ((this.beforeWindowWidth < 576 && this.$root.windowWidth < 576) || (this.beforeWindowWidth >= 576 && this.$root.windowWidth >= 576)) return;
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
@@ -160,6 +174,7 @@ export default {
       this.touchStartX = evt.touches[0].pageX;
       this.touchStartY = evt.touches[0].pageY;
     },
+    // TODO set reasonable setTimeout for canScroll
     pageTouchMove(evt) {
       if (this.$root.isMobileSize || this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
       evt.preventDefault();
@@ -170,7 +185,7 @@ export default {
       this.scrollTimer = setTimeout(() => {
         setTimeout(() => {
           this.canScroll = true;
-        }, 1000);
+        }, 600);
         const moveEndX = evt.changedTouches[0].pageX;
         const moveEndY = evt.changedTouches[0].pageY;
         const deltaX = moveEndX - this.touchStartX;
@@ -204,7 +219,7 @@ export default {
       this.scrollTimer = setTimeout(() => {
         setTimeout(() => {
           this.canScroll = true;
-        }, 1000);
+        }, 600);
         const scrollDirection = -evt.wheelDelta || evt.detail;
         if (scrollDirection > 0) {
           if (this.pageScrollY === -document.documentElement.clientHeight * 3) return;
@@ -214,13 +229,15 @@ export default {
             this.bodyClass.add('overflow-visible');
           }
           this.pageScrollY -= document.documentElement.clientHeight;
+          // this.pageScrollY -= document.documentElement.clientHeight;
         } else {
+          if (this.pageScrollY === 0) return;
           if (this.pageScrollY === -document.documentElement.clientHeight * 3) {
+            this.$refs.pageContent.style.transitionProperty = 'transform';
             this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
           }
-          if (this.pageScrollY === 0) return;
           this.pageScrollY += document.documentElement.clientHeight;
         }
       }, 200);
@@ -252,18 +269,19 @@ export default {
   }
 }
 .scroll-content {
+  // background-color: #fff;
   @media screen and (min-width: 576px) {
     transform: translateY(100vh);
     transition: transform 1s;
   }
   &__light {
     background-color: #fff;
-    padding-right: 30px;
-    padding-left: 30px;
+    // padding-right: 30px;
+    // padding-left: 30px;
     // TODO do youtube need full screen? if yes, remove "max-width: 960px;" and add it in other places
-    max-width: 960px;
-    margin-right: auto;
-    margin-left: auto;
+    // max-width: 960px;
+    // margin-right: auto;
+    // margin-left: auto;
   }
 }
 .last-content {
@@ -287,6 +305,9 @@ export default {
     @media screen and (min-width: 768px) {
       width: 50%;
     }
+  }
+  &__share {
+    margin-bottom: 48px;
   }
 }
 // .youtube-third {

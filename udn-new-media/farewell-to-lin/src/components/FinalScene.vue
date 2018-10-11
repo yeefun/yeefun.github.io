@@ -5,7 +5,7 @@
       <p><br></p>
       <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="isTextFadeOut = true" @webkitTransitionEnd.once="isTextFadeOut = true">退休前，<br>他最後有段話<br>想對現在的台灣說</div>
     </div>
-    <div class="final-scene__youtube" :class="{ 'fade-in': isYoutubeFadeIn }">
+    <div class="final-scene__youtube" :class="{ 'fade-in': isYoutubeFadeIn }" @transitionend.once="$parent.isLastContentShow = true" @webkitTransitionEnd.once="$parent.isLastContentShow = true">
       <slot></slot>
     </div>
   </section>
@@ -41,16 +41,22 @@ export default {
   // background-color: #fff;
   position: relative;
   &__text {
-    min-width: 376px;
+    min-width: 198px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #b98e49;
-    font-size: 3.6rem;
-    line-height: 1.67;
-    letter-spacing: 7.2px;
+    font-size: 2rem;
+    line-height: 1.83;
+    letter-spacing: 2px;
     transition: opacity 2s 1s;
+    @media screen and (min-width: 576px) {
+      min-width: 376px;
+      font-size: 3.6rem;
+      line-height: 1.67;
+      letter-spacing: 7.2px;
+    }
     &--first {
       opacity: 0;
       transition: opacity 2s;
@@ -62,7 +68,7 @@ export default {
   }
   &__youtube {
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 2s;
   }
 }
 </style>

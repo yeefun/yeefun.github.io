@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header-bar">
-      <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen }">
+      <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen || !isHeadBarLight }">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>
         <path d="M87.9,224.8c-3.4,2-12.6,10.7-21.1,19.1a130.2,130.2,0,0,0,15.6,8.4c5.7-6.5,11.1-13.1,13.2-17.3C99.3,227.2,91.9,222.5,87.9,224.8Z"/>
         <path d="M67.5,183.2c-5-4.3-5.1-5.5-9.9-2.7s-4.6,1.6-5.8,2.7-15.6,15.2-18.2,17.7l-5.7,5.3a131,131,0,0,0,8.6,11.3c3.9-4.1,8.7-8.8,11.4-11.3s8.6-8.7,11.1-9.4,3.4-.9,7.1-3.9S72.5,187.6,67.5,183.2Z"/>
@@ -16,11 +16,11 @@
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
       <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click="isListOpen=!isListOpen">
-        <div :class="{ active: isListOpen }"></div>
-        <div :class="{ active: isListOpen }"></div>
-        <div :class="{ active: isListOpen }"></div>
+        <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
+        <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
+        <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
       </div>
-      <nav class="header-bar__anchor-menu" v-else>
+      <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>雲門大船的未來進行式</li>
         </ul>
@@ -59,6 +59,7 @@
 <script>
 export default {
   name: 'HeadBar',
+  props: ['isHeadBarLight'],
   data() {
     return {
       isListOpen: false,
@@ -123,11 +124,30 @@ export default {
       &-menu {
         font-size: 1.6rem;
         display: flex;
-        color: #000;
+        color: #fff;
         letter-spacing: 1.6px;
         line-height: 1.88;
         // text-align: center;
         user-select: none;
+        &--light {
+          color: #000;
+          & .header-bar {
+            &__anchor {
+              &-item {
+                background-color: #fff;
+                &--outer:hover {
+                  border-color: #000;
+                }
+                &--inner {
+                  border-color: #000;
+                }
+              }
+            }
+            &__inner-anchor-item {
+              background-color: rgba(236, 236, 236, 0.5);
+            }
+          }
+        }
       }
       &-item {
         height: 33px;
@@ -136,20 +156,20 @@ export default {
         border-style: solid;
         cursor: pointer;
         padding-left: 22.4px;
-        background-color: #fff;
+        background-color: transparent;
         // padding-left: 22.4px;
         &--outer {
           border-color: transparent;
           margin-right: 28px;
           width: 223.2px;
           &:hover {
-            border-color: #000;
+            border-color: #fff;
             transition: border-color 0.5s;
           }
         }
         &--inner {
           width: 188px;
-          border-color: #000;
+          border-color: #fff;
           // padding-left: 22.4px;
           &:hover ul {
             // display: block;
@@ -174,7 +194,7 @@ export default {
       &-item {
         height: 33px;
         border-color: transparent;
-        background-color: rgba(236, 236, 236, 0.5);
+        background-color: rgba(255, 255, 255, 0.3);
         margin-bottom: 3px;
         transition: all 0.5s;
         // padding-left: 22.4px;

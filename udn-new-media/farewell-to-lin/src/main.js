@@ -15,6 +15,7 @@ new Vue({
     cacheHTML: document.documentElement,
     windowWidth: document.documentElement.clientWidth,
     windowHeight: document.documentElement.clientHeight,
+    firstYoutube: null,
   },
   created() {
     window.addEventListener('load', this.loadHandler);
@@ -37,7 +38,7 @@ new Vue({
   },
 }).$mount('#app');
 
-const tagContainYoutubeAPI = document.createElement('script');
-tagContainYoutubeAPI.src = 'https://www.youtube.com/iframe_api';
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tagContainYoutubeAPI, firstScriptTag);
+// const tagContainYoutubeAPI = document.createElement('script');
+// tagContainYoutubeAPI.src = 'https://www.youtube.com/iframe_api';
+// const firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tagContainYoutubeAPI, firstScriptTag);

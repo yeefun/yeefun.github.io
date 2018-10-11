@@ -10,18 +10,28 @@
       <blockquote>「台灣的今天，都是我們的共業，是我們眼睜睜讓這些事發生。」</blockquote>
       <p><br></p>
       <p>對於這塊孕育雲門舞集的土地，他有滿懷的情感與憂心，日前林懷民接受《聯合晚報》與新媒體中心專訪，暢談他眼中的台灣變化、雲門歷程與內心感懷。</p>
+      <div class="opening-line__share">
+        <Share></Share>
+      </div>
     </div>
+    <!-- <Share></Share> -->
   </section>
 </template>
 
 <script>
+import Share from './Share.vue';
+
 export default {
   name: 'OpeningLine',
+  components: {
+    Share,
+  },
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .opening-line {
+  // background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +39,9 @@ export default {
   color: #bcbcbc;
   padding-right: 30px;
   padding-left: 30px;
+  margin-top: 120px;
   @media screen and (min-width: 576px) {
+    margin-top: 0;
     height: 100vh;
     padding-right: 60px;
     padding-left: 60px;
@@ -37,28 +49,40 @@ export default {
   &__wrapper {
     max-width: 943px;
   }
-}
-p {
-  font-size: 1.6rem;
-  line-height: 2;
-  letter-spacing: 0.5px;
-  @media screen and (min-width: 576px) {
-    font-size: 1.8rem;
-    line-height: 1.56;
-    letter-spacing: 0.9px;
+  &__share {
+    margin-top: 50px;
+    margin-bottom: 120px;
+    @media screen and (min-width: 576px) {
+      margin-top: 80px;
+      margin-bottom: 0;
+      display: flex;
+      & > .share {
+        margin-left: auto;
+      }
+    }
   }
-}
-blockquote {
-  font-size: 2rem;
-  line-height: 1.6;
-  letter-spacing: 1px;
-  color: #b98e49;
-  font-weight: 700;
-  @media screen and (min-width: 576px) {
-    text-align: center;
-    font-size: 2.2rem;
-    line-height: 1.27;
-    letter-spacing: 1.1px;
+  & p {
+    font-size: 1.6rem;
+    line-height: 2;
+    letter-spacing: 0.5px;
+    @media screen and (min-width: 576px) {
+      font-size: 1.8rem;
+      line-height: 1.56;
+      letter-spacing: 0.9px;
+    }
+  }
+  & blockquote {
+    font-size: 2rem;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    color: #b98e49;
+    font-weight: 700;
+    @media screen and (min-width: 576px) {
+      text-align: center;
+      font-size: 2.2rem;
+      line-height: 1.27;
+      letter-spacing: 1.1px;
+    }
   }
 }
 </style>

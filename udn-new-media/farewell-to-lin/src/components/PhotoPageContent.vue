@@ -70,20 +70,25 @@ export default {
     };
   },
   created() {
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', this.photoChange);
+  },
+  methods: {
+    photoChange() {
       const currentTime = new Date();
       if (currentTime - this.startScrollTime < 200) return;
+      // console.log(this.$refs.photoWatermoon.offsetTop);
       if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWatermoon.offsetTop - this.marginTop) {
         this.$parent.photoName = 'watermoon';
       } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
         this.$parent.photoName = 'wanderers';
       } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
         this.$parent.photoName = 'legacy';
-      } else {
-        this.$parent.photoName = '';
       }
       this.startScrollTime = currentTime;
-    });
+    },
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.photoChange);
   },
 };
 </script>

@@ -47,6 +47,7 @@ export default {
 @import '../css/content.scss';
 
 .fixed-page {
+  // background-color: #000;
   position: relative;
   height: 100vh;
   // background-color: #000;

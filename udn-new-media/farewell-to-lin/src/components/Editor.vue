@@ -37,6 +37,7 @@ export default {
   line-height: 1.75;
   letter-spacing: 0.8px;
   margin-bottom: 124px;
+  color: #2b2b2b;
   @media screen and (min-width: 768px) {
     margin-bottom: 0;
   }
