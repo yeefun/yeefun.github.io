@@ -4,8 +4,6 @@ import App from './App.vue';
 import 'reset-css'; // eslint-disable-line
 import './css/common.scss';
 
-require('./js/objectFitPolyfill.basic.min.js');
-
 Vue.config.productionTip = false;
 
 new Vue({
@@ -15,7 +13,6 @@ new Vue({
     cacheHTML: document.documentElement,
     windowWidth: document.documentElement.clientWidth,
     windowHeight: document.documentElement.clientHeight,
-    firstYoutube: null,
   },
   created() {
     window.addEventListener('load', this.loadHandler);
@@ -42,3 +39,9 @@ new Vue({
 // tagContainYoutubeAPI.src = 'https://www.youtube.com/iframe_api';
 // const firstScriptTag = document.getElementsByTagName('script')[0];
 // firstScriptTag.parentNode.insertBefore(tagContainYoutubeAPI, firstScriptTag);
+
+// let firstYoutube;
+
+// function onYouTubeIframeAPIReady() {
+//   firstYoutube = new YT.Player('first-youtube');
+// };

@@ -12,7 +12,8 @@
     "npm": "^6.4.1",
     "reset-css": "^4.0.1",
     "udn-newmedia-utils": "^1.0.9",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "youtube-player": "^5.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",

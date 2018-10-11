@@ -8,17 +8,16 @@
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
-      <Youtube :youtubeID="youtubeID('first')"></Youtube>
-      <!-- <Youtube></Youtube> -->
+      <Youtube :youtubeId="youtubeId('first')" youtubeRef="first-youtube"></Youtube>
       <component :is="$root.isMobileSize ? 'ContentDark' : 'FixedPhotoPage'" :photoName="photoName"></component>
     </div>
     <div class="scroll-content" ref="scrollContent">
       <PhotoPageContent v-if="!$root.isMobileSize"></PhotoPageContent>
-      <!-- <Youtube :youtubeID="youtubeID('second')" ref="secondYoutube"></Youtube> -->
+      <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube"></Youtube>
       <div class="scroll-content__light" ref="contentLight">
         <ContentLight></ContentLight>
         <FinalScene>
-          <!-- <Youtube :youtubeID="youtubeID('third')"></Youtube> -->
+          <Youtube :youtubeId="youtubeId('third')"></Youtube>
         </FinalScene>
         <div class="last-content" v-show="isLastContentShow">
           <div class="last-content__left">
@@ -40,9 +39,9 @@
 import ProgressBar from './components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
 import Cover from './components/Cover.vue';
+import Youtube from './components/Youtube.vue';
 import OpeningLine from './components/OpeningLine.vue';
 import Share from './components/Share.vue';
-import Youtube from './components/Youtube.vue';
 import FixedPhotoPage from './components/FixedPhotoPage.vue';
 import PhotoPageContent from './components/PhotoPageContent.vue';
 import ContentDark from './components/ContentDark.vue';
@@ -191,21 +190,21 @@ export default {
         const deltaX = moveEndX - this.touchStartX;
         const deltaY = moveEndY - this.touchStartY;
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -document.documentElement.clientHeight * 3) return;
-          if (this.pageScrollY === -document.documentElement.clientHeight * 2) {
+          if (this.pageScrollY === -this.$root.windowHeight * 3) return;
+          if (this.pageScrollY === -this.$root.windowHeight * 2) {
             this.$refs.scrollContent.style.transform = 'translateY(0vh)';
             this.$root.cacheHTML.className += 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
-          this.pageScrollY -= document.documentElement.clientHeight;
+          this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-          if (this.pageScrollY === -document.documentElement.clientHeight * 3) {
+          if (this.pageScrollY === -this.$root.windowHeight * 3) {
             this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className += 'overflow-visible';
             this.bodyClass.remove('overflow-visible');
           }
           if (this.pageScrollY === 0) return;
-          this.pageScrollY += document.documentElement.clientHeight;
+          this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
     },
@@ -222,27 +221,27 @@ export default {
         }, 600);
         const scrollDirection = -evt.wheelDelta || evt.detail;
         if (scrollDirection > 0) {
-          if (this.pageScrollY === -document.documentElement.clientHeight * 3) return;
-          if (this.pageScrollY === -document.documentElement.clientHeight * 2) {
+          if (this.pageScrollY === -this.$root.windowHeight * 3) return;
+          if (this.pageScrollY === -this.$root.windowHeight * 2) {
             this.$refs.scrollContent.style.transform = 'translateY(0vh)';
             this.$root.cacheHTML.className += 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
-          this.pageScrollY -= document.documentElement.clientHeight;
-          // this.pageScrollY -= document.documentElement.clientHeight;
+          this.pageScrollY -= this.$root.windowHeight;
+          // this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -document.documentElement.clientHeight * 3) {
+          if (this.pageScrollY === -this.$root.windowHeight * 3) {
             this.$refs.pageContent.style.transitionProperty = 'transform';
             this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
           }
-          this.pageScrollY += document.documentElement.clientHeight;
+          this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
     },
-    youtubeID(ordinalNum) {
+    youtubeId(ordinalNum) {
       switch (ordinalNum) {
         case 'first':
           return this.$root.windowWidth < 576 ? '4Cyyr2brm7U' : 'w-jS7Bf90bY';
