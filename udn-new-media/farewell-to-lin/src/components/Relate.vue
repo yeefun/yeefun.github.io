@@ -45,6 +45,8 @@ export default {
   // ASK color?
   // width: 50%;
   width: 100%;
+  padding-right: 24px;
+  padding-left: 24px;
   // max-width: 960px;
   // position: relative;
   // margin-left: auto;
@@ -53,6 +55,8 @@ export default {
     width: 50%;
     margin-left: 0;
     margin-right: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
   // background-color: #fff;
   & h4 {

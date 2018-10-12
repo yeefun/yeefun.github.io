@@ -27,7 +27,7 @@
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
           <li>台灣是我們的共業
             <ul class="header-bar__inner-anchor">
-              <li class="header-bar__anchor-item header-bar__inner-anchor-item">退休前心內話</li>
+              <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="firstAnchorMove">退休前心內話</li>
               <li class="header-bar__anchor-item header-bar__inner-anchor-item">預告的背後故事</li>
               <li class="header-bar__anchor-item header-bar__inner-anchor-item">給台灣的情書</li>
             </ul>
@@ -57,6 +57,10 @@
 </template>
 
 <script>
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill();
+
 export default {
   name: 'HeadBar',
   props: ['isHeadBarLight'],
@@ -64,6 +68,16 @@ export default {
     return {
       isListOpen: false,
     };
+  },
+  methods: {
+    firstAnchorMove() {
+      this.$parent.pageScrollY = -this.$root.windowHeight * 3;
+      // this.$parent.$refs.scrollContent.style.transform = 'translateY(0vh)';
+      this.$parent.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
+      this.$root.cacheHTML.className = 'overflow-visible';
+      this.$parent.bodyClass.add('overflow-visible');
+      this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth' });
+    },
   },
 };
 </script>
@@ -95,6 +109,7 @@ export default {
       &-udn {
         // width: 34px;
         // height: auto;
+        width: 33.69px;
         height: 33px;
         width: auto;
         cursor: pointer;

@@ -5,7 +5,7 @@
       <p><br></p>
       <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="isTextFadeOut = true" @webkitTransitionEnd.once="isTextFadeOut = true">退休前，<br>他最後有段話<br>想對現在的台灣說</div>
     </div>
-    <div class="final-scene__youtube" :class="{ 'fade-in': isYoutubeFadeIn }" @transitionend.once="$parent.isLastContentShow = true" @webkitTransitionEnd.once="$parent.isLastContentShow = true">
+    <div class="final-scene__youtube" :class="{ 'fade-in': isYoutubeFadeIn }" @transitionend.once="lastContentShow" @webkitTransitionEnd.once="lastContentShow">
       <slot></slot>
     </div>
   </section>
@@ -30,6 +30,11 @@ export default {
       if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - 8) {
         this.isTextFadeIn = true;
       }
+    },
+    lastContentShow() {
+      this.$parent.isLastContentShow = true;
+      this.$parent.canThirdYoutubePlay = true;
+      this.$parent.thirdYoutube.playVideo();
     },
   },
 };

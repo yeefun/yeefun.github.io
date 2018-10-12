@@ -1,7 +1,7 @@
 <template>
   <section class="youtube" :style="{ 'padding-bottom': aspectRatio }">
     <!-- TODO add "origin" -->
-    <iframe class="youtube__player" :id="youtubeRef" :src="`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=0&iv_load_policy=3&loop=1&origin=http://10.120.225.233:8080`" frameborder="0"></iframe>
+    <iframe class="youtube__player" :id="youtubeRef" :src="`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=0&iv_load_policy=3&loop=1`" frameborder="0"></iframe>
   </section>
 </template>
 
