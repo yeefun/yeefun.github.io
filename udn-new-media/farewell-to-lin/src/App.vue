@@ -1,6 +1,7 @@
 <template>
 <!-- FIXME use wheel event -->
-  <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
+  <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
+  <div id="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
   <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
     <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
@@ -13,7 +14,7 @@
     </div>
     <div class="scroll-content" ref="scrollContent">
       <PhotoPageContent v-if="!$root.isMobileSize"></PhotoPageContent>
-      <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube"></Youtube>
+      <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
       <div class="scroll-content__light" ref="contentLight">
         <ContentLight></ContentLight>
         <FinalScene>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+import YouTubePlayer from 'youtube-player';
+
 import ProgressBar from './components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
 import Cover from './components/Cover.vue';
@@ -86,6 +89,9 @@ export default {
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
       isHeadBarLight: false,
+      firstYoutube: null,
+      secondYoutube: null,
+      isSecondYoutubePlay: false,
     };
   },
   created() {
@@ -93,6 +99,12 @@ export default {
     window.addEventListener('resize', this.resizeHandler);
     window.addEventListener('scroll', this.fixedPageMove);
     window.addEventListener('scroll', this.headBarChangeColor);
+  },
+  mounted() {
+    this.firstYoutube = YouTubePlayer('first-youtube');
+    this.secondYoutube = YouTubePlayer('second-youtube');
+    this.firstYoutube.mute();
+    this.secondYoutube.mute();
   },
   computed: {
     pageTransform() {
@@ -119,32 +131,47 @@ export default {
     fixedPageMove() {
       if (this.$root.isMobileSize) return;
       if (this.beforeScrollY > 8) this.$refs.pageContent.style.transitionProperty = 'none';
+
       const afterScrollY = this.$root.cacheWindow.pageYOffset;
       const deltaScrollY = afterScrollY - this.beforeScrollY;
       const youtubeY = this.$refs.secondYoutube.$el.offsetTop;
       const youtubeYLess = youtubeY - this.$root.windowHeight;
-      if ((deltaScrollY > 0 && this.pageScrollY === -this.$root.windowHeight * 4)
-        || (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset <= youtubeYLess)
+
+      // if ((deltaScrollY > 0 && this.pageScrollY === -this.$root.windowHeight * 4)
+      //   || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
+      //   || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
+
+      if ((deltaScrollY > 0 && afterScrollY > this.$refs.contentLight.offsetTop)
+        || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
         || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
-      // this.$refs.pageContent.style.transitionProperty = 'none';
-      if (deltaScrollY > 0 && this.$root.cacheWindow.pageYOffset >= youtubeYLess) {
-        if (youtubeY - this.$root.cacheWindow.pageYOffset >= 0) {
-          this.pageScrollY = -((this.$root.windowHeight * 3) + (this.$root.cacheWindow.pageYOffset - youtubeYLess));
-          // this.pageScrollY = -(this.$root.cacheWindow.pageYOffset - youtubeYLess);
+
+      if (deltaScrollY > 0 && afterScrollY >= youtubeYLess) {
+        if (youtubeY - afterScrollY >= 0) {
+          this.pageScrollY = -((this.$root.windowHeight * 3) + (afterScrollY - youtubeYLess));
+          // this.pageScrollY = -(afterScrollY - youtubeYLess);
         } else {
           // this.pageScrollY = -this.$root.windowHeight;
           this.pageScrollY = -this.$root.windowHeight * 4;
         }
-      } else if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset < youtubeY) {
-        if (this.$root.cacheWindow.pageYOffset - youtubeYLess >= 0) {
-          // this.pageScrollY = -this.$root.windowHeight + (youtubeY - this.$root.cacheWindow.pageYOffset);
-          this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - this.$root.cacheWindow.pageYOffset));
+      } else if (deltaScrollY < 0 && afterScrollY < youtubeY) {
+        if (afterScrollY - youtubeYLess >= 0) {
+          // this.pageScrollY = -this.$root.windowHeight + (youtubeY - afterScrollY);
+          this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - afterScrollY));
         } else {
           // this.pageScrollY = 0;
           this.pageScrollY = -this.$root.windowHeight * 3;
         }
       }
       this.beforeScrollY = afterScrollY;
+      // console.log(this.secondYoutube.getPlayerState);
+
+      if (!this.isSecondYoutubePlay && afterScrollY > youtubeY - (this.$root.windowHeight / 2) && afterScrollY < youtubeY + (this.$root.windowHeight / 2)) {
+        this.isYoutubePlay = true;
+        this.secondYoutube.playVideo();
+      } else if (this.isSecondYoutubePlay && (afterScrollY > youtubeY + (this.$root.windowHeight / 2) || afterScrollY < youtubeY - (this.$root.windowHeight / 2))) {
+        this.isYoutubePlay = false;
+        this.secondYoutube.pauseVideo();
+      }
     },
     // TODO dynamic set this.$root.windowWidth
     resizeHandler() {
@@ -209,6 +236,7 @@ export default {
       }, 200);
     },
     pageScroll(evt) {
+      // console.log(evt.wheelDelta);
       if (this.$root.isMobileSize || this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
       evt.preventDefault();
       if (this.scrollTimer) {
@@ -219,7 +247,8 @@ export default {
         setTimeout(() => {
           this.canScroll = true;
         }, 600);
-        const scrollDirection = -evt.wheelDelta || evt.detail;
+        // const scrollDirection = -evt.wheelDelta || evt.detail;
+        const scrollDirection = evt.deltaY;
         if (scrollDirection > 0) {
           if (this.pageScrollY === -this.$root.windowHeight * 3) return;
           if (this.pageScrollY === -this.$root.windowHeight * 2) {
@@ -227,6 +256,10 @@ export default {
             this.$root.cacheHTML.className += 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
+          // youtube
+          // console.log('success');
+          // console.log(this.pageScrollY === -this.$root.windowHeight);
+          if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
           this.pageScrollY -= this.$root.windowHeight;
           // this.pageScrollY -= this.$root.windowHeight;
         } else {
@@ -236,9 +269,12 @@ export default {
             this.$refs.scrollContent.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
+            // youtube
+            this.firstYoutube.playVideo();
           }
           this.pageScrollY += this.$root.windowHeight;
         }
+        if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
       }, 200);
     },
     youtubeId(ordinalNum) {
