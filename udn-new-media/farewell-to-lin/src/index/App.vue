@@ -94,7 +94,7 @@ export default {
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
