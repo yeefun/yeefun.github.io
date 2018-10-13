@@ -24,13 +24,15 @@
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>雲門大船的未來進行式</li>
         </ul>
-        <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
+        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @click="innerAnchorShow">
           <li>台灣是我們的共業
-            <ul class="header-bar__inner-anchor">
-              <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="firstAnchorMove">退休前心內話</li>
-              <li class="header-bar__anchor-item header-bar__inner-anchor-item">預告的背後故事</li>
-              <li class="header-bar__anchor-item header-bar__inner-anchor-item">給台灣的情書</li>
-            </ul>
+            <transition name="anchor-slide">
+              <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="firstAnchorMove">退休前心內話</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="secondAnchorMove">預告的背後故事</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="thirdAnchorMove">給台灣的情書</li>
+              </ul>
+            </transition>
           </li>
         </ul>
       </nav>
@@ -67,16 +69,39 @@ export default {
   data() {
     return {
       isListOpen: false,
+      isInnerAnchorShow: false,
     };
   },
   methods: {
+    innerAnchorShow() {
+      this.isInnerAnchorShow = true;
+    },
     firstAnchorMove() {
-      this.$parent.pageScrollY = -this.$root.windowHeight * 3;
-      // this.$parent.$refs.scrollContent.style.transform = 'translateY(0vh)';
-      this.$parent.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
-      this.$root.cacheHTML.className = 'overflow-visible';
-      this.$parent.bodyClass.add('overflow-visible');
+      // CONFUSED different after scroll-bar show
+      // const youtubeY = this.$parent.$refs.secondYoutube.$el.offsetTop;
+      this.AnchorJudge();
+      // this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth' });
+    },
+    secondAnchorMove() {
+      this.AnchorJudge();
+      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth' });
+    },
+    thirdAnchorMove() {
+      this.AnchorJudge();
+      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('third-anchor').scrollIntoView({ behavior: 'smooth' });
+    },
+    AnchorJudge() {
+      if (!this.$root.isMobileSize) {
+        if (this.$root.cacheHTML.className !== 'overflow-visible') {
+          this.$parent.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
+          this.$root.cacheHTML.className = 'overflow-visible';
+          this.$parent.bodyClass.add('overflow-visible');
+        }
+        this.$parent.pageScrollY = -this.$root.windowHeight * 4;
+      }
     },
   },
 };
@@ -186,18 +211,19 @@ export default {
           width: 188px;
           border-color: #fff;
           // padding-left: 22.4px;
-          &:hover ul {
+          // &:hover ul {
             // display: block;
-            height: 105px;
-          }
+            // height: 105px;
+          // }
         }
       }
     }
     &__inner-anchor {
       text-align: left;
-      height: 0px;
+      // height: 0px;
+      height: 105px;
       overflow: hidden;
-      transition: height 0.5s;
+      // transition: height 0.5s;
       // display: none;
       // padding-left: 24.4px;
       // margin-left: -2.8px;
@@ -279,9 +305,11 @@ export default {
 .list-fade-enter, .list-fade-leave-to {
   opacity: 0;
 }
-
-.hi {
-  fill: red;
+.anchor-slide-enter-active, .anchor-slide-leave-active {
+  transition: height 0.5s;
+}
+.anchor-slide-enter, .anchor-slide-leave-to {
+  height: 0px;
 }
 </style>
 

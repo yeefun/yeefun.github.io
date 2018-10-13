@@ -1,7 +1,7 @@
 <template>
 <!-- FIXME use wheel event -->
   <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
-  <div id="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
+  <div id="app" class="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
   <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
     <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
@@ -15,6 +15,9 @@
     <!-- <div class="scroll-content" ref="scrollContent"> -->
     <div>
       <PhotoPageContent class="photo-page-content" v-if="!$root.isMobileSize" ref="photoPageContent"></PhotoPageContent>
+      <!-- <div ref="secondYoutube">
+        <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
+      </div> -->
       <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
       <div class="scroll-content-light" ref="contentLight">
         <ContentLight></ContentLight>
@@ -96,6 +99,7 @@ export default {
       isSecondYoutubePlay: false,
       canThirdYoutubePlay: false,
       isThirdYoutubePlay: true,
+      // isAnchorScroll: false,
     };
   },
   created() {
@@ -325,6 +329,10 @@ export default {
 </script>
 
 <style lang="scss">
+.app {
+  background-color: #000;
+}
+
 .page-content {
   width: 100%;
   background-color: #000;
@@ -335,7 +343,7 @@ export default {
   }
 }
 
-.scroll-content--light {
+.scroll-content-light {
   background-color: #fff;
   // TODO do youtube need full screen? if yes, remove "max-width: 960px;" and add it in other places
   // max-width: 960px;

@@ -1,5 +1,5 @@
 <template>
-  <section class="final-scene" ref="finalScene">
+  <section class="final-scene" id="third-anchor">
     <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }" @transitionend.self.once="isYoutubeFadeIn = true" @webkitTransitionEnd.self.once="isYoutubeFadeIn = true">
       <div class="final-scene__text--first" :class="{ 'fade-in': isTextFadeIn }">過去45年<br>林懷民用90齣舞作<br>不斷與台灣社會對話</div>
       <p><br></p>
