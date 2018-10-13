@@ -6,7 +6,8 @@
       <p><br></p>
       <p>雲門舞集成立之時，正值台灣國際外交處境的艱困期，1971年台灣退出聯合國、1973年雲門舞集即成立。 在那充滿熱血救國口號的1970年代，林懷民說，他們一開始就有一大票人，都是像他一樣在光復後出生的「光復仔」，例如蔣勳、奚淞、賴德和、張照堂等人，「個人的力量是不夠的，才華是有限的，一定要『群組』、合起來做事情。」</p>
       <p><br></p>
-      <p ref="photoLegacy">也因為這樣的情感與時代背景，有了描繪先人移民奮鬥艱辛、充滿壓抑爆發力的舞蹈史詩《薪傳》（1978）。距離40年後的今天回頭看，林懷民形容那時舞者的身體有一鼓「壓抑的爆發力」，身體有障礙、不像現在的舞者肢體如此流暢，但正是這些有點生硬、卻力道強悍的舞蹈動作，激勵了無數台灣人心。</p>
+      <!-- <p ref="photoLegacy">也因為這樣的情感與時代背景，有了描繪先人移民奮鬥艱辛、充滿壓抑爆發力的舞蹈史詩《薪傳》（1978）。距離40年後的今天回頭看，林懷民形容那時舞者的身體有一鼓「壓抑的爆發力」，身體有障礙、不像現在的舞者肢體如此流暢，但正是這些有點生硬、卻力道強悍的舞蹈動作，激勵了無數台灣人心。</p> -->
+      <p>也因為這樣的情感與時代背景，有了描繪先人移民奮鬥艱辛、充滿壓抑爆發力的舞蹈史詩《薪傳》（1978）。距離40年後的今天回頭看，林懷民形容那時舞者的身體有一鼓「壓抑的爆發力」，身體有障礙、不像現在的舞者肢體如此流暢，但正是這些有點生硬、卻力道強悍的舞蹈動作，激勵了無數台灣人心。</p>
       <p><br></p>
       <p>「我只是一個愛跳舞的小孩，沒有學太多舞就來到雲門，因為看到一個舞叫《薪傳》。」在舞團超過30年、現任助理藝術總監的李靜君回憶，當時她只是個16、17歲的年輕女孩，看完《薪傳》後感動到連鼓掌都忘了，整個人像傻掉一樣，毅然決然放棄原本想跳的芭蕾舞，轉而來到雲門舞集，一待至今。</p>
     </div>
@@ -81,7 +82,10 @@ export default {
         this.$parent.photoName = 'watermoon';
       } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWanderers.offsetTop - this.marginTop) {
         this.$parent.photoName = 'wanderers';
-      } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
+      // } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoLegacy.offsetTop - this.marginTop) {
+      //   this.$parent.photoName = 'legacy';
+      // }
+      } else {
         this.$parent.photoName = 'legacy';
       }
       this.startScrollTime = currentTime;

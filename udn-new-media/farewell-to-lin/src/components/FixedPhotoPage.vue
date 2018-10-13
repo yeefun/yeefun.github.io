@@ -1,16 +1,13 @@
 <template>
   <section class="fixed-page">
-    <!-- <div class="fixed-page__photo" :style="{ backgroundImage: `url(${photo})` }"></div> -->
-    <!-- <transition name="photo-fade" mode="out-in"> -->
-      <div class="fixed-page__photo-wrapper">
-        <transition name="photo-fade" mode="out-in">
-          <div class="fixed-page__photo" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" :style="{ backgroundImage: `url('${photo.url}')`}"></div>
-        </transition>
-        <transition name="caption-fade" mode="out-in">
-          <div class="content__photo-caption content__photo-caption--dark content__photo-caption--photo-page" v-for="photo in photos" :key="photo.name" v-if="photo.name === photoName" v-html="photo.caption"></div>
+    <transition name="photo-fade" v-for="photo in photos" :key="photo.name">
+      <div class="fixed-page__photo-wrapper" v-show="photoName === photo.name">
+        <div class="fixed-page__photo" :style="`background-image: url(${photo.url})`"></div>
+        <transition name="caption-fade">
+          <div class="content__photo-caption content__photo-caption--dark content__photo-caption--photo-page" v-show="photoName === photo.name" v-html="photo.caption" :key="photo.name"></div>
         </transition>
       </div>
-    <!-- </transition> -->
+    </transition>
     <div class="fixed-page__mask"></div>
   </section>
 </template>
@@ -45,12 +42,12 @@ export default {
 
 <style lang="scss">
 @import '../css/content.scss';
+@import '../css/vue-transition.scss';
 
 .fixed-page {
   // background-color: #000;
   position: relative;
   height: 100vh;
-  // background-color: #000;
   &__photo {
     // position: absolute;
     // width: 100%;
@@ -71,19 +68,6 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
   }
-}
-
-.photo-fade-enter-active {
-  transition: opacity, 0.5s;
-}
-.photo-fade-leave-active {
-  transition: opacity, 0.25s;
-}
-.caption-fade-enter-active {
-  transition: opacity, 0.5s 0.5s;
-}
-.photo-fade-enter, .caption-fade-enter, .photo-fade-leave-to, .caption-fade-leave-to {
-  opacity: 0;
 }
 </style>
 

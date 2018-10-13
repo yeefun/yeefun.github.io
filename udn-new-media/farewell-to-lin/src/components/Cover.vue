@@ -3,7 +3,7 @@
   <article class="cover"
   @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove">
     <!-- muted for Chrome, otherwise video can't play-->
-    <video id="cover__video" class="cover__video" data-object-fit="cover" autoplay muted loop>
+    <video id="cover__video" class="cover__video" data-object-fit="cover" muted autoplay loop>
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
@@ -25,8 +25,8 @@
         <p class="mb-0">書</p>
       </div>
       <div class="cover__title" :class="{ 'fade-in': isCoverTitleFadeIn,
-      'cover__title-move': isCoverTitleMove }" @transitionend.once="coverTitleFadeInEnd"
-      @webkitTransitionEnd.once="coverTitleFadeInEnd">
+      'cover__title-move': isCoverTitleMove }" @transitionend.once="isCoverTitleMove = true"
+      @webkitTransitionEnd.once="isCoverTitleMove = true">
         <div class="cover__title-left">
           <p>都</p>
           <p>是</p>
@@ -46,8 +46,8 @@
           <p class="mb-0">，</p>
         </div>
       </div>
-    </section> -->
-    <!-- <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
+    </section>
+    <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
     <div class="cover__prompt" v-if="isCoverPromptExist">
       <div class="cover__prompt-to-bottom">
         <p>向下</p>
@@ -56,23 +56,23 @@
       <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
     </div>
     <div class="cover__img" :class="{ 'fade-out': isCoverFadeOut }"
-    @transitionend.self="coverFadeOutEnd" @webkitTransitionEnd.self="coverFadeOutEnd">
-    <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
-    @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
-    <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
-    <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
-    <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
-    <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
-    </div> -->
+    @transitionend.self="isCoverTitleFadeIn = true;" @webkitTransitionEnd.self="isCoverTitleFadeIn = true;">
+      <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
+      @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
+      <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
+      <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
+      <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
+      <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
+    </div>
+    <transition name="cover-end-fade">
+      <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../assets/CoverImg/arrow.png" alt="">
+    </transition> -->
   </article>
 </template>
 
 <script>
-// import resize from '../mixins/resize';
-
 export default {
   name: 'Cover',
-  // mixins: [resize],
   data() {
     return {
       isDancerMove: false,
@@ -83,9 +83,6 @@ export default {
     };
   },
   methods: {
-    // resizeHandler() {
-    //   this.windowWidth = document.documentElement.clientWidth;
-    // },
     dancerClass(idx) {
       const dancerClass = {
         'dancer-move': this.isDancerMove,
@@ -102,20 +99,27 @@ export default {
       if (!this.isDancerMove) return;
       this.isCoverFadeOut = true;
     },
-    coverFadeOutEnd() {
-      this.isCoverTitleFadeIn = true;
-    },
-    coverTitleFadeInEnd() {
-      this.isCoverTitleMove = true;
-    },
+    // coverFadeOutEnd() {
+    //   this.isCoverTitleFadeIn = true;
+    // },
+    // coverTitleFadeInEnd() {
+    //   this.isCoverTitleMove = true;
+    // },
     subtitleMoveEnd() {
-      this.$root.$el.style.overflow = 'initial';
+      if (this.$root.isMobileSize) {
+        this.$root.cacheHTML.className = 'overflow-visible';
+        this.$parent.bodyClass.add('overflow-visible');
+      }
+      this.$parent.canScroll = true;
+      this.$parent.isHeadBarShow = true;
     },
   },
 };
 </script>
 
 <style lang="scss">
+@import '../css/vue-transition.scss';
+
 .cover {
   height: 100vh;
   position: relative;
@@ -255,8 +259,9 @@ export default {
     display: flex;
 
     @media screen and (min-width: 576px) {
-      transform: translateX(0px);
-      transition: opacity 2s, left 2s 0.5s;
+      // calculate for center
+      transform: translateX(-30px);
+      transition: opacity 2s, left 2s 0.5s, transform 2s 0.5s;
     }
 
     &-left {
@@ -321,6 +326,15 @@ export default {
         font-size: 2.8rem;
       }
     }
+  }
+
+  &__arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: auto;
   }
 }
 

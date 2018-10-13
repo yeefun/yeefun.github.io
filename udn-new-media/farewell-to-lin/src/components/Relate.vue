@@ -76,6 +76,10 @@ export default {
     // & > div {
     //   flex: auto 0 0;
     // }
+    @media screen and (max-width: 375.98px) {
+      // text-align: left;
+      width: 100%;
+    }
     & a {
       text-decoration: none;
       color: #000;
@@ -90,7 +94,9 @@ export default {
       margin-bottom: 10px;
     }
     & p {
-      font-size: 1.2rem;
+      // ASK
+      // font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 700;
       line-height: 1.67;
       margin-bottom: 20px;
@@ -104,11 +110,17 @@ export default {
       @media screen and (min-width: 768px) {
         padding-right: 22px;
       }
+      @media screen and (max-width: 375.98px) {
+        padding-right: 0;
+      }
     }
     &--right {
       padding-left: 7px;
       @media screen and (min-width: 576px) {
         padding-left: 22px;
+      }
+      @media screen and (max-width: 375.98px) {
+        padding-left: 0;
       }
     }
   }

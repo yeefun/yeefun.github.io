@@ -4,7 +4,9 @@
   <div id="app" class="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
   <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
-    <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
+    <transition name="cover-end-fade">
+      <HeadBar :isHeadBarLight="isHeadBarLight" v-if="isHeadBarShow"></HeadBar>
+    </transition>
     <div class="page-content" :style="pageTransform" ref="pageContent">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
@@ -19,7 +21,7 @@
         <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
       </div> -->
       <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
-      <div class="scroll-content-light" ref="contentLight">
+      <div class="light-content" ref="lightContent">
         <ContentLight></ContentLight>
         <FinalScene>
           <Youtube :youtubeId="youtubeId('third')" youtubeRef="third-youtube" ref="thirdYoutube"></Youtube>
@@ -84,14 +86,15 @@ export default {
       resizeTimer: null,
       scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
-      // throttle touchpad mousewheel event
+      // throttle touchpad mousewheel event & opening
       canScroll: true,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
-      photoName: null,
+      photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
+      isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -127,7 +130,7 @@ export default {
   },
   methods: {
     headBarChangeColor() {
-      if (this.$root.cacheWindow.pageYOffset > this.$refs.contentLight.offsetTop) {
+      if (this.$root.cacheWindow.pageYOffset > this.$refs.lightContent.offsetTop) {
         this.isHeadBarLight = true;
       } else {
         this.isHeadBarLight = false;
@@ -141,40 +144,33 @@ export default {
     },
     // FIXME IE don't support 'youtube-player'
     fixedPageMove() {
-      if (this.$root.isMobileSize) return;
-      if (this.beforeScrollY > 8) this.$refs.pageContent.style.transitionProperty = 'none';
-
-      const afterScrollY = this.$root.cacheWindow.pageYOffset;
-      const deltaScrollY = afterScrollY - this.beforeScrollY;
       const youtubeY = this.$refs.secondYoutube.$el.offsetTop;
-      const youtubeYLess = youtubeY - this.$root.windowHeight;
+      const afterScrollY = this.$root.cacheWindow.pageYOffset;
+      if (!this.$root.isMobileSize) {
+        if (this.beforeScrollY > 8) this.$refs.pageContent.style.transitionProperty = 'none';
 
-      // if ((deltaScrollY > 0 && this.pageScrollY === -this.$root.windowHeight * 4)
-      //   || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
-      //   || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
+        const deltaScrollY = afterScrollY - this.beforeScrollY;
+        const youtubeYLess = youtubeY - this.$root.windowHeight;
 
-      if ((deltaScrollY > 0 && afterScrollY > this.$refs.contentLight.offsetTop)
-        || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
-        || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
+        if ((deltaScrollY > 0 && afterScrollY > this.$refs.lightContent.offsetTop)
+          || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
+          || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
 
-      if (deltaScrollY > 0 && afterScrollY >= youtubeYLess) {
-        if (youtubeY - afterScrollY >= 0) {
-          this.pageScrollY = -((this.$root.windowHeight * 3) + (afterScrollY - youtubeYLess));
-          // this.pageScrollY = -(afterScrollY - youtubeYLess);
-        } else {
-          // this.pageScrollY = -this.$root.windowHeight;
-          this.pageScrollY = -this.$root.windowHeight * 4;
+        if (deltaScrollY > 0 && afterScrollY >= youtubeYLess) {
+          if (youtubeY - afterScrollY >= 0) {
+            this.pageScrollY = -((this.$root.windowHeight * 3) + (afterScrollY - youtubeYLess));
+          } else {
+            this.pageScrollY = -this.$root.windowHeight * 4;
+          }
+        } else if (deltaScrollY < 0 && afterScrollY < youtubeY) {
+          if (afterScrollY - youtubeYLess >= 0) {
+            this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - afterScrollY));
+          } else {
+            this.pageScrollY = -this.$root.windowHeight * 3;
+          }
         }
-      } else if (deltaScrollY < 0 && afterScrollY < youtubeY) {
-        if (afterScrollY - youtubeYLess >= 0) {
-          // this.pageScrollY = -this.$root.windowHeight + (youtubeY - afterScrollY);
-          this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - afterScrollY));
-        } else {
-          // this.pageScrollY = 0;
-          this.pageScrollY = -this.$root.windowHeight * 3;
-        }
+        this.beforeScrollY = afterScrollY;
       }
-      this.beforeScrollY = afterScrollY;
 
       // second youtube
       if (!this.secondYoutube) return;
@@ -238,13 +234,12 @@ export default {
           }
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+          if (this.pageScrollY === 0) return;
           if (this.pageScrollY === -this.$root.windowHeight * 3) {
             this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
-            // this.$root.cacheHTML.classthis.$root.cacheHTML.className += 'overflow-visible';Name += 'overflow-visible';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
           }
-          if (this.pageScrollY === 0) return;
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -273,7 +268,6 @@ export default {
           if (this.firstYoutube) {
             if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
           }
-          // if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
           this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
@@ -282,18 +276,17 @@ export default {
             this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
+
             // first-youtube
             if (this.firstYoutube) {
               this.firstYoutube.playVideo();
             }
-            // this.firstYoutube.playVideo();
           }
           this.pageScrollY += this.$root.windowHeight;
         }
         if (this.firstYoutube) {
           if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
         }
-        // if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
       }, 200);
     },
     youtubeId(ordinalNum) {
@@ -329,6 +322,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import './css/vue-transition.scss';
+
 .app {
   background-color: #000;
 }
@@ -343,7 +338,7 @@ export default {
   }
 }
 
-.scroll-content-light {
+.light-content {
   background-color: #fff;
   // TODO do youtube need full screen? if yes, remove "max-width: 960px;" and add it in other places
   // max-width: 960px;
@@ -368,6 +363,8 @@ export default {
   // ASK break point 768 or 576?
   @media screen and (min-width: 768px) {
     padding-top: 270px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
   &__left {
     // width: 100%;
