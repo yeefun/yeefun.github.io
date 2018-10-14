@@ -39,9 +39,9 @@ export default {
   color: #bcbcbc;
   padding-right: 30px;
   padding-left: 30px;
-  margin-top: 120px;
+  padding-top: 120px;
   @media screen and (min-width: 576px) {
-    margin-top: 0;
+    padding-top: 0;
     height: 100vh;
     padding-right: 60px;
     padding-left: 60px;

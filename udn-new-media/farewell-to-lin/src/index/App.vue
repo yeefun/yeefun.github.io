@@ -45,7 +45,7 @@
 <script>
 import YouTubePlayer from 'youtube-player';
 
-import ProgressBar from './components/ProgressBar.vue';
+import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
 import Cover from './components/Cover.vue';
 import Youtube from './components/Youtube.vue';

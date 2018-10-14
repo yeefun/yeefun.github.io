@@ -18,7 +18,7 @@ export default {
   methods: {
     progressBarGrow() {
       const currentHeight = this.$root.cacheWindow.pageYOffset;
-      const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.cacheHTML.clientHeight;
+      const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.windowHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
     },
   },

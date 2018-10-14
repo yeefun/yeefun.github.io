@@ -15,25 +15,17 @@
         <path d="M180.5,38.5c-2.1-1.7-6.6-6.6-8.2-7.3s-5.3-1-6.7-.1l-6.6,4.5a18.2,18.2,0,0,0-5.2,7.5c-0.8,2.8,1,6.6,2.6,9.2s3.7,7.3,8.4,4.7,13.5-11.5,15.3-13.1S182.7,40.3,180.5,38.5Z"/>
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
-      <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click.prevent="isListOpen=!isListOpen" @touchstart.prevent="isListOpen=!isListOpen">
+      <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click="isListOpen=!isListOpen" @touchstart.prevent="isListOpen=!isListOpen">
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
-          <li>雲門大船的未來進行式</li>
+          <li>台灣是我們的共業</li>
         </ul>
-        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @touchstart="innerAnchorShow" @mouseleave="isInnerAnchorShow = false">
-          <li>台灣是我們的共業
-            <transition name="anchor-slide">
-              <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
-                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="firstAnchorMove" @touchstart.stop="firstAnchorMove">退休前心內話</li>
-                <li class.prevent="header-bar__anchor-item header-bar__inner-anchor-item" @click="secondAnchorMove" @touchstart.stop="secondAnchorMove">預告的背後故事</li>
-                <li class.prevent="header-bar__anchor-item header-bar__inner-anchor-item" @click="thirdAnchorMove" @touchstart.stop="thirdAnchorMove">給台灣的情書</li>
-              </ul>
-            </transition>
-          </li>
+        <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
+          <li>雲門大船的未來進行式</li>
         </ul>
       </nav>
     </div>
@@ -41,16 +33,10 @@
       <div class="header-list" v-if="isListOpen && $root.isMobileSize">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
-            <li>台灣是我們的共業
-              <ul class="header-list__inner-anchor">
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="firstAnchorMove" @touchstart="firstAnchorMove">退休前心內話</li>
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="secondAnchorMove" @touchstart="secondAnchorMove">預告的背後故事</li>
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="thirdAnchorMove" @touchstart="thirdAnchorMove">給台灣的情書</li>
-              </ul>
-            </li>
+            <li>雲門大船的未來進行式</li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li>雲門大船的未來進行式</li>
+            <li>台灣是我們的共業</li>
           </ul>
         </nav>
       </div>
@@ -59,60 +45,17 @@
 </template>
 
 <script>
-import smoothscroll from 'smoothscroll-polyfill';
-
-smoothscroll.polyfill();
-
 export default {
   name: 'HeadBar',
   props: ['isHeadBarLight'],
   data() {
     return {
       isListOpen: false,
-      isInnerAnchorShow: false,
     };
-  },
-  created() {
-    // document.addEventListener('click', this.innerAnchorClose);
   },
   methods: {
     innerAnchorShow() {
       this.isInnerAnchorShow = true;
-    },
-    // innerAnchorClose(evt) {
-    //   if (evt.target.nodeName !== 'LI') {
-    //     this.isInnerAnchorShow = false;
-    //   }
-    // },
-    firstAnchorMove() {
-      // CONFUSED different after scroll-bar show
-      // const youtubeY = this.$parent.$refs.secondYoutube.$el.offsetTop;
-      this.AnchorJudge();
-      // this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth' });
-    },
-    secondAnchorMove() {
-      this.AnchorJudge();
-      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth' });
-    },
-    thirdAnchorMove() {
-      this.AnchorJudge();
-      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      document.getElementById('third-anchor').scrollIntoView({ behavior: 'smooth' });
-    },
-    AnchorJudge() {
-      if (!this.$root.isMobileSize) {
-        if (this.$root.cacheHTML.className !== 'overflow-visible') {
-          this.$parent.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.$parent.bodyClass.add('overflow-visible');
-        }
-        this.$parent.pageScrollY = -this.$root.windowHeight * 4;
-        this.isInnerAnchorShow = false;
-      } else {
-        this.isListOpen = false;
-      }
     },
   },
 };
@@ -143,8 +86,6 @@ export default {
     }
     &__icon {
       &-udn {
-        // width: 34px;
-        // height: auto;
         width: 33.69px;
         height: 33px;
         width: auto;
@@ -164,7 +105,6 @@ export default {
           background-color: #040000;
           width: 26px;
           height: 4px;
-          // transition: background-color 0.5s;
           &.active {
             background-color: #fff;
           }
@@ -178,7 +118,7 @@ export default {
         color: #fff;
         letter-spacing: 1.6px;
         line-height: 1.88;
-        // text-align: center;
+        text-align: center;
         user-select: none;
         &--light {
           color: #000;
@@ -194,9 +134,6 @@ export default {
                 }
               }
             }
-            &__inner-anchor-item {
-              background-color: rgba(236, 236, 236, 0.5);
-            }
           }
         }
       }
@@ -205,54 +142,23 @@ export default {
         box-sizing: border-box;
         border-width: 2px;
         border-style: solid;
-        cursor: pointer;
-        padding-left: 22.4px;
         background-color: transparent;
-        // padding-left: 22.4px;
+        & > li {
+          margin-left: 0.8px;
+        }
         &--outer {
           border-color: transparent;
-          margin-right: 28px;
-          width: 223.2px;
           transition: border-color 0.5s;
+          margin-right: 28px;
+          width: 188px;
+          cursor: pointer;
           &:hover {
             border-color: #fff;
           }
         }
         &--inner {
-          width: 188px;
+          width: 223.2px;
           border-color: #fff;
-          // padding-left: 22.4px;
-          // &:hover ul {
-          //   display: block;
-          //   height: 105px;
-          // }
-        }
-      }
-    }
-    &__inner-anchor {
-      text-align: left;
-      // height: 0px;
-      height: 105px;
-      overflow: hidden;
-      // transition: height 0.5s;
-      // display: none;
-      // padding-left: 24.4px;
-      // margin-left: -2.8px;
-      width: 188px;
-      margin-left: -24.4px;
-      box-sizing: border-box;
-      margin-top: 6px;
-      // padding-left: 22.4px;
-      &-item {
-        height: 33px;
-        border-color: transparent;
-        background-color: rgba(255, 255, 255, 0.3);
-        margin-bottom: 3px;
-        transition: all 0.5s;
-        // padding-left: 22.4px;
-        &:hover {
-          background-color: #b98e49;
-          color: #fff;
         }
       }
     }
@@ -279,34 +185,23 @@ export default {
         line-height: 2.1;
         user-select: none;
         width: 246px;
+        text-align: center;
       }
       &-item {
         box-sizing: border-box;
         height: 44px;
         border-width: 2px;
         border-style: solid;
-        padding-left: 34px;
-        // cursor: pointer;
+        & > li {
+          margin-left: 1px;
+        }
         &--inner {
           border-color: #fff;
-          margin-bottom: 188px;
-          // width: 232px;
+          margin-bottom: 12px;
         }
         &--outer {
-          padding-left: 12px;
           cursor: pointer;
         }
-      }
-    }
-    &__inner-anchor {
-      width: 246px;
-      margin-top: 10px;
-      margin-left: -36px;
-      &-item {
-        border-color: transparent;
-        background-color: rgba(236, 236, 236, 0.5);
-        margin-bottom: 5px;
-        cursor: pointer;
       }
     }
   }

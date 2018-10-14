@@ -65,7 +65,7 @@
       <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
     </div>
     <transition name="cover-end-fade">
-      <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../assets/CoverImg/arrow.png" alt="">
+      <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
     </transition> -->
   </article>
 </template>
@@ -330,7 +330,8 @@ export default {
 
   &__arrow {
     position: absolute;
-    bottom: 30px;
+    // bottom: 30px;
+    bottom: 4.5%;
     left: 50%;
     transform: translateX(-50%);
     width: 25px;
