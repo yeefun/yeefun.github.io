@@ -7,7 +7,8 @@
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
-    <!-- <section class="cover__title-wrapper">
+
+    <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -66,7 +67,7 @@
     </div>
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
-    </transition> -->
+    </transition>
   </article>
 </template>
 

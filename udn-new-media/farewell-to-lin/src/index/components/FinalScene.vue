@@ -26,8 +26,9 @@ export default {
     window.addEventListener('scroll', this.finalSceneFade);
   },
   methods: {
+    // TODO change judgement
     finalSceneFade() {
-      if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - 8) {
+      if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.cacheHTML.clientHeight / 2)) {
         this.isTextFadeIn = true;
       }
     },

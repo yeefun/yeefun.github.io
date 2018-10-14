@@ -7,7 +7,7 @@
     <transition name="cover-end-fade">
       <HeadBar :isHeadBarLight="isHeadBarLight" v-if="isHeadBarShow"></HeadBar>
     </transition>
-    <div class="page-content" :style="pageTransform" ref="pageContent">
+    <div class="page-content" :style="{ transform: `translateY(${pageScrollY}px)` }" ref="pageContent">
     <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
@@ -56,10 +56,10 @@ import PhotoPageContent from './components/PhotoPageContent.vue';
 import ContentDark from './components/ContentDark.vue';
 import ContentLight from './components/ContentLight.vue';
 import FinalScene from './components/FinalScene.vue';
-import Editor from './components/Editor.vue';
+import Editor from '../components/Editor.vue';
 import Relate from './components/Relate.vue';
 import FbComment from './components/FbComment.vue';
-import Footer from './components/Footer.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
   name: 'app',
@@ -87,14 +87,16 @@ export default {
       scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
       // throttle touchpad mousewheel event & opening
-      canScroll: true,
+      // canScroll: true,
+      canScroll: false,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      isHeadBarShow: true,
+      // isHeadBarShow: true,
+      isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -120,14 +122,13 @@ export default {
     this.secondYoutube.mute();
     this.thirdYoutube.mute();
   },
-  computed: {
-    pageTransform() {
-      return {
-        transform: `translateY(${this.pageScrollY}px)`,
-        // '-webkit-transform': `translateY(${this.pageScrollY}px)`,
-      };
-    },
-  },
+  // computed: {
+  //   pageTransform() {
+  //     return {
+  //       transform: `translateY(${this.pageScrollY}px)`,
+  //     };
+  //   },
+  // },
   methods: {
     headBarChangeColor() {
       if (this.$root.cacheWindow.pageYOffset > this.$refs.lightContent.offsetTop) {
@@ -225,12 +226,20 @@ export default {
         const moveEndY = evt.changedTouches[0].pageY;
         const deltaX = moveEndX - this.touchStartX;
         const deltaY = moveEndY - this.touchStartY;
+        // first youtube
+        if (this.firstYoutube) {
+          if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
+        }
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
           if (this.pageScrollY === -this.$root.windowHeight * 3) return;
           if (this.pageScrollY === -this.$root.windowHeight * 2) {
             this.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
             this.$root.cacheHTML.className = 'overflow-visible';
             this.bodyClass.add('overflow-visible');
+          }
+          // first youtube
+          if (this.firstYoutube) {
+            if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
           }
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
@@ -239,6 +248,10 @@ export default {
             this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
+            // first youtube
+            if (this.firstYoutube) {
+              this.firstYoutube.playVideo();
+            }
           }
           this.pageScrollY += this.$root.windowHeight;
         }
@@ -258,6 +271,10 @@ export default {
         }, 600);
         // const scrollDirection = -evt.wheelDelta || evt.detail;
         const scrollDirection = evt.deltaY;
+        // first youtube
+        if (this.firstYoutube) {
+          if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
+        }
         if (scrollDirection > 0) {
           if (this.pageScrollY === -this.$root.windowHeight * 3) return;
           if (this.pageScrollY === -this.$root.windowHeight * 2) {
@@ -265,6 +282,7 @@ export default {
             this.$root.cacheHTML.className = 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
+          // first youtube
           if (this.firstYoutube) {
             if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
           }
@@ -276,16 +294,12 @@ export default {
             this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
             this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
-
-            // first-youtube
+            // first youtube
             if (this.firstYoutube) {
               this.firstYoutube.playVideo();
             }
           }
           this.pageScrollY += this.$root.windowHeight;
-        }
-        if (this.firstYoutube) {
-          if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
         }
       }, 200);
     },
@@ -356,7 +370,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-top: 132px;
+  padding-top: 82px;
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;

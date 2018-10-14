@@ -22,7 +22,9 @@
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
-          <li>雲門大船的未來進行式</li>
+          <li>
+            <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
+          </li>
         </ul>
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @touchstart="innerAnchorShow" @mouseleave="isInnerAnchorShow = false">
           <li>台灣是我們的共業
@@ -50,7 +52,7 @@
             </li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li>雲門大船的未來進行式</li>
+            <li><a href="/future.html" target="_blank">雲門大船的未來進行式</a></li>
           </ul>
         </nav>
       </div>
@@ -186,6 +188,9 @@ export default {
             &__anchor {
               &-item {
                 background-color: #fff;
+                & a {
+                  color: #000;
+                }
                 &--outer:hover {
                   border-color: #000;
                 }
@@ -198,6 +203,9 @@ export default {
               background-color: rgba(236, 236, 236, 0.5);
             }
           }
+          // & a {
+          //   color: #000;
+          // }
         }
       }
       &-item {
@@ -309,6 +317,9 @@ export default {
         cursor: pointer;
       }
     }
+  }
+  & a {
+    color: #fff;
   }
 }
 </style>

@@ -22,7 +22,7 @@
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
-          <li>台灣是我們的共業</li>
+          <li><a href="../" target="_blank">台灣是我們的共業</a></li>
         </ul>
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
           <li>雲門大船的未來進行式</li>
@@ -36,7 +36,7 @@
             <li>雲門大船的未來進行式</li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li>台灣是我們的共業</li>
+            <li><a href="../" target="_blank">台灣是我們的共業</a></li>
           </ul>
         </nav>
       </div>
@@ -126,6 +126,9 @@ export default {
             &__anchor {
               &-item {
                 background-color: #fff;
+                & a {
+                  color: #000;
+                }
                 &--outer:hover {
                   border-color: #000;
                 }
@@ -204,6 +207,9 @@ export default {
         }
       }
     }
+  }
+  & a {
+    color: #fff;
   }
 }
 </style>

@@ -100,24 +100,24 @@ export default {
       font-weight: 700;
       line-height: 1.67;
       margin-bottom: 20px;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 576px) {
         line-height: 1.5;
         font-size: 1.6rem;
       }
     }
     &--left {
-      padding-right: 7px;
-      @media screen and (min-width: 768px) {
-        padding-right: 22px;
+      padding-right: 12px;
+      @media screen and (min-width: 576px) {
+        padding-right: 16px;
       }
       @media screen and (max-width: 375.98px) {
         padding-right: 0;
       }
     }
     &--right {
-      padding-left: 7px;
+      padding-left: 12px;
       @media screen and (min-width: 576px) {
-        padding-left: 22px;
+        padding-left: 16px;
       }
       @media screen and (max-width: 375.98px) {
         padding-left: 0;
