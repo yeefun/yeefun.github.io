@@ -1,19 +1,25 @@
 <template>
 <!-- FIXME use wheel event -->
+  <!-- <div id="app" @mousewheel="pageScroll" @DOMMouseScroll="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove"> -->
   <div id="app" class="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
+  <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
     <transition name="cover-end-fade">
       <HeadBar :isHeadBarLight="isHeadBarLight" v-if="isHeadBarShow"></HeadBar>
     </transition>
     <div class="page-content" :style="{ transform: `translateY(${pageScrollY}px)` }" ref="pageContent">
+    <!-- <div class="page-content"> -->
       <Cover></Cover>
       <OpeningLine></OpeningLine>
+      <Youtube :youtubeId="youtubeId('first')" youtubeRef="first-youtube"></Youtube>
+      <component :is="$root.isMobileSize ? 'ContentDark' : 'FixedPhotoPage'" :photoName="photoName"></component>
     </div>
-    <Youtube class="youtube--scroll" :youtubeId="youtubeId('first')" youtubeRef="first-youtube" ref="firstYoutube"></Youtube>
-    <div class="scroll-content">
-      <ContentDark v-if="$root.isMobileSize"></ContentDark>
-      <FixedPhotoPage v-if="!$root.isMobileSize" :photoName="photoName" ref="fixedPhotoPage"></FixedPhotoPage>
+    <!-- <div class="scroll-content" ref="scrollContent"> -->
+    <div>
       <PhotoPageContent class="photo-page-content" v-if="!$root.isMobileSize" ref="photoPageContent"></PhotoPageContent>
+      <!-- <div ref="secondYoutube">
+        <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
+      </div> -->
       <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
       <div class="light-content" ref="lightContent">
         <ContentLight></ContentLight>
@@ -45,7 +51,6 @@
 
 <script>
 import YouTubePlayer from 'youtube-player';
-import smoothscroll from 'smoothscroll-polyfill';
 
 import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
@@ -63,8 +68,6 @@ import Relate from './components/Relate.vue';
 import Feedback from '../components/Feedback.vue';
 import FbComment from './components/FbComment.vue';
 import Footer from '../components/Footer.vue';
-
-smoothscroll.polyfill();
 
 export default {
   name: 'app',
@@ -93,34 +96,31 @@ export default {
       scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
       // throttle touchpad mousewheel event & opening
-      // canScroll: true,
-      canScroll: false,
+      canScroll: true,
+      // canScroll: false,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      // isHeadBarShow: true,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
+      // isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
       thirdYoutube: null,
-      canThirdYoutubePlay: false,
-      isFirstYoutubePlay: false,
       isSecondYoutubePlay: false,
-      isThirdYoutubePlay: false,
+      canThirdYoutubePlay: false,
+      isThirdYoutubePlay: true,
       // isAnchorScroll: false,
     };
   },
   created() {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('resize', this.resizeHandler);
-    window.addEventListener('scroll', this.PhotoPageControl);
+    window.addEventListener('scroll', this.fixedPageMove);
     window.addEventListener('scroll', this.headBarChangeColor);
-    window.addEventListener('scroll', this.firstYoutubeControlInMobile);
-    window.addEventListener('scroll', this.secondYoutubeControlInMobile);
     window.addEventListener('scroll', this.thirdYoutubeControl);
   },
   mounted() {
@@ -131,17 +131,14 @@ export default {
     this.secondYoutube.mute();
     this.thirdYoutube.mute();
   },
+  // computed: {
+  //   pageTransform() {
+  //     return {
+  //       transform: `translateY(${this.pageScrollY}px)`,
+  //     };
+  //   },
+  // },
   methods: {
-    PhotoPageControl() {
-      // CONFUSED why need add windowHeight?
-      // TODO OPT
-      if (this.$root.isMobileSize) return;
-      if (this.$root.cacheWindow.pageYOffset >= this.$refs.fixedPhotoPage.$el.offsetTop + this.$root.windowHeight) {
-        this.$refs.fixedPhotoPage.$el.style.position = 'fixed';
-      } else {
-        this.$refs.fixedPhotoPage.$el.style.position = 'absolute';
-      }
-    },
     headBarChangeColor() {
       if (this.$root.cacheWindow.pageYOffset > this.$refs.lightContent.offsetTop) {
         this.isHeadBarLight = true;
@@ -150,14 +147,69 @@ export default {
       }
     },
     beforeunloadHandler() {
-      this.$root.cacheWindow.scroll({ top: 0 });
+      this.$root.cacheWindow.scrollTo({
+        top: 0,
+        behavior: 'instant',
+      });
+    },
+    // FIXME IE don't support 'youtube-player'
+    fixedPageMove() {
+      const youtubeY = this.$refs.secondYoutube.$el.offsetTop;
+      const afterScrollY = this.$root.cacheWindow.pageYOffset;
+      if (!this.$root.isMobileSize) {
+        if (this.beforeScrollY > 8) this.$refs.pageContent.style.transitionProperty = 'none';
+
+        const deltaScrollY = afterScrollY - this.beforeScrollY;
+        const youtubeYLess = youtubeY - this.$root.windowHeight;
+
+        if ((deltaScrollY > 0 && afterScrollY > this.$refs.lightContent.offsetTop)
+          || (deltaScrollY > 0 && afterScrollY <= youtubeYLess)
+          || (deltaScrollY < 0 && this.pageScrollY === -this.$root.windowHeight * 3)) return;
+
+        if (deltaScrollY > 0 && afterScrollY >= youtubeYLess) {
+          if (youtubeY - afterScrollY >= 0) {
+            this.pageScrollY = -((this.$root.windowHeight * 3) + (afterScrollY - youtubeYLess));
+          } else {
+            this.pageScrollY = -this.$root.windowHeight * 4;
+          }
+        } else if (deltaScrollY < 0 && afterScrollY < youtubeY) {
+          if (afterScrollY - youtubeYLess >= 0) {
+            this.pageScrollY = -((this.$root.windowHeight * 4) - (youtubeY - afterScrollY));
+          } else {
+            this.pageScrollY = -this.$root.windowHeight * 3;
+          }
+        }
+        this.beforeScrollY = afterScrollY;
+      }
+
+      // second youtube
+      if (!this.secondYoutube) return;
+      if (!this.isSecondYoutubePlay && afterScrollY > youtubeY - (this.$root.windowHeight / 2) && afterScrollY < youtubeY + (this.$root.windowHeight / 2)) {
+        this.isSecondYoutubePlay = true;
+        this.secondYoutube.playVideo();
+      } else if (this.isSecondYoutubePlay && (afterScrollY > youtubeY + (this.$root.windowHeight / 2) || afterScrollY < youtubeY - (this.$root.windowHeight / 2))) {
+        this.isSecondYoutubePlay = false;
+        this.secondYoutube.pauseVideo();
+      }
     },
     // TODO dynamic set this.$root.windowWidth
     resizeHandler() {
       if ((this.beforeWindowWidth < 576 && this.$root.windowWidth < 576) || (this.beforeWindowWidth >= 576 && this.$root.windowWidth >= 576)) return;
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
-        this.$root.cacheWindow.location.reload();
+        if (this.beforeWindowWidth < 576 && this.$root.windowWidth >= 576) {
+          this.$root.cacheWindow.scrollTo({
+            top: 0,
+            behavior: 'instant',
+          });
+          this.$root.cacheHTML.className = '';
+          this.bodyClass.remove('overflow-visible');
+          this.pageScrollY = 0;
+        } else if (this.beforeWindowWidth >= 576 && this.$root.windowWidth < 576) {
+          this.$root.cacheHTML.className = 'overflow-visible';
+          this.bodyClass.add('overflow-visible');
+          this.pageScrollY = 0;
+        }
         this.beforeWindowWidth = this.$root.windowWidth;
       }, 400);
     },
@@ -184,14 +236,14 @@ export default {
         const deltaX = moveEndX - this.touchStartX;
         const deltaY = moveEndY - this.touchStartY;
         // first youtube
-        // if (this.firstYoutube) {
-        //   if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.pauseVideo();
-        // }
+        if (this.firstYoutube) {
+          if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
+        }
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -this.$root.windowHeight * 2) return;
-          if (this.pageScrollY === -this.$root.windowHeight) {
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(0vh)';
-            // this.$root.cacheHTML.className = 'overflow-visible';
+          if (this.pageScrollY === -this.$root.windowHeight * 3) return;
+          if (this.pageScrollY === -this.$root.windowHeight * 2) {
+            this.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
+            this.$root.cacheHTML.className = 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
           // first youtube
@@ -201,9 +253,9 @@ export default {
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
-            // this.$root.cacheHTML.className = '';
+          if (this.pageScrollY === -this.$root.windowHeight * 3) {
+            this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
+            this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
             // first youtube
             if (this.firstYoutube) {
@@ -215,7 +267,6 @@ export default {
       }, 200);
     },
     // FIXME IE don't support 'youtube-player'
-    // TODO set first youtube pause timing
     pageScroll(evt) {
       if (this.$root.isMobileSize || this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
       evt.preventDefault();
@@ -227,12 +278,17 @@ export default {
         setTimeout(() => {
           this.canScroll = true;
         }, 600);
+        // const scrollDirection = -evt.wheelDelta || evt.detail;
         const scrollDirection = evt.deltaY;
+        // first youtube
+        if (this.firstYoutube) {
+          if (this.pageScrollY === -this.$root.windowHeight * 2) this.firstYoutube.pauseVideo();
+        }
         if (scrollDirection > 0) {
-          if (this.pageScrollY === -this.$root.windowHeight * 2) return;
-          if (this.pageScrollY === -this.$root.windowHeight) {
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(0vh)';
-            // this.$root.cacheHTML.className = 'overflow-visible';
+          if (this.pageScrollY === -this.$root.windowHeight * 3) return;
+          if (this.pageScrollY === -this.$root.windowHeight * 2) {
+            this.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
+            this.$root.cacheHTML.className = 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
           // first youtube
@@ -242,14 +298,14 @@ export default {
           this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            // this.$refs.pageContent.style.transitionProperty = 'transform';
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
-            // this.$root.cacheHTML.className = '';
+          if (this.pageScrollY === -this.$root.windowHeight * 3) {
+            this.$refs.pageContent.style.transitionProperty = 'transform';
+            this.$refs.photoPageContent.$el.style.transform = 'translateY(100vh)';
+            this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
             // first youtube
             if (this.firstYoutube) {
-              this.firstYoutube.pauseVideo();
+              this.firstYoutube.playVideo();
             }
           }
           this.pageScrollY += this.$root.windowHeight;
@@ -269,43 +325,19 @@ export default {
       }
     },
     // FIXME IE don't support 'youtube-player'
-    firstYoutubeControlInMobile(evt) {
-      this.youtubeControlInMobile(evt, 'firstYoutube', 'isFirstYoutubePlay', () => {
-        if (!this.firstYoutube || !this.$root.isMobileSize) {
-          return false;
-        }
-        return true;
-      });
-    },
-    secondYoutubeControlInMobile(evt) {
-      this.youtubeControlInMobile(evt, 'secondYoutube', 'isSecondYoutubePlay', () => {
-        if (!this.secondYoutube) {
-          return false;
-        }
-        return true;
-      });
-    },
     thirdYoutubeControl(evt) {
-      this.youtubeControlInMobile(evt, 'thirdYoutube', 'isThirdYoutubePlay', () => {
-        if (!this.thirdYoutube || !this.canThirdYoutubePlay) {
-          return false;
-        }
-        return true;
-      });
-    },
-    youtubeControlInMobile(evt, youtubeRef, isYoutubePlay, fn) {
-      if (!fn()) return;
+      if (!this.thirdYoutube) return;
+      if (!this.canThirdYoutubePlay) return;
       evt.preventDefault();
       const scrollY = this.$root.cacheWindow.pageYOffset;
-      const youtubeY = this.$refs[youtubeRef].$el.getBoundingClientRect().top + scrollY;
-      const WH = this.$root.windowHeight;
+      const youtubeY = this.$refs.thirdYoutube.$el.getBoundingClientRect().top + scrollY;
 
-      if (!this[isYoutubePlay] && scrollY > youtubeY - (WH / 2) && scrollY < youtubeY + (WH / 2)) {
-        this[isYoutubePlay] = true;
-        this[youtubeRef].playVideo();
-      } else if (this[isYoutubePlay] && (scrollY > youtubeY + (WH / 2) || scrollY < youtubeY - (WH / 2))) {
-        this[isYoutubePlay] = false;
-        this[youtubeRef].pauseVideo();
+      if (!this.isThirdYoutubePlay && scrollY > youtubeY - (this.$root.windowHeight / 2) && scrollY < youtubeY + (this.$root.windowHeight / 2)) {
+        this.isThirdYoutubePlay = true;
+        this.thirdYoutube.playVideo();
+      } else if (this.isThirdYoutubePlay && (scrollY > youtubeY + (this.$root.windowHeight / 2) || scrollY < youtubeY - (this.$root.windowHeight / 2))) {
+        this.isThirdYoutubePlay = false;
+        this.thirdYoutube.pauseVideo();
       }
     },
   },
@@ -322,7 +354,6 @@ export default {
 .page-content {
   width: 100%;
   background-color: #000;
-  z-index: 9;
   @media screen and (min-width: 576px) {
     position: fixed;
     top: 0;
@@ -330,35 +361,20 @@ export default {
   }
 }
 
-.youtube--scroll {
-  @media screen and (min-width: 576px) {
-    transform: translateY(100vh);
-    transition: transform 1s;
-  }
-}
-
-.scroll-content {
-  position: static;
-  @media screen and (min-width: 576px) {
-    position: relative;
-  }
-}
-
 .light-content {
   background-color: #fff;
-  position: relative;
   // TODO do youtube need full screen? if yes, remove "max-width: 960px;" and add it in other places
   // max-width: 960px;
   // margin-right: auto;
   // margin-left: auto;
 }
 
-// .photo-page-content {
-//   @media screen and (min-width: 576px) {
-//     transform: translateY(100vh);
-//     transition: transform 1s;
-//   }
-// }
+.photo-page-content {
+  @media screen and (min-width: 576px) {
+    transform: translateY(100vh);
+    transition: transform 1s;
+  }
+}
 .last-content {
   display: flex;
   flex-wrap: wrap;

@@ -42,7 +42,6 @@ import OpeningLine from './components/OpeningLine.vue';
 import Youtube from './components/Youtube.vue';
 import ContentLight from './components/ContentLight.vue';
 import Share from './components/Share.vue';
-import Logo from '../components/Logo.vue';
 import Editor from '../components/Editor.vue';
 import Relate from './components/Relate.vue';
 import Feedback from '../components/Feedback.vue';
@@ -59,7 +58,6 @@ export default {
     Youtube,
     ContentLight,
     Share,
-    Logo,
     Editor,
     Relate,
     Feedback,

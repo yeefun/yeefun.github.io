@@ -46,8 +46,11 @@ export default {
 
 .fixed-page {
   // background-color: #000;
-  position: relative;
+  // position: relative;
+  position: absolute;
   height: 100vh;
+  width: 100%;
+  top: 0;
   &__photo {
     // position: absolute;
     // width: 100%;

@@ -35,7 +35,7 @@
 
 .photo-fade {
   &-enter-active {
-    transition: opacity 1s 0.5s;
+    transition: opacity 0.5s 0.25s;
   }
   &-leave-active {
     transition: opacity 0.5s;
@@ -45,8 +45,9 @@
   }
 }
 .caption-fade {
+  // CONFUSED caption don't need delay 0.7s (0.5 + 0.2), why?
   &-enter-active, &-leave-active {
-    transition: opacity 0.5s 1s;
+    transition: opacity 0.25s 0.5s;
   }
   &-enter, &-leave-to {
     opacity: 0;
