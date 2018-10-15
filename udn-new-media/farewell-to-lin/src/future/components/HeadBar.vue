@@ -39,14 +39,24 @@
             <li><a href="../" target="_blank">台灣是我們的共業</a></li>
           </ul>
         </nav>
+        <section class="logo">
+          <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
+          <img src="../../assets/Logo/whiteUdnNews.png" alt="">
+          <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+        </section>
       </div>
     </transition>
   </header>
 </template>
 
 <script>
+// import Logo from '../../components/Logo.vue';
+
 export default {
   name: 'HeadBar',
+  // components: {
+  //   Logo,
+  // },
   props: ['isHeadBarLight'],
   data() {
     return {
@@ -88,7 +98,7 @@ export default {
       &-udn {
         width: 33.69px;
         height: 33px;
-        width: auto;
+        // width: auto;
         cursor: pointer;
         fill: #040000;
         &.active {
@@ -154,7 +164,7 @@ export default {
           transition: border-color 0.5s;
           margin-right: 28px;
           width: 188px;
-          cursor: pointer;
+          // cursor: pointer;
           &:hover {
             border-color: #fff;
           }
@@ -174,12 +184,15 @@ export default {
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &__anchor {
       &-menu {
         position: relative;
         top: 14.6%;
-        margin-right: auto;
-        margin-left: auto;
+        // margin-right: auto;
+        // margin-left: auto;
         font-size: 2rem;
         display: flex;
         flex-direction: column;
@@ -202,14 +215,18 @@ export default {
           border-color: #fff;
           margin-bottom: 12px;
         }
-        &--outer {
-          cursor: pointer;
-        }
+        // &--outer {
+        //   cursor: pointer;
+        // }
       }
     }
   }
   & a {
     color: #fff;
+  }
+  & .logo {
+    position: relative;
+    top: 40%;
   }
 }
 </style>

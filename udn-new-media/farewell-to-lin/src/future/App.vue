@@ -16,9 +16,16 @@
         <div class="last-content__share">
           <Share></Share>
         </div>
+        <section class="logo">
+          <img src="../assets/Logo/blackUdnEveNews.png" alt="">
+          <img src="../assets/Logo/blackUdnNews.png" alt="">
+          <img class="mb-0" src="../assets/Logo/blackNewMidia.png" alt="">
+        </section>
         <Editor></Editor>
       </div>
+      <Feedback v-if="$root.windowWidth < 768"></Feedback>
       <Relate></Relate>
+      <Feedback v-if="$root.windowWidth >= 768"></Feedback>
       <FbComment></FbComment>
       <Footer></Footer>
     </div>
@@ -35,8 +42,10 @@ import OpeningLine from './components/OpeningLine.vue';
 import Youtube from './components/Youtube.vue';
 import ContentLight from './components/ContentLight.vue';
 import Share from './components/Share.vue';
+import Logo from '../components/Logo.vue';
 import Editor from '../components/Editor.vue';
 import Relate from './components/Relate.vue';
+import Feedback from '../components/Feedback.vue';
 import FbComment from './components/FbComment.vue';
 import Footer from '../components/Footer.vue';
 
@@ -50,8 +59,10 @@ export default {
     Youtube,
     ContentLight,
     Share,
+    Logo,
     Editor,
     Relate,
+    Feedback,
     FbComment,
     Footer,
   },
@@ -196,6 +207,8 @@ export default {
 </script>
 
 <style lang="scss">
+// @import './css/common.scss';
+
 .page-content {
   width: 100%;
   // background-color: #000;
@@ -232,12 +245,26 @@ export default {
     margin-left: auto;
     margin-right: auto;
     flex-shrink: 0;
+    padding-right: 24px;
+    padding-left: 24px;
     @media screen and (min-width: 768px) {
       width: 50%;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
   &__share {
     margin-bottom: 48px;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  & > img {
+    width: 138px;
+    height: auto;
+    margin-bottom: 12px;
   }
 }
 </style>

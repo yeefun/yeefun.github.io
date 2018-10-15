@@ -13,7 +13,7 @@
       <div>
         <p>何定照、洪欣慈</p>
         <p>張心慈</p>
-        <p>蘇健忠、林伯東</p>
+        <p>蘇健忠、林伯東、林澔一</p>
         <p>報系資料照</p>
         <p>黃微庭</p>
         <p>林昱帆、楊若榆</p>
@@ -36,8 +36,11 @@ export default {
   font-size: 1.6rem;
   line-height: 1.75;
   letter-spacing: 0.8px;
-  margin-bottom: 124px;
+  margin-bottom: 120px;
   color: #2b2b2b;
+  margin-top: 30px;
+  // padding-left: 24px;
+  // padding-right: 24px;
   @media screen and (min-width: 768px) {
     margin-bottom: 0;
   }

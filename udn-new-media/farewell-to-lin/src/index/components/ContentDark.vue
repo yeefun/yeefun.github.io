@@ -10,7 +10,7 @@
     </div>
     <figure class="content__photo-wrapper content__photo-wrapper--dark">
       <img class="content__photo" src="../assets/ContentImg/mob_legacy.jpg" alt="">
-      <figcaption class="content__photo-caption content__photo-caption--dark">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+      <figcaption class="content__photo-caption content__photo-caption--dark">1978年首演的《薪傳》以舞蹈描述先人在台灣開拓的艱辛。圖／雲門舞集提供</figcaption>
     </figure>
     <div class="content__text">
       <p>「我只是一個愛跳舞的小孩，沒有學太多舞就來到雲門，因為看到一個舞叫《薪傳》。」在舞團超過30年、現任助理藝術總監的李靜君回憶，當時她只是個16、17歲的年輕女孩，看完《薪傳》後感動到連鼓掌都忘了，整個人像傻掉一樣，毅然決然放棄原本想跳的芭蕾舞，轉而來到雲門舞集，一待至今。</p>
@@ -33,7 +33,7 @@
     </div>
     <figure class="content__photo-wrapper content__photo-wrapper--dark">
       <img class="content__photo" src="../assets/ContentImg/mob_wanderers.jpg" alt="">
-      <figcaption class="content__photo-caption content__photo-caption--dark">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+      <figcaption class="content__photo-caption content__photo-caption--dark">1994年首演的《流浪者之歌》是雲門舞集風格轉變的代表作。圖／雲門舞集提供</figcaption>
     </figure>
     <div class="content__text">
       <p>20多年前一位計程車司機給了林懷民繼續前行的力量，那麼去年宣布退休後，大家都怎麼說呢？林懷民溫和地笑了：「現在他們都說，林老師，你辛苦了，好好休息。」最後一句話，是用閩南語說的。</p>
@@ -52,7 +52,7 @@
     </div>
     <figure class="content__photo-wrapper content__photo-wrapper--dark">
       <img class="content__photo" src="../assets/ContentImg/mob_watermoon.jpg" alt="">
-      <figcaption class="content__photo-caption content__photo-caption--dark">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+      <figcaption class="content__photo-caption content__photo-caption--dark">1998年首演的《水月》運用太極導引的原理創作，舞者的肢體與明鏡、流水相互輝映，被國際譽為「當代舞蹈的里程碑」。圖／雲門舞集提供</figcaption>
     </figure>
     <div class="content__text">
       <p>1997年做談228、白色恐怖的《家族合唱》，隔年做精緻抽象的《水月》，林懷民也曾被疑問是否背棄什麼，但他認為，兩個作品只是反映不同時代的台灣。「一切要泛政治化嗎？一定要分左右前後嗎？」大家要這樣分，就變成這種局面，「但都不是，藝術與生活而已。」</p>

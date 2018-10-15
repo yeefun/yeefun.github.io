@@ -1,7 +1,7 @@
 <template>
   <article class="content">
     <div class="content-wrapper">
-      <h2 class="content__title content__title--light">永遠都在補課的<br>難題</h2>
+      <h2 class="content__title content__title--light">永遠都在補課的難題</h2>
       <div class="content__text content__text--light">
         <p>雲門園區內蓬勃花木中，有棵林懷民母親親手培育送給兒子的老梅樹，跟著雲門從燒毀的舊排練場到今日的新園區，林懷民每次談到此樹，總顯深情，說起已逝的父母，卻是滿滿的悔憾。這些悔憾，讓他至今每次旅行都帶著父母的照片在旅館供起來，對著他們說話，大大小小的記憶都是不捨。</p>
       </div>
@@ -15,7 +15,7 @@
       <figure class="content__photo-wrapper content__photo-wrapper--light">
         <img class="content__photo" src="../assets/ContentImg/mob_childhood.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/web_childhood.jpg" v-else alt="">
-        <figcaption class="content__photo-caption content__photo-caption--light">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption content__photo-caption--light">林懷民一家人。左一為幼年時的林懷民。圖／雲門舞集提供</figcaption>
       </figure>
       <div class="content__text content__text--light">
         <p>又譬如，爸爸過世後，林懷民總在周六陪媽媽，周日由弟弟陪。有年林懷民弟弟出國，他周六在台中演完，準備周日回家，先打電話問「媽媽您好嗎」，聽到媽媽答「一個人吃飯哪有什麼好？」他聽到簡直快瘋掉，趕快衝回家。</p>
@@ -40,7 +40,7 @@
       <figure class="content__photo-wrapper content__photo-wrapper--light">
         <img class="content__photo" src="../assets/ContentImg/mob_huimin.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/web_huimin.jpg" v-else alt="">
-        <figcaption class="content__photo-caption content__photo-caption--light">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption content__photo-caption--light">林懷民去年預告將於2019年退休，他坦言一部分原因與算命有關。記者蘇健忠／攝影</figcaption>
       </figure>
       <div class="content__text content__text--light">
         <p>林懷民退休前最後一齣舞作《關於島嶼》裡有一段金剛經偈語：「一切有為法／如夢幻泡影／如露亦如電／應作如是觀」，反映著林懷民的生死觀。林懷民認為，夢幻泡影是人世間的必然，「你覺得你是例外嗎？沒有例外。」林懷民說得凜然，彷彿直視生死。</p>

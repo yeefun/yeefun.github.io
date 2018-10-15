@@ -31,9 +31,16 @@
             <div class="last-content__share">
               <Share></Share>
             </div>
+            <section class="logo">
+              <img src="../assets/Logo/blackUdnEveNews.png" alt="">
+              <img src="../assets/Logo/blackUdnNews.png" alt="">
+              <img class="mb-0" src="../assets/Logo/blackNewMidia.png" alt="">
+            </section>
             <Editor></Editor>
           </div>
+          <Feedback v-if="$root.windowWidth < 768"></Feedback>
           <Relate></Relate>
+          <Feedback v-if="$root.windowWidth >= 768"></Feedback>
           <FbComment></FbComment>
           <Footer></Footer>
         </div>
@@ -56,8 +63,10 @@ import PhotoPageContent from './components/PhotoPageContent.vue';
 import ContentDark from './components/ContentDark.vue';
 import ContentLight from './components/ContentLight.vue';
 import FinalScene from './components/FinalScene.vue';
+// import Logo from '../components/Logo.vue';
 import Editor from '../components/Editor.vue';
 import Relate from './components/Relate.vue';
+import Feedback from '../components/Feedback.vue';
 import FbComment from './components/FbComment.vue';
 import Footer from '../components/Footer.vue';
 
@@ -74,11 +83,13 @@ export default {
     ContentDark,
     ContentLight,
     FinalScene,
+    // Logo,
     HeadBar,
     Editor,
     Relate,
     FbComment,
     Footer,
+    Feedback,
   },
   data() {
     return {
@@ -87,16 +98,16 @@ export default {
       scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
       // throttle touchpad mousewheel event & opening
-      // canScroll: true,
-      canScroll: false,
+      canScroll: true,
+      // canScroll: false,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      // isHeadBarShow: true,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
+      // isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -385,13 +396,27 @@ export default {
     min-width: 201.62px;
     margin-left: auto;
     margin-right: auto;
+    padding-right: 24px;
+    padding-left: 24px;
     flex-shrink: 0;
     @media screen and (min-width: 768px) {
       width: 50%;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
   &__share {
     margin-bottom: 48px;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  & > img {
+    width: 138px;
+    height: auto;
+    margin-bottom: 12px;
   }
 }
 // .youtube-third {

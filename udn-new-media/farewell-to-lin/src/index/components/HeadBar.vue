@@ -31,8 +31,8 @@
             <transition name="anchor-slide">
               <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
                 <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="firstAnchorMove" @touchstart.stop="firstAnchorMove">退休前心內話</li>
-                <li class.prevent="header-bar__anchor-item header-bar__inner-anchor-item" @click="secondAnchorMove" @touchstart.stop="secondAnchorMove">預告的背後故事</li>
-                <li class.prevent="header-bar__anchor-item header-bar__inner-anchor-item" @click="thirdAnchorMove" @touchstart.stop="thirdAnchorMove">給台灣的情書</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="secondAnchorMove" @touchstart.stop="secondAnchorMove">預告的背後故事</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="thirdAnchorMove" @touchstart.stop="thirdAnchorMove">給台灣的情書</li>
               </ul>
             </transition>
           </li>
@@ -55,6 +55,11 @@
             <li><a href="/future.html" target="_blank">雲門大船的未來進行式</a></li>
           </ul>
         </nav>
+        <section class="logo">
+          <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
+          <img src="../../assets/Logo/whiteUdnNews.png" alt="">
+          <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+        </section>
       </div>
     </transition>
   </header>
@@ -149,7 +154,7 @@ export default {
         // height: auto;
         width: 33.69px;
         height: 33px;
-        width: auto;
+        // width: auto;
         cursor: pointer;
         fill: #040000;
         &.active {
@@ -213,7 +218,7 @@ export default {
         box-sizing: border-box;
         border-width: 2px;
         border-style: solid;
-        cursor: pointer;
+        // cursor: pointer;
         padding-left: 22.4px;
         background-color: transparent;
         // padding-left: 22.4px;
@@ -273,12 +278,15 @@ export default {
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &__anchor {
       &-menu {
         position: relative;
         top: 14.6%;
-        margin-right: auto;
-        margin-left: auto;
+        // margin-right: auto;
+        // margin-left: auto;
         font-size: 2rem;
         display: flex;
         flex-direction: column;
@@ -302,7 +310,7 @@ export default {
         }
         &--outer {
           padding-left: 12px;
-          cursor: pointer;
+          // cursor: pointer;
         }
       }
     }
@@ -314,12 +322,16 @@ export default {
         border-color: transparent;
         background-color: rgba(236, 236, 236, 0.5);
         margin-bottom: 5px;
-        cursor: pointer;
+        // cursor: pointer;
       }
     }
   }
   & a {
     color: #fff;
+  }
+  & .logo {
+    position: relative;
+    top: 28%;
   }
 }
 </style>

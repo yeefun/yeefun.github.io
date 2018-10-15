@@ -145,18 +145,23 @@
     }
 
     &-caption {
-      width: 100%;
+      // width: 100%;
       font-size: 1.2rem;
-      line-height: 2.33;
+      // line-height: 2.33;
+      line-height: 2;
       letter-spacing: 1px;
       // padding-left: 32px;
       padding-left: 24px;
+      padding-right: 24px;
       // color: #bcbcbc;
       margin-top: 8px;
       &--dark {
         position: absolute;
-        height: 50px;
-        line-height: 50px;
+        // height: 50px;
+        // line-height: 50px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        margin-top: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.8);
         // color: #bcbcbc;
@@ -165,6 +170,7 @@
         @media screen and (min-width: 768px) {
           text-align: right;
           padding-left: 0;
+          padding-right: 0;
         }
       }
       &--photo-page {
@@ -174,14 +180,16 @@
         right: 10%;
         bottom: 70px;
         color: #bcbcbc;
-        padding-left: 0;
-        text-align: center;
+        // padding-left: 0;
+        padding: 12px 20px;
+        // text-align: center;
         box-sizing: border-box;
         margin-top: 0;
-        @media screen and (min-width: 768px) {
-          padding-left: 28px;
-          text-align: left;
-        }
+        // @media screen and (min-width: 768px) {
+          // padding-left: 28px;
+          // text-align: left;
+          // padding-right: 28px;
+        // }
       }
     }
   }

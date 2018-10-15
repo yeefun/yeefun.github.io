@@ -6,28 +6,28 @@
         <a href="https://udn.com/upf/newmedia/2018_data/childabuse/help.html" target="_blank">
           <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/helpkid.d99a31d.jpg" alt="">
           <!-- <div class="relate__report-img relate__report-img-1"></div> -->
-          <p>家扶公布十大兒保新聞 半數與性侵相關</p>
+          <p>台灣無論好壞<br>都是我們的共業</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
-        <a href="https://udn.com/news/story/7272/2872246" target="_blank">
+        <a href="https://udn.com/news/story/7266/3379502" target="_blank">
           <img  src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/badinkid.f5002ee.jpg" alt="">
           <!-- <div class="relate__report-img relate__report-img-2"></div> -->
-          <p>流沙中年 棄6萬月薪顧爸媽我在貧窮</p>
+          <p>45年舞作精選<br>林懷民：穿越時代與感情</p>
         </a>
       </div>
       <div class="relate__report relate__report--left">
-        <a href="https://udn.com/news/story/7266/2805019" target="_blank">
+        <a href="https://reader.udn.com/reader/story/7012/3304480" target="_blank">
           <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/braindead.8427313.jpg" alt="">
           <!-- <div class="relate__report-img relate__report-img-3"></div> -->
-          <p>兒虐6成腦傷 每4人有1人重殘</p>
+          <p :class="{ 'mb-0': $root.windowWidth > 375.98 }">林懷民舞作精選<br>看台灣小船的漂盪</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
-        <a href="https://health.udn.com/health/story/5999/2769721" target="_blank">
+        <a href="https://theme.udn.com/theme/story/6774/3325945" target="_blank">
           <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/ghost.58c8ec0.jpg" alt="">
           <!-- <div class="relate__report-img relate__report-img-4"></div> -->
-          <p>尋找幽靈受虐兒 漏打疫苗挖線索</p>
+          <p class="mb-0">池上稻浪間<br>雲門再舞書法《松煙》</p>
         </a>
       </div>
     </div>
@@ -41,12 +41,15 @@ export default {
 </script>
 
 <style lang="scss">
+// @import '../css/common.scss';
+
 .relate {
   // ASK color?
   // width: 50%;
   width: 100%;
   padding-right: 24px;
   padding-left: 24px;
+  margin-bottom: 80px;
   // max-width: 960px;
   // position: relative;
   // margin-left: auto;
@@ -57,6 +60,7 @@ export default {
     margin-right: 0;
     padding-right: 0;
     padding-left: 0;
+    margin-bottom: 0;
   }
   // background-color: #fff;
   & h4 {
@@ -96,14 +100,15 @@ export default {
     & p {
       // ASK
       // font-size: 1.2rem;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      line-height: 1.67;
+      line-height: 1.5;
+      // line-height: 1.67;
       margin-bottom: 20px;
-      @media screen and (min-width: 576px) {
-        line-height: 1.5;
-        font-size: 1.6rem;
-      }
+      // @media screen and (min-width: 576px) {
+        // line-height: 1.5;
+        // font-size: 1.6rem;
+      // }
     }
     &--left {
       padding-right: 12px;

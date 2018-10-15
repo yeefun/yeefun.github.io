@@ -1,4 +1,5 @@
 html, body {
+  // TODO hidden html
   // CONFUSED max-height can work on ipad? or height?
   // max-height: 100%;
   height: 100%;
@@ -20,4 +21,9 @@ html {
 
 a {
   text-decoration: none;
+  cursor: pointer;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
 }

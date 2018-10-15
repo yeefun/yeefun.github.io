@@ -25,15 +25,15 @@ export default {
       photos: [{
         name: 'legacy',
         url: photoLegacy,
-        caption: '圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影',
+        caption: '1978年首演的《薪傳》以舞蹈描述先人在台灣開拓的艱辛。圖／雲門舞集提供，劉振祥攝影',
       }, {
         name: 'wanderers',
         url: photoWanderers,
-        caption: '圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影',
+        caption: '1994年首演的《流浪者之歌》是雲門舞集風格轉變的代表作。圖／雲門舞集提供，游輝弘攝影',
       }, {
         name: 'watermoon',
         url: photoWatermoon,
-        caption: '圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影',
+        caption: '1998年首演的《水月》運用太極導引的原理創作，舞者的肢體與明鏡、流水相互輝映，被國際譽為「當代舞蹈的里程碑」。圖／雲門舞集提供，劉振祥攝影',
       }],
     };
   },

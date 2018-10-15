@@ -8,7 +8,7 @@
       <figure class="content__photo-wrapper">
         <img class="content__photo" src="../assets/ContentImg/huaimin_mob.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/huaimin_web.jpg" v-else alt="">
-        <figcaption class="content__photo-caption">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption">林懷民認為，很多作品的消失都是必然，「我們要一個模仿品還是要做一個新鮮的？」記者蘇健忠／攝影</figcaption>
       </figure>
       <div class="content__text">
         <p>林懷民說，雲門的舞者雖然都一直在上站樁、打坐、太極導引這些雲門系統「必修課」，以後大概也會繼續，但編舞和訓練向來表裡一體，編舞者編舞時，往往是因舞者而生，換成其他舞者，身體可能完全不同，如此舞一定要改，才能連貫起畫面的前文後義。</p>
@@ -30,7 +30,7 @@
       <figure class="content__photo-wrapper">
         <img class="content__photo" src="../assets/ContentImg/teacher_mob.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/teacher_web.jpg" v-else alt="">
-        <figcaption class="content__photo-caption">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption">助理藝術總監李靜君每日在排練場，指導動作並引導舞者透過訓練挖掘自己的身體。記者林澔一／攝影</figcaption>
       </figure>
       <div class="content__text">
         <p>李靜君說，林懷民老師常說自己是個大垃圾桶，裡面倒來倒去，都可以倒出一個新的作品；韭菜跟蛋一般人只會想到韭菜炒蛋，「但林老師不是，他說他可以將這兩個食材變出韭菜蛋糕」，在傳統技術的基礎之上，變出完全不同的新面貌。</p>
@@ -42,7 +42,7 @@
       <figure class="content__photo-wrapper">
         <img class="content__photo" src="../assets/ContentImg/teacher2_mob.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/teacher2_web.jpg" v-else alt="">
-        <figcaption class="content__photo-caption">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption">雲門舞集作品中舞蹈元素多元，長期、紮實的身體訓練讓舞者培養出高度專注力，被國際讚賞。記者蘇健忠／攝影</figcaption>
       </figure>
       <div class="content__text">
         <p>李靜君說，國際舞評最常讚賞雲門舞者的「專注力」，舞者的舞技之所以能看起來收放自如、完美，都是因為長期訓練下來累積出的全神貫注。</p>
@@ -58,7 +58,7 @@
       <figure class="content__photo-wrapper">
         <img class="content__photo" src="../assets/ContentImg/huaimin2_mob.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/huaimin2_web.jpg" v-else alt="">
-        <figcaption class="content__photo-caption">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption">林懷民從雲門創立至今，每場彩排幾乎都親自到場指導，如今將退休，他期待年輕人能有更多發揮。記者林伯東／攝影</figcaption>
       </figure>
       <div class="content__text">
         <p>資深舞者與年輕一輩對雲門的未來也都充滿樂觀與期待。在舞團35年的李靜君認為，就讓年輕人去衝撞，不同世代一定有自己想說的話，和屬於那個世代的渴望，努力去衝一定會有自己的一片天，「最好是面貌不一樣，還一樣幹嘛呢？」</p>
@@ -68,7 +68,7 @@
       <figure class="content__photo-wrapper">
         <img class="content__photo" src="../assets/ContentImg/dancer_mob.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/dancer_web.jpg" v-else alt="">
-        <figcaption class="content__photo-caption">圖說預留的位置&ensp;/&ensp;誰誰&ensp;攝影</figcaption>
+        <figcaption class="content__photo-caption">黃立捷在這次雲門45周年「林懷民舞作精選」中擔綱演出經典作品《風．影》裡黑天使橋段。記者蘇健忠／攝影</figcaption>
       </figure>
       <div class="content__text">
         <p>不過黃立捷認為，他在雲門這4年來都跳林老師的作品，身體有著明顯的改變和成長，之後將開始跳不同編舞家的作品，「我的身體可以變出什麼不一樣的東西，這是我最期待的。」</p>
@@ -138,17 +138,20 @@ export default {
     }
 
     &-caption {
-      width: 100%;
+      // width: 100%;
       font-size: 1.2rem;
-      line-height: 2.33;
+      // line-height: 2.33;
+      line-height: 2;
       letter-spacing: 1px;
       // padding-left: 32px;
       padding-left: 24px;
+      padding-right: 24px;
       // color: #bcbcbc;
       margin-top: 8px;
       @media screen and (min-width: 768px) {
         text-align: right;
         padding-left: 0;
+        padding-right: 0;
       }
     }
   }

@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-container">
       <span>
-        <a class="footer-link" href="http://www.udngroup.com" target="_blank">聯合報系</a>
+        <a class="footer-link no-padding" href="http://www.udngroup.com" target="_blank">聯合報系</a>
       </span>
       <span>
         <a class="footer-link" href="https://www.facebook.com/udnplus" target="_blank">粉絲團</a>
@@ -31,6 +31,7 @@ export default {
   margin-top: 64px;
   margin-bottom: 48px;
   font-size: 1.4rem;
+  line-height: 1.8;
   @media screen and (min-width: 768px) {
     padding-right: 0;
     padding-left: 0;
@@ -46,9 +47,13 @@ export default {
     border-right: 1px solid #dcdddd;
     padding-left: 12px;
     padding-right: 12px;
-    cursor: pointer;
+    // cursor: pointer;
     &.no-border {
       border-right: none;
+      padding-right: 0;
+    }
+    &.no-padding {
+      padding-left: 0;
     }
     &:hover {
       color: #2b2b2b;
