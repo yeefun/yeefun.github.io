@@ -2,7 +2,7 @@
   <!-- <section class="youtube" :style="{ 'padding-bottom': aspectRatio }"> -->
   <section class="youtube">
       <!-- TODO add "origin" -->
-    <iframe class="youtube__player" id="first-youtube" :src="`https://www.youtube.com/embed/k5_iIp_Rab8?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1`" frameborder="0"></iframe>
+    <iframe class="youtube__player" id="first-youtube" :src="`https://www.youtube.com/embed/k5_iIp_Rab8?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&origin=http://yeefun.github.io/udn-new-media/farewell-to-lin/dist`" frameborder="0" @load="iframe"></iframe>
     <!-- <div class="test"></div> -->
   </section>
 </template>
@@ -10,11 +10,11 @@
 <script>
 export default {
   name: 'Youtube',
-  // methods: {
-  //   iframe() {
-  //     console.log('hi!');
-  //   },
-  // },
+  methods: {
+    iframe(evt) {
+      console.log(evt.currentTarget.contentWindow.document);
+    },
+  },
   // computed: {
   //   aspectRatio() {
   //     if (this.$root.isMobileSize) return `${(this.$root.windowHeight / this.$root.windowWidth) * 100}%`;
@@ -41,7 +41,7 @@ export default {
     width: 100%;
     height: 100%;
     position: absolute;
-    pointer-events: none;
+    // pointer-events: none;
     // top: 0;
     // left: 0;
   }
