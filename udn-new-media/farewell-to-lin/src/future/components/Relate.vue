@@ -41,19 +41,11 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/common.scss';
-
 .relate {
-  // ASK color?
-  // width: 50%;
   width: 100%;
   padding-right: 24px;
   padding-left: 24px;
   margin-bottom: 80px;
-  // max-width: 960px;
-  // position: relative;
-  // margin-left: auto;
-  // margin-right: auto;
   @media screen and (min-width: 768px) {
     width: 50%;
     margin-left: 0;
@@ -98,13 +90,12 @@ export default {
       margin-bottom: 10px;
     }
     & p {
-      // ASK
-      // font-size: 1.2rem;
       font-size: 1.6rem;
       font-weight: 700;
       line-height: 1.5;
       // line-height: 1.67;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      color: #2b2b2b;
       // @media screen and (min-width: 576px) {
         // line-height: 1.5;
         // font-size: 1.6rem;

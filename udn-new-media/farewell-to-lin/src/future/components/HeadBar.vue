@@ -104,8 +104,12 @@ export default {
         // width: auto;
         cursor: pointer;
         fill: #040000;
+        transition: transform 0.5s;
         &.active {
           fill: #fff;
+        }
+        &:hover {
+          transform: rotate(15deg);
         }
       }
       &-burger {

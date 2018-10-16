@@ -44,8 +44,6 @@ export default {
 // @import '../css/common.scss';
 
 .relate {
-  // ASK color?
-  // width: 50%;
   width: 100%;
   padding-right: 24px;
   padding-left: 24px;
@@ -98,14 +96,13 @@ export default {
       margin-bottom: 10px;
     }
     & p {
-      // ASK
-      // font-size: 1.2rem;
       line-height: 1.5;
       font-size: 1.6rem;
       // font-size: 1.4rem;
       font-weight: 700;
       // line-height: 1.67;
       margin-bottom: 24px;
+      color: #2b2b2b;
       // @media screen and (min-width: 768px) {
       //   line-height: 1.5;
       //   font-size: 1.6rem;

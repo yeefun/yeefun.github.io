@@ -1,5 +1,4 @@
 <template>
-<!-- FIXME use wheel event -->
   <div id="app" class="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
     <ProgressBar></ProgressBar>
     <transition name="cover-end-fade">
@@ -111,6 +110,7 @@ export default {
       isFirstYoutubePlay: false,
       isSecondYoutubePlay: false,
       isThirdYoutubePlay: false,
+      // beforeScrollY: 0,
       // isAnchorScroll: false,
     };
   },
@@ -120,6 +120,7 @@ export default {
     window.addEventListener('scroll', this.photoPageControl);
     window.addEventListener('scroll', this.headBarChangeColor);
     window.addEventListener('scroll', this.youtubeControl);
+    window.addEventListener('scroll', this.preventIframeBlockScroll);
   },
   mounted() {
     this.firstYoutube = YouTubePlayer('first-youtube');
@@ -130,6 +131,19 @@ export default {
     this.thirdYoutube.mute();
   },
   methods: {
+    preventIframeBlockScroll() {
+      if (this.pageScrollY === -this.$root.windowHeight) return;
+      const afterScrollY = this.$root.cacheWindow.pageYOffset;
+      const deltaScrollY = afterScrollY - this.beforeScrollY;
+      if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset === 0) {
+        this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
+        this.pageScrollY += this.$root.windowHeight;
+        this.firstYoutube.pauseVideo();
+        this.$root.cacheHTML.className = '';
+        this.bodyClass.remove('overflow-visible');
+      }
+      this.beforeScrollY = afterScrollY;
+    },
     photoPageControl() {
       // CONFUSED why need add windowHeight?
       // TODO OPT
@@ -152,7 +166,6 @@ export default {
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
-    // TODO dynamic set this.$root.windowWidth
     resizeHandler() {
       if ((this.beforeWindowWidth < 576 && this.$root.windowWidth < 576) || (this.beforeWindowWidth >= 576 && this.$root.windowWidth >= 576)) return;
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
@@ -184,10 +197,7 @@ export default {
         const moveEndY = evt.changedTouches[0].pageY;
         const deltaX = moveEndX - this.touchStartX;
         const deltaY = moveEndY - this.touchStartY;
-        // first youtube
-        // if (this.firstYoutube) {
-        //   if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.pauseVideo();
-        // }
+
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
           if (this.pageScrollY === -this.$root.windowHeight * 2) return;
           if (this.pageScrollY === -this.$root.windowHeight) {
@@ -196,21 +206,21 @@ export default {
             this.bodyClass.add('overflow-visible');
           }
           // first youtube
-          // if (this.firstYoutube) {
-          if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
-          // }
+          if (this.firstYoutube) {
+            if (this.pageScrollY === -this.$root.windowHeight) this.firstYoutube.playVideo();
+          }
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
-            this.$root.cacheHTML.className = '';
-            this.bodyClass.remove('overflow-visible');
-            // first youtube
-            if (this.firstYoutube) {
-              this.firstYoutube.pauseVideo();
-            }
-          }
+          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
+          // this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
+          // this.$root.cacheHTML.className = '';
+          // this.bodyClass.remove('overflow-visible');
+          // first youtube
+          // if (this.firstYoutube) {
+          // this.firstYoutube.pauseVideo();
+          // }
+          // }
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -242,15 +252,15 @@ export default {
           this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
-            this.$root.cacheHTML.className = '';
-            this.bodyClass.remove('overflow-visible');
-            // first youtube
-            if (this.firstYoutube) {
-              this.firstYoutube.pauseVideo();
-            }
-          }
+          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
+          // this.$refs.firstYoutube.$el.style.transform = 'translateY(100vh)';
+          // this.$root.cacheHTML.className = '';
+          // this.bodyClass.remove('overflow-visible');
+          // first youtube
+          // if (this.firstYoutube) {
+          //   this.firstYoutube.pauseVideo();
+          // }
+          // }
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -331,6 +341,7 @@ export default {
 }
 
 .youtube--scroll {
+  // z-index: 49;
   @media screen and (min-width: 576px) {
     transform: translateY(100vh);
     transition: transform 1s;
@@ -339,6 +350,7 @@ export default {
 
 .scroll-content {
   position: static;
+  // z-index: 49;
   @media screen and (min-width: 576px) {
     position: relative;
   }
@@ -347,18 +359,8 @@ export default {
 .light-content {
   background-color: #fff;
   position: relative;
-  // TODO do youtube need full screen? if yes, remove "max-width: 960px;" and add it in other places
-  // max-width: 960px;
-  // margin-right: auto;
-  // margin-left: auto;
 }
 
-// .photo-page-content {
-//   @media screen and (min-width: 576px) {
-//     transform: translateY(100vh);
-//     transition: transform 1s;
-//   }
-// }
 .last-content {
   display: flex;
   flex-wrap: wrap;
@@ -367,14 +369,12 @@ export default {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  // ASK break point 768 or 576?
   @media screen and (min-width: 768px) {
     padding-top: 270px;
     padding-left: 24px;
     padding-right: 24px;
   }
   &__left {
-    // width: 100%;
     min-width: 201.62px;
     margin-left: auto;
     margin-right: auto;
@@ -401,7 +401,4 @@ export default {
     margin-bottom: 12px;
   }
 }
-// .youtube-third {
-//   opacity: 0;
-// }
 </style>

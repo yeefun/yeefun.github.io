@@ -48,7 +48,9 @@ export default {
   // background-color: #000;
   // position: relative;
   position: absolute;
+  // CONFUSED why need to set 100vh, can't set 100%?
   height: 100vh;
+  // height: 100%;
   width: 100%;
   top: 0;
   &__photo {

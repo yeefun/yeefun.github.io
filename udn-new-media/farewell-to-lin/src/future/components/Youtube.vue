@@ -1,7 +1,7 @@
 <template>
   <!-- <section class="youtube" :style="{ 'padding-bottom': aspectRatio }"> -->
   <section class="youtube" @scroll.prevent>
-      <!-- TODO add "origin" -->
+      <!-- TODO add "origin=https://udn.com" -->
     <iframe class="youtube__player" id="youtube" src="https://www.youtube.com/embed/k5_iIp_Rab8?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1" frameborder="0"></iframe>
   </section>
 </template>

@@ -76,21 +76,33 @@ export default {
       pageScrollY: 0,
       youtube: null,
       isYoutubePlay: false,
+      beforeScrollY: 0,
     };
   },
   created() {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
     window.addEventListener('scroll', this.youtubeControl);
-    // window.setInterval(() => {
-    //   window.scroll();
-    // }, 1000);
+    window.addEventListener('scroll', this.preventIframeBlockScroll);
   },
   mounted() {
     this.youtube = YouTubePlayer('youtube');
     this.youtube.mute();
   },
   methods: {
+    preventIframeBlockScroll() {
+      if (this.pageScrollY === -this.$root.windowHeight) return;
+      const afterScrollY = this.$root.cacheWindow.pageYOffset;
+      const deltaScrollY = afterScrollY - this.beforeScrollY;
+      if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset === 0) {
+        this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
+        this.pageScrollY += this.$root.windowHeight;
+        this.youtube.pauseVideo();
+        this.$root.cacheHTML.className = '';
+        this.bodyClass.remove('overflow-visible');
+      }
+      this.beforeScrollY = afterScrollY;
+    },
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
@@ -130,15 +142,15 @@ export default {
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-            // this.$root.cacheHTML.className = '';
-            this.bodyClass.remove('overflow-visible');
-            // first youtube
-            if (this.youtube) {
-              this.youtube.pauseVideo();
-            }
-          }
+          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
+          // this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
+          // this.$root.cacheHTML.className = '';
+          // this.bodyClass.remove('overflow-visible');
+          // first youtube
+          // if (this.youtube) {
+          //   this.youtube.pauseVideo();
+          // }
+          // }
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -170,15 +182,15 @@ export default {
           this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
-          if (this.pageScrollY === -this.$root.windowHeight * 2) {
-            this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-            this.$root.cacheHTML.className = '';
-            this.bodyClass.remove('overflow-visible');
-            // first youtube
-            if (this.youtube) {
-              this.youtube.pauseVideo();
-            }
-          }
+          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
+          // this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
+          // this.$root.cacheHTML.className = '';
+          // this.bodyClass.remove('overflow-visible');
+          // first youtube
+          // if (this.youtube) {
+          // this.youtube.pauseVideo();
+          // }
+          // }
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -246,7 +258,6 @@ export default {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  // ASK break point 768 or 576?
   @media screen and (min-width: 768px) {
     padding-top: 187px;
     padding-left: 24px;

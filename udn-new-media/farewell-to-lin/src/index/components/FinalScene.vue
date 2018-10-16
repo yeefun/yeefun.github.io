@@ -30,7 +30,11 @@ export default {
   },
   methods: {
     finalSceneFade() {
+      // OPT
+      // CONFUSED if not add this, this event probably fires in page scroll of beginning. see: https://javascript.info/size-and-scroll-window#width-height-of-the-document
+      if (this.$root.cacheWindow.pageYOffset === 0) return;
       if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.cacheHTML.clientHeight / 4)) {
+        console.log('success');
         this.isTextFadeIn = true;
       }
     },
@@ -55,6 +59,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     color: #b98e49;
+    // font-weight: 700;
     font-size: 2rem;
     line-height: 1.83;
     letter-spacing: 2px;

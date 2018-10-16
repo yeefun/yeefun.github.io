@@ -110,7 +110,7 @@ export default {
       if (!this.$root.isMobileSize) {
         if (!this.$parent.bodyClass.contains('overflow-visible')) {
           this.$parent.$refs.firstYoutube.$el.style.transform = 'translateY(0vh)';
-          // this.$root.cacheHTML.className = 'overflow-visible';
+          this.$root.cacheHTML.className = 'overflow-visible';
           this.$parent.bodyClass.add('overflow-visible');
         }
         this.$parent.pageScrollY = -this.$root.windowHeight * 2;
@@ -155,8 +155,12 @@ export default {
         // width: auto;
         cursor: pointer;
         fill: #040000;
+        transition: transform 0.5s;
         &.active {
           fill: #fff;
+        }
+        &:hover {
+          transform: rotate(15deg);
         }
       }
       &-burger {

@@ -46,6 +46,7 @@ export default {
     height: 100%;
     padding-right: 60px;
     padding-left: 60px;
+    overflow: hidden;
   }
   &__wrapper {
     max-width: 943px;

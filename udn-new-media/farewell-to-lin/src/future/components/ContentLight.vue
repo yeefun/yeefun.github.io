@@ -85,72 +85,61 @@ export default {
 
 <style lang="scss">
 .content {
-  // background-color: #fff;
-  // color: #fff;
-  // ASK mob #47 or web #2b
-  // color: #474747;
   color: #2b2b2b;
   padding-right: 24px;
   padding-left: 24px;
   // prevent margin collapse
   overflow-x: hidden;
-  &-wrapper {
+  @media screen and (min-width: 576px) {
     max-width: 960px;
     margin-right: auto;
     margin-left: auto;
   }
+
   &__title {
-    margin-bottom: 50px;
-    font-size: 3.8rem;
+    margin-bottom: 40px;
+    font-size: 3.6rem;
     font-weight: 700;
-    line-height: 1.56;
-    letter-spacing: 10.7px;
+    line-height: 1.33;
+    letter-spacing: 2.9px;
     color: #000;
-    margin-top: 168px;
+    margin-top: 96px;
+    @media screen and (min-width: 576px) {
+      margin-top: 168px;
+      margin-bottom: 48px;
+      font-size: 3.8rem;
+      line-height: 1.56;
+      letter-spacing: 4.8px;
+    }
   }
 
   &__text {
-    // font-size: 1.6rem;
     font-size: 1.8rem;
     line-height: 1.75;
-    // letter-spacing: 1.3px;
-    letter-spacing: 0.9px;
-    // text-align: justify;
-    // @media screen and (min-width: 768px) {
-      // font-size: 1.8rem;
-      // letter-spacing: 0.9px;
-      // ASK
-      // line-height: 1.56;
-    // }
+    letter-spacing: 1.3px;
   }
 
   &__photo {
     width: 100%;
     height: auto;
-    vertical-align: middle;
-
+    vertical-align: top;
     &-wrapper {
       position: relative;
-      // margin: 48px -30px;
-      margin: 48px -24px;
-      @media screen and (min-width: 768px) {
+      margin: 48px -24px 64px -24px;
+      @media screen and (min-width: 576px) {
         margin-right: 0;
         margin-left: 0;
       }
     }
 
     &-caption {
-      // width: 100%;
       font-size: 1.2rem;
-      // line-height: 2.33;
       line-height: 2;
       letter-spacing: 1px;
-      // padding-left: 32px;
       padding-left: 24px;
       padding-right: 24px;
-      // color: #bcbcbc;
       margin-top: 8px;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 576px) {
         text-align: right;
         padding-left: 0;
         padding-right: 0;

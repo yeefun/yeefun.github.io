@@ -1,8 +1,4 @@
 .content {
-  // background-color: #fff;
-  // color: #fff;
-  // ASK mob #47 or web #2b
-  // color: #474747;
   color: #2b2b2b;
   padding-right: 24px;
   padding-left: 24px;
@@ -12,11 +8,13 @@
     color: #bcbcbc;
     background-color: transparent;
   }
-  // &--light {
-  //   @media screen and (min-width: 576px) {
-  //     max-width: 960px;
-  //   }
-  // }
+  &--light {
+    @media screen and (min-width: 576px) {
+      max-width: 960px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
   &--photo-page {
     position: relative;
     width: 36%;
@@ -27,12 +25,8 @@
       width: 28%;
       left: 16%;
     }
-    // margin-top: 100vh;
-    // transition: margin-top 1s;
-    // visibility: hidden;
   }
 
-  // light for mobile
   &__title {
     margin-bottom: 40px;
     font-size: 3.6rem;
@@ -40,16 +34,25 @@
     line-height: 1.33;
     letter-spacing: 2.9px;
     color: #000;
-    margin-top: 100px;
+    margin-top: 96px;
     &--dark {
       color: #fff;
     }
     &--photo-page, &--light {
-      font-size: 3.8rem;
-      letter-spacing: 10.7px;
-      line-height: 1.56;
       margin-top: 168px;
-      margin-bottom: 50px;
+      margin-bottom: 48px;
+      font-size: 3.8rem;
+      line-height: 1.56;
+      letter-spacing: 4.8px;
+    }
+    &--light {
+      @media screen and (min-width: 576px) {
+        margin-top: 168px;
+        margin-bottom: 48px;
+        font-size: 3.8rem;
+        line-height: 1.56;
+        letter-spacing: 4.8px;
+      }
     }
   }
 
@@ -58,26 +61,15 @@
     font-weight: 700;
     line-height: 1.64;
     letter-spacing: 2.2px;
-    margin-top: 50px;
-    margin-bottom: 12px;
+    margin-top: 64px;
+    margin-bottom: 20px;
     color: #fff;
   }
 
   &__text {
-    // font-size: 1.6rem;
     font-size: 1.8rem;
     line-height: 1.75;
-    // letter-spacing: 1.3px;
-    letter-spacing: 0.9px;
-    // text-align: justify;
-    // &--light {
-      // @media screen and (min-width: 768px) {
-        // font-size: 1.8rem;
-        // letter-spacing: 0.9px;
-        // ASK
-        // line-height: 1.56;
-      // }
-    // }
+    letter-spacing: 1.3px;
   }
 
   &__quote {
@@ -87,20 +79,20 @@
     letter-spacing: 2.2px;
     margin-bottom: 12px;
     &--light {
-      @media screen and (min-width: 768px) {
+      // font-weight: 700;
+      @media screen and (min-width: 576px) {
+        font-weight: 700;
         font-size: 3rem;
         line-height: 1.47;
         letter-spacing: 1.5px;
         margin-bottom: 4px;
-        // ASK only here bold?
-        font-weight: 700;
       }
     }
     &-wrapper {
       padding-right: 50px;
       padding-left: 50px;
       margin-top: 64px;
-      margin-bottom: 64px;
+      margin-bottom: 72px;
       &--photo-page {
         padding-right: 0;
         padding-left: 0;
@@ -115,7 +107,7 @@
       font-size: 1.4rem;
       letter-spacing: 1.4px;
       &--light {
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 576px) {
           font-size: 1.8rem;
           letter-spacing: 0.9px;
           line-height: 1.56;
@@ -130,47 +122,34 @@
   &__photo {
     width: 100%;
     height: auto;
-    vertical-align: middle;
-
+    vertical-align: top;
     &-wrapper {
       position: relative;
-      // margin: 48px -30px;
-      margin: 48px -24px;
-      &--dark {
-        margin-bottom: 70px;
-      }
+      margin: 48px -24px 64px -24px;
       &--light {
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 576px) {
           margin-right: 0;
           margin-left: 0;
         }
       }
     }
-
     &-caption {
-      // width: 100%;
       font-size: 1.2rem;
-      // line-height: 2.33;
       line-height: 2;
       letter-spacing: 1px;
-      // padding-left: 32px;
       padding-left: 24px;
       padding-right: 24px;
-      // color: #bcbcbc;
       margin-top: 8px;
       &--dark {
         position: absolute;
-        // height: 50px;
-        // line-height: 50px;
         padding-top: 12px;
         padding-bottom: 12px;
         margin-top: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.8);
-        // color: #bcbcbc;
       }
       &--light {
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 576px) {
           text-align: right;
           padding-left: 0;
           padding-right: 0;
@@ -183,16 +162,9 @@
         right: 10%;
         bottom: 70px;
         color: #bcbcbc;
-        // padding-left: 0;
         padding: 12px 20px;
-        // text-align: center;
         box-sizing: border-box;
         margin-top: 0;
-        // @media screen and (min-width: 768px) {
-          // padding-left: 28px;
-          // text-align: left;
-          // padding-right: 28px;
-        // }
       }
     }
   }
