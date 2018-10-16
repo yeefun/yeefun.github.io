@@ -35,13 +35,13 @@ export default {
   // height: 100vh;
   // width: 100%;
   // FIXME dark youtube need full version?
-  height: 100vh;
+  height: 100%;
   // @media screen and (min-width: 576px) {
   //   height: 100vh;
   // }
   &__player {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     // pointer-events: none;
     top: 0;

@@ -31,7 +31,8 @@ export default {
 // @import '../css/vue-transition.scss';
 
 .cover {
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   position: relative;
   // display: flex;
   // justify-content: center;

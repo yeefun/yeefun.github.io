@@ -30,8 +30,6 @@ export default {
   // width: 100%;
   // FIXME dark youtube need full version?
   @media screen and (min-width: 576px) {
-    // height: 100vh;
-    // modify
     height: 100%;
   }
   &__player {

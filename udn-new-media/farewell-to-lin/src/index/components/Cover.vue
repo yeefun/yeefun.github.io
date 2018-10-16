@@ -8,7 +8,7 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <!-- <section class="cover__title-wrapper">
+    <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -64,7 +64,7 @@
       <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
       <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
       <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
-    </div> -->
+    </div>
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
     </transition>
@@ -122,8 +122,6 @@ export default {
 // @import '../css/vue-transition.scss';
 
 .cover {
-  // height: 100vh;
-  // modify
   height: 100%;
   position: relative;
   overflow: hidden;
