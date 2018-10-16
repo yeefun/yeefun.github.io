@@ -319,11 +319,11 @@ export default {
 
 .page-content {
   width: 100%;
-  // modify
-  height: 100%;
+  // height: 100vh;
   background-color: #000;
   z-index: 9;
   @media screen and (min-width: 576px) {
+    height: 100%;
     position: fixed;
     top: 0;
     transition: transform 1s;

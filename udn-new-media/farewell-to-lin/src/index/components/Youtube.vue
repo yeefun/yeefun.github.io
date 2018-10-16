@@ -25,21 +25,14 @@ export default {
 <style lang="scss">
 .youtube {
   position: relative;
-  // height: 0;
-  // height: 100vh;
-  // width: 100%;
   // FIXME dark youtube need full version?
   @media screen and (min-width: 576px) {
-    height: 100%;
+    height: 100vh;
   }
   &__player {
     width: 100%;
-    // height: 100%;
-    // modify
-    height: 100vh;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
+    height: 100%;
+    position: absolute;
   }
 }
 </style>

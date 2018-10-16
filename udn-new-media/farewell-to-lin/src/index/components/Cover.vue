@@ -122,13 +122,16 @@ export default {
 // @import '../css/vue-transition.scss';
 
 .cover {
-  height: 100%;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   // IE 11 can't work properly
   // display: flex;
   // justify-content: center;
   // align-items: center;
+  @media screen and (min-width: 576px) {
+    height: 100%;
+  }
   &__video {
     position: absolute;
     width: 100%;

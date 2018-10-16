@@ -31,9 +31,11 @@ export default {
 // @import '../css/vue-transition.scss';
 
 .cover {
-  // height: 100vh;
-  height: 100%;
+  height: 100vh;
   position: relative;
+  @media screen and (min-width: 576px) {
+    height: 100%;
+  }
   // display: flex;
   // justify-content: center;
   // align-items: center;
