@@ -110,16 +110,18 @@ export default {
   }
 
   &__text {
-    font-size: 1.6rem;
+    // font-size: 1.6rem;
+    font-size: 1.8rem;
     line-height: 1.75;
-    letter-spacing: 1.3px;
+    // letter-spacing: 1.3px;
+    letter-spacing: 0.9px;
     // text-align: justify;
-    @media screen and (min-width: 768px) {
-      font-size: 1.8rem;
-      letter-spacing: 0.9px;
+    // @media screen and (min-width: 768px) {
+      // font-size: 1.8rem;
+      // letter-spacing: 0.9px;
       // ASK
       // line-height: 1.56;
-    }
+    // }
   }
 
   &__photo {

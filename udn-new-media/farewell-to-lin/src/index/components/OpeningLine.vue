@@ -42,18 +42,23 @@ export default {
   padding-top: 120px;
   @media screen and (min-width: 576px) {
     padding-top: 0;
-    height: 100vh;
+    // height: 100vh;
+    // modify
+    height: 100%;
     padding-right: 60px;
     padding-left: 60px;
   }
   &__wrapper {
     max-width: 943px;
+    @media screen and (min-width: 576px) {
+      transform: translateY(40px);
+    }
   }
   &__share {
     margin-top: 50px;
     margin-bottom: 120px;
     @media screen and (min-width: 576px) {
-      margin-top: 80px;
+      margin-top: 60px;
       margin-bottom: 0;
       display: flex;
       & > .share {
@@ -62,14 +67,18 @@ export default {
     }
   }
   & p {
-    font-size: 1.6rem;
-    line-height: 2;
-    letter-spacing: 0.5px;
-    @media screen and (min-width: 576px) {
-      font-size: 1.8rem;
-      line-height: 1.56;
-      letter-spacing: 0.9px;
-    }
+    // font-size: 1.6rem;
+    // line-height: 2;
+    // letter-spacing: 0.5px;
+    font-size: 1.8rem;
+    // line-height: 1.56;
+    line-height: 1.75;
+    letter-spacing: 0.9px;
+    // @media screen and (min-width: 576px) {
+    //   font-size: 1.8rem;
+    //   line-height: 1.56;
+    //   letter-spacing: 0.9px;
+    // }
   }
   & blockquote {
     font-size: 2rem;

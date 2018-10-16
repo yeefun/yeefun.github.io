@@ -5,9 +5,9 @@ html, body {
   height: 100%;
   position: relative;
   // overflow: hidden;
-  // @media screen and (min-width: 576px) {
-  //   overflow: hidden;
-  // }
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
 }
 
 html {
@@ -15,11 +15,11 @@ html {
   font-family: Arial, "Microsoft JhengHei", sans-serif;
 }
 
-body {
-  @media screen and (min-width: 576px) {
-    overflow: hidden;
-  }
-}
+// body {
+//   @media screen and (min-width: 576px) {
+//     overflow: hidden;
+//   }
+// }
 
 .overflow-visible {
   overflow: visible;

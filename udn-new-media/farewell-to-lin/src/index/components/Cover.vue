@@ -64,10 +64,10 @@
       <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
       <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
       <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
-    </div>
+    </div> -->
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
-    </transition> -->
+    </transition>
   </article>
 </template>
 
@@ -122,7 +122,9 @@ export default {
 // @import '../css/vue-transition.scss';
 
 .cover {
-  height: 100vh;
+  // height: 100vh;
+  // modify
+  height: 100%;
   position: relative;
   overflow: hidden;
   // IE 11 can't work properly

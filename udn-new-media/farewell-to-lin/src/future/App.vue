@@ -82,9 +82,12 @@ export default {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
     window.addEventListener('scroll', this.youtubeControl);
+    // window.setInterval(() => {
+    //   window.scroll();
+    // }, 1000);
   },
   mounted() {
-    this.youtube = YouTubePlayer('first-youtube');
+    this.youtube = YouTubePlayer('youtube');
     this.youtube.mute();
   },
   methods: {
@@ -157,7 +160,7 @@ export default {
           if (this.pageScrollY === -this.$root.windowHeight * 2) return;
           if (this.pageScrollY === -this.$root.windowHeight) {
             this.$refs.youtube.$el.style.transform = 'translateY(0vh)';
-            // this.$root.cacheHTML.className = 'overflow-visible';
+            this.$root.cacheHTML.className = 'overflow-visible';
             this.bodyClass.add('overflow-visible');
           }
           // first youtube
@@ -169,7 +172,7 @@ export default {
           if (this.pageScrollY === 0) return;
           if (this.pageScrollY === -this.$root.windowHeight * 2) {
             this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-            // this.$root.cacheHTML.className = '';
+            this.$root.cacheHTML.className = '';
             this.bodyClass.remove('overflow-visible');
             // first youtube
             if (this.youtube) {

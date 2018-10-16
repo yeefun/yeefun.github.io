@@ -29,7 +29,7 @@
             <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
           </li>
         </ul> -->
-        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @touchstart="innerAnchorShow" @mouseleave="isInnerAnchorShow = false">
+        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @mouseleave="isInnerAnchorShow = false" @touchstart.stop="innerAnchorShow">
           <li>台灣是我們的共業
             <transition name="anchor-slide">
               <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
@@ -42,13 +42,13 @@
         </ul>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>
-            <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
+            <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a>
           </li>
         </ul>
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>台灣是我們的共業
@@ -60,7 +60,7 @@
             </li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li><a href="/future.html" target="_blank">雲門大船的未來進行式</a></li>
+            <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li>
           </ul>
         </nav>
         <section class="logo">
@@ -216,7 +216,7 @@ export default {
         box-sizing: border-box;
         border-width: 2px;
         border-style: solid;
-        // cursor: pointer;
+        cursor: pointer;
         padding-left: 22.4px;
         background-color: transparent;
         // padding-left: 22.4px;

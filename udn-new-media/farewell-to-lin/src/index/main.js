@@ -1,10 +1,12 @@
 import Vue from 'vue';
+// import 'promise-polyfill/src/polyfill';
 import App from './App.vue';
 
 import 'reset-css'; // eslint-disable-line
 import './css/common.scss';
 
 require('./js/objectFitPolyfill.basic.min');
+// require('es6-symbol/implement');
 
 Vue.config.productionTip = false;
 
