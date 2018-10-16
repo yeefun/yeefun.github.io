@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/content.scss';
-@import '../css/vue-transition.scss';
+// @import '../css/content.scss';
+// @import '../css/vue-transition.scss';
 
 .fixed-page {
   // background-color: #000;

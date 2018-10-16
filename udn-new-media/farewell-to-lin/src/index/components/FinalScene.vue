@@ -28,7 +28,7 @@ export default {
   methods: {
     // TODO change judgement
     finalSceneFade() {
-      if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.cacheHTML.clientHeight / 2)) {
+      if (this.$root.cacheWindow.pageYOffset + this.$root.cacheHTML.clientHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.cacheHTML.clientHeight / 4)) {
         this.isTextFadeIn = true;
       }
     },

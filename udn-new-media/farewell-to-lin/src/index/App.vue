@@ -93,16 +93,16 @@ export default {
       scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
       // throttle touchpad mousewheel event & opening
-      // canScroll: true,
-      canScroll: false,
+      canScroll: true,
+      // canScroll: false,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      // isHeadBarShow: true,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
+      // isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -117,11 +117,12 @@ export default {
   created() {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('resize', this.resizeHandler);
-    window.addEventListener('scroll', this.PhotoPageControl);
+    window.addEventListener('scroll', this.photoPageControl);
     window.addEventListener('scroll', this.headBarChangeColor);
-    window.addEventListener('scroll', this.firstYoutubeControlInMobile);
-    window.addEventListener('scroll', this.secondYoutubeControlInMobile);
-    window.addEventListener('scroll', this.thirdYoutubeControl);
+    window.addEventListener('scroll', this.youtubeControl);
+    // window.addEventListener('scroll', this.firstYoutubeControlInMobile);
+    // window.addEventListener('scroll', this.secondYoutubeControlInMobile);
+    // window.addEventListener('scroll', this.thirdYoutubeControl);
   },
   mounted() {
     this.firstYoutube = YouTubePlayer('first-youtube');
@@ -132,7 +133,7 @@ export default {
     this.thirdYoutube.mute();
   },
   methods: {
-    PhotoPageControl() {
+    photoPageControl() {
       // CONFUSED why need add windowHeight?
       // TODO OPT
       if (this.$root.isMobileSize) return;
@@ -143,7 +144,7 @@ export default {
       }
     },
     headBarChangeColor() {
-      if (this.$root.cacheWindow.pageYOffset > this.$refs.lightContent.offsetTop) {
+      if (this.$root.cacheWindow.pageYOffset > this.$refs.lightContent.offsetTop + this.$root.windowHeight) {
         this.isHeadBarLight = true;
       } else {
         this.isHeadBarLight = false;
@@ -207,7 +208,7 @@ export default {
             this.bodyClass.remove('overflow-visible');
             // first youtube
             if (this.firstYoutube) {
-              this.firstYoutube.playVideo();
+              this.firstYoutube.pauseVideo();
             }
           }
           this.pageScrollY += this.$root.windowHeight;
@@ -215,7 +216,6 @@ export default {
       }, 200);
     },
     // FIXME IE don't support 'youtube-player'
-    // TODO set first youtube pause timing
     pageScroll(evt) {
       if (this.$root.isMobileSize || this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
       evt.preventDefault();
@@ -268,33 +268,8 @@ export default {
           return false;
       }
     },
-    // FIXME IE don't support 'youtube-player'
-    firstYoutubeControlInMobile(evt) {
-      this.youtubeControlInMobile(evt, 'firstYoutube', 'isFirstYoutubePlay', () => {
-        if (!this.firstYoutube || !this.$root.isMobileSize) {
-          return false;
-        }
-        return true;
-      });
-    },
-    secondYoutubeControlInMobile(evt) {
-      this.youtubeControlInMobile(evt, 'secondYoutube', 'isSecondYoutubePlay', () => {
-        if (!this.secondYoutube) {
-          return false;
-        }
-        return true;
-      });
-    },
-    thirdYoutubeControl(evt) {
-      this.youtubeControlInMobile(evt, 'thirdYoutube', 'isThirdYoutubePlay', () => {
-        if (!this.thirdYoutube || !this.canThirdYoutubePlay) {
-          return false;
-        }
-        return true;
-      });
-    },
-    youtubeControlInMobile(evt, youtubeRef, isYoutubePlay, fn) {
-      if (!fn()) return;
+    youtubeControlFn(evt, youtubeRef, isYoutubePlay, statement) {
+      if (!statement()) return;
       evt.preventDefault();
       const scrollY = this.$root.cacheWindow.pageYOffset;
       const youtubeY = this.$refs[youtubeRef].$el.getBoundingClientRect().top + scrollY;
@@ -308,12 +283,36 @@ export default {
         this[youtubeRef].pauseVideo();
       }
     },
+    youtubeControl(evt) {
+      // first youtube
+      this.youtubeControlFn(evt, 'firstYoutube', 'isFirstYoutubePlay', () => {
+        if (!this.firstYoutube) {
+          return false;
+        }
+        return true;
+      });
+      // second youtube
+      this.youtubeControlFn(evt, 'secondYoutube', 'isSecondYoutubePlay', () => {
+        if (!this.secondYoutube) {
+          return false;
+        }
+        return true;
+      });
+      // third youtube
+      this.youtubeControlFn(evt, 'thirdYoutube', 'isThirdYoutubePlay', () => {
+        if (!this.thirdYoutube || !this.canThirdYoutubePlay) {
+          return false;
+        }
+        return true;
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import './css/vue-transition.scss';
+@import './css/content.scss';
 
 .app {
   background-color: #000;

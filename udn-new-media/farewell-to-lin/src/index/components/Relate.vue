@@ -4,28 +4,28 @@
     <div class="relate__report-wrapper">
       <div class="relate__report relate__report--left">
         <a href="https://udn.com/upf/newmedia/2018_data/childabuse/help.html" target="_blank">
-          <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/helpkid.d99a31d.jpg" alt="">
+          <img src="../assets/ReadMore/readMore101.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-1"></div> -->
           <p>45年掌舵人將交棒<br>雲門大船的未來進行式</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
         <a href="https://udn.com/news/story/7314/3389202" target="_blank">
-          <img  src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/badinkid.f5002ee.jpg" alt="">
+          <img  src="../assets/ReadMore/readMore102.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-2"></div> -->
           <p>要讓林懷民不遺憾…<br>文化中心活化 核定52場</p>
         </a>
       </div>
       <div class="relate__report relate__report--left">
         <a href="https://udn.com/news/story/7266/3389722" target="_blank">
-          <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/braindead.8427313.jpg" alt="">
+          <img src="../assets/ReadMore/readMore103.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-3"></div> -->
           <p :class="{ 'mb-0': $root.windowWidth > 375.98 }">文化部將活化文化中心<br>林懷民：很棒很開心</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
         <a href="https://ubrand.udn.com/ubrand/story/12117/3368053" target="_blank">
-          <img src="https://udn.com/upf/newmedia/2018_data/childabuse/static/img/ghost.58c8ec0.jpg" alt="">
+          <img src="../assets/ReadMore/readMore104.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-4"></div> -->
           <p class="mb-0">捷運變游池＋台東熱氣球<br>幕後推手都是他</p>
         </a>

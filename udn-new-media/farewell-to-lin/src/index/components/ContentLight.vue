@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/content.scss';
+// @import '../css/content.scss';
 
 .content {
   &-wrapper {

@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/vue-transition.scss';
+// @import '../css/vue-transition.scss';
 
 .cover {
   height: 100vh;

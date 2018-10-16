@@ -52,9 +52,9 @@
       <p><br></p>
       <p>但林懷民不曾因為疲累而放棄。觀衆看的開心、讓藝術服務人群，是林懷民成立雲門舞集最大的期待。回首雲門舞集45年時光，林懷民說，雲門的目光從不看向歐美劇場，「我們看的是老百姓，」他很希望雲門舞集的作品，能夠帶給台灣的老百姓一點點快樂、安靜的時光。</p>
       <p><br></p>
-      <p ref="noPhoto">所以雲門舞集從1990年代開始，每年一定會到各地戶外公演，讓作品走出劇院、走進人民的生活，至今23年不輟。戶外廣場上每個觀眾感受和理解到的都不同，但只要在舞者演出的那段時間，觀眾能享受演出，露出一抹微笑或獲得短暫平靜，就是林懷民繼續下去的力量。</p>
+      <p>所以雲門舞集從1990年代開始，每年一定會到各地戶外公演，讓作品走出劇院、走進人民的生活，至今23年不輟。戶外廣場上每個觀眾感受和理解到的都不同，但只要在舞者演出的那段時間，觀眾能享受演出，露出一抹微笑或獲得短暫平靜，就是林懷民繼續下去的力量。</p>
     </div>
-    <div class="content__quote-wrapper content__quote-wrapper--photo-page content__quote-wrapper--last">
+    <div class="content__quote-wrapper content__quote-wrapper--photo-page content__quote-wrapper--last" ref="noPhoto">
       <blockquote class="content__quote">我個人跟雲門何其幸運，能看到大家對我們努力的結果，有比較好的、正面的回饋，這樣的對話非常重要。</blockquote>
       <p class="content__quote-speaker content__quote-speaker--photo-page">林懷民</p>
     </div>
@@ -66,7 +66,7 @@ export default {
   name: 'PhotoPageContent',
   data() {
     return {
-      marginTop: 148,
+      marginTop: 74,
       startScrollTime: new Date(),
     };
   },
@@ -77,8 +77,8 @@ export default {
     photoChange() {
       const currentTime = new Date();
       if (currentTime - this.startScrollTime < 200) return;
-      // console.log(this.$refs.photoWatermoon.offsetTop);
-      if (this.$root.cacheWindow.pageYOffset >= this.$refs.noPhoto.offsetTop + this.marginTop) {
+
+      if (this.$root.cacheWindow.pageYOffset >= this.$refs.noPhoto.offsetTop) {
         this.$parent.photoName = null;
       } else if (this.$root.cacheWindow.pageYOffset >= this.$refs.photoWatermoon.offsetTop + this.marginTop) {
         this.$parent.photoName = 'watermoon';
@@ -100,6 +100,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/content.scss';
+// @import '../css/content.scss';
 </style>
 

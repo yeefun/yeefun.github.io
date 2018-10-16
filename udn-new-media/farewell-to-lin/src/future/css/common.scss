@@ -5,14 +5,20 @@ html, body {
   height: 100%;
   position: relative;
   // overflow: hidden;
-  @media screen and (min-width: 576px) {
-    overflow: hidden;
-  }
+  // @media screen and (min-width: 576px) {
+  //   overflow: hidden;
+  // }
 }
 
 html {
   font-size: 10px !important;
   font-family: Arial, "Microsoft JhengHei", sans-serif;
+}
+
+body {
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
 }
 
 .overflow-visible {

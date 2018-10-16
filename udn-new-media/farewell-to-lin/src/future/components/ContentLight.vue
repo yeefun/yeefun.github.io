@@ -100,13 +100,13 @@ export default {
     margin-left: auto;
   }
   &__title {
-    margin-bottom: 40px;
-    font-size: 3.6rem;
+    margin-bottom: 50px;
+    font-size: 3.8rem;
     font-weight: 700;
-    line-height: 1.33;
-    letter-spacing: 2.9px;
+    line-height: 1.56;
+    letter-spacing: 10.7px;
     color: #000;
-    margin-top: 100px;
+    margin-top: 168px;
   }
 
   &__text {

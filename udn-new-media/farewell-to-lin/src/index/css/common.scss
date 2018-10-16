@@ -10,9 +10,9 @@ html, body {
 }
 
 body {
-  // @media screen and (min-width: 576px) {
-  overflow: hidden;
-  // }
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
 }
 
 html {

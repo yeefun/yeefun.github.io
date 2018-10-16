@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header-bar">
-      <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen || !isHeadBarLight }">
+      <!-- ASK is link right? -->
+      <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
+        <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen || !isHeadBarLight }">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>
         <path d="M87.9,224.8c-3.4,2-12.6,10.7-21.1,19.1a130.2,130.2,0,0,0,15.6,8.4c5.7-6.5,11.1-13.1,13.2-17.3C99.3,227.2,91.9,222.5,87.9,224.8Z"/>
         <path d="M67.5,183.2c-5-4.3-5.1-5.5-9.9-2.7s-4.6,1.6-5.8,2.7-15.6,15.2-18.2,17.7l-5.7,5.3a131,131,0,0,0,8.6,11.3c3.9-4.1,8.7-8.8,11.4-11.3s8.6-8.7,11.1-9.4,3.4-.9,7.1-3.9S72.5,187.6,67.5,183.2Z"/>
@@ -15,17 +17,18 @@
         <path d="M180.5,38.5c-2.1-1.7-6.6-6.6-8.2-7.3s-5.3-1-6.7-.1l-6.6,4.5a18.2,18.2,0,0,0-5.2,7.5c-0.8,2.8,1,6.6,2.6,9.2s3.7,7.3,8.4,4.7,13.5-11.5,15.3-13.1S182.7,40.3,180.5,38.5Z"/>
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
+      </a>
       <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click.prevent="isListOpen=!isListOpen" @touchstart.prevent="isListOpen=!isListOpen">
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
-        <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
+        <!-- <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>
             <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
           </li>
-        </ul>
+        </ul> -->
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @touchstart="innerAnchorShow" @mouseleave="isInnerAnchorShow = false">
           <li>台灣是我們的共業
             <transition name="anchor-slide">
@@ -37,10 +40,15 @@
             </transition>
           </li>
         </ul>
+        <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
+          <li>
+            <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
+          </li>
+        </ul>
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>台灣是我們的共業
@@ -79,28 +87,18 @@ export default {
       isInnerAnchorShow: false,
     };
   },
-  created() {
-    // document.addEventListener('click', this.innerAnchorClose);
-  },
   methods: {
     innerAnchorShow() {
       this.isInnerAnchorShow = true;
     },
-    // innerAnchorClose(evt) {
-    //   if (evt.target.nodeName !== 'LI') {
-    //     this.isInnerAnchorShow = false;
-    //   }
-    // },
     firstAnchorMove() {
       // CONFUSED different after scroll-bar show
       // const youtubeY = this.$parent.$refs.secondYoutube.$el.offsetTop;
       this.AnchorJudge();
-      // this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       this.$parent.$refs.secondYoutube.$el.scrollIntoView({ behavior: 'smooth' });
     },
     secondAnchorMove() {
       this.AnchorJudge();
-      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
       document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth' });
     },
     thirdAnchorMove() {
@@ -110,12 +108,12 @@ export default {
     },
     AnchorJudge() {
       if (!this.$root.isMobileSize) {
-        if (this.$root.cacheHTML.className !== 'overflow-visible') {
-          this.$parent.$refs.photoPageContent.$el.style.transform = 'translateY(0vh)';
-          this.$root.cacheHTML.className = 'overflow-visible';
+        if (!this.$parent.bodyClass.contains('overflow-visible')) {
+          this.$parent.$refs.firstYoutube.$el.style.transform = 'translateY(0vh)';
+          // this.$root.cacheHTML.className = 'overflow-visible';
           this.$parent.bodyClass.add('overflow-visible');
         }
-        this.$parent.pageScrollY = -this.$root.windowHeight * 4;
+        this.$parent.pageScrollY = -this.$root.windowHeight * 2;
         this.isInnerAnchorShow = false;
       } else {
         this.isListOpen = false;
@@ -126,7 +124,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/vue-transition.scss';
+// @import '../css/vue-transition.scss';
 
 .header {
   position: fixed;
@@ -224,7 +222,7 @@ export default {
         // padding-left: 22.4px;
         &--outer {
           border-color: transparent;
-          margin-right: 28px;
+          // margin-right: 28px;
           width: 223.2px;
           transition: border-color 0.5s;
           &:hover {
@@ -234,6 +232,7 @@ export default {
         &--inner {
           width: 188px;
           border-color: #fff;
+          margin-right: 28px;
           // padding-left: 22.4px;
           // &:hover ul {
           //   display: block;
@@ -322,7 +321,7 @@ export default {
         border-color: transparent;
         background-color: rgba(236, 236, 236, 0.5);
         margin-bottom: 5px;
-        // cursor: pointer;
+        cursor: pointer;
       }
     }
   }
