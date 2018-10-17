@@ -1,14 +1,13 @@
 <template>
   <!-- TODO change css animation to Vue animation -->
-  <article class="cover"
-  @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove">
-    <!-- muted for Chrome, otherwise video can't play-->
+  <!-- <article class="cover" @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove"> -->
+  <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
     <video id="cover__video" class="cover__video" data-object-fit="cover" muted autoplay loop>
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <!-- <section class="cover__title-wrapper">
+    <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -25,46 +24,50 @@
         <p>情</p>
         <p class="mb-0">書</p>
       </div>
-      <div class="cover__title" :class="{ 'fade-in': isCoverTitleFadeIn,
-      'cover__title-move': isCoverTitleMove }" @transitionend.once="isCoverTitleMove = true"
-      @webkitTransitionEnd.once="isCoverTitleMove = true">
-        <div class="cover__title-left">
-          <p>都</p>
-          <p>是</p>
-          <p>我</p>
-          <p>們</p>
-          <p>的</p>
-          <p>共</p>
-          <p class="mb-0">業</p>
+      <transition name="title-fade" @after-enter="isCoverTitleMove = true">
+        <div class="cover__title" v-if="isCoverTitleFadeIn" :class="{ 'cover__title-move': isCoverTitleMove }">
+          <div class="cover__title-left">
+            <p>都</p>
+            <p>是</p>
+            <p>我</p>
+            <p>們</p>
+            <p>的</p>
+            <p>共</p>
+            <p class="mb-0">業</p>
+          </div>
+          <div>
+            <p>台</p>
+            <p>灣</p>
+            <p>無</p>
+            <p>論</p>
+            <p>好</p>
+            <p>壞</p>
+            <p class="mb-0">，</p>
+          </div>
         </div>
-        <div>
-          <p>台</p>
-          <p>灣</p>
-          <p>無</p>
-          <p>論</p>
-          <p>好</p>
-          <p>壞</p>
-          <p class="mb-0">，</p>
-        </div>
-      </div>
+      </transition>
     </section>
-    <div class="cover__mask" :class="{ 'fade-out': isCoverFadeOut }"></div>
-    <div class="cover__prompt" v-if="isCoverPromptExist">
-      <div class="cover__prompt-to-bottom">
-        <p>向下</p>
-        <p>滾動</p>
+
+    <transition name="mask-fade" @after-leave="isCoverTitleFadeIn = true">
+      <div class="cover__mask" v-if="!isCoverFadeOut">
+        <div class="cover__prompt" v-if="isCoverPromptExist">
+          <div class="cover__prompt-to-bottom">
+            <p>往下</p>
+            <p>滾動</p>
+          </div>
+          <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
+        </div>
+        <div class="cover__img">
+          <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
+          @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
+          <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
+          <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
+          <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
+          <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
+        </div>
       </div>
-      <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
-    </div>
-    <div class="cover__img" :class="{ 'fade-out': isCoverFadeOut }"
-    @transitionend.self="isCoverTitleFadeIn = true;" @webkitTransitionEnd.self="isCoverTitleFadeIn = true;">
-      <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
-      @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
-      <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
-      <img src="../assets/CoverImg/hito3.png" :class="dancerClass(3)" alt="">
-      <img src="../assets/CoverImg/hito4.png" :class="dancerClass(4)" alt="">
-      <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
-    </div> -->
+    </transition>
+
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
     </transition>
@@ -89,7 +92,7 @@ export default {
         'dancer-move': this.isDancerMove,
       };
       dancerClass[`dancer${idx}`] = true;
-      dancerClass[`dancer${idx}-move`] = this.isDancerMove && idx !== 4 && idx !== 5;
+      dancerClass[`dancer${idx}-move`] = this.isDancerMove && idx < 4;
       return dancerClass;
     },
     dancerMove() {
@@ -100,12 +103,6 @@ export default {
       if (!this.isDancerMove) return;
       this.isCoverFadeOut = true;
     },
-    // coverFadeOutEnd() {
-    //   this.isCoverTitleFadeIn = true;
-    // },
-    // coverTitleFadeInEnd() {
-    //   this.isCoverTitleMove = true;
-    // },
     subtitleMoveEnd() {
       if (this.$root.isMobileSize) {
         this.$root.cacheHTML.className = 'overflow-visible';
@@ -119,8 +116,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/vue-transition.scss';
-
 .cover {
   height: 100vh;
   position: relative;
@@ -144,7 +139,7 @@ export default {
     background-color: #000;
     // ORIGIN
     // transition: opacity 5s 2s;
-    transition: opacity 3s 1s;
+    // transition: opacity 3s 1s;
     width: 100%;
     height: 100%;
   }
@@ -155,7 +150,7 @@ export default {
     // align-items: center;
     width: 100%;
     height: 100%;
-    position: absolute;
+    // position: absolute;
 
     &-to-bottom {
       width: 100px;
@@ -213,13 +208,14 @@ export default {
 
   &__img {
     position: absolute;
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     // ORIGIN
     // transition: opacity 5s 2s;
-    transition: opacity 3s 1s;
+    // transition: opacity 3s 1s;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -252,12 +248,12 @@ export default {
      ** noted "align-items: center;" can make BOX-MODEL (so include "margin-top") center
      */
     // margin-top: 14px;
-    opacity: 0;
+    // opacity: 0;
     // right: 0;
     // ORIGIN
     // transition: opacity 4s, right 0.5s 2s;
     // transition: opacity 2s, right 2s 0.5s;
-    transition: opacity 2s, transform 1s 0.5s;
+    transition: transform 1s 0.5s;
     color: #fff;
     font-weight: 700;
     display: flex;
@@ -265,7 +261,7 @@ export default {
     @media screen and (min-width: 576px) {
       // calculate for center
       transform: translateX(-30px);
-      transition: opacity 2s, left 2s 0.5s, transform 2s 0.5s;
+      transition: left 2s 0.5s, transform 2s 0.5s;
     }
 
     &-left {

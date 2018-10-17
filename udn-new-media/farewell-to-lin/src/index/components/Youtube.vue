@@ -1,13 +1,11 @@
 <template>
   <section class="youtube" :style="{ 'padding-bottom': aspectRatio }">
     <!-- TODO add "&origin=https://udn.com" "&origin=http://nmdap.udn.com.tw"-->
-    <iframe class="youtube__player" :id="youtubeRef" :src="`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&origin=https://udn.com`" frameborder="0"></iframe>
+    <iframe class="youtube__player" :id="youtubeRef" :src="`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1`" frameborder="0"></iframe>
   </section>
 </template>
 
 <script>
-// import YouTubePlayer from 'youtube-player';
-
 export default {
   name: 'Youtube',
   props: ['youtubeId', 'youtubeRef'],

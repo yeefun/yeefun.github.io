@@ -1,7 +1,30 @@
+.mask-fade {
+  &-leave {
+    &-active {
+      transition: opacity 3s 1s;
+    }
+    &-to {
+      opacity: 0;
+    }
+  }
+}
+
+.title-fade {
+  &-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity 2s;
+    }
+  }
+}
+
+
+
+
+
 .cover-end-fade {
   &-enter {
     opacity: 0;
-
     &-active {
       transition: opacity 1s;
     }

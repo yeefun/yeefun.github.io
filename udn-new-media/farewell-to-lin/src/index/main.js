@@ -1,12 +1,10 @@
 import Vue from 'vue';
-// import 'promise-polyfill/src/polyfill';
 import App from './App.vue';
 
 import 'reset-css'; // eslint-disable-line
 import './css/common.scss';
 
 require('./js/objectFitPolyfill.basic.min');
-// require('es6-symbol/implement');
 
 Vue.config.productionTip = false;
 
@@ -22,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     created() {
       window.addEventListener('load', this.loadHandler);
       window.addEventListener('resize', this.resizeHandler);
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScript = document.getElementsByTagName('script')[0];
+      firstScript.parentNode.insertBefore(tag, firstScript);
     },
     computed: {
       isMobileSize() {
