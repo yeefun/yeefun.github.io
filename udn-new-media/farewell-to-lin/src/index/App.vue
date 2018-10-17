@@ -110,7 +110,6 @@ export default {
       isFirstYoutubePlay: false,
       isSecondYoutubePlay: false,
       isThirdYoutubePlay: false,
-      // beforeScrollY: 0,
       // isAnchorScroll: false,
     };
   },
@@ -121,6 +120,7 @@ export default {
     window.addEventListener('scroll', this.headBarChangeColor);
     window.addEventListener('scroll', this.youtubeControl);
     window.addEventListener('scroll', this.preventIframeBlockScroll);
+    window.addEventListener('touchmove', this.preventIframeBlockTouch);
   },
   mounted() {
     this.firstYoutube = YouTubePlayer('first-youtube');
@@ -132,7 +132,7 @@ export default {
   },
   methods: {
     preventIframeBlockScroll() {
-      if (this.pageScrollY === -this.$root.windowHeight) return;
+      if (this.pageScrollY !== -this.$root.windowHeight * 2) return;
       const afterScrollY = this.$root.cacheWindow.pageYOffset;
       const deltaScrollY = afterScrollY - this.beforeScrollY;
       if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset === 0) {
@@ -175,7 +175,7 @@ export default {
       }, 400);
     },
     pageTouchStart(evt) {
-      if (this.$children[1].isInnerAnchorShow) this.$children[1].isInnerAnchorShow = false;
+      // if (this.$children[1].isInnerAnchorShow) this.$children[1].isInnerAnchorShow = false;
       if (this.$root.isMobileSize || this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
       evt.preventDefault();
       this.touchStartX = evt.touches[0].pageX;

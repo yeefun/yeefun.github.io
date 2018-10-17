@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     preventIframeBlockScroll() {
-      if (this.pageScrollY === -this.$root.windowHeight) return;
+      if (this.pageScrollY !== -this.$root.windowHeight * 2) return;
       const afterScrollY = this.$root.cacheWindow.pageYOffset;
       const deltaScrollY = afterScrollY - this.beforeScrollY;
       if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset === 0) {
