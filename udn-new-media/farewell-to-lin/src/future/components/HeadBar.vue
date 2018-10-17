@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :style="`background-color: ${isHeadBarLight ? 'rgba(255, 255, 255, 0.5)' : ''}`">
     <div class="header-bar">
       <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
         <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen || !isHeadBarLight }">
@@ -26,6 +26,7 @@
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li>
+          <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li> -->
         </ul>
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
           <li>雲門大船的未來進行式</li>
@@ -40,12 +41,19 @@
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
             <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li>
+            <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li> -->
           </ul>
         </nav>
         <section class="logo">
-          <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
-          <img src="../../assets/Logo/whiteUdnNews.png" alt="">
-          <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
+          </a>
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../../assets/Logo/whiteUdnNews.png" alt="">
+          </a>
+          <a href="https://udn.com/upf/newmedia/ubrandstudio/" target="_blank">
+            <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+          </a>
         </section>
       </div>
     </transition>
@@ -88,6 +96,7 @@ export default {
     align-items: center;
     box-sizing: border-box;
     padding-top: 8px;
+    padding-bottom: 8px;
     padding-right: 12px;
     padding-left: 8px;
     position: relative;

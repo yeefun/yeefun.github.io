@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ active: !isHeadBarLight }">
     <div class="header-bar">
       <!-- ASK is link right? -->
       <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
@@ -43,6 +43,7 @@
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>
             <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a>
+            <!-- <a href="http://nmdap.udn.com.tw/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a> -->
           </li>
         </ul>
       </nav>
@@ -61,12 +62,19 @@
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
             <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li>
+            <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li> -->
           </ul>
         </nav>
         <section class="logo">
-          <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
-          <img src="../../assets/Logo/whiteUdnNews.png" alt="">
-          <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../../assets/Logo/whiteUdnEveNews.png" alt="">
+          </a>
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../../assets/Logo/whiteUdnNews.png" alt="">
+          </a>
+          <a href="https://udn.com/upf/newmedia/ubrandstudio/" target="_blank">
+            <img class="mb-0" src="../../assets/Logo/whiteNewMidia.png" alt="">
+          </a>
         </section>
       </div>
     </transition>
@@ -87,7 +95,13 @@ export default {
       isInnerAnchorShow: false,
     };
   },
+  created() {
+    document.addEventListener('touchstart', this.innerAnchorClose);
+  },
   methods: {
+    innerAnchorClose() {
+      if (this.isInnerAnchorShow) this.isInnerAnchorShow = false;
+    },
     innerAnchorShow() {
       this.isInnerAnchorShow = true;
     },
@@ -109,11 +123,11 @@ export default {
     AnchorJudge() {
       if (!this.$root.isMobileSize) {
         if (!this.$parent.bodyClass.contains('overflow-visible')) {
-          this.$parent.$refs.firstYoutube.$el.style.transform = 'translateY(0vh)';
+          this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
           this.$root.cacheHTML.className = 'overflow-visible';
           this.$parent.bodyClass.add('overflow-visible');
         }
-        this.$parent.pageScrollY = -this.$root.windowHeight * 2;
+        this.$parent.pageScrollY = -this.$root.windowHeight;
         this.isInnerAnchorShow = false;
       } else {
         this.isListOpen = false;
@@ -124,19 +138,22 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/vue-transition.scss';
-
 .header {
   position: fixed;
   width: 100%;
   // height: 100vh;
   z-index: 99;
+  background-color: rgba(255, 255, 255, 0.5);
+  &.active {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
   &-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding-top: 8px;
+    padding-bottom: 8px;
     padding-right: 12px;
     padding-left: 8px;
     position: relative;
@@ -257,7 +274,7 @@ export default {
       width: 188px;
       margin-left: -24.4px;
       box-sizing: border-box;
-      margin-top: 6px;
+      margin-top: 10px;
       // padding-left: 22.4px;
       &-item {
         height: 33px;

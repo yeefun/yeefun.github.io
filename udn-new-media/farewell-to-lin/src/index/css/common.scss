@@ -1,17 +1,11 @@
 html, body {
   height: 100%;
   position: relative;
-  overflow: hidden;
-  // @media screen and (min-width: 576px) {
-  //   overflow: hidden;
-  // }
+  // overflow: hidden;
+  @media screen and (min-width: 576px) {
+    overflow: hidden;
+  }
 }
-
-// body {
-//   @media screen and (min-width: 576px) {
-//     overflow: hidden;
-//   }
-// }
 
 html {
   font-size: 10px !important;
@@ -36,9 +30,4 @@ a {
 
 .overflow-visible {
   overflow: visible;
-  // overflow-y: scroll;
 }
-
-// .hidden {
-//   overflow: hidden;
-// }

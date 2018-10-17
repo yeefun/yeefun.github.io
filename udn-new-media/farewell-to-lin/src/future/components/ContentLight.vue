@@ -109,7 +109,7 @@ export default {
       margin-bottom: 48px;
       font-size: 3.8rem;
       line-height: 1.56;
-      letter-spacing: 4.8px;
+      letter-spacing: 3.2px;
     }
   }
 

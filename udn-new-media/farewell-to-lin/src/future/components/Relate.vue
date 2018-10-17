@@ -3,7 +3,7 @@
     <h4>延伸閱讀</h4>
     <div class="relate__report-wrapper">
       <div class="relate__report relate__report--left">
-        <a href="https://udn.com/upf/newmedia/2018_data/childabuse/help.html" target="_blank">
+        <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">
           <img src="../assets/ReadMore/readMore201.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-1"></div> -->
           <p>台灣無論好壞<br>都是我們的共業</p>

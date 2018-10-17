@@ -3,7 +3,7 @@
     <h4>延伸閱讀</h4>
     <div class="relate__report-wrapper">
       <div class="relate__report relate__report--left">
-        <a href="https://udn.com/upf/newmedia/2018_data/childabuse/help.html" target="_blank">
+        <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">
           <img src="../assets/ReadMore/readMore101.png" alt="">
           <!-- <div class="relate__report-img relate__report-img-1"></div> -->
           <p>45年掌舵人將交棒<br>雲門大船的未來進行式</p>

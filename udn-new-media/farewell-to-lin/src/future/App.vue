@@ -1,26 +1,28 @@
 <template>
   <div id="app" @wheel="pageScroll" @touchstart="pageTouchStart" @touchmove="pageTouchMove">
-  <!-- <div id="app"> -->
     <ProgressBar></ProgressBar>
     <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
     <div class="page-content" :style="{ transform: `translateY(${pageScrollY}px)` }">
       <Cover></Cover>
-      <OpeningLine></OpeningLine>
     </div>
-    <Youtube class="youtube--scroll" ref="youtube"></Youtube>
-    <!-- <div> -->
-    <!-- <ContentLight class="content-light" ref="contentLight"></ContentLight> -->
+    <OpeningLine class="opening-line" ref="openingLine"></OpeningLine>
+    <Youtube ref="youtube"></Youtube>
     <ContentLight ref="contentLight"></ContentLight>
-    <!-- </div> -->
     <div class="last-content">
       <div class="last-content__left">
         <div class="last-content__share">
           <Share></Share>
         </div>
         <section class="logo">
-          <img src="../assets/Logo/blackUdnEveNews.png" alt="">
-          <img src="../assets/Logo/blackUdnNews.png" alt="">
-          <img class="mb-0" src="../assets/Logo/blackNewMidia.png" alt="">
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../assets/Logo/blackUdnEveNews.png" alt="">
+          </a>
+          <a href="https://udn.com/news/index" target="_blank">
+            <img src="../assets/Logo/blackUdnNews.png" alt="">
+          </a>
+          <a href="https://udn.com/upf/newmedia/ubrandstudio/" target="_blank">
+            <img class="mb-0" src="../assets/Logo/blackNewMidia.png" alt="">
+          </a>
         </section>
         <Editor></Editor>
       </div>
@@ -34,7 +36,6 @@
 </template>
 
 <script>
-import YouTubePlayer from 'youtube-player';
 import smoothscroll from 'smoothscroll-polyfill';
 
 import ProgressBar from '../components/ProgressBar.vue';
@@ -83,26 +84,24 @@ export default {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
     window.addEventListener('scroll', this.youtubeControl);
-    window.addEventListener('scroll', this.preventIframeBlockScroll);
   },
   mounted() {
-    this.youtube = YouTubePlayer('youtube');
-    this.youtube.mute();
+    window.onYouTubeIframeAPIReady = () => {
+      this.youtube = new YT.Player('youtube', { // eslint-disable-line
+        events: {
+          onReady: () => {
+            this.youtube.mute();
+          },
+          onStateChange: (evt) => {
+            if (evt.data === 2) {
+              window.removeEventListener('scroll', this.youtubeControl);
+            }
+          },
+        },
+      });
+    };
   },
   methods: {
-    preventIframeBlockScroll() {
-      if (this.pageScrollY !== -this.$root.windowHeight * 2) return;
-      const afterScrollY = this.$root.cacheWindow.pageYOffset;
-      const deltaScrollY = afterScrollY - this.beforeScrollY;
-      if (deltaScrollY < 0 && this.$root.cacheWindow.pageYOffset === 0) {
-        this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-        this.pageScrollY += this.$root.windowHeight;
-        this.youtube.pauseVideo();
-        this.$root.cacheHTML.className = '';
-        this.bodyClass.remove('overflow-visible');
-      }
-      this.beforeScrollY = afterScrollY;
-    },
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
@@ -129,28 +128,16 @@ export default {
         const deltaX = moveEndX - this.touchStartX;
         const deltaY = moveEndY - this.touchStartY;
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-          if (this.pageScrollY === -this.$root.windowHeight * 2) return;
-          if (this.pageScrollY === -this.$root.windowHeight) {
-            this.$refs.youtube.$el.style.transform = 'translateY(0vh)';
-            // this.$root.cacheHTML.className = 'overflow-visible';
-            this.bodyClass.add('overflow-visible');
-          }
-          // first youtube
-          if (this.youtube) {
-            if (this.pageScrollY === -this.$root.windowHeight) this.youtube.playVideo();
-          }
+          if (this.pageScrollY === -this.$root.windowHeight) return;
+          this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+          this.$root.cacheHTML.className = 'overflow-visible';
+          this.bodyClass.add('overflow-visible');
           this.pageScrollY -= this.$root.windowHeight;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
           if (this.pageScrollY === 0) return;
-          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
-          // this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-          // this.$root.cacheHTML.className = '';
-          // this.bodyClass.remove('overflow-visible');
-          // first youtube
-          // if (this.youtube) {
-          //   this.youtube.pauseVideo();
-          // }
-          // }
+          this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+          this.$root.cacheHTML.className = '';
+          this.bodyClass.remove('overflow-visible');
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -166,31 +153,18 @@ export default {
         setTimeout(() => {
           this.canScroll = true;
         }, 600);
-        // const scrollDirection = -evt.wheelDelta || evt.detail;
         const scrollDirection = evt.deltaY;
         if (scrollDirection > 0) {
-          if (this.pageScrollY === -this.$root.windowHeight * 2) return;
-          if (this.pageScrollY === -this.$root.windowHeight) {
-            this.$refs.youtube.$el.style.transform = 'translateY(0vh)';
-            this.$root.cacheHTML.className = 'overflow-visible';
-            this.bodyClass.add('overflow-visible');
-          }
-          // first youtube
-          if (this.youtube) {
-            if (this.pageScrollY === -this.$root.windowHeight) this.youtube.playVideo();
-          }
+          if (this.pageScrollY === -this.$root.windowHeight) return;
+          this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+          this.$root.cacheHTML.className = 'overflow-visible';
+          this.bodyClass.add('overflow-visible');
           this.pageScrollY -= this.$root.windowHeight;
         } else {
           if (this.pageScrollY === 0) return;
-          // if (this.pageScrollY === -this.$root.windowHeight * 2) {
-          // this.$refs.youtube.$el.style.transform = 'translateY(100vh)';
-          // this.$root.cacheHTML.className = '';
-          // this.bodyClass.remove('overflow-visible');
-          // first youtube
-          // if (this.youtube) {
-          // this.youtube.pauseVideo();
-          // }
-          // }
+          this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+          this.$root.cacheHTML.className = '';
+          this.bodyClass.remove('overflow-visible');
           this.pageScrollY += this.$root.windowHeight;
         }
       }, 200);
@@ -209,11 +183,10 @@ export default {
       const youtubeY = this.$refs.youtube.$el.offsetTop;
       const WH = this.$root.windowHeight;
 
-      if (!this.isYoutubePlay && scrollY < youtubeY + (WH / 2)) {
+      if (!this.isYoutubePlay && scrollY > youtubeY) {
         this.isYoutubePlay = true;
         this.youtube.playVideo();
       } else if (this.isYoutubePlay && (scrollY > youtubeY + (WH / 2) || scrollY < youtubeY - (WH / 2))) {
-        this.isYoutubePlay = false;
         this.youtube.pauseVideo();
       }
     },
@@ -236,7 +209,7 @@ export default {
   }
 }
 
-.youtube--scroll {
+.opening-line {
   @media screen and (min-width: 576px) {
     transform: translateY(100vh);
     transition: transform 1s;
@@ -285,7 +258,7 @@ export default {
 .logo {
   display: flex;
   flex-direction: column;
-  & > img {
+  & img {
     width: 138px;
     height: auto;
     margin-bottom: 12px;

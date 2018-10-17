@@ -10,42 +10,33 @@ require('./js/objectFitPolyfill.basic.min');
 
 Vue.config.productionTip = false;
 
-new Vue({
-  render: h => h(App),
-  data: {
-    cacheWindow: window,
-    cacheHTML: document.documentElement,
-    windowWidth: document.documentElement.clientWidth,
-    windowHeight: document.documentElement.clientHeight,
-  },
-  created() {
-    window.addEventListener('load', this.loadHandler);
-    window.addEventListener('resize', this.resizeHandler);
-  },
-  computed: {
-    isMobileSize() {
-      return this.windowWidth < 576;
+document.addEventListener('DOMContentLoaded', () => {
+  new Vue({
+    render: h => h(App),
+    data: {
+      cacheWindow: window,
+      cacheHTML: document.documentElement,
+      windowWidth: document.documentElement.clientWidth,
+      windowHeight: document.documentElement.clientHeight,
     },
-  },
-  methods: {
-    loadHandler() {
-      this.windowWidth = document.documentElement.clientWidth;
-      this.windowHeight = document.documentElement.clientHeight;
+    created() {
+      window.addEventListener('load', this.loadHandler);
+      window.addEventListener('resize', this.resizeHandler);
     },
-    resizeHandler() {
-      this.windowWidth = document.documentElement.clientWidth;
-      this.windowHeight = document.documentElement.clientHeight;
+    computed: {
+      isMobileSize() {
+        return this.windowWidth < 576;
+      },
     },
-  },
-}).$mount('#app');
-
-// const tagContainYoutubeAPI = document.createElement('script');
-// tagContainYoutubeAPI.src = 'https://www.youtube.com/iframe_api';
-// const firstScriptTag = document.getElementsByTagName('script')[0];
-// firstScriptTag.parentNode.insertBefore(tagContainYoutubeAPI, firstScriptTag);
-
-// let firstYoutube;
-
-// function onYouTubeIframeAPIReady() {
-//   firstYoutube = new YT.Player('first-youtube');
-// };
+    methods: {
+      loadHandler() {
+        this.windowWidth = document.documentElement.clientWidth;
+        this.windowHeight = document.documentElement.clientHeight;
+      },
+      resizeHandler() {
+        this.windowWidth = document.documentElement.clientWidth;
+        this.windowHeight = document.documentElement.clientHeight;
+      },
+    },
+  }).$mount('#app');
+});

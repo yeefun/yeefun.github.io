@@ -37,15 +37,16 @@ export default {
   // height: 100vh;
   @media screen and (min-width: 576px) {
     padding-top: 0;
-    height: 100%;
+    // height: 100%;
+    height: 100vh;
     padding-right: 60px;
     padding-left: 60px;
   }
   &__wrapper {
     max-width: 943px;
-    @media screen and (min-width: 576px) {
-      transform: translateY(40px);
-    }
+    // @media screen and (min-width: 576px) {
+    //   transform: translateY(40px);
+    // }
   }
   &__share {
     margin-top: 50px;
@@ -60,18 +61,9 @@ export default {
     }
   }
   & p {
-    // font-size: 1.6rem;
     font-size: 1.8rem;
-    // line-height: 2;
-    // line-height: 1.56;
     line-height: 1.75;
-    // letter-spacing: 0.5px;
     letter-spacing: 0.9px;
-    // @media screen and (min-width: 576px) {
-    //   font-size: 1.8rem;
-    //   line-height: 1.56;
-    //   letter-spacing: 0.9px;
-    // }
   }
 }
 </style>
