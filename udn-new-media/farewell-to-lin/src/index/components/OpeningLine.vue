@@ -44,14 +44,14 @@ export default {
   @media screen and (min-width: 576px) {
     // padding-top: 0;
     // height: 100%;
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-bottom: 240px;
+    padding-top: 240px;
     // height: 100vh;
     padding-right: 60px;
     padding-left: 60px;
   }
   &__wrapper {
-    max-width: 943px;
+    max-width: 960px;
     // @media screen and (min-width: 576px) {
     //   transform: translateY(40px);
     // }

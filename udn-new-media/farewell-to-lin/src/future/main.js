@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     methods: {
       loadHandler() {
         this.windowWidth = document.documentElement.clientWidth;
+        this.beforeWindowWidth = this.windowWidth;
         this.windowHeight = document.documentElement.clientHeight;
       },
       resizeHandler() {
@@ -41,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         this.resizeTimer = setTimeout(() => {
           this.windowWidth = document.documentElement.clientWidth;
           this.windowHeight = document.documentElement.clientHeight;
+          if ((this.beforeWindowWidth < 576 && this.windowWidth >= 576) || (this.beforeWindowWidth >= 576 && this.windowWidth < 576)) {
+            this.cacheWindow.location.reload();
+            this.beforeWindowWidth = this.windowWidth;
+          }
         }, 400);
       },
     },

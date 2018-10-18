@@ -1,11 +1,12 @@
 <template>
-  <div id="app" @wheel="!$root.isMobileSize && pageScroll($event)" @touchstart="!$root.isMobileSize && pageTouchStart($event)" @touchmove="!$root.isMobileSize && pageTouchMove($event)">
+  <!-- <div id="app" @wheel="!$root.isMobileSize && pageScroll($event)" @touchstart="!$root.isMobileSize && pageTouchStart($event)" @touchmove="!$root.isMobileSize && pageTouchMove($event)"> -->
+  <div id="app">
     <ProgressBar></ProgressBar>
     <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
-    <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }">
-      <Cover></Cover>
-    </div>
-    <OpeningLine class="opening-line" ref="openingLine"></OpeningLine>
+    <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
+    <Cover :style="`height: ${$root.windowHeight}px`"></Cover>
+    <!-- </div> -->
+    <OpeningLine></OpeningLine>
     <Youtube ref="youtube"></Youtube>
     <ContentLight ref="contentLight"></ContentLight>
     <div class="last-content">
@@ -71,13 +72,13 @@ export default {
   },
   data() {
     return {
-      bodyClass: document.body.classList,
+      // bodyClass: document.body.classList,
       isHeadBarLight: false,
-      canScroll: true,
-      pageScrollY: 0,
+      // canScroll: true,
+      // pageScrollY: 0,
       youtube: null,
       isYoutubePlay: false,
-      resizeTimer: null,
+      // resizeTimer: null,
     };
   },
   created() {
@@ -102,73 +103,63 @@ export default {
     };
   },
   methods: {
-    resizeHandler() {
-      const WW = this.$root.windowWeight;
-      if ((this.beforeWindowWidth < 576 && WW >= 576) || (this.beforeWindowWidth >= 576 && WW < 576)) {
-        if (this.resizeTimer) clearTimeout(this.resizeTimer);
-        this.resizeTimer = setTimeout(() => {
-          this.$root.cacheWindow.location.reload();
-          this.beforeWindowWidth = WW;
-        }, 400);
-      }
-    },
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
-    pageTouchStart(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
-      this.touchStartX = evt.touches[0].pageX;
-      this.touchStartY = evt.touches[0].pageY;
-    },
-    pageTouchMove(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
+    // pageTouchStart(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
+    //   // evt.preventDefault();
+    //   this.touchStartX = evt.touches[0].pageX;
+    //   this.touchStartY = evt.touches[0].pageY;
+    // },
+    // pageTouchMove(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
+    //   // evt.preventDefault();
 
-      const moveEndX = evt.changedTouches[0].pageX;
-      const moveEndY = evt.changedTouches[0].pageY;
-      const deltaX = moveEndX - this.touchStartX;
-      const deltaY = moveEndY - this.touchStartY;
-      const WH = this.$root.windowHeight;
+    //   const moveEndX = evt.changedTouches[0].pageX;
+    //   const moveEndY = evt.changedTouches[0].pageY;
+    //   const deltaX = moveEndX - this.touchStartX;
+    //   const deltaY = moveEndY - this.touchStartY;
+    //   const WH = this.$root.windowHeight;
 
-      if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-        if (this.pageScrollY === -WH) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-        this.pageScrollY -= WH;
-        setTimeout(() => {
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.bodyClass.add('overflow-visible');
-        }, 1000);
-      } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-        if (this.pageScrollY === 0) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
-        this.pageScrollY += WH;
-        this.$root.cacheHTML.className = '';
-        this.bodyClass.remove('overflow-visible');
-      }
-    },
-    pageScroll(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
-      const scrollDirection = evt.deltaY;
-      const WH = this.$root.windowHeight;
+    //   if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
+    //     if (this.pageScrollY === -WH) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+    //     this.pageScrollY -= WH;
+    //     setTimeout(() => {
+    //       this.$root.cacheHTML.className = 'overflow-visible';
+    //       this.bodyClass.add('overflow-visible');
+    //     }, 1000);
+    //   } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+    //     if (this.pageScrollY === 0) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+    //     this.pageScrollY += WH;
+    //     this.$root.cacheHTML.className = '';
+    //     this.bodyClass.remove('overflow-visible');
+    //   }
+    // },
+    // pageScroll(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
+    //   // evt.preventDefault();
+    //   const scrollDirection = evt.deltaY;
+    //   const WH = this.$root.windowHeight;
 
-      if (scrollDirection > 0) {
-        if (this.pageScrollY === -WH) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-        this.pageScrollY -= WH;
-        setTimeout(() => {
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.bodyClass.add('overflow-visible');
-        }, 1000);
-      } else {
-        if (this.pageScrollY === 0) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
-        this.pageScrollY += WH;
-        this.$root.cacheHTML.className = '';
-        this.bodyClass.remove('overflow-visible');
-      }
-    },
+    //   if (scrollDirection > 0) {
+    //     if (this.pageScrollY === -WH) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+    //     this.pageScrollY -= WH;
+    //     setTimeout(() => {
+    //       this.$root.cacheHTML.className = 'overflow-visible';
+    //       this.bodyClass.add('overflow-visible');
+    //     }, 1000);
+    //   } else {
+    //     if (this.pageScrollY === 0) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+    //     this.pageScrollY += WH;
+    //     this.$root.cacheHTML.className = '';
+    //     this.bodyClass.remove('overflow-visible');
+    //   }
+    // },
     headBarChangeColor() {
       if (this.$root.cacheWindow.pageYOffset >= this.$refs.contentLight.$el.offsetTop) {
         this.isHeadBarLight = true;
@@ -187,7 +178,7 @@ export default {
         this.isYoutubePlay = true;
         this.youtube.playVideo();
       // ASK pause timing is half or all
-      } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH / 2)) || scrollY < (youtubeY - (WH / 2)))) {
+      } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH / 1.5)) || scrollY < (youtubeY - (WH / 1.5)))) {
         this.youtube.pauseVideo();
       }
     },
@@ -198,25 +189,25 @@ export default {
 <style lang="scss">
 @import './css/vue-transition.scss';
 
-.page-content {
-  width: 100%;
-  // height: 100%;
-  // background-color: #000;
-  @media screen and (min-width: 576px) {
-    // position: fixed;
-    position: absolute;
-    // height: 100%;
-    top: 0;
-    transition: transform 1s;
-  }
-}
+// .page-content {
+//   width: 100%;
+//   // height: 100%;
+//   // background-color: #000;
+//   @media screen and (min-width: 576px) {
+//     // position: fixed;
+//     position: absolute;
+//     // height: 100%;
+//     top: 0;
+//     transition: transform 1s;
+//   }
+// }
 
-.opening-line {
-  @media screen and (min-width: 576px) {
-    transform: translateY(100vh);
-    transition: transform 1s;
-  }
-}
+// .opening-line {
+//   @media screen and (min-width: 576px) {
+//     transform: translateY(100vh);
+//     transition: transform 1s;
+//   }
+// }
 
 .last-content {
   display: flex;

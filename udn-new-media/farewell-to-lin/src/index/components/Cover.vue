@@ -7,7 +7,7 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <!-- <section class="cover__title-wrapper">
+    <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -66,7 +66,7 @@
           <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
         </div>
       </div>
-    </transition> -->
+    </transition>
 
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
@@ -112,11 +112,13 @@ export default {
       this.isCoverFadeOut = true;
     },
     subtitleMoveEnd() {
-      if (this.$root.isMobileSize) {
+      // if (this.$root.isMobileSize) {
+      setTimeout(() => {
         this.$root.cacheHTML.className = 'overflow-visible';
-        this.$parent.bodyClass.add('overflow-visible');
-      }
-      this.$parent.canScroll = true;
+        document.body.classList.add('overflow-visible');
+      }, 1000);
+      // }
+      // this.$parent.canScroll = true;
       this.$parent.isHeadBarShow = true;
     },
   },
@@ -126,9 +128,16 @@ export default {
 <style lang="scss">
 .cover {
   // height: 100vh;
-  height: 100%;
+  // height: 100%;
   position: relative;
   overflow: hidden;
+
+  width: 100%;
+  // background-color: #000;
+  // z-index: 9;
+  // @media screen and (min-width: 576px) {
+  //   position: absolute;
+  // }
   // IE 11 can't work properly
   // display: flex;
   // justify-content: center;
@@ -137,7 +146,7 @@ export default {
   //   height: 100%;
   // }
   &__video {
-    position: absolute;
+    // position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -153,6 +162,7 @@ export default {
     // transition: opacity 3s 1s;
     width: 100%;
     height: 100%;
+    top: 0;
   }
 
   &__prompt {
@@ -248,6 +258,7 @@ export default {
     // flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: 0;
   }
 
   &__title {

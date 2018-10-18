@@ -34,7 +34,7 @@
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="{ height: `${$root.windowHeight}px` }">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="`height: ${$root.windowHeight}px`">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>雲門大船的未來進行式</li>
@@ -185,7 +185,7 @@ export default {
     width: 100%;
     // height: 100vh;
     top: 0;
-    left: 0;
+    // left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 99;
     display: flex;

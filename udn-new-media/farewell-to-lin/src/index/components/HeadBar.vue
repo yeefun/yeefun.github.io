@@ -49,7 +49,8 @@
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="{ height: `${$root.windowHeight}px` }">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="`height: ${$root.windowHeight}px`">
+      <!-- <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false"> -->
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>台灣是我們的共業
@@ -121,12 +122,12 @@ export default {
         this.isListOpen = false;
         return;
       }
-      if (!this.$parent.bodyClass.contains('overflow-visible')) {
-        this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-        this.$root.cacheHTML.className = 'overflow-visible';
-        this.$parent.bodyClass.add('overflow-visible');
-      }
-      this.$parent.pageScrollY = -this.$root.windowHeight;
+      // if (!this.$parent.bodyClass.contains('overflow-visible')) {
+      //   this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+      //   this.$root.cacheHTML.className = 'overflow-visible';
+      //   this.$parent.bodyClass.add('overflow-visible');
+      // }
+      // this.$parent.pageScrollY = -this.$root.windowHeight;
       this.isInnerAnchorShow = false;
     },
   },
@@ -289,8 +290,9 @@ export default {
   &-list {
     position: absolute;
     width: 100%;
+    // height: 100vh;
     top: 0;
-    left: 0;
+    // left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 99;
     display: flex;

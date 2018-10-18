@@ -1,14 +1,15 @@
 <template>
-  <div id="app" class="app" @wheel="!$root.isMobileSize && pageScroll($event)" @touchstart="!$root.isMobileSize && pageTouchStart($event)" @touchmove="!$root.isMobileSize && pageTouchMove($event)">
+  <!-- <div id="app" class="app" @wheel="!$root.isMobileSize && pageScroll($event)" @touchstart="!$root.isMobileSize && pageTouchStart($event)" @touchmove="!$root.isMobileSize && pageTouchMove($event)"> -->
+  <div id="app" class="app">
     <ProgressBar></ProgressBar>
     <transition name="cover-end-fade">
       <HeadBar :isHeadBarLight="isHeadBarLight" v-if="isHeadBarShow"></HeadBar>
     </transition>
-    <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }">
     <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
-      <Cover></Cover>
-    </div>
-    <OpeningLine class="opening-line" ref="openingLine"></OpeningLine>
+    <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
+    <Cover :style="`height: ${$root.windowHeight}px`"></Cover>
+    <!-- </div> -->
+    <OpeningLine></OpeningLine>
     <Youtube :youtubeId="youtubeId('first')" youtubeRef="first-youtube" ref="firstYoutube"></Youtube>
     <div class="scroll-content">
       <ContentDark v-if="$root.isMobileSize"></ContentDark>
@@ -93,20 +94,20 @@ export default {
   },
   data() {
     return {
-      bodyClass: document.body.classList,
-      resizeTimer: null,
+      // bodyClass: document.body.classList,
+      // resizeTimer: null,
       // scrollTimer: null,
-      beforeWindowWidth: document.documentElement.clientWidth,
-      canScroll: true,
+      // beforeWindowWidth: document.documentElement.clientWidth,
+      // canScroll: true,
       // canScroll: false,
-      pageScrollY: 0,
-      touchStartX: 0,
-      touchStartY: 0,
+      // pageScrollY: 0,
+      // touchStartX: 0,
+      // touchStartY: 0,
       photoName: 'legacy',
-      beforeScrollY: window.pageYOffset,
+      // beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      isHeadBarShow: true,
-      // isHeadBarShow: false,
+      // isHeadBarShow: true,
+      isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -119,7 +120,6 @@ export default {
   },
   created() {
     window.addEventListener('beforeunload', this.beforeunloadHandler);
-    window.addEventListener('resize', this.resizeHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
     if (!this.$root.isMobileSize) {
       window.addEventListener('scroll', this.photoPageControl);
@@ -179,12 +179,12 @@ export default {
       //   this.beforeScrollY = afterScrollY;
       //   return;
       // }
-      const photoPage = this.$refs.fixedPhotoPage.$el;
+      const photoPageStyle = this.$refs.fixedPhotoPage.$el.style;
       const firstYoutubeY = this.$refs.firstYoutube.$el.getBoundingClientRect().bottom;
       if (firstYoutubeY <= 0) {
-        photoPage.style.position = 'fixed';
+        photoPageStyle.position = 'fixed';
       } else {
-        photoPage.style.position = 'absolute';
+        photoPageStyle.position = 'absolute';
       }
     },
     headBarChangeColor() {
@@ -194,60 +194,57 @@ export default {
         this.isHeadBarLight = false;
       }
     },
-    pageTouchStart(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
-      this.touchStartX = evt.touches[0].pageX;
-      this.touchStartY = evt.touches[0].pageY;
-    },
-    pageTouchMove(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
+    // pageTouchStart(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
+    //   this.touchStartX = evt.touches[0].pageX;
+    //   this.touchStartY = evt.touches[0].pageY;
+    // },
+    // pageTouchMove(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
 
-      const moveEndX = evt.changedTouches[0].pageX;
-      const moveEndY = evt.changedTouches[0].pageY;
-      const deltaX = moveEndX - this.touchStartX;
-      const deltaY = moveEndY - this.touchStartY;
-      const WH = this.$root.windowHeight;
+    //   const moveEndX = evt.changedTouches[0].pageX;
+    //   const moveEndY = evt.changedTouches[0].pageY;
+    //   const deltaX = moveEndX - this.touchStartX;
+    //   const deltaY = moveEndY - this.touchStartY;
+    //   const WH = this.$root.windowHeight;
 
-      if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
-        if (this.pageScrollY === -WH) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-        this.pageScrollY -= WH;
-        setTimeout(() => {
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.bodyClass.add('overflow-visible');
-        }, 1000);
-      } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
-        if (this.pageScrollY === 0) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
-        this.pageScrollY += WH;
-        this.$root.cacheHTML.className = '';
-        this.bodyClass.remove('overflow-visible');
-      }
-    },
-    pageScroll(evt) {
-      if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      // evt.preventDefault();
-      const scrollDirection = evt.deltaY;
-      const WH = this.$root.windowHeight;
+    //   if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < 0) {
+    //     if (this.pageScrollY === -WH) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+    //     this.pageScrollY -= WH;
+    //     setTimeout(() => {
+    //       this.$root.cacheHTML.className = 'overflow-visible';
+    //       this.bodyClass.add('overflow-visible');
+    //     }, 1000);
+    //   } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+    //     if (this.pageScrollY === 0) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+    //     this.pageScrollY += WH;
+    //     this.$root.cacheHTML.className = '';
+    //     this.bodyClass.remove('overflow-visible');
+    //   }
+    // },
+    // pageScroll(evt) {
+    //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
+    //   const scrollDirection = evt.deltaY;
+    //   const WH = this.$root.windowHeight;
 
-      if (scrollDirection > 0) {
-        if (this.pageScrollY === -WH) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-        this.pageScrollY -= WH;
-        setTimeout(() => {
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.bodyClass.add('overflow-visible');
-        }, 1000);
-      } else {
-        if (this.pageScrollY === 0) return;
-        this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
-        this.pageScrollY += WH;
-        this.$root.cacheHTML.className = '';
-        this.bodyClass.remove('overflow-visible');
-      }
-    },
+    //   if (scrollDirection > 0) {
+    //     if (this.pageScrollY === -WH) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+    //     this.pageScrollY -= WH;
+    //     setTimeout(() => {
+    //       this.$root.cacheHTML.className = 'overflow-visible';
+    //       this.bodyClass.add('overflow-visible');
+    //     }, 1000);
+    //   } else {
+    //     if (this.pageScrollY === 0) return;
+    //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
+    //     this.pageScrollY += WH;
+    //     this.$root.cacheHTML.className = '';
+    //     this.bodyClass.remove('overflow-visible');
+    //   }
+    // },
     youtubeId(ordinalNum) {
       switch (ordinalNum) {
         case 'first':
@@ -262,14 +259,14 @@ export default {
     },
     youtubeControlFn(evt, num, isNum, canPlay = true) {
       if (!canPlay) return;
-      // evt.preventDefault();
+
       const youtubeY = this.$refs[`${num}Youtube`].$el.getBoundingClientRect().top;
       const WH = this.$root.windowHeight;
 
       if (!this[`is${isNum}YoutubePlay`] && youtubeY < 0) {
         this[`is${isNum}YoutubePlay`] = true;
         this[`${num}Youtube`].playVideo();
-      } else if (this[`is${isNum}YoutubePlay`] && ((youtubeY + (WH / 2) < 0) || (youtubeY - (WH / 2) > 0))) {
+      } else if (this[`is${isNum}YoutubePlay`] && ((youtubeY + (WH / 1.5) < 0) || (youtubeY - (WH / 1.5) > 0))) {
         this[`${num}Youtube`].pauseVideo();
       }
     },
@@ -285,16 +282,6 @@ export default {
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
-    resizeHandler() {
-      const WW = this.$root.windowWeight;
-      if ((this.beforeWindowWidth < 576 && WW >= 576) || (this.beforeWindowWidth >= 576 && WW < 576)) {
-        if (this.resizeTimer) clearTimeout(this.resizeTimer);
-        this.resizeTimer = setTimeout(() => {
-          this.$root.cacheWindow.location.reload();
-          this.beforeWindowWidth = WW;
-        }, 400);
-      }
-    },
   },
 };
 </script>
@@ -307,25 +294,26 @@ export default {
   background-color: #000;
 }
 
-.page-content {
-  width: 100%;
-  background-color: #000;
-  z-index: 9;
-  @media screen and (min-width: 576px) {
-    height: 100%;
-    // position: fixed;
-    position: absolute;
-    top: 0;
-    transition: transform 1s;
-  }
-}
+// .page-content {
+//   height: 100%;
+//   width: 100%;
+//   background-color: #000;
+//   z-index: 9;
+//   @media screen and (min-width: 576px) {
+//     // height: 100%;
+//     // position: fixed;
+//     position: absolute;
+//     top: 0;
+//     transition: transform 1s;
+//   }
+// }
 
-.opening-line {
-  @media screen and (min-width: 576px) {
-    transform: translateY(100vh);
-    transition: transform 1s;
-  }
-}
+// .opening-line {
+//   @media screen and (min-width: 576px) {
+//     transform: translateY(100vh);
+//     transition: transform 1s;
+//   }
+// }
 
 .scroll-content {
   // z-index: 49;

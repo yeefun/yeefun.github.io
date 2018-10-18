@@ -15,5 +15,10 @@ export default {
 .fb-comment-wrapper {
   width: 100%;
 }
+
+// TODO
+.fb_iframe_widget_lift {
+  width: 100% !important;
+}
 </style>
 

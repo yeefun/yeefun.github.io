@@ -1,6 +1,6 @@
 <template>
   <section class="feedback">
-    <a href="" target="_blank">
+    <a href="https://www.surveycake.com/s/KpQKN" target="_blank">
       <p>填寫閱讀體驗問卷</p>
     </a>
   </section>

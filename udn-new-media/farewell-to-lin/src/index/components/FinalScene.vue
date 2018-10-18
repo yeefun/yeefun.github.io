@@ -30,7 +30,7 @@ export default {
     finalSceneFade() {
       // OPT
       // CONFUSED if not add this, this event probably fires in page scroll of beginning. see: https://javascript.info/size-and-scroll-window#width-height-of-the-document
-      if (!this.$parent.isHeadBarLight || (!this.$root.isMobileSize && this.$parent.pageScrollY !== -this.$root.windowHeight)) return;
+      if (!this.$parent.isHeadBarLight) return;
       if (this.$root.cacheWindow.pageYOffset + this.$root.windowHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.windowHeight / 3)) {
         this.isTextFadeIn = true;
       }
