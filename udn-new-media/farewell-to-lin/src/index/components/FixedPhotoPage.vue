@@ -41,9 +41,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/content.scss';
-// @import '../css/vue-transition.scss';
-
 .fixed-page {
   // background-color: #000;
   // position: relative;
@@ -57,7 +54,6 @@ export default {
     // position: absolute;
     // width: 100%;
     height: 100%;
-    // background-image: url('../assets/ContentImg/web_legacy.jpg');
     background-size: cover;
     background-position: center;
     &-wrapper {

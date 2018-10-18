@@ -24,7 +24,6 @@ export default {
 
 <style lang="scss">
 .opening-line {
-  // background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +33,6 @@ export default {
   padding-right: 30px;
   padding-left: 30px;
   padding-top: 120px;
-  // height: 100vh;
   @media screen and (min-width: 576px) {
     padding-top: 0;
     // height: 100%;
@@ -44,15 +42,12 @@ export default {
   }
   &__wrapper {
     max-width: 943px;
-    // @media screen and (min-width: 576px) {
-    //   transform: translateY(40px);
-    // }
   }
   &__share {
     margin-top: 50px;
     margin-bottom: 120px;
     @media screen and (min-width: 576px) {
-      margin-top: 60px;
+      margin-top: 80px;
       margin-bottom: 0;
       display: flex;
       & > .share {

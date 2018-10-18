@@ -80,8 +80,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/content.scss';
-
 .content {
   &-wrapper {
     max-width: 960px;
@@ -89,10 +87,5 @@ export default {
     margin-left: auto;
   }
 }
-// .content {
-//   @media screen and (min-width: 576px) {
-//     margin-top: 100vh;
-//   }
-// }
 </style>
 

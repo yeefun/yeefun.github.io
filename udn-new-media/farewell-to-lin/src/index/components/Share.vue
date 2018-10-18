@@ -40,9 +40,6 @@ export default {
   &__fb-like-wrapper {
     margin-right: 8px;
   }
-  // &__button {
-  //   cursor: pointer;
-  // }
 }
 .fb-like, .line-share {
   cursor: pointer;

@@ -4,7 +4,8 @@
     <transition name="cover-end-fade">
       <HeadBar :isHeadBarLight="isHeadBarLight" v-if="isHeadBarShow"></HeadBar>
     </transition>
-    <div class="page-content" :style="{ transform: `translateY(${pageScrollY}px)` }">
+    <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }">
+    <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
       <Cover></Cover>
     </div>
     <OpeningLine class="opening-line" ref="openingLine"></OpeningLine>
@@ -96,16 +97,16 @@ export default {
       resizeTimer: null,
       // scrollTimer: null,
       beforeWindowWidth: document.documentElement.clientWidth,
-      // canScroll: true,
-      canScroll: false,
+      canScroll: true,
+      // canScroll: false,
       pageScrollY: 0,
       touchStartX: 0,
       touchStartY: 0,
       photoName: 'legacy',
       beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      // isHeadBarShow: true,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
+      // isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -195,13 +196,13 @@ export default {
     },
     pageTouchStart(evt) {
       if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
+      // evt.preventDefault();
       this.touchStartX = evt.touches[0].pageX;
       this.touchStartY = evt.touches[0].pageY;
     },
     pageTouchMove(evt) {
       if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
+      // evt.preventDefault();
 
       const moveEndX = evt.changedTouches[0].pageX;
       const moveEndY = evt.changedTouches[0].pageY;
@@ -261,7 +262,7 @@ export default {
     },
     youtubeControlFn(evt, num, isNum, canPlay = true) {
       if (!canPlay) return;
-      evt.preventDefault();
+      // evt.preventDefault();
       const youtubeY = this.$refs[`${num}Youtube`].$el.getBoundingClientRect().top;
       const WH = this.$root.windowHeight;
 
@@ -285,13 +286,14 @@ export default {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
     resizeHandler() {
-      const WH = this.$root.windowHeight;
-      if ((this.beforeWindowWidth < 576 && WH < 576) || (this.beforeWindowWidth >= 576 && WH >= 576)) return;
-      if (this.resizeTimer) clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
-        this.$root.cacheWindow.location.reload();
-        this.beforeWindowWidth = WH;
-      }, 400);
+      const WW = this.$root.windowWeight;
+      if ((this.beforeWindowWidth < 576 && WW >= 576) || (this.beforeWindowWidth >= 576 && WW < 576)) {
+        if (this.resizeTimer) clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
+          this.$root.cacheWindow.location.reload();
+          this.beforeWindowWidth = WW;
+        }, 400);
+      }
     },
   },
 };
@@ -307,26 +309,17 @@ export default {
 
 .page-content {
   width: 100%;
-  // height: 100vh;
   background-color: #000;
   z-index: 9;
   @media screen and (min-width: 576px) {
     height: 100%;
-    position: fixed;
+    // position: fixed;
+    position: absolute;
     top: 0;
     transition: transform 1s;
   }
 }
 
-// .youtube--scroll {
-//   // z-index: 49;
-//   @media screen and (min-width: 576px) {
-//     transform: translateY(100vh);
-//     transition: transform 1s;
-//   }
-// }
-
-// CONFUSED 100vh or clientHeight?
 .opening-line {
   @media screen and (min-width: 576px) {
     transform: translateY(100vh);

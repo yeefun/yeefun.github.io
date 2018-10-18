@@ -42,12 +42,10 @@ export default {
     text-align: center;
   }
   &-link {
-    // text-decoration: none;
     color: #a3a3a3;
     border-right: 1px solid #dcdddd;
     padding-left: 12px;
     padding-right: 12px;
-    // cursor: pointer;
     &.no-border {
       border-right: none;
       padding-right: 0;

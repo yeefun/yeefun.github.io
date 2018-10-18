@@ -34,7 +34,7 @@ export default {
   // background-color: #000;
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   // background-color: #000;
   color: #bcbcbc;
   padding-right: 30px;
@@ -42,9 +42,11 @@ export default {
   padding-top: 120px;
   // height: 100vh;
   @media screen and (min-width: 576px) {
-    padding-top: 0;
+    // padding-top: 0;
     // height: 100%;
-    height: 100vh;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    // height: 100vh;
     padding-right: 60px;
     padding-left: 60px;
   }
@@ -58,7 +60,7 @@ export default {
     margin-top: 50px;
     margin-bottom: 120px;
     @media screen and (min-width: 576px) {
-      margin-top: 60px;
+      margin-top: 80px;
       margin-bottom: 0;
       display: flex;
       & > .share {

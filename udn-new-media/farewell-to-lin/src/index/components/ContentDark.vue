@@ -81,6 +81,5 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/content.scss';
 </style>
 

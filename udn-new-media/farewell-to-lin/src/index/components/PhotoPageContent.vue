@@ -75,18 +75,16 @@ export default {
   methods: {
     photoChange() {
       const currentTime = new Date();
-      if (currentTime - this.startScrollTime < 200) return;
-      const scrollY = this.$root.cacheWindow.pageYOffset;
-      const scrollYLess = scrollY - this.marginTop;
-      const noPhotoY = this.$refs.noPhoto.getBoundingClientRect().top + scrollYLess;
-      const watermoonY = this.$refs.photoWatermoon.getBoundingClientRect().top + scrollYLess;
-      const wanderersY = this.$refs.photoWanderers.getBoundingClientRect().top + scrollYLess;
+      if (currentTime - this.startScrollTime < 400) return;
+      const noPhotoY = this.$refs.noPhoto.getBoundingClientRect().top;
+      const watermoonY = this.$refs.photoWatermoon.getBoundingClientRect().top;
+      const wanderersY = this.$refs.photoWanderers.getBoundingClientRect().top;
 
-      if (scrollY >= noPhotoY) {
+      if (noPhotoY - this.marginTop <= 0) {
         this.$parent.photoName = null;
-      } else if (scrollY >= watermoonY) {
+      } else if (watermoonY - this.marginTop <= 0) {
         this.$parent.photoName = 'watermoon';
-      } else if (scrollY >= wanderersY) {
+      } else if (wanderersY - this.marginTop <= 0) {
         this.$parent.photoName = 'wanderers';
       } else {
         this.$parent.photoName = 'legacy';

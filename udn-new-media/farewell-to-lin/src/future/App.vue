@@ -2,7 +2,7 @@
   <div id="app" @wheel="!$root.isMobileSize && pageScroll($event)" @touchstart="!$root.isMobileSize && pageTouchStart($event)" @touchmove="!$root.isMobileSize && pageTouchMove($event)">
     <ProgressBar></ProgressBar>
     <HeadBar :isHeadBarLight="isHeadBarLight"></HeadBar>
-    <div class="page-content" :style="{ transform: `translateY(${pageScrollY}px)` }">
+    <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }">
       <Cover></Cover>
     </div>
     <OpeningLine class="opening-line" ref="openingLine"></OpeningLine>
@@ -103,26 +103,27 @@ export default {
   },
   methods: {
     resizeHandler() {
-      const WH = this.$root.windowHeight;
-      if ((this.beforeWindowWidth < 576 && WH < 576) || (this.beforeWindowWidth >= 576 && WH >= 576)) return;
-      if (this.resizeTimer) clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
-        this.$root.cacheWindow.location.reload();
-        this.beforeWindowWidth = WH;
-      }, 400);
+      const WW = this.$root.windowWeight;
+      if ((this.beforeWindowWidth < 576 && WW >= 576) || (this.beforeWindowWidth >= 576 && WW < 576)) {
+        if (this.resizeTimer) clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
+          this.$root.cacheWindow.location.reload();
+          this.beforeWindowWidth = WW;
+        }, 400);
+      }
     },
     beforeunloadHandler() {
       this.$root.cacheWindow.scroll({ top: 0 });
     },
     pageTouchStart(evt) {
       if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
+      // evt.preventDefault();
       this.touchStartX = evt.touches[0].pageX;
       this.touchStartY = evt.touches[0].pageY;
     },
     pageTouchMove(evt) {
       if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
-      evt.preventDefault();
+      // evt.preventDefault();
 
       const moveEndX = evt.changedTouches[0].pageX;
       const moveEndY = evt.changedTouches[0].pageY;
@@ -175,9 +176,9 @@ export default {
         this.isHeadBarLight = false;
       }
     },
-    youtubeControl(evt) {
+    youtubeControl() {
       // if (!this.youtube) return;
-      evt.preventDefault();
+      // evt.preventDefault();
       const scrollY = this.$root.cacheWindow.pageYOffset;
       const youtubeY = this.$refs.youtube.$el.offsetTop;
       const WH = this.$root.windowHeight;
@@ -202,8 +203,9 @@ export default {
   // height: 100%;
   // background-color: #000;
   @media screen and (min-width: 576px) {
-    position: fixed;
-    height: 100%;
+    // position: fixed;
+    position: absolute;
+    // height: 100%;
     top: 0;
     transition: transform 1s;
   }

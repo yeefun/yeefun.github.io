@@ -23,8 +23,6 @@
 </template>
 
 <script>
-// import Utils from 'udn-newmedia-utils';
-
 export default {
   name: 'Editor',
 };

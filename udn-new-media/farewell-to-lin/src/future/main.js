@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cacheHTML: document.documentElement,
       windowWidth: document.documentElement.clientWidth,
       windowHeight: document.documentElement.clientHeight,
+      resizeTimer: null,
     },
     created() {
       window.addEventListener('load', this.loadHandler);
@@ -36,8 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         this.windowHeight = document.documentElement.clientHeight;
       },
       resizeHandler() {
-        this.windowWidth = document.documentElement.clientWidth;
-        this.windowHeight = document.documentElement.clientHeight;
+        if (this.resizeTimer) clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
+          this.windowWidth = document.documentElement.clientWidth;
+          this.windowHeight = document.documentElement.clientHeight;
+        }, 400);
       },
     },
   }).$mount('#app');

@@ -1,8 +1,6 @@
 <template>
-  <!-- TODO change css animation to Vue animation -->
   <article class="cover">
     <div class="cover__img" :style="{ backgroundImage: `url(${backgroundCover})` }"></div>
-    <!-- <div class="cover__img" v-else></div> -->
     <div class="cover__title">
       <h2>45年掌舵人將交棒</h2>
       <h1>雲門大船的<br>未來進行式</h1>
@@ -22,32 +20,17 @@ export default {
       return this.$root.isMobileSize ? mobileCover : webCover;
     },
   },
-  // methods: {
-  // },
 };
 </script>
 
 <style lang="scss">
-// @import '../css/vue-transition.scss';
-
 .cover {
-  height: 100vh;
+  height: 100%;
   position: relative;
-  @media screen and (min-width: 576px) {
-    height: 100%;
-  }
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // overflow: hidden;
-  // IE 11 can't work properly
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
   &__img {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-size: cover;
     background-position: center;
   }
@@ -69,6 +52,7 @@ export default {
       margin-left: 1.35px;
       // line-height: 2.75;
       margin-bottom: 20px;
+      text-shadow: 0 0 12.6px #000;
       @media screen and (min-width: 576px) {
         font-size: 4rem;
         letter-spacing: 4px;

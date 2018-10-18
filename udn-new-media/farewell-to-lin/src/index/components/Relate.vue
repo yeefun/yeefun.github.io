@@ -4,29 +4,25 @@
     <div class="relate__report-wrapper">
       <div class="relate__report relate__report--left">
         <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">
-          <img src="../assets/ReadMore/readMore101.png" alt="">
-          <!-- <div class="relate__report-img relate__report-img-1"></div> -->
+          <img src="../assets/ReadMore/readMore101.jpg" alt="">
           <p>45年掌舵人將交棒<br>雲門大船的未來進行式</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
         <a href="https://udn.com/news/story/7314/3389202" target="_blank">
-          <img  src="../assets/ReadMore/readMore102.png" alt="">
-          <!-- <div class="relate__report-img relate__report-img-2"></div> -->
+          <img  src="../assets/ReadMore/readMore102.jpg" alt="">
           <p>要讓林懷民不遺憾…<br>文化中心活化 核定52場</p>
         </a>
       </div>
       <div class="relate__report relate__report--left">
         <a href="https://udn.com/news/story/7266/3389722" target="_blank">
-          <img src="../assets/ReadMore/readMore103.png" alt="">
-          <!-- <div class="relate__report-img relate__report-img-3"></div> -->
+          <img src="../assets/ReadMore/readMore103.jpg" alt="">
           <p :class="{ 'mb-0': $root.windowWidth > 375.98 }">文化部將活化文化中心<br>林懷民：很棒很開心</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
         <a href="https://ubrand.udn.com/ubrand/story/12117/3368053" target="_blank">
-          <img src="../assets/ReadMore/readMore104.png" alt="">
-          <!-- <div class="relate__report-img relate__report-img-4"></div> -->
+          <img src="../assets/ReadMore/readMore104.jpg" alt="">
           <p class="mb-0">捷運變游池＋台東熱氣球<br>幕後推手都是他</p>
         </a>
       </div>
@@ -41,8 +37,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../css/common.scss';
-
 .relate {
   width: 100%;
   padding-right: 24px;
@@ -60,7 +54,6 @@ export default {
     padding-left: 0;
     margin-bottom: 0;
   }
-  // background-color: #fff;
   & h4 {
     font-size: 1.8rem;
     margin-bottom: 26px;
@@ -79,11 +72,9 @@ export default {
     //   flex: auto 0 0;
     // }
     @media screen and (max-width: 375.98px) {
-      // text-align: left;
       width: 100%;
     }
     & a {
-      // text-decoration: none;
       color: #000;
     }
     &-wrapper {

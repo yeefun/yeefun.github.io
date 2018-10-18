@@ -21,7 +21,6 @@ export default {
 <style lang="scss">
 .youtube {
   position: relative;
-  // FIXME dark youtube need full version?
   @media screen and (min-width: 576px) {
     height: 100vh;
   }

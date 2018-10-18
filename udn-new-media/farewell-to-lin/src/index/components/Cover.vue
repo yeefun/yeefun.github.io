@@ -2,12 +2,12 @@
   <!-- TODO change css animation to Vue animation -->
   <!-- <article class="cover" @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove"> -->
   <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
-    <video id="cover__video" class="cover__video" data-object-fit="cover" muted autoplay loop>
+    <video id="cover__video" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline poster="../assets/CoverImg/empty.png" :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <section class="cover__title-wrapper">
+    <!-- <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -66,7 +66,7 @@
           <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
         </div>
       </div>
-    </transition>
+    </transition> -->
 
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
@@ -75,6 +75,9 @@
 </template>
 
 <script>
+import videoImgMob from '../assets/CoverImg/video_mob.jpg';
+import videoImgWeb from '../assets/CoverImg/video_web.jpg';
+
 export default {
   name: 'Cover',
   data() {
@@ -86,13 +89,18 @@ export default {
       isCoverTitleMove: false,
     };
   },
+  computed: {
+    videoImg() {
+      return this.$root.isMobileSize ? videoImgMob : videoImgWeb;
+    },
+  },
   methods: {
     dancerClass(idx) {
       const dancerClass = {
         'dancer-move': this.isDancerMove,
       };
       dancerClass[`dancer${idx}`] = true;
-      dancerClass[`dancer${idx}-move`] = this.isDancerMove && idx < 4;
+      dancerClass[`dancer${idx}-move`] = this.isDancerMove && idx !== 5;
       return dancerClass;
     },
     dancerMove() {
@@ -117,21 +125,24 @@ export default {
 
 <style lang="scss">
 .cover {
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   position: relative;
   overflow: hidden;
   // IE 11 can't work properly
   // display: flex;
   // justify-content: center;
   // align-items: center;
-  @media screen and (min-width: 576px) {
-    height: 100%;
-  }
+  // @media screen and (min-width: 576px) {
+  //   height: 100%;
+  // }
   &__video {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-size: cover;
+    background-position: center;
   }
 
   &__mask {
@@ -208,7 +219,6 @@ export default {
 
   &__img {
     position: absolute;
-    // height: 100vh;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -336,6 +346,16 @@ export default {
     transform: translateX(-50%);
     width: 25px;
     height: auto;
+    // animation: arrow-move 2s infinite;
+    // @keyframes arrow-move {
+    //   0% {
+    //     bottom: 6.5%;
+    //   }
+
+    //   100% {
+    //     bottom: 4.5%;
+    //   }
+    // }
   }
 }
 
@@ -357,7 +377,7 @@ export default {
   }
 
   &-move {
-    transform: translateY(80%) rotate(0deg);
+    transform: translateY(88%) rotate(0deg);
   }
 }
 
@@ -401,6 +421,9 @@ export default {
     top: -34vh;
     left: 24vw;
     transform: translateY(-40%);
+  }
+  &-move {
+    transform: translateY(-32%);
   }
 }
 

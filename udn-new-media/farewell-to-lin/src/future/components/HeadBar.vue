@@ -34,7 +34,7 @@
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="{ height: `${$root.windowHeight}px` }">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>雲門大船的未來進行式</li>
@@ -61,30 +61,18 @@
 </template>
 
 <script>
-// import Logo from '../../components/Logo.vue';
-
 export default {
   name: 'HeadBar',
-  // components: {
-  //   Logo,
-  // },
   props: ['isHeadBarLight'],
   data() {
     return {
       isListOpen: false,
     };
   },
-  methods: {
-    innerAnchorShow() {
-      this.isInnerAnchorShow = true;
-    },
-  },
 };
 </script>
 
 <style lang="scss">
-// @import '../css/vue-transition.scss';
-
 .header {
   position: fixed;
   width: 100%;
@@ -195,7 +183,7 @@ export default {
   &-list {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);

@@ -29,7 +29,7 @@
             <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
           </li>
         </ul> -->
-        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="innerAnchorShow" @mouseleave="isInnerAnchorShow = false" @touchstart.stop="innerAnchorShow">
+        <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="isInnerAnchorShow = true" @mouseleave="isInnerAnchorShow = false" @touchstart.stop="isInnerAnchorShow = true">
           <li>台灣是我們的共業
             <transition name="anchor-slide">
               <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
@@ -49,7 +49,7 @@
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="{ height: `${$root.windowHeight}px` }">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>台灣是我們的共業
@@ -102,9 +102,6 @@ export default {
     innerAnchorClose() {
       if (this.isInnerAnchorShow) this.isInnerAnchorShow = false;
     },
-    innerAnchorShow() {
-      this.isInnerAnchorShow = true;
-    },
     firstAnchorMove() {
       // CONFUSED different after scroll-bar show
       // const youtubeY = this.$parent.$refs.secondYoutube.$el.offsetTop;
@@ -117,21 +114,20 @@ export default {
     },
     thirdAnchorMove() {
       this.AnchorJudge();
-      // document.getElementById('second-anchor').scrollIntoView({ behavior: 'smooth', block: 'center' });
       document.getElementById('third-anchor').scrollIntoView({ behavior: 'smooth' });
     },
     AnchorJudge() {
-      if (!this.$root.isMobileSize) {
-        if (!this.$parent.bodyClass.contains('overflow-visible')) {
-          this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-          this.$root.cacheHTML.className = 'overflow-visible';
-          this.$parent.bodyClass.add('overflow-visible');
-        }
-        this.$parent.pageScrollY = -this.$root.windowHeight;
-        this.isInnerAnchorShow = false;
-      } else {
+      if (this.$root.isMobileSize) {
         this.isListOpen = false;
+        return;
       }
+      if (!this.$parent.bodyClass.contains('overflow-visible')) {
+        this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
+        this.$root.cacheHTML.className = 'overflow-visible';
+        this.$parent.bodyClass.add('overflow-visible');
+      }
+      this.$parent.pageScrollY = -this.$root.windowHeight;
+      this.isInnerAnchorShow = false;
     },
   },
 };
@@ -293,7 +289,6 @@ export default {
   &-list {
     position: absolute;
     width: 100%;
-    height: 100vh;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
