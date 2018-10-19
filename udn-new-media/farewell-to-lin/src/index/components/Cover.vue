@@ -1,13 +1,11 @@
 <template>
-  <!-- TODO change css animation to Vue animation -->
-  <!-- <article class="cover" @mousewheel.once="dancerMove" @DOMMouseScroll.once="dancerMove" @touchmove.once="dancerMove"> -->
   <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
     <video id="cover__video" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline poster="../assets/CoverImg/empty.png" :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <!-- <section class="cover__title-wrapper">
+    <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -65,7 +63,7 @@
           <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
         </div>
       </div>
-    </transition> -->
+    </transition>
 
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">

@@ -52,6 +52,7 @@
 
 <script>
 import smoothscroll from 'smoothscroll-polyfill';
+import Utils from 'udn-newmedia-utils';
 
 import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
@@ -106,8 +107,8 @@ export default {
       photoName: 'legacy',
       // beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      isHeadBarShow: true,
-      // isHeadBarShow: false,
+      // isHeadBarShow: true,
+      isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -131,11 +132,17 @@ export default {
       this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.firstYoutube.setVolume(0);
+            this.firstYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
               window.removeEventListener('scroll', this.firstYoutubeControl);
+              window.ga('send', {
+                hitType: 'event',
+                eventCategory: 'video',
+                eventAction: 'play',
+                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民與台灣的對話] [已觀看${this.firstYoutube.getCurrentTime()}秒]`,
+              });
             }
           },
         },
@@ -143,11 +150,17 @@ export default {
       this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.secondYoutube.setVolume(0);
+            this.secondYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
               window.removeEventListener('scroll', this.secondYoutubeControl);
+              window.ga('send', {
+                hitType: 'event',
+                eventCategory: 'video',
+                eventAction: 'play',
+                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民真心話大告白] [已觀看${this.secondYoutube.getCurrentTime()}秒]`,
+              });
             }
           },
         },
@@ -155,11 +168,17 @@ export default {
       this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.thirdYoutube.setVolume(0);
+            this.thirdYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
               window.removeEventListener('scroll', this.thirdYoutubeControl);
+              window.ga('send', {
+                hitType: 'event',
+                eventCategory: 'video',
+                eventAction: 'play',
+                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [退休前給台灣的一段話] [已觀看${this.thirdYoutube.getCurrentTime()}秒]`,
+              });
             }
           },
         },
@@ -248,11 +267,11 @@ export default {
     youtubeId(ordinalNum) {
       switch (ordinalNum) {
         case 'first':
-          return this.$root.windowWidth < 576 ? '4Cyyr2brm7U' : 'w-jS7Bf90bY';
+          return this.$root.windowWidth < 576 ? 'ws1aS1SASdw' : 'Tg5a_R3rr6U';
         case 'second':
-          return this.$root.windowWidth < 576 ? 'xhKWsXskhRM' : 'iVpdcGvj32s';
+          return this.$root.windowWidth < 576 ? 'Ec32L2R1dZo' : 'Zu9QLTeX_Uk';
         case 'third':
-          return this.$root.windowWidth < 576 ? '6u2vkJCamD8' : 'aNwTvyITqBY';
+          return this.$root.windowWidth < 576 ? 'j3QNQIcTuJg' : 'Nfi2mssgFqQ';
         default:
           return false;
       }

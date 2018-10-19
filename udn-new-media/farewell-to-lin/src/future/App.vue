@@ -38,6 +38,7 @@
 
 <script>
 import smoothscroll from 'smoothscroll-polyfill';
+import Utils from 'udn-newmedia-utils';
 
 import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
@@ -91,11 +92,17 @@ export default {
         events: {
           onReady: () => {
             this.youtube.mute();
-            this.youtube.setVolume(0);
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
               window.removeEventListener('scroll', this.youtubeControl);
+
+              window.ga('send', {
+                hitType: 'event',
+                eventCategory: 'video',
+                eventAction: 'play',
+                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [45年掌舵人將交棒 雲門大船的未來進行式] [已觀看${this.youtube.getCurrentTime()}秒]`,
+              });
             }
           },
         },
@@ -178,7 +185,6 @@ export default {
       if (!this.isYoutubePlay && scrollY > youtubeY) {
         this.isYoutubePlay = true;
         this.youtube.playVideo();
-        this.youtube.unMute();
       // ASK pause timing is half or all
       } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH / 1.5)) || scrollY < (youtubeY - (WH / 1.5)))) {
         this.youtube.pauseVideo();

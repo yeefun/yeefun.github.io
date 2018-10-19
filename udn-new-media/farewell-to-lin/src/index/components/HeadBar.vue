@@ -58,7 +58,6 @@
             <li>
               <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a>
             </li>
-            <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li> -->
           </ul>
         </nav>
         <section class="logo">

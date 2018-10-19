@@ -3,25 +3,25 @@
     <h4>延伸閱讀</h4>
     <div class="relate__report-wrapper">
       <div class="relate__report relate__report--left">
-        <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">
+        <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank" @click="relateClick('45年掌舵人將交棒 雲門大船的未來進行式')">
           <img src="../assets/ReadMore/readMore101.jpg" alt="">
           <p>45年掌舵人將交棒<br>雲門大船的未來進行式</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
-        <a href="https://udn.com/news/story/7314/3389202" target="_blank">
-          <img  src="../assets/ReadMore/readMore102.jpg" alt="">
+        <a href="https://udn.com/news/story/7314/3389202" target="_blank" @click="relateClick('要讓林懷民不遺憾… 文化中心活化 核定52場')">
+          <img src="../assets/ReadMore/readMore102.jpg" alt="">
           <p>要讓林懷民不遺憾…<br>文化中心活化 核定52場</p>
         </a>
       </div>
       <div class="relate__report relate__report--left">
-        <a href="https://udn.com/news/story/7266/3389722" target="_blank">
+        <a href="https://udn.com/news/story/7266/3389722" target="_blank" @click="relateClick('文化部將活化文化中心 林懷民：很棒很開心')">
           <img src="../assets/ReadMore/readMore103.jpg" alt="">
           <p :class="{ 'mb-0': $root.windowWidth > 375.98 }">文化部將活化文化中心<br>林懷民：很棒很開心</p>
         </a>
       </div>
       <div class="relate__report relate__report--right">
-        <a href="https://ubrand.udn.com/ubrand/story/12117/3368053" target="_blank">
+        <a href="https://ubrand.udn.com/ubrand/story/12117/3368053" target="_blank" @click="relateClick('捷運變游池＋台東熱氣球 幕後推手都是他')">
           <img src="../assets/ReadMore/readMore104.jpg" alt="">
           <p class="mb-0">捷運變游池＋台東熱氣球<br>幕後推手都是他</p>
         </a>
@@ -31,8 +31,20 @@
 </template>
 
 <script>
+import Utils from 'udn-newmedia-utils';
+
 export default {
   name: 'Relate',
+  methods: {
+    relateClick(target) {
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'relate',
+        eventAction: 'click',
+        eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [${target}] [relate click]`,
+      });
+    },
+  },
 };
 </script>
 

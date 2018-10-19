@@ -30,7 +30,6 @@ export default {
 
 <style lang="scss">
 .editor {
-  // ASK color?
   font-size: 1.6rem;
   line-height: 1.75;
   letter-spacing: 0.8px;

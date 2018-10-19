@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import Utils from 'udn-newmedia-utils';
+
 export default {
   name: 'ProgressBar',
   created() {
@@ -19,7 +21,14 @@ export default {
     progressBarGrow() {
       const currentHeight = this.$root.cacheWindow.pageYOffset;
       const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.windowHeight;
-      this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
+      const readPercent = (currentHeight / totalHeight) * 100;
+      this.progress = readPercent.toFixed(2);
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'read',
+        eventAction: 'scroll',
+        eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [page read '${readPercent.toFixed(2)}%]`,
+      });
     },
   },
 };
