@@ -90,6 +90,7 @@ export default {
       this.youtube = new YT.Player('youtube', { // eslint-disable-line
         events: {
           onReady: () => {
+            this.youtube.mute();
             this.youtube.setVolume(0);
           },
           onStateChange: (evt) => {
@@ -177,6 +178,7 @@ export default {
       if (!this.isYoutubePlay && scrollY > youtubeY) {
         this.isYoutubePlay = true;
         this.youtube.playVideo();
+        this.youtube.unMute();
       // ASK pause timing is half or all
       } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH / 1.5)) || scrollY < (youtubeY - (WH / 1.5)))) {
         this.youtube.pauseVideo();
