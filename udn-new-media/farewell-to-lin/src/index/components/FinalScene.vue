@@ -1,5 +1,5 @@
 <template>
-  <section class="final-scene" id="third-anchor">
+  <section class="final-scene" id="third-anchor" ref="finalScene">
     <div class="final-scene__text" :class="{ 'fade-out': isTextFadeOut }" @transitionend.self.once="isYoutubeFadeIn = true" @webkitTransitionEnd.self.once="isYoutubeFadeIn = true">
       <div class="final-scene__text--first" :class="{ 'fade-in': isTextFadeIn }">過去45年<br>林懷民用90齣舞作<br>不斷與台灣社會對話</div>
       <p><br></p>
@@ -27,11 +27,17 @@ export default {
     window.addEventListener('scroll', this.finalSceneFade);
   },
   methods: {
+    // finalSceneFade() {
+    //   // OPT
+    //   // CONFUSED if not add this, this event probably fires in page scroll of beginning. see: https://javascript.info/size-and-scroll-window#width-height-of-the-document
+    //   if (!this.$parent.isHeadBarLight) return;
+    //   if (this.$root.cacheWindow.pageYOffset + this.$root.windowHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.windowHeight / 3)) {
+    //     this.isTextFadeIn = true;
+    //   }
+    // },
     finalSceneFade() {
-      // OPT
-      // CONFUSED if not add this, this event probably fires in page scroll of beginning. see: https://javascript.info/size-and-scroll-window#width-height-of-the-document
       if (!this.$parent.isHeadBarLight) return;
-      if (this.$root.cacheWindow.pageYOffset + this.$root.windowHeight >= this.$root.cacheHTML.scrollHeight - (this.$root.windowHeight / 3)) {
+      if ((this.$refs.finalScene.getBoundingClientRect().top - (this.$root.windowHeight * 0.25)) < 0) {
         this.isTextFadeIn = true;
       }
     },
@@ -46,7 +52,7 @@ export default {
 
 <style lang="scss">
 .final-scene {
-  height: 100vh;
+  // height: 100vh;
   // background-color: #fff;
   position: relative;
   &__text {

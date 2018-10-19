@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-import 'reset-css'; // eslint-disable-line
-import './css/common.scss';
+// import './css/common.scss';
 import './js/objectFitPolyfill.basic.min';
 
 Vue.config.productionTip = false;

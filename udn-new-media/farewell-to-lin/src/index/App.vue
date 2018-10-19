@@ -106,8 +106,8 @@ export default {
       photoName: 'legacy',
       // beforeScrollY: window.pageYOffset,
       isLastContentShow: false,
-      // isHeadBarShow: true,
-      isHeadBarShow: false,
+      isHeadBarShow: true,
+      // isHeadBarShow: false,
       isHeadBarLight: false,
       firstYoutube: null,
       secondYoutube: null,
@@ -131,7 +131,7 @@ export default {
       this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.firstYoutube.mute();
+            this.firstYoutube.setVolume(0);
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
@@ -143,7 +143,7 @@ export default {
       this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.secondYoutube.mute();
+            this.secondYoutube.setVolume(0);
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
@@ -155,7 +155,7 @@ export default {
       this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.thirdYoutube.mute();
+            this.thirdYoutube.setVolume(0);
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
@@ -213,15 +213,15 @@ export default {
     //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
     //     this.pageScrollY -= WH;
     //     setTimeout(() => {
-    //       this.$root.cacheHTML.className = 'overflow-visible';
-    //       this.bodyClass.add('overflow-visible');
+    //       this.$root.cacheHTML.className = 'of-v';
+    //       this.bodyClass.add('of-v');
     //     }, 1000);
     //   } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
     //     if (this.pageScrollY === 0) return;
     //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
     //     this.pageScrollY += WH;
     //     this.$root.cacheHTML.className = '';
-    //     this.bodyClass.remove('overflow-visible');
+    //     this.bodyClass.remove('of-v');
     //   }
     // },
     // pageScroll(evt) {
@@ -234,15 +234,15 @@ export default {
     //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
     //     this.pageScrollY -= WH;
     //     setTimeout(() => {
-    //       this.$root.cacheHTML.className = 'overflow-visible';
-    //       this.bodyClass.add('overflow-visible');
+    //       this.$root.cacheHTML.className = 'of-v';
+    //       this.bodyClass.add('of-v');
     //     }, 1000);
     //   } else {
     //     if (this.pageScrollY === 0) return;
     //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
     //     this.pageScrollY += WH;
     //     this.$root.cacheHTML.className = '';
-    //     this.bodyClass.remove('overflow-visible');
+    //     this.bodyClass.remove('of-v');
     //   }
     // },
     youtubeId(ordinalNum) {
@@ -287,6 +287,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'reset-css';
+@import './css/common.scss';
 @import './css/vue-transition.scss';
 @import './css/content.scss';
 

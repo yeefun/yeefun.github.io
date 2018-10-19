@@ -90,7 +90,7 @@ export default {
       this.youtube = new YT.Player('youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            this.youtube.mute();
+            this.youtube.setVolume(0);
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
@@ -127,15 +127,15 @@ export default {
     //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
     //     this.pageScrollY -= WH;
     //     setTimeout(() => {
-    //       this.$root.cacheHTML.className = 'overflow-visible';
-    //       this.bodyClass.add('overflow-visible');
+    //       this.$root.cacheHTML.className = 'of-v';
+    //       this.bodyClass.add('of-v');
     //     }, 1000);
     //   } else if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
     //     if (this.pageScrollY === 0) return;
     //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
     //     this.pageScrollY += WH;
     //     this.$root.cacheHTML.className = '';
-    //     this.bodyClass.remove('overflow-visible');
+    //     this.bodyClass.remove('of-v');
     //   }
     // },
     // pageScroll(evt) {
@@ -149,15 +149,15 @@ export default {
     //     this.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
     //     this.pageScrollY -= WH;
     //     setTimeout(() => {
-    //       this.$root.cacheHTML.className = 'overflow-visible';
-    //       this.bodyClass.add('overflow-visible');
+    //       this.$root.cacheHTML.className = 'of-v';
+    //       this.bodyClass.add('of-v');
     //     }, 1000);
     //   } else {
     //     if (this.pageScrollY === 0) return;
     //     this.$refs.openingLine.$el.style.transform = 'translateY(100vh)';
     //     this.pageScrollY += WH;
     //     this.$root.cacheHTML.className = '';
-    //     this.bodyClass.remove('overflow-visible');
+    //     this.bodyClass.remove('of-v');
     //   }
     // },
     headBarChangeColor() {
@@ -187,6 +187,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'reset-css';
+@import './css/common.scss';
 @import './css/vue-transition.scss';
 
 // .page-content {

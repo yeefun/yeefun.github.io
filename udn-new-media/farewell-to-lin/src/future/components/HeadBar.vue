@@ -25,8 +25,9 @@
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
-          <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li>
-          <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li> -->
+          <li>
+            <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a>
+          </li>
         </ul>
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner">
           <li>雲門大船的未來進行式</li>
@@ -34,13 +35,15 @@
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="`height: ${$root.windowHeight}px`">
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>雲門大船的未來進行式</li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li>
+            <li>
+              <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" target="_blank">台灣是我們的共業</a>
+            </li>
             <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/index.html" target="_blank">台灣是我們的共業</a></li> -->
           </ul>
         </nav>
@@ -183,7 +186,7 @@ export default {
   &-list {
     position: absolute;
     width: 100%;
-    // height: 100vh;
+    height: 100vh;
     top: 0;
     // left: 0;
     background-color: rgba(0, 0, 0, 0.8);

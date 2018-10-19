@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   // @media screen and (min-width: 576px) {
   //   overflow: hidden;
   // }
@@ -28,6 +28,6 @@ a {
   margin-bottom: 0 !important;
 }
 
-.overflow-visible {
+.of-v {
   overflow: visible;
 }

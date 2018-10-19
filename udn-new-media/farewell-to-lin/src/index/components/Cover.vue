@@ -7,7 +7,7 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
 
-    <section class="cover__title-wrapper">
+    <!-- <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
       @transitionend.once="subtitleMoveEnd" @webkitTransitionEnd.once="subtitleMoveEnd">
         <p>退</p>
@@ -52,8 +52,7 @@
       <div class="cover__mask" v-if="!isCoverFadeOut">
         <div class="cover__prompt" v-if="isCoverPromptExist">
           <div class="cover__prompt-to-bottom">
-            <p>往下</p>
-            <p>滾動</p>
+            <p>請滑動</p>
           </div>
           <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
         </div>
@@ -66,7 +65,7 @@
           <img src="../assets/CoverImg/hito5.png" :class="dancerClass(5)" alt="">
         </div>
       </div>
-    </transition>
+    </transition> -->
 
     <transition name="cover-end-fade">
       <img v-if="$parent.isHeadBarShow" class="cover__arrow" src="../../assets/CoverImg/arrow.png" alt="">
@@ -88,6 +87,12 @@ export default {
       isCoverTitleFadeIn: false,
       isCoverTitleMove: false,
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isCoverPromptExist = false;
+      this.isDancerMove = true;
+    }, 8000);
   },
   computed: {
     videoImg() {
@@ -114,8 +119,8 @@ export default {
     subtitleMoveEnd() {
       // if (this.$root.isMobileSize) {
       setTimeout(() => {
-        this.$root.cacheHTML.className = 'overflow-visible';
-        document.body.classList.add('overflow-visible');
+        this.$root.cacheHTML.className = 'of-v';
+        document.body.classList.add('of-v');
       }, 1000);
       // }
       // this.$parent.canScroll = true;
@@ -151,7 +156,7 @@ export default {
     height: 100%;
     object-fit: cover;
     background-size: cover;
-    background-position: center;
+    background-position: 40% 50%;
   }
 
   &__mask {

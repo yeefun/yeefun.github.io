@@ -15,7 +15,7 @@
       <figure class="content__photo-wrapper content__photo-wrapper--light">
         <img class="content__photo" src="../assets/ContentImg/mob_childhood.jpg" v-if="$root.isMobileSize" alt="">
         <img class="content__photo" src="../assets/ContentImg/web_childhood.jpg" v-else alt="">
-        <figcaption class="content__photo-caption content__photo-caption--light">林懷民一家人。左一為幼年時的林懷民。圖／雲門舞集提供</figcaption>
+        <figcaption class="content__photo-caption content__photo-caption--light">林懷民一家人。左一為幼年時的林懷民，左二為林懷民母親，左三為林懷民父親、台灣首任嘉義縣縣長林金生。圖／雲門舞集提供</figcaption>
       </figure>
       <div class="content__text content__text--light">
         <p>又譬如，爸爸過世後，林懷民總在周六陪媽媽，周日由弟弟陪。有年林懷民弟弟出國，他周六在台中演完，準備周日回家，先打電話問「媽媽您好嗎」，聽到媽媽答「一個人吃飯哪有什麼好？」他聽到簡直快瘋掉，趕快衝回家。</p>

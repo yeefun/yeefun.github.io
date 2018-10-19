@@ -18,24 +18,19 @@
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
       </a>
-      <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click.prevent="isListOpen=!isListOpen" @touchstart.prevent="isListOpen=!isListOpen">
+      <div class="header-bar__icon-burger" v-if="$root.isMobileSize" @click="isListOpen=!isListOpen" @touchstart.prevent="isListOpen=!isListOpen">
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
         <div :class="{ active: isListOpen || !isHeadBarLight }"></div>
       </div>
       <nav class="header-bar__anchor-menu" :class="{ 'header-bar__anchor-menu--light': isHeadBarLight }" v-else>
-        <!-- <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
-          <li>
-            <a href="/future.html" target="_blank">雲門大船的未來進行式</a>
-          </li>
-        </ul> -->
         <ul class="header-bar__anchor-item header-bar__anchor-item--inner" @mouseenter="isInnerAnchorShow = true" @mouseleave="isInnerAnchorShow = false" @touchstart.stop="isInnerAnchorShow = true">
           <li>台灣是我們的共業
             <transition name="anchor-slide">
               <ul class="header-bar__inner-anchor" v-show="isInnerAnchorShow">
-                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="firstAnchorMove" @touchstart.stop="firstAnchorMove">退休前心內話</li>
-                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="secondAnchorMove" @touchstart.stop="secondAnchorMove">預告的背後故事</li>
-                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click.prevent="thirdAnchorMove" @touchstart.stop="thirdAnchorMove">給台灣的情書</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="firstAnchorMove" @touchstart.prevent.stop="firstAnchorMove">退休前心內話</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="secondAnchorMove" @touchstart.prevent.stop="secondAnchorMove">預告的背後故事</li>
+                <li class="header-bar__anchor-item header-bar__inner-anchor-item" @click="thirdAnchorMove" @touchstart.prevent.stop="thirdAnchorMove">給台灣的情書</li>
               </ul>
             </transition>
           </li>
@@ -43,26 +38,26 @@
         <ul class="header-bar__anchor-item header-bar__anchor-item--outer">
           <li>
             <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a>
-            <!-- <a href="http://nmdap.udn.com.tw/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a> -->
           </li>
         </ul>
       </nav>
     </div>
     <transition name="list-fade">
-      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false" :style="`height: ${$root.windowHeight}px`">
-      <!-- <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false"> -->
+      <div class="header-list" v-if="isListOpen && $root.isMobileSize" @click.self="isListOpen = false" @touchstart.self.prevent="isListOpen = false">
         <nav class="header-list__anchor-menu">
           <ul class="header-list__anchor-item header-list__anchor-item--inner">
             <li>台灣是我們的共業
               <ul class="header-list__inner-anchor">
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="firstAnchorMove" @touchstart="firstAnchorMove">退休前心內話</li>
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="secondAnchorMove" @touchstart="secondAnchorMove">預告的背後故事</li>
-                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="thirdAnchorMove" @touchstart="thirdAnchorMove">給台灣的情書</li>
+                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="firstAnchorMove" @touchstart.prevent="firstAnchorMove">退休前心內話</li>
+                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="secondAnchorMove" @touchstart.prevent="secondAnchorMove">預告的背後故事</li>
+                <li class="header-list__anchor-item header-list__inner-anchor-item" @click="thirdAnchorMove" @touchstart.prevent="thirdAnchorMove">給台灣的情書</li>
               </ul>
             </li>
           </ul>
           <ul class="header-list__anchor-item header-list__anchor-item--outer">
-            <li><a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li>
+            <li>
+              <a href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a>
+            </li>
             <!-- <li><a href="http://nmdap.udn.com.tw/cloudgate/future.html" target="_blank">雲門大船的未來進行式</a></li> -->
           </ul>
         </nav>
@@ -122,10 +117,10 @@ export default {
         this.isListOpen = false;
         return;
       }
-      // if (!this.$parent.bodyClass.contains('overflow-visible')) {
+      // if (!this.$parent.bodyClass.contains('of-v')) {
       //   this.$parent.$refs.openingLine.$el.style.transform = 'translateY(0vh)';
-      //   this.$root.cacheHTML.className = 'overflow-visible';
-      //   this.$parent.bodyClass.add('overflow-visible');
+      //   this.$root.cacheHTML.className = 'of-v';
+      //   this.$parent.bodyClass.add('of-v');
       // }
       // this.$parent.pageScrollY = -this.$root.windowHeight;
       this.isInnerAnchorShow = false;
@@ -290,7 +285,8 @@ export default {
   &-list {
     position: absolute;
     width: 100%;
-    // height: 100vh;
+    // height: 100%;
+    height: 100vh;
     top: 0;
     // left: 0;
     background-color: rgba(0, 0, 0, 0.8);
