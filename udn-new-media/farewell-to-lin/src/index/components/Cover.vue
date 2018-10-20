@@ -1,6 +1,7 @@
 <template>
-  <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
-    <video id="cover__video" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline poster="../assets/CoverImg/empty.png" :style="`background-image: url(${videoImg})`">
+  <!-- <article class="cover" @wheel.once="dancerMove" @touchmove.once="ancerMove"> -->
+  <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()">
+    <video id="cover__video" poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit controls muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
@@ -48,13 +49,20 @@
 
     <transition name="mask-fade" @after-leave="isCoverTitleFadeIn = true">
       <div class="cover__mask" v-if="!isCoverFadeOut">
-        <div class="cover__prompt" v-if="isCoverPromptExist">
-          <div class="cover__prompt-to-bottom">
+
+        <div class="cover__prompt cover__prompt-loading" v-if="isLoad">載入中…</div>
+
+        <!-- <div class="cover__prompt" v-if="isCoverPromptExist"> -->
+        <div class="cover__prompt-wrapper" v-else-if="isCoverPromptExist">
+          <!-- <div class="cover__prompt-to-bottom">
             <p>請滑動</p>
           </div>
-          <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
+          <div class="cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div> -->
+          <div class="cover__prompt cover__prompt-to-bottom">請滑動</div>
+          <div class="cover__prompt cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
         </div>
-        <div class="cover__img">
+        <!-- <div class="cover__img"> -->
+        <div class="cover__img" :style="`opacity: ${imgOpacity};`">
           <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
           @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
           <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
@@ -79,18 +87,22 @@ export default {
   name: 'Cover',
   data() {
     return {
+      isLoad: true,
+      loadingTimer: null,
+
       isDancerMove: false,
       isCoverPromptExist: true,
       isCoverFadeOut: false,
       isCoverTitleFadeIn: false,
       isCoverTitleMove: false,
+
+      imgOpacity: 0,
+      isImgOpacityReduce: false,
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.isCoverPromptExist = false;
-      this.isDancerMove = true;
-    }, 8000);
+  created() {
+    window.addEventListener('load', this.loadHandler);
+    this.loadingHandler();
   },
   computed: {
     videoImg() {
@@ -98,6 +110,24 @@ export default {
     },
   },
   methods: {
+
+    loadingHandler() {
+      this.loadTimer = setTimeout(() => {
+        if (this.imgOpacity >= 1) return;
+        this.imgOpacity += 0.1;
+        this.loadingHandler();
+      }, 1000);
+    },
+    loadHandler() {
+      this.imgOpacity = 1;
+      clearTimeout(this.loadTimer);
+      this.isLoad = false;
+      setTimeout(() => {
+        this.isCoverPromptExist = false;
+        this.isDancerMove = true;
+      }, 6000);
+    },
+
     dancerClass(idx) {
       const dancerClass = {
         'dancer-move': this.isDancerMove,
@@ -169,33 +199,49 @@ export default {
   }
 
   &__prompt {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    width: 100%;
-    height: 100%;
-    // position: absolute;
+    // width: 100%;
+    // height: 100%;
+    // width: 100px;
+    // height: 100px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid lightgrey;
+    border-radius: 50%;
+    color: lightgrey;
+    font-size: 2.4rem;
+    // line-height: 32px;
+    box-sizing: border-box;
+
+    &-wrapper {
+      width: 100%;
+      height: 100%;
+    }
 
     &-to-bottom {
-      width: 100px;
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: absolute;
+      // width: 100px;
+      // height: 100px;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      // position: absolute;
+      // top: 20%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
+      // border: 1.5px solid lightgrey;
+      // border-radius: 50%;
+      // color: lightgrey;
+      // font-size: 2.4rem;
+      // box-sizing: border-box;
       top: 20%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 1.5px solid lightgrey;
-      border-radius: 50%;
-      color: lightgrey;
-      // ORIGIN
-      // opacity: 0.7;
-      font-size: 2.4rem;
-      line-height: 32px;
-      box-sizing: border-box;
-      animation: prompt-to-bottom 3s 1s infinite;
+      // animation: prompt-to-bottom 3s 1s infinite;
+      animation: prompt-to-bottom 3s 0.5s infinite;
 
       @keyframes prompt-to-bottom {
         0% {
@@ -222,10 +268,10 @@ export default {
       }
 
       &--dashed {
+        border-width: 2px;
         border-style: dashed;
-        // ORIGIN
-        // opacity: 0.5;
-        animation-delay: 1.2s;
+        // animation-delay: 1.2s;
+        animation-delay: 0.7s;
       }
     }
   }

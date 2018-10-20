@@ -171,7 +171,7 @@ export default {
           transition: border-color 0.5s;
           margin-right: 28px;
           width: 188px;
-          // cursor: pointer;
+          cursor: pointer;
           &:hover {
             border-color: #fff;
           }

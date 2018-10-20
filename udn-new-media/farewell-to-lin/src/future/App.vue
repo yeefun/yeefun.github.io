@@ -186,7 +186,7 @@ export default {
         this.isYoutubePlay = true;
         this.youtube.playVideo();
       // ASK pause timing is half or all
-      } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH / 1.5)) || scrollY < (youtubeY - (WH / 1.5)))) {
+      } else if (this.isYoutubePlay && (scrollY > (youtubeY + (WH * 0.75)) || scrollY < (youtubeY - (WH * 0.75)))) {
         this.youtube.pauseVideo();
       }
     },

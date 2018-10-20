@@ -285,7 +285,7 @@ export default {
       if (!this[`is${isNum}YoutubePlay`] && youtubeY < 0) {
         this[`is${isNum}YoutubePlay`] = true;
         this[`${num}Youtube`].playVideo();
-      } else if (this[`is${isNum}YoutubePlay`] && ((youtubeY + (WH / 1.5) < 0) || (youtubeY - (WH / 1.5) > 0))) {
+      } else if (this[`is${isNum}YoutubePlay`] && ((youtubeY + (WH * 0.75) < 0) || (youtubeY - (WH * 0.75) > 0))) {
         this[`${num}Youtube`].pauseVideo();
       }
     },

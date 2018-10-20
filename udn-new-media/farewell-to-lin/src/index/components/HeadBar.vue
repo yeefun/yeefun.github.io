@@ -134,7 +134,8 @@ export default {
   width: 100%;
   // height: 100vh;
   z-index: 99;
-  background-color: rgba(255, 255, 255, 0.5);
+  // background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(236, 236, 236, 0.8);
   &.active {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -151,6 +152,7 @@ export default {
     z-index: 149;
     @media screen and (min-width: 576px) {
       padding-top: 12px;
+      padding-bottom: 12px;
       padding-right: 40px;
       padding-left: 12px;
     }
@@ -215,7 +217,8 @@ export default {
               }
             }
             &__inner-anchor-item {
-              background-color: rgba(236, 236, 236, 0.5);
+              // background-color: rgba(236, 236, 236, 0.5);
+              background-color: rgba(236, 236, 236, 0.8);
             }
           }
           // & a {
@@ -265,12 +268,14 @@ export default {
       width: 188px;
       margin-left: -24.4px;
       box-sizing: border-box;
-      margin-top: 10px;
+      // margin-top: 10px;
+      margin-top: 14px;
       // padding-left: 22.4px;
       &-item {
         height: 33px;
         border-color: transparent;
-        background-color: rgba(255, 255, 255, 0.3);
+        // background-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(0, 0, 0, 0.5);
         margin-bottom: 3px;
         transition: all 0.5s;
         // padding-left: 22.4px;
