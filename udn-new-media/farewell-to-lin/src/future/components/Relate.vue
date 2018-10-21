@@ -87,6 +87,9 @@ export default {
     & a {
       // text-decoration: none;
       color: #000;
+      &:hover > img {
+        opacity: 0.8;
+      }
     }
     &-wrapper {
       display: flex;
@@ -96,6 +99,7 @@ export default {
       width: 100%;
       height: auto;
       margin-bottom: 10px;
+      transition: opacity 0.5s;
     }
     & p {
       font-size: 1.6rem;
