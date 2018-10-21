@@ -122,7 +122,7 @@ export default {
     };
   },
   created() {
-    window.addEventListener('beforeunload', this.beforeunloadHandler);
+    window.addEventListener('unload', this.unloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
     if (!this.$root.isMobileSize) {
       window.addEventListener('scroll', this.photoPageControl);
@@ -280,7 +280,7 @@ export default {
     thirdYoutubeControl(evt) {
       this.youtubeControlFn(evt, 'third', 'Third', this.canThirdYoutubePlay);
     },
-    beforeunloadHandler() {
+    unloadHandler() {
       const firstYoutubeWatchTime = Math.floor(this.firstYoutube.getCurrentTime());
       const secondYoutubeWatchTime = Math.floor(this.secondYoutube.getCurrentTime());
       const thirdYoutubeWatchTime = Math.floor(this.thirdYoutube.getCurrentTime());

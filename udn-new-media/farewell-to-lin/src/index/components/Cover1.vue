@@ -100,17 +100,25 @@ export default {
       // isImgOpacityReduce: false,
     };
   },
-  // created() {
+  // mounted() {
   //   window.addEventListener('load', this.loadHandler);
-  //   this.loadingHandler();
   // },
+  created() {
+    window.addEventListener('load', this.loadHandler);
+    // this.loadingHandler();
+  },
   computed: {
     videoImg() {
       return this.$root.isMobileSize ? videoImgMob : videoImgWeb;
     },
   },
   methods: {
-
+    loadHandler() {
+      setTimeout(() => {
+        this.isCoverPromptExist = false;
+        this.isDancerMove = true;
+      }, 3000);
+    },
     // loadingHandler() {
     //   this.loadTimer = setTimeout(() => {
     //     if (this.imgOpacity >= 1) return;

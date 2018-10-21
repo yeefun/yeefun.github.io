@@ -113,8 +113,11 @@ export default {
 
     loadingHandler() {
       this.loadTimer = setTimeout(() => {
-        if (this.imgOpacity >= 1) return;
-        this.imgOpacity += 0.1;
+        if (this.imgOpacity >= 1) {
+          this.loadHandler();
+          window.removeEventListener('load', this.loadHandler);
+        }
+        this.imgOpacity += 0.3;
         this.loadingHandler();
       }, 1000);
     },

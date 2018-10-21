@@ -84,7 +84,7 @@ export default {
     };
   },
   created() {
-    window.addEventListener('beforeunload', this.beforeunloadHandler);
+    window.addEventListener('unload', this.unloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
   },
   mounted() {
@@ -103,7 +103,7 @@ export default {
     };
   },
   methods: {
-    beforeunloadHandler() {
+    unloadHandler() {
       const youtubeWatchTime = Math.floor(this.youtube.getCurrentTime());
       window.ga('send', {
         hitType: 'event',
