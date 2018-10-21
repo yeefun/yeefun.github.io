@@ -132,6 +132,7 @@ export default {
       this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
             this.firstYoutube.mute();
           },
           onStateChange: (evt) => {
@@ -150,6 +151,7 @@ export default {
       this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
             this.secondYoutube.mute();
           },
           onStateChange: (evt) => {
@@ -168,6 +170,7 @@ export default {
       this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
             this.thirdYoutube.mute();
           },
           onStateChange: (evt) => {

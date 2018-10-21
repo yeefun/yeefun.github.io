@@ -91,6 +91,7 @@ export default {
       this.youtube = new YT.Player('youtube', { // eslint-disable-line
         events: {
           onReady: () => {
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
             this.youtube.mute();
           },
           onStateChange: (evt) => {
