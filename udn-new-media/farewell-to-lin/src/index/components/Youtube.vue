@@ -12,7 +12,7 @@ export default {
   computed: {
     aspectRatio() {
       if (this.$root.isMobileSize) return `${(this.$root.windowHeight / this.$root.windowWidth) * 100}%`;
-      return false;
+      return 0;
     },
   },
 };

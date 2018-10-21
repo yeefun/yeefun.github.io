@@ -1,7 +1,7 @@
 <template>
   <!-- <article class="cover" @wheel.once="dancerMove" @touchmove.once="ancerMove"> -->
   <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()">
-    <video id="cover__video" poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit controls muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
+    <video ref="coverVideo" poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
@@ -143,6 +143,7 @@ export default {
     dancerMoveEnd() {
       if (!this.isDancerMove) return;
       this.isCoverFadeOut = true;
+      this.$refs.coverVideo.play();
     },
     subtitleMoveEnd() {
       // if (this.$root.isMobileSize) {

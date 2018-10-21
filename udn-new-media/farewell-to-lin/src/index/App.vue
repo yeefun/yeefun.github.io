@@ -117,6 +117,7 @@ export default {
       isFirstYoutubePlay: false,
       isSecondYoutubePlay: false,
       isThirdYoutubePlay: false,
+      isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
     };
   },
   created() {
@@ -132,12 +133,11 @@ export default {
       this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
-            this.firstYoutube.mute();
+            if (!this.isIOS) this.firstYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
-              window.removeEventListener('scroll', this.firstYoutubeControl);
+              if (!this.isIOS) window.removeEventListener('scroll', this.firstYoutubeControl);
               window.ga('send', {
                 hitType: 'event',
                 eventCategory: 'video',
@@ -151,12 +151,11 @@ export default {
       this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
-            this.secondYoutube.mute();
+            if (!this.isIOS) this.secondYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
-              window.removeEventListener('scroll', this.secondYoutubeControl);
+              if (!this.isIOS) window.removeEventListener('scroll', this.secondYoutubeControl);
               window.ga('send', {
                 hitType: 'event',
                 eventCategory: 'video',
@@ -170,12 +169,11 @@ export default {
       this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
-            this.thirdYoutube.mute();
+            if (!this.isIOS) this.thirdYoutube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
-              window.removeEventListener('scroll', this.thirdYoutubeControl);
+              if (!this.isIOS) window.removeEventListener('scroll', this.thirdYoutubeControl);
               window.ga('send', {
                 hitType: 'event',
                 eventCategory: 'video',
@@ -186,9 +184,11 @@ export default {
           },
         },
       });
-      window.addEventListener('scroll', this.firstYoutubeControl);
-      window.addEventListener('scroll', this.secondYoutubeControl);
-      window.addEventListener('scroll', this.thirdYoutubeControl);
+      if (!this.isIOS) {
+        window.addEventListener('scroll', this.firstYoutubeControl);
+        window.addEventListener('scroll', this.secondYoutubeControl);
+        window.addEventListener('scroll', this.thirdYoutubeControl);
+      }
     };
     // }
   },

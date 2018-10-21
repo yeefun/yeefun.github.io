@@ -79,11 +79,12 @@ export default {
       // pageScrollY: 0,
       youtube: null,
       isYoutubePlay: false,
+      isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
       // resizeTimer: null,
     };
   },
   created() {
-    window.addEventListener('beforeunload', this.beforeunloadHandler);
+    // window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
   },
   mounted() {
@@ -91,13 +92,11 @@ export default {
       this.youtube = new YT.Player('youtube', { // eslint-disable-line
         events: {
           onReady: () => {
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) return;
-            this.youtube.mute();
+            if (!this.isIOS) this.youtube.mute();
           },
           onStateChange: (evt) => {
             if (evt.data === 2) {
-              window.removeEventListener('scroll', this.youtubeControl);
-
+              if (!this.isIOS) window.removeEventListener('scroll', this.youtubeControl);
               window.ga('send', {
                 hitType: 'event',
                 eventCategory: 'video',
@@ -108,13 +107,13 @@ export default {
           },
         },
       });
-      window.addEventListener('scroll', this.youtubeControl);
+      if (!this.isIOS) window.addEventListener('scroll', this.youtubeControl);
     };
   },
   methods: {
-    beforeunloadHandler() {
-      this.$root.cacheWindow.scroll({ top: 0 });
-    },
+    // beforeunloadHandler() {
+    //   this.$root.cacheWindow.scroll({ top: 0 });
+    // },
     // pageTouchStart(evt) {
     //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
     //   // evt.preventDefault();

@@ -33,7 +33,7 @@ new Vue({
   methods: {
     loadHandler() {
       this.windowWidth = document.documentElement.clientWidth;
-      this.beforeWindowWidth = this.windowWidth;
+      // this.beforeWindowWidth = this.windowWidth;
       this.windowHeight = document.documentElement.clientHeight;
     },
     resizeHandler() {
@@ -41,10 +41,10 @@ new Vue({
       this.resizeTimer = setTimeout(() => {
         this.windowWidth = document.documentElement.clientWidth;
         this.windowHeight = document.documentElement.clientHeight;
-        if ((this.beforeWindowWidth < 576 && this.windowWidth >= 576) || (this.beforeWindowWidth >= 576 && this.windowWidth < 576)) {
-          this.cacheWindow.location.reload();
-          this.beforeWindowWidth = this.windowWidth;
-        }
+        // if ((this.beforeWindowWidth < 576 && this.windowWidth >= 576) || (this.beforeWindowWidth >= 576 && this.windowWidth < 576)) {
+        //   this.cacheWindow.location.reload();
+        //   this.beforeWindowWidth = this.windowWidth;
+        // }
       }, 400);
     },
   },

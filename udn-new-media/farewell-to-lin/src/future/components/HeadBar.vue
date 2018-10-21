@@ -94,6 +94,7 @@ export default {
     z-index: 149;
     @media screen and (min-width: 576px) {
       padding-top: 12px;
+      padding-bottom: 12px;
       padding-right: 40px;
       padding-left: 12px;
     }
