@@ -8,7 +8,7 @@
         </transition>
       </div>
     </transition>
-    <div class="fixed-page__mask"></div>
+    <div class="fixed-page__mask" v-if="!hidden"></div>
   </section>
 </template>
 
@@ -19,7 +19,7 @@ import photoWatermoon from '../assets/ContentImg/web_watermoon.jpg';
 
 export default {
   name: 'FixedPhotoPage',
-  props: ['photoName'],
+  props: ['photoName', 'hidden'],
   data() {
     return {
       photos: [{

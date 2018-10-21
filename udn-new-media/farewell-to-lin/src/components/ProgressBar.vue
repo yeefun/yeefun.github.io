@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Utils from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 export default {
   name: 'ProgressBar',
@@ -15,20 +15,26 @@ export default {
   data() {
     return {
       progress: 0,
+      readProgress: 0,
     };
   },
   methods: {
     progressBarGrow() {
       const currentHeight = this.$root.cacheWindow.pageYOffset;
       const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.windowHeight;
-      const readPercent = (currentHeight / totalHeight) * 100;
-      this.progress = readPercent.toFixed(2);
-      window.ga('send', {
-        hitType: 'event',
-        eventCategory: 'read',
-        eventAction: 'scroll',
-        eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [page read '${readPercent.toFixed(2)}%]`,
-      });
+      this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
+      const currentReadProgress = Math.floor(this.progress / 10);
+      if (currentReadProgress > this.readProgress) {
+        for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
+          window.ga('send', {
+            hitType: 'event',
+            eventCategory: 'read',
+            eventAction: 'scroll',
+            eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [page read '${i * 10}%]`,
+          });
+        }
+        this.readProgress = currentReadProgress;
+      }
     },
   },
 };

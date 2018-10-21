@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Utils from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 export default {
   name: 'Relate',
@@ -41,7 +41,7 @@ export default {
         hitType: 'event',
         eventCategory: 'relate',
         eventAction: 'click',
-        eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [${target}] [relate click]`,
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [${target}] [relate click]`,
       });
     },
   },

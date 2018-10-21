@@ -38,7 +38,7 @@
 
 <script>
 import smoothscroll from 'smoothscroll-polyfill';
-import Utils from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
@@ -84,7 +84,7 @@ export default {
     };
   },
   created() {
-    // window.addEventListener('beforeunload', this.beforeunloadHandler);
+    window.addEventListener('beforeunload', this.beforeunloadHandler);
     window.addEventListener('scroll', this.headBarChangeColor);
   },
   mounted() {
@@ -95,15 +95,7 @@ export default {
             if (!this.isIOS) this.youtube.mute();
           },
           onStateChange: (evt) => {
-            if (evt.data === 2) {
-              if (!this.isIOS) window.removeEventListener('scroll', this.youtubeControl);
-              window.ga('send', {
-                hitType: 'event',
-                eventCategory: 'video',
-                eventAction: 'play',
-                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [45年掌舵人將交棒 雲門大船的未來進行式] [已觀看${this.youtube.getCurrentTime()}秒]`,
-              });
-            }
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.youtubeControl);
           },
         },
       });
@@ -111,9 +103,15 @@ export default {
     };
   },
   methods: {
-    // beforeunloadHandler() {
-    //   this.$root.cacheWindow.scroll({ top: 0 });
-    // },
+    beforeunloadHandler() {
+      const youtubeWatchTime = Math.floor(this.youtube.getCurrentTime());
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'video',
+        eventAction: 'play',
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [45年掌舵人將交棒 雲門大船的未來進行式] [已觀看${youtubeWatchTime}秒]`,
+      });
+    },
     // pageTouchStart(evt) {
     //   if (this.$root.cacheWindow.pageYOffset > 0 || !this.canScroll) return;
     //   // evt.preventDefault();

@@ -13,7 +13,7 @@
     <Youtube :youtubeId="youtubeId('first')" youtubeRef="first-youtube" ref="firstYoutube"></Youtube>
     <div class="scroll-content">
       <ContentDark v-if="$root.isMobileSize"></ContentDark>
-      <FixedPhotoPage v-if="!$root.isMobileSize" :photoName="photoName" ref="fixedPhotoPage"></FixedPhotoPage>
+      <FixedPhotoPage v-if="!$root.isMobileSize" :photoName="photoName" ref="fixedPhotoPage" :hidden="hiddenMaskForIE"></FixedPhotoPage>
       <PhotoPageContent class="photo-page-content" v-if="!$root.isMobileSize"></PhotoPageContent>
       <Youtube :youtubeId="youtubeId('second')" youtubeRef="second-youtube" ref="secondYoutube"></Youtube>
       <div class="light-content" ref="lightContent">
@@ -52,7 +52,7 @@
 
 <script>
 import smoothscroll from 'smoothscroll-polyfill';
-import Utils from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 import ProgressBar from '../components/ProgressBar.vue';
 import HeadBar from './components/HeadBar.vue';
@@ -118,6 +118,7 @@ export default {
       isSecondYoutubePlay: false,
       isThirdYoutubePlay: false,
       isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+      hiddenMaskForIE: false,
     };
   },
   created() {
@@ -136,15 +137,7 @@ export default {
             if (!this.isIOS) this.firstYoutube.mute();
           },
           onStateChange: (evt) => {
-            if (evt.data === 2) {
-              if (!this.isIOS) window.removeEventListener('scroll', this.firstYoutubeControl);
-              window.ga('send', {
-                hitType: 'event',
-                eventCategory: 'video',
-                eventAction: 'play',
-                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民與台灣的對話] [已觀看${this.firstYoutube.getCurrentTime()}秒]`,
-              });
-            }
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.firstYoutubeControl);
           },
         },
       });
@@ -154,15 +147,7 @@ export default {
             if (!this.isIOS) this.secondYoutube.mute();
           },
           onStateChange: (evt) => {
-            if (evt.data === 2) {
-              if (!this.isIOS) window.removeEventListener('scroll', this.secondYoutubeControl);
-              window.ga('send', {
-                hitType: 'event',
-                eventCategory: 'video',
-                eventAction: 'play',
-                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民真心話大告白] [已觀看${this.secondYoutube.getCurrentTime()}秒]`,
-              });
-            }
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.secondYoutubeControl);
           },
         },
       });
@@ -172,15 +157,7 @@ export default {
             if (!this.isIOS) this.thirdYoutube.mute();
           },
           onStateChange: (evt) => {
-            if (evt.data === 2) {
-              if (!this.isIOS) window.removeEventListener('scroll', this.thirdYoutubeControl);
-              window.ga('send', {
-                hitType: 'event',
-                eventCategory: 'video',
-                eventAction: 'play',
-                eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [退休前給台灣的一段話] [已觀看${this.thirdYoutube.getCurrentTime()}秒]`,
-              });
-            }
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.thirdYoutubeControl);
           },
         },
       });
@@ -212,8 +189,10 @@ export default {
     headBarChangeColor() {
       if (this.$refs.lightContent.getBoundingClientRect().top < 0) {
         this.isHeadBarLight = true;
+        this.hiddenMaskForIE = true;
       } else {
         this.isHeadBarLight = false;
+        this.hiddenMaskForIE = false;
       }
     },
     // pageTouchStart(evt) {
@@ -302,7 +281,28 @@ export default {
       this.youtubeControlFn(evt, 'third', 'Third', this.canThirdYoutubePlay);
     },
     beforeunloadHandler() {
-      this.$root.cacheWindow.scroll({ top: 0 });
+      const firstYoutubeWatchTime = Math.floor(this.firstYoutube.getCurrentTime());
+      const secondYoutubeWatchTime = Math.floor(this.secondYoutube.getCurrentTime());
+      const thirdYoutubeWatchTime = Math.floor(this.thirdYoutube.getCurrentTime());
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'video',
+        eventAction: 'play',
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民與台灣的對話] [已觀看${firstYoutubeWatchTime}秒]`,
+      });
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'video',
+        eventAction: 'play',
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [林懷民真心話大告白] [已觀看${secondYoutubeWatchTime}秒]`,
+      });
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'video',
+        eventAction: 'play',
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [退休前給台灣的一段話] [已觀看${thirdYoutubeWatchTime}秒]`,
+      });
+      // this.$root.cacheWindow.scroll({ top: 0 });
     },
   },
 };

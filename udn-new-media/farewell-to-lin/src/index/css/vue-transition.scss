@@ -76,3 +76,32 @@
     opacity: 0;
   }
 }
+
+
+
+
+
+.final-text-fade {
+  &-leave {
+    &-active {
+      transition: opacity 2s 1s;
+    }
+
+    &-to {
+      opacity: 0;
+    }
+  }
+}
+
+.youtube-fade {
+  &-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity 2s;
+    }
+
+    &-to {
+      opacity: 1;
+    }
+  }
+}

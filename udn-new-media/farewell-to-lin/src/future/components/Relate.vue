@@ -10,7 +10,7 @@
       </div>
       <div class="relate__report relate__report--right">
         <a href="https://udn.com/news/story/7266/3379502" target="_blank" @click="relateClick('45年舞作精選 林懷民：穿越時代與感情')">
-          <img  src="../assets/ReadMore/readMore202.jpg" alt="">
+          <img src="../assets/ReadMore/readMore202.jpg" alt="">
           <p>45年舞作精選<br>林懷民：穿越時代與感情</p>
         </a>
       </div>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Utils from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 export default {
   name: 'Relate',
@@ -41,7 +41,7 @@ export default {
         hitType: 'event',
         eventCategory: 'relate',
         eventAction: 'click',
-        eventLabel: `[${Utils.detectPlatform()}] [${document.querySelector('title').innerHTML}] [${target}] [relate click]`,
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [${target}] [relate click]`,
       });
     },
   },
