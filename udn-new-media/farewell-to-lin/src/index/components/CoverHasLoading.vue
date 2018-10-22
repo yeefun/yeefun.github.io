@@ -84,7 +84,7 @@ import videoImgMob from '../assets/CoverImg/video_mob.jpg';
 import videoImgWeb from '../assets/CoverImg/video_web.jpg';
 
 export default {
-  name: 'Cover',
+  name: 'CoverHasLoading',
   data() {
     return {
       isLoad: true,
