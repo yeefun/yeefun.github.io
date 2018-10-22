@@ -89,7 +89,7 @@ export default {
     & a {
       color: #000;
       &:hover > img {
-        opacity: 0.8;
+        opacity: 0.6;
       }
     }
     &-wrapper {
