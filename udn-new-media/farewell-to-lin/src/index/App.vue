@@ -251,7 +251,7 @@ export default {
         case 'first':
           return this.$root.windowWidth < 576 ? 'ws1aS1SASdw' : 'Tg5a_R3rr6U';
         case 'second':
-          return this.$root.windowWidth < 576 ? 'Ec32L2R1dZo' : 'Zu9QLTeX_Uk';
+          return this.$root.windowWidth < 576 ? 'xGrKH4rkxxc' : 'QhmOfqHJQ64';
         case 'third':
           return this.$root.windowWidth < 576 ? 'j3QNQIcTuJg' : 'Nfi2mssgFqQ';
         default:

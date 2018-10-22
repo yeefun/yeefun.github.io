@@ -4,7 +4,7 @@
       <div class="final-scene__text" v-if="!isTextFadeOut">
         <div class="final-scene__text--first" :class="{ 'fade-in': isTextFadeIn }">過去45年<br>林懷民用90齣舞作<br>不斷與台灣社會對話</div>
         <p><br></p>
-        <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="isTextFadeOut = true" @webkitTransitionEnd.once="isTextFadeOut = true">退休前，<br>他最後有段話<br>想對現在的台灣說</div>
+        <div class="final-scene__text--last" :class="{ 'fade-in': isTextFadeIn }" @transitionend.once="isTextFadeOut = true" @webkitTransitionEnd.once="isTextFadeOut = true">退休前<br>他最後有段話<br>想對現在的台灣說</div>
       </div>
     </transition>
     <transition name="youtube-fade" @after-enter="lastContentShow">
