@@ -1,7 +1,7 @@
 <template>
   <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
   <!-- <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()"> -->
-    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop :style="`background-image: url(${videoImg})`">
+    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
@@ -103,22 +103,22 @@ export default {
   // mounted() {
   //   window.addEventListener('load', this.loadHandler);
   // },
-  created() {
-    window.addEventListener('load', this.loadHandler);
+  // created() {
+    // window.addEventListener('load', this.loadHandler);
     // this.loadingHandler();
-  },
+  // },
   computed: {
     videoImg() {
       return this.$root.isMobileSize ? videoImgMob : videoImgWeb;
     },
   },
   methods: {
-    loadHandler() {
-      setTimeout(() => {
-        this.isCoverPromptExist = false;
-        this.isDancerMove = true;
-      }, 3000);
-    },
+    // loadHandler() {
+    //   setTimeout(() => {
+    //     this.isCoverPromptExist = false;
+    //     this.isDancerMove = true;
+    //   }, 3000);
+    // },
     // loadingHandler() {
     //   this.loadTimer = setTimeout(() => {
     //     if (this.imgOpacity >= 1) return;
