@@ -167,7 +167,7 @@ export default {
 <style lang="scss">
 .cover {
   // height: 100vh;
-  height: 100%;
+  // height: 100%;
   position: relative;
   overflow: hidden;
 
@@ -188,9 +188,9 @@ export default {
     // position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    // object-fit: cover;
     background-size: cover;
-    background-position: 40% 50%;
+    background-position: center;
   }
 
   &__mask {

@@ -7,8 +7,8 @@
     </transition>
     <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
     <!-- <div class="page-content" :style="{ height: `${$root.windowHeight}px`, transform: `translateY(${pageScrollY}px)` }"> -->
-    <!-- <Cover :style="`height: ${$root.windowHeight}px`"></Cover> -->
-    <Cover></Cover>
+    <Cover :style="`height: ${$root.windowHeight}px`"></Cover>
+    <!-- <Cover></Cover> -->
     <!-- </div> -->
     <OpeningLine></OpeningLine>
     <Youtube :youtubeId="youtubeId('first')" youtubeRef="first-youtube" ref="firstYoutube"></Youtube>

@@ -197,7 +197,7 @@ export default {
     height: 100%;
     object-fit: cover;
     background-size: cover;
-    background-position: 40% 50%;
+    background-position: center;
   }
 
   &__mask {
