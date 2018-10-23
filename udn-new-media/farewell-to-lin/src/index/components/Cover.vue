@@ -167,7 +167,7 @@ export default {
 <style lang="scss">
 .cover {
   // height: 100vh;
-  // height: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
 
