@@ -1,7 +1,7 @@
 <template>
   <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
   <!-- <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()"> -->
-    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
+    <video poster="../assets/CoverImg/empty.png" class="cover__video" muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
@@ -168,7 +168,7 @@ export default {
 
 <style lang="scss">
 .cover {
-  height: 100vh;
+  // height: 100vh;
   // height: 100%;
   position: relative;
   overflow: hidden;
