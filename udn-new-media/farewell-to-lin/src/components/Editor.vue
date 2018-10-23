@@ -1,6 +1,6 @@
 <template>
   <section class="editor">
-    <p class="editor__time">2018.10.24</p>
+    <p class="editor__time">2018.10.23</p>
     <div class="editor__content">
       <div>
         <p>文&emsp;&emsp;字：</p>
