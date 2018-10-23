@@ -1,10 +1,13 @@
 <template>
   <!-- <article class="cover" @wheel.once="dancerMove" @touchmove.once="ancerMove"> -->
   <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()">
-    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
+    <!-- <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
-    </video>
+    </video> -->
+
+    <video src="../assets/video/mobile_video.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize"></video>
+    <video src="../assets/video/web_video.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-else></video>
 
     <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
