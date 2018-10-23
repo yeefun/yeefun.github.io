@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     progressBarGrow() {
-      if (!this.$parent.isHeadBarShow) return;
+      if (this.$root.cacheHTML.className !== 'of-v') return;
       const currentHeight = this.$root.cacheWindow.pageYOffset;
       const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.windowHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
