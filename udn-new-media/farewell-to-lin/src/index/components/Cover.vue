@@ -6,8 +6,8 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video> -->
 
-    <video src="../assets/video/mobile_video.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-show="$root.isMobileSize"></video>
-    <video src="../assets/video/web_video.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-show="!$root.isMobileSize"></video>
+    <video src="../assets/video/mobile_bg.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-show="$root.isMobileSize"></video>
+    <video src="../assets/video/web_bg.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-show="!$root.isMobileSize"></video>
 
     <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
@@ -188,7 +188,7 @@ export default {
     // position: absolute;
     width: 100%;
     height: 100%;
-    // object-fit: cover;
+    object-fit: cover;
     background-size: cover;
     background-position: center;
   }
