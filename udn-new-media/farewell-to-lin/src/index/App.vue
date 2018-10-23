@@ -118,7 +118,7 @@ export default {
       isFirstYoutubePlay: false,
       isSecondYoutubePlay: false,
       isThirdYoutubePlay: false,
-      // isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+      isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
       hiddenMaskForIE: false,
     };
   },
@@ -131,43 +131,43 @@ export default {
   },
   mounted() {
     // if (window.onYouTubeIframeAPIReady) {
-    // window.onYouTubeIframeAPIReady = () => {
-    //   this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
-    //     events: {
-    //       onReady: () => {
-    //         if (!this.isIOS) this.firstYoutube.mute();
-    //       },
-    //       onStateChange: (evt) => {
-    //         if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.firstYoutubeControl);
-    //       },
-    //     },
-    //   });
-    //   this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
-    //     events: {
-    //       onReady: () => {
-    //         if (!this.isIOS) this.secondYoutube.mute();
-    //       },
-    //       onStateChange: (evt) => {
-    //         if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.secondYoutubeControl);
-    //       },
-    //     },
-    //   });
-    //   this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
-    //     events: {
-    //       onReady: () => {
-    //         if (!this.isIOS) this.thirdYoutube.mute();
-    //       },
-    //       onStateChange: (evt) => {
-    //         if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.thirdYoutubeControl);
-    //       },
-    //     },
-    //   });
-    //   if (!this.isIOS) {
-    //     window.addEventListener('scroll', this.firstYoutubeControl);
-    //     window.addEventListener('scroll', this.secondYoutubeControl);
-    //     window.addEventListener('scroll', this.thirdYoutubeControl);
-    //   }
-    // };
+    window.onYouTubeIframeAPIReady = () => {
+      this.firstYoutube = new YT.Player('first-youtube', { // eslint-disable-line
+        events: {
+          onReady: () => {
+            if (!this.isIOS) this.firstYoutube.mute();
+          },
+          onStateChange: (evt) => {
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.firstYoutubeControl);
+          },
+        },
+      });
+      this.secondYoutube = new YT.Player('second-youtube', { // eslint-disable-line
+        events: {
+          onReady: () => {
+            if (!this.isIOS) this.secondYoutube.mute();
+          },
+          onStateChange: (evt) => {
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.secondYoutubeControl);
+          },
+        },
+      });
+      this.thirdYoutube = new YT.Player('third-youtube', { // eslint-disable-line
+        events: {
+          onReady: () => {
+            if (!this.isIOS) this.thirdYoutube.mute();
+          },
+          onStateChange: (evt) => {
+            if (evt.data === 2 && !this.isIOS) window.removeEventListener('scroll', this.thirdYoutubeControl);
+          },
+        },
+      });
+      if (!this.isIOS) {
+        window.addEventListener('scroll', this.firstYoutubeControl);
+        window.addEventListener('scroll', this.secondYoutubeControl);
+        window.addEventListener('scroll', this.thirdYoutubeControl);
+      }
+    };
     // }
   },
   methods: {

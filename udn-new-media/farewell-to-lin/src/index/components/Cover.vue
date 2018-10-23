@@ -1,6 +1,11 @@
 <template>
   <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
-    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
+    <!-- <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
+      <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
+      <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
+    </video> -->
+
+    <video class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline>
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
