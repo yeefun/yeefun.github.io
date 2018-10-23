@@ -20,21 +20,22 @@ export default {
   },
   methods: {
     progressBarGrow() {
+      if (!this.$parent.isHeadBarShow) return;
       const currentHeight = this.$root.cacheWindow.pageYOffset;
       const totalHeight = this.$root.cacheHTML.scrollHeight - this.$root.windowHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
-      // const currentReadProgress = Math.floor(this.progress / 10);
-      // if (currentReadProgress > this.readProgress) {
-      //   for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
-      //     window.ga('send', {
-      //       hitType: 'event',
-      //       eventCategory: 'read',
-      //       eventAction: 'scroll',
-      //       eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [page read '${i * 10}%]`,
-      //     });
-      //   }
-      //   this.readProgress = currentReadProgress;
-      // }
+      const currentReadProgress = Math.floor(this.progress / 10);
+      if (currentReadProgress > this.readProgress) {
+        for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
+          window.ga('send', {
+            hitType: 'event',
+            eventCategory: 'read',
+            eventAction: 'scroll',
+            eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [page read '${i * 10}%]`,
+          });
+        }
+        this.readProgress = currentReadProgress;
+      }
     },
   },
 };
