@@ -1,15 +1,15 @@
 <template>
-  <!-- <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove"> -->
-  <article class="cover">
-    <!-- <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
-      <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
-      <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
-    </video> -->
-
-    <video class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline>
+  <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
+  <!-- <article class="cover"> -->
+    <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
+
+    <!-- <video class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline>
+      <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
+      <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
+    </video> -->
 
     <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
@@ -173,7 +173,7 @@ export default {
 
 <style lang="scss">
 .cover {
-  height: 100vh;
+  // height: 100vh;
   // height: 100%;
   position: relative;
   overflow: hidden;
@@ -435,17 +435,17 @@ export default {
 
 .dancer-move {
   // can't write only 0, otherwise IE can't work properly
-  top: 0vh !important;
+  top: 0% !important;
   left: 0vw !important;
 }
 
 .dancer1 {
-  top: -12vh;
+  top: -12%;
   left: 28vw;
   transform: translateY(80%) rotate(38deg);
 
   @media screen and (min-width: 576px) {
-    top: 34vh;
+    top: 34%;
     left: -6vw;
     transform: translateY(80%);
   }
@@ -456,12 +456,12 @@ export default {
 }
 
 .dancer2 {
-  top: 14vh;
+  top: 14%;
   left: 8vw;
   transform: translateY(40%) rotate(-40deg);
 
   @media screen and (min-width: 576px) {
-    top: -16vh;
+    top: -16%;
     left: -24vw;
     transform: translateY(40%);
   }
@@ -472,12 +472,12 @@ export default {
 }
 
 .dancer3 {
-  top: -24vh;
+  top: -24%;
   left: -26vw;
   transform: rotate(-16deg);
 
   @media screen and (min-width: 576px) {
-    top: 24vh;
+    top: 24%;
     left: -36vw;
   }
 
@@ -487,12 +487,12 @@ export default {
 }
 
 .dancer4 {
-  top: 14vh;
+  top: 14%;
   left: 30vw;
   transform: translateY(-40%);
 
   @media screen and (min-width: 576px) {
-    top: -34vh;
+    top: -34%;
     left: 24vw;
     transform: translateY(-40%);
   }
@@ -502,12 +502,12 @@ export default {
 }
 
 .dancer5 {
-  top: 12vh;
+  top: 12%;
   left: -32vw;
   transform: translateY(-80%);
 
   @media screen and (min-width: 576px) {
-    top: 4vh;
+    top: 4%;
     left: 32vw;
     transform: translateY(-80%);
   }
