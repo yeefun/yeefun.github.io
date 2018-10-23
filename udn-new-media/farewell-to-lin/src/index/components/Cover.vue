@@ -434,17 +434,17 @@ export default {
 
 .dancer-move {
   // can't write only 0, otherwise IE can't work properly
-  top: 0% !important;
+  top: 0vh !important;
   left: 0vw !important;
 }
 
 .dancer1 {
-  top: -12%;
+  top: -12vh;
   left: 28vw;
   transform: translateY(80%) rotate(38deg);
 
   @media screen and (min-width: 576px) {
-    top: 34%;
+    top: 34vh;
     left: -6vw;
     transform: translateY(80%);
   }
@@ -455,12 +455,12 @@ export default {
 }
 
 .dancer2 {
-  top: 14%;
+  top: 14vh;
   left: 8vw;
   transform: translateY(40%) rotate(-40deg);
 
   @media screen and (min-width: 576px) {
-    top: -16%;
+    top: -16vh;
     left: -24vw;
     transform: translateY(40%);
   }
@@ -471,12 +471,12 @@ export default {
 }
 
 .dancer3 {
-  top: -24%;
+  top: -24vh;
   left: -26vw;
   transform: rotate(-16deg);
 
   @media screen and (min-width: 576px) {
-    top: 24%;
+    top: 24vh;
     left: -36vw;
   }
 
@@ -486,12 +486,12 @@ export default {
 }
 
 .dancer4 {
-  top: 14%;
+  top: 14vh;
   left: 30vw;
   transform: translateY(-40%);
 
   @media screen and (min-width: 576px) {
-    top: -34%;
+    top: -34vh;
     left: 24vw;
     transform: translateY(-40%);
   }
@@ -501,12 +501,12 @@ export default {
 }
 
 .dancer5 {
-  top: 12%;
+  top: 12vh;
   left: -32vw;
   transform: translateY(-80%);
 
   @media screen and (min-width: 576px) {
-    top: 4%;
+    top: 4vh;
     left: 32vw;
     transform: translateY(-80%);
   }
