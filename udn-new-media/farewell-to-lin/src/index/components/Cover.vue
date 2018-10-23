@@ -1,13 +1,10 @@
 <template>
-  <!-- <article class="cover" @wheel.once="dancerMove" @touchmove.once="ancerMove"> -->
-  <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()">
+  <article class="cover" @wheel.once="dancerMove" @touchmove.once="dancerMove">
+  <!-- <article class="cover" @wheel="isLoad || dancerMove()" @touchmove="isLoad || dancerMove()"> -->
     <video poster="../assets/CoverImg/empty.png" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline :style="`background-image: url(${videoImg})`">
       <source src="../assets/video/mobile_video.mp4" v-if="$root.isMobileSize" type="video/mp4"/>
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video>
-
-    <!-- <video src="../assets/video/mobile_video.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize"></video>
-    <video src="../assets/video/web_video.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-else></video> -->
 
     <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
@@ -53,10 +50,10 @@
     <transition name="mask-fade" @after-leave="isCoverTitleFadeIn = true">
       <div class="cover__mask" v-if="!isCoverFadeOut">
 
-        <div class="cover__prompt" v-if="isLoad">載入中…</div>
+        <!-- <div class="cover__prompt cover__prompt-loading" v-if="isLoad">載入中…</div> -->
 
         <!-- <div class="cover__prompt" v-if="isCoverPromptExist"> -->
-        <div class="cover__prompt-wrapper" v-else-if="isCoverPromptExist">
+        <div class="cover__prompt-wrapper" v-if="isCoverPromptExist">
           <!-- <div class="cover__prompt-to-bottom">
             <p>請滑動</p>
           </div>
@@ -64,8 +61,8 @@
           <div class="cover__prompt cover__prompt-to-bottom">請滑動</div>
           <div class="cover__prompt cover__prompt-to-bottom cover__prompt-to-bottom--dashed"></div>
         </div>
-        <!-- <div class="cover__img"> -->
-        <div class="cover__img" :style="`opacity: ${imgOpacity};`">
+        <div class="cover__img">
+        <!-- <div class="cover__img" :style="`opacity: ${imgOpacity};`"> -->
           <img src="../assets/CoverImg/hito1.png" :class="dancerClass(1)"
           @transitionend="dancerMoveEnd" @webkitTransitionEnd="dancerMoveEnd" alt="">
           <img src="../assets/CoverImg/hito2.png" :class="dancerClass(2)" alt="">
@@ -90,8 +87,8 @@ export default {
   name: 'Cover',
   data() {
     return {
-      isLoad: true,
-      loadingTimer: null,
+      // isLoad: true,
+      // loadingTimer: null,
 
       isDancerMove: false,
       isCoverPromptExist: true,
@@ -99,13 +96,16 @@ export default {
       isCoverTitleFadeIn: false,
       isCoverTitleMove: false,
 
-      imgOpacity: 0,
-      isImgOpacityReduce: false,
+      // imgOpacity: 0,
+      // isImgOpacityReduce: false,
     };
   },
+  // mounted() {
+  //   window.addEventListener('load', this.loadHandler);
+  // },
   created() {
     window.addEventListener('load', this.loadHandler);
-    this.loadingHandler();
+    // this.loadingHandler();
   },
   computed: {
     videoImg() {
@@ -113,26 +113,28 @@ export default {
     },
   },
   methods: {
-
-    loadingHandler() {
-      this.loadTimer = setTimeout(() => {
-        if (this.imgOpacity >= 1) {
-          this.loadHandler();
-          window.removeEventListener('load', this.loadHandler);
-        }
-        this.imgOpacity += 0.1;
-        this.loadingHandler();
-      }, 300);
-    },
     loadHandler() {
-      this.imgOpacity = 1;
-      clearTimeout(this.loadTimer);
-      this.isLoad = false;
       setTimeout(() => {
         this.isCoverPromptExist = false;
         this.isDancerMove = true;
-      }, 6000);
+      }, 3000);
     },
+    // loadingHandler() {
+    //   this.loadTimer = setTimeout(() => {
+    //     if (this.imgOpacity >= 1) return;
+    //     this.imgOpacity += 0.1;
+    //     this.loadingHandler();
+    //   }, 1000);
+    // },
+    // loadHandler() {
+    //   this.imgOpacity = 1;
+    //   clearTimeout(this.loadTimer);
+    //   this.isLoad = false;
+    //   setTimeout(() => {
+    //     this.isCoverPromptExist = false;
+    //     this.isDancerMove = true;
+    //   }, 6000);
+    // },
 
     dancerClass(idx) {
       const dancerClass = {
@@ -166,7 +168,7 @@ export default {
 
 <style lang="scss">
 .cover {
-  height: 100vh;
+  // height: 100vh;
   // height: 100%;
   position: relative;
   overflow: hidden;
