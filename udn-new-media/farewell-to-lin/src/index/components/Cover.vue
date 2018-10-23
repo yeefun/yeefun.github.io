@@ -117,9 +117,9 @@ export default {
           this.loadHandler();
           window.removeEventListener('load', this.loadHandler);
         }
-        this.imgOpacity += 0.3;
+        this.imgOpacity += 0.1;
         this.loadingHandler();
-      }, 1000);
+      }, 300);
     },
     loadHandler() {
       this.imgOpacity = 1;
