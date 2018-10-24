@@ -6,12 +6,8 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video> -->
 
-    <video poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize">
-      <source src="../assets/video/mobile_video_2.mp4" type="video/mp4">
-    </video>
-    <video poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-else>
-      <source src="../assets/video/web_video.mp4" type="video/mp4">
-    </video>
+    <video src="../assets/video/mobile_video.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize"></video>
+    <video src="../assets/video/web_video.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-else></video>
 
     <section class="cover__title-wrapper">
       <div class="cover__subtitle" :class="{ 'cover__subtitle-move': isCoverTitleMove }"
@@ -119,18 +115,18 @@ export default {
   methods: {
 
     loadingHandler() {
-      this.loadTimer = setTimeout(() => {
+      this.loadTimer = setInterval(() => {
         if (this.imgOpacity >= 1) {
           this.loadHandler();
           window.removeEventListener('load', this.loadHandler);
         }
         this.imgOpacity += 0.1;
-        this.loadingHandler();
+        // this.loadingHandler();
       }, 300);
     },
     loadHandler() {
       this.imgOpacity = 1;
-      clearTimeout(this.loadTimer);
+      clearInterval(this.loadTimer);
       this.isLoad = false;
       setTimeout(() => {
         this.isCoverPromptExist = false;
