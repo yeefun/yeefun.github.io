@@ -187,10 +187,12 @@ export default {
   &__video {
     // position: absolute;
     width: 100%;
+    max-width: 100%;
     height: 100%;
     object-fit: cover;
     background-size: cover;
-    background-position: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
   }
 
   &__mask {

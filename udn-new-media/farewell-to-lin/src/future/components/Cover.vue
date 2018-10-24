@@ -29,10 +29,12 @@ export default {
   position: relative;
   &__img {
     position: absolute;
+    max-width: 100%;
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
   }
   &__title {
     color: #fff;

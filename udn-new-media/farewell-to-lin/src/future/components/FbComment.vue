@@ -12,12 +12,18 @@ export default {
 
 <style lang="scss">
 .fb-comment-wrapper {
+  padding-right: 24px;
+  padding-left: 24px;
   width: 100%;
+  max-width: 100%;
+  @media screen and (min-width: 768px) {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
-// TODO
-.fb_iframe_widget_lift {
-  width: 100% !important;
-}
+// .fb_iframe_widget_lift {
+//   width: 100% !important;
+// }
 </style>
 
