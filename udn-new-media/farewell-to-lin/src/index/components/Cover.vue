@@ -6,7 +6,7 @@
       <source src="../assets/video/web_video.mp4" v-else type="video/mp4"/>
     </video> -->
 
-    <video src="../assets/video/mobile_video.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize"></video>
+    <video src="../assets/video/mobile_bg.mp4" poster="../assets/CoverImg/video_mob.jpg" class="cover__video" data-object-fit muted autoplay loop playsinline webkit-playsinline v-if="$root.isMobileSize"></video>
     <video src="../assets/video/web_video.mp4" poster="../assets/CoverImg/video_web.jpg" class="cover__video" data-object-fit muted autoplay loop v-else></video>
 
     <section class="cover__title-wrapper">
