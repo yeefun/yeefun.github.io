@@ -3,16 +3,16 @@
     <p class="editor__time">2018.10.23</p>
     <div class="editor__content">
       <div>
-        <p>文&emsp;&emsp;字：</p>
-        <p>攝&emsp;&emsp;影：</p>
+        <p>文字&emsp;&emsp;&emsp;：</p>
+        <p>影音、攝影：</p>
         <p><br></p>
-        <p>剪&emsp;&emsp;輯：</p>
-        <p>網頁設計：</p>
-        <p>網頁製作：</p>
+        <p>剪輯&emsp;&emsp;&emsp;：</p>
+        <p>網頁設計&emsp;：</p>
+        <p>網頁製作&emsp;：</p>
       </div>
       <div>
         <p>何定照、洪欣慈</p>
-        <p>蘇健忠、林伯東、林澔一</p>
+        <p>蘇健忠、林伯東、林澔一、</p>
         <p>張心慈、報系資料照</p>
         <p>張心慈</p>
         <p>黃微庭</p>

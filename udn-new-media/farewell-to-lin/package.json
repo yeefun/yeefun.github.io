@@ -1,5 +1,5 @@
 {
-  "name": "farewell-to-lin",
+  "name": "cloudgate",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "npm": "^6.4.1",
-    "reset-css": "^4.0.1",
     "smoothscroll-polyfill": "^0.4.3",
     "udn-newmedia-utils": "^1.0.9",
     "vue": "^2.5.17"

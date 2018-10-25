@@ -193,7 +193,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'reset-css';
+// @import 'reset-css';
 @import './css/common.scss';
 @import './css/vue-transition.scss';
 
