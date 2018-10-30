@@ -38,8 +38,14 @@ export default {
     border-radius: 45px;
     box-shadow: 0 0 5.6px 0.4px rgba(53, 53, 53, 0.3);
     color: #2b2b2b;
+    margin-left: 1.3px;
     @media screen and (min-width: 768px) {
       padding: 38px 86px;
+      margin-left: 1.8px;
+    }
+    @media screen and (max-width: 375.98px) {
+      padding-left: 40px;
+      padding-right: 40px;
     }
   }
 }
