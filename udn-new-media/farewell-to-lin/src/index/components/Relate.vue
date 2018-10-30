@@ -21,9 +21,9 @@
         </a>
       </div>
       <div class="relate__report relate__report--right">
-        <a href="https://ubrand.udn.com/ubrand/story/12117/3368053" target="_blank" @click="relateClick('捷運變游池＋台東熱氣球 幕後推手都是他')">
+        <a href="https://udn.com/news/story/12564/3439121" target="_blank" @click="relateClick('72歲大限？預知死亡紀事 林懷民：可不信 但要尊敬')">
           <img src="../assets/ReadMore/readMore104.jpg" alt="">
-          <p class="mb-0">捷運變游池＋台東熱氣球<br>幕後推手都是他</p>
+          <p class="mb-0">72歲大限？預知死亡紀事<br>林懷民：可不信 但要尊敬</p>
         </a>
       </div>
     </div>
