@@ -51,4 +51,8 @@ html {
 .bg-grey {
   background-color: #959595;
 }
+
+img {
+  user-select: none;
+}
 </style>

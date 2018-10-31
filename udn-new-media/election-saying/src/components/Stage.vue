@@ -92,7 +92,7 @@ export default {
   }
   & p {
     position: relative;
-    transform: translateY(1px);
+    // transform: translateY(1px);
   }
   & .active {
     border-color: #6d6d6d;
