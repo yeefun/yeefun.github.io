@@ -12,11 +12,11 @@
     <!-- <section class="test-question" v-if="false"> -->
     <section class="test-question" :id="`question--${test.id}`" v-if="isQuestionHide">
       <div class="test-question__quotation">
-        <img class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="">
-        <h2>{{ test.saying }}</h2>
-        <img class="test-question__quotation-mark test-question__quotation-mark--bottom" src="../assets/quotation-mark.png" alt="">
+        <img :id="`quotation-mark-top--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="">
+        <h2 :id="`quotation--${test.id}`"></h2>
+        <img :id="`quotation-mark-bottom--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--bottom" src="../assets/quotation-mark.png" alt="">
       </div>
-      <div class="test-question__drop-place">
+      <div class="test-question__drop-place" :id="`drop-place--${test.id}`">
         <img class="test-question__drop-place-head" src="../assets/Candidates/pseudo_head.png" ref="droppedHead" :id="`droppedHead--${test.id}`" alt="">
         <p class="test-question__drop-place-prompt">拖曳<br>頭像</p>
 
@@ -43,22 +43,26 @@
 
       </div>
       <div class="test-question__candidate">
-        <div>
+        <div v-for="(num, idx) in 4" :key="test.names[idx]" :id="`candidate${idx + 1}--${test.id}`">
+          <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[idx]" :data-name="test.names[idx]" alt="">
+          <div class="candidate-name" :class="test.backgroundColorOfNames[idx]">{{ test.names[idx] }}</div>
+        </div>
+        <!-- <div :id="`candidate1--${test.id}`">
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[0]" :data-name="test.names[0]" alt="">
           <div class="candidate-name" :class="test.backgroundColorOfNames[0]">{{ test.names[0] }}</div>
         </div>
-        <div>
+        <div :id="`candidate2--${test.id}`">
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[1]" :data-name="test.names[1]" alt="">
           <div class="candidate-name" :class="test.backgroundColorOfNames[1]">{{ test.names[1] }}</div>
         </div>
-        <div>
+        <div :id="`candidate3--${test.id}`">
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[2]" :data-name="test.names[2]" alt="">
           <div class="candidate-name" :class="test.backgroundColorOfNames[2]">{{ test.names[2] }}</div>
         </div>
-        <div>
+        <div :id="`candidate4--${test.id}`">
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[3]" :data-name="test.names[3]" alt="">
           <div class="candidate-name" :class="test.backgroundColorOfNames[3]">{{ test.names[3] }}</div>
-        </div>
+        </div> -->
       </div>
     </section>
   </article>
@@ -88,7 +92,7 @@ export default {
       draggedHeadLeft: 0,
       droppedHeadOffsetTop: 0,
       droppedHeadOffsetLeft: 0,
-      canDragHead: true,
+      canDragHead: false,
       isDraggedHeadMatchDrop: false,
 
       windowEle: window,
@@ -96,13 +100,13 @@ export default {
       resizeTimer: null,
       isAnswerShow: false,
       isQuestionHide: true,
+      typeSayingTimer: null,
       // isCorrect: false,
     };
   },
-  created() {
-    // window.addEventListener('load', this.loadHandler);
-    window.addEventListener('resize', this.resetDroppedHeadOffset);
-  },
+  // created() {
+  //   window.addEventListener('resize', this.resizeHandler);
+  // },
   computed: {
     triggerDropMatchRange() {
       // const droppedHeadWidth = this.$refs.droppedHead.offsetWidth;
@@ -118,20 +122,84 @@ export default {
     },
   },
   methods: {
-    // loadHandler() {
-    //   const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
-    //   this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
-    //   this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
-    // },
-    resetDroppedHeadOffset() {
+    slideInDynamic() {
+      this.setDroppedHeadOffset();
+      window.addEventListener('resize', this.resizeHandler);
+      TweenLite.to(`#candidate1--${this.test.id}`, 0.4, {
+        x: 0,
+        ease: Back.easeOut.config(1.4),
+      });
+      TweenLite.to(`#candidate2--${this.test.id}`, 0.3, {
+        x: 0,
+        ease: Back.easeOut.config(1.4),
+        delay: 0.1,
+      });
+      TweenLite.to(`#candidate3--${this.test.id}`, 0.2, {
+        x: 0,
+        ease: Back.easeOut.config(1.4),
+        delay: 0.2,
+      });
+      TweenLite.to(`#candidate4--${this.test.id}`, 0.1, {
+        x: 0,
+        ease: Back.easeOut.config(1.4),
+        delay: 0.3,
+        onComplete: () => {
+          this.typeQuotation();
+        },
+      });
+    },
+    typeQuotation() {
+      TweenLite.set(`#quotation-mark-top--${this.test.id}, #quotation-mark-bottom--${this.test.id}`, {
+        opacity: 1,
+      });
+      const quotation = document.getElementById(`quotation--${this.test.id}`);
+      const splitSaying = this.test.saying.split('');
+      let sayingStr = '';
+      let idx = 0;
+      let delay = 120;
+      const typeSaying = () => {
+        this.typeSayingTimer = setTimeout(() => {
+          sayingStr += splitSaying[idx];
+          quotation.textContent = sayingStr;
+          if (idx !== 3) {
+            if (idx > 3 && idx < splitSaying.length - 5) {
+              delay = 80;
+            } else {
+              delay = 120;
+            }
+          } else {
+            delay = 280;
+          }
+          idx += 1;
+          if (idx !== splitSaying.length) {
+            typeSaying();
+          } else {
+            clearTimeout(this.typeSayingTimer);
+            TweenLite.to(`#drop-place--${this.test.id}`, 0.8, {
+              opacity: 1,
+              ease: Power2.easeIn,
+              // delay: 0.5,
+              onComplete: () => {
+                this.canDragHead = true;
+              },
+            });
+          }
+        }, delay);
+      };
+      typeSaying();
+    },
+    resizeHandler() {
       if (this.resizeTimer) {
         clearTimeout(this.resizeTimer);
       }
       this.resizeTimer = setTimeout(() => {
-        const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
-        this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
-        this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
+        this.setDroppedHeadOffset();
       }, 600);
+    },
+    setDroppedHeadOffset() {
+      const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
+      this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
+      this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
     },
     mouseDragStart(evt) {
       this.draggedHead = evt.target;
@@ -151,6 +219,8 @@ export default {
       this.draggedHead.style.zIndex = '99';
 
       document.addEventListener('mousemove', this.mouseDragging);
+      // can't bind this event to this.draggedHead
+      document.addEventListener('mouseup', this.mouseDrop);
     },
     touchDragStart(evt) {
       this.draggedHead = evt.target;
@@ -170,6 +240,7 @@ export default {
       this.draggedHead.style.zIndex = '99';
 
       this.draggedHead.addEventListener('touchmove', this.touchDragging);
+      this.draggedHead.addEventListener('touchend', this.touchDrop);
     },
     mouseDragging(evt) {
       evt.preventDefault();
@@ -188,7 +259,7 @@ export default {
       this.mouseX = currentMouseX;
       this.mouseY = currentMouseY;
 
-      this.draggedHead.addEventListener('mouseup', this.mouseDrop);
+      // this.draggedHead.addEventListener('mouseup', this.mouseDrop);
     },
     touchDragging(evt) {
       evt.preventDefault();
@@ -207,7 +278,7 @@ export default {
       this.touchX = currentTouchX;
       this.touchY = currentTouchY;
 
-      this.draggedHead.addEventListener('touchend', this.touchDrop);
+      // this.draggedHead.addEventListener('touchend', this.touchDrop);
     },
     mouseDrop(evt) {
       evt.preventDefault();
@@ -215,7 +286,7 @@ export default {
       this.draggedHead.style.zIndex = 'auto';
 
       document.removeEventListener('mousemove', this.mouseDragging);
-      this.draggedHead.removeEventListener('mouseup', this.mouseDrop);
+      document.removeEventListener('mouseup', this.mouseDrop);
     },
     touchDrop(evt) {
       evt.preventDefault();
@@ -250,6 +321,7 @@ export default {
             ease: Power2.easeInOut,
             delay: 0.8,
           });
+          console.log('success');
           TweenLite.to(`#tick--${this.test.id}`, 0.8, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
@@ -314,7 +386,6 @@ export default {
           scaleY: 1,
           ease: Power4.easeOut,
         });
-
         this.isDraggedHeadMatchDrop = true;
       } else {
         TweenLite.to(this.draggedHead, 0.2, {
@@ -322,7 +393,6 @@ export default {
           scaleY: 1.2,
           ease: Power4.easeOut,
         });
-
         this.isDraggedHeadMatchDrop = false;
       }
     },
@@ -399,21 +469,28 @@ export default {
   padding-left: 20px;
   font-size: 2rem;
   // position: relative;
-  width: 100%;
+  // width: 100%;
+  width: 375px;
   flex-shrink: 0;
   box-sizing: border-box;
   &-answer {
     position: absolute;
-    width: 100%;
+    // width: 100%;
+    width: 375px;
     left: 0;
     padding-right: 20px;
     padding-left: 20px;
     box-sizing: border-box;
     margin-bottom: 14px;
     z-index: 49;
+    text-align: center;
     // opacity: 0;
+    & > div {
+      text-align: left;
+    }
     & img {
-      width: 100%;
+      // width: 100%;
+      width: 80%;
       transform-origin: center bottom;
     }
     & h2 {
@@ -444,6 +521,7 @@ export default {
       margin-bottom: 18px;
       &-mark {
         width: 25px;
+        opacity: 0;
         // height: auto;
         &--top {
           margin-bottom: 10px;
@@ -476,6 +554,7 @@ export default {
       position: relative;
       margin-bottom: 35px;
       text-align: center;
+      opacity: 0;
       // &-head {
       //   position: relative;
       //   z-index: -9;
@@ -500,15 +579,15 @@ export default {
       display: flex;
       justify-content: space-between;
       // margin-bottom: 32px;
-      padding-top: 85px;
-      // & > div {
-      //   width: 80px;
-      // }
+      // padding-top: 85px;
+      & > div {
+        transform: translateX(375px);
+      }
       &-head {
         border: 1px solid #d5d4d4;
-        // margin-bottom: 5px;
+        margin-bottom: 5px;
         // position: relative;
-        position: absolute;
+        // position: absolute;
         top: 0;
         background-color: #fff;
         cursor: pointer;

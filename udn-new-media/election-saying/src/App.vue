@@ -2,12 +2,12 @@
   <div id="app" class="app">
     <div class="app-container" id="app-container">
       <Cover>
-        <!-- <button type="button" @click="slideToTestPage">開始</button> -->
+        <button type="button" @click="slideToTestPage('test1')">開始</button>
       </Cover>
       <div class="test-container">
         <Stage></Stage>
         <div class="test-wrapper">
-          <Test v-for="test in tests" :key="test.id" :test="test"></Test>
+          <Test v-for="test in tests" :key="test.id" :test="test" :ref="test.id"></Test>
         </div>
       </div>
     </div>
@@ -15,6 +15,10 @@
 </template>
 
 <script>
+import {
+  TweenLite, Back,
+} from 'gsap/TweenMax';
+
 import Stage from './components/Stage.vue';
 import Cover from './components/Cover.vue';
 import Test from './components/Test.vue';
@@ -59,23 +63,27 @@ export default {
       }],
     };
   },
-  // methods: {
-  //   slideToTestPage() {
-  //     TweenLite.to('#app-container', 0.3, {
-  //       x: '-100%',
-  //       ease: Back.easeIn.config(1.4),
-  //     });
-  //   },
-  // },
+  methods: {
+    slideToTestPage(testId) {
+      TweenLite.to('#app-container', 0.3, {
+        x: '-100%',
+        ease: Back.easeIn.config(1.4),
+        onComplete: () => {
+          this.$refs[testId][0].slideInDynamic();
+        },
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-// html, body {
-//   height: 100%;
-//   // position: relative;
-//   // overflow: hidden;
-// }
+html, body {
+  height: 100%;
+  background-color: #eee;
+  // position: relative;
+  // overflow: hidden;
+}
 
 html {
   font-size: 10px !important;
@@ -83,8 +91,11 @@ html {
 }
 
 .app {
+  background-color: #fff;
   // height: 100%;
-  max-width: 375px;
+  // max-width: 375px;
+  // width: 375px;
+  width: 392px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
@@ -96,6 +107,7 @@ html {
     width: 100%;
     display: flex;
     position: relative;
+    // height: 100%;
   }
 }
 // .pr-0 {
@@ -110,12 +122,16 @@ html {
 
 .test-container {
   width: 100%;
+  // height: 100%;
+  // for ie
+  // flex: 0 0 auto;
 }
 
 .test-wrapper {
   display: flex;
   position: relative;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  // height: 100%;
 }
 
 .bg-green {

@@ -57,6 +57,8 @@ export default {
 @import '../css/mixin.scss';
 
 .stage {
+  width: 375px;
+  box-sizing: border-box;
   padding: 10px 19px;
   background-color: #f7f7f7;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
