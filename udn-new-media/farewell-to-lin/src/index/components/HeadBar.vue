@@ -1,7 +1,6 @@
 <template>
   <header class="header" :class="{ active: !isHeadBarLight }">
     <div class="header-bar">
-      <!-- ASK is link right? -->
       <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
         <svg class="header-bar__icon-udn" viewBox="0 0 272.1 266.5" :class="{ active: isListOpen || !isHeadBarLight }">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>

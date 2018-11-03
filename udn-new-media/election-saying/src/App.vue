@@ -1,37 +1,72 @@
 <template>
   <div id="app" class="app">
-    <Stage></Stage>
-    <Test v-for="(test, idx) in tests" :key="idx" :test="test" answer="韓國瑜"></Test>
+    <div class="app-container" id="app-container">
+      <Cover>
+        <!-- <button type="button" @click="slideToTestPage">開始</button> -->
+      </Cover>
+      <div class="test-container">
+        <Stage></Stage>
+        <div class="test-wrapper">
+          <Test v-for="test in tests" :key="test.id" :test="test"></Test>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Stage from './components/Stage.vue';
+import Cover from './components/Cover.vue';
 import Test from './components/Test.vue';
+
 import houImg from './assets/Candidates/hou.png';
 import keImg from './assets/Candidates/ke.png';
+import linImg from './assets/Candidates/lin.png';
+import dingImg from './assets/Candidates/ding.png';
 import hanImg from './assets/Candidates/han.png';
 import yaoImg from './assets/Candidates/yao.png';
 
 export default {
   name: 'app',
   components: {
+    Cover,
     Stage,
     Test,
   },
   data() {
     return {
       tests: [{
+        id: 'test1',
+        saying: '升旗是我心目中日常的工作，已經內化在心裡。',
+        names: ['侯友宜', '柯文哲', '林佳龍', '丁守中'],
+        imgs: [houImg, keImg, linImg, dingImg],
+        backgroundColorOfNames: ['bg-blue', 'bg-grey', 'bg-green', 'bg-blue'],
+        answerName: '侯友宜',
+        answerImg: houImg,
+        backgroundColorOfAnswerName: 'bg-blue',
+        context: '國民黨新北市長參選人侯友宜去年底參加國民黨新北市黨部黨慶活動，因婉拒拿國旗，被前北縣長周錫瑋以「前幾天還看到有人不願意拿國旗、黨旗。」暗批不認同國民黨。侯友宜隨後在新北市元旦升旗活動記者會上表示，自己從小到大每天升旗，國旗已內化在他心裡。',
+      },
+      {
+        id: 'test2',
         saying: '我們年輕時把馬子，絕對不會分人種...把馬子不分人種，賺錢為何要分幣種？今天能賺錢為什麼不賺？',
         names: ['侯友宜', '柯文哲', '韓國瑜', '姚文智'],
         imgs: [houImg, keImg, hanImg, yaoImg],
+        backgroundColorOfNames: ['bg-blue', 'bg-grey', 'bg-blue', 'bg-green'],
         answerName: '韓國瑜',
         answerImg: hanImg,
-        backgroundColorOfName: 'bg-blue',
+        backgroundColorOfAnswerName: 'bg-blue',
         context: '民進黨高雄市長參選人陳其邁曾表示，高雄觀光主力過度集中在陸客，對此國民黨高雄市長參選人韓國瑜以「把馬子不分人種，賺錢為何要分幣種？」形容，批評陳其邁的說法是劃地自限。民進黨高雄市黨部執行長林展鴻則抨擊韓國瑜的「把馬子說」侮辱女性。',
       }],
     };
   },
+  // methods: {
+  //   slideToTestPage() {
+  //     TweenLite.to('#app-container', 0.3, {
+  //       x: '-100%',
+  //       ease: Back.easeIn.config(1.4),
+  //     });
+  //   },
+  // },
 };
 </script>
 
@@ -52,12 +87,36 @@ html {
   max-width: 375px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 32px;
+  overflow-x: hidden;
+  // margin-bottom: 32px;
+  // display: flex;
+  // position: relative;
   // overflow-y: auto;
+  &-container {
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
 }
 // .pr-0 {
 //   padding-right: 0 !important;
 // }
+
+// .container {
+//   width: 100%;
+//   display: flex;
+//   position: relative;
+// }
+
+.test-container {
+  width: 100%;
+}
+
+.test-wrapper {
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+}
 
 .bg-green {
   background-color: #8fc31f;
@@ -88,5 +147,11 @@ button {
   font-family: "Helvetica Neue", Arial, "微軟正黑體", "Microsoft JhengHei", sans-serif;
   border-radius: 100px;
   color: #fff;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

@@ -1,43 +1,43 @@
 <template>
   <article class="test">
     <section class="test-answer" v-show="isAnswerShow">
-      <img id="answer-head" :src="test.answerImg" alt="">
-      <div id="answer-text">
-        <div class="candidate-name" :class="test.backgroundColorOfName">{{ test.answerName }}</div>
+      <img :id="`answer-head--${test.id}`" :src="test.answerImg" alt="">
+      <div :id="`answer-text--${test.id}`">
+        <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
         <h2>{{ test.saying }}</h2>
         <p>{{ test.context }}</p>
         <button type="button" class="test-answer__next-btn">下一題</button>
       </div>
     </section>
     <!-- <section class="test-question" v-if="false"> -->
-    <section class="test-question" id="question" v-if="isQuestionHide">
+    <section class="test-question" :id="`question--${test.id}`" v-if="isQuestionHide">
       <div class="test-question__quotation">
         <img class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="">
         <h2>{{ test.saying }}</h2>
         <img class="test-question__quotation-mark test-question__quotation-mark--bottom" src="../assets/quotation-mark.png" alt="">
       </div>
       <div class="test-question__drop-place">
-        <img class="test-question__drop-place-head" src="../assets/Candidates/pseudo_head.png" ref="droppedHead" id="droppedHead" alt="">
+        <img class="test-question__drop-place-head" src="../assets/Candidates/pseudo_head.png" ref="droppedHead" :id="`droppedHead--${test.id}`" alt="">
         <p class="test-question__drop-place-prompt">拖曳<br>頭像</p>
 
         <svg viewBox="0 0 86 86">
           <g transform="translate(-19 -398)">
             <g class="cls-1" transform="translate(19 398)">
-              <circle class="check-fill" id="correct-fill" cx="43" cy="43" r="43"/>
-              <circle class="check-stroke" id="correct-stroke" cx="43" cy="43" r="41.5"/>
+              <circle class="check-fill" :id="`correct-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <circle class="check-stroke" :id="`correct-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
-            <path class="check-mark check-mark--tick" id="tick" d="M36.082,1221.95l15.807,15.832,31.615-32.3" transform="translate(4 -781)"/>
+            <path class="check-mark check-mark--tick" :id="`tick--${test.id}`" d="M36.082,1221.95l15.807,15.832,31.615-32.3" transform="translate(4 -781)"/>
           </g>
         </svg>
 
         <svg viewBox="0 0 86 86">
           <g transform="translate(-113 -398)">
             <g transform="translate(113 398)">
-              <circle class="check-fill" id="incorrect-fill" cx="43" cy="43" r="43"/>
-              <circle class="check-stroke" id="incorrect-stroke" cx="43" cy="43" r="41.5"/>
+              <circle class="check-fill" :id="`incorrect-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <circle class="check-stroke" :id="`incorrect-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
-            <path class="check-mark check-mark--cross" id="cross-right" d="M149,1182.4v48.783" transform="translate(903.972 -517.898) rotate(45)"/>
-            <path class="check-mark check-mark--cross" id="cross-left" d="M149,1182.4v48.783" transform="translate(-802.69 -307.18) rotate(-45)"/>
+            <path class="check-mark check-mark--cross" :id="`cross-right--${test.id}`" d="M149,1182.4v48.783" transform="translate(903.972 -517.898) rotate(45)"/>
+            <path class="check-mark check-mark--cross" :id="`cross-left--${test.id}`" d="M149,1182.4v48.783" transform="translate(-802.69 -307.18) rotate(-45)"/>
           </g>
         </svg>
 
@@ -45,19 +45,19 @@
       <div class="test-question__candidate">
         <div>
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[0]" :data-name="test.names[0]" alt="">
-          <div class="candidate-name bg-blue">{{ test.names[0] }}</div>
+          <div class="candidate-name" :class="test.backgroundColorOfNames[0]">{{ test.names[0] }}</div>
         </div>
         <div>
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[1]" :data-name="test.names[1]" alt="">
-          <div class="candidate-name bg-grey">{{ test.names[1] }}</div>
+          <div class="candidate-name" :class="test.backgroundColorOfNames[1]">{{ test.names[1] }}</div>
         </div>
         <div>
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[2]" :data-name="test.names[2]" alt="">
-          <div class="candidate-name bg-blue">{{ test.names[2] }}</div>
+          <div class="candidate-name" :class="test.backgroundColorOfNames[2]">{{ test.names[2] }}</div>
         </div>
         <div>
           <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[3]" :data-name="test.names[3]" alt="">
-          <div class="candidate-name bg-green">{{ test.names[3] }}</div>
+          <div class="candidate-name" :class="test.backgroundColorOfNames[3]">{{ test.names[3] }}</div>
         </div>
       </div>
     </section>
@@ -71,7 +71,7 @@ import {
 
 export default {
   name: 'Test',
-  props: ['test', 'answer'],
+  props: ['test'],
   data() {
     return {
       mouseX: 0,
@@ -100,7 +100,7 @@ export default {
     };
   },
   created() {
-    window.addEventListener('load', this.loadHandler);
+    // window.addEventListener('load', this.loadHandler);
     window.addEventListener('resize', this.resetDroppedHeadOffset);
   },
   computed: {
@@ -118,11 +118,11 @@ export default {
     },
   },
   methods: {
-    loadHandler() {
-      const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
-      this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
-      this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
-    },
+    // loadHandler() {
+    //   const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
+    //   this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
+    //   this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
+    // },
     resetDroppedHeadOffset() {
       if (this.resizeTimer) {
         clearTimeout(this.resizeTimer);
@@ -240,17 +240,17 @@ export default {
           ease: Power2.easeInOut,
         });
 
-        if (this.draggedHead.dataset.name === this.answer) {
-          TweenLite.to('#correct-stroke', 0.8, {
+        if (this.draggedHead.dataset.name === this.test.answerName) {
+          TweenLite.to(`#correct-stroke--${this.test.id}`, 0.8, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
           });
-          TweenLite.to('#correct-fill', 0.8, {
+          TweenLite.to(`#correct-fill--${this.test.id}`, 0.8, {
             opacity: 1,
             ease: Power2.easeInOut,
             delay: 0.8,
           });
-          TweenLite.to('#tick', 0.8, {
+          TweenLite.to(`#tick--${this.test.id}`, 0.8, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
             delay: 1.6,
@@ -259,21 +259,21 @@ export default {
             },
           });
         } else {
-          TweenLite.to('#incorrect-stroke', 0.8, {
+          TweenLite.to(`#incorrect-stroke--${this.test.id}`, 0.8, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
           });
-          TweenLite.to('#incorrect-fill', 0.8, {
+          TweenLite.to(`#incorrect-fill--${this.test.id}`, 0.8, {
             opacity: 1,
             ease: Power2.easeInOut,
             delay: 0.8,
           });
-          TweenLite.to('#cross-left', 0.4, {
+          TweenLite.to(`#cross-left--${this.test.id}`, 0.4, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
             delay: 1.6,
           });
-          TweenLite.to('#cross-right', 0.4, {
+          TweenLite.to(`#cross-right--${this.test.id}`, 0.4, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
             delay: 2,
@@ -328,18 +328,18 @@ export default {
     },
     switchQuestionToAnswer() {
       this.isAnswerShow = true;
-      TweenLite.from('#answer-head', 0.4, {
+      TweenLite.from(`#answer-head--${this.test.id}`, 0.4, {
         scaleX: 0,
         scaleY: 0,
         ease: Back.easeOut.config(1),
       });
-      TweenLite.from('#answer-text', 0.4, {
+      TweenLite.from(`#answer-text--${this.test.id}`, 0.4, {
         y: '50%',
         // y: this.htmlEle.clientHeight,
         // opacity: 0,
         ease: Power4.easeOut,
       });
-      TweenLite.to('#question', 0.4, {
+      TweenLite.to(`#question--${this.test.id}`, 0.4, {
         y: '100%',
         // y: this.htmlEle.clientHeight,
         // opacity: 0,
@@ -398,7 +398,10 @@ export default {
   padding-right: 20px;
   padding-left: 20px;
   font-size: 2rem;
-  position: relative;
+  // position: relative;
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
   &-answer {
     position: absolute;
     width: 100%;
