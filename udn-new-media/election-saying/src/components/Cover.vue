@@ -47,8 +47,9 @@ export default {
 
 <style lang="scss">
 .cover {
-  width: 100%;
-  flex-shrink: 0;
+  flex: 0 0 100%;
+  // width: 100%;
+  // flex-shrink: 0;
   // padding-right: 20px;
   // padding-left: 20px;
   padding-top: 6px;

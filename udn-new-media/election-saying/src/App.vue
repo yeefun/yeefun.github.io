@@ -93,9 +93,9 @@ html {
 .app {
   background-color: #fff;
   // height: 100%;
-  // max-width: 375px;
+  max-width: 375px;
   // width: 375px;
-  width: 392px;
+  // width: 392px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
@@ -104,7 +104,7 @@ html {
   // position: relative;
   // overflow-y: auto;
   &-container {
-    width: 100%;
+    // width: 100%;
     display: flex;
     position: relative;
     // height: 100%;
@@ -121,7 +121,10 @@ html {
 // }
 
 .test-container {
-  width: 100%;
+  // width: 100%;
+  // flex: 0 0 100%;
+  // CONFUSED
+  min-width: 100%;
   // height: 100%;
   // for ie
   // flex: 0 0 auto;

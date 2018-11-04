@@ -168,14 +168,14 @@ export default {
               delay = 120;
             }
           } else {
-            delay = 280;
+            delay = 200;
           }
           idx += 1;
           if (idx !== splitSaying.length) {
             typeSaying();
           } else {
             clearTimeout(this.typeSayingTimer);
-            TweenLite.to(`#drop-place--${this.test.id}`, 0.8, {
+            TweenLite.to(`#drop-place--${this.test.id}`, 0.4, {
               opacity: 1,
               ease: Power2.easeIn,
               // delay: 0.5,
@@ -470,13 +470,15 @@ export default {
   font-size: 2rem;
   // position: relative;
   // width: 100%;
-  width: 375px;
-  flex-shrink: 0;
+  // flex: 0 0 100%;
+  min-width: 100%;
+  // width: 375px;
+  // flex-shrink: 0;
   box-sizing: border-box;
   &-answer {
     position: absolute;
-    // width: 100%;
-    width: 375px;
+    width: 100%;
+    // width: 375px;
     left: 0;
     padding-right: 20px;
     padding-left: 20px;
