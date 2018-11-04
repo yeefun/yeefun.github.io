@@ -23,7 +23,8 @@
         <svg viewBox="0 0 86 86">
           <g transform="translate(-19 -398)">
             <g class="cls-1" transform="translate(19 398)">
-              <circle class="check-fill" :id="`correct-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <!-- <circle class="check-fill" :id="`correct-fill--${test.id}`" cx="43" cy="43" r="43"/> -->
+              <circle class="check-fill" cx="43" cy="43" r="43"/>
               <circle class="check-stroke" :id="`correct-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
             <path class="check-mark check-mark--tick" :id="`tick--${test.id}`" d="M36.082,1221.95l15.807,15.832,31.615-32.3" transform="translate(4 -781)"/>
@@ -33,7 +34,8 @@
         <svg viewBox="0 0 86 86">
           <g transform="translate(-113 -398)">
             <g transform="translate(113 398)">
-              <circle class="check-fill" :id="`incorrect-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <!-- <circle class="check-fill" :id="`incorrect-fill--${test.id}`" cx="43" cy="43" r="43"/> -->
+              <circle class="check-fill" cx="43" cy="43" r="43"/>
               <circle class="check-stroke" :id="`incorrect-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
             <path class="check-mark check-mark--cross" :id="`cross-right--${test.id}`" d="M149,1182.4v48.783" transform="translate(903.972 -517.898) rotate(45)"/>
@@ -316,16 +318,16 @@ export default {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
           });
-          TweenLite.to(`#correct-fill--${this.test.id}`, 0.8, {
-            opacity: 1,
-            ease: Power2.easeInOut,
-            delay: 0.8,
-          });
-          console.log('success');
+          // TweenLite.to(`#correct-fill--${this.test.id}`, 0.8, {
+          //   opacity: 1,
+          //   ease: Power2.easeInOut,
+          //   delay: 0.8,
+          // });
           TweenLite.to(`#tick--${this.test.id}`, 0.8, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
-            delay: 1.6,
+            // delay: 1.6,
+            delay: 0.8,
             onComplete: () => {
               this.switchQuestionToAnswer();
             },
@@ -335,20 +337,22 @@ export default {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
           });
-          TweenLite.to(`#incorrect-fill--${this.test.id}`, 0.8, {
-            opacity: 1,
-            ease: Power2.easeInOut,
-            delay: 0.8,
-          });
+          // TweenLite.to(`#incorrect-fill--${this.test.id}`, 0.8, {
+          //   opacity: 1,
+          //   ease: Power2.easeInOut,
+          //   delay: 0.8,
+          // });
           TweenLite.to(`#cross-left--${this.test.id}`, 0.4, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
-            delay: 1.6,
+            // delay: 1.6,
+            delay: 0.8,
           });
           TweenLite.to(`#cross-right--${this.test.id}`, 0.4, {
             strokeDashoffset: 0,
             ease: Power2.easeInOut,
-            delay: 2,
+            // delay: 2,
+            delay: 1.2,
             onComplete: () => {
               this.switchQuestionToAnswer();
             },
@@ -437,12 +441,14 @@ export default {
 }
 .check-fill {
   stroke: none;
-  fill: #efefef;
-  opacity: 0;
+  // fill: #efefef;
+  // opacity: 0;
+  fill: none;
 }
 
 .check-mark {
   stroke: #fff;
+  // stroke: #000;
   stroke-width: 10px;
   fill: none;
   &--tick {
