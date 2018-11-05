@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import {
-  TweenLite, Power2, Power4, Back,
-} from 'gsap/TweenMax';
+// import {
+//   TweenLite, Power2, Power4, Back,
+// } from 'gsap/TweenMax';
 
 export default {
   name: 'Test',
@@ -90,335 +90,55 @@ export default {
       isQuestionShow: true,
       hideForAnswerPop: false,
       typeSayingTimer: null,
-      // isCandidateShow: true,
-      // isCorrect: false,
     };
   },
-  // created() {
-  //   window.addEventListener('resize', this.resizeHandler);
-  // },
   computed: {
     triggerDropMatchRange() {
-      // const droppedHeadWidth = this.$refs.droppedHead.offsetWidth;
-      // const droppedHeadHeight = this.$refs.droppedHead.offsetHeight;
-      return {
-        top: this.droppedHeadOffsetTop + (this.$refs.droppedHead.offsetHeight / 2),
-        left: this.droppedHeadOffsetLeft + (this.$refs.droppedHead.offsetWidth / 2),
-        // top: this.droppedHeadOffsetTop + (droppedHeadHeight / 3),
-        // bottom: this.droppedHeadOffsetTop + (droppedHeadHeight / 3 * 2),
-        // left: this.droppedHeadOffsetLeft + (droppedHeadWidth / 3),
-        // right: this.droppedHeadOffsetLeft + (droppedHeadWidth / 3 * 2),
-      };
+      return this.$test.computed.triggerDropMatchRange(this);
     },
   },
   methods: {
-    slideInDynamic() {
-      this.setDroppedHeadOffset();
-      window.addEventListener('resize', this.resizeHandler);
-      TweenLite.to(`#candidate1--${this.test.id}`, 0.4, {
-        x: 0,
-        ease: Back.easeOut.config(1.4),
-      });
-      TweenLite.to(`#candidate2--${this.test.id}`, 0.3, {
-        x: 0,
-        ease: Back.easeOut.config(1.4),
-        delay: 0.1,
-      });
-      TweenLite.to(`#candidate3--${this.test.id}`, 0.2, {
-        x: 0,
-        ease: Back.easeOut.config(1.4),
-        delay: 0.2,
-      });
-      TweenLite.to(`#candidate4--${this.test.id}`, 0.1, {
-        x: 0,
-        ease: Back.easeOut.config(1.4),
-        delay: 0.3,
-        onComplete: () => {
-          this.typeQuotation();
-        },
-      });
-    },
-    typeQuotation() {
-      TweenLite.set(`#quotation-mark-top--${this.test.id}, #quotation-mark-bottom--${this.test.id}`, {
-        opacity: 1,
-      });
-      const quotation = document.getElementById(`quotation--${this.test.id}`);
-      const splitSaying = this.test.saying.split('');
-      let sayingStr = '';
-      let idx = 0;
-      let delay = 120;
-      const typeSaying = () => {
-        this.typeSayingTimer = setTimeout(() => {
-          sayingStr += splitSaying[idx];
-          quotation.textContent = sayingStr;
-          if (idx !== 3) {
-            if (idx > 3 && idx < splitSaying.length - 5) {
-              delay = 80;
-            } else {
-              delay = 120;
-            }
-          } else {
-            delay = 200;
-          }
-          idx += 1;
-          if (idx !== splitSaying.length) {
-            typeSaying();
-          } else {
-            clearTimeout(this.typeSayingTimer);
-            TweenLite.to(`#drop-place--${this.test.id}`, 0.4, {
-              opacity: 1,
-              ease: Power2.easeIn,
-              // delay: 0.5,
-              onComplete: () => {
-                this.canDragHead = true;
-              },
-            });
-          }
-        }, delay);
-      };
-      typeSaying();
+    setDroppedHeadOffset() {
+      this.$test.methods.setDroppedHeadOffset(this);
     },
     resizeHandler() {
-      if (this.resizeTimer) {
-        clearTimeout(this.resizeTimer);
-      }
-      this.resizeTimer = setTimeout(() => {
-        this.setDroppedHeadOffset();
-      }, 600);
+      this.$test.methods.resizeHandler(this);
     },
-    setDroppedHeadOffset() {
-      const droppedHeadRect = this.$refs.droppedHead.getBoundingClientRect();
-      this.droppedHeadOffsetTop = droppedHeadRect.top + this.windowEle.pageYOffset;
-      this.droppedHeadOffsetLeft = droppedHeadRect.left + this.windowEle.pageXOffset;
+    slideInDynamic() {
+      this.$test.methods.slideInDynamic(this);
+    },
+    typeQuotation() {
+      this.$test.methods.typeQuotation(this);
     },
     mouseDragStart(evt) {
-      this.draggedHead = evt.target;
-
-      this.draggedHeadTop = this.draggedHead.getBoundingClientRect().top + this.windowEle.pageYOffset;
-      this.draggedHeadLeft = this.draggedHead.getBoundingClientRect().left + this.windowEle.pageXOffset;
-
-      TweenLite.to(this.draggedHead, 0.2, {
-        scaleX: 1.2,
-        scaleY: 1.2,
-        ease: Power4.easeOut,
-      });
-
-      this.mouseX = evt.pageX;
-      this.mouseY = evt.pageY;
-
-      this.draggedHead.style.zIndex = '99';
-
-      document.addEventListener('mousemove', this.mouseDragging);
-      // can't bind this event to this.draggedHead
-      document.addEventListener('mouseup', this.mouseDrop);
-    },
-    touchDragStart(evt) {
-      this.draggedHead = evt.target;
-
-      this.draggedHeadTop = this.draggedHead.getBoundingClientRect().top + this.windowEle.pageYOffset;
-      this.draggedHeadLeft = this.draggedHead.getBoundingClientRect().left + this.windowEle.pageXOffset;
-
-      TweenLite.to(this.draggedHead, 0.2, {
-        scaleX: 1.2,
-        scaleY: 1.2,
-        ease: Power4.easeOut,
-      });
-
-      this.touchX = evt.touches[0].pageX;
-      this.touchY = evt.touches[0].pageY;
-
-      this.draggedHead.style.zIndex = '99';
-
-      this.draggedHead.addEventListener('touchmove', this.touchDragging);
-      this.draggedHead.addEventListener('touchend', this.touchDrop);
+      this.$test.methods.mouseDragStart(evt, this);
     },
     mouseDragging(evt) {
-      evt.preventDefault();
-      const currentMouseX = evt.pageX;
-      const currentMouseY = evt.pageY;
-      this.draggedHeadTotalMoveX += currentMouseX - this.mouseX;
-      this.draggedHeadTotalMoveY += currentMouseY - this.mouseY;
-
-      TweenLite.set(this.draggedHead, {
-        x: this.draggedHeadTotalMoveX,
-        y: this.draggedHeadTotalMoveY,
-      });
-
-      this.checkDraggedHeadInDropRange();
-
-      this.mouseX = currentMouseX;
-      this.mouseY = currentMouseY;
-
-      // this.draggedHead.addEventListener('mouseup', this.mouseDrop);
-    },
-    touchDragging(evt) {
-      evt.preventDefault();
-      const currentTouchX = evt.changedTouches[0].pageX;
-      const currentTouchY = evt.changedTouches[0].pageY;
-      this.draggedHeadTotalMoveX += currentTouchX - this.touchX;
-      this.draggedHeadTotalMoveY += currentTouchY - this.touchY;
-
-      TweenLite.set(this.draggedHead, {
-        x: this.draggedHeadTotalMoveX,
-        y: this.draggedHeadTotalMoveY,
-      });
-
-      this.checkDraggedHeadInDropRange();
-
-      this.touchX = currentTouchX;
-      this.touchY = currentTouchY;
-
-      // this.draggedHead.addEventListener('touchend', this.touchDrop);
+      this.$test.methods.mouseDragging(evt, this);
     },
     mouseDrop(evt) {
-      evt.preventDefault();
-      this.headDropped();
-      this.draggedHead.style.zIndex = 'auto';
-
-      document.removeEventListener('mousemove', this.mouseDragging);
-      document.removeEventListener('mouseup', this.mouseDrop);
+      this.$test.methods.mouseDrop(evt, this);
+    },
+    touchDragStart(evt) {
+      this.$test.methods.touchDragStart(evt, this);
+    },
+    touchDragging(evt) {
+      this.$test.methods.touchDragging(evt, this);
     },
     touchDrop(evt) {
-      evt.preventDefault();
-      this.headDropped();
-
-      this.draggedHead.removeEventListener('touchmove', this.touchDragging);
-      this.draggedHead.removeEventListener('touchend', this.touchDrop);
+      this.$test.methods.touchDrop(evt, this);
     },
     headDropped() {
-      if (this.isDraggedHeadMatchDrop) {
-        TweenLite.to(this.draggedHead, 0.2, {
-          x: this.droppedHeadOffsetLeft - this.draggedHeadLeft,
-          y: this.droppedHeadOffsetTop - this.draggedHeadTop,
-          scaleX: 1,
-          scaleY: 1,
-          ease: Power4.easeOut,
-        });
-        this.canDragHead = false;
-
-        const candidates = this.draggedHead.parentNode.parentNode.children;
-        const draggedHeadParent = this.draggedHead.parentNode;
-        const newCandidates = [];
-        for (let i = 0; i < candidates.length; i += 1) {
-          if (candidates[i] !== draggedHeadParent) {
-            newCandidates.push(candidates[i]);
-          }
-        }
-        newCandidates.forEach((candidate) => {
-          candidate.classList.add('check-answer-hide');
-        });
-
-        TweenLite.to(this.draggedHead.nextElementSibling, 0.8, {
-          opacity: 0,
-          ease: Power2.easeInOut,
-        });
-        TweenLite.to('.check-answer-hide', 0.8, {
-          opacity: 0,
-          ease: Power2.easeInOut,
-          onComplete: () => {
-            this.checkAnswerDynamic();
-          },
-        });
-      } else {
-        TweenLite.to(this.draggedHead, 0.2, {
-          x: 0,
-          y: 0,
-          scaleX: 1,
-          scaleY: 1,
-          ease: Power4.easeOut,
-        });
-      }
-
-      this.draggedHead.style.zIndex = 'auto';
-      this.draggedHeadTotalMoveX = 0;
-      this.draggedHeadTotalMoveY = 0;
+      this.$test.methods.headDropped(this);
     },
     checkAnswerDynamic() {
-      // correct
-      if (this.draggedHead.dataset.name === this.test.answerName) {
-        TweenLite.to(`#correct-stroke--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-        });
-        TweenLite.to(`#tick--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 0.8,
-          onComplete: () => {
-            this.switchQuestionToAnswer();
-          },
-        });
-      // incorrect
-      } else {
-        TweenLite.to(`#incorrect-stroke--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-        });
-        TweenLite.to(`#cross-left--${this.test.id}`, 0.4, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 0.8,
-        });
-        TweenLite.to(`#cross-right--${this.test.id}`, 0.4, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 1.2,
-          onComplete: () => {
-            this.switchQuestionToAnswer();
-          },
-        });
-      }
+      this.$test.methods.checkAnswerDynamic(this);
     },
     switchQuestionToAnswer() {
-      TweenLite.set(`#answer-head--${this.test.id}`, {
-        opacity: 1,
-        delay: 0.5,
-      });
-      TweenLite.to(`#answer-head--${this.test.id}`, 0.4, {
-        x: '-50%',
-        y: -248,
-        scale: 2,
-        ease: Back.easeOut.config(1),
-        delay: 0.5,
-        onStart: () => {
-          this.hideForAnswerPop = true;
-          this.draggedHead.style.display = 'none';
-          this.isAnswerShow = true;
-        },
-      });
-      TweenLite.from(`#answer-text--${this.test.id}`, 0.4, {
-        y: 200,
-        ease: Back.easeOut.config(1),
-        delay: 0.5,
-      });
+      this.$test.methods.switchQuestionToAnswer(this);
     },
     checkDraggedHeadInDropRange() {
-      const draggedHeadRect = this.draggedHead.getBoundingClientRect();
-      const scrollY = this.windowEle.pageYOffset;
-      const scrollX = this.windowEle.pageXOffset;
-      const dropDraggedHeadTop = draggedHeadRect.top + scrollY;
-      const dropDraggedHeadBottom = draggedHeadRect.bottom + scrollY;
-      const dropDraggedHeadLeft = draggedHeadRect.left + scrollX;
-      const dropDraggedHeadRight = draggedHeadRect.right + scrollX;
-
-      if (((dropDraggedHeadTop > this.droppedHeadOffsetTop && dropDraggedHeadTop < this.triggerDropMatchRange.top)
-          || (dropDraggedHeadTop < this.droppedHeadOffsetTop && dropDraggedHeadBottom > this.triggerDropMatchRange.top))
-        && ((dropDraggedHeadLeft < this.droppedHeadOffsetLeft && dropDraggedHeadRight > this.triggerDropMatchRange.left)
-          || (dropDraggedHeadLeft > this.droppedHeadOffsetLeft && dropDraggedHeadLeft < this.triggerDropMatchRange.left))) {
-        TweenLite.to(this.draggedHead, 0.2, {
-          scaleX: 1,
-          scaleY: 1,
-          ease: Power4.easeOut,
-        });
-        this.isDraggedHeadMatchDrop = true;
-      } else {
-        TweenLite.to(this.draggedHead, 0.2, {
-          scaleX: 1.2,
-          scaleY: 1.2,
-          ease: Power4.easeOut,
-        });
-        this.isDraggedHeadMatchDrop = false;
-      }
+      this.$test.methods.checkDraggedHeadInDropRange(this);
     },
   },
 };
