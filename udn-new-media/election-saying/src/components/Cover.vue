@@ -22,26 +22,14 @@
       <h1>這些爆紅名言<br>是誰說的？</h1>
       <p>九合一選舉即將到來，各候選人過去曾說過的爆紅名言也被拿出來檢驗。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！</p>
       <slot></slot>
-      <!-- <button type="button" @click="slideToTestPage">開始</button> -->
     </div>
   </section>
 </template>
 
 <script>
-// import {
-//   TweenLite, Back,
-// } from 'gsap/TweenMax';
 
 export default {
   name: 'Cover',
-  // methods: {
-  //   slideToTestPage() {
-  //     TweenLite.to('#app-container', 0.3, {
-  //       x: '-100%',
-  //       ease: Back.easeIn.config(1.4),
-  //     });
-  //   },
-  // },
 };
 </script>
 
@@ -52,7 +40,7 @@ export default {
   // flex-shrink: 0;
   // padding-right: 20px;
   // padding-left: 20px;
-  padding-top: 6px;
+  padding-top: 8px;
   box-sizing: border-box;
   &__text-wrapper {
     transform: translateY(-30px);
@@ -112,7 +100,8 @@ export default {
     }
   }
   & svg {
-    margin-left: 10px;
+    margin-left: 8px;
+    // margin-left: 12px;
     margin-bottom: 6px;
     width: 33.69px;
     height: 33px;

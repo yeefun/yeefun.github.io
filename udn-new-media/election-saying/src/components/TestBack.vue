@@ -1,7 +1,7 @@
 <template>
   <article class="test">
     <section class="test-answer" v-show="isAnswerShow">
-      <!-- <img :id="`answer-head--${test.id}`" :src="test.answerImg" alt=""> -->
+      <img :id="`answer-head--${test.id}`" :src="test.answerImg" alt="">
       <div :id="`answer-text--${test.id}`">
         <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
         <h2>{{ test.saying }}</h2>
@@ -10,33 +10,32 @@
       </div>
     </section>
     <!-- <section class="test-question" v-if="false"> -->
-    <section class="test-question" :id="`question--${test.id}`" v-if="isQuestionShow">
+    <section class="test-question" :id="`question--${test.id}`" v-if="isQuestionHide">
       <div class="test-question__quotation">
-        <img :id="`quotation-mark-top--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="" v-if="!hideForAnswerPop">
-        <h2 :id="`quotation--${test.id}`" v-if="!hideForAnswerPop"></h2>
-        <img :id="`quotation-mark-bottom--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--bottom" src="../assets/quotation-mark.png" alt="" v-if="!hideForAnswerPop">
+        <img :id="`quotation-mark-top--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="">
+        <h2 :id="`quotation--${test.id}`"></h2>
+        <img :id="`quotation-mark-bottom--${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--bottom" src="../assets/quotation-mark.png" alt="">
       </div>
       <div class="test-question__drop-place" :id="`drop-place--${test.id}`">
-        <img class="test-question__head" src="../assets/Candidates/pseudo_head.png" ref="droppedHead" :id="`droppedHead--${test.id}`" alt="" v-show="!hideForAnswerPop">
-        <img :src="test.answerImg" class="test-question__answer-head" :id="`answer-head--${test.id}`" alt="">
-        <p class="test-question__drop-place-prompt" v-show="!hideForAnswerPop">拖曳<br>頭像</p>
+        <img class="test-question__drop-place-head" src="../assets/Candidates/pseudo_head.png" ref="droppedHead" :id="`droppedHead--${test.id}`" alt="">
+        <p class="test-question__drop-place-prompt">拖曳<br>頭像</p>
 
-        <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
+        <svg viewBox="0 0 86 86">
           <g transform="translate(-19 -398)">
             <g class="cls-1" transform="translate(19 398)">
-              <!-- <circle class="check-fill" :id="`correct-fill--${test.id}`" cx="43" cy="43" r="43"/> -->
-              <circle class="check-fill" cx="43" cy="43" r="43"/>
+              <circle class="check-fill" :id="`correct-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <!-- <circle class="check-fill" cx="43" cy="43" r="43"/> -->
               <circle class="check-stroke" :id="`correct-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
             <path class="check-mark check-mark--tick" :id="`tick--${test.id}`" d="M36.082,1221.95l15.807,15.832,31.615-32.3" transform="translate(4 -781)"/>
           </g>
         </svg>
 
-        <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
+        <svg viewBox="0 0 86 86">
           <g transform="translate(-113 -398)">
             <g transform="translate(113 398)">
-              <!-- <circle class="check-fill" :id="`incorrect-fill--${test.id}`" cx="43" cy="43" r="43"/> -->
-              <circle class="check-fill" cx="43" cy="43" r="43"/>
+              <circle class="check-fill" :id="`incorrect-fill--${test.id}`" cx="43" cy="43" r="43"/>
+              <!-- <circle class="check-fill" cx="43" cy="43" r="43"/> -->
               <circle class="check-stroke" :id="`incorrect-stroke--${test.id}`" cx="43" cy="43" r="41.5"/>
             </g>
             <path class="check-mark check-mark--cross" :id="`cross-right--${test.id}`" d="M149,1182.4v48.783" transform="translate(903.972 -517.898) rotate(45)"/>
@@ -46,9 +45,8 @@
 
       </div>
       <div class="test-question__candidate">
-        <!-- <transition> -->
-        <div v-for="(num, idx) in test.names.length" :key="test.names[idx]" :id="`candidate${idx + 1}--${test.id}`">
-          <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__head test-question__head--candidate" :src="test.imgs[idx]" :data-name="test.names[idx]" alt="">
+        <div v-for="(num, idx) in 4" :key="test.names[idx]" :id="`candidate${idx + 1}--${test.id}`">
+          <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__candidate-head" :src="test.imgs[idx]" :data-name="test.names[idx]" alt="">
           <div class="candidate-name" :class="test.backgroundColorOfNames[idx]">{{ test.names[idx] }}</div>
         </div>
       </div>
@@ -87,10 +85,8 @@ export default {
       htmlEle: document.documentElement,
       resizeTimer: null,
       isAnswerShow: false,
-      isQuestionShow: true,
-      hideForAnswerPop: false,
+      isQuestionHide: true,
       typeSayingTimer: null,
-      // isCandidateShow: true,
       // isCorrect: false,
     };
   },
@@ -296,29 +292,56 @@ export default {
         });
         this.canDragHead = false;
 
-        const candidates = this.draggedHead.parentNode.parentNode.children;
-        const draggedHeadParent = this.draggedHead.parentNode;
-        const newCandidates = [];
-        for (let i = 0; i < candidates.length; i += 1) {
-          if (candidates[i] !== draggedHeadParent) {
-            newCandidates.push(candidates[i]);
-          }
-        }
-        newCandidates.forEach((candidate) => {
-          candidate.classList.add('check-answer-hide');
-        });
-
         TweenLite.to(this.draggedHead.nextElementSibling, 0.8, {
           opacity: 0,
           ease: Power2.easeInOut,
         });
-        TweenLite.to('.check-answer-hide', 0.8, {
-          opacity: 0,
-          ease: Power2.easeInOut,
-          onComplete: () => {
-            this.checkAnswerDynamic();
-          },
-        });
+
+        if (this.draggedHead.dataset.name === this.test.answerName) {
+          TweenLite.to(`#correct-stroke--${this.test.id}`, 0.8, {
+            strokeDashoffset: 0,
+            ease: Power2.easeInOut,
+          });
+          // TweenLite.to(`#correct-fill--${this.test.id}`, 0.8, {
+          //   opacity: 1,
+          //   ease: Power2.easeInOut,
+          //   delay: 0.8,
+          // });
+          TweenLite.to(`#tick--${this.test.id}`, 0.8, {
+            strokeDashoffset: 0,
+            ease: Power2.easeInOut,
+            // delay: 1.6,
+            delay: 0.8,
+            onComplete: () => {
+              this.switchQuestionToAnswer();
+            },
+          });
+        } else {
+          TweenLite.to(`#incorrect-stroke--${this.test.id}`, 0.8, {
+            strokeDashoffset: 0,
+            ease: Power2.easeInOut,
+          });
+          TweenLite.to(`#incorrect-fill--${this.test.id}`, 0.8, {
+            opacity: 1,
+            ease: Power2.easeInOut,
+            delay: 0.8,
+          });
+          TweenLite.to(`#cross-left--${this.test.id}`, 0.4, {
+            strokeDashoffset: 0,
+            ease: Power2.easeInOut,
+            delay: 1.6,
+            // delay: 0.8,
+          });
+          TweenLite.to(`#cross-right--${this.test.id}`, 0.4, {
+            strokeDashoffset: 0,
+            ease: Power2.easeInOut,
+            delay: 2,
+            // delay: 1.2,
+            onComplete: () => {
+              this.switchQuestionToAnswer();
+            },
+          });
+        }
       } else {
         TweenLite.to(this.draggedHead, 0.2, {
           x: 0,
@@ -332,65 +355,6 @@ export default {
       this.draggedHead.style.zIndex = 'auto';
       this.draggedHeadTotalMoveX = 0;
       this.draggedHeadTotalMoveY = 0;
-    },
-    checkAnswerDynamic() {
-      // correct
-      if (this.draggedHead.dataset.name === this.test.answerName) {
-        TweenLite.to(`#correct-stroke--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-        });
-        TweenLite.to(`#tick--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 0.8,
-          onComplete: () => {
-            this.switchQuestionToAnswer();
-          },
-        });
-      // incorrect
-      } else {
-        TweenLite.to(`#incorrect-stroke--${this.test.id}`, 0.8, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-        });
-        TweenLite.to(`#cross-left--${this.test.id}`, 0.4, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 0.8,
-        });
-        TweenLite.to(`#cross-right--${this.test.id}`, 0.4, {
-          strokeDashoffset: 0,
-          ease: Power2.easeInOut,
-          delay: 1.2,
-          onComplete: () => {
-            this.switchQuestionToAnswer();
-          },
-        });
-      }
-    },
-    switchQuestionToAnswer() {
-      TweenLite.set(`#answer-head--${this.test.id}`, {
-        opacity: 1,
-        delay: 0.5,
-      });
-      TweenLite.to(`#answer-head--${this.test.id}`, 0.4, {
-        x: '-50%',
-        y: -248,
-        scale: 2,
-        ease: Back.easeOut.config(1),
-        delay: 0.5,
-        onStart: () => {
-          this.hideForAnswerPop = true;
-          this.draggedHead.style.display = 'none';
-          this.isAnswerShow = true;
-        },
-      });
-      TweenLite.from(`#answer-text--${this.test.id}`, 0.4, {
-        y: 200,
-        ease: Back.easeOut.config(1),
-        delay: 0.5,
-      });
     },
     checkDraggedHeadInDropRange() {
       const draggedHeadRect = this.draggedHead.getBoundingClientRect();
@@ -420,6 +384,29 @@ export default {
         this.isDraggedHeadMatchDrop = false;
       }
     },
+    switchQuestionToAnswer() {
+      this.isAnswerShow = true;
+      TweenLite.from(`#answer-head--${this.test.id}`, 0.4, {
+        scaleX: 0,
+        scaleY: 0,
+        ease: Back.easeOut.config(1),
+      });
+      TweenLite.from(`#answer-text--${this.test.id}`, 0.4, {
+        y: '50%',
+        // y: this.htmlEle.clientHeight,
+        // opacity: 0,
+        ease: Power4.easeOut,
+      });
+      TweenLite.to(`#question--${this.test.id}`, 0.4, {
+        y: '100%',
+        // y: this.htmlEle.clientHeight,
+        // opacity: 0,
+        ease: Power4.easeOut,
+        onComplete: () => {
+          this.isQuestionHide = false;
+        },
+      });
+    },
   },
 };
 </script>
@@ -438,9 +425,9 @@ export default {
 }
 .check-fill {
   stroke: none;
-  // fill: #efefef;
-  // opacity: 0;
-  fill: none;
+  fill: #efefef;
+  opacity: 0;
+  // fill: none;
 }
 
 .check-mark {
@@ -479,8 +466,6 @@ export default {
   // flex-shrink: 0;
   box-sizing: border-box;
   &-answer {
-    top: 279px;
-
     position: absolute;
     width: 100%;
     // width: 375px;
@@ -497,7 +482,8 @@ export default {
     }
     & img {
       // width: 100%;
-      width: 80%;
+      // width: 80%;
+      width: 60%;
       transform-origin: center bottom;
     }
     & h2 {
@@ -541,14 +527,6 @@ export default {
         }
       }
     }
-    &__answer-head {
-      position: absolute;
-      width: 80px;
-      // left: 0;
-      opacity: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
     & h2 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -560,8 +538,6 @@ export default {
       width: 86px;
       height: 86px;
       @include align-center;
-      // left: 50%;
-      // transform: translateX(-50%);
       z-index: 9;
       // top: 0;
       // left: 50%;
@@ -572,13 +548,9 @@ export default {
       margin-bottom: 35px;
       text-align: center;
       opacity: 0;
-      // width: 80px;
-      margin-left: auto;
-      margin-right: auto;
-      // & img {
-        // position: relative;
-        // z-index: -9;
-        // width: 100%;
+      // &-head {
+      //   position: relative;
+      //   z-index: -9;
       // }
       &-prompt {
         position: absolute;
@@ -589,23 +561,11 @@ export default {
         user-select: none;
       }
     }
-    &__head {
+    &__drop-place-head, &__candidate-head {
       width: 80px;
       // height: auto;
       border-radius: 50%;
       box-sizing: border-box;
-      &--candidate {
-        border: 1px solid #d5d4d4;
-        margin-bottom: 5px;
-        // position: relative;
-        // position: absolute;
-        // top: 0;
-        background-color: #fff;
-        cursor: pointer;
-        @supports (cursor: grab) {
-          cursor: grab;
-        }
-      }
     }
     &__candidate {
       position: relative;
@@ -615,6 +575,18 @@ export default {
       // padding-top: 85px;
       & > div {
         transform: translateX(375px);
+      }
+      &-head {
+        border: 1px solid #d5d4d4;
+        margin-bottom: 5px;
+        // position: relative;
+        // position: absolute;
+        top: 0;
+        background-color: #fff;
+        cursor: pointer;
+        @supports (cursor: grab) {
+          cursor: grab;
+        }
       }
       // &-name {
       //   text-align: center;
