@@ -12,8 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4="
     crossorigin="anonymous" />
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" integrity="sha256-AJvwDTgx+2JZWtsg4XDtKI2KFXST+2AosYiLBYde2PM=" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" integrity="sha256-AJvwDTgx+2JZWtsg4XDtKI2KFXST+2AosYiLBYde2PM=" crossorigin="anonymous"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js" integrity="sha256-LoCg++4tsi5AciTHK9ObksOjA7sjIcHtkayFvaUD/0c=" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/easing/EasePack.min.js" integrity="sha256-odoo0v0NZMOKcTDOsXexs9o8eYHVEktwoZfRsT9k3wc=" crossorigin="anonymous"></script> -->
 
   <!-- google analytic -->
   <!-- <script>
@@ -47,8 +48,19 @@
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
   <div id="app"></div>
-  <!-- built files will be auto injected -->
 </body>
 
 </html>

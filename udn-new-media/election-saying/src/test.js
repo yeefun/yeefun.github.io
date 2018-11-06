@@ -2,6 +2,8 @@
 import {
   TweenLite, Power2, Power4, Back,
 } from 'gsap/TweenMax';
+// import TweenLite, { Power2, Power4 } from 'gsap/TweenLite';
+// import { Back } from 'gsap/EasePack';
 
 export default {
   computed: {
@@ -21,6 +23,7 @@ export default {
   methods: {
     setDroppedHeadOffset(vm) {
       const droppedHeadRect = vm.$refs.droppedHead.getBoundingClientRect();
+      // console.log(droppedHeadRect.top, vm.windowEle.pageYOffset);
       vm.droppedHeadOffsetTop = droppedHeadRect.top + vm.windowEle.pageYOffset;
       vm.droppedHeadOffsetLeft = droppedHeadRect.left + vm.windowEle.pageXOffset;
     },
@@ -33,59 +36,62 @@ export default {
       }, 600);
     },
     slideInDynamic(vm) {
-      vm.setDroppedHeadOffset();
+      // vm.setDroppedHeadOffset();
       window.addEventListener('resize', vm.resizeHandler);
-      TweenLite.to(`#candidate1--${vm.test.id}`, 0.4, {
+      // console.lotestg(vm.test.id);
+      TweenLite.to(`#candidate1--test${vm.test.id}`, 0.4, {
         x: 0,
         ease: Back.easeOut.config(1.4),
       });
-      TweenLite.to(`#candidate2--${vm.test.id}`, 0.3, {
+      TweenLite.to(`#candidate2--test${vm.test.id}`, 0.3, {
         x: 0,
         ease: Back.easeOut.config(1.4),
         delay: 0.1,
       });
-      TweenLite.to(`#candidate3--${vm.test.id}`, 0.2, {
+      TweenLite.to(`#candidate3--test${vm.test.id}`, 0.2, {
         x: 0,
         ease: Back.easeOut.config(1.4),
         delay: 0.2,
       });
-      TweenLite.to(`#candidate4--${vm.test.id}`, 0.1, {
+      TweenLite.to(`#candidate4--test${vm.test.id}`, 0.1, {
         x: 0,
         ease: Back.easeOut.config(1.4),
         delay: 0.3,
         onComplete: () => {
+          vm.setDroppedHeadOffset();
           vm.typeQuotation();
         },
       });
     },
     typeQuotation(vm) {
-      TweenLite.set(`#quotation-mark-top--${vm.test.id}, #quotation-mark-bottom--${vm.test.id}`, {
+      TweenLite.set(`#quotation-mark-top--test${vm.test.id}, #quotation-mark-bottom--test${vm.test.id}`, {
         opacity: 1,
       });
-      const quotation = document.getElementById(`quotation--${vm.test.id}`);
+      const quotation = document.getElementById(`quotation--test${vm.test.id}`);
       const splitSaying = vm.test.saying.split('');
       let sayingStr = '';
       let idx = 0;
-      let delay = 120;
+      let delay = 100;
       const typeSaying = () => {
         vm.typeSayingTimer = setTimeout(() => {
           sayingStr += splitSaying[idx];
           quotation.textContent = sayingStr;
-          if (idx !== 3) {
-            if (idx > 3 && idx < splitSaying.length - 5) {
-              delay = 80;
-            } else {
-              delay = 120;
-            }
-          } else {
-            delay = 200;
-          }
+          delay = Math.floor(Math.random() * (100 - 50 + 1) + 50);
+          // if (idx !== 3) {
+          //   if (idx > 3 && idx < splitSaying.length - 5) {
+          //     delay = 80;
+          //   } else {
+          //     delay = 120;
+          //   }
+          // } else {
+          //   delay = 200;
+          // }
           idx += 1;
           if (idx !== splitSaying.length) {
             typeSaying();
           } else {
             clearTimeout(vm.typeSayingTimer);
-            TweenLite.to(`#drop-place--${vm.test.id}`, 0.4, {
+            TweenLite.to(`#drop-place--test${vm.test.id}`, 0.4, {
               opacity: 1,
               ease: Power2.easeIn,
               onComplete: () => {
@@ -111,7 +117,7 @@ export default {
       vm.mouseX = evt.pageX;
       vm.mouseY = evt.pageY;
 
-      vm.draggedHead.style.zIndex = '99';
+      vm.draggedHead.parentNode.style.zIndex = '99';
 
       document.addEventListener('mousemove', vm.mouseDragging);
       // can't bind vm event to vm.draggedHead
@@ -138,7 +144,7 @@ export default {
     mouseDrop(evt, vm) {
       evt.preventDefault();
       vm.headDropped();
-      vm.draggedHead.style.zIndex = 'auto';
+      // vm.draggedHead.parentNode.style.zIndex = 'auto';
 
       document.removeEventListener('mousemove', vm.mouseDragging);
       document.removeEventListener('mouseup', vm.mouseDrop);
@@ -157,7 +163,7 @@ export default {
       vm.touchX = evt.touches[0].pageX;
       vm.touchY = evt.touches[0].pageY;
 
-      vm.draggedHead.style.zIndex = '99';
+      vm.draggedHead.parentNode.style.zIndex = '99';
 
       vm.draggedHead.addEventListener('touchmove', vm.touchDragging);
       vm.draggedHead.addEventListener('touchend', vm.touchDrop);
@@ -218,6 +224,7 @@ export default {
           opacity: 0,
           ease: Power2.easeInOut,
           onComplete: () => {
+            vm.draggedHead.parentNode.style.zIndex = 'auto';
             vm.checkAnswerDynamic();
           },
         });
@@ -227,21 +234,24 @@ export default {
           y: 0,
           scale: 1,
           ease: Power4.easeOut,
+          onComplete: () => {
+            vm.draggedHead.parentNode.style.zIndex = 'auto';
+          },
         });
       }
 
-      vm.draggedHead.style.zIndex = 'auto';
+      // vm.draggedHead.parentNode.style.zIndex = 'auto';
       vm.draggedHeadTotalMoveX = 0;
       vm.draggedHeadTotalMoveY = 0;
     },
     checkAnswerDynamic(vm) {
       // correct
       if (vm.draggedHead.dataset.name === vm.test.answerName) {
-        TweenLite.to(`#correct-stroke--${vm.test.id}`, 0.8, {
+        TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.8, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
         });
-        TweenLite.to(`#tick--${vm.test.id}`, 0.8, {
+        TweenLite.to(`#tick--test${vm.test.id}`, 0.8, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
           delay: 0.8,
@@ -251,16 +261,16 @@ export default {
         });
         // incorrect
       } else {
-        TweenLite.to(`#incorrect-stroke--${vm.test.id}`, 0.8, {
+        TweenLite.to(`#incorrect-stroke--test${vm.test.id}`, 0.8, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
         });
-        TweenLite.to(`#cross-left--${vm.test.id}`, 0.4, {
+        TweenLite.to(`#cross-left--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
           delay: 0.8,
         });
-        TweenLite.to(`#cross-right--${vm.test.id}`, 0.4, {
+        TweenLite.to(`#cross-right--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
           delay: 1.2,
@@ -271,11 +281,11 @@ export default {
       }
     },
     switchQuestionToAnswer(vm) {
-      TweenLite.set(`#answer-head--${vm.test.id}`, {
+      TweenLite.set(`#answer-head--test${vm.test.id}`, {
         opacity: 1,
         delay: 0.5,
       });
-      TweenLite.to(`#answer-head--${vm.test.id}`, 0.4, {
+      TweenLite.to(`#answer-head--test${vm.test.id}`, 0.4, {
         x: '-50%',
         y: -248,
         scale: 2,
@@ -287,11 +297,22 @@ export default {
           vm.isAnswerShow = true;
         },
       });
-      TweenLite.from(`#answer-text--${vm.test.id}`, 0.4, {
+      TweenLite.from(`#answer-text--test${vm.test.id}`, 0.4, {
         y: 200,
         ease: Back.easeOut.config(1),
         delay: 0.5,
       });
+
+      if (vm.draggedHead.dataset.name === vm.test.answerName) {
+        TweenLite.to(`#stage-correct--test${vm.test.id}`, 0.4, {
+          scale: 1,
+          ease: Back.easeOut.config(1.7),
+          delay: 0.5,
+          onStart: () => {
+            document.getElementById(`stage-num--test${vm.test.id}`).classList.add('correct');
+          },
+        });
+      }
     },
     checkDraggedHeadInDropRange(vm) {
       const draggedHeadRect = vm.draggedHead.getBoundingClientRect();
@@ -316,6 +337,17 @@ export default {
         });
         vm.isDraggedHeadMatchDrop = false;
       }
+    },
+    slideToNextTestPage(vm, testId) {
+      document.getElementById(`stage-num--${testId}`).classList.add('active');
+      TweenLite.to('#test-wrapper', 0.3, {
+        x: '-=100%',
+        ease: Back.easeIn.config(1.4),
+        onComplete: () => {
+          vm.isTestShow = false;
+          vm.$parent.$refs[testId][0].slideInDynamic();
+        },
+      });
     },
   },
 };

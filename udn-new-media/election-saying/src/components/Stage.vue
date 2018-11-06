@@ -1,9 +1,14 @@
 <template>
   <section class="stage">
     <div class="stage-wrapper">
-      <div class="stage__squre">
-        <div class="stage__num active">
-          <!-- <div class="stage__correct"></div> -->
+      <div class="stage__squre" v-for="(num, idx) in 7" :key="idx">
+        <div class="stage__num" :id="`stage-num--test${idx + 1}`" :class="idx === 0 ? 'active': ''">
+          <div class="stage__correct-mark" :id="`stage-correct--test${idx + 1}`"></div>
+          <p>{{ num }}</p>
+        </div>
+      </div>
+      <!-- <div class="stage__squre">
+        <div class="stage__num" :class="{ active: stages[0] }">
           <p>1</p>
         </div>
       </div>
@@ -15,34 +20,29 @@
       </div>
       <div class="stage__squre">
         <div class="stage__num active">
-          <!-- <div class="stage__correct"></div> -->
           <p>3</p>
         </div>
       </div>
       <div class="stage__squre">
         <div class="stage__num">
-          <!-- <div class="stage__correct"></div> -->
           <p>4</p>
         </div>
       </div>
       <div class="stage__squre">
         <div class="stage__num">
-          <!-- <div class="stage__correct"></div> -->
           <p>5</p>
         </div>
       </div>
       <div class="stage__squre">
         <div class="stage__num">
-          <!-- <div class="stage__correct"></div> -->
           <p>6</p>
         </div>
       </div>
       <div class="stage__squre">
         <div class="stage__num">
-          <!-- <div class="stage__correct"></div> -->
           <p>7</p>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../css/mixin.scss';
+// @import '../css/mixin.scss';
 
 .stage {
   // width: 375px;
@@ -83,17 +83,25 @@ export default {
     background-color: #fff;
     border: 1px solid #dcdddd;
     position: relative;
+    height: 38px;
+    box-sizing: border-box;
+    // transition: color
   }
   &__correct-mark {
     background-color: #d14033;
     width: 25px;
     height: 25px;
     border-radius: 50%;
+    top: 50%;
+    left: 50%;
     position: absolute;
-    @include align-center;
+    // @include align-center;
+    transform: translate(-50%, -50%) scale(0);
+    // transform-origin: center;
   }
   & p {
     position: relative;
+    line-height: 38px;
     // transform: translateY(1px);
   }
   & .active {

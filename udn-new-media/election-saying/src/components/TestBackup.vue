@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import {
-  TweenLite, Power2, Power4, Back,
-} from 'gsap/TweenMax';
+// import {
+//   TweenLite, Power2, Power4, Back,
+// } from 'gsap/TweenMax';
 
 export default {
   name: 'Test',
