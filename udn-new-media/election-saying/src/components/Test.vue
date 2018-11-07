@@ -7,8 +7,9 @@
           <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
           <h2>{{ test.saying }}</h2>
           <p>{{ test.context }}</p>
-          <button type="button" @click="slideToNextTestPage(`test${test.id + 1}`)" @touchstart.prevent="slideToNextTestPage(`test${test.id + 1}`)">{{ test.id !== 7 ? '下一題' : '看結果' }}</button>
-          <!-- <slot></slot> -->
+
+          <button v-if="test.id !== 7" type="button" @click="slideToNextTestPage(`test${test.id + 1}`)" @touchstart.prevent="slideToNextTestPage(`test${test.id + 1}`)">下一題</button>
+          <button type="button" v-else @click="slideToResult" @touchstart.prevent="slideToResult">看結果</button>
         </div>
       </section>
       <!-- <section class="test-question" v-if="false"> -->
@@ -26,10 +27,9 @@
 
           <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
             <g transform="translate(-19 -398)">
-              <g class="cls-1" transform="translate(19 398)">
-                <!-- <circle class="check-fill" :id="`correct-fill--test${test.id}`" cx="43" cy="43" r="43"/> -->
+              <g transform="translate(19 398)">
                 <circle class="check-fill" cx="43" cy="43" r="43"/>
-                <circle class="check-stroke" :id="`correct-stroke--test${test.id}`" cx="43" cy="43" r="41.5"/>
+                <circle class="check-stroke" :id="`correct-stroke--test${test.id}`" cx="43" cy="43" r="41.5" transform="rotate(-90)"/>
               </g>
               <path class="check-mark check-mark--tick" :id="`tick--test${test.id}`" d="M36.082,1221.95l15.807,15.832,31.615-32.3" transform="translate(4 -781)"/>
             </g>
@@ -38,9 +38,8 @@
           <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
             <g transform="translate(-113 -398)">
               <g transform="translate(113 398)">
-                <!-- <circle class="check-fill" :id="`incorrect-fill--test${test.id}`" cx="43" cy="43" r="43"/> -->
                 <circle class="check-fill" cx="43" cy="43" r="43"/>
-                <circle class="check-stroke" :id="`incorrect-stroke--test${test.id}`" cx="43" cy="43" r="41.5"/>
+                <circle class="check-stroke" :id="`incorrect-stroke--test${test.id}`" cx="43" cy="43" r="41.5" transform="rotate(-90)"/>
               </g>
               <path class="check-mark check-mark--cross" :id="`cross-right--test${test.id}`" d="M149,1182.4v48.783" transform="translate(903.972 -517.898) rotate(45)"/>
               <path class="check-mark check-mark--cross" :id="`cross-left--test${test.id}`" d="M149,1182.4v48.783" transform="translate(-802.69 -307.18) rotate(-45)"/>
@@ -109,8 +108,8 @@ export default {
     resizeHandler() {
       this.$test.methods.resizeHandler(this);
     },
-    slideInDynamic() {
-      this.$test.methods.slideInDynamic(this);
+    testSlideInDynamic() {
+      this.$test.methods.testSlideInDynamic(this);
     },
     typeQuotation() {
       this.$test.methods.typeQuotation(this);
@@ -148,6 +147,9 @@ export default {
     slideToNextTestPage(testId) {
       this.$test.methods.slideToNextTestPage(this, testId);
     },
+    slideToResult(evt) {
+      this.$test.methods.slideToResult(evt, this);
+    },
   },
 };
 </script>
@@ -161,7 +163,7 @@ export default {
   stroke-width: 3px;
   stroke-dasharray: 260.8;
   stroke-dashoffset: 260.8;
-  transform: rotate(-90deg);
+  // transform: rotate(-90deg);
   transform-origin: center;
 }
 .check-fill {
@@ -200,6 +202,7 @@ export default {
   padding-left: 20px;
   font-size: 2rem;
   position: relative;
+  // height: 627px;
   // width: 100%;
   // flex: 0 0 100%;
   min-width: 100%;
@@ -208,7 +211,9 @@ export default {
   box-sizing: border-box;
   &-answer {
     top: 279px;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
 
     position: absolute;
     width: 100%;
@@ -250,6 +255,7 @@ export default {
       width: 190px;
       height: 32px;
       background-color: #000;
+      line-height: 32px;
       /* line-height: 2.2; */
       font-size: 15px;
     }
@@ -291,6 +297,7 @@ export default {
       line-height: 1.4;
     }
     svg {
+      overflow: hidden;
       fill: none;
       position: absolute;
       width: 86px;

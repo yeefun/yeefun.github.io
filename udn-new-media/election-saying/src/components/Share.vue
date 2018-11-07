@@ -3,7 +3,10 @@
     <div class="share__fb-like-wrapper">
       <div class="fb-like" data-href="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
     </div>
-    <div @click="lineShare">
+    <!-- <div @click="lineShare">
+      <img class="line-share" src="//media.line.me/img/button/zh-hant/84x20.png" alt="LINE分享給朋友" width="84" height="20">
+    </div> -->
+    <div>
       <img class="line-share" src="//media.line.me/img/button/zh-hant/84x20.png" alt="LINE分享給朋友" width="84" height="20">
     </div>
   </section>
@@ -36,7 +39,7 @@ export default {
 .share {
   display: flex;
   height: 20px;
-  // margin-bottom: 48px;
+  margin-bottom: 15px;
   &__fb-like-wrapper {
     margin-right: 8px;
   }

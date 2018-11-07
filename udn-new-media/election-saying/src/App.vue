@@ -6,9 +6,9 @@
         <Stage></Stage>
         <div class="test-wrapper" id="test-wrapper">
           <Test v-for="test in tests" :key="`test${test.id}`" :test="test" :ref="`test${test.id}`"></Test>
-          <TestOutput></TestOutput>
         </div>
       </div>
+      <Result ref="result"></Result>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
 
 import Stage from './components/Stage.vue';
 import Cover from './components/Cover.vue';
-import TestOutput from './components/TestOutput.vue';
+import Result from './components/Result.vue';
 import Test from './components/Test.vue';
 
 import houImgAnswer from './assets/Candidates/hou--answer.png';
@@ -50,10 +50,12 @@ export default {
     Cover,
     Stage,
     Test,
-    TestOutput,
+    Result,
   },
   data() {
     return {
+      scores: 0,
+      // tests:
       tests: [{
         id: 1,
         saying: '升旗是我心目中日常的工作，已經內化在心裡。',
@@ -140,6 +142,7 @@ export default {
 html, body {
   // height: 100%;
   background-color: #eee;
+  // overflow: hidden;
 }
 
 html {
@@ -151,6 +154,7 @@ html {
   background-color: #fff;
   // height: 100%;
   max-width: 392px;
+  // height: 627px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
@@ -161,10 +165,12 @@ html {
 .total-container {
   display: flex;
   position: relative;
+  // height: 627px;
 }
 
 .test-container {
   padding-bottom: 30px;
+  // height: 627px;
   // width: 100%;
   // flex: 0 0 100%;
   // CONFUSED
@@ -173,6 +179,7 @@ html {
 
 .test-wrapper {
   display: flex;
+  // height: 627px;
   // position: relative;
 }
 
@@ -206,6 +213,18 @@ button {
   border-radius: 100px;
   color: #fff;
   user-select: none;
+}
+
+.primary-btn {
+  height: 40px;
+  font-size: 2rem;
+  background-color: #d14033;
+  line-height: 40px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #c64033;
+    opacity: 0.6;
+  }
 }
 
 a {

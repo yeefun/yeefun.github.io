@@ -25,7 +25,7 @@
         <h1>這些爆紅名言<br>是誰說的？</h1>
         <p>九合一選舉即將到來，各候選人過去曾說過的爆紅名言也被拿出來檢驗。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！</p>
         <!-- <slot></slot> -->
-        <button type="button" @touchstart.prevent="slideToFirstTestPage" @click="slideToFirstTestPage">開始</button>
+        <button class="primary-btn" type="button" @touchstart.prevent="slideToFirstTestPage" @click="slideToFirstTestPage">開始</button>
       </div>
     </div>
   </section>
@@ -47,11 +47,12 @@ export default {
   methods: {
     slideToFirstTestPage() {
       TweenLite.to('#total-container', 0.3, {
-        x: '-100%',
+        x: '-=100%',
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           this.isCoverShow = false;
-          this.$parent.$refs.test1[0].slideInDynamic();
+          this.$parent.$refs.test1[0].testSlideInDynamic();
+          // this.$parent.$refs.test7[0].testSlideInDynamic();
         },
       });
     },
@@ -116,19 +117,13 @@ export default {
   & img {
     width: 100%;
   }
-  & button {
-    // height: 41px;
-    height: 40px;
-    font-size: 2rem;
-    // font-weight: 300;
-    background-color: #d14033;
-    transition: all 0.3s;
-    // line-height: 1.65;
-    &:hover {
-      background-color: #c64033;
-      opacity: 0.6;
-    }
-  }
+  // & button {
+  //   transition: all 0.3s;
+  //   &:hover {
+  //     background-color: #c64033;
+  //     opacity: 0.6;
+  //   }
+  // }
   & svg {
     margin-left: 8px;
     // margin-left: 12px;

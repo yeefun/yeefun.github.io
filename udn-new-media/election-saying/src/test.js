@@ -35,7 +35,7 @@ export default {
         vm.setDroppedHeadOffset();
       }, 600);
     },
-    slideInDynamic(vm) {
+    testSlideInDynamic(vm) {
       // vm.setDroppedHeadOffset();
       window.addEventListener('resize', vm.resizeHandler);
       // console.lotestg(vm.test.id);
@@ -247,6 +247,7 @@ export default {
     checkAnswerDynamic(vm) {
       // correct
       if (vm.draggedHead.dataset.name === vm.test.answerName) {
+        vm.$parent.scores += 1;
         TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.8, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
@@ -345,7 +346,37 @@ export default {
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           vm.isTestShow = false;
-          vm.$parent.$refs[testId][0].slideInDynamic();
+          vm.$parent.$refs[testId][0].testSlideInDynamic();
+        },
+      });
+    },
+    slideToResult(evt, vm) {
+      if (vm.$parent.scores <= 2) {
+        vm.$parent.$refs.result.isReaderSoso = false;
+      } else if (vm.$parent.scores >= 7) {
+        vm.$parent.$refs.result.isReaderSoso = false;
+        vm.$parent.$refs.result.isReaderBad = false;
+      }
+
+      TweenLite.to(evt.currentTarget, 0.5, {
+        opacity: 0,
+        ease: Power2.easeOut,
+        // onStart: () => {
+        //   if (vm.$parent.scores <= 2) {
+        //     vm.$parent.$refs.result.isReaderSoso = false;
+        //   } else if (vm.$parent.scores >= 7) {
+        //     vm.$parent.$refs.result.isReaderSoso = false;
+        //     vm.$parent.$refs.result.isReaderBad = false;
+        //   }
+        // },
+      });
+      TweenLite.to('#total-container', 0.3, {
+        x: '-=100%',
+        ease: Back.easeIn.config(1.4),
+        delay: 0.5,
+        onComplete: () => {
+          vm.isTestShow = false;
+          vm.$parent.$refs.result.resultSlideInDynamic();
         },
       });
     },
