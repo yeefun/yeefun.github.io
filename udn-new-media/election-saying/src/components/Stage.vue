@@ -1,7 +1,7 @@
 <template>
   <section class="stage">
     <div class="stage-wrapper">
-      <div class="stage__squre" v-for="(num, idx) in 7" :key="idx">
+      <div class="stage__squre" v-for="(num, idx) in 6" :key="idx">
         <div class="stage__num" :id="`stage-num--test${idx + 1}`" :class="idx === 0 ? 'active': ''">
           <div class="stage__correct-mark" :id="`stage-correct--test${idx + 1}`"></div>
           <p>{{ num }}</p>
@@ -72,11 +72,12 @@ export default {
   }
   &__squre {
     box-sizing: border-box;
-    width: calc(100% / 7);
+    // width: calc(100% / 6);
+    width: 13.8%;
     text-align: center;
     // background-color: #fff;
-    padding-right: 1px;
-    padding-left: 1px;
+    // padding-right: 1px;
+    // padding-left: 1px;
     // position: relative;
   }
   &__num {

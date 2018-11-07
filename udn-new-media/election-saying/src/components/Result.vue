@@ -1,6 +1,6 @@
 <template>
-  <section class="result" id="result">
-
+  <section class="result" id="result" v-if="isResultShow">
+    <HeadBar></HeadBar>
     <template v-if="isReaderSoso">
       <img src="../assets/TestOutput/soso.png" alt="">
       <div class="result__text">
@@ -9,7 +9,7 @@
         </h2>
         <Share></Share>
         <h3>你不關心政治，政治會來關心你。</h3>
-        <p>你的腦中內建候選人金句資料庫，蒐羅各候選人的經典語錄，選戰新聞達人非你莫屬！</p>
+        <p>選舉只是一時的，關心政治卻是一輩子的功課。關注政治大小事，確保自己的權益不受損。</p>
         <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button>
       </div>
     </template>
@@ -22,7 +22,7 @@
         </h2>
         <Share></Share>
         <h3>問世間，選舉為何物？</h3>
-        <p>不論是柯文哲的經典語錄，還是韓國瑜的霸氣名言，選戰的喧鬧只要到你身邊就會立刻消音。</p>
+        <p>不論是柯文哲的經典語錄，還是韓國瑜的名言，選戰的喧鬧只要到你身邊就會立刻消音。</p>
         <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button>
       </div>
     </template>
@@ -47,15 +47,18 @@
 import {
   TweenLite, Power2,
 } from 'gsap/TweenMax';
+import HeadBar from './HeadBar.vue';
 import Share from './Share.vue';
 
 export default {
   name: 'Result',
   components: {
+    HeadBar,
     Share,
   },
   data() {
     return {
+      isResultShow: false,
       isReaderSoso: true,
       isReaderBad: true,
       resultNames: ['選舉觀測員', '政治絕緣體', '選戰新聞達人'],

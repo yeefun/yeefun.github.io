@@ -1,9 +1,8 @@
 <template>
-  <section class="cover">
-    <div v-if="isCoverShow">
-      <HeadBar></HeadBar>
-      <!-- <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
-        <svg viewBox="0 0 272.1 266.5">
+  <section class="head-bar">
+    <div class="head-bar__editor-list"></div>
+    <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
+      <svg viewBox="0 0 272.1 266.5">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>
         <path d="M87.9,224.8c-3.4,2-12.6,10.7-21.1,19.1a130.2,130.2,0,0,0,15.6,8.4c5.7-6.5,11.1-13.1,13.2-17.3C99.3,227.2,91.9,222.5,87.9,224.8Z"/>
         <path d="M67.5,183.2c-5-4.3-5.1-5.5-9.9-2.7s-4.6,1.6-5.8,2.7-15.6,15.2-18.2,17.7l-5.7,5.3a131,131,0,0,0,8.6,11.3c3.9-4.1,8.7-8.8,11.4-11.3s8.6-8.7,11.1-9.4,3.4-.9,7.1-3.9S72.5,187.6,67.5,183.2Z"/>
@@ -17,130 +16,41 @@
         <path d="M180.5,38.5c-2.1-1.7-6.6-6.6-8.2-7.3s-5.3-1-6.7-.1l-6.6,4.5a18.2,18.2,0,0,0-5.2,7.5c-0.8,2.8,1,6.6,2.6,9.2s3.7,7.3,8.4,4.7,13.5-11.5,15.3-13.1S182.7,40.3,180.5,38.5Z"/>
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
-      </a> -->
-      <img src="../assets/cover-background.png" alt="">
-      <div class="cover__text-wrapper">
-        <h2>
-          <div>候選人金句連連看</div>
-        </h2>
-        <h1>這些政策是誰提的？</h1>
-        <p>九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！</p>
-        <!-- <slot></slot> -->
-        <button class="primary-btn" type="button" @touchstart.prevent="slideToFirstTestPage" @click="slideToFirstTestPage">開始</button>
-      </div>
-    </div>
+    </a>
   </section>
 </template>
 
 <script>
-import {
-  TweenLite, Back,
-} from 'gsap/TweenMax';
-import HeadBar from './HeadBar.vue';
-
-
 export default {
-  name: 'Cover',
-  components: {
-    HeadBar,
-  },
-  data() {
-    return {
-      isCoverShow: true,
-    };
-  },
-  methods: {
-    slideToFirstTestPage() {
-      TweenLite.to('#total-container', 0.3, {
-        x: '-=100%',
-        ease: Back.easeIn.config(1.4),
-        onComplete: () => {
-          this.isCoverShow = false;
-          this.$parent.$refs.test1[0].testSlideInDynamic();
-          // this.$parent.$refs.test7[0].testSlideInDynamic();
-        },
-      });
-    },
-  },
+  name: 'HeadBar',
 };
 </script>
 
 <style lang="scss">
-@import '../css/mixin.scss';
-
-.cover {
-  flex: 0 0 100%;
-  // width: 100%;
-  // flex-shrink: 0;
-  // padding-right: 20px;
-  // padding-left: 20px;
-  // padding-top: 8px;
-  box-sizing: border-box;
-  &__text-wrapper {
-    transform: translateY(-30px);
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-  & h2 {
-    width: 136px;
-    border: 0.5px solid #707070;
-    font-size: 1.3rem;
-    // font-weight: 300;
-    // line-height: 2.54;
-    text-align: center;
-    box-sizing: border-box;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: #fff;
-    transform: translateY(-8px);
-    margin-bottom: 2px;
-    & > div {
-      width: 130px;
-      height: 24px;
-      border: 0.5px solid #707070;
-      line-height: 24px;
-      box-sizing: border-box;
+.head-bar {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+  margin-bottom: 22px;
+  padding: 5px 5px 5px 10px;
+  // &__editor-list {
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   z-index: 9;
+  // }
+  & svg {
+    // margin-left: 8px;
+    // margin-left: 12px;
+    // margin-bottom: 6px;
+    width: 33.69px;
+    height: 33px;
+    // cursor: pointer;
+    fill: #040000;
+    transition: transform 0.5s;
+    &:hover {
+      transform: rotate(15deg);
     }
   }
-  & h1 {
-    font-size: 3.5rem;
-    line-height: 1.14;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  & p {
-    font-size: 2rem;
-    line-height: 1.25;
-    // font-weight: 300;
-    margin-bottom: 30px;
-  }
-  & img {
-    width: 100%;
-  }
-  // & button {
-  //   transition: all 0.3s;
-  //   &:hover {
-  //     background-color: #c64033;
-  //     opacity: 0.6;
-  //   }
-  // }
-  // & svg {
-  //   margin-left: 8px;
-  //   // margin-left: 12px;
-  //   margin-bottom: 6px;
-  //   width: 33.69px;
-  //   height: 33px;
-  //   // cursor: pointer;
-  //   fill: #040000;
-  //   transition: transform 0.5s;
-  //   &:hover {
-  //     transform: rotate(15deg);
-  //   }
-  // }
 }
 </style>

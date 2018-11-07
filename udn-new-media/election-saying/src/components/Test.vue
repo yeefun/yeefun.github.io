@@ -1,14 +1,14 @@
 <template>
   <article class="test">
-    <div v-if="isTestShow">
+    <div v-if="test.id !== 1 ? isTestShow : !isTestShow">
       <section class="test-answer" v-show="isAnswerShow">
         <!-- <img :id="`answer-head--test${test.id}`" :src="test.answerImg" alt=""> -->
         <div :id="`answer-text--test${test.id}`">
           <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
           <h2>{{ test.saying }}</h2>
-          <p>{{ test.context }}</p>
+          <p v-html="test.context"></p>
 
-          <button v-if="test.id !== 7" type="button" @click="slideToNextTestPage(`test${test.id + 1}`)" @touchstart.prevent="slideToNextTestPage(`test${test.id + 1}`)">下一題</button>
+          <button v-if="test.id !== 6" type="button" @click="slideToNextTestPage" @touchstart.prevent="slideToNextTestPage">下一題</button>
           <button type="button" v-else @click="slideToResult" @touchstart.prevent="slideToResult">看結果</button>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default {
   props: ['test'],
   data() {
     return {
-      isTestShow: true,
+      isTestShow: false,
       mouseX: 0,
       mouseY: 0,
       touchX: 0,
@@ -144,8 +144,8 @@ export default {
     checkDraggedHeadInDropRange() {
       this.$test.methods.checkDraggedHeadInDropRange(this);
     },
-    slideToNextTestPage(testId) {
-      this.$test.methods.slideToNextTestPage(this, testId);
+    slideToNextTestPage() {
+      this.$test.methods.slideToNextTestPage(this);
     },
     slideToResult(evt) {
       this.$test.methods.slideToResult(evt, this);
@@ -159,7 +159,7 @@ export default {
 
 .check-stroke {
   fill: none;
-  stroke: #dcdddd;
+  stroke: #D14033;
   stroke-width: 3px;
   stroke-dasharray: 260.8;
   stroke-dashoffset: 260.8;
@@ -174,7 +174,7 @@ export default {
 }
 
 .check-mark {
-  stroke: #dcdddd;
+  stroke: #d14033;
   // stroke: #000;
   stroke-width: 10px;
   fill: none;
@@ -244,6 +244,10 @@ export default {
       line-height: 1.25;
       margin-bottom: 30px;
     }
+    & a {
+      color: #d14033;
+      text-decoration: underline;
+    }
     // &__next-btn {
     //   width: 190px;
     //   height: 32px;
@@ -258,6 +262,11 @@ export default {
       line-height: 32px;
       /* line-height: 2.2; */
       font-size: 15px;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #3e3a39;
+        opacity: 0.6;
+      }
     }
   }
   &-question {

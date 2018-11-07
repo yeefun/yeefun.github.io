@@ -282,6 +282,12 @@ export default {
       }
     },
     switchQuestionToAnswer(vm) {
+      if (vm.test.id !== 6) {
+        vm.$parent.$refs[`test${vm.test.id + 1}`][0].isTestShow = true;
+        // ...
+      } else {
+        vm.$parent.$refs.result.isResultShow = true;
+      }
       TweenLite.set(`#answer-head--test${vm.test.id}`, {
         opacity: 1,
         delay: 0.5,
@@ -339,21 +345,22 @@ export default {
         vm.isDraggedHeadMatchDrop = false;
       }
     },
-    slideToNextTestPage(vm, testId) {
-      document.getElementById(`stage-num--${testId}`).classList.add('active');
+    slideToNextTestPage(vm) {
+      document.getElementById(`stage-num--test${vm.test.id}`).classList.add('active');
       TweenLite.to('#test-wrapper', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
-          vm.isTestShow = false;
-          vm.$parent.$refs[testId][0].testSlideInDynamic();
+          vm.isTestShow = !vm.isTestShow;
+          vm.$parent.$refs[`test${vm.test.id + 1}`][0].testSlideInDynamic();
         },
       });
     },
     slideToResult(evt, vm) {
+      // vm.$parent.$refs.result.isResultShow = true;
       if (vm.$parent.scores <= 2) {
         vm.$parent.$refs.result.isReaderSoso = false;
-      } else if (vm.$parent.scores >= 7) {
+      } else if (vm.$parent.scores >= 6) {
         vm.$parent.$refs.result.isReaderSoso = false;
         vm.$parent.$refs.result.isReaderBad = false;
       }
@@ -375,7 +382,7 @@ export default {
         ease: Back.easeIn.config(1.4),
         delay: 0.5,
         onComplete: () => {
-          vm.isTestShow = false;
+          vm.isTestShow = !vm.isTestShow;
           vm.$parent.$refs.result.resultSlideInDynamic();
         },
       });
