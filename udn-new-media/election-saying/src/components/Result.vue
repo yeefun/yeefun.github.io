@@ -40,7 +40,7 @@
       </div>
     </template>
     <div class="result__share">
-      <div class="result__share-fb">
+      <div class="result__share-fb" @click="shareToFb">
         <p>分享至</p>
         <img src="../assets/Share/facebook.svg" alt="">
       </div>
@@ -64,6 +64,9 @@ import {
 } from 'gsap/TweenMax';
 import HeadBar from './HeadBar.vue';
 // import Share from './Share.vue';
+import sosoFbShareMetaImg from '../assets/Share/meta--soso.jpg';
+import badFbShareMetaImg from '../assets/Share/meta--bad.jpg';
+import goodFbShareMetaImg from '../assets/Share/meta--good.jpg';
 
 export default {
   name: 'Result',
@@ -73,6 +76,7 @@ export default {
   },
   data() {
     return {
+      FbShareMetaImg: sosoFbShareMetaImg,
       isResultShow: false,
       // isResultShow: true,
       isReaderSoso: true,
@@ -82,6 +86,25 @@ export default {
     };
   },
   methods: {
+    shareToFb() {
+      if (this.$parent.scores <= 2) {
+        this.FbShareMetaImg = badFbShareMetaImg;
+      } else if (this.$parent.scores >= 6) {
+        this.FbShareMetaImg = goodFbShareMetaImg;
+      }
+      window.FB.ui({
+        method: 'share_open_graph',
+        action_type: 'og.shares',
+        action_properties: JSON.stringify({
+          object: {
+            'og:title': '候選人金句連連看 這些政策是誰提的？',
+            'og:url': 'https://udn.com/upf/newmedia/2018_data/cloudgate/index.html',
+            'og:image': this.FbShareMetaImg,
+            'og:description': '九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！',
+          },
+        }),
+      });
+    },
     resultSlideInDynamic() {
       TweenLite.to('#result', 0.3, {
         opacity: 1,

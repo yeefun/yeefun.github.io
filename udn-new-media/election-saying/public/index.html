@@ -7,10 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="icon" type="image/ico" href="https://udn.com/upf/newmedia/image/udn-icon.ico" />
   <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
-  <title>election-saying</title>
+  <title>候選人金句連連看 這些政策是誰提的？</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4="
     crossorigin="anonymous" />
+
+  <!-- for Facebook -->
+  <meta property="og:title" content="候選人金句連連看 這些政策是誰提的？" />
+  <meta property="og:url" content="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" />
+  <meta property="og:image" content="<%= BASE_URL %>mata--default.jpg" />
+  <meta property="og:description" content="九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！" />
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" integrity="sha256-AJvwDTgx+2JZWtsg4XDtKI2KFXST+2AosYiLBYde2PM=" crossorigin="anonymous"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js" integrity="sha256-LoCg++4tsi5AciTHK9ObksOjA7sjIcHtkayFvaUD/0c=" crossorigin="anonymous"></script> -->
@@ -45,10 +51,36 @@
     ga('udn.send', 'event', '圖表看時事', 'view', '圖解新聞');
   </script> -->
 
+  <!-- Facebook Pixel Code -->
+  <script>
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '285426731894626');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=285426731894626&ev=PageView&noscript=1" /></noscript>
+  <!-- End Facebook Pixel Code -->
+
 </head>
 
 <body>
-  <div id="fb-root"></div>
+  <!-- <div id="fb-root"></div>
   <script>
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -56,6 +88,27 @@
       js = d.createElement(s);
       js.id = id;
       js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script> -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1010324812347164',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v3.2'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/zh_TW/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
