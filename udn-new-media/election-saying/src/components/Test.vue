@@ -69,7 +69,8 @@ export default {
   props: ['test'],
   data() {
     return {
-      isTestShow: false,
+      // isTestShow: false,
+      isTestShow: true,
       mouseX: 0,
       mouseY: 0,
       touchX: 0,
@@ -163,7 +164,7 @@ export default {
   stroke-width: 3px;
   stroke-dasharray: 260.8;
   stroke-dashoffset: 260.8;
-  // transform: rotate(-90deg);
+  transform: rotate(-90deg);
   transform-origin: center;
 }
 .check-fill {

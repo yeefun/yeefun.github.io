@@ -10,7 +10,7 @@
         <Share></Share>
         <h3>你不關心政治，政治會來關心你。</h3>
         <p>選舉只是一時的，關心政治卻是一輩子的功課。關注政治大小事，確保自己的權益不受損。</p>
-        <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button>
+        <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
       </div>
     </template>
 
@@ -20,10 +20,10 @@
         <h2>
           <div id="result__name"></div>
         </h2>
-        <Share></Share>
+        <!-- <Share></Share> -->
         <h3>問世間，選舉為何物？</h3>
         <p>不論是柯文哲的經典語錄，還是韓國瑜的名言，選戰的喧鬧只要到你身邊就會立刻消音。</p>
-        <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button>
+        <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
       </div>
     </template>
 
@@ -36,9 +36,24 @@
         <Share></Share>
         <h3>天底下沒有我不知道的政事。</h3>
         <p>你的腦中內建候選人金句資料庫，蒐羅各候選人的經典語錄，選戰新聞達人非你莫屬！</p>
-        <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button>
+        <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
       </div>
     </template>
+    <div class="result__share">
+      <div class="result__share-fb">
+        <p>分享至</p>
+        <img src="../assets/Share/facebook.svg" alt="">
+      </div>
+      <div class="result__share-line">
+        <p>分享至</p>
+        <img src="../assets/Share/line.svg" alt="">
+      </div>
+      <div class="result__share-election">
+        <a href="https://udn.com/vote2018/index" target="_blank">
+          <p>選戰專區</p>
+        </a>
+      </div>
+    </div>
 
   </section>
 </template>
@@ -48,17 +63,18 @@ import {
   TweenLite, Power2,
 } from 'gsap/TweenMax';
 import HeadBar from './HeadBar.vue';
-import Share from './Share.vue';
+// import Share from './Share.vue';
 
 export default {
   name: 'Result',
   components: {
     HeadBar,
-    Share,
+    // Share,
   },
   data() {
     return {
       isResultShow: false,
+      // isResultShow: true,
       isReaderSoso: true,
       isReaderBad: true,
       resultNames: ['選舉觀測員', '政治絕緣體', '選戰新聞達人'],
@@ -109,6 +125,56 @@ export default {
   opacity: 0;
   flex: 0 0 100%;
   box-sizing: border-box;
+  position: relative;
+  &__share {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: space-between;
+    padding-top: 4px;
+    padding-bottom: 45px;
+    &-fb {
+      background-color: #3b62b8;
+      & p {
+        margin-right: 6px;
+      }
+    }
+    &-line {
+      background-color: #00c329;
+      & p {
+        margin-right: 6px;
+      }
+    }
+    &-election {
+      background-color: #d14033;
+      &:hover {
+        opacity: 0.6;
+        background-color: #c64033;
+      }
+    }
+    & p {
+      display: inline-block;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    & img {
+      width: 20px;
+      height: auto;
+    }
+    & > div {
+      width: 31%;
+      border-radius: 100px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
   & > img {
     width: 100%;
     height: auto;
@@ -126,7 +192,9 @@ export default {
     padding: 4px;
     box-sizing: border-box;
     background-color: #fff;
-    margin-bottom: 22px;
+    // margin-bottom: 22px;
+    // margin-bottom: 10px;
+    margin-bottom: 20px;
     & > div {
       width: 100%;
       border: 0.5px solid #707070;
@@ -140,17 +208,17 @@ export default {
     // font-size: 2rem;
     line-height: 1.35;
     font-weight: 700;
-    margin-bottom: 16px;
-  }
-  & p {
-    line-height: 1.25;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
   &__text {
     padding-right: 20px;
     padding-left: 20px;
     font-size: 2rem;
     transform: translateY(-30px);
+    & p {
+      line-height: 1.25;
+      // margin-bottom: 30px;
+    }
   }
   & a {
     color: #fff;

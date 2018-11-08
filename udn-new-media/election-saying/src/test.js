@@ -38,7 +38,6 @@ export default {
     testSlideInDynamic(vm) {
       // vm.setDroppedHeadOffset();
       window.addEventListener('resize', vm.resizeHandler);
-      // console.lotestg(vm.test.id);
       TweenLite.to(`#candidate1--test${vm.test.id}`, 0.4, {
         x: 0,
         ease: Back.easeOut.config(1.4),
@@ -248,33 +247,53 @@ export default {
       // correct
       if (vm.draggedHead.dataset.name === vm.test.answerName) {
         vm.$parent.scores += 1;
-        TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.8, {
+        TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
         });
-        TweenLite.to(`#tick--test${vm.test.id}`, 0.8, {
+        TweenLite.to(`#tick--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
-          delay: 0.8,
+          delay: 0.4,
+          // onUpdate: () => {
+          //   const n = document.createTextNode(' ');
+          //   document.body.appendChild(n);
+          //   document.body.removeChild(n);
+          // },
           onComplete: () => {
             vm.switchQuestionToAnswer();
           },
         });
         // incorrect
       } else {
-        TweenLite.to(`#incorrect-stroke--test${vm.test.id}`, 0.8, {
+        TweenLite.to(`#incorrect-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
+          // onUpdate: () => {
+          //   const n = document.createTextNode(' ');
+          //   document.body.appendChild(n);
+          //   document.body.removeChild(n);
+          // },
         });
-        TweenLite.to(`#cross-left--test${vm.test.id}`, 0.4, {
+        TweenLite.to(`#cross-left--test${vm.test.id}`, 0.2, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
-          delay: 0.8,
+          delay: 0.4,
+          // onUpdate: () => {
+          //   const n = document.createTextNode(' ');
+          //   document.body.appendChild(n);
+          //   document.body.removeChild(n);
+          // },
         });
-        TweenLite.to(`#cross-right--test${vm.test.id}`, 0.4, {
+        TweenLite.to(`#cross-right--test${vm.test.id}`, 0.2, {
           strokeDashoffset: 0,
           ease: Power2.easeInOut,
-          delay: 1.2,
+          delay: 0.6,
+          // onUpdate: () => {
+          //   const n = document.createTextNode(' ');
+          //   document.body.appendChild(n);
+          //   document.body.removeChild(n);
+          // },
           onComplete: () => {
             vm.switchQuestionToAnswer();
           },
@@ -284,7 +303,6 @@ export default {
     switchQuestionToAnswer(vm) {
       if (vm.test.id !== 6) {
         vm.$parent.$refs[`test${vm.test.id + 1}`][0].isTestShow = true;
-        // ...
       } else {
         vm.$parent.$refs.result.isResultShow = true;
       }
@@ -346,7 +364,7 @@ export default {
       }
     },
     slideToNextTestPage(vm) {
-      document.getElementById(`stage-num--test${vm.test.id}`).classList.add('active');
+      document.getElementById(`stage-num--test${vm.test.id + 1}`).classList.add('active');
       TweenLite.to('#test-wrapper', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),
