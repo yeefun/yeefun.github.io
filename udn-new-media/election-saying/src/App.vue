@@ -134,7 +134,7 @@ export default {
     if (detectMob()) {
       this.$refs.app.style.minHeight = '100%';
       // document.body.style.cssText = 'display: flex; align-items: center;';
-    } else if (this.$refs.app.offsetHeight > 619) {
+    } else if (document.documentElement.clientHeight > 619) {
       document.body.style.cssText = 'display: flex; align-items: center;';
     }
   },
