@@ -1,6 +1,7 @@
 <template>
   <article class="test">
-    <div v-if="test.id !== 1 ? isTestShow : !isTestShow">
+    <!-- <div v-if="test.id !== 1 ? isTestShow : !isTestShow"> -->
+    <div v-if="test.id !== 5 ? isTestShow : !isTestShow">
       <section class="test-answer" v-show="isAnswerShow">
         <!-- <img :id="`answer-head--test${test.id}`" :src="test.answerImg" alt=""> -->
         <div :id="`answer-text--test${test.id}`">

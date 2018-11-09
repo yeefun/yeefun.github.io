@@ -303,6 +303,7 @@ export default {
     switchQuestionToAnswer(vm) {
       if (vm.test.id !== 6) {
         vm.$parent.$refs[`test${vm.test.id + 1}`][0].isTestShow = true;
+        // vm.$parent.$refs.test6[0].isTestShow = true;
       } else {
         vm.$parent.$refs.result.isResultShow = true;
       }

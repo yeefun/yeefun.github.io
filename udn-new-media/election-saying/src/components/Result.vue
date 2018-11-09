@@ -44,7 +44,7 @@
         <p>分享至</p>
         <img src="../assets/Share/facebook.svg" alt="">
       </div>
-      <div class="result__share-line" @click="shareToLine">
+      <div class="result__share-line" @touchstart="shareToLine">
         <p>分享至</p>
         <img src="../assets/Share/line.svg" alt="">
       </div>
@@ -87,7 +87,7 @@ export default {
   methods: {
     shareToLine() {
       if (detectMob()) {
-        window.open(`//line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/2018election/game2/index.html`);
+        window.open(`https://line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/2018election/game2/index.html`);
       } else {
         window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html', '', 'height=400, width=647, top=100, left=162');
       }
