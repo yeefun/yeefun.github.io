@@ -164,6 +164,7 @@ html {
   // height: 100%;
   // for fixed head-bar__editor-list position
   // transform: translate(0,0);
+  width: 100%;
   max-width: 392px;
   // height: 627px;
   margin-left: auto;

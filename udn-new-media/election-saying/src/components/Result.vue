@@ -103,8 +103,6 @@ export default {
       }
       window.FB.ui({
         method: 'share_open_graph',
-        app_id: '1010324812347164',
-        display: 'popup',
         // action_type: 'og.shares',
         action_type: 'og.likes',
         action_properties: JSON.stringify({

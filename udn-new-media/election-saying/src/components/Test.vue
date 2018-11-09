@@ -297,10 +297,14 @@ export default {
     &__answer-head {
       position: absolute;
       width: 80px;
+      // transform: scale(1);
       // left: 0;
+      // transform-origin: center bottom;
       opacity: 0;
+      z-index: 99;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
     }
     & h2 {
       font-size: 2.5rem;

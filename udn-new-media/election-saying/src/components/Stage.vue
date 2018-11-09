@@ -65,7 +65,7 @@ export default {
 .stage {
   // width: 375px;
   position: relative;
-  z-index: 99;
+  z-index: 199;
   box-sizing: border-box;
   padding: 10px 19px;
   background-color: #f7f7f7;

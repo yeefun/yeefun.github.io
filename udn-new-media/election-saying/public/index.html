@@ -162,49 +162,26 @@
 </head>
 
 <body>
-  <!-- <div id="fb-root"></div>
   <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1010324812347164',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v3.2'
+      });
+    };
+
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
+      if (d.getElementById(id)) {
+        return;
+      }
       js = d.createElement(s);
       js.id = id;
-      js.src = "//connect.facebook.net/zh_TW/sdk.js?t-1#xfbml=1&version=v2.7&appId=1010324812347164";
+      js.src = "https://connect.facebook.net/zh_TW/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  </script> -->
-
-  <!-- <div id="fb-root"></div>
-  <script>
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script> -->
-  <script>
-    // window.fbAsyncInit = function () {
-    //   FB.init({
-    //     appId: '1010324812347164',
-    //     autoLogAppEvents: true,
-    //     xfbml: true,
-    //     version: 'v3.2'
-    //   });
-    // };
-
-    // (function (d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) {
-    //     return;
-    //   }
-    //   js = d.createElement(s);
-    //   js.id = id;
-    //   js.src = "https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=1010324812347164";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
   </script>
 
   <div id="app"></div>

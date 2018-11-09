@@ -249,11 +249,16 @@ export default {
         vm.$parent.scores += 1;
         TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeOut,
+          // onUpdate: () => {
+          //   const n = document.createTextNode(' ');
+          //   document.body.appendChild(n);
+          //   document.body.removeChild(n);
+          // },
         });
         TweenLite.to(`#tick--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeIn,
           delay: 0.4,
           // onUpdate: () => {
           //   const n = document.createTextNode(' ');
@@ -268,7 +273,7 @@ export default {
       } else {
         TweenLite.to(`#incorrect-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeOut,
           // onUpdate: () => {
           //   const n = document.createTextNode(' ');
           //   document.body.appendChild(n);
@@ -277,7 +282,7 @@ export default {
         });
         TweenLite.to(`#cross-left--test${vm.test.id}`, 0.2, {
           strokeDashoffset: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeIn,
           delay: 0.4,
           // onUpdate: () => {
           //   const n = document.createTextNode(' ');
@@ -287,7 +292,7 @@ export default {
         });
         TweenLite.to(`#cross-right--test${vm.test.id}`, 0.2, {
           strokeDashoffset: 0,
-          ease: Power2.easeInOut,
+          ease: Power2.easeIn,
           delay: 0.6,
           // onUpdate: () => {
           //   const n = document.createTextNode(' ');
@@ -307,33 +312,34 @@ export default {
       } else {
         vm.$parent.$refs.result.isResultShow = true;
       }
+
       TweenLite.set(`#answer-head--test${vm.test.id}`, {
         opacity: 1,
-        delay: 0.5,
-      });
-      TweenLite.to(`#answer-head--test${vm.test.id}`, 0.4, {
-        x: '-50%',
-        y: -248,
-        scale: 2,
-        ease: Back.easeOut.config(1),
-        delay: 0.5,
+        delay: 0.4,
         onStart: () => {
           vm.hideForAnswerPop = true;
           vm.draggedHead.style.display = 'none';
           vm.isAnswerShow = true;
         },
       });
+      TweenLite.to(`#answer-head--test${vm.test.id}`, 0.4, {
+        x: '-50%',
+        y: -248,
+        scale: 2,
+        ease: Back.easeOut.config(1),
+        delay: 0.4,
+      });
       TweenLite.from(`#answer-text--test${vm.test.id}`, 0.4, {
         y: 200,
         ease: Back.easeOut.config(1),
-        delay: 0.5,
+        delay: 0.4,
       });
 
       if (vm.draggedHead.dataset.name === vm.test.answerName) {
         TweenLite.to(`#stage-correct--test${vm.test.id}`, 0.4, {
           scale: 1,
           ease: Back.easeOut.config(1.7),
-          delay: 0.5,
+          delay: 0.4,
           onStart: () => {
             document.getElementById(`stage-num--test${vm.test.id}`).classList.add('correct');
           },
