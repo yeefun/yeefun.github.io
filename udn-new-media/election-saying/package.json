@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "gsap": "^2.0.2",
+    "udn-newmedia-utils": "^1.0.9",
     "vue": "^2.5.17"
   },
   "devDependencies": {

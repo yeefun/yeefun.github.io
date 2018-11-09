@@ -85,6 +85,7 @@ export default {
   align-items: center;
   &__editor-list {
     // display: flex;
+    // position: fixed;
     // justify-content: center;
     // align-items: center;
     position: absolute;

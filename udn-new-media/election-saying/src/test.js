@@ -370,12 +370,13 @@ export default {
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           vm.isTestShow = !vm.isTestShow;
+          window.removeEventListener('resize', vm.resizeHandler);
           vm.$parent.$refs[`test${vm.test.id + 1}`][0].testSlideInDynamic();
         },
       });
     },
     slideToResult(evt, vm) {
-      // vm.$parent.$refs.result.isResultShow = true;
+      vm.$parent.$refs.result.isResultShow = true;
       if (vm.$parent.scores <= 2) {
         vm.$parent.$refs.result.isReaderSoso = false;
       } else if (vm.$parent.scores >= 6) {
@@ -401,6 +402,8 @@ export default {
         delay: 0.5,
         onComplete: () => {
           vm.isTestShow = !vm.isTestShow;
+          vm.$parent.isStageShow = false;
+          window.removeEventListener('resize', vm.resizeHandler);
           vm.$parent.$refs.result.resultSlideInDynamic();
         },
       });

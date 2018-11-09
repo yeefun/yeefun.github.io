@@ -39,8 +39,8 @@ export default {
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           this.isCoverShow = false;
-          // this.$parent.$refs.test1[0].testSlideInDynamic();
-          this.$parent.$refs.test6[0].testSlideInDynamic();
+          this.$parent.$refs.test1[0].testSlideInDynamic();
+          // this.$parent.$refs.test6[0].testSlideInDynamic();
         },
       });
     },

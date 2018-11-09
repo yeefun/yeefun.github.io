@@ -17,21 +17,21 @@
 
 export default {
   name: 'Share',
-  // methods: {
-  //   lineShare() {
-  //     window.ga('send', {
-  //       hitType: 'event',
-  //       eventCategory: 'Line Share',
-  //       eventAction: 'click',
-  //       eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [line share]`,
-  //     });
-  //     if (detectMob()) {
-  //       window.open(`//line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/cloudgate/index.html`);
-  //     } else {
-  //       window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/cloudgate/index.html');
-  //     }
-  //   },
-  // },
+  methods: {
+    lineShare() {
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'Line Share',
+        eventAction: 'click',
+        eventLabel: `[${detectPlatform()}] [${document.querySelector('title').innerHTML}] [line share]`,
+      });
+      if (detectMob()) {
+        window.open(`//line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/cloudgate/index.html`);
+      } else {
+        window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/cloudgate/index.html');
+      }
+    },
+  },
 };
 </script>
 

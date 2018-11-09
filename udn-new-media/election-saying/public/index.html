@@ -4,23 +4,30 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" type="image/ico" href="https://udn.com/upf/newmedia/image/udn-icon.ico" />
-  <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
   <title>候選人金句連連看 這些政策是誰提的？</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha256-gvEnj2axkqIj4wbYhPjbWV7zttgpzBVEgHub9AAZQD4="
     crossorigin="anonymous" />
 
   <!-- for Facebook -->
+  <meta property="fb:admins" content="671188086" />
+  <meta property="fb:app_id" content="1010324812347164" />
+  <meta property="og:url" content="https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html" />
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="候選人金句連連看 這些政策是誰提的？" />
-  <meta property="og:url" content="https://udn.com/upf/newmedia/2018_data/cloudgate/index.html" />
-  <meta property="og:image" content="<%= BASE_URL %>mata--default.jpg" />
   <meta property="og:description" content="九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！" />
+  <meta property="og:image" content="<%= BASE_URL %>mata--default.jpg" />
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" integrity="sha256-AJvwDTgx+2JZWtsg4XDtKI2KFXST+2AosYiLBYde2PM=" crossorigin="anonymous"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js" integrity="sha256-LoCg++4tsi5AciTHK9ObksOjA7sjIcHtkayFvaUD/0c=" crossorigin="anonymous"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/easing/EasePack.min.js" integrity="sha256-odoo0v0NZMOKcTDOsXexs9o8eYHVEktwoZfRsT9k3wc=" crossorigin="anonymous"></script> -->
+  <!-- for Google -->
+  <meta name="application-name" content="候選人金句連連看 這些政策是誰提的？" />
+  <meta name="description" content="九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！" />
+  <meta name="copyright" content="聯合報" />
+
+  <meta property="og:site_name" content="聯合報" />
+  <meta property="article:author" content="https://www.facebook.com/udnplus" />
+  <meta property="article:publisher" content="https://www.facebook.com/udnplus" />
 
   <!-- google analytic -->
   <!-- <script>
@@ -77,9 +84,96 @@
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=285426731894626&ev=PageView&noscript=1" /></noscript>
   <!-- End Facebook Pixel Code -->
 
+  <!-- udn comScore Tag -->
+  <script>
+    var _comscore = _comscore || [];
+    _comscore.push({
+      c1: "2",
+      c2: "7390954"
+    });
+    (function () {
+      var s = document.createElement("script"),
+        el = document.getElementsByTagName("script")[0];
+      s.async = true;
+      s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") +
+        ".scorecardresearch.com/beacon.js";
+      el.parentNode.insertBefore(s, el);
+    })();
+  </script>
+  <noscript>
+    <img src="http://b.scorecardresearch.com/p?c1=2&c2=7390954&cv=2.0&cj=1" />
+  </noscript>
+
+  <!-- udn Alexa Certify Javascript -->
+  <script type="text/javascript">
+    _atrk_opts = {
+      atrk_acct: "aw0Di1a4ZP00aY",
+      domain: "udn.com",
+      dynamic: true
+    };
+    (function () {
+      var as = document.createElement('script');
+      as.type = 'text/javascript';
+      as.async = true;
+      as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js";
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(as, s);
+    })();
+  </script>
+  <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=aw0Di1a4ZP00aY" style="display:none" height="1"
+      width="1" /></noscript>
+
+  <!-- Begin etu Tag -->
+  <script id="etu-recommender" type="text/javascript">
+    // var atid=rId();
+    // sLogin=GetCkValue("udnmember");
+    var temp = window.location.href.split('/')
+    var pid = ''
+    if (temp.length > 3) {
+      pid = temp[temp.length - 3] + '_' + temp[temp.length - 2]
+    }
+    var erUrlPrefix = 'https://rec.udn.com/';
+    var _qevents = _qevents || [];
+    _qevents.push({
+      group: 'udn',
+      cid: 'udn_soft',
+      act: 'view',
+      cat: ['ubrand', 'ubrand', '', '', ''],
+      uid: '',
+      bid: '',
+      pid: pid,
+      page: 'ARTICLE',
+      Rank_cat: '10',
+      Rank_pid: '10',
+      title: document.querySelector('title').innerHTML,
+      tag: [],
+      referral: document.referrer
+    });
+    (function () {
+      var er = document.createElement('script');
+      er.type = 'text/javascript';
+      er.async = true;
+      er.src = erUrlPrefix + 'er.js?' + (new Date().getTime());
+      var currentJs = document.getElementById('etu-recommender');
+      currentJs.parentNode.insertBefore(er, currentJs);
+    })();
+  </script>
+
 </head>
 
 <body>
+  <!-- <div id="fb-root"></div>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/zh_TW/sdk.js?t-1#xfbml=1&version=v2.7&appId=1010324812347164";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script> -->
+
   <!-- <div id="fb-root"></div>
   <script>
     (function (d, s, id) {

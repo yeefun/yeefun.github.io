@@ -69,8 +69,8 @@ export default {
   props: ['test'],
   data() {
     return {
-      // isTestShow: false,
-      isTestShow: true,
+      isTestShow: false,
+      // isTestShow: true,
       mouseX: 0,
       mouseY: 0,
       touchX: 0,

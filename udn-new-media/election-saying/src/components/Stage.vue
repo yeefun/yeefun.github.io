@@ -1,5 +1,5 @@
 <template>
-  <section class="stage">
+  <section class="stage" :style="`transform: translateY(${stageMove}px)`">
     <div class="stage-wrapper">
       <div class="stage__squre" v-for="(num, idx) in 6" :key="idx">
         <div class="stage__num" :id="`stage-num--test${idx + 1}`" :class="idx === 0 ? 'active': ''">
@@ -50,6 +50,12 @@
 <script>
 export default {
   name: 'Stage',
+  props: ['stageMove'],
+  // data() {
+  //   return {
+  //     isStageShow: true,
+  //   };
+  // },
 };
 </script>
 
@@ -58,6 +64,8 @@ export default {
 
 .stage {
   // width: 375px;
+  position: relative;
+  z-index: 99;
   box-sizing: border-box;
   padding: 10px 19px;
   background-color: #f7f7f7;

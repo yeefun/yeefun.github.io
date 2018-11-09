@@ -44,7 +44,7 @@
         <p>分享至</p>
         <img src="../assets/Share/facebook.svg" alt="">
       </div>
-      <div class="result__share-line">
+      <div class="result__share-line" @click="shareToLine">
         <p>分享至</p>
         <img src="../assets/Share/line.svg" alt="">
       </div>
@@ -62,11 +62,10 @@
 import {
   TweenLite, Power2,
 } from 'gsap/TweenMax';
+import { detectMob } from 'udn-newmedia-utils';
 import HeadBar from './HeadBar.vue';
 // import Share from './Share.vue';
-import sosoFbShareMetaImg from '../assets/Share/meta--soso.jpg';
-import badFbShareMetaImg from '../assets/Share/meta--bad.jpg';
-import goodFbShareMetaImg from '../assets/Share/meta--good.jpg';
+
 
 export default {
   name: 'Result',
@@ -76,7 +75,7 @@ export default {
   },
   data() {
     return {
-      FbShareMetaImg: sosoFbShareMetaImg,
+      FbShareMetaImg: 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--soso.jpg',
       isResultShow: false,
       // isResultShow: true,
       isReaderSoso: true,
@@ -86,21 +85,29 @@ export default {
     };
   },
   methods: {
+    shareToLine() {
+      if (detectMob()) {
+        window.open(`//line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/2018election/game2/index.html`);
+      } else {
+        window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html', '', 'height=400, width=647, top=100, left=162');
+      }
+    },
     shareToFb() {
       if (this.$parent.scores <= 2) {
-        this.FbShareMetaImg = badFbShareMetaImg;
+        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--bad.jpg';
       } else if (this.$parent.scores >= 6) {
-        this.FbShareMetaImg = goodFbShareMetaImg;
+        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--good.jpg';
       }
       window.FB.ui({
         method: 'share_open_graph',
-        action_type: 'og.shares',
+        // action_type: 'og.shares',
+        action_type: 'og.likes',
         action_properties: JSON.stringify({
           object: {
+            'og:url': 'https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html',
             'og:title': '候選人金句連連看 這些政策是誰提的？',
-            'og:url': 'https://udn.com/upf/newmedia/2018_data/cloudgate/index.html',
-            'og:image': this.FbShareMetaImg,
             'og:description': '九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！',
+            'og:image': this.FbShareMetaImg,
           },
         }),
       });
@@ -149,6 +156,8 @@ export default {
   flex: 0 0 100%;
   box-sizing: border-box;
   position: relative;
+  // CONFUSED
+  min-width: 100%;
   &__share {
     display: flex;
     padding-left: 20px;
@@ -199,8 +208,12 @@ export default {
     }
   }
   & > img {
-    width: 100%;
-    height: auto;
+    // width: 100%;
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    // height: auto;
   }
   & h2 {
     width: 100%;
