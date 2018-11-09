@@ -40,11 +40,14 @@
       </div>
     </template>
     <div class="result__share">
-      <div class="result__share-fb" @click="shareToFb">
+      <div class="result__share-fb" @touchstart="shareToFb">
         <p>分享至</p>
         <img src="../assets/Share/facebook.svg" alt="">
       </div>
+      <!-- 用 touchstart，在手機上會被封鎖
       <div class="result__share-line" @touchstart="shareToLine">
+      -->
+      <div class="result__share-line" @click="shareToLine">
         <p>分享至</p>
         <img src="../assets/Share/line.svg" alt="">
       </div>
