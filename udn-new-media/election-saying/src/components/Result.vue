@@ -7,7 +7,6 @@
         <h2>
           <div id="result__name"></div>
         </h2>
-        <Share></Share>
         <h3>你不關心政治，政治會來關心你。</h3>
         <p>選舉只是一時的，關心政治卻是一輩子的功課。關注政治大小事，確保自己的權益不受損。</p>
         <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
@@ -20,7 +19,6 @@
         <h2>
           <div id="result__name"></div>
         </h2>
-        <!-- <Share></Share> -->
         <h3>問世間，選舉為何物？</h3>
         <p>不論是柯文哲的經典語錄，還是韓國瑜的名言，選戰的喧鬧只要到你身邊就會立刻消音。</p>
         <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
@@ -33,7 +31,6 @@
         <h2>
           <div id="result__name"></div>
         </h2>
-        <Share></Share>
         <h3>天底下沒有我不知道的政事。</h3>
         <p>你的腦中內建候選人金句資料庫，蒐羅各候選人的經典語錄，選戰新聞達人非你莫屬！</p>
         <!-- <button type="button" class="primary-btn"><a href="https://udn.com/vote2018/index" target="_blank">選戰專區</a></button> -->
@@ -51,7 +48,7 @@
         <p>分享至</p>
         <img src="../assets/Share/line.svg" alt="">
       </div>
-      <div class="result__share-election">
+      <div class="result__share-election" @click="gaRelateEvent">
         <a href="https://udn.com/vote2018/index" target="_blank">
           <p>選戰專區</p>
         </a>
@@ -62,10 +59,11 @@
 </template>
 
 <script>
-import {
-  TweenLite, Power2,
-} from 'gsap/TweenMax';
-import { detectMob } from 'udn-newmedia-utils';
+// import TweenLite from 'gsap/TweenLite';
+// import {
+//   TweenLite, Power2,
+// } from 'gsap/TweenMax';
+import { detectMob, detectPlatform } from 'udn-newmedia-utils';
 import HeadBar from './HeadBar.vue';
 // import Share from './Share.vue';
 
@@ -88,12 +86,28 @@ export default {
     };
   },
   methods: {
+    gaRelateEvent() {
+      // GA: how many people enter realted website from this game?
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Relate',
+        eventAction: 'Click',
+        eventLabel: `[候選人金句連連看] [${detectPlatform()}] [選戰專區]`,
+      });
+    },
     shareToLine() {
       if (detectMob()) {
         window.open(`https://line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/2018election/game2/index.html`);
       } else {
         window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html', '', 'width=647, height=400, left=162, top=100');
       }
+      // GA: how many people share this game to Line?
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Share',
+        eventAction: 'Click',
+        eventLabel: `[候選人金句連連看] [${detectPlatform()}] [Line]`,
+      });
     },
     shareToFb() {
       if (this.$parent.scores <= 2) {

@@ -9,16 +9,18 @@
         </h2>
         <h1>這些政策是誰提的？</h1>
         <p class="cover__intro">九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！</p>
-        <button class="primary-btn" type="button" @touchstart.prevent="slideToFirstTestPage" @click="slideToFirstTestPage">開始</button>
+        <button type="button" @click="slideToFirstTestPage" @touchstart.prevent="slideToFirstTestPage">開始</button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import {
-  TweenLite, Back,
-} from 'gsap/TweenMax';
+// import TweenLite from 'gsap/TweenLite';
+// import { Back } from 'gsap/EasePack.js';
+// import {
+//   TweenLite, Back,
+// } from 'gsap/TweenMax';
 import HeadBar from './HeadBar.vue';
 
 
@@ -39,6 +41,7 @@ export default {
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           this.isCoverShow = false;
+          this.$parent.currentStage += 1;
           // this.$parent.$refs.test1[0].testSlideInDynamic();
           this.$parent.$refs.test5[0].testSlideInDynamic();
         },
@@ -105,15 +108,63 @@ export default {
     // font-weight: 300;
     margin-bottom: 30px;
   }
+  & button {
+    position: relative;
+    height: 40px;
+    font-size: 2rem;
+    background-color: #d14033;
+    line-height: 40px;
+    transition: all 0.3s;
+    overflow: hidden;
+    // &:hover {
+    //   background-color: #c64033;
+    //   opacity: 0.6;
+    // }
+    &:after {
+      content: '';
+      background-color: #ff5e5e;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 100px;
+      transform: scale(0);
+      opacity: 1;
+      transition: all 0s;
+      // content: '';
+      // background-color: #ff5e5e;
+      // display: block;
+      // position: absolute;
+      // width: 100%;
+      // height: 100%;
+      // top: 0;
+      // left: 0;
+      // border-radius: 100px;
+      // transform: scale(2);
+      // opacity: 0;
+      // transition: all 0.3s ease-out;
+    }
+    &:hover:after {
+      animation: ripple 0.8s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+      @keyframes ripple {
+        25% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+      // transform: scale(0);
+      // opacity: 1;
+      // transition: all 0s;
+    }
+  }
   // & img {
   //   width: 100%;
-  // }
-  // & button {
-  //   transition: all 0.3s;
-  //   &:hover {
-  //     background-color: #c64033;
-  //     opacity: 0.6;
-  //   }
   // }
   // & svg {
   //   margin-left: 8px;

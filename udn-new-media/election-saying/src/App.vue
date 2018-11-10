@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { detectMob } from 'udn-newmedia-utils';
+import { detectMob, detectPlatform } from 'udn-newmedia-utils';
 // import {
 //   TweenLite, Back,
 // } from 'gsap/TweenMax';
@@ -57,6 +57,7 @@ export default {
     return {
       isStageShow: true,
       stageMove: 0,
+      currentStage: 0,
       scores: 0,
       tests:
       // tests: [{
@@ -130,17 +131,26 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.fixedStage);
-    // const appEle = this.$refs.app;
-    if (detectMob()) {
+    if (detectMob() && !navigator.userAgent.match(/iPad/i)) {
       this.$refs.app.style.minHeight = '100%';
-      // document.body.style.cssText = 'display: flex; align-items: center;';
     } else if (document.documentElement.clientHeight > 619) {
       document.body.style.cssText = 'display: flex; align-items: center;';
     }
+    window.addEventListener('unload', this.unloadHandler);
   },
   methods: {
     fixedStage() {
       this.stageMove = this.$refs.app.scrollTop + window.pageYOffset;
+    },
+    unloadHandler() {
+      // GA: what's the stage when reader exit from this game?
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Game',
+        eventAction: 'Exit',
+        eventLabel: `[候選人金句連連看] [${detectPlatform()}] [第${this.currentStage}關跳出]`,
+        eventValue: this.currentStage,
+      });
     },
   },
 };
@@ -230,17 +240,17 @@ button {
   user-select: none;
 }
 
-.primary-btn {
-  height: 40px;
-  font-size: 2rem;
-  background-color: #d14033;
-  line-height: 40px;
-  transition: all 0.3s;
-  &:hover {
-    background-color: #c64033;
-    opacity: 0.6;
-  }
-}
+// .primary-btn {
+//   height: 40px;
+//   font-size: 2rem;
+//   background-color: #d14033;
+//   line-height: 40px;
+//   transition: all 0.3s;
+//   &:hover {
+//     background-color: #c64033;
+//     opacity: 0.6;
+//   }
+// }
 
 a {
   text-decoration: none;

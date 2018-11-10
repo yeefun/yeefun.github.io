@@ -4,6 +4,7 @@ import {
 } from 'gsap/TweenMax';
 // import TweenLite, { Power2, Power4 } from 'gsap/TweenLite';
 // import { Back } from 'gsap/EasePack';
+// import { detectPlatform } from 'udn-newmedia-utils';
 
 export default {
   computed: {
@@ -247,30 +248,29 @@ export default {
       // correct
       if (vm.draggedHead.dataset.name === vm.test.answerName) {
         vm.$parent.scores += 1;
+        // CONFUSED why it can work in IE, but css or svg property can't?
+        TweenLite.set(`#correct-stroke--test${vm.test.id}`, {
+          transformOrigin: '50% 50%',
+          rotation: -90,
+        });
         TweenLite.to(`#correct-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeOut,
-          // onUpdate: () => {
-          //   const n = document.createTextNode(' ');
-          //   document.body.appendChild(n);
-          //   document.body.removeChild(n);
-          // },
         });
         TweenLite.to(`#tick--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeIn,
           delay: 0.4,
-          // onUpdate: () => {
-          //   const n = document.createTextNode(' ');
-          //   document.body.appendChild(n);
-          //   document.body.removeChild(n);
-          // },
           onComplete: () => {
             vm.switchQuestionToAnswer();
           },
         });
         // incorrect
       } else {
+        TweenLite.set(`#incorrect-stroke--test${vm.test.id}`, {
+          transformOrigin: '50% 50%',
+          rotation: -90,
+        });
         TweenLite.to(`#incorrect-stroke--test${vm.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeOut,
@@ -345,6 +345,8 @@ export default {
           },
         });
       }
+      // GA: how long does reader stay at this answer page?
+      vm.startTimeInAnswerPage = new Date();
     },
     checkDraggedHeadInDropRange(vm) {
       const draggedHeadRect = vm.draggedHead.getBoundingClientRect();
@@ -371,18 +373,25 @@ export default {
       }
     },
     slideToNextTestPage(vm) {
+      // GA: how long does reader stay at this answer page?
+      vm.readerStayTimeInAnswerPage();
+
       document.getElementById(`stage-num--test${vm.test.id + 1}`).classList.add('active');
       TweenLite.to('#test-wrapper', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),
         onComplete: () => {
           vm.isTestShow = !vm.isTestShow;
+          vm.$parent.currentStage += 1;
           window.removeEventListener('resize', vm.resizeHandler);
           vm.$parent.$refs[`test${vm.test.id + 1}`][0].testSlideInDynamic();
         },
       });
     },
     slideToResult(evt, vm) {
+      // GA: how long does reader stay at this answer page?
+      vm.readerStayTimeInAnswerPage();
+
       vm.$parent.$refs.result.isResultShow = true;
       if (vm.$parent.scores <= 2) {
         vm.$parent.$refs.result.isReaderSoso = false;
@@ -413,6 +422,19 @@ export default {
           window.removeEventListener('resize', vm.resizeHandler);
           vm.$parent.$refs.result.resultSlideInDynamic();
         },
+      });
+    },
+    readerStayTimeInAnswerPage(vm) {
+      // GA: how long does reader stay at this answer page?
+      vm.endTimeInAnswerPage = new Date();
+      const stayTime = Math.round((vm.endTimeInAnswerPage - vm.startTimeInAnswerPage) / 1000);
+
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Game',
+        eventAction: 'Stay',
+        eventLabel: `[候選人金句連連看] [第${vm.test.id}關] [停留${stayTime}秒]`,
+        eventValue: stayTime,
       });
     },
   },
