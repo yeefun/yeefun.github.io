@@ -17,6 +17,7 @@
 
 <script>
 // import TweenLite from 'gsap/TweenLite';
+// import TweenLite from 'gsap/TweenLite';
 // import { Back } from 'gsap/EasePack.js';
 // import {
 //   TweenLite, Back,

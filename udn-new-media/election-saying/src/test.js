@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import {
-  TweenLite, Power2, Power4, Back,
-} from 'gsap/TweenMax';
+// import {
+//   TweenLite, Power2, Power4, Back,
+// } from 'gsap/TweenMax';
 // import TweenLite, { Power2, Power4 } from 'gsap/TweenLite';
 // import { Back } from 'gsap/EasePack';
 // import { detectPlatform } from 'udn-newmedia-utils';

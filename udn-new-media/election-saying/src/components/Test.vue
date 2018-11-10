@@ -63,7 +63,7 @@
 // import {
 //   TweenLite, Power2, Power4, Back,
 // } from 'gsap/TweenMax';
-import TweenLite from 'gsap/TweenLite';
+// import TweenLite from 'gsap/TweenLite';
 // import { Power2, Power4, Back } from 'gsap/EasePack';
 // import TweenLite, { Power2, Power4 } from 'gsap/TweenLite.js';
 // import { Back } from 'gsap/EasePack.js';

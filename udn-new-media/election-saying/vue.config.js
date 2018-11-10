@@ -3,12 +3,11 @@ module.exports = {
     ? './'
     : '/',
   // externals: {
-  //   gsap: 'TweenLite',
+  //   'gsap/TweenMax': 'TweenMax',
   // },
-  // chainWebpack: (config) => {
-  //   config.externals({
-  //     gsap: 'TweenLite',
-
-  //   });
-  // },
+  chainWebpack: (config) => {
+    config.externals({
+      vue: 'Vue',
+    });
+  },
 };
