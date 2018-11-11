@@ -7,42 +7,6 @@
           <p>{{ num }}</p>
         </div>
       </div>
-      <!-- <div class="stage__squre">
-        <div class="stage__num" :class="{ active: stages[0] }">
-          <p>1</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num active correct">
-          <div class="stage__correct-mark"></div>
-          <p>2</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num active">
-          <p>3</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num">
-          <p>4</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num">
-          <p>5</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num">
-          <p>6</p>
-        </div>
-      </div>
-      <div class="stage__squre">
-        <div class="stage__num">
-          <p>7</p>
-        </div>
-      </div> -->
     </div>
   </section>
 </template>
@@ -51,19 +15,11 @@
 export default {
   name: 'Stage',
   props: ['stageMove'],
-  // data() {
-  //   return {
-  //     isStageShow: true,
-  //   };
-  // },
 };
 </script>
 
 <style lang="scss">
-// @import '../css/mixin.scss';
-
 .stage {
-  // width: 375px;
   position: relative;
   z-index: 199;
   box-sizing: border-box;
@@ -80,13 +36,8 @@ export default {
   }
   &__squre {
     box-sizing: border-box;
-    // width: calc(100% / 6);
     width: 13.8%;
     text-align: center;
-    // background-color: #fff;
-    // padding-right: 1px;
-    // padding-left: 1px;
-    // position: relative;
   }
   &__num {
     background-color: #fff;
@@ -94,7 +45,6 @@ export default {
     position: relative;
     height: 38px;
     box-sizing: border-box;
-    // transition: color
   }
   &__correct-mark {
     background-color: #d14033;
@@ -104,14 +54,11 @@ export default {
     top: 50%;
     left: 50%;
     position: absolute;
-    // @include align-center;
     transform: translate(-50%, -50%) scale(0);
-    // transform-origin: center;
   }
   & p {
     position: relative;
     line-height: 38px;
-    // transform: translateY(1px);
   }
   & .active {
     border-color: #6d6d6d;
@@ -120,8 +67,5 @@ export default {
   & .correct {
     color: #fff;
   }
-  // & .success {
-
-  // }
 }
 </style>

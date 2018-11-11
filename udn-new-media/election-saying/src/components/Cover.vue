@@ -9,7 +9,7 @@
         </h2>
         <h1>這些政策是誰提的？</h1>
         <p class="cover__intro">九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！</p>
-        <button type="button" @click="slideToFirstTestPage" @touchstart.prevent="slideToFirstTestPage">開始</button>
+        <button type="button" @click.once="slideToFirstTestPage" @touchstart.prevent.once="slideToFirstTestPage">開始</button>
       </div>
     </div>
   </section>
@@ -17,13 +17,11 @@
 
 <script>
 // import TweenLite from 'gsap/TweenLite';
-// import TweenLite from 'gsap/TweenLite';
 // import { Back } from 'gsap/EasePack.js';
 // import {
 //   TweenLite, Back,
 // } from 'gsap/TweenMax';
 import HeadBar from './HeadBar.vue';
-
 
 export default {
   name: 'Cover',
@@ -43,8 +41,8 @@ export default {
         onComplete: () => {
           this.isCoverShow = false;
           this.$parent.currentStage += 1;
-          // this.$parent.$refs.test1[0].testSlideInDynamic();
-          this.$parent.$refs.test5[0].testSlideInDynamic();
+          this.$parent.$refs.test1[0].testSlideInDynamic();
+          // this.$parent.$refs.test5[0].testSlideInDynamic();
         },
       });
     },
@@ -59,9 +57,6 @@ export default {
   flex: 0 0 100%;
   // width: 100%;
   // flex-shrink: 0;
-  // padding-right: 20px;
-  // padding-left: 20px;
-  // padding-top: 8px;
   box-sizing: border-box;
   &__text-wrapper {
     transform: translateY(-30px);
@@ -75,8 +70,6 @@ export default {
     width: 136px;
     border: 0.5px solid #707070;
     font-size: 1.3rem;
-    // font-weight: 300;
-    // line-height: 2.54;
     text-align: center;
     box-sizing: border-box;
     height: 30px;
@@ -106,7 +99,6 @@ export default {
   &__intro {
     font-size: 2rem;
     line-height: 1.25;
-    // font-weight: 300;
     margin-bottom: 30px;
   }
   & button {
@@ -164,21 +156,5 @@ export default {
       // transition: all 0s;
     }
   }
-  // & img {
-  //   width: 100%;
-  // }
-  // & svg {
-  //   margin-left: 8px;
-  //   // margin-left: 12px;
-  //   margin-bottom: 6px;
-  //   width: 33.69px;
-  //   height: 33px;
-  //   // cursor: pointer;
-  //   fill: #040000;
-  //   transition: transform 0.5s;
-  //   &:hover {
-  //     transform: rotate(15deg);
-  //   }
-  // }
 }
 </style>

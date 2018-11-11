@@ -1,19 +1,19 @@
 <template>
   <article class="test">
-    <!-- <div v-if="test.id !== 1 ? isTestShow : !isTestShow"> -->
-    <div v-if="test.id !== 5 ? isTestShow : !isTestShow">
+    <div v-if="test.id !== 1 ? isTestShow : !isTestShow">
+    <!-- <div v-if="test.id !== 5 ? isTestShow : !isTestShow"> -->
       <section class="test-answer" v-show="isAnswerShow">
-        <!-- <img :id="`answer-head--test${test.id}`" :src="test.answerImg" alt=""> -->
         <div :id="`answer-text--test${test.id}`">
           <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
           <h2>{{ test.saying }}</h2>
           <p v-html="test.context"></p>
 
-          <button v-if="test.id !== 6" type="button" @click="slideToNextTestPage" @touchstart.prevent="slideToNextTestPage">下一題</button>
-          <button type="button" v-else @click="slideToResult" @touchstart.prevent="slideToResult">看結果</button>
+          <button v-if="test.id !== 6" type="button" @click.once="slideToNextTestPage" @touchstart.prevent.once="slideToNextTestPage">下一題</button>
+          <button type="button" v-else @click.once="slideToResult" @touchstart.prevent.once="slideToResult">看結果</button>
         </div>
       </section>
-      <!-- <section class="test-question" v-if="false"> -->
+
+      <!-- why I can't remove class "test-question"? -->
       <section class="test-question" :id="`question--test${test.id}`" v-if="isQuestionShow">
         <div class="test-question__quotation">
           <img :id="`quotation-mark-top--test${test.id}`" class="test-question__quotation-mark test-question__quotation-mark--top" src="../assets/quotation-mark.png" alt="" v-if="!hideForAnswerPop">
@@ -65,8 +65,6 @@
 // } from 'gsap/TweenMax';
 // import TweenLite from 'gsap/TweenLite';
 // import { Power2, Power4, Back } from 'gsap/EasePack';
-// import TweenLite, { Power2, Power4 } from 'gsap/TweenLite.js';
-// import { Back } from 'gsap/EasePack.js';
 
 export default {
   name: 'Test',
@@ -162,27 +160,28 @@ export default {
       const splitSaying = this.test.saying.split('');
       let sayingStr = '';
       let idx = 0;
+      // let delay = 100;
       let delay = 100;
       const typeSaying = () => {
         this.typeSayingTimer = setTimeout(() => {
           sayingStr += splitSaying[idx];
           quotation.textContent = sayingStr;
-          delay = Math.floor(Math.random() * (100 - 50 + 1) + 50);
-          // if (idx !== 3) {
-          //   if (idx > 3 && idx < splitSaying.length - 5) {
-          //     delay = 80;
-          //   } else {
-          //     delay = 120;
-          //   }
-          // } else {
-          //   delay = 200;
-          // }
+          // delay = Math.floor(Math.random() * (100 - 50 + 1) + 50);
+          if (idx !== 4) {
+            if (idx > 4 && idx < splitSaying.length - 5) {
+              delay = 60;
+            } else {
+              delay = 100;
+            }
+          } else {
+            delay = 160;
+          }
           idx += 1;
           if (idx !== splitSaying.length) {
             typeSaying();
           } else {
             clearTimeout(this.typeSayingTimer);
-            TweenLite.to(`#drop-place--test${this.test.id}`, 0.4, {
+            TweenLite.to(`#drop-place--test${this.test.id}`, 0.2, {
               opacity: 1,
               ease: Power2.easeIn,
               onComplete: () => {
@@ -235,7 +234,6 @@ export default {
     mouseDrop(evt) {
       evt.preventDefault();
       this.headDropped();
-      // this.draggedHead.parentNode.style.zIndex = 'auto';
 
       document.removeEventListener('mousemove', this.mouseDragging);
       document.removeEventListener('mouseup', this.mouseDrop);
@@ -331,7 +329,6 @@ export default {
         });
       }
 
-      // this.draggedHead.parentNode.style.zIndex = 'auto';
       this.draggedHeadTotalMoveX = 0;
       this.draggedHeadTotalMoveY = 0;
     },
@@ -476,14 +473,14 @@ export default {
         this.$parent.$refs.result.isReaderBad = false;
       }
 
-      TweenLite.to(evt.currentTarget, 0.5, {
+      TweenLite.to(evt.currentTarget, 0.3, {
         opacity: 0,
-        ease: Power2.easeOut,
+        ease: Power2.easeIn,
       });
       TweenLite.to('#total-container', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),
-        delay: 0.5,
+        delay: 0.3,
         onComplete: () => {
           this.isTestShow = !this.isTestShow;
           this.$parent.isStageShow = false;
@@ -570,18 +567,14 @@ export default {
   stroke-dasharray: 260.8;
   stroke-dashoffset: 260.8;
   // transform: rotate(-90deg);
-  // transform-origin: center;
 }
 .check-fill {
   stroke: none;
-  // fill: #efefef;
-  // opacity: 0;
   fill: none;
 }
 
 .check-mark {
   stroke: #d14033;
-  // stroke: #000;
   stroke-width: 10px;
   fill: none;
   &--tick {
@@ -608,38 +601,27 @@ export default {
   padding-left: 20px;
   font-size: 2rem;
   position: relative;
-  // height: 627px;
   // width: 100%;
   // flex: 0 0 100%;
   min-width: 100%;
   // width: 375px;
-  // flex-shrink: 0;
   box-sizing: border-box;
   &-answer {
     top: 279px;
-    // margin-bottom: 30px;
     padding-bottom: 30px;
     background-color: #fff;
 
     position: absolute;
     width: 100%;
-    // width: 375px;
     left: 0;
     padding-right: 20px;
     padding-left: 20px;
     box-sizing: border-box;
-    // margin-bottom: 14px;
     z-index: 49;
     text-align: center;
-    // opacity: 0;
     & > div {
       text-align: left;
     }
-    // & img {
-    //   // width: 100%;
-    //   width: 80%;
-    //   transform-origin: center bottom;
-    // }
     & h2 {
       font-weight: 700;
       line-height: 1.25;
@@ -654,13 +636,6 @@ export default {
       color: #d14033;
       text-decoration: underline;
     }
-    // &__next-btn {
-    //   width: 190px;
-    //   height: 32px;
-    //   background-color: #000;
-    //   /* line-height: 2.2; */
-    //   font-size: 15px;
-    // }
     & button {
       height: 32px;
       background-color: #000;
@@ -674,7 +649,6 @@ export default {
     }
   }
   &-question {
-    // margin-bottom: 32px;
     &__quotation {
       height: 300px;
       display: flex;
@@ -684,7 +658,6 @@ export default {
       &-mark {
         width: 25px;
         opacity: 0;
-        // height: auto;
         &--top {
           margin-bottom: 10px;
           transform: rotate(180deg);
@@ -699,9 +672,6 @@ export default {
     &__answer-head {
       position: absolute;
       width: 80px;
-      // transform: scale(1);
-      // left: 0;
-      // transform-origin: center bottom;
       opacity: 0;
       z-index: 99;
       top: 50%;
@@ -720,26 +690,15 @@ export default {
       width: 86px;
       height: 86px;
       @include align-center;
-      // left: 50%;
-      // transform: translateX(-50%);
       z-index: 9;
-      // top: 0;
-      // left: 50%;
-      // transform: translateX(-50%);
     }
     &__drop-place {
       position: relative;
       margin-bottom: 35px;
       text-align: center;
       opacity: 0;
-      // width: 80px;
       margin-left: auto;
       margin-right: auto;
-      // & img {
-        // position: relative;
-        // z-index: -9;
-        // width: 100%;
-      // }
       &-prompt {
         position: absolute;
         @include align-center;
@@ -751,15 +710,11 @@ export default {
     }
     &__head {
       width: 80px;
-      // height: auto;
       border-radius: 50%;
       box-sizing: border-box;
       &--candidate {
         border: 1px solid #d5d4d4;
         margin-bottom: 5px;
-        // position: relative;
-        // position: absolute;
-        // top: 0;
         background-color: #fff;
         cursor: pointer;
         @supports (cursor: grab) {
@@ -771,18 +726,9 @@ export default {
       position: relative;
       display: flex;
       justify-content: space-between;
-      // margin-bottom: 32px;
-      // padding-top: 85px;
       & > div {
         transform: translateX(375px);
       }
-      // &-name {
-      //   text-align: center;
-      //   border-radius: 100px;
-      //   font-size: 1.3rem;
-      //   line-height: 1.65;
-      //   color: #fff;
-      // }
     }
   }
 }

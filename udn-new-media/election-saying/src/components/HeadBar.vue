@@ -64,9 +64,6 @@ export default {
   methods: {
     toggleEditorList() {
       this.isEditorListShow = !this.isEditorListShow;
-      // if (this.isEditorListShow) {
-      //   document.getElementsByClassName('head-bar__editor-list')[0].style.minHeight = '100%';
-      // }
     },
   },
 };
@@ -76,7 +73,6 @@ export default {
 .head-bar {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
   margin-bottom: 22px;
-  // padding: 5px 5px 5px 10px;
   padding-left: 10px;
   padding-right: 5px;
   line-height: 1.29;
@@ -84,12 +80,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   &__editor-list {
-    // display: flex;
     // position: fixed;
-    // justify-content: center;
-    // align-items: center;
     position: absolute;
-    // height: 0%;
     width: 100%;
     overflow: hidden;
     // min-height: 100%;
@@ -99,8 +91,6 @@ export default {
     left: 0;
     background-color: #e5e5e5;
     z-index: 9;
-    // padding-top: 80px;
-    // padding-bottom: 30px;
   }
   &__editor-wrapper {
     padding-top: 80px;
@@ -108,23 +98,13 @@ export default {
     flex-direction: column;
     align-items: center;
     position: relative;
-    // position: absolute;
-    // left: 50%;
-    // transform: translateX(-50%);
     margin-bottom: 48px;
-    // top: 12.76%;
-    // & > * {
-    //   flex: 0 0 auto;
-    // }
   }
   &__logo-wrapper {
     width: 107px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 34px;
-    // position: relative;
-    // position: absolute;
-    // bottom: 13.56%;
   }
   & img {
     margin-bottom: 10px;
@@ -149,19 +129,6 @@ export default {
     line-height: 20px;
     padding-bottom: 30px;
   }
-  // & svg {
-  //   // margin-left: 8px;
-  //   // margin-left: 12px;
-  //   // margin-bottom: 6px;
-  //   width: 33.69px;
-  //   height: 33px;
-  //   // cursor: pointer;
-  //   fill: #040000;
-  //   transition: transform 0.5s;
-  //   &:hover {
-  //     transform: rotate(15deg);
-  //   }
-  // }
   &__arrow {
     width: 39.16px;
     height: 40px;
@@ -180,11 +147,6 @@ export default {
 .udn-logo {
   width: 30.63px;
   height: 30px;
-  // width: 33.69px;
-  // height: 33px;
-  // cursor: pointer;
-  // margin-top: 5px;
-  // margin-bottom: 5px;
   fill: #040000;
   transition: transform 0.5s;
   &:hover {

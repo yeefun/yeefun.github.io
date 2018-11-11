@@ -65,8 +65,6 @@
 // } from 'gsap/TweenMax';
 import { detectMob, detectPlatform } from 'udn-newmedia-utils';
 import HeadBar from './HeadBar.vue';
-// import Share from './Share.vue';
-
 
 export default {
   name: 'Result',
@@ -225,12 +223,10 @@ export default {
     }
   }
   & > img {
-    // width: 100%;
     width: 300px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    // height: auto;
   }
   & h2 {
     width: 100%;
@@ -245,8 +241,6 @@ export default {
     padding: 4px;
     box-sizing: border-box;
     background-color: #fff;
-    // margin-bottom: 22px;
-    // margin-bottom: 10px;
     margin-bottom: 20px;
     & > div {
       width: 100%;
@@ -258,7 +252,6 @@ export default {
     }
   }
   & h3 {
-    // font-size: 2rem;
     line-height: 1.35;
     font-weight: 700;
     margin-bottom: 5px;
@@ -270,7 +263,6 @@ export default {
     transform: translateY(-30px);
     & p {
       line-height: 1.25;
-      // margin-bottom: 30px;
     }
   }
   & a {
