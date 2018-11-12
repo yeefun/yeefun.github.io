@@ -1,5 +1,5 @@
 <template>
-  <section class="result" id="result" v-if="isResultShow">
+  <section class="result" id="result" v-show="isResultShow" ref="result">
     <HeadBar></HeadBar>
     <template v-if="isReaderSoso">
       <img src="../assets/TestOutput/soso.png" alt="">
@@ -83,6 +83,11 @@ export default {
       typeNameTimer: null,
     };
   },
+  mounted() {
+    if (detectMob()) {
+      this.$refs.result.style.minHeight = '100vh';
+    }
+  },
   methods: {
     gaRelateEvent() {
       // GA: how many people enter realted website from this game?
@@ -115,14 +120,16 @@ export default {
       }
       window.FB.ui({
         method: 'share_open_graph',
-        // action_type: 'og.shares',
-        action_type: 'og.likes',
+        action_type: 'og.shares',
+        // action_type: 'og.likes',
         action_properties: JSON.stringify({
           object: {
             'og:url': 'https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html',
             'og:title': '候選人金句連連看 這些政策是誰提的？',
             'og:description': '九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！',
             'og:image': this.FbShareMetaImg,
+            'og:image:width': '1280',
+            'og:image:width': '680',
           },
         }),
       });
@@ -171,6 +178,7 @@ export default {
   flex: 0 0 100%;
   box-sizing: border-box;
   position: relative;
+  // min-height: 100vh;
   // CONFUSED
   min-width: 100%;
   &__share {

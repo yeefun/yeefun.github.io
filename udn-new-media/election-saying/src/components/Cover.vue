@@ -35,6 +35,10 @@ export default {
   },
   methods: {
     slideToFirstTestPage() {
+      const candidateWrappers = document.getElementsByClassName('test-question__candidate-wrapper');
+      for (let i = 0; i < candidateWrappers.length; i += 1) {
+        candidateWrappers[i].style.transform = `translateX(${this.$parent.$refs.app.offsetWidth}px)`;
+      }
       TweenLite.to('#total-container', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),

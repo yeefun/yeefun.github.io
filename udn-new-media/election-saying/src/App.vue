@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import { detectMob, detectPlatform } from 'udn-newmedia-utils';
 // import {
 //   TweenLite, Back,
 // } from 'gsap/TweenMax';
 
 // import TweenLite from 'gsap/TweenLite.js';
 // import { Back } from 'gsap/EasePack.js';
+import { detectMob, detectPlatform } from 'udn-newmedia-utils';
 
 import Stage from './components/Stage.vue';
 import Cover from './components/Cover.vue';

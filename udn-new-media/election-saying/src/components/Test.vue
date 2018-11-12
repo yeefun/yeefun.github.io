@@ -4,7 +4,7 @@
     <!-- <div v-if="test.id !== 5 ? isTestShow : !isTestShow"> -->
       <section class="test-answer" v-show="isAnswerShow">
         <div :id="`answer-text--test${test.id}`">
-          <div class="candidate-name" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
+          <div class="candidate-name candidate-name--answer" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
           <h2>{{ test.saying }}</h2>
           <p v-html="test.context"></p>
 
@@ -49,7 +49,8 @@
 
         </div>
         <div class="test-question__candidate">
-          <div v-for="(num, idx) in test.names.length" :key="test.names[idx]" :id="`candidate${idx + 1}--test${test.id}`">
+          <!-- change -->
+          <div v-for="(num, idx) in test.names.length" :key="test.names[idx]" :id="`candidate${idx + 1}--test${test.id}`" class="test-question__candidate-wrapper">
             <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__head test-question__head--candidate" :src="test.imgs[idx]" :data-name="test.names[idx]" alt="">
             <div class="candidate-name" :class="test.backgroundColorOfNames[idx]">{{ test.names[idx] }}</div>
           </div>
@@ -127,6 +128,8 @@ export default {
       }, 600);
     },
     testSlideInDynamic() {
+      this.$parent.$refs.app.scrollTop = 0;
+      this.htmlEle.scrollTop = 0;
       window.addEventListener('resize', this.resizeHandler);
       TweenLite.to(`#candidate1--test${this.test.id}`, 0.4, {
         x: 0,
@@ -338,7 +341,8 @@ export default {
         this.$parent.scores += 1;
         // CONFUSED why it can work in IE, but css or svg property can't?
         TweenLite.set(`#correct-stroke--test${this.test.id}`, {
-          transformOrigin: '50% 50%',
+          // transformOrigin: '50% 50%',
+          // svgOrigin: '43 43',
           rotation: -90,
         });
         TweenLite.to(`#correct-stroke--test${this.test.id}`, 0.4, {
@@ -401,6 +405,10 @@ export default {
         scale: 2,
         ease: Back.easeOut.config(1),
         delay: 0.4,
+        onStart: () => {
+          this.$parent.$refs.app.scrollTop = 0;
+          this.htmlEle.scrollTop = 0;
+        },
       });
       TweenLite.from(`#answer-text--test${this.test.id}`, 0.4, {
         y: 200,
@@ -450,6 +458,12 @@ export default {
       this.readerStayTimeInAnswerPage();
 
       document.getElementById(`stage-num--test${this.test.id + 1}`).classList.add('active');
+
+      const candidateWrappers = document.getElementsByClassName('test-question__candidate-wrapper');
+      for (let i = 0; i < candidateWrappers.length; i += 1) {
+        candidateWrappers[i].style.transform = `translateX(${this.$parent.$refs.app.offsetWidth}px)`;
+      }
+
       TweenLite.to('#test-wrapper', 0.3, {
         x: '-=100%',
         ease: Back.easeIn.config(1.4),
@@ -575,7 +589,9 @@ export default {
 
 .check-mark {
   stroke: #d14033;
-  stroke-width: 10px;
+  // stroke-width: 10px;
+  // IE & Edge only can display 'stroke-dashoffset' animation in 6px
+  stroke-width: 6px;
   fill: none;
   &--tick {
     stroke-dasharray: 68;
@@ -593,7 +609,11 @@ export default {
   font-size: 1.3rem;
   line-height: 1.65;
   color: #fff;
-  width: 80px;
+  // width: 80px;
+  width: 100%;
+  &--answer {
+    width: 80px;
+  }
 }
 
 .test {
@@ -687,8 +707,11 @@ export default {
       overflow: hidden;
       fill: none;
       position: absolute;
-      width: 86px;
-      height: 86px;
+      width: 25.67%;
+      // width: 100%;
+      height: auto;
+      // width: 86px;
+      // height: 86px;
       @include align-center;
       z-index: 9;
     }
@@ -699,6 +722,7 @@ export default {
       opacity: 0;
       margin-left: auto;
       margin-right: auto;
+      // width: 23.88%;
       &-prompt {
         position: absolute;
         @include align-center;
@@ -709,10 +733,14 @@ export default {
       }
     }
     &__head {
-      width: 80px;
+      width: 23.88%;
+      // width: 100%;
+      // width: 80px;
       border-radius: 50%;
       box-sizing: border-box;
       &--candidate {
+        width: 100%;
+
         border: 1px solid #d5d4d4;
         margin-bottom: 5px;
         background-color: #fff;
@@ -726,9 +754,12 @@ export default {
       position: relative;
       display: flex;
       justify-content: space-between;
-      & > div {
-        transform: translateX(375px);
+      &-wrapper {
+        width: 23.88%;
       }
+      // & > div {
+      //   transform: translateX(375px);
+      // }
     }
   }
 }
