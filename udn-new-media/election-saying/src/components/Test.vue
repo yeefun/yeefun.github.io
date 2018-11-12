@@ -342,7 +342,7 @@ export default {
         // CONFUSED why it can work in IE, but css or svg property can't?
         TweenLite.set(`#correct-stroke--test${this.test.id}`, {
           // transformOrigin: '50% 50%',
-          // svgOrigin: '43 43',
+          svgOrigin: '43 43',
           rotation: -90,
         });
         TweenLite.to(`#correct-stroke--test${this.test.id}`, 0.4, {
@@ -360,7 +360,8 @@ export default {
         // incorrect
       } else {
         TweenLite.set(`#incorrect-stroke--test${this.test.id}`, {
-          transformOrigin: '50% 50%',
+          // transformOrigin: '50% 50%',
+          svgOrigin: '43 43',
           rotation: -90,
         });
         TweenLite.to(`#incorrect-stroke--test${this.test.id}`, 0.4, {

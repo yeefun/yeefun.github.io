@@ -129,7 +129,7 @@ export default {
             'og:description': '九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！',
             'og:image': this.FbShareMetaImg,
             'og:image:width': '1280',
-            'og:image:width': '680',
+            'og:image:height': '680',
           },
         }),
       });
