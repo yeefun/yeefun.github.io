@@ -130,6 +130,8 @@ export default {
     testSlideInDynamic() {
       this.$parent.$refs.app.scrollTop = 0;
       this.htmlEle.scrollTop = 0;
+      this.windowEle.scrollTo(0, 0);
+
       window.addEventListener('resize', this.resizeHandler);
       TweenLite.to(`#candidate1--test${this.test.id}`, 0.4, {
         x: 0,
@@ -411,6 +413,7 @@ export default {
         onStart: () => {
           this.$parent.$refs.app.scrollTop = 0;
           this.htmlEle.scrollTop = 0;
+          this.windowEle.scrollTo(0, 0);
         },
       });
       TweenLite.from(`#answer-text--test${this.test.id}`, 0.4, {
