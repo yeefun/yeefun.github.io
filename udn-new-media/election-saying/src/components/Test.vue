@@ -343,7 +343,8 @@ export default {
         TweenLite.set(`#correct-stroke--test${this.test.id}`, {
           // transformOrigin: '50% 50%',
           svgOrigin: '43 43',
-          rotation: '-89.9_ccw',
+          // if set '-90', ipad can't rotate -90deg
+          rotation: -89.99,
         });
         TweenLite.to(`#correct-stroke--test${this.test.id}`, 0.4, {
           strokeDashoffset: 0,
@@ -362,7 +363,8 @@ export default {
         TweenLite.set(`#incorrect-stroke--test${this.test.id}`, {
           // transformOrigin: '50% 50%',
           svgOrigin: '43 43',
-          rotation: '-=89.9_ccw',
+          // if set '-90', ipad can't rotate -90deg
+          rotation: -89.99,
         });
         TweenLite.to(`#incorrect-stroke--test${this.test.id}`, 0.4, {
           strokeDashoffset: 0,
