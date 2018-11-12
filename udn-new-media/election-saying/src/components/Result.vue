@@ -163,6 +163,14 @@ export default {
             typeName();
           } else {
             clearTimeout(this.typeNameTimer);
+            // GA: what is reader's score?
+            window.ga('newmedia.send', {
+              hitType: 'event',
+              eventCategory: 'Game',
+              eventAction: 'answer',
+              eventLabel: `[候選人金句連連看] [共得${this.$parent.scores}分]`,
+              eventValue: this.$parent.scores,
+            });
           }
         }, 160);
       };
