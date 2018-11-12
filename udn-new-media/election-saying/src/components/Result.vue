@@ -120,8 +120,8 @@ export default {
       }
       window.FB.ui({
         method: 'share_open_graph',
-        action_type: 'og.shares',
-        // action_type: 'og.likes',
+        // action_type: 'og.shares',
+        action_type: 'og.likes',
         action_properties: JSON.stringify({
           object: {
             'og:url': 'https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html',
