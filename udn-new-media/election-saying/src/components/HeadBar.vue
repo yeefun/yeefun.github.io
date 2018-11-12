@@ -1,7 +1,7 @@
 <template>
   <section class="head-bar">
     <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
-      <svg class="udn-logo" viewBox="0 0 272.1 266.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="udn-logo" viewBox="0 0 272.1 266.5">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>
         <path d="M87.9,224.8c-3.4,2-12.6,10.7-21.1,19.1a130.2,130.2,0,0,0,15.6,8.4c5.7-6.5,11.1-13.1,13.2-17.3C99.3,227.2,91.9,222.5,87.9,224.8Z"/>
         <path d="M67.5,183.2c-5-4.3-5.1-5.5-9.9-2.7s-4.6,1.6-5.8,2.7-15.6,15.2-18.2,17.7l-5.7,5.3a131,131,0,0,0,8.6,11.3c3.9-4.1,8.7-8.8,11.4-11.3s8.6-8.7,11.1-9.4,3.4-.9,7.1-3.9S72.5,187.6,67.5,183.2Z"/>
@@ -16,7 +16,7 @@
         <path d="M118.5,144.7c1,0.9,4.6,3.5,9.5-1.4s6.8-7.4,9-9.7,5.5-6,3.8-9.4-5.5-8.4-11.1-5.9a46.9,46.9,0,0,0-10.5,6.2l-2.7,2.4c-2.1,2.7-4.1,5.6-2.7,10.7S117.5,143.8,118.5,144.7Z"/>
         <path d="M115.9,109c3.1-3.3,1.7-4.8-.7-8.4S108,96.5,101,97.1s-10.4,7.3-11.1,9.7c0,0-1.9,5-1.6,7.4s4.4,8.2,7.8,10,6.3-.4,9.6-4.8S112.8,112.3,115.9,109Z"/></svg>
     </a>
-    <svg class="head-bar__arrow" :class="{ active: isEditorListShow } " viewBox="0 0 39.174 40" @click="toggleEditorList" @touchstatr.prevent="toggleEditorList">
+    <svg xmlns="http://www.w3.org/2000/svg" class="head-bar__arrow" :class="{ active: isEditorListShow } " viewBox="0 0 39.174 40" @click="toggleEditorList" @touchstatr.prevent="toggleEditorList">
       <path d="M23.627,8.59l-7.64,7.328L8.347,8.59,6,10.846l9.987,9.6,9.987-9.6Z" transform="translate(3.6 5.983)"/>
       <path fill="none" d="M0,0H39.174V40H0Z"/>
     </svg>

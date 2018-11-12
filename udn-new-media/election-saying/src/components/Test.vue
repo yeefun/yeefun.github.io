@@ -26,7 +26,7 @@
           <img :src="test.answerImg" class="test-question__answer-head" :id="`answer-head--test${test.id}`" alt="">
           <p class="test-question__drop-place-prompt" v-show="!hideForAnswerPop">拖曳<br>頭像</p>
 
-          <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 86" v-show="!hideForAnswerPop">
             <g transform="translate(-19 -398)">
               <g transform="translate(19 398)">
                 <circle class="check-fill" cx="43" cy="43" r="43"/>
@@ -36,7 +36,7 @@
             </g>
           </svg>
 
-          <svg viewBox="0 0 86 86" v-show="!hideForAnswerPop">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 86" v-show="!hideForAnswerPop">
             <g transform="translate(-113 -398)">
               <g transform="translate(113 398)">
                 <circle class="check-fill" cx="43" cy="43" r="43"/>
