@@ -362,7 +362,7 @@ export default {
         TweenLite.set(`#incorrect-stroke--test${this.test.id}`, {
           // transformOrigin: '50% 50%',
           svgOrigin: '43 43',
-          rotation: '-=80',
+          rotation: '-=90',
         });
         TweenLite.to(`#incorrect-stroke--test${this.test.id}`, 0.4, {
           strokeDashoffset: 0,
