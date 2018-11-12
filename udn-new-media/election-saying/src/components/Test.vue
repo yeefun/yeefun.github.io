@@ -128,8 +128,8 @@ export default {
       }, 600);
     },
     testSlideInDynamic() {
-      this.$parent.$refs.app.scrollTop = 0;
-      this.htmlEle.scrollTop = 0;
+      // this.$parent.$refs.app.scrollTop = 0;
+      // this.htmlEle.scrollTop = 0;
       this.windowEle.scrollTo(0, 0);
 
       window.addEventListener('resize', this.resizeHandler);
@@ -411,8 +411,8 @@ export default {
         ease: Back.easeOut.config(1),
         delay: 0.4,
         onStart: () => {
-          this.$parent.$refs.app.scrollTop = 0;
-          this.htmlEle.scrollTop = 0;
+          // this.$parent.$refs.app.scrollTop = 0;
+          // this.htmlEle.scrollTop = 0;
           this.windowEle.scrollTo(0, 0);
         },
       });
