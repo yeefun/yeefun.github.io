@@ -340,11 +340,11 @@ export default {
       if (this.draggedHead.dataset.name === this.test.answerName) {
         this.$parent.scores += 1;
         // CONFUSED why it can work in IE, but css or svg property can't?
-        TweenLite.set(`#correct-stroke--test${this.test.id}`, {
-          // transformOrigin: '50% 50%',
-          svgOrigin: '43 43',
-          rotation: -90,
-        });
+        // TweenLite.set(`#correct-stroke--test${this.test.id}`, {
+        //   // transformOrigin: '50% 50%',
+        //   svgOrigin: '43 43',
+        //   rotation: -90,
+        // });
         TweenLite.to(`#correct-stroke--test${this.test.id}`, 0.4, {
           strokeDashoffset: 0,
           ease: Power2.easeOut,

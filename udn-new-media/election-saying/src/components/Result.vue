@@ -84,7 +84,7 @@ export default {
     };
   },
   mounted() {
-    if (detectMob()) {
+    if (detectMob() && !navigator.userAgent.match(/iPad/i)) {
       this.$refs.result.style.minHeight = '100vh';
     }
   },
