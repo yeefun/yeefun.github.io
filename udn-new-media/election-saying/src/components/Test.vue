@@ -733,7 +733,8 @@ export default {
         position: absolute;
         @include align-center;
         font-size: 1.5rem;
-        color: #707070;
+        // color: #707070;
+        color: #000;
         line-height: 1.13;
         user-select: none;
       }

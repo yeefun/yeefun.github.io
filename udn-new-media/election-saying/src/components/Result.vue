@@ -74,7 +74,8 @@ export default {
   },
   data() {
     return {
-      FbShareMetaImg: 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--soso.jpg',
+      FbShareMetaImg: 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--soso--mob.jpg',
+      // FbShareMetaImg: 'https://nmdap.udn.com.tw/saying/meta--soso.jpg',
       isResultShow: false,
       // isResultShow: true,
       isReaderSoso: true,
@@ -113,23 +114,33 @@ export default {
       });
     },
     shareToFb() {
-      if (this.$parent.scores <= 2) {
-        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--bad.jpg';
-      } else if (this.$parent.scores >= 6) {
-        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--good.jpg';
+      if (detectMob()) {
+        if (this.$parent.scores <= 2) {
+          this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--bad--mob.jpg';
+          // this.FbShareMetaImg = 'https://nmdap.udn.com.tw/saying/meta--bad.jpg';
+        } else if (this.$parent.scores >= 6) {
+          this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--good--mob.jpg';
+        }
+      } else if (this.$parent.scores > 2 && this.$parent.scores < 6) {
+        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--soso--pc.jpg';
+      } else if (this.$parent.scores <= 2) {
+        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--bad--pc.jpg';
+      } else {
+        this.FbShareMetaImg = 'https://udn.com/upf/newmedia/2018_data/2018election/game2/meta--good--pc.jpg';
       }
+
       window.FB.ui({
         method: 'share_open_graph',
-        // action_type: 'og.shares',
-        action_type: 'og.likes',
+        action_type: 'og.shares',
+        // action_type: 'og.likes',
         action_properties: JSON.stringify({
           object: {
             'og:url': 'https://udn.com/upf/newmedia/2018_data/2018election/game2/index.html',
             'og:title': '候選人金句連連看 這些政策是誰提的？',
             'og:description': '九合一選舉即將到來，每位候選人都積極喊出各種口號及政策，希望能獲得選民青睞。你知道這些金句出自哪幾位候選人嗎？來玩玩看這個小測驗吧！',
             'og:image': this.FbShareMetaImg,
-            'og:image:width': '1280',
-            'og:image:height': '680',
+            // 'og:image:width': '1280',
+            // 'og:image:height': '680',
           },
         }),
       });
@@ -167,7 +178,7 @@ export default {
             window.ga('newmedia.send', {
               hitType: 'event',
               eventCategory: 'Game',
-              eventAction: 'answer',
+              eventAction: 'Answer',
               eventLabel: `[候選人金句連連看] [共得${this.$parent.scores}分]`,
               eventValue: this.$parent.scores,
             });

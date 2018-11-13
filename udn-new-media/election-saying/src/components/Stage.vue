@@ -21,6 +21,10 @@ export default {
 <style lang="scss">
 .stage {
   position: relative;
+  // position: fixed;
+  // position: absolute;
+  // width: 100%;
+
   z-index: 199;
   box-sizing: border-box;
   padding: 10px 19px;

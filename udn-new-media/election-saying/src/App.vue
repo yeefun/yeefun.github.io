@@ -66,7 +66,7 @@ export default {
         answerName: '丁守中',
         answerImg: dingImgAnswer,
         backgroundColorOfAnswerName: 'bg-blue',
-        context: '國民黨台北市長參選人丁守中推出「<a href="https://udn.com/news/story/7323/3465970" target="_blank">三招救都更</a>」政策，第一招是提高容積率，一坪換一坪；第二招是成立都更局，一條龍服務；第三招是加速修法，拔掉釘子戶。丁守中表示，在台北需要都更的老房子有60萬戶，但是4年了，大家講到都更還是一句，麥作惘了(別做夢了)。」',
+        context: '國民黨台北市長參選人丁守中推出「<a href="https://udn.com/news/story/7323/3465970" target="_blank">三招救都更</a>」政策，第一招是提高容積率，一坪換一坪；第二招是成立都更局，一條龍服務；第三招是加速修法，拔掉釘子戶。丁守中表示，在台北需要都更的老房子有60萬戶，「但是4年了，大家講到都更還是一句，麥作惘了(別做夢了)。」',
       },
       {
         id: 2,
@@ -136,7 +136,11 @@ export default {
   },
   methods: {
     fixedStage() {
-      this.stageMove = this.$refs.app.scrollTop + window.pageYOffset;
+      if (document.documentElement.clientHeight > 643) {
+        this.stageMove = this.$refs.app.scrollTop;
+      } else {
+        this.stageMove = this.$refs.app.scrollTop + window.pageYOffset;
+      }
     },
     unloadHandler() {
       // GA: what's the stage when reader exit from this game?
