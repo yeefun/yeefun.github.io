@@ -1,6 +1,6 @@
 <template>
   <section class="head-bar">
-    <a href="https://ubrand.udn.com/ubrand/index" target="_blank">
+    <a href="https://udn.com/news/index" target="_blank">
       <svg xmlns="http://www.w3.org/2000/svg" class="udn-logo" viewBox="0 0 272.1 266.5">
         <path d="M105.4,155.2c1.4-2.2-.3-7.2-1.7-8.1s-3.9-4.4-7.1-1.6-4.2,5.2-6.2,6-4.6,2.3-4.6,2.3a5,5,0,0,0-3.5,6.7c1.2,3.1,8.3,10.8,11,12.6s7.5-1.1,8.5-4.7S104,157.3,105.4,155.2Z"/>
         <path d="M87.9,224.8c-3.4,2-12.6,10.7-21.1,19.1a130.2,130.2,0,0,0,15.6,8.4c5.7-6.5,11.1-13.1,13.2-17.3C99.3,227.2,91.9,222.5,87.9,224.8Z"/>
