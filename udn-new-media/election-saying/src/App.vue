@@ -66,7 +66,7 @@ export default {
         answerName: '丁守中',
         answerImg: dingImgAnswer,
         backgroundColorOfAnswerName: 'bg-blue',
-        context: '國民黨台北市長參選人丁守中推出「<a href="https://udn.com/news/story/7323/3465970" target="_blank">三招救都更</a>」政策，第一招是提高容積率，一坪換一坪；第二招是成立都更局，一條龍服務；第三招是加速修法，拔掉釘子戶。丁守中表示，在台北需要都更的老房子有60萬戶，「但是4年了，大家講到都更還是一句，麥作惘了(別做夢了)。」',
+        context: '國民黨台北市長參選人丁守中推出「三招救都更」政策，第一招是提高容積率，一坪換一坪；第二招是成立都更局，一條龍服務；第三招是加速修法，拔掉釘子戶。丁守中表示，在台北需要都更的老房子有60萬戶，「但是4年了，大家講到都更還是一句，麥作惘了（別做夢了）。」',
       },
       {
         id: 2,
@@ -77,7 +77,7 @@ export default {
         answerName: '姚文智',
         answerImg: yaoImgAnswer,
         backgroundColorOfAnswerName: 'bg-green',
-        context: '民進黨台北市長參選人姚文智日前搭上「撩妹金句」風潮，以幽默風趣的圖文結合市政，向市民告白。姚文智也在金句中提及自己「<a href="https://udn.com/news/story/10958/2880476" target="_blank">廢松機，改中央公園</a>」的政策，若當選台北市長，計劃在2022年將松山機場遷走。',
+        context: '民進黨台北市長參選人姚文智日前搭上「撩妹金句」風潮，以幽默風趣的圖文結合市政，向市民告白。姚文智也在金句中提及自己「廢松機，改中央公園」的政策，若當選台北市長，計劃在2022年將松山機場遷走。',
       },
       {
         id: 3,
@@ -88,7 +88,7 @@ export default {
         answerName: '韓國瑜',
         answerImg: hanImgAnswer,
         backgroundColorOfAnswerName: 'bg-blue',
-        context: '國民黨高雄市長參選人韓國瑜表示，若有機會執掌高雄市，對他來說，兩岸關係及對外關係通通都沒有圍牆，只有道路，他也主張「<a href="https://udn.com/news/story/6656/3299296" target="_blank">南南合作</a>」，即台灣南部、中國大陸南方和東南亞結合起來，高雄走經濟之路。民進黨高雄市長參選人陳其邁則把招商引資列為高雄拚經濟的首要目標，強調將打造智慧城市及全世界最有價值的半導體聚落。',
+        context: '國民黨高雄市長參選人韓國瑜表示，若有機會執掌高雄市，對他來說，兩岸關係及對外關係通通都沒有圍牆，只有道路，他也主張「南南合作」，即台灣南部、中國大陸南方和東南亞結合起來，高雄走經濟之路。民進黨高雄市長參選人陳其邁則把招商引資列為高雄拚經濟的首要目標，強調將打造智慧城市及全世界最有價值的半導體聚落。',
       },
       {
         id: 4,
@@ -99,7 +99,7 @@ export default {
         answerName: '柯文哲',
         answerImg: keImgAnswer,
         backgroundColorOfAnswerName: 'bg-grey',
-        context: '尋求連任的台北市長柯文哲透過影片宣傳「擁抱多元，全城平權」的理念，他提到台北市推動<a href="https://udn.com/news/story/7323/2911231" target="_blank">共融式遊具</a>，讓健康的孩童與腦性麻痺、殘障、身障的朋友都可以到公園玩樂，柯文哲也以台北在去年舉辦開齋節和台北同志大遊行為例，證明台北能接納各個族群，是個多元、友善的城市。',
+        context: '尋求連任的台北市長柯文哲透過影片宣傳「擁抱多元，全城平權」的理念，他提到台北市推動共融式遊具，讓健康的孩童與腦性麻痺、殘障、身障的朋友都可以到公園玩樂，柯文哲也以台北在去年舉辦開齋節和台北同志大遊行為例，證明台北能接納各個族群，是個多元、友善的城市。',
       },
       {
         id: 5,
@@ -110,7 +110,7 @@ export default {
         answerName: '侯友宜',
         answerImg: houImgAnswer,
         backgroundColorOfAnswerName: 'bg-blue',
-        context: '國民黨新北市長參選人侯友宜推出「<a href="https://udn.com/news/story/7323/3314450" target="_blank">三環六線</a>」政策，計劃新增完成五股泰山輕軌、深坑輕軌、淡海輕軌延伸到八里等捷運路線，同時將積極推動共構，提高捷運站周邊的生活和商業機能，以讓更多人住在捷運站周邊。',
+        context: '國民黨新北市長參選人侯友宜推出「三環六線」政策，計劃新增完成五股泰山輕軌、深坑輕軌、淡海輕軌延伸到八里等捷運路線，同時將積極推動共構，提高捷運站周邊的生活和商業機能，以讓更多人住在捷運站周邊。',
       },
       {
         id: 6,
@@ -121,22 +121,36 @@ export default {
         answerName: '林佳龍',
         answerImg: linImgAnswer,
         backgroundColorOfAnswerName: 'bg-green',
-        context: '競選連任的台中市長林佳龍與國民黨籍台中市長參選人盧秀燕在<a href="https://udn.com/news/story/6656/3446301" target="_blank">空汙議題</a>上針鋒相對，盧秀燕曾批評，台中近年來成為全國空氣最糟的地方，林佳龍則表示，過去30年來，台中火力發電廠的空汙問題，沒有一位縣市長敢挑戰，他選擇扛起責任，今年上半年，台中空氣品質第一次來到全國前十名。',
+        context: '競選連任的台中市長林佳龍與國民黨籍台中市長參選人盧秀燕在空汙議題上針鋒相對，盧秀燕曾批評，台中近年來成為全國空氣最糟的地方，林佳龍則表示，過去30年來，台中火力發電廠的空汙問題，沒有一位縣市長敢挑戰，他選擇扛起責任，今年上半年，台中空氣品質第一次來到全國前十名。',
       }],
+      htmlEle: document.documentElement,
+      // canStageMove: true,
     };
   },
   mounted() {
     window.addEventListener('scroll', this.fixedStage);
     if (detectMob() && !navigator.userAgent.match(/iPad/i)) {
       this.$refs.app.style.minHeight = '100%';
-    } else if (document.documentElement.clientHeight > 643) {
+    } else if (this.htmlEle.clientHeight > 643) {
       document.body.style.cssText = 'display: flex; align-items: center;';
+      window.addEventListener('resize', this.handleResize);
+    } else {
+      document.body.style.cssText = '';
+      window.addEventListener('resize', this.handleResize);
     }
     window.addEventListener('unload', this.unloadHandler);
   },
   methods: {
+    handleResize() {
+      if (this.htmlEle.clientHeight > 643) {
+        document.body.style.cssText = 'display: flex; align-items: center;';
+      } else {
+        document.body.style.cssText = '';
+      }
+    },
     fixedStage() {
-      if (document.documentElement.clientHeight > 643) {
+      // if (!this.canStageMove) return;
+      if (this.htmlEle.clientHeight > 643) {
         this.stageMove = this.$refs.app.scrollTop;
       } else {
         this.stageMove = this.$refs.app.scrollTop + window.pageYOffset;

@@ -6,7 +6,7 @@
         <div :id="`answer-text--test${test.id}`">
           <div class="candidate-name candidate-name--answer" :class="test.backgroundColorOfAnswerName">{{ test.answerName }}</div>
           <h2>{{ test.saying }}</h2>
-          <p v-html="test.context"></p>
+          <p>{{ test.context }}</p>
 
           <button v-if="test.id !== 6" type="button" @click.once="slideToNextTestPage" @touchstart.prevent.once="slideToNextTestPage">下一題</button>
           <button type="button" v-else @click.once="slideToResult" @touchstart.prevent.once="slideToResult">看結果</button>
@@ -49,7 +49,6 @@
 
         </div>
         <div class="test-question__candidate">
-          <!-- change -->
           <div v-for="(num, idx) in test.names.length" :key="test.names[idx]" :id="`candidate${idx + 1}--test${test.id}`" class="test-question__candidate-wrapper">
             <img @mousedown.prevent="!canDragHead || mouseDragStart($event)" @touchstart.prevent="!canDragHead || touchDragStart($event)" class="test-question__head test-question__head--candidate" :src="test.imgs[idx]" :data-name="test.names[idx]" alt="">
             <div class="candidate-name" :class="test.backgroundColorOfNames[idx]">{{ test.names[idx] }}</div>
@@ -158,6 +157,7 @@ export default {
       });
     },
     typeQuotation() {
+      // this.$parent.canStageMove = false;
       TweenLite.set(`#quotation-mark-top--test${this.test.id}, #quotation-mark-bottom--test${this.test.id}`, {
         opacity: 1,
       });
@@ -191,6 +191,8 @@ export default {
               ease: Power2.easeIn,
               onComplete: () => {
                 this.canDragHead = true;
+                // this.$parent.canStageMove = true;
+                // this.$parent.fixedStage();
               },
             });
           }
