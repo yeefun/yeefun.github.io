@@ -3,12 +3,16 @@ html, body {
   overflow: hidden;
 }
 
-// body {
-//   background-color: #9e9e9f;
-// }
+body {
+  background-color: #9e9e9f;
+  // background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 canvas {
-  // width: 574px;
-  // height: 396px;
   max-width: 100%;
+  // box-shadow: 7px 7px 14px rgba(#000, 0.4);
+  border-radius: 4px;
 }

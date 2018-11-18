@@ -2,7 +2,20 @@ html, body {
   height: 100%;
   overflow: hidden; }
 
+body {
+  background-color: #9e9e9f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
 canvas {
-  max-width: 100%; }
+  max-width: 100%;
+  border-radius: 4px; }
 
 /*# sourceMappingURL=style.css.map */

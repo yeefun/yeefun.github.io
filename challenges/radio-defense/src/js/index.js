@@ -4,7 +4,7 @@ const updateFPS = 30;
 // const bgColor = 'black';
 let time = 0;
 
-const color = {
+const globalColor = {
   red: "#e7465d",
   yellow: "#f5af5f",
   blue: "#3676bb",
@@ -17,12 +17,12 @@ const color = {
 
 
 /* GUI Controls */
-const controls = {
-  value: 0,
-}
+// const controls = {
+//   value: 0,
+// }
 
 const gui = new dat.GUI();
-gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
+// gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 
 
@@ -84,8 +84,8 @@ class Vec2 {
 /* Initialize Canvas Settings */
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
-let ww;
-let wh;
+let cw;
+let ch;
 
 ctx.circle = function (v, r) {
   this.arc(v.x, v.y, r, 0, Math.PI * 2);
@@ -96,8 +96,8 @@ ctx.line = function (v1, v2) {
 }
 
 function initCanvas() {
-  ww = canvas.width = document.documentElement.clientWidth;
-  wh = canvas.height = document.documentElement.clientHeight;
+  cw = canvas.width;
+  ch = canvas.height;
 }
 // initCanvas();
 
@@ -105,6 +105,7 @@ function initCanvas() {
 
 
 
+const degToPi = Math.PI / 180;
 class Game {
   constructor(args) {
     const def = {
@@ -118,28 +119,52 @@ class Game {
     this.update();
   }
   render() {
-    ctx.fillStyle = color.blueDark;
-    ctx.fillRect(0, 0, ww, wh);
+    ctx.fillStyle = globalColor.blueDark;
+    ctx.fillRect(0, 0, cw, ch);
     if (!this.start) {
       // 中央兩白圈
       ctx.save();
-        ctx.translate(ww / 2, wh / 2);
+        ctx.translate(cw / 2, ch / 2);
         ctx.beginPath();
-        ctx.arc(0, 0, 184, 0, Math.PI * 2);
-        ctx.strokeStyle = color.white;
+        ctx.arc(0, 0, 196, 0, Math.PI * 2);
+        ctx.strokeStyle = globalColor.white;
         ctx.stroke();
         ctx.beginPath();
-        ctx.arc(0, 0, 272, 0, Math.PI * 2);
+        ctx.arc(0, 0, 264, 0, Math.PI * 2);
         ctx.globalAlpha = 0.3;
         ctx.stroke();
       ctx.restore();
-
       // 左下方字
-      ctx.fillStyle = color.white;
-      ctx.font = "300 16px sans-serif";
-      ctx.fillText("你身負著運送能量電池的任務", 40, wh - 120);
-      ctx.fillText("卻遭到幾何星人的埋伏", 40, wh - 90);
-      ctx.fillText("請協助從他們的手中奪回能量電池！", 40, wh - 60);
+      // ctx.fillStyle = globalColor.white;
+      // ctx.font = '300 14px sans-serif';
+      // ctx.fillText('你身負著運送能量電池的任務', 24, ch - 80);
+      // ctx.fillText('卻遭到幾何星人的埋伏', 24, ch - 56);
+      // ctx.fillText('請協助從他們的手中奪回能量電池！', 24, ch - 32);
+      // 黃圓
+      const circle = new Circle({
+        p: {
+          x: cw - 128,
+          y: 96,
+        },
+      });
+      circle.draw();
+      // 藍三角形
+      const triangle = new Triangle({
+        p: {
+          x: cw - 224,
+          y: ch - 80,
+        },
+        rotate: 8,
+      });
+      triangle.draw();
+      // 紅多邊形
+      const polygon = new Polygon({
+        p: {
+          x: 88,
+          y: 104,
+        },
+      });
+      polygon.draw();
     }
     requestAnimationFrame(() => { this.render() });
   }
@@ -150,6 +175,119 @@ class Game {
   }
 }
 
+
+
+/* Circle Class
+ **
+ */
+class Circle {
+  constructor(args) {
+    const def = {
+      p: new Vec2(0, 0),
+      r: 40,
+      color: globalColor.yellow,
+    }
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.p.x, this.p.y, this.r, 0, Math.PI *2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
+
+
+/* Triangle Class
+**
+ */
+class Triangle {
+  constructor(args) {
+    const def = {
+      p: new Vec2(0, 0),
+      // angleSpan: 360 / 3,
+      r: 78,
+      rotate: 0,
+      color: globalColor.blue,
+    }
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.save();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.moveTo(0, 0);
+      ctx.rotate(this.rotate * degToPi);
+      ctx.lineTo(this.r, 0);
+      ctx.translate(this.r, 0);
+      ctx.rotate(-30 * degToPi);
+      ctx.lineTo(0, -this.r);
+    ctx.restore();
+    ctx.closePath();
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    // let points = [];
+    // for (let i = 0; i < 3; i += 1) {
+    //   const angle = this.rotate * degToPi + (360 / 3) * i * degToPi;
+    //   points.push({
+    //     angle,
+    //     r: this.r,
+    //   });
+    // }
+    // ctx.save();
+    //   ctx.translate(this.p.x, this.p.y);
+    //   ctx.beginPath();
+    //   points.forEach((point) => {
+    //     ctx.lineTo(point.r * Math.cos(point.angle), point.r * Math.sin(point.angle));
+    //   });
+    //   ctx.closePath();
+    //   ctx.fillStyle = this.color;
+    //   ctx.fill();
+    // ctx.restore();
+  }
+}
+
+
+
+class Polygon {
+  constructor(args) {
+    const def = {
+      p: new Vec2(0, 0),
+      color: globalColor.red,
+    }
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+  draw() {
+    ctx.save();
+      ctx.beginPath();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.moveTo(0, 0);
+      ctx.rotate(18 * degToPi);
+      ctx.lineTo(44, 0);
+      ctx.translate(44, 0)
+
+      ctx.rotate(64 * degToPi);
+      ctx.lineTo(28, 0);
+      ctx.translate(28, 0);
+
+      ctx.rotate(40 * degToPi);
+      ctx.lineTo(38, 0);
+      ctx.translate(38, 0);
+
+      ctx.rotate(76 * degToPi);
+      ctx.lineTo(52, 0);
+      ctx.translate(52, 0);
+
+      ctx.rotate(50 * degToPi);
+      ctx.lineTo(48, 0);
+    ctx.restore();
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
 
 /* Initialize Game Logic */
 // function init() {
@@ -172,8 +310,8 @@ class Game {
 /* Update Picture */
 // function draw() {
   // clear background
-  // ctx.fillStyle = color.blueDark;
-  // ctx.fillRect(0, 0, ww, wh);
+  // ctx.fillStyle = globalColor.blueDark;
+  // ctx.fillRect(0, 0, cw, ch);
 
   // draw here
   // ...

@@ -11,7 +11,7 @@ var updateFPS = 30; // const showMouse = true;
 // const bgColor = 'black';
 
 var time = 0;
-var color = {
+var globalColor = {
   red: "#e7465d",
   yellow: "#f5af5f",
   blue: "#3676bb",
@@ -19,12 +19,12 @@ var color = {
   white: "#fff"
 };
 /* GUI Controls */
+// const controls = {
+//   value: 0,
+// }
 
-var controls = {
-  value: 0
-};
-var gui = new dat.GUI();
-gui.add(controls, 'value', -2, 2).step(0.01).onChange(function (value) {});
+var gui = new dat.GUI(); // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
+
 /* 2D Vector Class */
 
 var Vec2 =
@@ -107,8 +107,8 @@ function () {
 
 var canvas = document.getElementById('game');
 var ctx = canvas.getContext('2d');
-var ww;
-var wh;
+var cw;
+var ch;
 
 ctx.circle = function (v, r) {
   this.arc(v.x, v.y, r, 0, Math.PI * 2);
@@ -120,10 +120,12 @@ ctx.line = function (v1, v2) {
 };
 
 function initCanvas() {
-  ww = canvas.width = document.documentElement.clientWidth;
-  wh = canvas.height = document.documentElement.clientHeight;
+  cw = canvas.width;
+  ch = canvas.height;
 } // initCanvas();
 
+
+var degToPi = Math.PI / 180;
 
 var Game =
 /*#__PURE__*/
@@ -149,28 +151,53 @@ function () {
     value: function render() {
       var _this = this;
 
-      ctx.fillStyle = color.blueDark;
-      ctx.fillRect(0, 0, ww, wh);
+      ctx.fillStyle = globalColor.blueDark;
+      ctx.fillRect(0, 0, cw, ch);
 
       if (!this.start) {
         // 中央兩白圈
         ctx.save();
-        ctx.translate(ww / 2, wh / 2);
+        ctx.translate(cw / 2, ch / 2);
         ctx.beginPath();
-        ctx.arc(0, 0, 184, 0, Math.PI * 2);
-        ctx.strokeStyle = color.white;
+        ctx.arc(0, 0, 196, 0, Math.PI * 2);
+        ctx.strokeStyle = globalColor.white;
         ctx.stroke();
         ctx.beginPath();
-        ctx.arc(0, 0, 272, 0, Math.PI * 2);
+        ctx.arc(0, 0, 264, 0, Math.PI * 2);
         ctx.globalAlpha = 0.3;
         ctx.stroke();
         ctx.restore(); // 左下方字
+        // ctx.fillStyle = globalColor.white;
+        // ctx.font = '300 14px sans-serif';
+        // ctx.fillText('你身負著運送能量電池的任務', 24, ch - 80);
+        // ctx.fillText('卻遭到幾何星人的埋伏', 24, ch - 56);
+        // ctx.fillText('請協助從他們的手中奪回能量電池！', 24, ch - 32);
+        // 黃圓
 
-        ctx.fillStyle = color.white;
-        ctx.font = "300 16px sans-serif";
-        ctx.fillText("你身負著運送能量電池的任務", 40, wh - 120);
-        ctx.fillText("卻遭到幾何星人的埋伏", 40, wh - 90);
-        ctx.fillText("請協助從他們的手中奪回能量電池！", 40, wh - 60);
+        var circle = new Circle({
+          p: {
+            x: cw - 128,
+            y: 96
+          }
+        });
+        circle.draw(); // 藍三角形
+
+        var triangle = new Triangle({
+          p: {
+            x: cw - 224,
+            y: ch - 80
+          },
+          rotate: 8
+        });
+        triangle.draw(); // 紅多邊形
+
+        var polygon = new Polygon({
+          p: {
+            x: 88,
+            y: 104
+          }
+        });
+        polygon.draw();
       }
 
       requestAnimationFrame(function () {
@@ -191,6 +218,142 @@ function () {
 
   return Game;
 }();
+/* Circle Class
+ **
+ */
+
+
+var Circle =
+/*#__PURE__*/
+function () {
+  function Circle(args) {
+    _classCallCheck(this, Circle);
+
+    var def = {
+      p: new Vec2(0, 0),
+      r: 40,
+      color: globalColor.yellow
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Circle, [{
+    key: "draw",
+    value: function draw() {
+      ctx.beginPath();
+      ctx.arc(this.p.x, this.p.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }]);
+
+  return Circle;
+}();
+/* Triangle Class
+**
+ */
+
+
+var Triangle =
+/*#__PURE__*/
+function () {
+  function Triangle(args) {
+    _classCallCheck(this, Triangle);
+
+    var def = {
+      p: new Vec2(0, 0),
+      // angleSpan: 360 / 3,
+      r: 78,
+      rotate: 0,
+      color: globalColor.blue
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Triangle, [{
+    key: "draw",
+    value: function draw() {
+      ctx.beginPath();
+      ctx.save();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.moveTo(0, 0);
+      ctx.rotate(this.rotate * degToPi);
+      ctx.lineTo(this.r, 0);
+      ctx.translate(this.r, 0);
+      ctx.rotate(-30 * degToPi);
+      ctx.lineTo(0, -this.r);
+      ctx.restore();
+      ctx.closePath();
+      ctx.fillStyle = this.color;
+      ctx.fill(); // let points = [];
+      // for (let i = 0; i < 3; i += 1) {
+      //   const angle = this.rotate * degToPi + (360 / 3) * i * degToPi;
+      //   points.push({
+      //     angle,
+      //     r: this.r,
+      //   });
+      // }
+      // ctx.save();
+      //   ctx.translate(this.p.x, this.p.y);
+      //   ctx.beginPath();
+      //   points.forEach((point) => {
+      //     ctx.lineTo(point.r * Math.cos(point.angle), point.r * Math.sin(point.angle));
+      //   });
+      //   ctx.closePath();
+      //   ctx.fillStyle = this.color;
+      //   ctx.fill();
+      // ctx.restore();
+    }
+  }]);
+
+  return Triangle;
+}();
+
+var Polygon =
+/*#__PURE__*/
+function () {
+  function Polygon(args) {
+    _classCallCheck(this, Polygon);
+
+    var def = {
+      p: new Vec2(0, 0),
+      color: globalColor.red
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Polygon, [{
+    key: "draw",
+    value: function draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.moveTo(0, 0);
+      ctx.rotate(18 * degToPi);
+      ctx.lineTo(44, 0);
+      ctx.translate(44, 0);
+      ctx.rotate(64 * degToPi);
+      ctx.lineTo(28, 0);
+      ctx.translate(28, 0);
+      ctx.rotate(40 * degToPi);
+      ctx.lineTo(38, 0);
+      ctx.translate(38, 0);
+      ctx.rotate(76 * degToPi);
+      ctx.lineTo(52, 0);
+      ctx.translate(52, 0);
+      ctx.rotate(50 * degToPi);
+      ctx.lineTo(48, 0);
+      ctx.restore();
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }]);
+
+  return Polygon;
+}();
 /* Initialize Game Logic */
 // function init() {
 // }
@@ -203,8 +366,8 @@ function () {
 /* Update Picture */
 // function draw() {
 // clear background
-// ctx.fillStyle = color.blueDark;
-// ctx.fillRect(0, 0, ww, wh);
+// ctx.fillStyle = globalColor.blueDark;
+// ctx.fillRect(0, 0, cw, ch);
 // draw here
 // ...
 // draw mouse
