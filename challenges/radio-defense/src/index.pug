@@ -7,10 +7,19 @@ html(lang="zh-Hant")
     title Radio-Defense
 
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Yantramanav:300,400,500")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.3/dat.gui.min.js")
 
   body
-    canvas#game(width="856" height="624");
+    .container
+      canvas#game(width="856" height="624")
+      .logo R
+      h1 Radio Defense
+      button(type="button") Start Game
+      .intro
+        p 你身負著運送能量電池的任務
+        p 卻遭到幾何星人的埋伏
+        p 現在，從他們手中奪回能量電池！
 
 
 

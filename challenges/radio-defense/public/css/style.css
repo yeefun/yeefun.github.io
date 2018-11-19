@@ -2,6 +2,9 @@ html, body {
   height: 100%;
   overflow: hidden; }
 
+html {
+  font-size: 10px; }
+
 body {
   background-color: #9e9e9f;
   display: -webkit-box;
@@ -15,7 +18,63 @@ body {
           align-items: center; }
 
 canvas {
-  max-width: 100%;
   border-radius: 4px; }
+
+.container {
+  position: relative;
+  color: #fff;
+  font-family: Yantramanav, sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+.intro {
+  font-family: "Microsoft JhengHei", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1.618; }
+
+.logo {
+  position: absolute;
+  top: 36.5%;
+  left: 48%;
+  font-size: 10rem;
+  font-weight: 500; }
+
+h1 {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  font-size: 2.4rem;
+  font-weight: 300; }
+
+button {
+  outline: none;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 6px 20px;
+  color: #fff;
+  border-radius: 18px;
+  font-size: 1.6rem;
+  font-family: Yantramanav, sans-serif;
+  cursor: pointer;
+  font-weight: 300;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out; }
+  button:hover {
+    background-color: #fff;
+    color: #001d2e; }
 
 /*# sourceMappingURL=style.css.map */

@@ -126,7 +126,7 @@ class Game {
       ctx.save();
         ctx.translate(cw / 2, ch / 2);
         ctx.beginPath();
-        ctx.arc(0, 0, 196, 0, Math.PI * 2);
+        ctx.arc(0, 0, 180, 0, Math.PI * 2);
         ctx.strokeStyle = globalColor.white;
         ctx.stroke();
         ctx.beginPath();
@@ -134,16 +134,10 @@ class Game {
         ctx.globalAlpha = 0.3;
         ctx.stroke();
       ctx.restore();
-      // 左下方字
-      // ctx.fillStyle = globalColor.white;
-      // ctx.font = '300 14px sans-serif';
-      // ctx.fillText('你身負著運送能量電池的任務', 24, ch - 80);
-      // ctx.fillText('卻遭到幾何星人的埋伏', 24, ch - 56);
-      // ctx.fillText('請協助從他們的手中奪回能量電池！', 24, ch - 32);
       // 黃圓
       const circle = new Circle({
         p: {
-          x: cw - 128,
+          x: cw - 120,
           y: 96,
         },
       });
@@ -151,7 +145,7 @@ class Game {
       // 藍三角形
       const triangle = new Triangle({
         p: {
-          x: cw - 224,
+          x: cw - 240,
           y: ch - 80,
         },
         rotate: 8,
@@ -165,21 +159,36 @@ class Game {
         },
       });
       polygon.draw();
+      // 電池
+      drawBattery({
+        x: cw / 2 - 24,
+        y: ch / 2 - 51.8,
+      });
+      // R 字小三角裝飾
+      ctx.save();
+        ctx.translate(cw / 2 + 24, ch / 2 - 30);
+        ctx.rotate(-132 * degToPi);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(4, 0);
+        ctx.lineTo(0, -8);
+        ctx.lineTo(-4, 0);
+        ctx.closePath();
+        ctx.fillStyle = globalColor.white;
+        ctx.fill();
+      ctx.restore();
     }
     requestAnimationFrame(() => { this.render() });
   }
   update() {
     time += 1;
-
     setTimeout(() => { this.update() }, 1000 / updateFPS);
   }
 }
 
 
 
-/* Circle Class
- **
- */
+/* Circle Class */
 class Circle {
   constructor(args) {
     const def = {
@@ -199,9 +208,8 @@ class Circle {
 }
 
 
-/* Triangle Class
-**
- */
+
+/* Triangle Class */
 class Triangle {
   constructor(args) {
     const def = {
@@ -228,29 +236,12 @@ class Triangle {
     ctx.closePath();
     ctx.fillStyle = this.color;
     ctx.fill();
-    // let points = [];
-    // for (let i = 0; i < 3; i += 1) {
-    //   const angle = this.rotate * degToPi + (360 / 3) * i * degToPi;
-    //   points.push({
-    //     angle,
-    //     r: this.r,
-    //   });
-    // }
-    // ctx.save();
-    //   ctx.translate(this.p.x, this.p.y);
-    //   ctx.beginPath();
-    //   points.forEach((point) => {
-    //     ctx.lineTo(point.r * Math.cos(point.angle), point.r * Math.sin(point.angle));
-    //   });
-    //   ctx.closePath();
-    //   ctx.fillStyle = this.color;
-    //   ctx.fill();
-    // ctx.restore();
   }
 }
 
 
 
+/* Polygon Class */
 class Polygon {
   constructor(args) {
     const def = {
@@ -265,28 +256,97 @@ class Polygon {
       ctx.beginPath();
       ctx.translate(this.p.x, this.p.y);
       ctx.moveTo(0, 0);
-      ctx.rotate(18 * degToPi);
-      ctx.lineTo(44, 0);
-      ctx.translate(44, 0)
+      ctx.rotate(16 * degToPi);
+      ctx.lineTo(40, 0);
+      ctx.translate(40, 0)
 
       ctx.rotate(64 * degToPi);
       ctx.lineTo(28, 0);
       ctx.translate(28, 0);
 
-      ctx.rotate(40 * degToPi);
-      ctx.lineTo(38, 0);
-      ctx.translate(38, 0);
+      ctx.rotate(42 * degToPi);
+      ctx.lineTo(36, 0);
+      ctx.translate(36, 0);
 
       ctx.rotate(76 * degToPi);
-      ctx.lineTo(52, 0);
-      ctx.translate(52, 0);
-
-      ctx.rotate(50 * degToPi);
       ctx.lineTo(48, 0);
+      ctx.translate(48, 0);
+
+      ctx.rotate(48 * degToPi);
+      ctx.lineTo(44, 0);
     ctx.restore();
     ctx.fillStyle = this.color;
     ctx.fill();
   }
+}
+
+
+
+function drawBattery(p) {
+  ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.fillStyle = globalColor.yellow;
+    // 瓶身
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-24, 0);
+    ctx.lineTo(-24, 42);
+    ctx.lineTo(0, 42);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.save();
+      ctx.translate(0, 44);
+      // 瓶底
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(-24, 0);
+      ctx.lineTo(-24, 3);
+      ctx.lineTo(0, 3);
+      ctx.closePath();
+      ctx.fill();
+    ctx.restore();
+
+    // 瓶蓋
+    ctx.fillStyle = globalColor.white;
+    ctx.save();
+      ctx.translate(-6.75, 0);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, -3);
+      ctx.lineTo(-10.5, -3);
+      ctx.lineTo(-10.5, -0);
+      ctx.closePath();
+      ctx.fill();
+    ctx.restore();
+
+    // 閃電
+    ctx.strokeStyle = globalColor.white;
+    ctx.translate(-12, 9);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.rotate(18 * degToPi);
+    ctx.lineTo(0, 10);
+    ctx.translate(0, 10);
+    ctx.rotate(-18 * degToPi);
+
+    ctx.lineTo(10, 0);
+    ctx.translate(10, 0);
+
+    ctx.rotate(28 * degToPi);
+    ctx.lineTo(0, 16);
+    ctx.translate(0, 16);
+    ctx.rotate(-28 * degToPi);
+
+    ctx.rotate(3.6 * degToPi);
+    ctx.lineTo(0, -10);
+    ctx.translate(0, -10);
+    ctx.rotate(-3.6 * degToPi);
+
+    ctx.lineTo(-8, 0);
+    ctx.closePath();
+    ctx.fill();
+  ctx.restore();
 }
 
 /* Initialize Game Logic */
