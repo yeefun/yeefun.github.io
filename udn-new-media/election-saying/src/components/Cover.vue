@@ -66,9 +66,23 @@ export default {
     transform: translateY(-30px);
     padding-right: 20px;
     padding-left: 20px;
+    @media screen and (min-width: 490px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
-  & > img {
-    width: 100%;
+  // & > img {
+  //   width: 100%;
+  // }
+  & img {
+    display: block;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
   }
   & h2 {
     width: 136px;

@@ -217,9 +217,17 @@ export default {
     display: flex;
     padding-left: 20px;
     padding-right: 20px;
+    @media screen and (min-width: 490px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
     justify-content: space-between;
     padding-top: 4px;
     padding-bottom: 45px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
     &-fb {
       background-color: #3b62b8;
       & p {
@@ -299,8 +307,16 @@ export default {
   &__text {
     padding-right: 20px;
     padding-left: 20px;
+    @media screen and (min-width: 490px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
     font-size: 2rem;
     transform: translateY(-30px);
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
     & p {
       line-height: 1.25;
     }

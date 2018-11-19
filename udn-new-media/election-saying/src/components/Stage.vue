@@ -37,6 +37,10 @@ export default {
   &-wrapper {
     display: flex;
     justify-content: space-between;
+    // max-width: 392px;
+    max-width: 335px;
+    margin-right: auto;
+    margin-left: auto;
   }
   &__squre {
     box-sizing: border-box;

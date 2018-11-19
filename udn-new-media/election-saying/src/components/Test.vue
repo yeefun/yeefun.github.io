@@ -396,39 +396,44 @@ export default {
       } else {
         this.$parent.$refs.result.isResultShow = true;
       }
-
+      // this.$parent.$refs.testWrapper.style.paddingBottom = 0
       TweenLite.set(`#answer-head--test${this.test.id}`, {
         opacity: 1,
-        delay: 0.4,
+        delay: 0.3,
         onStart: () => {
           this.hideForAnswerPop = true;
           this.draggedHead.style.display = 'none';
           this.isAnswerShow = true;
+          // this.$parent.$el.style.overflowY = 'hidden';
+          this.$parent.$refs.testWrapper.style.paddingBottom = 0;
         },
       });
-      TweenLite.to(`#answer-head--test${this.test.id}`, 0.4, {
+      TweenLite.to(`#answer-head--test${this.test.id}`, 0.3, {
         x: '-50%',
         y: -248,
         scale: 2,
         ease: Back.easeOut.config(1),
-        delay: 0.4,
+        delay: 0.3,
         onStart: () => {
           // this.$parent.$refs.app.scrollTop = 0;
           // this.htmlEle.scrollTop = 0;
           this.windowEle.scrollTo(0, 0);
         },
       });
-      TweenLite.from(`#answer-text--test${this.test.id}`, 0.4, {
+      TweenLite.from(`#answer-text--test${this.test.id}`, 0.3, {
         y: 200,
         ease: Back.easeOut.config(1),
-        delay: 0.4,
+        delay: 0.3,
+        // onComplete: () => {
+        // this.$parent.$el.style.overflowY = '';
+        // },
       });
 
       if (this.draggedHead.dataset.name === this.test.answerName) {
-        TweenLite.to(`#stage-correct--test${this.test.id}`, 0.4, {
+        TweenLite.to(`#stage-correct--test${this.test.id}`, 0.3, {
           scale: 1,
           ease: Back.easeOut.config(1.7),
-          delay: 0.4,
+          delay: 0.3,
           onStart: () => {
             document.getElementById(`stage-num--test${this.test.id}`).classList.add('correct');
           },
@@ -464,6 +469,8 @@ export default {
     slideToNextTestPage() {
       // GA: how long does reader stay at this answer page?
       this.readerStayTimeInAnswerPage();
+
+      this.$parent.$refs.testWrapper.style.paddingBottom = '';
 
       document.getElementById(`stage-num--test${this.test.id + 1}`).classList.add('active');
 
@@ -644,6 +651,10 @@ export default {
     left: 0;
     padding-right: 20px;
     padding-left: 20px;
+    @media screen and (min-width: 600px) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
     box-sizing: border-box;
     z-index: 49;
     text-align: center;
@@ -677,6 +688,10 @@ export default {
     }
   }
   &-question {
+    // max-width: 392px;
+    max-width: 335px;
+    margin-right: auto;
+    margin-left: auto;
     &__quotation {
       height: 300px;
       display: flex;

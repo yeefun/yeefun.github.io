@@ -4,7 +4,7 @@
       <Cover></Cover>
       <div class="test-container">
         <Stage :stageMove="stageMove" v-if="isStageShow"></Stage>
-        <div class="test-wrapper" id="test-wrapper">
+        <div class="test-wrapper" id="test-wrapper" ref="testWrapper">
           <Test v-for="test in tests" :key="`test${test.id}`" :test="test" :ref="`test${test.id}`"></Test>
         </div>
       </div>
@@ -187,12 +187,12 @@ html {
   position: relative;
   // height: 100%;
   width: 100%;
-  max-width: 392px;
+  // max-width: 392px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
   overflow-y: scroll;
-  // -ms-overflow-style: none;
 }
 
 .total-container {
