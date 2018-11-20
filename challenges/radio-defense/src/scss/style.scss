@@ -58,6 +58,7 @@ h1 {
 }
 
 button {
+  box-shadow: 0 0 4px rgba(#fff, 0.8);
   outline: none;
   position: absolute;
   top: 60%;
@@ -73,6 +74,12 @@ button {
   cursor: pointer;
   font-weight: 300;
   transition: all 0.5s ease-out;
+  animation: shine 1.2s infinite ease-out alternate;
+  @keyframes shine {
+    100% {
+      box-shadow: 0 0 12px rgba(#fff, 0.8);
+    }
+  }
   &:hover {
     background-color: #fff;
     color: #001d2e;

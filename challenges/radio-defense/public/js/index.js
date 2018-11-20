@@ -107,8 +107,8 @@ function () {
 
 var canvas = document.getElementById('game');
 var ctx = canvas.getContext('2d');
-var cw;
-var ch;
+var gameW;
+var gameH;
 
 ctx.circle = function (v, r) {
   this.arc(v.x, v.y, r, 0, Math.PI * 2);
@@ -120,12 +120,16 @@ ctx.line = function (v1, v2) {
 };
 
 function initCanvas() {
-  cw = canvas.width;
-  ch = canvas.height;
+  gameW = canvas.width;
+  gameH = canvas.height;
 } // initCanvas();
 
 
-var degToPi = Math.PI / 180;
+var degToPi = Math.PI / 180; // let circles = [];
+
+var coverCircle;
+var coverTriangle;
+var coverPolygon;
 
 var Game =
 /*#__PURE__*/
@@ -143,6 +147,24 @@ function () {
   _createClass(Game, [{
     key: "init",
     value: function init() {
+      coverCircle = new Circle({
+        rotationAxisR: 388,
+        rotationAngle: -40
+      });
+      coverTriangle = new Triangle({
+        rotationAxisR: {
+          x: 320,
+          y: 320
+        },
+        rotationAngle: 40,
+        rotate: 32
+      });
+      coverPolygon = new Polygon({
+        p: {
+          x: 88,
+          y: 104
+        }
+      });
       this.render();
       this.update();
     }
@@ -152,12 +174,12 @@ function () {
       var _this = this;
 
       ctx.fillStyle = globalColor.blueDark;
-      ctx.fillRect(0, 0, cw, ch);
+      ctx.fillRect(0, 0, gameW, gameH);
 
       if (!this.start) {
         // 中央兩白圈
         ctx.save();
-        ctx.translate(cw / 2, ch / 2);
+        ctx.translate(gameW / 2, gameH / 2);
         ctx.beginPath();
         ctx.arc(0, 0, 180, 0, Math.PI * 2);
         ctx.strokeStyle = globalColor.white;
@@ -168,44 +190,28 @@ function () {
         ctx.stroke();
         ctx.restore(); // 黃圓
 
-        var circle = new Circle({
-          p: {
-            x: cw - 120,
-            y: 96
-          }
-        });
-        circle.draw(); // 藍三角形
+        coverCircle.draw();
+        coverCircle.update(); // 藍三角形
 
-        var triangle = new Triangle({
-          p: {
-            x: cw - 240,
-            y: ch - 80
-          },
-          rotate: 8
-        });
-        triangle.draw(); // 紅多邊形
+        coverTriangle.draw();
+        coverTriangle.update(); // 紅多邊形
 
-        var polygon = new Polygon({
-          p: {
-            x: 88,
-            y: 104
-          }
-        });
-        polygon.draw(); // 電池
+        coverPolygon.draw();
+        coverPolygon.update(); // 電池
 
         drawBattery({
-          x: cw / 2 - 24,
-          y: ch / 2 - 51.8
+          x: gameW / 2 - 24,
+          y: gameH / 2 - 51.8
         }); // R 字小三角裝飾
 
         ctx.save();
-        ctx.translate(cw / 2 + 24, ch / 2 - 30);
+        ctx.translate(gameW / 2 + 24, gameH / 2 - 30);
         ctx.rotate(-132 * degToPi);
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(4, 0);
-        ctx.lineTo(0, -8);
-        ctx.lineTo(-4, 0);
+        ctx.lineTo(0, -8.4);
+        ctx.lineTo(-4.2, 0);
         ctx.closePath();
         ctx.fillStyle = globalColor.white;
         ctx.fill();
@@ -240,8 +246,15 @@ function () {
     _classCallCheck(this, Circle);
 
     var def = {
-      p: new Vec2(0, 0),
-      r: 40,
+      rotationAxisPos: {
+        x: gameW / 2,
+        y: gameH / 2
+      },
+      rotationAxisR: 0,
+      // rotationAxisYR: 264,
+      rotationAngle: 0,
+      r: 32,
+      v: 0.8,
       color: globalColor.yellow
     };
     Object.assign(def, args);
@@ -252,9 +265,17 @@ function () {
     key: "draw",
     value: function draw() {
       ctx.beginPath();
-      ctx.arc(this.p.x, this.p.y, this.r, 0, Math.PI * 2);
+      ctx.save();
+      ctx.translate(this.rotationAxisPos.x, this.rotationAxisPos.y);
+      ctx.arc(this.rotationAxisR * Math.cos(this.rotationAngle * degToPi), this.rotationAxisR * Math.sin(this.rotationAngle * degToPi), this.r, 0, Math.PI * 2);
+      ctx.restore();
       ctx.fillStyle = this.color;
       ctx.fill();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.rotationAngle += this.v;
     }
   }]);
 
@@ -270,11 +291,20 @@ function () {
     _classCallCheck(this, Triangle);
 
     var def = {
-      p: new Vec2(0, 0),
-      // angleSpan: 360 / 3,
-      r: 78,
+      rotationAxisPos: {
+        x: gameW / 2,
+        y: gameH / 2
+      },
+      rotationAxisR: {
+        x: 0,
+        y: 0
+      },
+      rotationAngle: 0,
+      r: 40,
       rotate: 0,
-      color: globalColor.blue
+      v: -0.4,
+      color: globalColor.blue,
+      canMove: true
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -285,17 +315,33 @@ function () {
     value: function draw() {
       ctx.beginPath();
       ctx.save();
-      ctx.translate(this.p.x, this.p.y);
-      ctx.moveTo(0, 0);
-      ctx.rotate(this.rotate * degToPi);
-      ctx.lineTo(this.r, 0);
-      ctx.translate(this.r, 0);
-      ctx.rotate(-30 * degToPi);
-      ctx.lineTo(0, -this.r);
+      ctx.translate(this.rotationAxisPos.x, this.rotationAxisPos.y);
+      ctx.translate(this.rotationAxisR.x * Math.cos(this.rotationAngle * degToPi), this.rotationAxisR.y * Math.sin(this.rotationAngle * degToPi));
+      ctx.moveTo(this.r * Math.cos(0 + this.rotate * degToPi), this.r * Math.sin(0 + this.rotate * degToPi));
+      ctx.lineTo(this.r * Math.cos((120 + this.rotate) * degToPi), this.r * Math.sin((120 + this.rotate) * degToPi));
+      ctx.lineTo(this.r * Math.cos((240 + this.rotate) * degToPi), this.r * Math.sin((240 + this.rotate) * degToPi));
       ctx.restore();
       ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.rotate += this.v; // if (this.canMove) {
+      //   this.canMove = false;
+      //   setTimeout(() => {
+      //     TweenLite.to(this, 0.8, {
+      //       // rotationAngle: `${Math.random() < 0.5 ? '-=' : '+='}${Math.random() * 30 + 15}`,
+      //       rotationAngle: '+=90',
+      //       ease: Sine.easeInOut,
+      //       // onComplete: () => {
+      //       //   this.canMove = true;
+      //       // },
+      //     });
+      //     this.canMove = true;
+      //   }, 1200);
+      // }
     }
   }]);
 
@@ -312,6 +358,12 @@ function () {
 
     var def = {
       p: new Vec2(0, 0),
+      v: {
+        x: 1,
+        y: 0.5
+      },
+      rotate: 0,
+      rotateV: 0.4,
       color: globalColor.red
     };
     Object.assign(def, args);
@@ -324,24 +376,46 @@ function () {
       ctx.save();
       ctx.beginPath();
       ctx.translate(this.p.x, this.p.y);
+      ctx.rotate(this.rotate * degToPi);
       ctx.moveTo(0, 0);
       ctx.rotate(16 * degToPi);
+      ctx.lineTo(32, 0);
+      ctx.translate(32, 0);
+      ctx.rotate(64 * degToPi);
+      ctx.lineTo(24, 0);
+      ctx.translate(24, 0);
+      ctx.rotate(42 * degToPi);
+      ctx.lineTo(30, 0);
+      ctx.translate(30, 0);
+      ctx.rotate(76 * degToPi);
       ctx.lineTo(40, 0);
       ctx.translate(40, 0);
-      ctx.rotate(64 * degToPi);
-      ctx.lineTo(28, 0);
-      ctx.translate(28, 0);
-      ctx.rotate(42 * degToPi);
-      ctx.lineTo(36, 0);
-      ctx.translate(36, 0);
-      ctx.rotate(76 * degToPi);
-      ctx.lineTo(48, 0);
-      ctx.translate(48, 0);
       ctx.rotate(48 * degToPi);
-      ctx.lineTo(44, 0);
+      ctx.lineTo(36, 0);
       ctx.restore();
       ctx.fillStyle = this.color;
       ctx.fill();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.p.x += this.v.x;
+      this.p.y += this.v.y;
+      this.rotate += this.rotateV;
+
+      if (!this.isInBoundary) {
+        this.p.x = -48;
+        this.p.y = -32;
+        this.v.x = 0.5 * Math.random() + 0.5;
+        this.v.y = 0.5 * Math.random() + 0.5;
+      }
+    }
+  }, {
+    key: "isInBoundary",
+    get: function get() {
+      var xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
+      var yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
+      return xInRange && yInRange;
     }
   }]);
 
@@ -359,10 +433,10 @@ function drawBattery(p) {
   ctx.lineTo(-24, 42);
   ctx.lineTo(0, 42);
   ctx.closePath();
-  ctx.fill();
-  ctx.save();
-  ctx.translate(0, 44); // 瓶底
+  ctx.fill(); // 瓶底
 
+  ctx.save();
+  ctx.translate(0, 44);
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(-24, 0);
@@ -385,7 +459,7 @@ function drawBattery(p) {
   ctx.restore(); // 閃電
 
   ctx.strokeStyle = globalColor.white;
-  ctx.translate(-12, 9);
+  ctx.translate(-11, 9);
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.rotate(18 * degToPi);
@@ -420,7 +494,7 @@ function drawBattery(p) {
 // function draw() {
 // clear background
 // ctx.fillStyle = globalColor.blueDark;
-// ctx.fillRect(0, 0, cw, ch);
+// ctx.fillRect(0, 0, gameW, gameH);
 // draw here
 // ...
 // draw mouse

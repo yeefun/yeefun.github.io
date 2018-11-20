@@ -56,6 +56,8 @@ h1 {
   font-weight: 300; }
 
 button {
+  -webkit-box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+          box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
   outline: none;
   position: absolute;
   top: 60%;
@@ -72,7 +74,19 @@ button {
   cursor: pointer;
   font-weight: 300;
   -webkit-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out; }
+  transition: all 0.5s ease-out;
+  -webkit-animation: shine 1.2s infinite ease-out alternate;
+          animation: shine 1.2s infinite ease-out alternate; }
+
+@-webkit-keyframes shine {
+  100% {
+    -webkit-box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); } }
+
+@keyframes shine {
+  100% {
+    -webkit-box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); } }
   button:hover {
     background-color: #fff;
     color: #001d2e; }
