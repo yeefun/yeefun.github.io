@@ -18,6 +18,14 @@ var globalColor = {
   blueDark: "#001d2e",
   white: "#fff"
 };
+var startBtn = document.getElementById('start-btn');
+var panel = document.getElementById('panel');
+startBtn.addEventListener('click', function () {
+  game.startGame();
+  panel.style.display = 'none';
+}, {
+  once: true
+});
 /* GUI Controls */
 // const controls = {
 //   value: 0,
@@ -130,6 +138,7 @@ var degToPi = Math.PI / 180; // let circles = [];
 var coverCircle;
 var coverTriangle;
 var coverPolygon;
+var game;
 
 var Game =
 /*#__PURE__*/
@@ -138,7 +147,7 @@ function () {
     _classCallCheck(this, Game);
 
     var def = {
-      start: false
+      isGameStart: true
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -148,8 +157,9 @@ function () {
     key: "init",
     value: function init() {
       coverCircle = new Circle({
-        rotationAxisR: 388,
-        rotationAngle: -40
+        rotationAxisR: 380,
+        rotationAngle: -36,
+        r: 39
       });
       coverTriangle = new Triangle({
         rotationAxisR: {
@@ -157,13 +167,15 @@ function () {
           y: 320
         },
         rotationAngle: 40,
-        rotate: 32
+        rotate: 32,
+        r: 44
       });
       coverPolygon = new Polygon({
         p: {
-          x: 88,
-          y: 104
-        }
+          x: 72,
+          y: 96
+        },
+        scale: 1.25
       });
       this.render();
       this.update();
@@ -176,46 +188,8 @@ function () {
       ctx.fillStyle = globalColor.blueDark;
       ctx.fillRect(0, 0, gameW, gameH);
 
-      if (!this.start) {
-        // 中央兩白圈
-        ctx.save();
-        ctx.translate(gameW / 2, gameH / 2);
-        ctx.beginPath();
-        ctx.arc(0, 0, 180, 0, Math.PI * 2);
-        ctx.strokeStyle = globalColor.white;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 0, 264, 0, Math.PI * 2);
-        ctx.globalAlpha = 0.3;
-        ctx.stroke();
-        ctx.restore(); // 黃圓
-
-        coverCircle.draw();
-        coverCircle.update(); // 藍三角形
-
-        coverTriangle.draw();
-        coverTriangle.update(); // 紅多邊形
-
-        coverPolygon.draw();
-        coverPolygon.update(); // 電池
-
-        drawBattery({
-          x: gameW / 2 - 24,
-          y: gameH / 2 - 51.8
-        }); // R 字小三角裝飾
-
-        ctx.save();
-        ctx.translate(gameW / 2 + 24, gameH / 2 - 30);
-        ctx.rotate(-132 * degToPi);
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(4, 0);
-        ctx.lineTo(0, -8.4);
-        ctx.lineTo(-4.2, 0);
-        ctx.closePath();
-        ctx.fillStyle = globalColor.white;
-        ctx.fill();
-        ctx.restore();
+      if (!this.isGameStart) {
+        this.drawCover();
       }
 
       requestAnimationFrame(function () {
@@ -231,6 +205,54 @@ function () {
       setTimeout(function () {
         _this2.update();
       }, 1000 / updateFPS);
+    }
+  }, {
+    key: "drawCover",
+    value: function drawCover() {
+      // 中央兩白圈
+      ctx.save();
+      ctx.translate(gameW / 2, gameH / 2);
+      ctx.beginPath();
+      ctx.arc(0, 0, 180, 0, Math.PI * 2);
+      ctx.strokeStyle = globalColor.white;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 0, 264, 0, Math.PI * 2);
+      ctx.globalAlpha = 0.3;
+      ctx.stroke();
+      ctx.restore(); // 黃圓
+
+      coverCircle.draw();
+      coverCircle.update(); // 藍三角形
+
+      coverTriangle.draw();
+      coverTriangle.update(); // 紅多邊形
+
+      coverPolygon.draw();
+      coverPolygon.update(); // 電池
+
+      drawBattery({
+        x: gameW / 2 - 24,
+        y: gameH / 2 - 51.8
+      }); // R 字小角裝飾
+
+      ctx.save();
+      ctx.translate(gameW / 2 + 24, gameH / 2 - 30);
+      ctx.rotate(-132 * degToPi);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(4, 0);
+      ctx.lineTo(0, -8.4);
+      ctx.lineTo(-4.2, 0);
+      ctx.closePath();
+      ctx.fillStyle = globalColor.white;
+      ctx.fill();
+      ctx.restore();
+    }
+  }, {
+    key: "startGame",
+    value: function startGame() {
+      this.isGameStart = true;
     }
   }]);
 
@@ -251,9 +273,8 @@ function () {
         y: gameH / 2
       },
       rotationAxisR: 0,
-      // rotationAxisYR: 264,
       rotationAngle: 0,
-      r: 32,
+      r: 26,
       v: 0.8,
       color: globalColor.yellow
     };
@@ -300,7 +321,7 @@ function () {
         y: 0
       },
       rotationAngle: 0,
-      r: 40,
+      r: 28,
       rotate: 0,
       v: -0.4,
       color: globalColor.blue,
@@ -362,6 +383,7 @@ function () {
         x: 1,
         y: 0.5
       },
+      scale: 1,
       rotate: 0,
       rotateV: 0.4,
       color: globalColor.red
@@ -375,23 +397,24 @@ function () {
     value: function draw() {
       ctx.save();
       ctx.beginPath();
+      ctx.scale(this.scale, this.scale);
       ctx.translate(this.p.x, this.p.y);
       ctx.rotate(this.rotate * degToPi);
       ctx.moveTo(0, 0);
-      ctx.rotate(16 * degToPi);
+      ctx.rotate(20 * degToPi);
       ctx.lineTo(32, 0);
       ctx.translate(32, 0);
-      ctx.rotate(64 * degToPi);
-      ctx.lineTo(24, 0);
-      ctx.translate(24, 0);
-      ctx.rotate(42 * degToPi);
-      ctx.lineTo(30, 0);
-      ctx.translate(30, 0);
-      ctx.rotate(76 * degToPi);
-      ctx.lineTo(40, 0);
-      ctx.translate(40, 0);
-      ctx.rotate(48 * degToPi);
+      ctx.rotate(62 * degToPi);
+      ctx.lineTo(20, 0);
+      ctx.translate(20, 0);
+      ctx.rotate(40 * degToPi);
+      ctx.lineTo(28, 0);
+      ctx.translate(28, 0);
+      ctx.rotate(78 * degToPi);
       ctx.lineTo(36, 0);
+      ctx.translate(36, 0);
+      ctx.rotate(44 * degToPi);
+      ctx.lineTo(34, 0);
       ctx.restore();
       ctx.fillStyle = this.color;
       ctx.fill();
@@ -421,6 +444,37 @@ function () {
 
   return Polygon;
 }();
+/* Shooter Class */
+
+
+var Shooter =
+/*#__PURE__*/
+function () {
+  function Shooter(args) {
+    _classCallCheck(this, Shooter);
+
+    var def = {
+      p: {
+        x: gameW / 2,
+        y: gameH / 2
+      }
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Shooter, [{
+    key: "draw",
+    value: function draw() {
+      ctx.save();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.restore();
+    }
+  }]);
+
+  return Shooter;
+}(); // draw battery
+
 
 function drawBattery(p) {
   ctx.save();
@@ -519,7 +573,7 @@ function drawBattery(p) {
 
 
 function handleLoad() {
-  var game = new Game();
+  game = new Game();
   initCanvas();
   game.init(); // init();
   // requestAnimationFrame(draw);
