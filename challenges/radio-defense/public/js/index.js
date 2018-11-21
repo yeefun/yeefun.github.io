@@ -22,7 +22,6 @@ var startBtn = document.getElementById('start-btn');
 var panel = document.getElementById('panel');
 startBtn.addEventListener('click', function () {
   game.startGame();
-  panel.style.display = 'none';
 }, {
   once: true
 });
@@ -115,6 +114,8 @@ function () {
 
 var canvas = document.getElementById('game');
 var ctx = canvas.getContext('2d');
+var ww;
+var wh;
 var gameW;
 var gameH;
 
@@ -130,6 +131,8 @@ ctx.line = function (v1, v2) {
 function initCanvas() {
   gameW = canvas.width;
   gameH = canvas.height;
+  ww = document.documentElement.clientWidth;
+  wh = document.documentElement.clientHeight;
 } // initCanvas();
 
 
@@ -147,7 +150,9 @@ function () {
     _classCallCheck(this, Game);
 
     var def = {
-      isGameStart: true
+      isGameStart: true,
+      // isGameStart: false,
+      shooter: null
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -177,6 +182,7 @@ function () {
         },
         scale: 1.25
       });
+      this.startGame();
       this.render();
       this.update();
     }
@@ -188,7 +194,10 @@ function () {
       ctx.fillStyle = globalColor.blueDark;
       ctx.fillRect(0, 0, gameW, gameH);
 
-      if (!this.isGameStart) {
+      if (this.isGameStart) {
+        this.shooter.draw();
+      } else {
+        // this.startGame();
         this.drawCover();
       }
 
@@ -202,6 +211,11 @@ function () {
       var _this2 = this;
 
       time += 1;
+
+      if (this.isGameStart) {
+        this.shooter.update();
+      }
+
       setTimeout(function () {
         _this2.update();
       }, 1000 / updateFPS);
@@ -253,6 +267,9 @@ function () {
     key: "startGame",
     value: function startGame() {
       this.isGameStart = true;
+      panel.style.display = 'none';
+      this.shooter = new Shooter();
+      canvas.style.cursor = 'pointer';
     }
   }]);
 
@@ -447,6 +464,8 @@ function () {
 /* Shooter Class */
 
 
+var shooterBullets = [];
+
 var Shooter =
 /*#__PURE__*/
 function () {
@@ -457,7 +476,11 @@ function () {
       p: {
         x: gameW / 2,
         y: gameH / 2
-      }
+      },
+      color: globalColor.white,
+      r: 34,
+      rotateAngle: 0,
+      bullet: null
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -466,13 +489,148 @@ function () {
   _createClass(Shooter, [{
     key: "draw",
     value: function draw() {
-      ctx.save();
-      ctx.translate(this.p.x, this.p.y);
+      ctx.save(); // 輪圍
+
+      ctx.translate(this.p.x, this.p.y); // ctx.save();
+
+      ctx.beginPath(); // ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+      // ctx.shadowBlur = 16;
+
+      ctx.arc(0, 0, this.r, 0, Math.PI * 2);
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 6;
+      ctx.stroke(); // 輪軸
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(this.r * Math.cos(30 * degToPi + this.rotateAngle), this.r * Math.sin(30 * degToPi + this.rotateAngle));
+      ctx.moveTo(0, 0);
+      ctx.lineTo(this.r * Math.cos(150 * degToPi + this.rotateAngle), this.r * Math.sin(150 * degToPi + this.rotateAngle));
+      ctx.moveTo(0, 0);
+      ctx.lineTo(this.r * Math.cos(270 * degToPi + this.rotateAngle), this.r * Math.sin(270 * degToPi + this.rotateAngle));
+      ctx.lineWidth = 3;
+      ctx.stroke(); // ctx.restore();
+      // 輪圍外虛線
+      // ctx.beginPath();
+
+      ctx.strokeStyle = this.color;
+      var outerR = this.r + 22;
+
+      for (var i = 0; i < 360; i += 1) {
+        // const angle1 = i;
+        // const angle2 = (i + 1);
+        var x1 = outerR * Math.cos(i * degToPi + this.rotateAngle);
+        var y1 = outerR * Math.sin(i * degToPi + this.rotateAngle);
+        var x2 = outerR * Math.cos((i + 1) * degToPi + this.rotateAngle);
+        var y2 = outerR * Math.sin((i + 1) * degToPi + this.rotateAngle);
+
+        if (i % 10 < 5) {
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      } // 護盾
+
+
+      var shieldR = this.r + 36;
+      ctx.beginPath();
+      ctx.arc(0, 0, shieldR, 45 * degToPi + this.rotateAngle, 135 * degToPi + this.rotateAngle);
+      ctx.lineWidth = 4;
+      ctx.stroke(); // 砲口
+
+      ctx.beginPath(); // ctx.save();
+      // ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+      // ctx.shadowBlur = 12;
+
+      ctx.rotate(this.rotateAngle);
+      ctx.translate(0, -this.r - 8);
+      ctx.moveTo(0, 0); // 下方長方形長 16、寬（高） 12
+      // 上方梯形高 14、上邊寬 8
+
+      ctx.lineTo(8, 0);
+      ctx.lineTo(8, -12);
+      ctx.lineTo(4, -26);
+      ctx.lineTo(-4, -26);
+      ctx.lineTo(-8, -12);
+      ctx.lineTo(-8, 0);
+      ctx.closePath();
+      ctx.fillStyle = this.color;
+      ctx.fill(); // ctx.restore();
+
       ctx.restore();
+      this.shoot();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.rotateAngle = mouseMoveAngle;
+    }
+  }, {
+    key: "shoot",
+    value: function shoot() {
+      shooterBullets.forEach(function (bullet) {
+        bullet.draw();
+      }); // this.bullet = new Bullet({
+      //   p: new Vec2(this.p.x, this.p.y - this.r - 8 - 30),
+      // });
+      // this.bullet.draw();
+      // ctx.save();
+      //   ctx.beginPath();
+      //   ctx.translate(this.p.x, this.p.y - this.r - 8 - 30);
+      //   ctx.arc(0, 0, 4, 0, Math.PI * 2);
+      //   ctx.fillStyle = this.color;
+      //   ctx.fill();
+      //   ctx.beginPath();
+      //   ctx.moveTo(3, -3);
+      //   ctx.lineTo(0, -15);
+      //   ctx.lineTo(-3, -3);
+      //   ctx.closePath();
+      //   ctx.fill();
+      // ctx.restore();
     }
   }]);
 
   return Shooter;
+}();
+
+var Bullet =
+/*#__PURE__*/
+function () {
+  function Bullet(args) {
+    _classCallCheck(this, Bullet);
+
+    var def = {
+      p: new Vec2(0, 0),
+      shotInterval: 0,
+      color: globalColor.white
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Bullet, [{
+    key: "draw",
+    value: function draw() {
+      ctx.save();
+      ctx.beginPath(); // ctx.translate(this.p.x, this.p.y - this.r - 8 - 30);
+
+      ctx.translate(this.p.x, this.p.y);
+      ctx.arc(0, 0, 4, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(3, -3);
+      ctx.lineTo(0, -15);
+      ctx.lineTo(-3, -3);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+  }]);
+
+  return Bullet;
 }(); // draw battery
 
 
@@ -584,23 +742,33 @@ function handleLoad() {
 window.addEventListener('load', handleLoad);
 window.addEventListener('resize', initCanvas);
 /* Mouse Events & Recording */
+// const mouseMovePos = new Vec2(0, 0);
 
-var mouseMovePos = new Vec2(0, 0);
-var mouseUpPos = new Vec2(0, 0);
-var mouseDownPos = new Vec2(0, 0);
-window.addEventListener('mousemove', handleMouseMove);
-window.addEventListener('mouseup', handleMouseUp);
-window.addEventListener('mousedown', handleMouseDown);
+var mouseMovePos = {};
+var mouseMoveAngle = 0; // let mouseUpPos = new Vec2(0, 0);
+// let mouseDownPos = new Vec2(0, 0);
+// window.addEventListener('mousemove', handleMouseMove);
+// window.addEventListener('mouseup', handleMouseUp);
+// window.addEventListener('mousedown', handleMouseDown);
+
+canvas.addEventListener('mousemove', handleMouseMove);
 
 function handleMouseMove(evt) {
-  mouseMovePos.set(evt.x, evt.y);
+  mouseMovePos.x = evt.x - ww / 2;
+  mouseMovePos.y = evt.y - wh / 2;
+  mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x) - 270 * degToPi;
 }
 
-function handleMouseUp(evt) {
-  mouseUpPos = mouseMovePos.clone();
-}
+canvas.addEventListener('click', handleClick);
 
-function handleMouseDown(evt) {
-  mouseDownPos = mouseMovePos.clone();
-}
+function handleClick() {
+  shooterBullets.push(new Bullet({
+    p: new Vec2(gameW / 2, gameH / 2 - 34 - 8 - 30)
+  }));
+} // function handleMouseUp(evt) {
+//   mouseUpPos = mouseMovePos.clone();
+// }
+// function handleMouseDown(evt) {
+//   mouseDownPos = mouseMovePos.clone();
+// }
 //# sourceMappingURL=index.js.map
