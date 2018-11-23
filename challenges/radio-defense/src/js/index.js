@@ -66,9 +66,9 @@ class Vec2 {
   equal(v) {
     return this.x === v.x && this.y === v.y;
   }
-  toString() {
-    return `(${this.x}, ${this.y})`;
-  }
+  // toString() {
+  //   return `(${this.x}, ${this.y})`;
+  // }
 
   get length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -248,7 +248,7 @@ class Game {
   setLevelOne() {
     circles.push(new Circle({
       rotationAxisR: 240,
-      rotationAngle: 184,
+      rotationAngle: 180,
     }));
   }
 }
@@ -266,72 +266,89 @@ class Circle {
       rotationAxisR: 0,
       rotationAngle: 0,
       r: 22,
-      v: 0.4,
+      v: 0.8,
+      rotate: 0,
       color: globalColor.yellow,
-      bullets: [new CircleBullet()],
+      bullets: [],
+      brforeShootTime: new Date(),
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
+  get originalPos() {
+    return {
+      x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAngle * degToPi),
+      y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAngle * degToPi),
+    };
+  }
   draw() {
-    const bigCirR = this.r + 5;
-    const smallCirR = this.r - 10;
+    const bigCircleR = this.r + 5;
+    const smallCircleR = this.r - 10;
     const subRotationAxisR = 14;
     ctx.save();
-      ctx.translate(this.rotationAxisPos.x, this.rotationAxisPos.y);
-        // ctx.translate(-4, 0);
+      ctx.translate(this.originalPos.x, this.originalPos.y);
       // 大淡圓
+      ctx.rotate(this.rotate * degToPi);
       ctx.beginPath();
-      ctx.arc(this.rotationAxisR * Math.cos(this.rotationAngle * degToPi) - 4, this.rotationAxisR * Math.sin(this.rotationAngle * degToPi), bigCirR, 0, Math.PI * 2);
+      ctx.arc(-4, 0, bigCircleR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.3)';
       ctx.fill();
       // 小淡圓
       ctx.beginPath();
-      ctx.arc(this.rotationAxisR * Math.cos(this.rotationAngle * degToPi) + 20, this.rotationAxisR * Math.sin(this.rotationAngle * degToPi), smallCirR, 0, Math.PI * 2);
+      ctx.arc(20, 0, smallCircleR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.3)';
       ctx.fill();
       // 主體圓
       ctx.beginPath();
-      ctx.arc(this.rotationAxisR * Math.cos(this.rotationAngle * degToPi), this.rotationAxisR * Math.sin(this.rotationAngle * degToPi), this.r, 0, Math.PI * 2);
+      ctx.arc(0, 0, this.r, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.fill();
-      ctx.save();
-        ctx.translate(this.rotationAxisR * Math.cos(this.rotationAngle * degToPi), this.rotationAxisR * Math.sin(this.rotationAngle * degToPi));
-        // 小三圓
-        ctx.beginPath();
-        ctx.fillStyle = globalColor.white;
-        ctx.arc(subRotationAxisR, 0, 2.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(subRotationAxisR * Math.cos(120 * degToPi), subRotationAxisR * Math.sin(120 * degToPi), 2.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(subRotationAxisR * Math.cos(240 * degToPi), subRotationAxisR * Math.sin(240 * degToPi), 2.4, 0, Math.PI * 2);
-        ctx.fill();
-        // 神經
-        ctx.beginPath();
-        ctx.fillStyle = globalColor.white;
-        ctx.lineTo(8, 0);
-        ctx.lineTo(3 * Math.cos(32 * degToPi), 3 * Math.sin(32 * degToPi));
-        ctx.lineTo(12 * Math.cos(120 * degToPi), 12 * Math.sin(120 * degToPi));
-        ctx.lineTo(1 * Math.cos(170 * degToPi), 3 * Math.sin(170 * degToPi));
-        ctx.lineTo(8 * Math.cos(240 * degToPi), 8 * Math.sin(240 * degToPi));
-        ctx.lineTo(1 * Math.cos(320 * degToPi), 3 * Math.sin(320 * degToPi));
-        ctx.closePath();
-        ctx.fill();
-        // 子彈
-        this.bullets.forEach((bullet) => {
-          // ctx.beginPath()
-          bullet.draw();
-        });
-      ctx.restore();
+      // 小三圓
+      ctx.beginPath();
+      ctx.fillStyle = globalColor.white;
+      ctx.arc(subRotationAxisR, 0, 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(subRotationAxisR * Math.cos(120 * degToPi), subRotationAxisR * Math.sin(120 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(subRotationAxisR * Math.cos(240 * degToPi), subRotationAxisR * Math.sin(240 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      // 神經
+      ctx.beginPath();
+      ctx.fillStyle = globalColor.white;
+      ctx.lineTo(8, 0);
+      ctx.lineTo(3 * Math.cos(32 * degToPi), 3 * Math.sin(32 * degToPi));
+      ctx.lineTo(12 * Math.cos(120 * degToPi), 12 * Math.sin(120 * degToPi));
+      ctx.lineTo(1 * Math.cos(170 * degToPi), 3 * Math.sin(170 * degToPi));
+      ctx.lineTo(8 * Math.cos(240 * degToPi), 8 * Math.sin(240 * degToPi));
+      ctx.lineTo(1 * Math.cos(320 * degToPi), 3 * Math.sin(320 * degToPi));
+      ctx.closePath();
+      ctx.fill();
+      ctx.rotate(-this.rotate * degToPi);
     ctx.restore();
+    // 子彈
+    this.bullets.forEach((bullet) => {
+      bullet.draw();
+    });
   }
   update() {
-    // this.rotationAngle += this.v;
-    // this.bullets.forEach((bullet) => {
-    //   bullet.update();
-    // });
+    this.rotationAngle += this.v;
+    this.rotate += this.v;
+    this.bullets.forEach((bullet) => {
+      bullet.update();
+    });
+    const shootTime = new Date();
+    if (shootTime - this.brforeShootTime > 800) {
+      this.bullets.push(new CircleBullet({
+        p: {
+          x: this.originalPos.x,
+          y: this.originalPos.y,
+        },
+        rotate: this.rotate,
+      }));
+      this.brforeShootTime = shootTime;
+    }
   }
 }
 
@@ -617,10 +634,14 @@ class ShooterBullet {
 class CircleBullet {;
   constructor(args) {
     const def = {
-      p: new Vec2(0, 4),
+      p: {
+        x: 0,
+        y: 0,
+      },
+      movePos: new Vec2(0, 0),
       color: globalColor.yellow,
-      v: new Vec2(0, -6),
-      rotateAngle: 0,
+      v: new Vec2(2, 0),
+      rotate: 0,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -628,11 +649,16 @@ class CircleBullet {;
   draw() {
     ctx.save();
       ctx.beginPath();
+      ctx.translate(this.p.x, this.p.y);
+      ctx.rotate(this.rotate * degToPi);
       ctx.scale(1.6, 0.7);
-      ctx.arc(23, this.p.x, this.p.y, 0, Math.PI * 2);
+      ctx.arc(this.movePos.x + 22, this.movePos.y, 4, 0, Math.PI * 2);
     ctx.restore();
     ctx.fillStyle = this.color;
     ctx.fill();
+  }
+  update() {
+    this.movePos = this.movePos.add(this.v);
   }
 }
 
@@ -788,10 +814,10 @@ function handleMouseMove(evt) {
   mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x) - 270 * degToPi;
 };
 
-canvas.addEventListener('mousedown', handleMousedown);
+canvas.addEventListener('click', handleClick);
 
 let beforeShootTime = new Date();
-function handleMousedown() {
+function handleClick() {
   const shootTime = new Date();
   if (shootTime - beforeShootTime > 200) {
     shooterBullets.push(new ShooterBullet({
