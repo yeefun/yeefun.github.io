@@ -172,17 +172,21 @@ class Game {
     // ctx.fillStyle = "rgba(0, 0, 255, 0.1)"
     ctx.fillRect(0, 0, gameW, gameH);
     if (this.isGameStart) {
-      // draw shooter
+      // 繪製 shooter
       this.shooter.draw();
-      // draw circles
+      // 繪製 circles
       circles.forEach((circle) => {
         circle.draw();
       });
-      // draw triangles
+      // 繪製 triangles
       triangles.forEach((triangle) => {
         triangle.draw();
       });
-      // update sub triangles
+      // 繪製 polygons
+      polygons.forEach((polygon) => {
+        polygon.draw();
+      });
+      // 繪製 sub triangles
       subTriangles.forEach((subTriangle) => {
         subTriangle.draw();
       });
@@ -195,22 +199,26 @@ class Game {
   update() {
     time += 1;
     if (this.isGameStart) {
-      // judge level
+      // 判斷現在是第幾關
       if (this.currentLevel === 1 && !this.isInLevel1) {
         this.setLevelOne();
         this.isInLevel1 = true;
       }
-      // update shooter
+      // 更新 shooter
       this.shooter.update();
-      // update circle
+      // 更新 circle
       circles.forEach((circle) => {
         circle.update();
       });
-      // update triangles
+      // 更新 triangles
       triangles.forEach((triangle) => {
         triangle.update();
       });
-      // update sub triangles
+      // 更新 polygons
+      polygons.forEach((polygon) => {
+        polygon.update();
+      });
+      // 更新 sub triangles
       subTriangles.forEach((subTriangle) => {
         subTriangle.update();
       });
@@ -233,7 +241,7 @@ class Game {
     // 黃圓
     coverCircle.draw();
     coverCircle.update();
-    // 藍三角形
+    // 藍三角
     coverTriangle.draw();
     coverTriangle.update();
     // 紅多邊形
@@ -265,17 +273,22 @@ class Game {
     canvas.style.cursor = 'pointer';
   }
   setLevelOne() {
-    // circles.push(new Circle({
-    //   rotationAxisR: 240,
-    //   rotationAngle: 180,
+    circles.push(new Circle({
+      rotationAxisR: 240,
+      rotationAngle: 180,
+    }));
+    // triangles.push(new Triangle({
+    //   rotationAxisR: {
+    //     x: 280,
+    //     y: 280,
+    //   },
+    //   rotationAngle: 40,
+    //   // rotate: 36,
     // }));
-    triangles.push(new Triangle({
-      rotationAxisR: {
-        x: 280,
-        y: 280,
-      },
-      rotationAngle: 40,
-      // rotate: 36,
+    polygons.push(new Polygon({
+      rotationAxisR: 280,
+      rotationAngle: 220,
+      // scale: 0.8,
     }));
   }
 }
@@ -417,7 +430,7 @@ class Triangle {
     const triangleInnerBigR = this.r - 16;
     const triangleInnerSmallR = this.r - 22;
     ctx.save();
-      // 淡三角形
+      // 淡三角
       ctx.translate(this.originalPos.x, this.originalPos.y);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
@@ -430,7 +443,7 @@ class Triangle {
         ctx.fillStyle = 'rgba(54, 118, 187, 0.34)';
         ctx.fill();
       ctx.restore();
-      // 主體三角形
+      // 主體三角
       ctx.beginPath();
       ctx.moveTo(this.r * Math.cos(0), this.r * Math.sin(0));
       ctx.lineTo(this.r * Math.cos(120 * degToPi), this.r * Math.sin(120 * degToPi));
@@ -438,7 +451,7 @@ class Triangle {
       ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
-      // 大白三角形
+      // 大白三角
       ctx.translate(-3.2, -1.6);
       ctx.fillStyle = globalColor.white;
       ctx.beginPath();
@@ -447,7 +460,7 @@ class Triangle {
       ctx.lineTo(triangleInnerBigR * Math.cos(90 * degToPi), triangleInnerBigR * Math.sin(90 * degToPi));
       ctx.closePath();
       ctx.fill();
-      // 小白三角形
+      // 小白三角
       ctx.translate(0, -8.8);
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -480,7 +493,7 @@ class Triangle {
     }
     // 派副三角形攻擊
     if (this.life === 4 && !this.isReproduce) {
-      for (let i = 0; i < 2; i += 1) {
+      for (let i = 1; i <= 2; i += 1) {
         subTriangles.push(new TriangleSub({
           rotationAxisR: {
             x: this.rotationAxisR.x,
@@ -488,7 +501,7 @@ class Triangle {
           },
           rotationAngle: this.rotationAngle,
           rotate: this.rotate,
-          v: i ? 0.4 : -0.4,
+          order: i,
         }));
       }
       this.isReproduce = true;
@@ -524,64 +537,64 @@ class Triangle {
 class Polygon {
   constructor(args) {
     const def = {
-      p: new Vec2(0, 0),
-      v: {
-        x: 1,
-        y: 0.5,
+      rotationAxisPos: {
+        x: gameW / 2,
+        y: gameH / 2,
       },
-      scale: 1,
+      rotationAxisR: 0,
+      rotationAngle: 0,
+      // p: new Vec2(0, 0),
+      // v: {
+      //   x: 1,
+      //   y: 0.5,
+      // },
+      v: 0.8,
       rotate: 0,
-      rotateV: 0.4,
+      // scale: 1,
+      // rotateV: 0.4,
       color: globalColor.red,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
+  get originalPos() {
+    return {
+      x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAngle * degToPi),
+      y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAngle * degToPi),
+    };
+  }
   draw() {
     ctx.save();
+      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.rotate(this.rotate);
       ctx.beginPath();
-      ctx.scale(this.scale, this.scale);
-      ctx.translate(this.p.x, this.p.y);
-      ctx.rotate(this.rotate * degToPi);
-      ctx.moveTo(0, 0);
-      ctx.rotate(20 * degToPi);
-      ctx.lineTo(32, 0);
-      ctx.translate(32, 0);
-
-      ctx.rotate(62 * degToPi);
-      ctx.lineTo(20, 0);
-      ctx.translate(20, 0);
-
-      ctx.rotate(40 * degToPi);
-      ctx.lineTo(28, 0);
-      ctx.translate(28, 0);
-
-      ctx.rotate(78 * degToPi);
-      ctx.lineTo(36, 0);
-      ctx.translate(36, 0);
-
-      ctx.rotate(44 * degToPi);
-      ctx.lineTo(34, 0);
+      ctx.fillStyle = this.color;
+      ctx.moveTo(23 * Math.cos(5 * degToPi), 22 * Math.sin(5 * degToPi));
+      ctx.lineTo(26 * Math.cos(66 * degToPi), 26 * Math.sin(66 * degToPi));
+      ctx.lineTo(23 * Math.cos(144 * degToPi), 23 * Math.sin(144 * degToPi));
+      ctx.lineTo(35 * Math.cos(202 * degToPi), 35 * Math.sin(202 * degToPi));
+      ctx.lineTo(24 * Math.cos(256 * degToPi), 24 * Math.sin(256 * degToPi));
+      ctx.lineTo(24 * Math.cos(320 * degToPi), 24 * Math.sin(320 * degToPi));
+      ctx.closePath();
+      ctx.fill();
     ctx.restore();
-    ctx.fillStyle = this.color;
-    ctx.fill();
   }
   update() {
-    this.p.x += this.v.x;
-    this.p.y += this.v.y;
-    this.rotate += this.rotateV;
-    if (!this.isInBoundary) {
-      this.p.x = -48;
-      this.p.y = -32;
-      this.v.x = 0.5 * Math.random() + 0.5;
-      this.v.y = 0.5 * Math.random() + 0.5;
-    }
+    // this.p.x += this.v.x;
+    // this.p.y += this.v.y;
+    // this.rotate += this.rotateV;
+    // if (!this.isInBoundary) {
+    //   this.p.x = -48;
+    //   this.p.y = -32;
+    //   this.v.x = 0.5 * Math.random() + 0.5;
+    //   this.v.y = 0.5 * Math.random() + 0.5;
+    // }
   }
-  get isInBoundary() {
-    const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
-    const yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
-    return xInRange && yInRange;
-  }
+  // get isInBoundary() {
+  //   const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
+  //   const yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
+  //   return xInRange && yInRange;
+  // }
 }
 
 
@@ -753,15 +766,16 @@ class TriangleSub {;
         y: 0,
       },
       rotationAngle: 0,
-      r: 26,
+      r: 26 * 0.4,
       rotate: 0,
+      rotateV: 4,
       // v: -0.4,
-      v: 0,
+      // v: 0,
       color: globalColor.blue,
-      // bullets: [],
-      // brforeShootTime: new Date(),
       life: 2,
       // isReproduce: false,
+      isReproduceMoving: false,
+      order: 0,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -773,16 +787,17 @@ class TriangleSub {;
     };
   }
   draw() {
-    const triangleOuterBigR = this.r + 4;
-    const triangleInnerBigR = this.r - 16;
-    const triangleInnerSmallR = this.r - 22;
+    const scale = 0.4;
+    const triangleOuterBigR = this.r + 4 * scale;
+    const triangleInnerBigR = this.r - 16 * scale;
+    const triangleInnerSmallR = this.r - 22 * scale;
     ctx.save();
-      // 淡三角形
+      // 淡三角
       ctx.translate(this.originalPos.x, this.originalPos.y);
-      ctx.scale(0.4, 0.4);
+      // ctx.scale(0.4, 0.4);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
-        ctx.translate(2, -Math.sqrt(12));
+        ctx.translate(2 * scale, -Math.sqrt(12) * scale);
         ctx.beginPath();
         ctx.moveTo(triangleOuterBigR * Math.cos(0), triangleOuterBigR * Math.sin(0));
         ctx.lineTo(triangleOuterBigR * Math.cos(120 * degToPi), triangleOuterBigR * Math.sin(120 * degToPi));
@@ -791,7 +806,7 @@ class TriangleSub {;
         ctx.fillStyle = 'rgba(54, 118, 187, 0.34)';
         ctx.fill();
       ctx.restore();
-      // 主體三角形
+      // 主體三角
       ctx.beginPath();
       ctx.moveTo(this.r * Math.cos(0), this.r * Math.sin(0));
       ctx.lineTo(this.r * Math.cos(120 * degToPi), this.r * Math.sin(120 * degToPi));
@@ -799,8 +814,8 @@ class TriangleSub {;
       ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
-      // 大白三角形
-      ctx.translate(-3.2, -1.6);
+      // 大白三角
+      ctx.translate(-3.2 * scale, -1.6 * scale);
       ctx.fillStyle = globalColor.white;
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -808,8 +823,8 @@ class TriangleSub {;
       ctx.lineTo(triangleInnerBigR * Math.cos(90 * degToPi), triangleInnerBigR * Math.sin(90 * degToPi));
       ctx.closePath();
       ctx.fill();
-      // 小白三角形
-      ctx.translate(0, -8.8);
+      // 小白三角
+      ctx.translate(0, -8.8 * scale);
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(triangleInnerSmallR * Math.cos(30 * degToPi), triangleInnerSmallR * Math.sin(30 * degToPi));
@@ -819,7 +834,35 @@ class TriangleSub {;
     ctx.restore();
   }
   update() {
-    this.rotationAngle += this.v;
+    this.rotate += this.rotateV;
+    if (!this.isReproduceMoving) {
+      if (this.order === 1) {
+        TweenLite.to(this, 0.8, {
+          rotationAngle: '+=10',
+          ease: Power2.easeOut,
+          onComplete: () => {
+            TweenLite.to(this.rotationAxisR, 1.6, {
+              x: 0,
+              y: 0,
+              ease: Power1.easeIn,
+            });
+          }
+        });
+      } else {
+        TweenLite.to(this, 0.8, {
+          rotationAngle: '-=10',
+          ease: Power2.easeOut,
+          onComplete: () => {
+            TweenLite.to(this.rotationAxisR, 1.6, {
+              x: 0,
+              y: 0,
+              ease: Power1.easeIn,
+            });
+          }
+        });
+      }
+    }
+    this.isReproduceMoving = true;
   }
 }
 
