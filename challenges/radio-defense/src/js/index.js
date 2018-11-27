@@ -211,8 +211,16 @@ class Game {
       // 更新 shooter
       this.shooter.update();
       // 更新 circle
-      circles.forEach((circle) => {
+      circles.forEach((circle, i) => {
         circle.update();
+        
+        shooterBullets.forEach((bullet) => {
+          // 取得兩個外切線的一半角度
+          const angle = Math.asin(circle.r / circle.rotationAxisR);
+          if (bullet.rotateAngle >= circle.rotationAngle * degToPi - angle && bullet.rotateAngle <= circle.rotationAngle * degToPi + angle) {
+            circles.splice(i, 1);
+          }
+        });
       });
       // 更新 triangles
       triangles.forEach((triangle) => {
@@ -278,8 +286,8 @@ class Game {
   }
   setLevelOne() {
     circles.push(new Circle({
-      rotationAxisR: 240,
-      rotationAngle: 180,
+      rotationAxisR: 200,
+      rotationAngle: 150,
     }));
     // triangles.push(new Triangle({
     //   rotationAxisR: {
@@ -718,11 +726,11 @@ class Shooter {
         // 輪軸
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.$triLineTo(this.r, 30, this.rotateAngle);
+        ctx.$triLineTo(this.r, 0, this.rotateAngle);
         ctx.moveTo(0, 0);
-        ctx.$triLineTo(this.r, 150, this.rotateAngle);
+        ctx.$triLineTo(this.r, 120, this.rotateAngle);
         ctx.moveTo(0, 0);
-        ctx.$triLineTo(this.r, 270, this.rotateAngle);
+        ctx.$triLineTo(this.r, 240, this.rotateAngle);
         ctx.lineWidth = 3;
         ctx.stroke();
       ctx.restore();
@@ -749,7 +757,7 @@ class Shooter {
       // 護盾
       const shieldR = this.r + 36;
       ctx.beginPath();
-      ctx.arc(0, 0, shieldR, 45 * degToPi + this.rotateAngle, 135 * degToPi + this.rotateAngle);
+      ctx.arc(0, 0, shieldR, 135 * degToPi + this.rotateAngle, 225 * degToPi + this.rotateAngle);
       ctx.lineWidth = 4;
       ctx.stroke();
       // 砲口
@@ -757,17 +765,24 @@ class Shooter {
       ctx.save();
         ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
         ctx.shadowBlur = 16;
-        ctx.rotate(this.rotateAngle)
-        ctx.translate(0, -this.r - 8);
+        ctx.rotate(this.rotateAngle);
+        // ctx.translate(0, -this.r - 8);
+        ctx.translate(this.r + 8, 0);
         ctx.moveTo(0, 0);
         // 下方長方形長 16、寬（高） 12
         // 上方梯形高 14、上邊寬 8
-        ctx.lineTo(8, 0);
-        ctx.lineTo(8, -12);
-        ctx.lineTo(4, -26);
-        ctx.lineTo(-4, -26);
-        ctx.lineTo(-8, -12);
-        ctx.lineTo(-8, 0);
+        // ctx.lineTo(8, 0);
+        // ctx.lineTo(8, -12);
+        // ctx.lineTo(4, -26);
+        // ctx.lineTo(-4, -26);
+        // ctx.lineTo(-8, -12);
+        // ctx.lineTo(-8, 0);
+        ctx.lineTo(0, 8);
+        ctx.lineTo(12, 8);
+        ctx.lineTo(26, 4);
+        ctx.lineTo(26, -4);
+        ctx.lineTo(12, -8);
+        ctx.lineTo(0, -8);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
@@ -795,7 +810,7 @@ class ShooterBullet {
       p: new Vec2(0, 0),
       // shootInterval: 0.4,
       color: globalColor.white,
-      v: new Vec2(0, -6),
+      v: new Vec2(6, 0),
       rotateAngle: 0,
     };
     Object.assign(def, args);
@@ -808,33 +823,37 @@ class ShooterBullet {
       ctx.rotate(this.rotateAngle);
       ctx.translate(this.p.x, this.p.y);
       // 殘影
-      // ctx.beginPath();
-      // ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-      // ctx.arc(0, 8, 4, 0, Math.PI * 2);
-      // ctx.fill();
-      // ctx.beginPath();
-      // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      // ctx.arc(0, 16, 4, 0, Math.PI * 2);
-      // ctx.fill();
-      // ctx.beginPath();
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.arc(0, 2, 4, 0, Math.PI * 2);
-      ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.arc(0, 4, 4, 0, Math.PI * 2);
+      ctx.arc(-7, 0, 3, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-      ctx.arc(0, 6, 4, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.arc(-12, 0, 2, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.arc(0, 8, 4, 0, Math.PI * 2);
-      ctx.fill();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.arc(0, 10, 4, 0, Math.PI * 2);
+      ctx.arc(-15, 0, 1, 0, Math.PI * 2);
       ctx.fill();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      // ctx.arc(0, 2, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      // ctx.arc(0, 4, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      // ctx.arc(0, 6, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      // ctx.arc(0, 8, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      // ctx.arc(0, 10, 4, 0, Math.PI * 2);
+      // ctx.fill();
       // 園底
       ctx.beginPath();
       ctx.fillStyle = this.color;
@@ -842,9 +861,9 @@ class ShooterBullet {
       ctx.fill();
       // 尖頭
       ctx.beginPath();
-      ctx.moveTo(3, -3);
-      ctx.lineTo(0, -15);
-      ctx.lineTo(-3, -3);
+      ctx.moveTo(-3, 3);
+      ctx.lineTo(15, 0);
+      ctx.lineTo(3, -3);
       ctx.closePath();
       ctx.fill();
     ctx.restore();
@@ -988,16 +1007,17 @@ class CircleBullet {;
     ctx.save();
       ctx.translate(this.p.x, this.p.y);
       ctx.rotate(this.rotate * degToPi);
-      // ctx.scale(1.6, 0.7);
+      ctx.scale(1.6, 0.68);
       // ctx.scale(1, 0.9);
-      // ctx.arc(this.movePos.x + 22, this.movePos.y, 4, 0, Math.PI * 2);
-      ctx.arc(this.movePos.x + 32, this.movePos.y, 4, 0, Math.PI * 2);
+      ctx.arc(this.movePos.x + 16, this.movePos.y, 4, 0, Math.PI * 2);
+      // ctx.arc(this.movePos.x + 32, this.movePos.y, 4, 0, Math.PI * 2);
     ctx.restore();
     ctx.fillStyle = this.color;
+    // ctx.fillStyle = 'red';
     ctx.fill();
   }
   update() {
-    this.movePos = this.movePos.add(this.v);
+    // this.movePos = this.movePos.add(this.v);
   }
 }
 
@@ -1224,7 +1244,7 @@ canvas.addEventListener('mousemove', handleMouseMove);
 function handleMouseMove(evt) {
   mouseMovePos.x = evt.x - ww / 2;
   mouseMovePos.y = evt.y - wh / 2;
-  mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x) - 270 * degToPi;
+  mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
 };
 
 canvas.addEventListener('click', handleClick);
@@ -1234,7 +1254,7 @@ function handleClick() {
   const shootTime = new Date();
   if (shootTime - beforeShootTime > 200) {
     shooterBullets.push(new ShooterBullet({
-      p: new Vec2(0, -34 - 12 - 16),
+      p: new Vec2(34 + 12 + 16, 0),
       // p: new Vec2(0, -34 - 8 - 30),
       rotateAngle: mouseMoveAngle,
     }));
