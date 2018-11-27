@@ -105,6 +105,10 @@ let gameH;
 //   this.lineTo(v2.x, v2.y);
 // }
 
+ctx.$triLineTo = function(r, angle, angleAdd = 0) {
+  return ctx.lineTo(r * Math.cos(angle * degToPi + angleAdd), r * Math.sin(angle * degToPi + angleAdd));
+}
+
 function initCanvas() {
   gameW = canvas.width;
   gameH = canvas.height;
@@ -285,11 +289,11 @@ class Game {
     //   rotationAngle: 40,
     //   // rotate: 36,
     // }));
-    polygons.push(new Polygon({
-      rotationAxisR: 280,
-      rotationAngle: 220,
-      // scale: 0.8,
-    }));
+    // polygons.push(new Polygon({
+    //   rotationAxisR: 280,
+    //   rotationAngle: 220,
+    //   // scale: 0.8,
+    // }));
   }
 }
 
@@ -377,17 +381,17 @@ class Circle {
     this.bullets.forEach((bullet) => {
       bullet.update();
     });
-    // const shootTime = new Date();
-    // if (shootTime - this.brforeShootTime > 800) {
-    //   this.bullets.push(new CircleBullet({
-    //     p: {
-    //       x: this.originalPos.x,
-    //       y: this.originalPos.y,
-    //     },
-    //     rotate: this.rotate,
-    //   }));
-    //   this.brforeShootTime = shootTime;
-    // }
+    const shootTime = new Date();
+    if (shootTime - this.brforeShootTime > 1200) {
+      this.bullets.push(new CircleBullet({
+        p: {
+          x: this.originalPos.x,
+          y: this.originalPos.y,
+        },
+        rotate: this.rotate,
+      }));
+      this.brforeShootTime = shootTime;
+    }
   }
 }
 
@@ -553,6 +557,7 @@ class Polygon {
       // scale: 1,
       // rotateV: 0.4,
       color: globalColor.red,
+      isSplited: true,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -566,17 +571,99 @@ class Polygon {
   draw() {
     ctx.save();
       ctx.translate(this.originalPos.x, this.originalPos.y);
-      ctx.rotate(this.rotate);
-      ctx.beginPath();
-      ctx.fillStyle = this.color;
-      ctx.moveTo(23 * Math.cos(5 * degToPi), 22 * Math.sin(5 * degToPi));
-      ctx.lineTo(26 * Math.cos(66 * degToPi), 26 * Math.sin(66 * degToPi));
-      ctx.lineTo(23 * Math.cos(144 * degToPi), 23 * Math.sin(144 * degToPi));
-      ctx.lineTo(35 * Math.cos(202 * degToPi), 35 * Math.sin(202 * degToPi));
-      ctx.lineTo(24 * Math.cos(256 * degToPi), 24 * Math.sin(256 * degToPi));
-      ctx.lineTo(24 * Math.cos(320 * degToPi), 24 * Math.sin(320 * degToPi));
-      ctx.closePath();
-      ctx.fill();
+      ctx.rotate(this.rotate * degToPi);
+      if (this.isSplited) {
+        // 主體多邊形
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.moveTo(21 * Math.cos(8 * degToPi), 21 * Math.sin(8 * degToPi));
+        ctx.$triLineTo(23, 70);
+        ctx.$triLineTo(23, 150);
+        ctx.$triLineTo(34, 202);
+        ctx.$triLineTo(22, 255);
+        ctx.$triLineTo(22, 324);
+        ctx.closePath();
+        ctx.fill();
+        // 右淡五邊形
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+        // ctx.fillStyle = globalColor.blue;
+        ctx.moveTo(9.6, -2);
+        ctx.$triLineTo(22, 324);
+        ctx.$triLineTo(21, 8);
+        ctx.$triLineTo(23, 70);
+        ctx.$triLineTo(10, 36);
+        ctx.closePath();
+        ctx.fill();
+        // 下淡四邊形
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+        // ctx.fillStyle = globalColor.yellow;
+        // ctx.moveTo(8.4, 5.6);
+        ctx.moveTo(10 * Math.cos(36 * degToPi), 10 * Math.sin(36 * degToPi));
+        ctx.$triLineTo(23, 70);
+        ctx.$triLineTo(23, 150);
+        ctx.lineTo(-8, 0);
+        ctx.closePath();
+        ctx.fill();
+        // 閃電
+        drawLightning({ x: -0.8, y: -16 });
+      } else {
+        // 右分裂四邊形
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(18, 0);
+        ctx.$triLineTo(24, 36);
+        ctx.$triLineTo(32, 74);
+        ctx.closePath();
+        ctx.fill();
+        // 內右淡四邊形
+        ctx.beginPath();
+        // ctx.fillStyle = globalColor.blue;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+        ctx.lineTo(18, 0);
+        ctx.$triLineTo(24, 36);
+        ctx.$triLineTo(32, 74);
+        ctx.$triLineTo(19, 65);;
+        ctx.$triLineTo(13, 42);;
+        ctx.closePath();
+        ctx.fill();
+        // 內左淡四邊形
+        ctx.beginPath();
+        // ctx.fillStyle = globalColor.yellow;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+        ctx.$triLineTo(32, 74);
+        ctx.$triLineTo(16.4, 74);
+        ctx.$triLineTo(19, 65);
+        ctx.closePath();
+        ctx.fill();
+        // 右閃電
+        ctx.save();
+          drawLightning({ x: 12, y: 6 }, 0.5);
+        ctx.restore();
+        // 左分裂四邊形
+        ctx.translate(-32, 0);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.$triLineTo(32, 36);
+        ctx.$triLineTo(28, 90);
+        ctx.$triLineTo(28, 144);
+        ctx.closePath();
+        ctx.fill();
+        // 內右淡四邊形
+        ctx.beginPath();
+        // ctx.fillStyle = globalColor.yellow;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+        ctx.$triLineTo(16, 36);
+        ctx.$triLineTo(32, 36);
+        ctx.$triLineTo(28, 90);
+        ctx.$triLineTo(12, 88);
+        ctx.fill();
+        // 左閃電
+        drawLightning({ x: 0, y: 8 }, 0.6);
+      }
     ctx.restore();
   }
   update() {
@@ -619,6 +706,7 @@ class Shooter {
     ctx.save(); 
       // 輪圍
       ctx.translate(this.p.x, this.p.y);
+      // ctx.rotate(this.rotateAngle);
       ctx.save();
         ctx.beginPath();
         ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
@@ -630,11 +718,11 @@ class Shooter {
         // 輪軸
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(this.r * Math.cos(30 * degToPi + this.rotateAngle), this.r * Math.sin(30 * degToPi + this.rotateAngle));
+        ctx.$triLineTo(this.r, 30, this.rotateAngle);
         ctx.moveTo(0, 0);
-        ctx.lineTo(this.r * Math.cos(150 * degToPi + this.rotateAngle), this.r * Math.sin(150 * degToPi + this.rotateAngle));
+        ctx.$triLineTo(this.r, 150, this.rotateAngle);
         ctx.moveTo(0, 0);
-        ctx.lineTo(this.r * Math.cos(270 * degToPi + this.rotateAngle), this.r * Math.sin(270 * degToPi + this.rotateAngle));
+        ctx.$triLineTo(this.r, 270, this.rotateAngle);
         ctx.lineWidth = 3;
         ctx.stroke();
       ctx.restore();
@@ -720,24 +808,37 @@ class ShooterBullet {
       ctx.rotate(this.rotateAngle);
       ctx.translate(this.p.x, this.p.y);
       // 殘影
-      ctx.beginPath();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      // ctx.arc(0, 8, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.beginPath();
+      // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      // ctx.arc(0, 16, 4, 0, Math.PI * 2);
+      // ctx.fill();
+      // ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.fillRect(-4, 0, 8, 4);
+      ctx.arc(0, 2, 4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.fillRect(-4, 4, 8, 4);
+      ctx.arc(0, 4, 4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-      ctx.fillRect(-4, 8, 8, 4);
+      ctx.arc(0, 6, 4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.fillRect(-4, 12, 8, 4);
-      ctx.beginPath();
+      ctx.arc(0, 8, 4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.fillRect(-4, 16, 8, 4);
+      ctx.arc(0, 10, 4, 0, Math.PI * 2);
+      ctx.fill();
       // 園底
-      ctx.arc(0, 0, 4, 0, Math.PI * 2);
+      ctx.beginPath();
       ctx.fillStyle = this.color;
+      ctx.arc(0, 0, 4, 0, Math.PI * 2);
       ctx.fill();
       // 尖頭
       ctx.beginPath();
@@ -876,7 +977,7 @@ class CircleBullet {;
       },
       movePos: new Vec2(0, 0),
       color: globalColor.yellow,
-      v: new Vec2(2, 0),
+      v: new Vec2(4, 0),
       rotate: 0,
     }
     Object.assign(def, args);
@@ -887,8 +988,10 @@ class CircleBullet {;
     ctx.save();
       ctx.translate(this.p.x, this.p.y);
       ctx.rotate(this.rotate * degToPi);
-      ctx.scale(1.6, 0.7);
-      ctx.arc(this.movePos.x + 22, this.movePos.y, 4, 0, Math.PI * 2);
+      // ctx.scale(1.6, 0.7);
+      // ctx.scale(1, 0.9);
+      // ctx.arc(this.movePos.x + 22, this.movePos.y, 4, 0, Math.PI * 2);
+      ctx.arc(this.movePos.x + 32, this.movePos.y, 4, 0, Math.PI * 2);
     ctx.restore();
     ctx.fillStyle = this.color;
     ctx.fill();
@@ -979,32 +1082,62 @@ function drawBattery(p) {
       ctx.fill();
     ctx.restore();
     // 閃電
-    ctx.strokeStyle = globalColor.white;
-    ctx.translate(-11, 9);
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.rotate(18 * degToPi);
-    ctx.lineTo(0, 10);
-    ctx.translate(0, 10);
-    ctx.rotate(-18 * degToPi);
+    // ctx.strokeStyle = globalColor.white;
+    drawLightning({ x: -11, y: -9 });
+    // ctx.translate(-11, 9);
+    // ctx.beginPath();
+    // ctx.moveTo(0, 0);
+    // ctx.rotate(18 * degToPi);
+    // ctx.lineTo(0, 10);
+    // ctx.translate(0, 10);
+    // ctx.rotate(-18 * degToPi);
 
-    ctx.lineTo(10, 0);
-    ctx.translate(10, 0);
+    // ctx.lineTo(10, 0);
+    // ctx.translate(10, 0);
 
-    ctx.rotate(28 * degToPi);
-    ctx.lineTo(0, 16);
-    ctx.translate(0, 16);
-    ctx.rotate(-28 * degToPi);
+    // ctx.rotate(28 * degToPi);
+    // ctx.lineTo(0, 16);
+    // ctx.translate(0, 16);
+    // ctx.rotate(-28 * degToPi);
 
-    ctx.rotate(3.6 * degToPi);
-    ctx.lineTo(0, -10);
-    ctx.translate(0, -10);
-    ctx.rotate(-3.6 * degToPi);
+    // ctx.rotate(3.6 * degToPi);
+    // ctx.lineTo(0, -10);
+    // ctx.translate(0, -10);
+    // ctx.rotate(-3.6 * degToPi);
 
-    ctx.lineTo(-8, 0);
-    ctx.closePath();
-    ctx.fill();
+    // ctx.lineTo(-8, 0);
+    // ctx.closePath();
+    // ctx.fill();
   ctx.restore();
+}
+
+// 繪製閃電
+function drawLightning(translate =  { x: 0, y: 0 }, scale = 1 ) {
+  ctx.fillStyle = globalColor.white;
+  ctx.translate(translate.x, translate.y);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.rotate(18 * degToPi);
+  ctx.lineTo(0, 10 * scale);
+  ctx.translate(0, 10 * scale);
+  ctx.rotate(-18 * degToPi);
+
+  ctx.lineTo(10 * scale, 0);
+  ctx.translate(10 * scale, 0);
+
+  ctx.rotate(28 * degToPi);
+  ctx.lineTo(0, 16 * scale);
+  ctx.translate(0, 16 * scale);
+  ctx.rotate(-28 * degToPi);
+
+  ctx.rotate(3.6 * degToPi);
+  ctx.lineTo(0, -10 * scale);
+  ctx.translate(0, -10 * scale);
+  ctx.rotate(-3.6 * degToPi);
+
+  ctx.lineTo(-8 * scale, 0);
+  ctx.closePath();
+  ctx.fill();
 }
 
 /* Initialize Game Logic */
