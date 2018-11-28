@@ -247,28 +247,8 @@ function () {
 
         this.shooter.update(); // 更新 circle
 
-        circles.forEach(function (circle, circleIdx) {
+        circles.forEach(function (circle) {
           circle.update();
-          shooterBullets.forEach(function (bullet, bulletIdx) {
-            // 取兩個外切線所構成角度的一半
-            var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 設中角度範圍
-
-            var shotAngleRange = bullet.rotateAngle >= circle.rotationAxisAngle * degToPi - anglePan && bullet.rotateAngle <= circle.rotationAxisAngle * degToPi + anglePan; // 設中距離範圍
-
-            var shotRRange = bullet.rotationAxisR + 15 + 11 >= circle.rotationAxisR && bullet.rotationAxisR + 15 - 11 <= circle.rotationAxisR; // 判斷子彈有無射中圓形
-
-            if (shotAngleRange && shotRRange) {
-              // 移除子彈
-              shooterBullets.splice(bulletIdx, 1); // 扣 1 生命值
-
-              circle.hP -= 1;
-
-              if (circle.hP === 0) {
-                // 若生命值 0，移除圓形
-                circles.splice(circleIdx, 1);
-              }
-            }
-          });
         }); // 更新 triangles
 
         triangles.forEach(function (triangle) {
@@ -344,8 +324,8 @@ function () {
     key: "setLevelOne",
     value: function setLevelOne() {
       circles.push(new Circle({
-        rotationAxisR: 200,
-        rotationAxisAngle: 150
+        rotationAxisR: 240,
+        rotationAxisAngle: 0
       })); // triangles.push(new Triangle({
       //   rotationAxisR: {
       //     x: 280,
@@ -388,7 +368,6 @@ function () {
       color: globalColor.orange,
       hP: 2,
       bullets: [],
-      beforeShootTime: new Date(),
       beforeRotateTime: new Date(),
       isRotating: false // beforeRotateAxisAngleTime: new Date(),
 
@@ -454,54 +433,55 @@ function () {
     value: function update() {
       var _this3 = this;
 
-      if (this.rotationAxisAngle >= 360) {
-        this.rotationAxisAngle = 0;
-      } // this.rotationAxisR -= this.rotationAxisRV;
-
+      this.bullets.forEach(function (bullet, idx, arr) {
+        bullet.update(idx, arr);
+      }); // 當圓形自身在旋轉時，圓形不要移動
 
       if (!this.isRotating) {
         this.rotationAxisAngle += this.rotationAxisAngleV;
-      } // this.rotate += this.rotateV;
-
-
-      this.bullets.forEach(function (bullet) {
-        bullet.update();
-      });
-      var shootTime = new Date();
-
-      if (shootTime - this.beforeShootTime > 1200) {
-        this.bullets.push(new CircleBullet({
-          p: {
-            x: this.originalPos.x,
-            y: this.originalPos.y
-          },
-          rotate: this.rotate
-        }));
-        this.beforeShootTime = shootTime;
       }
 
-      var rotateTime = new Date();
+      var rotateTime = new Date(); // 每 2-4 秒，自身旋轉一次
 
-      if (rotateTime - this.beforeRotateTime > 4000) {
+      if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
         this.isRotating = true;
-        TweenLite.to(this, 0.8, {
-          // rotate: this.rotationAxisAngle - 150,
-          rotate: '+=40',
+        TweenLite.to(this, 0.4, {
+          rotate: this.rotationAxisAngle - 180,
           ease: Power2.easeOut,
+          // 自身旋轉完後射擊
           onComplete: function onComplete() {
+            _this3.shoot();
+
             _this3.isRotating = false;
           }
         });
         this.beforeRotateTime = rotateTime;
-      } // const rotateAxisAngleTime = new Date();
-      // if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > 2000) {
-      //   TweenLite.to(this, 0.8, {
-      //     rotationAxisAngle: '+=16',
-      //     ease: Power2.easeOut,
-      //   });
-      //   this.beforeRotateAxisAngleTime = rotateAxisAngleTime;
-      // }
+      }
+    }
+  }, {
+    key: "shoot",
+    value: function shoot() {
+      var _this4 = this;
 
+      var _loop = function _loop(i) {
+        var timer = setTimeout(function () {
+          _this4.bullets.push(new CircleBullet({
+            originalPos: {
+              x: _this4.originalPos.x,
+              y: _this4.originalPos.y
+            },
+            rotateAngle: _this4.rotate,
+            rotationAxisR: _this4.rotationAxisR
+          }));
+
+          clearTimeout(timer); // 間隔 02-04 秒
+        }, i * (200 * Math.random() + 200));
+      };
+
+      // 射 1-2 發
+      for (var i = 0; i < 2 * Math.random(); i += 1) {
+        _loop(i);
+      }
     }
   }, {
     key: "originalPos",
@@ -957,8 +937,8 @@ function () {
     key: "update",
     value: function update() {
       this.rotateAngle = mouseMoveAngle;
-      shooterBullets.forEach(function (bullet) {
-        bullet.update();
+      shooterBullets.forEach(function (bullet, idx) {
+        bullet.update(idx);
       });
     }
   }, {
@@ -982,9 +962,7 @@ function () {
     var def = {
       // p: new Vec2(0, 0),
       rotationAxisR: 0,
-      // shootInterval: 0.4,
       color: globalColor.white,
-      // v: new Vec2(6, 0),
       v: 4,
       rotateAngle: 0
     };
@@ -996,7 +974,6 @@ function () {
     key: "draw",
     value: function draw() {
       ctx.save();
-      ctx.beginPath();
       ctx.translate(gameW / 2, gameH / 2);
       ctx.rotate(this.rotateAngle); // ctx.translate(this.p.x, this.p.y);
       // 殘影
@@ -1029,9 +1006,32 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
-      // this.p = this.p.add(this.v);
-      this.rotationAxisR += this.v;
+    value: function update(bulletIdx) {
+      var _this5 = this;
+
+      // 移動子彈
+      this.rotationAxisR += this.v; // 判斷子彈有無射中圓形
+
+      circles.forEach(function (circle, circleIdx) {
+        // 取兩個外切線所構成角度的一半
+        var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 設中角度範圍
+
+        var shotAngleRange = _this5.rotateAngle >= circle.rotationAxisAngle % 360 * degToPi - anglePan && _this5.rotateAngle <= circle.rotationAxisAngle % 360 * degToPi + anglePan; // 設中距離範圍
+
+        var shotRRange = _this5.rotationAxisR + 15 + 11 >= circle.rotationAxisR && _this5.rotationAxisR + 15 - 11 <= circle.rotationAxisR; // 判斷子彈有無射中圓形
+
+        if (shotAngleRange && shotRRange) {
+          // 移除子彈
+          shooterBullets.splice(bulletIdx, 1); // 扣 1 生命值
+
+          circle.hP -= 1;
+
+          if (circle.hP === 0) {
+            // 若生命值 0，移除圓形
+            circles.splice(circleIdx, 1);
+          }
+        }
+      });
     }
   }]);
 
@@ -1123,7 +1123,7 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      var _this4 = this;
+      var _this6 = this;
 
       this.rotate += this.rotateV;
 
@@ -1133,7 +1133,7 @@ function () {
             rotationAxisAngle: '+=10',
             ease: Power2.easeOut,
             onComplete: function onComplete() {
-              TweenLite.to(_this4.rotationAxisR, 1.6, {
+              TweenLite.to(_this6.rotationAxisR, 1.6, {
                 x: 0,
                 y: 0,
                 ease: Power1.easeIn
@@ -1145,7 +1145,7 @@ function () {
             rotationAxisAngle: '-=10',
             ease: Power2.easeOut,
             onComplete: function onComplete() {
-              TweenLite.to(_this4.rotationAxisR, 1.6, {
+              TweenLite.to(_this6.rotationAxisR, 1.6, {
                 x: 0,
                 y: 0,
                 ease: Power1.easeIn
@@ -1177,14 +1177,18 @@ function () {
     _classCallCheck(this, CircleBullet);
 
     var def = {
-      p: {
+      originalPos: {
         x: 0,
         y: 0
       },
-      movePos: new Vec2(0, 0),
+      rotationAxisR: 0,
+      // movePos: new Vec2(0, 0),
       color: globalColor.orange,
-      v: new Vec2(4, 0),
-      rotate: 0
+      // rotationAxisRV: 4,
+      moveX: 0,
+      moveV: 3,
+      // v: 4,
+      rotateAngle: 0
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1193,22 +1197,27 @@ function () {
   _createClass(CircleBullet, [{
     key: "draw",
     value: function draw() {
-      ctx.beginPath();
       ctx.save();
-      ctx.translate(this.p.x, this.p.y);
-      ctx.rotate(this.rotate * degToPi);
-      ctx.scale(1.6, 0.68); // ctx.scale(1, 0.9);
+      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.rotate(this.rotateAngle * degToPi); // ctx.scale(1.6, 0.68);
+      // ctx.scale(1, 0.9);
 
-      ctx.arc(this.movePos.x + 16, this.movePos.y, 4, 0, Math.PI * 2); // ctx.arc(this.movePos.x + 32, this.movePos.y, 4, 0, Math.PI * 2);
+      ctx.beginPath();
+      ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2); // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
 
-      ctx.restore();
-      ctx.fillStyle = this.color; // ctx.fillStyle = 'red';
-
+      ctx.fillStyle = this.color;
       ctx.fill();
+      ctx.restore();
     }
   }, {
     key: "update",
-    value: function update() {// this.movePos = this.movePos.add(this.v);
+    value: function update(idx, arr) {
+      // this.rotationAxisR += this.rotationAxisRV;
+      this.moveX += this.moveV;
+
+      if (this.moveX >= this.rotationAxisR - 22 - 10 - 37) {
+        arr.splice(idx, 1);
+      }
     }
   }]);
 
@@ -1437,7 +1446,7 @@ var beforeShootTime = new Date();
 function handleClick() {
   var shootTime = new Date();
 
-  if (shootTime - beforeShootTime > 200) {
+  if (shootTime - beforeShootTime > 400) {
     shooterBullets.push(new ShooterBullet({
       // 34 + 12 + 16
       // p: new Vec2(62, 0),

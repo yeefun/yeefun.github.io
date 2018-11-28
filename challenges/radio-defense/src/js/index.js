@@ -212,29 +212,8 @@ class Game {
       // 更新 shooter
       this.shooter.update();
       // 更新 circle
-      circles.forEach((circle, circleIdx) => {
+      circles.forEach((circle) => {
         circle.update();
-        
-        shooterBullets.forEach((bullet, bulletIdx) => {
-          // 取兩個外切線所構成角度的一半
-          const anglePan = Math.asin(circle.r / circle.rotationAxisR);
-          // 設中角度範圍
-          const shotAngleRange = bullet.rotateAngle >= (circle.rotationAxisAngle * degToPi - anglePan) && bullet.rotateAngle <= (circle.rotationAxisAngle * degToPi + anglePan);
-          // 設中距離範圍
-          const shotRRange = (bullet.rotationAxisR + 15 + 11) >= circle.rotationAxisR && bullet.rotationAxisR + 15 - 11 <= circle.rotationAxisR;
-
-          // 判斷子彈有無射中圓形
-          if (shotAngleRange && shotRRange) {
-            // 移除子彈
-            shooterBullets.splice(bulletIdx, 1);
-            // 扣 1 生命值
-            circle.hP -= 1;
-            if (circle.hP === 0) {
-              // 若生命值 0，移除圓形
-              circles.splice(circleIdx, 1);
-            }
-          }
-        });
       });
       // 更新 triangles
       triangles.forEach((triangle) => {
@@ -301,8 +280,8 @@ class Game {
   }
   setLevelOne() {
     circles.push(new Circle({
-      rotationAxisR: 200,
-      rotationAxisAngle: 150,
+      rotationAxisR: 240,
+      rotationAxisAngle: 0,
     }));
     // triangles.push(new Triangle({
     //   rotationAxisR: {
@@ -340,7 +319,6 @@ class Circle {
       color: globalColor.orange,
       hP: 2,
       bullets: [],
-      beforeShootTime: new Date(),
       beforeRotateTime: new Date(),
       isRotating: false,
       // beforeRotateAxisAngleTime: new Date(),
@@ -405,49 +383,45 @@ class Circle {
     });
   }
   update() {
-    if (this.rotationAxisAngle >= 360) {
-      this.rotationAxisAngle = 0;
-    }
-    // this.rotationAxisR -= this.rotationAxisRV;
+    this.bullets.forEach((bullet, idx, arr) => {
+      bullet.update(idx, arr);
+    });
+    // 當圓形自身在旋轉時，圓形不要移動
     if (!this.isRotating) {
       this.rotationAxisAngle += this.rotationAxisAngleV;
     }
-    // this.rotate += this.rotateV;
-    this.bullets.forEach((bullet) => {
-      bullet.update();
-    });
-    const shootTime = new Date();
-    if (shootTime - this.beforeShootTime > 1200) {
-      this.bullets.push(new CircleBullet({
-        p: {
-          x: this.originalPos.x,
-          y: this.originalPos.y,
-        },
-        rotate: this.rotate,
-      }));
-      this.beforeShootTime = shootTime;
-    }
     const rotateTime = new Date();
-    if (rotateTime - this.beforeRotateTime > 4000) {
+    // 每 2-4 秒，自身旋轉一次
+    if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
       this.isRotating = true;
-      TweenLite.to(this, 0.8, {
-        // rotate: this.rotationAxisAngle - 150,
-        rotate: '+=40',
+      TweenLite.to(this, 0.4, {
+        rotate: this.rotationAxisAngle - 180,
         ease: Power2.easeOut,
+        // 自身旋轉完後射擊
         onComplete: () => {
+          this.shoot();
           this.isRotating = false;
         },
       });
       this.beforeRotateTime = rotateTime;
     }
-    // const rotateAxisAngleTime = new Date();
-    // if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > 2000) {
-    //   TweenLite.to(this, 0.8, {
-    //     rotationAxisAngle: '+=16',
-    //     ease: Power2.easeOut,
-    //   });
-    //   this.beforeRotateAxisAngleTime = rotateAxisAngleTime;
-    // }
+  }
+  shoot() {
+    // 射 1-2 發
+    for (let i = 0; i < 2 * Math.random(); i += 1) {
+      const timer = setTimeout(() => {
+        this.bullets.push(new CircleBullet({
+          originalPos: {
+            x: this.originalPos.x,
+            y: this.originalPos.y,
+          },
+          rotateAngle: this.rotate,
+          rotationAxisR: this.rotationAxisR,
+        }));
+        clearTimeout(timer);
+        // 間隔 02-04 秒
+      }, i * (200 * Math.random() + 200));
+    }
   }
 }
 
@@ -841,8 +815,8 @@ class Shooter {
   }
   update() {
     this.rotateAngle = mouseMoveAngle;
-    shooterBullets.forEach((bullet) => {
-      bullet.update();
+    shooterBullets.forEach((bullet, idx) => {
+      bullet.update(idx);
     });
   }
   shoot() {
@@ -857,9 +831,7 @@ class ShooterBullet {
     const def = {
       // p: new Vec2(0, 0),
       rotationAxisR: 0,
-      // shootInterval: 0.4,
       color: globalColor.white,
-      // v: new Vec2(6, 0),
       v: 4,
       rotateAngle: 0,
     };
@@ -868,7 +840,6 @@ class ShooterBullet {
   }
   draw() {
     ctx.save();
-      ctx.beginPath();
       ctx.translate(gameW / 2, gameH / 2);
       ctx.rotate(this.rotateAngle);
       // ctx.translate(this.p.x, this.p.y);
@@ -899,9 +870,30 @@ class ShooterBullet {
       ctx.fill();
     ctx.restore();
   }
-  update() {
-    // this.p = this.p.add(this.v);
+  update(bulletIdx) {
+    // 移動子彈
     this.rotationAxisR += this.v;
+    // 判斷子彈有無射中圓形
+    circles.forEach((circle, circleIdx) => {
+      // 取兩個外切線所構成角度的一半
+      const anglePan = Math.asin(circle.r / circle.rotationAxisR);
+      // 設中角度範圍
+      const shotAngleRange = this.rotateAngle >= (circle.rotationAxisAngle % 360 * degToPi - anglePan) && this.rotateAngle <= (circle.rotationAxisAngle % 360 * degToPi + anglePan);
+      // 設中距離範圍
+      const shotRRange = (this.rotationAxisR + 15 + 11) >= circle.rotationAxisR && this.rotationAxisR + 15 - 11 <= circle.rotationAxisR;
+
+      // 判斷子彈有無射中圓形
+      if (shotAngleRange && shotRRange) {
+        // 移除子彈
+        shooterBullets.splice(bulletIdx, 1);
+        // 扣 1 生命值
+        circle.hP -= 1;
+        if (circle.hP === 0) {
+          // 若生命值 0，移除圓形
+          circles.splice(circleIdx, 1);
+        }
+      }
+    });
   }
 }
 
@@ -1022,34 +1014,42 @@ class TriangleSub {;
 class CircleBullet {;
   constructor(args) {
     const def = {
-      p: {
+      originalPos: {
         x: 0,
         y: 0,
       },
-      movePos: new Vec2(0, 0),
+      rotationAxisR: 0,
+      // movePos: new Vec2(0, 0),
       color: globalColor.orange,
-      v: new Vec2(4, 0),
-      rotate: 0,
+      // rotationAxisRV: 4,
+      moveX: 0,
+      moveV: 3,
+      // v: 4,
+      rotateAngle: 0,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   draw() {
-    ctx.beginPath();
     ctx.save();
-      ctx.translate(this.p.x, this.p.y);
-      ctx.rotate(this.rotate * degToPi);
-      ctx.scale(1.6, 0.68);
+      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.rotate(this.rotateAngle * degToPi);
+      // ctx.scale(1.6, 0.68);
       // ctx.scale(1, 0.9);
-      ctx.arc(this.movePos.x + 16, this.movePos.y, 4, 0, Math.PI * 2);
-      // ctx.arc(this.movePos.x + 32, this.movePos.y, 4, 0, Math.PI * 2);
+      ctx.beginPath();
+      ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2);
+      // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
     ctx.restore();
-    ctx.fillStyle = this.color;
-    // ctx.fillStyle = 'red';
-    ctx.fill();
   }
-  update() {
-    // this.movePos = this.movePos.add(this.v);
+  update(idx, arr) {
+    // this.rotationAxisR += this.rotationAxisRV;
+    this.moveX += this.moveV;
+    
+    if (this.moveX >= this.rotationAxisR - 22 - 10 - 37) {
+      arr.splice(idx, 1);
+    }
   }
 }
 
@@ -1284,7 +1284,7 @@ canvas.addEventListener('click', handleClick);
 let beforeShootTime = new Date();
 function handleClick() {
   const shootTime = new Date();
-  if (shootTime - beforeShootTime > 200) {
+  if (shootTime - beforeShootTime > 400) {
     shooterBullets.push(new ShooterBullet({
       // 34 + 12 + 16
       // p: new Vec2(62, 0),
