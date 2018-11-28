@@ -35,7 +35,98 @@ canvas {
   width: 100%;
   height: 100%;
   top: 0;
-  left: 0; }
+  left: 0;
+  pointer-events: none; }
+  .panel__game {
+    display: none;
+    height: 100%;
+    position: relative; }
+    .panel__game-wrapper-center {
+      position: absolute;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      top: 20px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%); }
+    .panel__game-wrapper-right {
+      position: absolute;
+      top: 28px;
+      right: 32px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: end;
+          -ms-flex-align: end;
+              align-items: flex-end; }
+    .panel__game-time {
+      font-size: 4.8rem;
+      font-weight: 500;
+      margin-bottom: 2px; }
+    .panel__game-alert, .panel__game-level {
+      font-size: 1.8rem;
+      color: #f5af5f;
+      font-weight: 300;
+      margin-left: -21.12px; }
+    .panel__game-alert {
+      margin-bottom: 4px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+    .panel__game-hp {
+      background-color: #f5af5f;
+      width: 216px;
+      height: 14px;
+      margin-bottom: 18px;
+      border-radius: 8px; }
+    .panel__game-heart {
+      position: relative;
+      width: 32px;
+      height: 24px;
+      margin-right: 6px; }
+      .panel__game-heart:before, .panel__game-heart:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 16px;
+        height: 24px;
+        background-color: #e7465d;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px; }
+      .panel__game-heart:before {
+        left: 16px;
+        -webkit-transform-origin: left bottom;
+                transform-origin: left bottom;
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg); }
+      .panel__game-heart:after {
+        left: 0;
+        -webkit-transform-origin: right bottom;
+                transform-origin: right bottom;
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg); }
+      .panel__game-heart-wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: end;
+            -ms-flex-pack: end;
+                justify-content: flex-end; }
 
 .intro {
   font-family: "Microsoft JhengHei", sans-serif;
@@ -96,5 +187,8 @@ button {
   button:hover {
     background-color: #fff;
     color: #001d2e; }
+
+.mr-0 {
+  margin-right: 0 !important; }
 
 /*# sourceMappingURL=style.css.map */
