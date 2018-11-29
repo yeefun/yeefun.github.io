@@ -281,7 +281,7 @@ class Game {
   setLevelOne() {
     circles.push(new Circle({
       rotationAxisR: 240,
-      rotationAxisAngle: 0,
+      rotationAxisAngle: 240,
     }));
     // triangles.push(new Triangle({
     //   rotationAxisR: {
@@ -341,12 +341,14 @@ class Circle {
       ctx.rotate(this.rotate * degToPi);
       // 大淡圓
       ctx.beginPath();
-      ctx.arc(-4, 0, circleBigR, 0, Math.PI * 2);
+      // ctx.arc(-4, 0, circleBigR, 0, Math.PI * 2);
+      ctx.arc(4, 0, circleBigR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.21)';
       ctx.fill();
       // 小淡圓
       ctx.beginPath();
-      ctx.arc(20, 0, circleSmallR, 0, Math.PI * 2);
+      // ctx.arc(20, 0, circleSmallR, 0, Math.PI * 2);
+      ctx.arc(-20, 0, circleSmallR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.21)';
       ctx.fill();
       // 主體圓
@@ -357,23 +359,24 @@ class Circle {
       // 小三圓
       ctx.beginPath();
       ctx.fillStyle = globalColor.white;
-      ctx.arc(subRotationAxisR, 0, 2.4, 0, Math.PI * 2);
+      // ctx.arc(subRotationAxisR, 0, 2.4, 0, Math.PI * 2);
+      ctx.arc(subRotationAxisR * Math.cos(60 * degToPi), subRotationAxisR * Math.sin(60 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(subRotationAxisR * Math.cos(120 * degToPi), subRotationAxisR * Math.sin(120 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.arc(subRotationAxisR * Math.cos(180 * degToPi), subRotationAxisR * Math.sin(180 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(subRotationAxisR * Math.cos(240 * degToPi), subRotationAxisR * Math.sin(240 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.arc(subRotationAxisR * Math.cos(300 * degToPi), subRotationAxisR * Math.sin(300 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill();
       // 神經
       ctx.beginPath();
       ctx.fillStyle = globalColor.white;
-      ctx.lineTo(8, 0);
-      ctx.$triLineTo(2, 32);
-      ctx.$triLineTo(12, 120);
-      ctx.$triLineTo(2.4, 176);
-      ctx.$triLineTo(8, 240);
-      ctx.$triLineTo(1.6, 320);
+      ctx.lineTo(-8, 0);
+      ctx.$triLineTo(-2, 32);
+      ctx.$triLineTo(-12, 120);
+      ctx.$triLineTo(-2.4, 176);
+      ctx.$triLineTo(-8, 240);
+      ctx.$triLineTo(-1.6, 320);
       ctx.closePath();
       ctx.fill();
     ctx.restore();
@@ -388,17 +391,22 @@ class Circle {
     });
     // 當圓形自身在旋轉時，圓形不要移動
     if (!this.isRotating) {
-      this.rotationAxisAngle += this.rotationAxisAngleV;
+      // this.rotationAxisAngle += this.rotationAxisAngleV;
+      // this.rotationAxisAngle += 2;
     }
     const rotateTime = new Date();
     // 每 2-4 秒，自身旋轉一次
     if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
       this.isRotating = true;
       TweenLite.to(this, 0.4, {
-        rotate: this.rotationAxisAngle - 180,
+        // rotate: this.rotationAxisAngle - 180,
+        rotate: this.rotationAxisAngle % 360,
+        // rotate: this.rotationAxisAngle,
         ease: Power2.easeOut,
         // 自身旋轉完後射擊
         onComplete: () => {
+          // console.log(this.rotate);
+
           this.shoot();
           this.isRotating = false;
         },
@@ -416,10 +424,11 @@ class Circle {
             y: this.originalPos.y,
           },
           rotateAngle: this.rotate,
+          // rotateAngle: Math.sin(this.rotate * degToPi),
           rotationAxisR: this.rotationAxisR,
         }));
         clearTimeout(timer);
-        // 間隔 02-04 秒
+        // 間隔 0.2-0.4 秒
       }, i * (200 * Math.random() + 200));
     }
   }
@@ -728,6 +737,7 @@ class Shooter {
       r: 34,
       rotateAngle: 0,
       bullet: null,
+      hP: 9,
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -815,6 +825,8 @@ class Shooter {
   }
   update() {
     this.rotateAngle = mouseMoveAngle;
+    // console.log(this.rotateAngle);
+    
     shooterBullets.forEach((bullet, idx) => {
       bullet.update(idx);
     });
@@ -1023,7 +1035,7 @@ class CircleBullet {;
       color: globalColor.orange,
       // rotationAxisRV: 4,
       moveX: 0,
-      moveV: 3,
+      moveXV: -3,
       // v: 4,
       rotateAngle: 0,
     }
@@ -1034,10 +1046,14 @@ class CircleBullet {;
     ctx.save();
       ctx.translate(this.originalPos.x, this.originalPos.y);
       ctx.rotate(this.rotateAngle * degToPi);
+      // ctx.rotate(this.rotateAngle);
+      // console.log(this.rotateAngle);
+      
       // ctx.scale(1.6, 0.68);
       // ctx.scale(1, 0.9);
       ctx.beginPath();
-      ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2);
+      // ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2);
+      ctx.arc(this.moveX - 22 - 10, 0, 4, 0, Math.PI * 2);
       // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.fill();
@@ -1045,9 +1061,22 @@ class CircleBullet {;
   }
   update(idx, arr) {
     // this.rotationAxisR += this.rotationAxisRV;
-    this.moveX += this.moveV;
+    // 子彈移動
+    this.moveX += this.moveXV;
+    // 當圓形子彈射中 shooter 主體
+    if (this.moveX <= -(this.rotationAxisR - 22 - 10 - 34 - 3)) {
+      // shooter 命減 1
+      game.shooter.hP -= 1;
+      // 移除子彈
+      arr.splice(idx, 1);
+    }
+    // console.log(this.rotateAngle);
     
-    if (this.moveX >= this.rotationAxisR - 22 - 10 - 37) {
+    // 當圓形子彈射中 shooter 的護盾
+    const shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= (135 * degToPi) && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= (225 * degToPi);
+    
+    if (shieldAngleRange && this.moveX <= -(this.rotationAxisR - 22 - 10 - 34 - 36 - 2)) {
+      // 移除子彈
       arr.splice(idx, 1);
     }
   }
@@ -1276,7 +1305,11 @@ canvas.addEventListener('mousemove', handleMouseMove);
 function handleMouseMove(evt) {
   mouseMovePos.x = evt.x - ww / 2;
   mouseMovePos.y = evt.y - wh / 2;
-  mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
+  const angle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
+  mouseMoveAngle = angle < 0 ? angle + 2 * Math.PI : angle;
+  // mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
+  
+  // console.log(mouseMoveAngle / Math.PI * 180);
 };
 
 canvas.addEventListener('click', handleClick);
@@ -1289,7 +1322,7 @@ function handleClick() {
       // 34 + 12 + 16
       // p: new Vec2(62, 0),
       rotationAxisR: 62,
-      rotateAngle: mouseMoveAngle < 0 ? mouseMoveAngle + 2 * Math.PI : mouseMoveAngle,
+      rotateAngle: mouseMoveAngle,
     }));
     beforeShootTime = shootTime;
   }
