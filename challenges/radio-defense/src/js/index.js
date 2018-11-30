@@ -67,10 +67,6 @@ class Vec2 {
   equal(v) {
     return this.x === v.x && this.y === v.y;
   }
-  // toString() {
-  //   return `(${this.x}, ${this.y})`;
-  // }
-
   get length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
@@ -123,7 +119,6 @@ function initCanvas() {
 
 
 const degToPi = Math.PI / 180;
-// let circles = [];
 let coverCircle;
 let coverTriangle;
 let coverPolygon;
@@ -279,18 +274,17 @@ class Game {
     canvas.style.cursor = 'pointer';
   }
   setLevelOne() {
-    circles.push(new Circle({
-      rotationAxisR: 240,
-      rotationAxisAngle: 240,
-    }));
-    // triangles.push(new Triangle({
-    //   rotationAxisR: {
-    //     x: 280,
-    //     y: 280,
-    //   },
-    //   rotationAxisAngle: 40,
-    //   // rotate: 36,
+    // circles.push(new Circle({
+    //   rotationAxisR: 240,
+    //   rotationAxisAngle: 0,
     // }));
+    triangles.push(new Triangle({
+      rotationAxisR: {
+        x: 240,
+        y: 280,
+      },
+      rotationAxisAngle: 0,
+    }));
     // polygons.push(new Polygon({
     //   rotationAxisR: 280,
     //   rotationAxisAngle: 220,
@@ -313,15 +307,14 @@ class Circle {
       rotationAxisAngle: 0,
       r: 22,
       rotate: 0,
-      rotationAxisRV: 0.01,
+      rotationAxisRV: 0.1,
       rotationAxisAngleV: 0.4,
       rotateV: 0.4,
       color: globalColor.orange,
-      hP: 2,
+      HP: 2,
       bullets: [],
       beforeRotateTime: new Date(),
       isRotating: false,
-      // beforeRotateAxisAngleTime: new Date(),
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -341,13 +334,11 @@ class Circle {
       ctx.rotate(this.rotate * degToPi);
       // 大淡圓
       ctx.beginPath();
-      // ctx.arc(-4, 0, circleBigR, 0, Math.PI * 2);
       ctx.arc(4, 0, circleBigR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.21)';
       ctx.fill();
       // 小淡圓
       ctx.beginPath();
-      // ctx.arc(20, 0, circleSmallR, 0, Math.PI * 2);
       ctx.arc(-20, 0, circleSmallR, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(245, 175, 95, 0.21)';
       ctx.fill();
@@ -386,18 +377,20 @@ class Circle {
     });
   }
   update() {
+    // 更新圓形子彈
     this.bullets.forEach((bullet, idx, arr) => {
       bullet.update(idx, arr);
     });
     // 當圓形自身在旋轉時，圓形不要移動
     if (!this.isRotating) {
-      // this.rotationAxisAngle += this.rotationAxisAngleV;
+      this.rotationAxisAngle += this.rotationAxisAngleV;
       // this.rotationAxisAngle += 2;
     }
-    const rotateTime = new Date();
     // 每 2-4 秒，自身旋轉一次
+    const rotateTime = new Date();
     if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
       this.isRotating = true;
+      // console.log(this.rotationAxisAngle);
       TweenLite.to(this, 0.4, {
         // rotate: this.rotationAxisAngle - 180,
         rotate: this.rotationAxisAngle % 360,
@@ -405,8 +398,6 @@ class Circle {
         ease: Power2.easeOut,
         // 自身旋轉完後射擊
         onComplete: () => {
-          // console.log(this.rotate);
-
           this.shoot();
           this.isRotating = false;
         },
@@ -451,13 +442,15 @@ class Triangle {
       rotationAxisAngle: 0,
       r: 26,
       rotate: 0,
-      v: -0.4,
+      rotationAxisRV: 0.1,
+      rotationAxisAngleV: 0.4,
+      rotateV: -2.4,
       color: globalColor.blue,
       bullets: [],
+      beforeRotateAxisAngleTime: new Date(),
       beforeShootTime: new Date(),
-      hP: 4,
+      HP: 4,
       isReproduce: false,
-      // canMove: true,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -477,55 +470,71 @@ class Triangle {
       ctx.translate(this.originalPos.x, this.originalPos.y);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
-        ctx.translate(2, -Math.sqrt(12));
+        ctx.translate(4, 0);
         ctx.beginPath();
-        ctx.moveTo(triangleOuterBigR * Math.cos(0), triangleOuterBigR * Math.sin(0));
-        ctx.lineTo(triangleOuterBigR * Math.cos(120 * degToPi), triangleOuterBigR * Math.sin(120 * degToPi));
-        ctx.lineTo(triangleOuterBigR * Math.cos(240 * degToPi), triangleOuterBigR * Math.sin(240 * degToPi));
+        ctx.moveTo(triangleOuterBigR * Math.cos(60 * degToPi), triangleOuterBigR * Math.sin(60 * degToPi));
+        ctx.$triLineTo(triangleOuterBigR, 180);
+        ctx.$triLineTo(triangleOuterBigR, 300);
         ctx.closePath();
         ctx.fillStyle = 'rgba(54, 118, 187, 0.34)';
         ctx.fill();
       ctx.restore();
       // 主體三角
       ctx.beginPath();
-      ctx.moveTo(this.r * Math.cos(0), this.r * Math.sin(0));
-      ctx.lineTo(this.r * Math.cos(120 * degToPi), this.r * Math.sin(120 * degToPi));
-      ctx.lineTo(this.r * Math.cos(240 * degToPi), this.r * Math.sin(240 * degToPi));
+      ctx.moveTo(this.r * Math.cos(60 * degToPi), this.r * Math.sin(60 * degToPi));
+      ctx.$triLineTo(this.r, 180);
+      ctx.$triLineTo(this.r, 300);
       ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
       // 大白三角
-      ctx.translate(-3.2, -1.6);
+      ctx.translate(0, -2.8);
       ctx.fillStyle = globalColor.white;
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(triangleInnerBigR * Math.cos(30 * degToPi), triangleInnerBigR * Math.sin(30 * degToPi));
-      ctx.lineTo(triangleInnerBigR * Math.cos(90 * degToPi), triangleInnerBigR * Math.sin(90 * degToPi));
+      ctx.$triLineTo(triangleInnerBigR, 90);
+      ctx.$triLineTo(triangleInnerBigR, 150);
       ctx.closePath();
       ctx.fill();
       // 小白三角
-      ctx.translate(0, -8.8);
+      ctx.translate(8 * Math.cos(-40 * degToPi), 8 * Math.sin(-40 * degToPi))
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(triangleInnerSmallR * Math.cos(30 * degToPi), triangleInnerSmallR * Math.sin(30 * degToPi));
-      ctx.lineTo(triangleInnerSmallR * Math.cos(90 * degToPi), triangleInnerSmallR * Math.sin(90 * degToPi));
+      ctx.$triLineTo(triangleInnerSmallR, 90);
+      ctx.$triLineTo(triangleInnerSmallR, 150);
       ctx.closePath();
       ctx.fill();
     ctx.restore();
-    // 子彈
+    // 繪製三角子彈
     this.bullets.forEach((bullet) => {
       bullet.draw();
     });
   }
   update() {
-    // this.rotationAxisAngle += this.v;
-    // this.rotate += this.v;
+    // 更新三角子彈
     this.bullets.forEach((bullet) => {
       bullet.update();
     });
-    // const shootTime = new Date();
-    // if (shootTime - this.beforeShootTime > 1000) {
-    if (!this.bullets.length) {
+    // 每 4-8 秒，三角移動 + 自身旋轉
+    const rotateAxisAngleTime = new Date();
+    if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > (Math.random() * 4000 + 4000)) {
+      const randomRotateAngle = (Math.random() > 0.25 ? -1 : 1) * (30 * Math.random() + 45);
+      // 以 0.8 秒移動
+      TweenLite.to(this, 0.8, {
+        rotationAxisAngle: `+=${randomRotateAngle}`,
+        ease: Power0.easeNone,
+      });
+      // 以 1.2 秒自身旋轉
+      TweenLite.to(this, 1.2, {
+        rotate: `+=${randomRotateAngle + 360}`,
+        ease: Power2.easeInOut,
+      });
+      this.beforeRotateAxisAngleTime = rotateAxisAngleTime;
+    }
+    // 每 2.4-3.6 秒，發射 1 發子彈
+    const shootTime = new Date();
+    if (shootTime - this.beforeShootTime > (Math.random() * 1200 + 2400)) {
+    // if (!this.bullets.length) {
       this.bullets.push(new TriangleBullet({
         p: {
           x: this.originalPos.x,
@@ -533,9 +542,10 @@ class Triangle {
         },
         rotate: this.rotate,
       }));
+      this.beforeShootTime = shootTime;
     }
-    // 派副三角形攻擊
-    if (this.hP === 4 && !this.isReproduce) {
+    // 當生命值剩 2，派副三角形攻擊
+    if (this.HP === 2 && !this.isReproduce) {
       for (let i = 1; i <= 2; i += 1) {
         subTriangles.push(new TriangleSub({
           rotationAxisR: {
@@ -549,34 +559,12 @@ class Triangle {
       }
       this.isReproduce = true;
     }
-      // this.beforeShootTime = shootTime;
-    // }
-    // if (this.canMove) {
-    //   this.canMove = false;
-    //   setTimeout(() => {
-    //     TweenLite.to(this, 0.8, {
-    //       // rotationAxisAngle: `${Math.random() < 0.5 ? '-=' : '+='}${Math.random() * 30 + 15}`,
-    //       rotationAxisAngle: '+=90',
-    //       ease: Sine.easeInOut,
-    //       // onComplete: () => {
-    //       //   this.canMove = true;
-    //       // },
-    //     });
-    //     this.canMove = true;
-    //   }, 1200);
-    // }
   }
-  // reproduce() {
-  //   ctx.save();
-  //     ctx.scale(4, 4);
-  //     this.draw('red');
-  //   ctx.restore();
-  // }
 }
 
 
 
-/* Polygon Class */
+/* Polygon 類別 */
 class Polygon {
   constructor(args) {
     const def = {
@@ -724,7 +712,8 @@ class Polygon {
 }
 
 
-/* Shooter Class */
+
+/* Shooter 類別 */
 let shooterBullets = [];
 class Shooter {
   constructor(args) {
@@ -737,7 +726,7 @@ class Shooter {
       r: 34,
       rotateAngle: 0,
       bullet: null,
-      hP: 9,
+      HP: 9,
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -767,12 +756,9 @@ class Shooter {
         ctx.stroke();
       ctx.restore();
       // 輪圍外虛線
-      // ctx.beginPath();
       ctx.strokeStyle = this.color;
       const outerR = this.r + 22;
       for (let i = 0; i < 360; i += 1) {
-        // const angle1 = i;
-        // const angle2 = (i + 1);
         const x1 = outerR * Math.cos(i * degToPi + this.rotateAngle);
         const y1 = outerR * Math.sin(i * degToPi + this.rotateAngle);
         const x2 = outerR * Math.cos((i + 1) * degToPi + this.rotateAngle);
@@ -798,17 +784,10 @@ class Shooter {
         ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
         ctx.shadowBlur = 16;
         ctx.rotate(this.rotateAngle);
-        // ctx.translate(0, -this.r - 8);
         ctx.translate(this.r + 8, 0);
         ctx.moveTo(0, 0);
         // 下方長方形長 16、寬（高） 12
         // 上方梯形高 14、上邊寬 8
-        // ctx.lineTo(8, 0);
-        // ctx.lineTo(8, -12);
-        // ctx.lineTo(4, -26);
-        // ctx.lineTo(-4, -26);
-        // ctx.lineTo(-8, -12);
-        // ctx.lineTo(-8, 0);
         ctx.lineTo(0, 8);
         ctx.lineTo(12, 8);
         ctx.lineTo(26, 4);
@@ -825,8 +804,6 @@ class Shooter {
   }
   update() {
     this.rotateAngle = mouseMoveAngle;
-    // console.log(this.rotateAngle);
-    
     shooterBullets.forEach((bullet, idx) => {
       bullet.update(idx);
     });
@@ -837,6 +814,8 @@ class Shooter {
     });
   }
 }
+
+
 
 class ShooterBullet {
   constructor(args) {
@@ -899,8 +878,8 @@ class ShooterBullet {
         // 移除子彈
         shooterBullets.splice(bulletIdx, 1);
         // 扣 1 生命值
-        circle.hP -= 1;
-        if (circle.hP === 0) {
+        circle.HP -= 1;
+        if (circle.HP === 0) {
           // 若生命值 0，移除圓形
           circles.splice(circleIdx, 1);
         }
@@ -909,7 +888,9 @@ class ShooterBullet {
   }
 }
 
-/* Sub Triangle Class */
+
+
+/* Sub Triangle 類別 */
 class TriangleSub {;
   constructor(args) {
     const def = {
@@ -928,8 +909,7 @@ class TriangleSub {;
       // v: -0.4,
       // v: 0,
       color: globalColor.blue,
-      hP: 2,
-      // isReproduce: false,
+      HP: 2,
       isReproduceMoving: false,
       order: 0,
     }
@@ -1023,6 +1003,7 @@ class TriangleSub {;
 }
 
 
+
 class CircleBullet {;
   constructor(args) {
     const def = {
@@ -1031,9 +1012,7 @@ class CircleBullet {;
         y: 0,
       },
       rotationAxisR: 0,
-      // movePos: new Vec2(0, 0),
       color: globalColor.orange,
-      // rotationAxisRV: 4,
       moveX: 0,
       moveXV: -3,
       // v: 4,
@@ -1045,10 +1024,7 @@ class CircleBullet {;
   draw() {
     ctx.save();
       ctx.translate(this.originalPos.x, this.originalPos.y);
-      ctx.rotate(this.rotateAngle * degToPi);
-      // ctx.rotate(this.rotateAngle);
-      // console.log(this.rotateAngle);
-      
+      ctx.rotate(this.rotateAngle * degToPi); 
       // ctx.scale(1.6, 0.68);
       // ctx.scale(1, 0.9);
       ctx.beginPath();
@@ -1060,18 +1036,15 @@ class CircleBullet {;
     ctx.restore();
   }
   update(idx, arr) {
-    // this.rotationAxisR += this.rotationAxisRV;
     // 子彈移動
     this.moveX += this.moveXV;
     // 當圓形子彈射中 shooter 主體
     if (this.moveX <= -(this.rotationAxisR - 22 - 10 - 34 - 3)) {
       // shooter 命減 1
-      game.shooter.hP -= 1;
+      game.shooter.HP -= 1;
       // 移除子彈
       arr.splice(idx, 1);
     }
-    // console.log(this.rotateAngle);
-    
     // 當圓形子彈射中 shooter 的護盾
     const shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= (135 * degToPi) && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= (225 * degToPi);
     
@@ -1082,6 +1055,8 @@ class CircleBullet {;
   }
 }
 
+
+
 class TriangleBullet {;
   constructor(args) {
     const def = {
@@ -1089,9 +1064,9 @@ class TriangleBullet {;
         x: 0,
         y: 0,
       },
-      movePos: new Vec2(0, 0),
+      moveX: 0,
       color: globalColor.blue,
-      v: new Vec2(-1.5, 1.5 * Math.sqrt(3)),
+      moveXV: -4,
       rotate: 0,
     }
     Object.assign(def, args);
@@ -1101,32 +1076,33 @@ class TriangleBullet {;
     ctx.save();
       ctx.translate(this.p.x, this.p.y);
       ctx.rotate(this.rotate * degToPi);
-      ctx.translate(this.movePos.x + 28 * Math.cos(120 * degToPi), this.movePos.y + 28 * Math.sin(120 * degToPi));
-      // 淡三角子彈
-      ctx.fillStyle = 'rgba(54, 118, 187, 0.34)';
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(18.8 * Math.cos(-45 * degToPi), 18.8 * Math.sin(-45 * degToPi));
-      ctx.lineTo(18 * Math.cos(-52 * degToPi), 18 * Math.sin(-52 * degToPi));
-      ctx.closePath();
-      ctx.fill();
+      ctx.translate(this.moveX, 0);
       // 主體三角子彈
       ctx.fillStyle = this.color;
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(18 * Math.cos(-52 * degToPi), 18 * Math.sin(-52 * degToPi));
-      ctx.lineTo(19.6 * Math.cos(-72 * degToPi), 19.6 * Math.sin(-72 * degToPi));
+      ctx.moveTo(-16, 0);
+      ctx.$triLineTo(38, 174);
+      ctx.$triLineTo(16.8, 200);
+      ctx.closePath();
+      ctx.fill();
+      // 淡三角子彈
+      ctx.fillStyle = 'rgba(54, 118, 187, 0.34)';
+      ctx.beginPath();
+      ctx.moveTo(-16.4, 0);
+      ctx.$triLineTo(38, 174);
+      ctx.$triLineTo(15.6, 168);
       ctx.closePath();
       ctx.fill();
     ctx.restore();
   }
   update() {
-    this.movePos = this.movePos.add(this.v);
-    // this.reproduce();
+    this.moveX += this.moveXV;
   }
 }
 
-// draw battery
+
+
+// 繪製電池
 function drawBattery(p) {
   ctx.save();
     ctx.translate(p.x, p.y);
@@ -1191,6 +1167,8 @@ function drawBattery(p) {
     // ctx.fill();
   ctx.restore();
 }
+
+
 
 // 繪製閃電
 function drawLightning(translate =  { x: 0, y: 0 }, scale = 1 ) {
