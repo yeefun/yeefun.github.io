@@ -1,19 +1,19 @@
 <template>
   <section class="cover-video">
     <div class="cover-video-wrapper" @click.once="playMainVideo">
-      <!-- <div class="cover-video__title-wrapper" v-if="isLoopingVideoState">
-        <h2>票開完了，他們的工作才開始</h2>
-        <h1>每晚與時間賽跑的印報人</h1>
-      </div> -->
       <video class="cover-video__main" src="../assets/video/cover-main.mp4" poster="../assets/cover-backgroung-img.jpg" controls playsinline webkit-playsinline ref="mainVideo"></video>
       <!-- <transition name="fade"> -->
       <video class="cover-video__looping" src="../assets/video/cover-looping.mp4" poster="../assets/cover-backgroung-img.jpg" muted autoplay loop playsinline webkit-playsinline v-if="isLoopingVideoState"></video>
       <!-- </transition> -->
-      <button type="button" v-if="isLoopingVideoState"></button>
       <div class="cover-video__title-wrapper" v-if="isLoopingVideoState">
-        <h2>票開完了，他們的工作才開始</h2>
-        <h1>每晚與時間賽跑的印報人</h1>
+        <button type="button" v-if="isLoopingVideoState"></button>
+        <h1 v-if="isLoopingVideoState">每晚與時間賽跑的印報人</h1>
       </div>
+      <!-- <button type="button" v-if="isLoopingVideoState"></button> -->
+      <!-- <div class="cover-video__title-wrapper" v-if="isLoopingVideoState"> -->
+        <!-- <h2>票開完了，他們的工作才開始</h2> -->
+        <!-- <h1 v-if="isLoopingVideoState">每晚與時間賽跑的印報人</h1> -->
+      <!-- </div> -->
     </div>
   </section>
 </template>
@@ -40,79 +40,95 @@ export default {
   &-wrapper {
     position: relative;
     padding-bottom: 56.25%;
-    &:hover > button {
-      background-color: #4d7b9f;
-      border-color: #4d7b9f;
-      @media screen and (min-width: 992px) {
-        background-color: rgba(255, 255, 255, 1);
-      }
+    &:hover button {
+      // background-color: #4d7b9f;
+      // border-color: #4d7b9f;
+      background-color: rgba(255, 255, 255, 1);
     }
   }
-  &__looping {
-    cursor: pointer;
-  }
+  // &__looping {
+  //   cursor: pointer;
+  // }
   & button {
-    position: absolute;
-    // padding: 38px 68px 38px 76px;
+    // position: absolute;
     border-radius: 4px;
-    // background-color: rgba(255, 255, 255, 0.72);
-    background-color: rgba(0, 0, 0, 0.64);
-    transition: all 0.2s;
-    padding: 14px 14.8px 14px 16.6px;
-    border: 2px solid rgba(255, 255, 255, 0.64);
-    left: 12px;
-    bottom: 12px;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // top: 30%;
+    // background-color: rgba(0, 0, 0, 0.64);
+    background-color: rgba(255, 255, 255, 0.72);
+    transition: background-color 0.2s;
+    // padding: 14px 14.8px 14px 16.6px;
+    padding: 28.5px 51px 28.5px 57px;
+    // padding: 26.6px 47.6px 26.6px 53.2px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 44px;
+    // border: 2px solid rgba(255, 255, 255, 0.64);
+    // left: 12px;
+    // bottom: 12px;
     box-sizing: border-box;
     @media screen and (min-width: 992px) {
-      left: 50%;
-      transform: translateX(-50%);
-      top: 24%;
-      background-color: rgba(255, 255, 255, 0.72);
+      // top: 28%;
+      margin-bottom: 64px;
       padding: 38px 68px 38px 76px;
-      border-radius: 5px;
-      border: none;
-      bottom: auto;
     }
     &:after {
       content: '';
       display: block;
       border-style: solid;
-      border-color: transparent transparent transparent #fff;
-      border-width: 8px 0 8px 12.6px;
+      border-color: transparent transparent transparent #000;
+      border-width: 21px 0 21px 33px;
+      // border-width: 19.6px 0 19.6px 30.8px;
+      // border-width: 8px 0 8px 12.6px;
       @media screen and (min-width: 992px) {
         border-width: 28px 0 28px 44px;
-        border-left-color: #000;
       }
     }
   }
   &__title-wrapper {
+    cursor: pointer;
     position: absolute;
-    color: #fff;
     width: 100%;
+    height: 100%;
+  //   color: #fff;
+  //   width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    top: 56%;
-    left: 50%;
-    transform: translateX(-50%);
+  //   top: 56%;
+  //   left: 50%;
+  //   transform: translateX(-50%);
   }
   & h1 {
     font-size: 5.6rem;
-    font-weight: 700;
     letter-spacing: 8px;
     margin-left: 4px;
-    text-shadow: 1.6px 1.6px 8px rgba(0, 0, 0, 0.4);
-  }
-  & h2 {
-    font-size: 3.2rem;
-    margin-bottom: 24px;
-    letter-spacing: 12px;
-    margin-left: 6px;
-    text-shadow: 0.8px 0.8px 4px rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+    // font-weight: 500;
+    text-shadow: 1.6px 1.6px 8px rgba(0, 0, 0, 0.64);
+    // position: absolute;
+    width: 96%;
+    // top: 60%;
+    // left: 50%;
+    // transform: translateX(-50%);
+    color: #fff;
+    text-align: center;
     @media screen and (min-width: 992px) {
-
+      font-size: 6.4rem;
+      letter-spacing: 12px;
+      margin-left: 6px;
+      // top: 62%;
     }
   }
+  // & h2 {
+  //   font-size: 3.2rem;
+  //   margin-bottom: 24px;
+  //   letter-spacing: 12px;
+  //   margin-left: 6px;
+  //   text-shadow: 0.8px 0.8px 4px rgba(0, 0, 0, 0.4);
+  // }
 }
 video {
   position: absolute;
