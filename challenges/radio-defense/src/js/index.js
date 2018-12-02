@@ -174,15 +174,15 @@ class Game {
     if (this.isGameStart) {
       // 繪製 shooter
       this.shooter.draw();
-      // 繪製 circles
+      // 繪製每個 circle
       circles.forEach((circle) => {
         circle.draw();
       });
-      // 繪製 triangles
+      // 繪製每個 triangle
       triangles.forEach((triangle) => {
         triangle.draw();
       });
-      // 繪製 polygons
+      // 繪製每個 polygon
       polygons.forEach((polygon) => {
         polygon.draw();
       });
@@ -206,15 +206,15 @@ class Game {
       }
       // 更新 shooter
       this.shooter.update();
-      // 更新 circle
+      // 更新每個 circle
       circles.forEach((circle) => {
         circle.update();
       });
-      // 更新 triangles
+      // 更新每個 triangles
       triangles.forEach((triangle) => {
         triangle.update();
       });
-      // 更新 polygons
+      // 更新每個 polygons
       polygons.forEach((polygon) => {
         polygon.update();
       });
@@ -279,10 +279,11 @@ class Game {
     //   rotationAxisAngle: 0,
     // }));
     triangles.push(new Triangle({
-      rotationAxisR: {
-        x: 240,
-        y: 280,
-      },
+      // rotationAxisR: {
+      //   x: 280,
+      //   y: 240,
+      // },
+      rotationAxisR: 280,
       rotationAxisAngle: 0,
     }));
     // polygons.push(new Polygon({
@@ -371,7 +372,7 @@ class Circle {
       ctx.closePath();
       ctx.fill();
     ctx.restore();
-    // 子彈
+    // 繪製圓形子彈
     this.bullets.forEach((bullet) => {
       bullet.draw();
     });
@@ -393,8 +394,8 @@ class Circle {
       // console.log(this.rotationAxisAngle);
       TweenLite.to(this, 0.4, {
         // rotate: this.rotationAxisAngle - 180,
-        rotate: this.rotationAxisAngle % 360,
-        // rotate: this.rotationAxisAngle,
+        // rotate: this.rotationAxisAngle % 360,
+        rotate: this.rotationAxisAngle,
         ease: Power2.easeOut,
         // 自身旋轉完後射擊
         onComplete: () => {
@@ -435,10 +436,11 @@ class Triangle {
         x: gameW / 2,
         y: gameH / 2,
       },
-      rotationAxisR: {
-        x: 0,
-        y: 0,
-      },
+      // rotationAxisR: {
+      //   x: 0,
+      //   y: 0,
+      // },
+      rotationAxisR: 0,
       rotationAxisAngle: 0,
       r: 26,
       rotate: 0,
@@ -457,8 +459,8 @@ class Triangle {
   }
   get originalPos() {
     return {
-      x: this.rotationAxisPos.x + this.rotationAxisR.x * Math.cos(this.rotationAxisAngle * degToPi),
-      y: this.rotationAxisPos.y + this.rotationAxisR.y * Math.sin(this.rotationAxisAngle * degToPi),
+      x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
+      y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi),
     };
   }
   draw() {
@@ -548,10 +550,11 @@ class Triangle {
     if (this.HP === 2 && !this.isReproduce) {
       for (let i = 1; i <= 2; i += 1) {
         subTriangles.push(new TriangleSub({
-          rotationAxisR: {
-            x: this.rotationAxisR.x,
-            y: this.rotationAxisR.y,
-          },
+          // rotationAxisR: {
+          //   x: this.rotationAxisR.x,
+          //   y: this.rotationAxisR.y,
+          // },
+          rotationAxisR: this.rotationAxisR,
           rotationAxisAngle: this.rotationAxisAngle,
           rotate: this.rotate,
           order: i,
@@ -763,7 +766,6 @@ class Shooter {
         const y1 = outerR * Math.sin(i * degToPi + this.rotateAngle);
         const x2 = outerR * Math.cos((i + 1) * degToPi + this.rotateAngle);
         const y2 = outerR * Math.sin((i + 1) * degToPi + this.rotateAngle);
-
         if (i % 10 < 5) {
           ctx.beginPath();
           ctx.moveTo(x1, y1);
@@ -816,14 +818,15 @@ class Shooter {
 }
 
 
-
+/* Shooter 子彈 */
 class ShooterBullet {
   constructor(args) {
     const def = {
       // p: new Vec2(0, 0),
+      bodyLength: 15,
       rotationAxisR: 0,
       color: globalColor.white,
-      v: 4,
+      v: 8,
       rotateAngle: 0,
     };
     Object.assign(def, args);
@@ -855,7 +858,7 @@ class ShooterBullet {
       // 尖頭
       ctx.beginPath();
       ctx.moveTo(3 + this.rotationAxisR, 3);
-      ctx.lineTo(15 + this.rotationAxisR, 0);
+      ctx.lineTo(this.bodyLength + this.rotationAxisR, 0);
       ctx.lineTo(3 + this.rotationAxisR, -3);
       ctx.closePath();
       ctx.fill();
@@ -866,13 +869,12 @@ class ShooterBullet {
     this.rotationAxisR += this.v;
     // 判斷子彈有無射中圓形
     circles.forEach((circle, circleIdx) => {
-      // 取兩個外切線所構成角度的一半
+      // 取得兩個外切線所構成角度的一半
       const anglePan = Math.asin(circle.r / circle.rotationAxisR);
       // 設中角度範圍
-      const shotAngleRange = this.rotateAngle >= (circle.rotationAxisAngle % 360 * degToPi - anglePan) && this.rotateAngle <= (circle.rotationAxisAngle % 360 * degToPi + anglePan);
+      const shotAngleRange = this.rotateAngle >= ((circle.rotationAxisAngle % 360) * degToPi - anglePan) && this.rotateAngle <= ((circle.rotationAxisAngle % 360) * degToPi + anglePan);
       // 設中距離範圍
-      const shotRRange = (this.rotationAxisR + 15 + 11) >= circle.rotationAxisR && this.rotationAxisR + 15 - 11 <= circle.rotationAxisR;
-
+      const shotRRange = ((this.rotationAxisR + this.bodyLength) >= (circle.rotationAxisR - (circle.r / 2))) && ((this.rotationAxisR + this.bodyLength) <= (circle.rotationAxisR + (circle.r / 2)));
       // 判斷子彈有無射中圓形
       if (shotAngleRange && shotRRange) {
         // 移除子彈
@@ -882,6 +884,32 @@ class ShooterBullet {
         if (circle.HP === 0) {
           // 若生命值 0，移除圓形
           circles.splice(circleIdx, 1);
+        }
+      }
+    });
+    // 判斷子彈有無射中三角形
+    triangles.forEach((triangle, triangleIdx) => {
+      // const lengthX = triangle.rotationAxisR.x * Math.cos(triangle.rotationAxisAngle * degToPi);
+      // const lengthY = triangle.rotationAxisR.y * Math.sin(triangle.rotationAxisAngle * degToPi);
+      // const length = Math.sqrt(lengthX * lengthX + lengthY * lengthY);
+
+      // 取得射中角度範圍的一半
+      const lengthX = triangle.rotationAxisR + (triangle.r / 2);
+      const lengthY = (triangle.r / 2) * Math.sqrt(3);
+      const anglePan = Math.atan2(lengthY, lengthX);
+      // 設中角度範圍
+      const shotAngleRange = this.rotateAngle >= (((triangle.rotationAxisAngle + 360) % 360) * degToPi - anglePan) && this.rotateAngle <= (((triangle.rotationAxisAngle + 360) % 360) * degToPi + anglePan);
+      // 設中距離範圍
+      const shotRRange = ((this.rotationAxisR + this.bodyLength) >= triangle.rotationAxisR) && ((this.rotationAxisR + this.bodyLength) <= (triangle.rotationAxisR + (triangle.r / 2)))
+      // 判斷子彈有無射中三角形
+      if (shotAngleRange && shotRRange) {
+        // 移除子彈
+        shooterBullets.splice(bulletIdx, 1);
+        // 扣 1 生命值
+        triangle.HP -= 1;
+        if (triangle.HP === 0) {
+          // 若生命值 0，移除三角形
+          triangles.splice(triangleIdx, 1);
         }
       }
     });
@@ -898,10 +926,11 @@ class TriangleSub {;
         x: gameW / 2,
         y: gameH / 2,
       },
-      rotationAxisR: {
-        x: 0,
-        y: 0,
-      },
+      // rotationAxisR: {
+      //   x: 0,
+      //   y: 0,
+      // },
+      rotationAxisR: 0,
       rotationAxisAngle: 0,
       r: 26 * 0.4,
       rotate: 0,
@@ -918,8 +947,8 @@ class TriangleSub {;
   }
   get originalPos() {
     return {
-      x: this.rotationAxisPos.x + this.rotationAxisR.x * Math.cos(this.rotationAxisAngle * degToPi),
-      y: this.rotationAxisPos.y + this.rotationAxisR.y * Math.sin(this.rotationAxisAngle * degToPi),
+      x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
+      y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi),
     };
   }
   draw() {
@@ -977,9 +1006,8 @@ class TriangleSub {;
           rotationAxisAngle: '+=10',
           ease: Power2.easeOut,
           onComplete: () => {
-            TweenLite.to(this.rotationAxisR, 1.6, {
-              x: 0,
-              y: 0,
+            TweenLite.to(this, 1.6, {
+              rotationAxisR: 0,
               ease: Power1.easeIn,
             });
           }
@@ -989,9 +1017,8 @@ class TriangleSub {;
           rotationAxisAngle: '-=10',
           ease: Power2.easeOut,
           onComplete: () => {
-            TweenLite.to(this.rotationAxisR, 1.6, {
-              x: 0,
-              y: 0,
+            TweenLite.to(this, 1.6, {
+              rotationAxisR: 0,
               ease: Power1.easeIn,
             });
           }
@@ -1003,7 +1030,7 @@ class TriangleSub {;
 }
 
 
-
+/* Circle 子彈 */
 class CircleBullet {;
   constructor(args) {
     const def = {
@@ -1056,7 +1083,7 @@ class CircleBullet {;
 }
 
 
-
+/* Triangle 子彈 */
 class TriangleBullet {;
   constructor(args) {
     const def = {
