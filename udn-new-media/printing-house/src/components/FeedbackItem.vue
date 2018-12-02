@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss">
 .feedback {
-  margin-top: 48px;
+  margin-top: 64px;
   margin-bottom: 64px;
   width: 100%;
   max-width: 360px;
@@ -26,7 +26,7 @@ export default {
   margin-right: auto;
   margin-left: auto;
   transition: border-radius 0.2s ease-out;
-  animation: shine 1.2s ease-in-out infinite alternate;
+  animation: shine 1.2s ease-out infinite alternate;
   @keyframes shine {
     0% {
       box-shadow: 0 0 8px rgba(53, 53, 53, 0.32);
@@ -36,9 +36,9 @@ export default {
     }
   }
   &:hover {
-    border-radius: 4px;
+    border-radius: 8px;
     // background-color: #f2f2f2;
-    // animation-play-state: paused;
+    animation-play-state: paused;
   }
   & p {
     font-size: 1.8rem;

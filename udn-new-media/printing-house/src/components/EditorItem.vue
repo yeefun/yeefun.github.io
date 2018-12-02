@@ -16,7 +16,7 @@ export default {
 
 <style lang="scss">
 .editor {
-  margin-top: 32px;
+  margin-top: 24px;
   & p {
     font-size: 1.6rem;
     color: #58595b;

@@ -1,7 +1,7 @@
 <template>
   <section class="cover-video">
     <div class="cover-video-wrapper" @click.once="playMainVideo">
-      <video class="cover-video__main" src="../assets/video/cover-main.mp4" poster="../assets/cover-backgroung-img.jpg" controls playsinline webkit-playsinline ref="mainVideo"></video>
+      <video class="cover-video__main" src="../assets/video/cover-main.mp4" poster="../assets/cover-backgroung-img.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo"></video>
       <!-- <transition name="fade"> -->
       <video class="cover-video__looping" src="../assets/video/cover-looping.mp4" poster="../assets/cover-backgroung-img.jpg" muted autoplay loop playsinline webkit-playsinline v-if="isLoopingVideoState"></video>
       <!-- </transition> -->
@@ -9,6 +9,7 @@
         <button type="button" v-if="isLoopingVideoState"></button>
         <h1 v-if="isLoopingVideoState">每晚與時間賽跑的印報人</h1>
       </div>
+      <!-- <div class="bar"></div> -->
       <!-- <button type="button" v-if="isLoopingVideoState"></button> -->
       <!-- <div class="cover-video__title-wrapper" v-if="isLoopingVideoState"> -->
         <!-- <h2>票開完了，他們的工作才開始</h2> -->
@@ -19,18 +20,46 @@
 </template>
 
 <script>
+// import { detectPlatform } from 'udn-newmedia-utils';
+
 export default {
   name: 'CoverVideo',
   data() {
     return {
       isLoopingVideoState: true,
+      seekedNem: 0,
+      watchedTimes: [],
     };
+  },
+  created() {
+    window.addEventListener('beforeunload', this.handleBeforeUnload);
   },
   methods: {
     playMainVideo() {
       this.isLoopingVideoState = false;
       this.$refs.mainVideo.play();
+      // GA: 多少人點擊觀看影片？
+      // window.ga('newmedia.send', {
+      //   hitType: 'event',
+      //   eventCategory: 'Video',
+      //   eventAction: 'Click',
+      //   eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}]`,
+      // });
     },
+    seekedMainVideo(evt) {
+      this.seekedNem += 1;
+      this.watchedTimes.push(Math.floor(evt.currentTarget.currentTime));
+    },
+    // handleBeforeUnload() {
+    //   // GA: 讀者影片看了多久？跳看幾次？
+    //   window.ga('newmedia.send', {
+    //     hitType: 'event',
+    //     eventCategory: 'Video',
+    //     eventAction: 'Watch',
+    //     eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒]`,
+    //     eventValue: this.watchedTimes[this.watchedTimes.length - 1],
+    //   });
+    // },
   },
 };
 </script>

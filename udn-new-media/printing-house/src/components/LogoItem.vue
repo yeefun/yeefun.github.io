@@ -21,6 +21,7 @@ export default {
     width: 138px;
     margin-right: 16px;
     margin-bottom: 16px;
+    vertical-align: middle;
   }
 }
 </style>

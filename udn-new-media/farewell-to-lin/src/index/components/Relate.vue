@@ -60,8 +60,8 @@ export default {
   // margin-right: auto;
   @media screen and (min-width: 768px) {
     width: 50%;
-    margin-left: 0;
-    margin-right: 0;
+    // margin-left: 0;
+    // margin-right: 0;
     padding-right: 0;
     padding-left: 0;
     margin-bottom: 0;
@@ -70,12 +70,12 @@ export default {
     font-size: 1.8rem;
     margin-bottom: 26px;
     line-height: 1.56;
-    letter-spacing: 0.9px;
-    text-align: center;
+    // letter-spacing: 0.9px;
+    // text-align: center;
     font-weight: 700;
-    @media screen and (min-width: 768px) {
-      text-align: left;
-    }
+    // @media screen and (min-width: 768px) {
+    //   text-align: left;
+    // }
   }
   &__report {
     width: 50%;

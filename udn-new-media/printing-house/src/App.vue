@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="app">
-    <CoverVideo v-if="!isMobSize"/>
+    <ProgressBar/>
+    <CoverVideo v-if="!isMobSize" ref="coverVideo"/>
     <ContentContainer>
       <ShareItem class="share--top"/>
       <p>11月24日九合一選舉那一夜，台北市長的選情呈現拉鋸戰，台北市長候選人柯文哲和丁守中的支持者直到深夜仍不敢鬆懈。鏡頭轉到桃園縣龜山鄉，這裡有一群人也在等待開票結果，但比起擔心誰輸誰贏，他們還有項更急迫的任務──選舉結果沒出來，他們就沒辦法印報紙。</p>
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+import ProgressBar from './components/ProgressBar.vue';
 import CoverVideo from './components/CoverVideo.vue';
 import ContentContainer from './components/ContentContainer.vue';
 import ShareItem from './components/ShareItem.vue';
@@ -54,6 +56,7 @@ import RelatedItem from './components/RelatedItem.vue';
 export default {
   name: 'app',
   components: {
+    ProgressBar,
     CoverVideo,
     ContentContainer,
     ShareItem,
@@ -130,11 +133,15 @@ a {
 }
 
 img {
-  vertical-align: middle;
+  vertical-align: top;
   height: auto;
 }
 
 .mr-0 {
   margin-right: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
 }
 </style>
