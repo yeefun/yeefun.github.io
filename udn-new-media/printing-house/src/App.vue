@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <ProgressBar v-if="isShowHeadBar"/>
     <HeadBar v-if="isShowHeadBar"/>
-    <CoverVideo v-if="isWebSize" ref="coverVideo"/>
+    <CoverVideo v-if="isWebSize" ref="coverVideo" id="main-video"/>
     <div class="cover" v-else>
       <img src="./assets/cover-backgroung--mob.jpg" alt="" v-if="isMobSize">
       <img src="./assets/cover-backgroung--web.jpg" alt="" v-else>
@@ -14,8 +14,8 @@
       <p><br></p>
       <p>「這次選舉等到凌晨一點多，台北市都還沒有下文，記者沒辦法截稿，我們就沒辦法開印，滿頭痛的，」聯合報林口印刷廠廠長佟德中說道。</p>
       <p><br></p>
-      <p>最後，台北市長選舉結果直到25日凌晨2時30分後才確定，當天聯合報頭版一行小標題寫著「與丁纏鬥至凌晨二時卅分 柯險勝」—為了讓讀者獲得完整大選結果，聯合報林口印刷廠的技術員和印刷機纏鬥到接近凌晨5時才把報紙印完。</p>
-      <ContentVideo v-if="!isWebSize" ref="contentVideo"/>
+      <p>最後，台北市長選舉結果直到25日凌晨2時30分後才確定，當天聯合報頭版一行小標題寫著「與丁纏鬥至凌晨二時卅分 柯險勝」──為了讓讀者獲得完整大選結果，聯合報林口印刷廠的技術員和印刷機纏鬥到接近凌晨5時才把報紙印完。</p>
+      <ContentVideo v-if="!isWebSize" id="main-video"/>
       <p v-else><br></p>
       <p>聯合報印刷廠每晚都在與時間賽跑，在記者寫好新聞稿、編輯排好報紙版面後，印刷廠得繼續為報紙品質把關，才能在隔日一早將最完整的報導呈現給讀者。</p>
       <p><br></p>

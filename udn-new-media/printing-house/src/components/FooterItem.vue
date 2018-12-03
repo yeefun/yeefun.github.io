@@ -29,6 +29,7 @@ export default {
   margin-top: 64px;
   margin-bottom: 48px;
   font-size: 1.4rem;
+  line-height: 1.6;
   &-container {
     border-top: 0.8px solid #dcdddd;
     padding-top: 24px;

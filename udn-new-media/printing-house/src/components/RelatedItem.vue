@@ -120,7 +120,10 @@ export default {
     width: 48%;
     float: right;
     transition: opacity 0.4s;
-    border-radius: 4px;
+    border-radius: 2px;
+    // @media screen and (min-width: 576px) and (max-width: 991.98px) {
+    //   border-radius: 4px;
+    // }
     @media screen and (min-width: 768px) {
       width: 100%;
     }

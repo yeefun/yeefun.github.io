@@ -26,9 +26,9 @@ export default {
     },
     shareToLine() {
       if (detectMob()) {
-        window.open(`https://line.me/R/msg/text/?${document.querySelector('title').innerHTML}%0D%0A%0D%0A${document.querySelector('meta[property="og:description"]').content}%0D%0A%0D%0Ahttps://udn.com/upf/newmedia/2018_data/cloudgate/future.html`);
+        window.open('https://line.me/R/msg/text/?【影音專題】每晚與時間賽跑的印報人%0D%0A%0D%0A大選那一夜，他們印到凌晨5點才收工…%0D%0A%0D%0Ahttps://p.udn.com.tw/upf/newmedia/2018_data/printing_plant/index.html');
       } else {
-        window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/cloudgate/future.html');
+        window.open('https://lineit.line.me/share/ui?url=https://udn.com/upf/newmedia/2018_data/printing_plant/index.html');
       }
       // GA: 有多少人用 Line 分享？
       window.ga('newmedia.send', {

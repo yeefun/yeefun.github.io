@@ -20,8 +20,10 @@
           </svg>
         </a>
         <nav>
-          <ul @click="scrollToVideo">
-            <li>看影音</li>
+          <ul @click="sendGa">
+            <a href="#" v-scroll-to="{ el: '#main-video', offset: this.$parent.isWebSize ? 0 : -100 }">
+              <li>看影音</li>
+            </a>
           </ul>
         </nav>
       </div>
@@ -30,20 +32,28 @@
 </template>
 
 <script>
-import smoothscroll from 'smoothscroll-polyfill';
+import { detectPlatform } from 'udn-newmedia-utils';
+// import smoothscroll from 'smoothscroll-polyfill';
 
-smoothscroll.polyfill();
+// smoothscroll.polyfill();
 
 export default {
   name: 'HeadBar',
   methods: {
-    scrollToVideo() {
-      if (this.$parent.isWebSize) {
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      } else {
-        const contentVideoEl = this.$parent.$refs.contentVideo.$el;
-        contentVideoEl.scrollIntoView({ behavior: 'smooth' });
-      }
+    sendGa() {
+      // if (this.$parent.isWebSize) {
+      //   window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      // } else {
+      //   const contentVideoEl = this.$parent.$refs.contentVideo.$el;
+      //   contentVideoEl.scrollIntoView({ behavior: 'smooth' });
+      // }
+      // GA: 有多人點擊「看影音」？
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Navbar',
+        eventAction: 'Click',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [看影音]`,
+      });
     },
   },
 };
@@ -65,7 +75,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     // box-sizing: border-box;
-    padding-top: 8px;
+    padding-top: 10px;
     padding-bottom: 8px;
     padding-right: 16px;
     padding-left: 8px;
@@ -81,12 +91,15 @@ export default {
     //   padding-left: 12px;
     // }
   }
-  & ul {
+  & li {
+    color: #111;
     font-size: 1.8rem;
     cursor: pointer;
+    // transition: all 0.4s;
     // font-weight: 700;
     &:hover {
       color: #2b61ad;
+      font-weight: 700;
     }
   }
   & svg {

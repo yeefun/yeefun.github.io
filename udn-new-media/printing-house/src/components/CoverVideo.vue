@@ -47,8 +47,8 @@ export default {
       // window.ga('newmedia.send', {
       //   hitType: 'event',
       //   eventCategory: 'Video',
-      //   eventAction: 'Click',
-      //   eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}]`,
+      //   eventAction: 'Play',
+      //   eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [cover]`,
       // });
     },
     seekedMainVideo(evt) {
@@ -61,7 +61,7 @@ export default {
     //     hitType: 'event',
     //     eventCategory: 'Video',
     //     eventAction: 'Watch',
-    //     eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒]`,
+    //     eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒] [cover]`,
     //     eventValue: this.watchedTimes[this.watchedTimes.length - 1],
     //   });
     // },
