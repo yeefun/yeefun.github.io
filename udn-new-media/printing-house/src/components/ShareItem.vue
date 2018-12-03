@@ -1,7 +1,7 @@
 <template>
   <section class="share">
     <div class="share__fb-like-wrapper" @click="shareToFb">
-      <div class="fb-like" data-href="https://udn.com/upf/newmedia/2018_data/cloudgate/future.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+      <div class="fb-like" data-href="https://udn.com/upf/newmedia/2018_data/printing_plant/index.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
     </div>
     <div @click="shareToLine">
       <img class="line-share" src="//media.line.me/img/button/zh-hant/84x20.png" alt="LINE分享給朋友" width="84" height="20">

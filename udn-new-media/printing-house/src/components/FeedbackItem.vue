@@ -43,7 +43,7 @@ export default {
   & p {
     font-size: 1.8rem;
     text-align: center;
-    color: #000;
+    color: #111;
     line-height: 96px;
   }
 }

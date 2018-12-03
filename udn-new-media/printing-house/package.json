@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "smoothscroll-polyfill": "^0.4.3",
     "udn-newmedia-utils": "^1.0.9",
     "vue": "^2.5.17"
   },

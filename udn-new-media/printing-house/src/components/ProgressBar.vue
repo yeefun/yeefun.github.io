@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="progress" v-if="isShowProgressBar">
+    <div class="progress">
       <div class="progress-bar" :style="{ width: `${progress}%` }"></div>
     </div>
   </transition>
@@ -17,10 +17,10 @@ export default {
   data() {
     return {
       progress: 0,
-      windowEle: window,
+      // windowEle: window,
       htmlEle: document.documentElement,
       // mainVideoEle: null,
-      isShowProgressBar: false,
+      // isShowProgressBar: false,
       // readProgress: 0,
     };
   },
@@ -30,17 +30,17 @@ export default {
   methods: {
     growProgressBar() {
       // if (this.$root.cacheHTML.className !== 'of-v') return;
-      const currentHeight = this.windowEle.pageYOffset;
+      const currentHeight = this.$parent.windowEle.pageYOffset;
       const totalHeight = this.htmlEle.scrollHeight - this.htmlEle.clientHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
-      if (!this.$parent.isMobSize) {
-        const mainVideoEle = this.$parent.$refs.coverVideo.$refs.mainVideo;
-        if (this.windowEle.pageYOffset > mainVideoEle.offsetHeight) {
-          this.isShowProgressBar = true;
-        } else {
-          this.isShowProgressBar = false;
-        }
-      }
+      // if (this.$parent.isWebSize) {
+      //   const mainVideoEle = this.$parent.$refs.coverVideo.$refs.mainVideo;
+      //   if (this.windowEle.pageYOffset > mainVideoEle.offsetHeight) {
+      //     this.isShowProgressBar = true;
+      //   } else {
+      //     this.isShowProgressBar = false;
+      //   }
+      // }
       // const currentReadProgress = Math.floor(this.progress / 10);
       // if (currentReadProgress > this.readProgress) {
       //   for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
@@ -69,16 +69,9 @@ export default {
   width: 100%;
   z-index: 999;
   &-bar {
-    background-color: #b98e49;
+    background-color: #2b61ad;
     height: 2px;
     transition: width 0.2s;
   }
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
 }
 </style>

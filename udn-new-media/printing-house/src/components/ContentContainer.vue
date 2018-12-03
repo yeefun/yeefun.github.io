@@ -24,13 +24,18 @@ export default {
   }
   &-container {
     width: 100%;
-    padding-top: 64px;
+    // padding-top: 64px;
+    padding-top: 32px;
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
+    @media (min-width: 576px) and (max-width: 767.98px) {
+      padding-top: 48px;
+    }
     @media screen and (min-width: 768px) and (max-width: 991.98px) {
       padding-left: 96px;
       padding-right: 96px;
+      padding-top: 64px;
       // padding: 64px 96px;
     }
     @media screen and (min-width: 992px) {
@@ -38,6 +43,12 @@ export default {
       padding-left: 0;
       padding-right: 0;
     }
+  }
+  & h1 {
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
   }
   & p {
     // font-weight: 300;
@@ -48,7 +59,7 @@ export default {
     // }
   }
   & figure {
-    margin: 64px -20px 72px -20px;
+    margin: 48px -20px 64px -20px;
     @media screen and (min-width: 768px) {
       margin-right: 0;
       margin-left: 0;

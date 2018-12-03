@@ -5,25 +5,25 @@
       <div class="related__report-wrapper">
         <div class="related__report related__report--top" @click="ClickRelated('參訪林口印刷廠')">
           <a href="https://udn.com/news/story/7323/3335035" target="_blank">
-            <img src="../assets/ReadMore/readMore101.jpg" />
+            <img src="../assets/Related/related--01.jpg" />
             <p>參訪林口印刷廠 小小記者大開眼界</p>
           </a>
         </div>
         <div class="related__report related__report--top" @click="ClickRelated('印刷廠存25萬枚鉛字')">
           <a href="https://udn.com/news/story/7326/3386219" target="_blank">
-            <img src="../assets/ReadMore/readMore102.jpg" />
+            <img src="../assets/Related/related--02.jpg" />
             <p>印刷廠存25萬枚鉛字 戒嚴時期撿錯遭調查</p>
           </a>
         </div>
         <div class="related__report" @click="ClickRelated('買下女兒出生那天各報')">
           <a href="https://udn.com/news/story/7272/3463433" target="_blank">
-            <img src="../assets/ReadMore/readMore103.jpg" />
+            <img src="../assets/Related/related--03.jpg" />
             <p>買下女兒出生那天各報 18年後父送上時空膠囊暖哭大家</p>
           </a>
         </div>
         <div class="related__report mb-0" @click="ClickRelated('老師傅的排版桌')">
           <a href="https://theme.udn.com/theme/story/6774/2497730" target="_blank">
-            <img src="../assets/ReadMore/readMore104.jpg" />
+            <img src="../assets/Related/related--04.jpg" />
             <p>老師傅的排版桌 見證活版印刷興衰</p>
           </a>
         </div>
@@ -109,7 +109,7 @@ export default {
     // font-size: 1.8rem;
     line-height: 1.48;
     font-weight: 700;
-    color: #000;
+    color: #111;
     // line-height: 1.4;
     @media screen and (min-width: 768px) {
       margin-top: 12px;
@@ -124,6 +124,10 @@ export default {
     @media screen and (min-width: 768px) {
       width: 100%;
     }
+  }
+  & a {
+    display: block;
+    height: 100%;
   }
 }
 // #report{
