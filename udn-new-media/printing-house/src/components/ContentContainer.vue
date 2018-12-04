@@ -45,10 +45,20 @@ export default {
     }
   }
   & h1 {
-    font-size: 4.8rem;
+    // font-size: 4.8rem;
+    font-size: 3.6rem;
     font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    @media screen and (min-width: 321px) {
+      font-size: 4rem;
+    }
+    @media screen and (min-width: 321px) {
+      font-size: 4.4rem;
+    }
+    @media screen and (min-width: 376px) {
+      font-size: 4.8rem;
+    }
   }
   & p {
     // font-weight: 300;
@@ -59,7 +69,7 @@ export default {
     // }
   }
   & figure {
-    margin: 48px -20px 64px -20px;
+    margin: 48px -20px 56px -20px;
     @media screen and (min-width: 768px) {
       margin-right: 0;
       margin-left: 0;

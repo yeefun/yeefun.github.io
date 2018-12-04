@@ -20,10 +20,10 @@
           </svg>
         </a>
         <nav>
-          <ul @click="sendGa">
-            <a href="#" v-scroll-to="{ el: '#main-video', offset: this.$parent.isWebSize ? 0 : -100 }">
-              <li>看影音</li>
-            </a>
+          <ul @click="scrollToVideo" @touchstart.prevent="scrollToVideo">
+            <!-- <a href="#" v-scroll-to="{ el: '#main-video', offset: this.$parent.isWebSize ? 0 : -100 }"> -->
+            <li>看影音</li>
+            <!-- </a> -->
           </ul>
         </nav>
       </div>
@@ -33,20 +33,21 @@
 
 <script>
 import { detectPlatform } from 'udn-newmedia-utils';
-// import smoothscroll from 'smoothscroll-polyfill';
+import smoothscroll from 'smoothscroll-polyfill';
 
-// smoothscroll.polyfill();
+smoothscroll.polyfill();
 
 export default {
   name: 'HeadBar',
   methods: {
-    sendGa() {
+    scrollToVideo() {
       // if (this.$parent.isWebSize) {
       //   window.scroll({ top: 0, left: 0, behavior: 'smooth' });
       // } else {
       //   const contentVideoEl = this.$parent.$refs.contentVideo.$el;
       //   contentVideoEl.scrollIntoView({ behavior: 'smooth' });
       // }
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
       // GA: 有多人點擊「看影音」？
       window.ga('newmedia.send', {
         hitType: 'event',

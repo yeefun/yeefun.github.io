@@ -3,7 +3,7 @@ module.exports = {
   chainWebpack: (config) => {
     config.externals({
       vue: 'Vue',
-      'vue-scrollto': 'VueScrollTo',
+      // 'vue-scrollto': 'VueScrollTo',
     });
   },
 };

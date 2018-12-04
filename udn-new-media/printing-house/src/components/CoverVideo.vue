@@ -1,31 +1,29 @@
 <template>
   <section class="cover-video">
     <div class="cover-video-wrapper" @click.once="playMainVideo">
-      <video class="cover-video__main" src="../assets/video/main--web.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo"></video>
-      <!-- <transition name="fade"> -->
+
+      <video class="cover-video__main" src="../assets/video/main--web.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo" v-if="$parent.isWebSize"></video>
+      <video class="cover-video__main" src="../assets/video/main--mob.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo" v-else></video>
+
       <video class="cover-video__looping" src="../assets/video/looping.mp4" poster="../assets/video-backgroung.jpg" muted autoplay loop playsinline webkit-playsinline v-if="isLoopingVideoState"></video>
-      <!-- </transition> -->
-      <div class="cover-video__title-wrapper" v-if="isLoopingVideoState">
-        <button type="button"></button>
+        <div class="cover-video__title-wrapper" v-if="isLoopingVideoState">
+          <button type="button"></button>
+          <h1 v-if="$parent.isWebSize">每晚與時間賽跑的印報人</h1>
+        </div>
+        <!-- <div class="cover-video__prompt" v-if="isLoopingVideoState && $parent.isWebSize"> -->
+          <!-- <p>看專題報導</p> -->
+          <!-- <div class="cover-video__arrow"></div> -->
+        <!-- </div> -->
+        <div class="cover-video__arrow" v-if="isLoopingVideoState && $parent.isWebSize"></div>
+      <!-- <template v-else>
         <h1>每晚與時間賽跑的印報人</h1>
-      </div>
-      <!-- <div class="bar"></div> -->
-      <!-- <button type="button" v-if="isLoopingVideoState"></button> -->
-      <!-- <div class="cover-video__title-wrapper" v-if="isLoopingVideoState"> -->
-        <!-- <h2>票開完了，他們的工作才開始</h2> -->
-        <!-- <h1 v-if="isLoopingVideoState">每晚與時間賽跑的印報人</h1> -->
-      <!-- </div> -->
-      <div class="cover-video__prompt" v-if="isLoopingVideoState">
-        <p>看專題報導</p>
-        <!-- <img src="../assets/arrow.png" alt=""> -->
-        <div class="cover-video__arrow"></div>
-      </div>
+      </template> -->
     </div>
   </section>
 </template>
 
 <script>
-// import { detectPlatform } from 'udn-newmedia-utils';
+import { detectPlatform } from 'udn-newmedia-utils';
 
 export default {
   name: 'CoverVideo',
@@ -44,27 +42,27 @@ export default {
       this.isLoopingVideoState = false;
       this.$refs.mainVideo.play();
       // GA: 多少人點擊觀看影片？
-      // window.ga('newmedia.send', {
-      //   hitType: 'event',
-      //   eventCategory: 'Video',
-      //   eventAction: 'Play',
-      //   eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [cover]`,
-      // });
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Video',
+        eventAction: 'Play',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [cover]`,
+      });
     },
     seekedMainVideo(evt) {
       this.seekedNem += 1;
       this.watchedTimes.push(Math.floor(evt.currentTarget.currentTime));
     },
-    // handleBeforeUnload() {
-    //   // GA: 讀者影片看了多久？跳看幾次？
-    //   window.ga('newmedia.send', {
-    //     hitType: 'event',
-    //     eventCategory: 'Video',
-    //     eventAction: 'Watch',
-    //     eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒] [cover]`,
-    //     eventValue: this.watchedTimes[this.watchedTimes.length - 1],
-    //   });
-    // },
+    handleBeforeUnload() {
+      // GA: 讀者影片看了多久？跳看幾次？
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Video',
+        eventAction: 'Watch',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒] [cover]`,
+        eventValue: this.watchedTimes[this.watchedTimes.length - 1],
+      });
+    },
   },
 };
 </script>
@@ -86,7 +84,7 @@ export default {
   // }
   & button {
     // position: absolute;
-    border-radius: 4px;
+    // border-radius: 4px;
     // left: 50%;
     // transform: translateX(-50%);
     // top: 30%;
@@ -94,14 +92,26 @@ export default {
     background-color: rgba(255, 255, 255, 0.72);
     transition: background-color 0.2s ease-out;
     // padding: 14px 14.8px 14px 16.6px;
-    padding: 28.5px 51px 28.5px 57px;
+    // padding: 28.5px 51px 28.5px 57px;
+    padding: 17.3px 30.9px 17.3px 34.5px;
     // padding: 26.6px 47.6px 26.6px 53.2px;
-    border-radius: 5px;
-    margin-bottom: 48px;
+    // padding: 21px 37.8px 21px 42.2px;
+    border-radius: 4px;
+    // margin-bottom: 48px;
     // border: 2px solid rgba(255, 255, 255, 0.64);
     // left: 12px;
     // bottom: 12px;
     box-sizing: border-box;
+    @media screen and (min-width: 376px) and (max-width: 575.98px) {
+      padding: 21px 37.8px 21px 42.2px;
+    }
+    @media screen and (min-width: 576px) and (max-width: 991.98px) {
+      padding: 28.5px 51px 28.5px 57px;
+    }
+    @media screen and (min-width: 768px) {
+      border-radius: 5px;
+      margin-bottom: 48px;
+    }
     @media screen and (min-width: 992px) {
       // top: 28%;
       margin-bottom: 64px;
@@ -112,9 +122,17 @@ export default {
       display: block;
       border-style: solid;
       border-color: transparent transparent transparent #111;
-      border-width: 21px 0 21px 33px;
+      // border-width: 15.6px 0 15.6px 24.4px;
+      // border-width: 21px 0 21px 33px;
       // border-width: 19.6px 0 19.6px 30.8px;
       // border-width: 8px 0 8px 12.6px;
+      border-width: 12.7px 0 12.7px 20px;
+      @media screen and (min-width: 376px) and (max-width: 575.98px) {
+        border-width: 15.6px 0 15.6px 24.4px;
+      }
+      @media screen and (min-width: 576px) and (max-width: 991.98px) {
+        border-width: 21px 0 21px 33px;
+      }
       @media screen and (min-width: 992px) {
         border-width: 28px 0 28px 44px;
       }
@@ -156,30 +174,36 @@ export default {
       // top: 62%;
     }
   }
-  &__prompt {
+  // &__prompt {
+  //   position: absolute;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   // top: 88%;
+  //   bottom: 16px;
+  //   // width: 100%;
+  //   // width: 32px;
+  //   @media screen and (min-width: 992px) {
+  //     bottom: 32px;
+  //   }
+  // }
+  &__arrow {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // top: 88%;
-    bottom: 16px;
-    // width: 100%;
-    // width: 32px;
-    @media screen and (min-width: 992px) {
-      bottom: 32px;
-    }
-  }
-  &__arrow {
     border-style: solid;
     border-color: #fff;
-    width: 12px;
-    height: 12px;
-    border-right-width: 2.4px;
-    border-bottom-width: 2.4px;
+    width: 24px;
+    height: 24px;
+    border-right-width: 3.2px;
+    border-bottom-width: 3.2px;
     box-sizing: border-box;
-    transform: rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+    bottom: 40px;
+    @media screen and (min-width: 992px) {
+      bottom: 64px;
+    }
   }
   & p {
     font-size: 1.8rem;

@@ -16,7 +16,8 @@ export default {
   max-width: 100%;
 }
 
-// .fb_iframe_widget_lift {
-//   width: 100% !important;
-// }
+// for IE
+.fb_iframe_widget_lift {
+  width: 100% !important;
+}
 </style>

@@ -2,11 +2,14 @@
   <div id="app" class="app">
     <ProgressBar v-if="isShowHeadBar"/>
     <HeadBar v-if="isShowHeadBar"/>
-    <CoverVideo v-if="isWebSize" ref="coverVideo" id="main-video"/>
-    <div class="cover" v-else>
-      <img src="./assets/cover-backgroung--mob.jpg" alt="" v-if="isMobSize">
-      <img src="./assets/cover-backgroung--web.jpg" alt="" v-else>
-    </div>
+    <CoverVideo ref="coverVideo"/>
+    <!-- <div class="cover" v-else> -->
+      <!-- <div class="cover__block"></div> -->
+      <!-- <img src="./assets/cover-backgroung--mob-1.jpg" alt=""> -->
+      <!-- <h1>每晚與時間<br>賽跑的印報人</h1> -->
+      <!-- <img src="./assets/cover-backgroung--mob.jpg" alt="" v-if="isMobSize"> -->
+      <!-- <img src="./assets/cover-backgroung--web.jpg" alt="" v-else> -->
+    <!-- </div> -->
     <ContentContainer>
       <h1 v-if="!isWebSize">每晚與時間<br>賽跑的印報人</h1>
       <ShareItem class="share--top"/>
@@ -15,8 +18,12 @@
       <p>「這次選舉等到凌晨一點多，台北市都還沒有下文，記者沒辦法截稿，我們就沒辦法開印，滿頭痛的，」聯合報林口印刷廠廠長佟德中說道。</p>
       <p><br></p>
       <p>最後，台北市長選舉結果直到25日凌晨2時30分後才確定，當天聯合報頭版一行小標題寫著「與丁纏鬥至凌晨二時卅分 柯險勝」──為了讓讀者獲得完整大選結果，聯合報林口印刷廠的技術員和印刷機纏鬥到接近凌晨5時才把報紙印完。</p>
-      <ContentVideo v-if="!isWebSize" id="main-video"/>
-      <p v-else><br></p>
+      <figure>
+        <img src="./assets/ContentImg/ke-win.jpg" alt="" class="article__img">
+        <figcaption>台北市長選舉結果直到11月25日凌晨才確定，聯合報林口印刷廠則到接近凌晨5時才把報紙印完。圖／報系資料照</figcaption>
+      </figure>
+      <!-- <ContentVideo v-if="!isWebSize" id="main-video"/> -->
+      <!-- <p v-else><br></p> -->
       <p>聯合報印刷廠每晚都在與時間賽跑，在記者寫好新聞稿、編輯排好報紙版面後，印刷廠得繼續為報紙品質把關，才能在隔日一早將最完整的報導呈現給讀者。</p>
       <p><br></p>
       <p>2018年即將走入尾聲，聯合報印刷廠從幕後走到幕前，展示近70年來，聯合報每晚如何把當天的社會樣貌化為報紙上一行行文字，在數位時代，延續紙本報紙的溫度。</p>
@@ -43,11 +50,11 @@
       <h3>近70年來不變的堅持</h3>
       <p>過去，當報紙是民眾獲得資訊的主要管道，聯合報報紙由位於台北、林口、台中、高雄的4家印刷廠印製。</p>
       <p><br></p>
-      <p>當時聯合報台北印刷廠總共開4台印刷機印報紙，一晚可印超過40萬至50萬份報紙，每晚印到凌晨3時30分左右收工。「那時候到了深夜，台北廠外面還有很多小吃攤，都是為了做聯合報員工的生意。」</p>
+      <p>當時聯合報台北印刷廠總共開4台印刷機印報紙，一晚可印超過40萬至50萬份報紙，每晚印到凌晨3時30分左右收工。佟德中回憶道，「那時候到了深夜，台北廠外面還有很多小吃攤，都是為了做聯合報員工的生意。」</p>
       <p><br></p>
       <p>如今，隨著時代變遷，聯合報林口、高雄兩間印刷廠持續運作，也因為印刷流程改變，收工時間提早了一小時。</p>
       <p><br></p>
-      <p>創報近70年來，聯合報不改對新聞堅持，努力在每個夜晚，將最詳盡的報導囊括在一份份報紙中；印刷廠技術員們盡力為報紙品質把關，在每個深夜為隔日清晨出刊的報紙奮鬥。</p>
+      <p>儘管如此，創報近70年來，聯合報仍不改對新聞堅持，努力在每個夜晚，將最詳盡的報導囊括在一份份報紙中；印刷廠技術員們也盡力為報紙品質把關，在每個深夜為隔日清晨出刊的報紙奮鬥。</p>
       <p><br></p>
       <p>「每天把報紙漂漂亮亮地印出去，我覺得滿有成就感的，」佟德中說道。</p>
       <p><br></p>
@@ -70,7 +77,7 @@ import HeadBar from './components/HeadBar.vue';
 import ProgressBar from './components/ProgressBar.vue';
 import CoverVideo from './components/CoverVideo.vue';
 import ContentContainer from './components/ContentContainer.vue';
-import ContentVideo from './components/ContentVideo.vue';
+// import ContentVideo from './components/ContentVideo.vue';
 import ShareItem from './components/ShareItem.vue';
 import LogoItem from './components/LogoItem.vue';
 import EditorItem from './components/EditorItem.vue';
@@ -86,7 +93,7 @@ export default {
     HeadBar,
     CoverVideo,
     ContentContainer,
-    ContentVideo,
+    // ContentVideo,
     ShareItem,
     LogoItem,
     EditorItem,
@@ -111,28 +118,29 @@ export default {
   computed: {
     isWebSize() {
       return this.htmlEleW >= 768;
+      // return this.htmlEleW >= 576;
     },
-    isMobSize() {
-      return this.htmlEleW < 376;
-    },
+    // isMobSize() {
+    //   return this.htmlEleW < 575.98;
+    // },
   },
   methods: {
     handleResize() {
       this.htmlEleW = document.documentElement.clientWidth;
     },
     controlHeadBarShow() {
-      if (this.isWebSize) {
-        const mainVideoEle = this.$refs.coverVideo.$refs.mainVideo;
-        if (this.windowEle.pageYOffset > mainVideoEle.offsetHeight) {
-          this.isShowHeadBar = true;
-        } else {
-          this.isShowHeadBar = false;
-        }
-      } else if (this.windowEle.pageYOffset > 8) {
+      const mainVideoEle = this.$refs.coverVideo.$refs.mainVideo;
+      if (this.windowEle.pageYOffset > mainVideoEle.offsetHeight) {
         this.isShowHeadBar = true;
       } else {
         this.isShowHeadBar = false;
       }
+    // }
+    // } else if (this.windowEle.pageYOffset > 8) {
+    // this.isShowHeadBar = true;
+    // } else {
+    // this.isShowHeadBar = false;
+    // }
     },
   },
 };
@@ -156,15 +164,48 @@ html {
   position: relative;
 }
 
-.cover {
-  & img {
-    width: 100%;
-  }
-  // & h1 {
-  //   font-size: 4.8rem;
-  //   font-weight: 700;
-  // }
-}
+// .cover {
+//   // background-color: #000;
+//   height: 100vh;
+//   // padding-bottom: 24px;
+//   // box-sizing: border-box;
+//   // max-width: 100%;
+//   // position: relative;
+//   // height: 100vh;
+//   background-image: url(./assets/cover-backgroung--mob-1.jpg);
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   // &__block {
+//   //   height: 0;
+//   //   padding-bottom: 100.5%;
+//   //   background-color: #fff;
+//   //   margin-bottom: 24px;
+//   // }
+//   & h1 {
+//     // position: absolute;
+//     // left: 20px;
+//     // top: 64%;
+//     color: #fff;
+//     font-size: 4.8rem;
+//     // font-weight: 700;
+//     line-height: 1.1;
+//     padding-top: 32px;
+//     // margin-bottom: 32px;
+//     padding-left: 24px;
+//     // margin-left: 24px;
+//     // margin-bottom: 16px;
+//   }
+//   // height: 100%;
+//   & img {
+//     width: 100%;
+//     // margin-bottom: 32px;
+//   }
+//   // & h1 {
+//   //   font-size: 4.8rem;
+//   //   font-weight: 700;
+//   // }
+// }
 
 button {
   border: none;
