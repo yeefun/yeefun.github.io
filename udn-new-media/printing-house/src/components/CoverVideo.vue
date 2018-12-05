@@ -1,9 +1,9 @@
 <template>
   <section class="cover-video">
-    <div class="cover-video-wrapper" @click.once="playMainVideo">
+    <div class="cover-video-wrapper" @click.once="firstPlayMainVideo">
 
-      <video class="cover-video__main" src="../assets/video/main--web.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo" v-if="$parent.isWebSize"></video>
-      <video class="cover-video__main" src="../assets/video/main--mob.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline ref="mainVideo" @seeked="seekedMainVideo" v-else></video>
+      <video ref="mainVideo" class="cover-video__main" src="../assets/video/main--web.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline @play="playMainVideo" @seeked="seekedMainVideo" v-if="$parent.isWebSize"></video>
+      <video ref="mainVideo" class="cover-video__main" src="../assets/video/main--mob.mp4" poster="../assets/video-backgroung.jpg" controls playsinline webkit-playsinline @play="playMainVideo" @seeked="seekedMainVideo" v-else></video>
 
       <video class="cover-video__looping" src="../assets/video/looping.mp4" poster="../assets/video-backgroung.jpg" muted autoplay loop playsinline webkit-playsinline v-if="isLoopingVideoState"></video>
         <div class="cover-video__title-wrapper" v-if="isLoopingVideoState">
@@ -31,36 +31,75 @@ export default {
     return {
       isLoopingVideoState: true,
       seekedNem: 0,
-      watchedTimes: [],
+      skipToTimes: [],
+      afterClickAnchorState: '',
+      pageLoadTime: null,
     };
   },
   created() {
+    document.addEventListener('DOMContentLoaded', this.handleDOMContentLoaded);
     window.addEventListener('beforeunload', this.handleBeforeUnload);
   },
   methods: {
-    playMainVideo() {
+    firstPlayMainVideo() {
       this.isLoopingVideoState = false;
       this.$refs.mainVideo.play();
-      // GA: 多少人點擊觀看影片？
+      this.afterClickAnchorState = this.$parent.afterClickAnchorTime ? `點擊錨點後${Math.round((new Date() - this.$parent.afterClickAnchorTime) / 1000)}秒` : '無點擊錨點';
+      const beforeFirstPlayMainVideoSecond = Math.round((new Date() - this.pageLoadTime) / 1000);
+      // GA: 在頁面載入多久後，有多少人按客製播放鈕觀看影片？（是否在點擊錨點後才按客製播放鈕？）
       window.ga('newmedia.send', {
         hitType: 'event',
         eventCategory: 'Video',
-        eventAction: 'Play',
-        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [cover]`,
+        eventAction: 'Start',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [頁面載入後${beforeFirstPlayMainVideoSecond}秒] [${this.afterClickAnchorState}]`,
+        eventValue: beforeFirstPlayMainVideoSecond,
       });
     },
-    seekedMainVideo(evt) {
+    playMainVideo() {
+      if (this.$parent.afterClickAnchorTime && this.afterClickAnchorState === '無點擊錨點') {
+        this.afterClickAnchorState = `點擊錨點後${Math.round((new Date() - this.$parent.afterClickAnchorTime) / 1000)}秒`;
+        const curTime = Math.round(this.$refs.mainVideo.currentTime);
+        // GA: 多少人在點擊錨點後，按原生播放鈕？
+        window.ga('newmedia.send', {
+          hitType: 'event',
+          eventCategory: 'Video',
+          eventAction: 'Play',
+          eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [${this.afterClickAnchorState}] [當前為第${curTime}秒]`,
+          eventValue: curTime,
+        });
+      }
+    },
+    seekedMainVideo() {
       this.seekedNem += 1;
-      this.watchedTimes.push(Math.floor(evt.currentTarget.currentTime));
+      this.skipToTimes.push(Math.round(this.$refs.mainVideo.currentTime));
+    },
+    handleDOMContentLoaded() {
+      this.pageLoadTime = new Date();
     },
     handleBeforeUnload() {
-      // GA: 讀者影片看了多久？跳看幾次？
+      // GA: 讀者看影片看了多久？
       window.ga('newmedia.send', {
         hitType: 'event',
         eventCategory: 'Video',
         eventAction: 'Watch',
-        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次] [已觀看${this.watchedTimes.join(',')}秒] [cover]`,
-        eventValue: this.watchedTimes[this.watchedTimes.length - 1],
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [已觀看${Math.round(this.$refs.mainVideo.currentTime)}秒]`,
+        eventValue: Math.round(this.$refs.mainVideo.currentTime),
+      });
+      // GA: 讀者跳看影片幾次？
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Video',
+        eventAction: 'Skip',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看${this.seekedNem}次]`,
+        eventValue: this.seekedNem,
+      });
+      // GA: 讀者跳看影片跳至第幾秒？
+      window.ga('newmedia.send', {
+        hitType: 'event',
+        eventCategory: 'Video',
+        eventAction: 'SkipTo',
+        eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [跳看至第${this.skipToTimes.join(',')}秒]`,
+        eventValue: this.skipToTimes[0],
       });
     },
   },

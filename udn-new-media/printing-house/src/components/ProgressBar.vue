@@ -30,7 +30,7 @@ export default {
       const currentReadProgress = Math.floor(this.progress / 10);
       if (currentReadProgress > this.readProgress) {
         for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
-          // GA: 用不同裝置的讀者分別閱讀文章多長？
+          // GA: 讀者讀文章讀了多長？
           window.ga('newmedia.send', {
             hitType: 'event',
             eventCategory: 'Read',

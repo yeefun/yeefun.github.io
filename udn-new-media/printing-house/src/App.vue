@@ -3,6 +3,7 @@
     <ProgressBar v-if="isShowHeadBar"/>
     <HeadBar v-if="isShowHeadBar"/>
     <CoverVideo ref="coverVideo"/>
+    <!-- <CoverVideo ref="coverVideo"/> -->
     <!-- <div class="cover" v-else> -->
       <!-- <div class="cover__block"></div> -->
       <!-- <img src="./assets/cover-backgroung--mob-1.jpg" alt=""> -->
@@ -107,12 +108,16 @@ export default {
       htmlEleW: document.documentElement.clientWidth,
       windowEle: window,
       isShowHeadBar: false,
+      mainVideoEle: null,
+      afterClickAnchorTime: null,
     };
   },
   created() {
     window.addEventListener('scroll', this.controlHeadBarShow);
   },
   mounted() {
+    this.mainVideoEle = this.$refs.coverVideo.$refs.mainVideo;
+    // this.mainVideoEle = document.getElementById('video');
     window.addEventListener('resize', this.handleResize);
   },
   computed: {
@@ -129,8 +134,8 @@ export default {
       this.htmlEleW = document.documentElement.clientWidth;
     },
     controlHeadBarShow() {
-      const mainVideoEle = this.$refs.coverVideo.$refs.mainVideo;
-      if (this.windowEle.pageYOffset > mainVideoEle.offsetHeight) {
+      // const mainVideoEle = this.$refs.coverVideo.$refs.mainVideo;
+      if (this.windowEle.pageYOffset > this.mainVideoEle.offsetHeight) {
         this.isShowHeadBar = true;
       } else {
         this.isShowHeadBar = false;

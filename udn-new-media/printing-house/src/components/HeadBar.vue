@@ -47,8 +47,9 @@ export default {
       //   const contentVideoEl = this.$parent.$refs.contentVideo.$el;
       //   contentVideoEl.scrollIntoView({ behavior: 'smooth' });
       // }
+      this.$parent.afterClickAnchorTime = new Date();
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      // GA: 有多人點擊「看影音」？
+      // GA: 有多少人點擊「看影音」錨點？
       window.ga('newmedia.send', {
         hitType: 'event',
         eventCategory: 'Navbar',
