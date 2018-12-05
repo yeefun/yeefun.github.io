@@ -64,8 +64,9 @@ export default {
       });
     },
     // timeupdateMainVideo() {
-    //   // 若暫停後 2 秒內讀者又按播放或跳看，便不發送 GA
-    //   if (this.pauseTimer) clearTimeout(this.pauseTimer);
+    // 若暫停後 2 秒內讀者又按播放或跳看，便不發送 GA
+    // if (this.pauseTimer) clearTimeout(this.pauseTimer);
+    // if (this.$refs.mainVideo.seeking) {
     // },
     // seekingMainVideo() {
     //   if (this.pauseTimer) clearTimeout(this.pauseTimer);
