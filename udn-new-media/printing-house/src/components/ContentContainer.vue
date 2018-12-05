@@ -84,7 +84,7 @@ export default {
     color: #58595b;
     padding-left: 20px;
     padding-right: 20px;
-    line-height: 1.4;
+    line-height: 1.48;
     @media screen and (min-width: 768px) {
       padding-left: 0;
       padding-right: 0;

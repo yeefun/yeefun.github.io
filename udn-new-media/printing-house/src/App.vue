@@ -20,7 +20,8 @@
       <p><br></p>
       <p>最後，台北市長選舉結果直到25日凌晨2時30分後才確定，當天聯合報頭版一行小標題寫著「與丁纏鬥至凌晨二時卅分 柯險勝」──為了讓讀者獲得完整大選結果，聯合報林口印刷廠的技術員和印刷機纏鬥到接近凌晨5時才把報紙印完。</p>
       <figure>
-        <img src="./assets/ContentImg/ke-win.jpg" alt="" class="article__img">
+        <img src="./assets/ContentImg/ke-win--mob.jpg" alt="" class="article__img" v-if="isMobSize">
+        <img src="./assets/ContentImg/ke-win--web.jpg" alt="" class="article__img" v-else>
         <figcaption>台北市長選舉結果直到11月25日凌晨才確定，聯合報林口印刷廠則到接近凌晨5時才把報紙印完。圖／報系資料照</figcaption>
       </figure>
       <!-- <ContentVideo v-if="!isWebSize" id="main-video"/> -->
@@ -35,14 +36,16 @@
       <p><br></p>
       <p>晚間11時20分，電子版報紙從台北傳到製版室，製版技術員們得在10分鐘內將電子版報紙製成印刷的色版。</p>
       <figure>
-        <img src="./assets/ContentImg/color-version.jpg" alt="" class="article__img">
+        <img src="./assets/ContentImg/color-version--mob.jpg" alt="" class="article__img" v-if="isMobSize">
+        <img src="./assets/ContentImg/color-version--web.jpg" alt="" class="article__img" v-else>
         <figcaption>製版技術員將電子版報紙製成印刷的色板。</figcaption>
       </figure>
       <p>「11點30分了，要開印了，快快快！」隨著報紙開印時間愈來愈近，印刷廠主管催促著製版技術員把色板交給印刷技術員。</p>
       <p><br></p>
       <p>晚間11時30分，印刷技術員把色版嵌在印刷機的滾筒上，接著，高約4層樓的印刷機上場。兩台印刷機一開，轟隆隆的印刷聲立刻佔據整個印刷作業區，印刷機一小時可以印10萬份報紙，每一秒鐘，都有近28份報紙持續從印刷機吐出，而一旁的印刷技術員則不斷隨機抽檢報紙，檢查報紙的版序、顏色、日期，確保印刷機的速度再快，也能維持報紙的印刷品質。</p>
       <figure>
-        <img src="./assets/ContentImg/check.jpg" alt="" class="article__img">
+        <img src="./assets/ContentImg/check--mob.jpg" alt="" class="article__img" v-if="isMobSize">
+        <img src="./assets/ContentImg/check--web.jpg" alt="" class="article__img" v-else>
         <figcaption>印刷技術員隨機抽檢報紙，檢查報紙的版序、顏色、日期。</figcaption>
       </figure>
       <p>在印刷機持續印製報紙的同時，印好的報紙會乘著夾報鏈，被送到樓上的發報作業廠，一份份報紙在這裡經過數報機、打包機，變成一落落報紙，再順著輸送帶，前往一樓的發報碼頭，最後由派報車將報紙運至各個縣市。</p>
@@ -66,7 +69,24 @@
       </div>
       <EditorItem/>
       <FeedbackItem/>
-      <RelatedItem/>
+      <RelatedItem>
+        <template slot="img1">
+          <img src="./assets/Related/related-01--small.jpg" v-if="isBigMobSize || isBigWebSize" />
+          <img src="./assets/Related/related-01--big.jpg" v-else />
+        </template>
+        <template slot="img2">
+          <img src="./assets/Related/related-02--small.jpg" v-if="isBigMobSize || isBigWebSize" />
+          <img src="./assets/Related/related-02--big.jpg" v-else />
+        </template>
+        <template slot="img3">
+          <img src="./assets/Related/related-03--small.jpg" v-if="isBigMobSize || isBigWebSize" />
+          <img src="./assets/Related/related-03--big.jpg" v-else />
+        </template>
+        <template slot="img4">
+          <img src="./assets/Related/related-04--small.jpg" v-if="isBigMobSize || isBigWebSize" />
+          <img src="./assets/Related/related-04--big.jpg" v-else />
+        </template>
+      </RelatedItem>
       <FbComment/>
       <FooterItem/>
     </ContentContainer>
@@ -123,11 +143,16 @@ export default {
   computed: {
     isWebSize() {
       return this.htmlEleW >= 768;
-      // return this.htmlEleW >= 576;
     },
-    // isMobSize() {
-    //   return this.htmlEleW < 575.98;
-    // },
+    isBigWebSize() {
+      return this.htmlEleW >= 992;
+    },
+    isMobSize() {
+      return this.htmlEleW <= 479.98;
+    },
+    isBigMobSize() {
+      return this.htmlEleW <= 575.98;
+    },
   },
   methods: {
     handleResize() {

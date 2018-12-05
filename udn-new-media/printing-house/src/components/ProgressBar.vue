@@ -27,15 +27,15 @@ export default {
       const currentHeight = this.$parent.windowEle.pageYOffset;
       const totalHeight = this.htmlEle.scrollHeight - this.htmlEle.clientHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
-      const currentReadProgress = Math.floor(this.progress / 10);
+      const currentReadProgress = Math.ceil(this.progress / 10);
       if (currentReadProgress > this.readProgress) {
         for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
           // GA: 讀者讀文章讀了多長？
           window.ga('newmedia.send', {
             hitType: 'event',
-            eventCategory: 'Read',
-            eventAction: 'Scroll',
-            eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [閱讀${(i - 1) * 10}-${i * 10}%]`,
+            eventCategory: 'Article',
+            eventAction: 'Read',
+            eventLabel: `[每晚與時間賽跑的印報人] [${detectPlatform()}] [閱讀 ${(i - 1) * 10}-${i * 10}%]`,
             eventValue: i * 10,
           });
         }
