@@ -323,18 +323,15 @@ function () {
       //   rotationAxisR: 240,
       //   rotationAxisAngle: 0,
       // }));
-      triangles.push(new Triangle({
-        // rotationAxisR: {
-        //   x: 280,
-        //   y: 240,
-        // },
-        rotationAxisR: 280,
-        rotationAxisAngle: 0
-      })); // polygons.push(new Polygon({
+      // triangles.push(new Triangle({
       //   rotationAxisR: 280,
-      //   rotationAxisAngle: 220,
-      //   // scale: 0.8,
+      //   rotationAxisAngle: 0,
       // }));
+      polygons.push(new Polygon({
+        rotationAxisR: 280,
+        rotationAxisAngle: 220 // scale: 0.8,
+
+      }));
     }
   }]);
 
@@ -472,6 +469,7 @@ function () {
               y: _this4.originalPos.y
             },
             rotateAngle: _this4.rotate,
+            moveX: -_this4.r - 10,
             // rotateAngle: Math.sin(this.rotate * degToPi),
             rotationAxisR: _this4.rotationAxisR
           }));
@@ -588,8 +586,8 @@ function () {
     key: "update",
     value: function update() {
       // 更新三角子彈
-      this.bullets.forEach(function (bullet) {
-        bullet.update();
+      this.bullets.forEach(function (bullet, idx, arr) {
+        bullet.update(idx, arr);
       }); // 每 4-8 秒，三角移動 + 自身旋轉
 
       var rotateAxisAngleTime = new Date();
@@ -619,7 +617,9 @@ function () {
             x: this.originalPos.x,
             y: this.originalPos.y
           },
-          rotate: this.rotate
+          rotationAxisR: this.rotationAxisR,
+          rotateAngle: this.rotate // rotate: this.rotate,
+
         }));
         this.beforeShootTime = shootTime;
       } // 當生命值剩 2，派副三角形攻擊
@@ -678,7 +678,7 @@ function () {
       v: 0.8,
       rotate: 0,
       // scale: 1,
-      // rotateV: 0.4,
+      rotateV: 0.4,
       color: globalColor.red,
       isSplited: true
     };
@@ -693,7 +693,7 @@ function () {
       ctx.translate(this.originalPos.x, this.originalPos.y);
       ctx.rotate(this.rotate * degToPi);
 
-      if (this.isSplited) {
+      if (!this.isSplited) {
         // 主體多邊形
         ctx.beginPath();
         ctx.fillStyle = this.color;
@@ -707,8 +707,7 @@ function () {
         ctx.fill(); // 右淡五邊形
 
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)'; // ctx.fillStyle = globalColor.blue;
-
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
         ctx.moveTo(9.6, -2);
         ctx.$triLineTo(22, 324);
         ctx.$triLineTo(21, 8);
@@ -718,13 +717,11 @@ function () {
         ctx.fill(); // 下淡四邊形
 
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)'; // ctx.fillStyle = globalColor.orange;
-        // ctx.moveTo(8.4, 5.6);
-
-        ctx.moveTo(10 * Math.cos(36 * degToPi), 10 * Math.sin(36 * degToPi));
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+        ctx.moveTo(10 * Math.cos(40 * degToPi), 10 * Math.sin(40 * degToPi));
         ctx.$triLineTo(23, 70);
         ctx.$triLineTo(23, 150);
-        ctx.lineTo(-8, 0);
+        ctx.lineTo(-8.8, 0);
         ctx.closePath();
         ctx.fill(); // 閃電
 
@@ -734,83 +731,78 @@ function () {
         });
       } else {
         // 右分裂四邊形
-        ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(18, 0);
-        ctx.$triLineTo(24, 36);
-        ctx.$triLineTo(32, 74);
+        ctx.fillStyle = this.color;
+        ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
+        ctx.$triLineTo(23, 150);
+        ctx.$triLineTo(34, 202);
+        ctx.$triLineTo(22, 255);
         ctx.closePath();
-        ctx.fill(); // 內右淡四邊形
+        ctx.fill(); // 左分裂四邊形
 
-        ctx.beginPath(); // ctx.fillStyle = globalColor.blue;
-
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
-        ctx.lineTo(18, 0);
-        ctx.$triLineTo(24, 36);
-        ctx.$triLineTo(32, 74);
-        ctx.$triLineTo(19, 65);
-        ;
-        ctx.$triLineTo(13, 42);
-        ;
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
+        ctx.$triLineTo(22, 255);
+        ctx.$triLineTo(22, 324);
+        ctx.$triLineTo(21, 8);
         ctx.closePath();
-        ctx.fill(); // 內左淡四邊形
-
-        ctx.beginPath(); // ctx.fillStyle = globalColor.orange;
+        ctx.fill(); // 右內下四邊形
 
         ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
-        ctx.$triLineTo(32, 74);
-        ctx.$triLineTo(16.4, 74);
-        ctx.$triLineTo(19, 65);
+        ctx.beginPath();
+        ctx.moveTo(-8.8, 0);
+        ctx.$triLineTo(4.8, 64);
+        ctx.$triLineTo(23, 70);
+        ctx.$triLineTo(23, 150);
         ctx.closePath();
-        ctx.fill(); // 右閃電
+        ctx.fill(); // 左內下三角形
+
+        ctx.beginPath();
+        ctx.moveTo(10 * Math.cos(40 * degToPi), 10 * Math.sin(40 * degToPi));
+        ctx.$triLineTo(4.8, 64);
+        ctx.$triLineTo(23, 70);
+        ctx.closePath();
+        ctx.fill(); // 左內右五邊形
+
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+        ctx.moveTo(9.6, -2);
+        ctx.$triLineTo(22, 324);
+        ctx.$triLineTo(21, 8);
+        ctx.$triLineTo(23, 70);
+        ctx.$triLineTo(10, 36);
+        ctx.closePath();
+        ctx.fill(); // 左閃電
 
         ctx.save();
         drawLightning({
-          x: 12,
-          y: 6
-        }, 0.5);
-        ctx.restore(); // 左分裂四邊形
-
-        ctx.translate(-32, 0);
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.$triLineTo(32, 36);
-        ctx.$triLineTo(28, 90);
-        ctx.$triLineTo(28, 144);
-        ctx.closePath();
-        ctx.fill(); // 內右淡四邊形
-
-        ctx.beginPath(); // ctx.fillStyle = globalColor.orange;
-
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
-        ctx.$triLineTo(16, 36);
-        ctx.$triLineTo(32, 36);
-        ctx.$triLineTo(28, 90);
-        ctx.$triLineTo(12, 88);
-        ctx.fill(); // 左閃電
+          x: -12,
+          y: -8
+        }, 0.6);
+        ctx.restore(); // 右閃電
 
         drawLightning({
-          x: 0,
-          y: 8
-        }, 0.6);
+          x: 10,
+          y: -8
+        }, 0.5);
       }
 
       ctx.restore();
     }
   }, {
     key: "update",
-    value: function update() {} // this.p.x += this.v.x;
-    // this.p.y += this.v.y;
-    // this.rotate += this.rotateV;
-    // if (!this.isInBoundary) {
-    //   this.p.x = -48;
-    //   this.p.y = -32;
-    //   this.v.x = 0.5 * Math.random() + 0.5;
-    //   this.v.y = 0.5 * Math.random() + 0.5;
-    // }
-    // get isInBoundary() {
+    value: function update() {
+      // this.p.x += this.v.x;
+      // this.p.y += this.v.y;
+      // this.rotationAxisR -= 4;
+      this.rotate += this.rotateV; // if (!this.isInBoundary) {
+      //   this.p.x = -48;
+      //   this.p.y = -32;
+      //   this.v.x = 0.5 * Math.random() + 0.5;
+      //   this.v.y = 0.5 * Math.random() + 0.5;
+      // }
+    } // get isInBoundary() {
     //   const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
     //   const yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
     //   return xInRange && yInRange;
@@ -1081,7 +1073,8 @@ function () {
       // },
       rotationAxisR: 0,
       rotationAxisAngle: 0,
-      r: 26 * 0.4,
+      // r: 26 * 0.4,
+      r: 10.4,
       rotate: 0,
       rotateV: 4,
       // v: -0.4,
@@ -1098,17 +1091,17 @@ function () {
   _createClass(TriangleSub, [{
     key: "draw",
     value: function draw() {
-      var scale = 0.4;
-      var triangleOuterBigR = this.r + 4 * scale;
-      var triangleInnerBigR = this.r - 16 * scale;
-      var triangleInnerSmallR = this.r - 22 * scale;
+      // const scale = 0.4;
+      var triangleOuterBigR = this.r + 1.6;
+      var triangleInnerBigR = this.r - 6.4;
+      var triangleInnerSmallR = this.r - 8.8;
       ctx.save(); // 淡三角
 
       ctx.translate(this.originalPos.x, this.originalPos.y); // ctx.scale(0.4, 0.4);
 
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
-      ctx.translate(2 * scale, -Math.sqrt(12) * scale);
+      ctx.translate(0.8, -Math.sqrt(1.92));
       ctx.beginPath();
       ctx.moveTo(triangleOuterBigR * Math.cos(0), triangleOuterBigR * Math.sin(0));
       ctx.lineTo(triangleOuterBigR * Math.cos(120 * degToPi), triangleOuterBigR * Math.sin(120 * degToPi));
@@ -1126,7 +1119,7 @@ function () {
       ctx.fillStyle = this.color;
       ctx.fill(); // 大白三角
 
-      ctx.translate(-3.2 * scale, -1.6 * scale);
+      ctx.translate(-1.28, -0.64);
       ctx.fillStyle = globalColor.white;
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -1135,7 +1128,7 @@ function () {
       ctx.closePath();
       ctx.fill(); // 小白三角
 
-      ctx.translate(0, -8.8 * scale);
+      ctx.translate(0, -3.52);
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(triangleInnerSmallR * Math.cos(30 * degToPi), triangleInnerSmallR * Math.sin(30 * degToPi));
@@ -1226,7 +1219,7 @@ function () {
 
       ctx.beginPath(); // ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2);
 
-      ctx.arc(this.moveX - 22 - 10, 0, 4, 0, Math.PI * 2); // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
+      ctx.arc(this.moveX, 0, 4, 0, Math.PI * 2); // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
 
       ctx.fillStyle = this.color;
       ctx.fill();
@@ -1235,10 +1228,14 @@ function () {
   }, {
     key: "update",
     value: function update(idx, arr) {
-      // 子彈移動
+      var shooterR = 34;
+      var shieldR = shooterR + 36;
+      var shooterInnerCirLineW = 6;
+      var shieldLineW = 4; // 圓形子彈移動
+
       this.moveX += this.moveXV; // 當圓形子彈射中 shooter 主體
 
-      if (this.moveX <= -(this.rotationAxisR - 22 - 10 - 34 - 3)) {
+      if (-this.moveX >= this.rotationAxisR - shooterR - shooterInnerCirLineW / 2) {
         // shooter 命減 1
         game.shooter.HP -= 1; // 移除子彈
 
@@ -1248,7 +1245,7 @@ function () {
 
       var shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= 225 * degToPi;
 
-      if (shieldAngleRange && this.moveX <= -(this.rotationAxisR - 22 - 10 - 34 - 36 - 2)) {
+      if (shieldAngleRange && -this.moveX >= this.rotationAxisR - shieldR - shieldLineW / 2) {
         // 移除子彈
         arr.splice(idx, 1);
       }
@@ -1272,9 +1269,9 @@ function () {
         y: 0
       },
       moveX: 0,
-      color: globalColor.blue,
       moveXV: -4,
-      rotate: 0
+      rotateAngle: 0,
+      color: globalColor.blue
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1285,7 +1282,7 @@ function () {
     value: function draw() {
       ctx.save();
       ctx.translate(this.p.x, this.p.y);
-      ctx.rotate(this.rotate * degToPi);
+      ctx.rotate(this.rotateAngle * degToPi);
       ctx.translate(this.moveX, 0); // 主體三角子彈
 
       ctx.fillStyle = this.color;
@@ -1307,8 +1304,29 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
-      this.moveX += this.moveXV;
+    value: function update(idx, arr) {
+      var shooterR = 34;
+      var shieldR = shooterR + 36;
+      var shooterInnerCirLineW = 6;
+      var shieldLineW = 4;
+      var triBulletLength = 37.8; // 三角子彈移動
+
+      this.moveX += this.moveXV; // 當三角子彈射中 shooter 主體
+
+      if (-this.moveX >= this.rotationAxisR - (triBulletLength + shooterR + shooterInnerCirLineW / 2)) {
+        // shooter 命減 1
+        game.shooter.HP -= 1; // 移除三角子彈
+
+        arr.splice(idx, 1);
+      } // 當三角子彈射中 shooter 的護盾
+
+
+      var shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= 225 * degToPi;
+
+      if (shieldAngleRange && -this.moveX >= this.rotationAxisR - (triBulletLength + shieldR + shieldLineW / 2)) {
+        // 移除三角子彈
+        arr.splice(idx, 1);
+      }
     }
   }]);
 

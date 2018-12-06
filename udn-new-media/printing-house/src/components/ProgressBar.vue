@@ -28,7 +28,8 @@ export default {
       const totalHeight = this.htmlEle.scrollHeight - this.htmlEle.clientHeight;
       this.progress = ((currentHeight / totalHeight) * 100).toFixed(2);
       const currentReadProgress = Math.ceil(this.progress / 10);
-      if (currentReadProgress > this.readProgress) {
+      // 後者判斷為防止部分瀏覽器會讓 currentReadProgress 大於 10
+      if (currentReadProgress > this.readProgress && currentReadProgress <= 10) {
         for (let i = this.readProgress + 1; i <= currentReadProgress; i += 1) {
           // GA: 讀者讀文章讀了多長？
           window.ga('newmedia.send', {

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
-    <ProgressBar v-if="isShowHeadBar"/>
-    <HeadBar v-if="isShowHeadBar"/>
+    <ProgressBar v-show="isShowHeadBar"/>
+    <HeadBar v-show="isShowHeadBar"/>
     <CoverVideo ref="coverVideo"/>
     <!-- <CoverVideo ref="coverVideo"/> -->
     <!-- <div class="cover" v-else> -->
