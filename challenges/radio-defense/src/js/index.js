@@ -26,11 +26,12 @@ startBtn.addEventListener('click',
 
 
 /* GUI Controls */
-// const controls = {
-//   value: 0,
-// }
+const controls = {
+  splited: false,
+}
 
 const gui = new dat.GUI();
+gui.add(controls, 'splited');
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 
@@ -283,8 +284,16 @@ class Game {
     //   rotationAxisAngle: 0,
     // }));
     polygons.push(new Polygon({
-      rotationAxisR: 280,
-      rotationAxisAngle: 220,
+      rotationAxisR: {
+        whole: 280,
+        splited1: 280,
+        splited2: 280,
+      },
+      rotationAxisAngle: {
+        whole: 0,
+        splited1: 0,
+        splited2: 0,
+      },
       // scale: 0.8,
     }));
   }
@@ -574,34 +583,75 @@ class Polygon {
         x: gameW / 2,
         y: gameH / 2,
       },
-      rotationAxisR: 0,
-      rotationAxisAngle: 0,
-      // p: new Vec2(0, 0),
-      // v: {
-      //   x: 1,
-      //   y: 0.5,
-      // },
-      v: 0.8,
-      rotate: 0,
-      // scale: 1,
-      rotateV: 0.4,
+      rotationAxisR: {
+        whole: 0,
+        splited1: 0,
+        splited2: 0,
+        // big: 0,
+        // small: 0,
+      },
+      rotationAxisAngle: {
+        whole: 0,
+        splited1: 0,
+        splited2: 0,
+        // big: 0,
+        // small: 0,
+      },
+      rotate: {
+        whole: 0,
+        splited1: 0,
+        splited2: 0,
+        // big: 0,
+        // small: 0,
+      },
+      life: {
+        whole: 1,
+        splited1: 1,
+        splited2: 1,
+      },
+      rotationAxisRV: {
+        whole: 0.4,
+        splited1: 0.4,
+        splited2: 0.4,
+      },
+      rotationAxisAngle: {
+        whole: 0.4,
+        splited1: 0.4,
+        splited2: 0.4,
+      },
+      rotateV: {
+        whole: 0.4,
+        splited1: 0.4,
+        splited2: 0.4,
+      },
       color: globalColor.red,
-      isSplited: true,
+      isSplited: false,
+      isSplitedMove: false,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   get originalPos() {
     return {
-      x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
-      y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi),
+      whole: {
+        x: this.rotationAxisPos.x + this.rotationAxisR.whole * Math.cos(this.rotationAxisAngle.whole * degToPi),
+        y: this.rotationAxisPos.y + this.rotationAxisR.whole * Math.sin(this.rotationAxisAngle.whole * degToPi),
+      },
+      splited1: {
+        x: this.rotationAxisPos.x + this.rotationAxisR.splited1 * Math.cos(this.rotationAxisAngle.splited1 * degToPi),
+        y: this.rotationAxisPos.y + this.rotationAxisR.splited1 * Math.sin(this.rotationAxisAngle.splited1 * degToPi),
+      },
+      splited2: {
+        x: this.rotationAxisPos.x + this.rotationAxisR.splited2 * Math.cos(this.rotationAxisAngle.splited2 * degToPi),
+        y: this.rotationAxisPos.y + this.rotationAxisR.splited2 * Math.sin(this.rotationAxisAngle.splited2 * degToPi),
+      },
     };
   }
   draw() {
-    ctx.save();
-      ctx.translate(this.originalPos.x, this.originalPos.y);
-      ctx.rotate(this.rotate * degToPi);
-      if (!this.isSplited) {
+    if (!this.isSplited && !controls.splited) {
+      ctx.save();
+        ctx.translate(this.originalPos.whole.x, this.originalPos.whole.y);
+        ctx.rotate(this.rotate.whole * degToPi);
         // 主體多邊形
         ctx.beginPath();
         ctx.fillStyle = this.color;
@@ -633,66 +683,111 @@ class Polygon {
         ctx.closePath();
         ctx.fill();
         // 閃電
-        drawLightning({ x: -0.8, y: -16 });
-      } else {
-        // 右分裂四邊形
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
-        ctx.$triLineTo(23, 150);
-        ctx.$triLineTo(34, 202);
-        ctx.$triLineTo(22, 255);
-        ctx.closePath();
-        ctx.fill();
-        // 左分裂四邊形
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
-        ctx.$triLineTo(22, 255);
-        ctx.$triLineTo(22, 324);
-        ctx.$triLineTo(21, 8);
-        ctx.closePath();
-        ctx.fill();
-        // 右內下四邊形
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
-        ctx.beginPath();
-        ctx.moveTo(-8.8, 0);
-        ctx.$triLineTo(4.8, 64);
-        ctx.$triLineTo(23, 70);
-        ctx.$triLineTo(23, 150);
-        ctx.closePath();
-        ctx.fill();
-        // 左內下三角形
-        ctx.beginPath();
-        ctx.moveTo(10 * Math.cos(40 * degToPi), 10 * Math.sin(40 * degToPi));
-        ctx.$triLineTo(4.8, 64);
-        ctx.$triLineTo(23, 70);
-        ctx.closePath();
-        ctx.fill();
-        // 左內右五邊形
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
-        ctx.moveTo(9.6, -2);
-        ctx.$triLineTo(22, 324);
-        ctx.$triLineTo(21, 8);
-        ctx.$triLineTo(23, 70);
-        ctx.$triLineTo(10, 36);
-        ctx.closePath();
-        ctx.fill();
-        // 左閃電
+        drawLightning({
+          x: -0.8,
+          y: -16
+        });
+      ctx.restore();
+    } else {
+      // 右分裂四邊形
+      if (this.life.splited1) {
         ctx.save();
-          drawLightning({ x: -12, y: -8 }, 0.6);
+          ctx.translate(this.originalPos.splited1.x, this.originalPos.splited1.y);
+          ctx.rotate(this.rotate.splited1 * degToPi);
+          // 右分裂主體
+          ctx.beginPath();
+          ctx.fillStyle = this.color;
+          ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
+          ctx.$triLineTo(23, 150);
+          ctx.$triLineTo(34, 202);
+          ctx.$triLineTo(22, 255);
+          ctx.closePath();
+          ctx.fill();
+          // 右內下四邊形
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+          ctx.beginPath();
+          ctx.moveTo(-8.8, 0);
+          ctx.$triLineTo(4.8, 64);
+          ctx.$triLineTo(23, 70);
+          ctx.$triLineTo(23, 150);
+          ctx.closePath();
+          ctx.fill();
+          // 右閃電
+          drawLightning({
+            x: -12,
+            y: -8
+          }, 0.6);
         ctx.restore();
-        // 右閃電
-        drawLightning({ x: 10, y: -8 }, 0.5);
       }
-    ctx.restore();
+      // 左分裂四邊形
+      if (this.life.splited2) {
+        ctx.save();
+          ctx.translate(this.originalPos.splited2.x, this.originalPos.splited2.y);
+          ctx.rotate(this.rotate.splited2 * degToPi);
+          // 左分裂主體
+          ctx.beginPath();
+          ctx.fillStyle = this.color;
+          ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
+          ctx.$triLineTo(22, 255);
+          ctx.$triLineTo(22, 324);
+          ctx.$triLineTo(21, 8);
+          ctx.closePath();
+          ctx.fill();
+          // 左內下三角形
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
+          ctx.moveTo(10 * Math.cos(40 * degToPi), 10 * Math.sin(40 * degToPi));
+          ctx.$triLineTo(4.8, 64);
+          ctx.$triLineTo(23, 70);
+          ctx.closePath();
+          ctx.fill();
+          // 左內右五邊形
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+          ctx.moveTo(9.6, -2);
+          ctx.$triLineTo(22, 324);
+          ctx.$triLineTo(21, 8);
+          ctx.$triLineTo(23, 70);
+          ctx.$triLineTo(10, 36);
+          ctx.closePath();
+          ctx.fill();
+          // 左閃電
+          drawLightning({
+            x: 10,
+            y: -8
+          }, 0.5);
+        ctx.restore();
+      }
+    }
   }
   update() {
-    // this.p.x += this.v.x;
-    // this.p.y += this.v.y;
-    // this.rotationAxisR -= 4;
-    this.rotate += this.rotateV;
+    if (!this.life.whole) {
+      this.isSplited = true;
+    }
+    if (!this.isSplited && !controls.splited) {
+      this.rotationAxisR.whole -= this.rotationAxisRV.whole;
+      this.rotationAxisR.splited1 -= this.rotationAxisRV.whole;
+      this.rotationAxisR.splited2 -= this.rotationAxisRV.whole;
+      this.rotate.whole += this.rotateV.whole;
+      this.rotate.splited1 += this.rotateV.whole;
+      this.rotate.splited2 += this.rotateV.whole;
+    } else {
+      if (!this.isSplitedMove) {
+        TweenLite.to(this.rotationAxisAngle, 2.4, {
+          splited1: '-=15',
+          splited2: '+=15',
+          ease: Circ.easeOut,
+        });
+        TweenLite.to(this.rotate, 3.2, {
+          splited1: '-=180',
+          splited2: '+=180',
+          ease: Power4.easeOut,
+        });
+        this.isSplitedMove = true;
+      }
+      this.rotationAxisR.splited1 -= this.rotationAxisRV.splited1;
+      this.rotationAxisR.splited2 -= this.rotationAxisRV.splited2;
+    }
     // if (!this.isInBoundary) {
     //   this.p.x = -48;
     //   this.p.y = -32;
