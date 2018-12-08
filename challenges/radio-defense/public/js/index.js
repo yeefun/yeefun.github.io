@@ -334,14 +334,17 @@ function () {
           splited1: 280,
           splited2: 280
         },
+        // 為了讓 shooter 子彈可以取得正確的射中角度，rotate 必須比 rotationAxisAngle 還多 90
         rotationAxisAngle: {
-          whole: 0,
-          splited1: 0,
-          splited2: 0
-        } // rotate: {
-        //   whole: 15,
-        // },
-        // scale: 0.8,
+          whole: 270,
+          splited1: 270,
+          splited2: 270
+        },
+        rotate: {
+          whole: 270 + 90,
+          splited1: 270 + 90,
+          splited2: 270 + 90
+        } // scale: 0.8,
 
       }));
     }
@@ -732,7 +735,7 @@ function () {
   _createClass(Polygon, [{
     key: "draw",
     value: function draw() {
-      if (!this.isSplited && !controls.splited) {
+      if (!this.isSplited && controls.splited) {
         ctx.save();
         ctx.translate(this.originalPos.whole.x, this.originalPos.whole.y);
         ctx.rotate(this.rotate.whole * degToPi); // 主體多邊形
@@ -773,11 +776,11 @@ function () {
         });
         ctx.restore();
       } else {
-        // 左分裂四邊形
+        // 大分裂四邊形
         if (this.HP.splited1) {
           ctx.save();
           ctx.translate(this.originalPos.splited1.x, this.originalPos.splited1.y);
-          ctx.rotate(this.rotate.splited1 * degToPi); // 左分裂主體
+          ctx.rotate(this.rotate.splited1 * degToPi); // 大分裂主體
 
           ctx.beginPath();
           ctx.fillStyle = this.color;
@@ -786,7 +789,7 @@ function () {
           ctx.$triLineTo(34, 202);
           ctx.$triLineTo(22, 255);
           ctx.closePath();
-          ctx.fill(); // 左內下四邊形
+          ctx.fill(); // 大分裂內下四邊形
 
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
           ctx.beginPath();
@@ -795,20 +798,20 @@ function () {
           ctx.$triLineTo(23, 70);
           ctx.$triLineTo(23, 150);
           ctx.closePath();
-          ctx.fill(); // 左閃電
+          ctx.fill(); // 大分裂左閃電
 
           drawLightning({
             x: -12,
             y: -8
           }, 0.6);
           ctx.restore();
-        } // 右分裂四邊形
+        } // 小分裂四邊形
 
 
         if (this.HP.splited2) {
           ctx.save();
           ctx.translate(this.originalPos.splited2.x, this.originalPos.splited2.y);
-          ctx.rotate(this.rotate.splited2 * degToPi); // 右分裂主體
+          ctx.rotate(this.rotate.splited2 * degToPi); // 小分裂主體
 
           ctx.beginPath();
           ctx.fillStyle = this.color;
@@ -817,7 +820,7 @@ function () {
           ctx.$triLineTo(22, 324);
           ctx.$triLineTo(21, 8);
           ctx.closePath();
-          ctx.fill(); // 右內下三角形
+          ctx.fill(); // 小分裂內下三角形
 
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
@@ -825,7 +828,7 @@ function () {
           ctx.$triLineTo(4.8, 64);
           ctx.$triLineTo(23, 70);
           ctx.closePath();
-          ctx.fill(); // 右內右五邊形
+          ctx.fill(); // 小分裂內右五邊形
 
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
@@ -835,7 +838,7 @@ function () {
           ctx.$triLineTo(23, 70);
           ctx.$triLineTo(10, 36);
           ctx.closePath();
-          ctx.fill(); // 右閃電
+          ctx.fill(); // 小分裂閃電
 
           drawLightning({
             x: 10,
@@ -848,6 +851,7 @@ function () {
   }, {
     key: "update",
     value: function update() {
+      // this.rotationAxisAngle.whole += 0.2;
       if (!this.HP.whole) {
         this.isSplited = true;
       }
@@ -873,10 +877,9 @@ function () {
             ease: Power4.easeOut
           });
           this.isSplitedMove = true;
-        }
+        } // this.rotationAxisR.splited1 -= this.rotationAxisRV.splited1;
+        // this.rotationAxisR.splited2 -= this.rotationAxisRV.splited2;
 
-        this.rotationAxisR.splited1 -= this.rotationAxisRV.splited1;
-        this.rotationAxisR.splited2 -= this.rotationAxisRV.splited2;
       } // if (!this.isInBoundary) {
       //   this.p.x = -48;
       //   this.p.y = -32;
@@ -1142,33 +1145,44 @@ function () {
       }); // 判斷子彈有無射中多邊形
 
       polygons.forEach(function (polygon, polyIdx) {
-        // 取得兩側射中角度
-        var sideA = polygon.rotationAxisR.whole;
-        var sideB1 = 22;
-        var sideB2 = 23;
-        var sideC1 = cosineFormula(sideA, sideB1, 255 - 180);
-        var sideC2 = cosineFormula(sideA, sideB2, 180 - 70);
+        // 當多邊形還沒分裂
+        if (polygon.HP.whole) {
+          var getAngleB = function getAngleB(a, b, c) {
+            return Math.acos((a * a + c * c - b * b) / (2 * a * c));
+          };
 
-        function getAngleB(a, b, c) {
-          return Math.acos((a * a + c * c - b * b) / (2 * a * c));
+          // 取得兩側射中最大角度
+          var sideA = polygon.rotationAxisR.whole;
+          var sideB1 = 34;
+          var sideB2 = 21; // 202 - 90 = 202 - (polygon.rotationAxisAngle.whole - 180)；polygon.rotationAxisAngle.whole 預設是 270
+
+          var sideC1 = cosineFormula(sideA, sideB1, 202 - 90); // 90 - 8 = (polygon.rotationAxisAngle.whole) - 180 - 8；polygon.rotationAxisAngle.whole 預設是 270
+
+          var sideC2 = cosineFormula(sideA, sideB2, 90 - 8);
+          var angleB1 = getAngleB(sideA, sideB1, sideC1);
+          var angleB2 = getAngleB(sideA, sideB2, sideC2); // 射中角度範圍
+          // 多邊形不會繞軸旋轉，所以 rotationAxisAngle 不用 % 360
+
+          var shotAngleRange = _this5.rotateAngle >= polygon.rotationAxisAngle.whole * degToPi - angleB1 && _this5.rotateAngle <= polygon.rotationAxisAngle.whole * degToPi + angleB2; // 設中距離範圍
+
+          var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= polygon.rotationAxisR.whole && _this5.rotationAxisR + _this5.bodyLength <= polygon.rotationAxisR.whole + 9;
+          ; // 判斷子彈有無射中多邊形
+
+          if (shotAngleRange && shotRRange) {
+            // 移除子彈
+            shooterBullets.splice(bulletIdx, 1); // 扣 1 生命值
+
+            polygon.HP.whole -= 1;
+          } // 當多邊形分裂
+
+        } else {
+          // 大分裂
+          var _sideA = polygon.rotationAxisR.splited1;
+          var _sideB = 23;
+          var _sideB2 = 22;
+
+          var _sideC = cosineFormula(_sideA, _sideB, 202 - 90);
         }
-
-        var angleB1 = getAngleB(sideA, sideB1, sideC1);
-        var angleB2 = getAngleB(sideA, sideB2, sideC2); // 射中角度範圍
-
-        var shotAngleRange = _this5.rotateAngle >= polygon.rotationAxisAngle * degToPi - angleB1 && _this5.rotateAngle <= polygon.rotationAxisAngle * degToPi + angleB2; // 設中距離範圍
-        // const shotRRange = ((this.rotationAxisR + this.bodyLength) >= polygon.rotationAxisR) && ((this.rotationAxisR + this.bodyLength) <= (polygon.rotationAxisR + (polygon.r / 2)));
-        // 判斷子彈有無射中多邊形
-        // if (shotAngleRange && shotRRange) {
-        //   // 移除子彈
-        //   shooterBullets.splice(bulletIdx, 1);
-        //   // 扣 1 生命值
-        //   polygon.whole.HP -= 1;
-        //   if (polygon.whole.HP === 0) {
-        //     // 若生命值 0，移除三角形
-        //     polygons.splice(triIdx, 1);
-        //   }
-        // }
       });
     }
   }]);
