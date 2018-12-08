@@ -1,7 +1,5 @@
 "use strict";
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -340,7 +338,10 @@ function () {
           whole: 0,
           splited1: 0,
           splited2: 0
-        } // scale: 0.8,
+        } // rotate: {
+        //   whole: 15,
+        // },
+        // scale: 0.8,
 
       }));
     }
@@ -672,11 +673,9 @@ var Polygon =
 /*#__PURE__*/
 function () {
   function Polygon(args) {
-    var _def;
-
     _classCallCheck(this, Polygon);
 
-    var def = (_def = {
+    var def = {
       rotationAxisPos: {
         x: gameW / 2,
         y: gameH / 2
@@ -702,7 +701,7 @@ function () {
         // small: 0,
 
       },
-      life: {
+      HP: {
         whole: 1,
         splited1: 1,
         splited2: 1
@@ -711,16 +710,21 @@ function () {
         whole: 0.4,
         splited1: 0.4,
         splited2: 0.4
-      }
-    }, _defineProperty(_def, "rotationAxisAngle", {
-      whole: 0.4,
-      splited1: 0.4,
-      splited2: 0.4
-    }), _defineProperty(_def, "rotateV", {
-      whole: 0.4,
-      splited1: 0.4,
-      splited2: 0.4
-    }), _defineProperty(_def, "color", globalColor.red), _defineProperty(_def, "isSplited", false), _defineProperty(_def, "isSplitedMove", false), _def);
+      },
+      rotationAxisAngleV: {
+        whole: 0.4,
+        splited1: 0.4,
+        splited2: 0.4
+      },
+      rotateV: {
+        whole: 0.4,
+        splited1: 0.4,
+        splited2: 0.4
+      },
+      color: globalColor.red,
+      isSplited: false,
+      isSplitedMove: false
+    };
     Object.assign(def, args);
     Object.assign(this, def);
   }
@@ -769,11 +773,11 @@ function () {
         });
         ctx.restore();
       } else {
-        // 右分裂四邊形
-        if (this.life.splited1) {
+        // 左分裂四邊形
+        if (this.HP.splited1) {
           ctx.save();
           ctx.translate(this.originalPos.splited1.x, this.originalPos.splited1.y);
-          ctx.rotate(this.rotate.splited1 * degToPi); // 右分裂主體
+          ctx.rotate(this.rotate.splited1 * degToPi); // 左分裂主體
 
           ctx.beginPath();
           ctx.fillStyle = this.color;
@@ -782,7 +786,7 @@ function () {
           ctx.$triLineTo(34, 202);
           ctx.$triLineTo(22, 255);
           ctx.closePath();
-          ctx.fill(); // 右內下四邊形
+          ctx.fill(); // 左內下四邊形
 
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
           ctx.beginPath();
@@ -791,20 +795,20 @@ function () {
           ctx.$triLineTo(23, 70);
           ctx.$triLineTo(23, 150);
           ctx.closePath();
-          ctx.fill(); // 右閃電
+          ctx.fill(); // 左閃電
 
           drawLightning({
             x: -12,
             y: -8
           }, 0.6);
           ctx.restore();
-        } // 左分裂四邊形
+        } // 右分裂四邊形
 
 
-        if (this.life.splited2) {
+        if (this.HP.splited2) {
           ctx.save();
           ctx.translate(this.originalPos.splited2.x, this.originalPos.splited2.y);
-          ctx.rotate(this.rotate.splited2 * degToPi); // 左分裂主體
+          ctx.rotate(this.rotate.splited2 * degToPi); // 右分裂主體
 
           ctx.beginPath();
           ctx.fillStyle = this.color;
@@ -813,7 +817,7 @@ function () {
           ctx.$triLineTo(22, 324);
           ctx.$triLineTo(21, 8);
           ctx.closePath();
-          ctx.fill(); // 左內下三角形
+          ctx.fill(); // 右內下三角形
 
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
@@ -821,7 +825,7 @@ function () {
           ctx.$triLineTo(4.8, 64);
           ctx.$triLineTo(23, 70);
           ctx.closePath();
-          ctx.fill(); // 左內右五邊形
+          ctx.fill(); // 右內右五邊形
 
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
@@ -831,7 +835,7 @@ function () {
           ctx.$triLineTo(23, 70);
           ctx.$triLineTo(10, 36);
           ctx.closePath();
-          ctx.fill(); // 左閃電
+          ctx.fill(); // 右閃電
 
           drawLightning({
             x: 10,
@@ -844,27 +848,28 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      if (!this.life.whole) {
+      if (!this.HP.whole) {
         this.isSplited = true;
       }
 
-      if (!this.isSplited && !controls.splited) {
-        this.rotationAxisR.whole -= this.rotationAxisRV.whole;
-        this.rotationAxisR.splited1 -= this.rotationAxisRV.whole;
-        this.rotationAxisR.splited2 -= this.rotationAxisRV.whole;
-        this.rotate.whole += this.rotateV.whole;
-        this.rotate.splited1 += this.rotateV.whole;
-        this.rotate.splited2 += this.rotateV.whole;
+      if (!this.isSplited && !controls.splited) {// this.rotationAxisR.whole -= this.rotationAxisRV.whole;
+        // this.rotationAxisR.splited1 -= this.rotationAxisRV.whole;
+        // this.rotationAxisR.splited2 -= this.rotationAxisRV.whole;
+        // this.rotate.whole += this.rotateV.whole;
+        // this.rotate.splited1 += this.rotateV.whole;
+        // this.rotate.splited2 += this.rotateV.whole;
       } else {
         if (!this.isSplitedMove) {
+          var rotateOriginPos = 90 - 70;
+          var rotateDirection = this.rotate.whole % 360 >= rotateOriginPos && this.rotate.whole % 360 < 180 + rotateOriginPos ? -1 : 1;
           TweenLite.to(this.rotationAxisAngle, 2.4, {
-            splited1: '-=15',
-            splited2: '+=15',
+            splited1: "+=".concat((Math.random() * 15 + 15) * rotateDirection),
+            splited2: "-=".concat((Math.random() * 15 + 15) * rotateDirection),
             ease: Circ.easeOut
           });
           TweenLite.to(this.rotate, 3.2, {
-            splited1: '-=180',
-            splited2: '+=180',
+            splited1: "-=".concat(Math.random() * 90 + 180),
+            splited2: "+=".concat(Math.random() * 90 + 180),
             ease: Power4.easeOut
           });
           this.isSplitedMove = true;
@@ -1089,7 +1094,7 @@ function () {
       // 移動子彈
       this.rotationAxisR += this.v; // 判斷子彈有無射中圓形
 
-      circles.forEach(function (circle, circleIdx) {
+      circles.forEach(function (circle, cirIdx) {
         // 取得兩個外切線所構成角度的一半
         var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 設中角度範圍
 
@@ -1105,12 +1110,12 @@ function () {
 
           if (circle.HP === 0) {
             // 若生命值 0，移除圓形
-            circles.splice(circleIdx, 1);
+            circles.splice(cirIdx, 1);
           }
         }
       }); // 判斷子彈有無射中三角形
 
-      triangles.forEach(function (triangle, triangleIdx) {
+      triangles.forEach(function (triangle, triIdx) {
         // const lengthX = triangle.rotationAxisR.x * Math.cos(triangle.rotationAxisAngle * degToPi);
         // const lengthY = triangle.rotationAxisR.y * Math.sin(triangle.rotationAxisAngle * degToPi);
         // const length = Math.sqrt(lengthX * lengthX + lengthY * lengthY);
@@ -1131,9 +1136,39 @@ function () {
 
           if (triangle.HP === 0) {
             // 若生命值 0，移除三角形
-            triangles.splice(triangleIdx, 1);
+            triangles.splice(triIdx, 1);
           }
         }
+      }); // 判斷子彈有無射中多邊形
+
+      polygons.forEach(function (polygon, polyIdx) {
+        // 取得兩側射中角度
+        var sideA = polygon.rotationAxisR.whole;
+        var sideB1 = 22;
+        var sideB2 = 23;
+        var sideC1 = cosineFormula(sideA, sideB1, 255 - 180);
+        var sideC2 = cosineFormula(sideA, sideB2, 180 - 70);
+
+        function getAngleB(a, b, c) {
+          return Math.acos((a * a + c * c - b * b) / (2 * a * c));
+        }
+
+        var angleB1 = getAngleB(sideA, sideB1, sideC1);
+        var angleB2 = getAngleB(sideA, sideB2, sideC2); // 射中角度範圍
+
+        var shotAngleRange = _this5.rotateAngle >= polygon.rotationAxisAngle * degToPi - angleB1 && _this5.rotateAngle <= polygon.rotationAxisAngle * degToPi + angleB2; // 設中距離範圍
+        // const shotRRange = ((this.rotationAxisR + this.bodyLength) >= polygon.rotationAxisR) && ((this.rotationAxisR + this.bodyLength) <= (polygon.rotationAxisR + (polygon.r / 2)));
+        // 判斷子彈有無射中多邊形
+        // if (shotAngleRange && shotRRange) {
+        //   // 移除子彈
+        //   shooterBullets.splice(bulletIdx, 1);
+        //   // 扣 1 生命值
+        //   polygon.whole.HP -= 1;
+        //   if (polygon.whole.HP === 0) {
+        //     // 若生命值 0，移除三角形
+        //     polygons.splice(triIdx, 1);
+        //   }
+        // }
       });
     }
   }]);
@@ -1483,6 +1518,11 @@ function drawBattery(p) {
   // ctx.fill();
 
   ctx.restore();
+} // 餘弦定理
+
+
+function cosineFormula(a, b, angle) {
+  return Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(angle * degToPi));
 } // 繪製閃電
 
 

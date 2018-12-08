@@ -294,6 +294,9 @@ class Game {
         splited1: 0,
         splited2: 0,
       },
+      // rotate: {
+      //   whole: 15,
+      // },
       // scale: 0.8,
     }));
   }
@@ -604,7 +607,7 @@ class Polygon {
         // big: 0,
         // small: 0,
       },
-      life: {
+      HP: {
         whole: 1,
         splited1: 1,
         splited2: 1,
@@ -614,7 +617,7 @@ class Polygon {
         splited1: 0.4,
         splited2: 0.4,
       },
-      rotationAxisAngle: {
+      rotationAxisAngleV: {
         whole: 0.4,
         splited1: 0.4,
         splited2: 0.4,
@@ -689,12 +692,12 @@ class Polygon {
         });
       ctx.restore();
     } else {
-      // 右分裂四邊形
-      if (this.life.splited1) {
+      // 左分裂四邊形
+      if (this.HP.splited1) {
         ctx.save();
           ctx.translate(this.originalPos.splited1.x, this.originalPos.splited1.y);
           ctx.rotate(this.rotate.splited1 * degToPi);
-          // 右分裂主體
+          // 左分裂主體
           ctx.beginPath();
           ctx.fillStyle = this.color;
           ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
@@ -703,7 +706,7 @@ class Polygon {
           ctx.$triLineTo(22, 255);
           ctx.closePath();
           ctx.fill();
-          // 右內下四邊形
+          // 左內下四邊形
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
           ctx.beginPath();
           ctx.moveTo(-8.8, 0);
@@ -712,19 +715,19 @@ class Polygon {
           ctx.$triLineTo(23, 150);
           ctx.closePath();
           ctx.fill();
-          // 右閃電
+          // 左閃電
           drawLightning({
             x: -12,
             y: -8
           }, 0.6);
         ctx.restore();
       }
-      // 左分裂四邊形
-      if (this.life.splited2) {
+      // 右分裂四邊形
+      if (this.HP.splited2) {
         ctx.save();
           ctx.translate(this.originalPos.splited2.x, this.originalPos.splited2.y);
           ctx.rotate(this.rotate.splited2 * degToPi);
-          // 左分裂主體
+          // 右分裂主體
           ctx.beginPath();
           ctx.fillStyle = this.color;
           ctx.moveTo(23 * Math.cos(70 * degToPi), 23 * Math.sin(70 * degToPi));
@@ -733,7 +736,7 @@ class Polygon {
           ctx.$triLineTo(21, 8);
           ctx.closePath();
           ctx.fill();
-          // 左內下三角形
+          // 右內下三角形
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.21)';
           ctx.moveTo(10 * Math.cos(40 * degToPi), 10 * Math.sin(40 * degToPi));
@@ -741,7 +744,7 @@ class Polygon {
           ctx.$triLineTo(23, 70);
           ctx.closePath();
           ctx.fill();
-          // 左內右五邊形
+          // 右內右五邊形
           ctx.beginPath();
           ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
           ctx.moveTo(9.6, -2);
@@ -751,7 +754,7 @@ class Polygon {
           ctx.$triLineTo(10, 36);
           ctx.closePath();
           ctx.fill();
-          // 左閃電
+          // 右閃電
           drawLightning({
             x: 10,
             y: -8
@@ -761,26 +764,28 @@ class Polygon {
     }
   }
   update() {
-    if (!this.life.whole) {
+    if (!this.HP.whole) {
       this.isSplited = true;
     }
     if (!this.isSplited && !controls.splited) {
-      this.rotationAxisR.whole -= this.rotationAxisRV.whole;
-      this.rotationAxisR.splited1 -= this.rotationAxisRV.whole;
-      this.rotationAxisR.splited2 -= this.rotationAxisRV.whole;
-      this.rotate.whole += this.rotateV.whole;
-      this.rotate.splited1 += this.rotateV.whole;
-      this.rotate.splited2 += this.rotateV.whole;
+      // this.rotationAxisR.whole -= this.rotationAxisRV.whole;
+      // this.rotationAxisR.splited1 -= this.rotationAxisRV.whole;
+      // this.rotationAxisR.splited2 -= this.rotationAxisRV.whole;
+      // this.rotate.whole += this.rotateV.whole;
+      // this.rotate.splited1 += this.rotateV.whole;
+      // this.rotate.splited2 += this.rotateV.whole;
     } else {
       if (!this.isSplitedMove) {
+        const rotateOriginPos = 90 - 70;
+        const rotateDirection = (((this.rotate.whole % 360) >= rotateOriginPos) && ((this.rotate.whole % 360) < (180 + rotateOriginPos))) ? -1 : 1;
         TweenLite.to(this.rotationAxisAngle, 2.4, {
-          splited1: '-=15',
-          splited2: '+=15',
+          splited1: `+=${(Math.random() * 15 + 15) * rotateDirection}`,
+          splited2: `-=${(Math.random() * 15 + 15) * rotateDirection}`,
           ease: Circ.easeOut,
         });
         TweenLite.to(this.rotate, 3.2, {
-          splited1: '-=180',
-          splited2: '+=180',
+          splited1: `-=${Math.random() * 90 + 180}`,
+          splited2: `+=${Math.random() * 90 + 180}`,
           ease: Power4.easeOut,
         });
         this.isSplitedMove = true;
@@ -956,7 +961,7 @@ class ShooterBullet {
     // 移動子彈
     this.rotationAxisR += this.v;
     // 判斷子彈有無射中圓形
-    circles.forEach((circle, circleIdx) => {
+    circles.forEach((circle, cirIdx) => {
       // 取得兩個外切線所構成角度的一半
       const anglePan = Math.asin(circle.r / circle.rotationAxisR);
       // 設中角度範圍
@@ -971,12 +976,12 @@ class ShooterBullet {
         circle.HP -= 1;
         if (circle.HP === 0) {
           // 若生命值 0，移除圓形
-          circles.splice(circleIdx, 1);
+          circles.splice(cirIdx, 1);
         }
       }
     });
     // 判斷子彈有無射中三角形
-    triangles.forEach((triangle, triangleIdx) => {
+    triangles.forEach((triangle, triIdx) => {
       // const lengthX = triangle.rotationAxisR.x * Math.cos(triangle.rotationAxisAngle * degToPi);
       // const lengthY = triangle.rotationAxisR.y * Math.sin(triangle.rotationAxisAngle * degToPi);
       // const length = Math.sqrt(lengthX * lengthX + lengthY * lengthY);
@@ -997,9 +1002,38 @@ class ShooterBullet {
         triangle.HP -= 1;
         if (triangle.HP === 0) {
           // 若生命值 0，移除三角形
-          triangles.splice(triangleIdx, 1);
+          triangles.splice(triIdx, 1);
         }
       }
+    });
+    // 判斷子彈有無射中多邊形
+    polygons.forEach((polygon, polyIdx) => {
+      // 取得兩側射中角度
+      const sideA = polygon.rotationAxisR.whole;
+      const sideB1 = 22;
+      const sideB2 = 23;
+      const sideC1 = cosineFormula(sideA, sideB1, (255 - 180));
+      const sideC2 = cosineFormula(sideA, sideB2, (180 - 70));
+      function getAngleB(a, b, c) {
+        return Math.acos((a * a + c * c - b * b) / (2 * a * c));
+      }
+      const angleB1 = getAngleB(sideA, sideB1, sideC1);
+      const angleB2 = getAngleB(sideA, sideB2, sideC2);
+      // 射中角度範圍
+      const shotAngleRange = this.rotateAngle >= (polygon.rotationAxisAngle * degToPi - angleB1) && this.rotateAngle <= (polygon.rotationAxisAngle * degToPi + angleB2);
+      // 設中距離範圍
+      // const shotRRange = ((this.rotationAxisR + this.bodyLength) >= polygon.rotationAxisR) && ((this.rotationAxisR + this.bodyLength) <= (polygon.rotationAxisR + (polygon.r / 2)));
+      // 判斷子彈有無射中多邊形
+      // if (shotAngleRange && shotRRange) {
+      //   // 移除子彈
+      //   shooterBullets.splice(bulletIdx, 1);
+      //   // 扣 1 生命值
+      //   polygon.whole.HP -= 1;
+      //   if (polygon.whole.HP === 0) {
+      //     // 若生命值 0，移除三角形
+      //     polygons.splice(triIdx, 1);
+      //   }
+      // }
     });
   }
 }
@@ -1306,7 +1340,10 @@ function drawBattery(p) {
   ctx.restore();
 }
 
-
+// 餘弦定理
+function cosineFormula(a, b, angle) {
+  return Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(angle * degToPi));
+}
 
 // 繪製閃電
 function drawLightning(translate =  { x: 0, y: 0 }, scale = 1 ) {
