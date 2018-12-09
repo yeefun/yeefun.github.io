@@ -324,27 +324,26 @@ function () {
       //   rotationAxisR: 240,
       //   rotationAxisAngle: 0,
       // }));
-      // triangles.push(new Triangle({
-      //   rotationAxisR: 280,
-      //   rotationAxisAngle: 0,
-      // }));
+      // FIXME 如果 rotationAxisAngle 不是 0°，子彈便射不準
+      triangles.push(new Triangle({
+        rotationAxisR: 280,
+        rotationAxisAngle: 160
+      }));
       polygons.push(new Polygon({
         rotationAxisR: {
           whole: 280,
           big: 280,
           small: 280
         },
-        // 為了讓 shooter 子彈可以取得正確的射中角度，rotate 必須比 rotationAxisAngle 還多 90
         rotationAxisAngle: {
-          whole: 145,
-          big: 145,
-          small: 145
+          whole: 0,
+          big: 0,
+          small: 0
         } // rotate: {
-        //   whole: -72.5,
-        //   big: -72.5,
-        //   small: -72.5,
+        //   whole: 17.5,
+        //   big: 17.5,
+        //   small: 17.5,
         // },
-        // scale: 0.8,
 
       }));
     }
@@ -860,13 +859,12 @@ function () {
         this.isSplited = true;
       }
 
-      if (!this.isSplited && !controls.splited) {
-        this.rotationAxisR.whole -= this.rotationAxisRV.whole;
-        this.rotationAxisR.big -= this.rotationAxisRV.whole;
-        this.rotationAxisR.small -= this.rotationAxisRV.whole;
-        this.rotate.whole += this.rotateV.whole;
-        this.rotate.big += this.rotateV.whole;
-        this.rotate.small += this.rotateV.whole;
+      if (!this.isSplited && !controls.splited) {// this.rotationAxisR.whole -= this.rotationAxisRV.whole;
+        // this.rotationAxisR.big -= this.rotationAxisRV.whole;
+        // this.rotationAxisR.small -= this.rotationAxisRV.whole;
+        // this.rotate.whole += this.rotateV.whole;
+        // this.rotate.big += this.rotateV.whole;
+        // this.rotate.small += this.rotateV.whole;
       } else {
         if (!this.isSplitedMove) {
           var rotateOriginPos = 90 - 70;
@@ -1104,9 +1102,9 @@ function () {
 
       circles.forEach(function (circle, cirIdx) {
         // 取得兩個外切線所構成角度的一半
-        var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 設中角度範圍
+        var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 射中角度範圍
 
-        var shotAngleRange = _this5.rotateAngle >= circle.rotationAxisAngle % 360 * degToPi - anglePan && _this5.rotateAngle <= circle.rotationAxisAngle % 360 * degToPi + anglePan; // 設中距離範圍
+        var shotAngleRange = _this5.rotateAngle >= circle.rotationAxisAngle % 360 * degToPi - anglePan && _this5.rotateAngle <= circle.rotationAxisAngle % 360 * degToPi + anglePan; // 射中距離範圍
 
         var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= circle.rotationAxisR - circle.r / 2 && _this5.rotationAxisR + _this5.bodyLength <= circle.rotationAxisR + circle.r / 2; // 判斷子彈有無射中圓形
 
@@ -1130,9 +1128,9 @@ function () {
         // 取得射中角度範圍的一半
         var lengthX = triangle.rotationAxisR + triangle.r / 2;
         var lengthY = triangle.r / 2 * Math.sqrt(3);
-        var anglePan = Math.atan2(lengthY, lengthX); // 設中角度範圍
+        var anglePan = Math.atan2(lengthY, lengthX); // 射中角度範圍
 
-        var shotAngleRange = _this5.rotateAngle >= (triangle.rotationAxisAngle + 360) % 360 * degToPi - anglePan && _this5.rotateAngle <= (triangle.rotationAxisAngle + 360) % 360 * degToPi + anglePan; // 設中距離範圍
+        var shotAngleRange = _this5.rotateAngle >= (triangle.rotationAxisAngle + 360) % 360 * degToPi - anglePan && _this5.rotateAngle <= (triangle.rotationAxisAngle + 360) % 360 * degToPi + anglePan; // 射中距離範圍
 
         var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= triangle.rotationAxisR && _this5.rotationAxisR + _this5.bodyLength <= triangle.rotationAxisR + triangle.r / 2; // 判斷子彈有無射中三角形
 
@@ -1148,31 +1146,47 @@ function () {
           }
         }
       }); // 判斷子彈有無射中多邊形
+      // FIXME 當 polygon.rotationAxisAngle 在 0° 附近時，上半部分（角度為負的地方）會出問題，因為 mouseMoveAngle（正數）恆大於負
 
       polygons.forEach(function (polygon, polyIdx) {
-        // 當多邊形還未分裂
+        // 當多邊形未分裂
         if (polygon.HP.whole) {
-          // 取得兩側射中最大角度
+          var polyRotationAxisAngle = polygon.rotationAxisAngle.whole;
+          var polyRotate = polygon.rotate.whole; // 取得兩側射中最大角度
+
           var sideA = polygon.rotationAxisR.whole;
           var sideB1 = 34;
           var sideB2 = 21;
           /**
-           * 202 - 180 = 22
-           * 8 - 0 = 8
-           * (22 + 8) / 2 = 15
-           * 202 - 15 = 187
-           * 8 - 15 = -7
+           * 兩側點（8°、202°）愈靠近軸心，夾角便愈大
+           * 相同軸半徑下，當多邊形　rotationAxisAngle 180°，rotate 75° 時，兩側點離軸心（幾乎）最近，angleB 相同
+           * 270 - 202 = 68
+           * 90 - 8 = 82
+           * (68 + 82) / 2 = 75
            */
 
-          var sideC1 = cosineFormula(sideA, sideB1, 187 - 90);
-          var sideC2 = cosineFormula(sideA, sideB2, 90 - -7);
+          var sideC1 = cosineFormula(sideA, sideB1, 360 - (202 + 75));
+          var sideC2 = cosineFormula(sideA, sideB2, 8 + 75);
           var angleB1 = getAngleB(sideA, sideB1, sideC1);
-          var angleB2 = getAngleB(sideA, sideB2, sideC2); // 射中角度範圍
-          // 多邊形不會繞軸旋轉，所以 rotationAxisAngle 不用 % 360
+          var angleB2 = getAngleB(sideA, sideB2, sideC2);
+          /**
+           * 射中角度範圍
+           * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
+           * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+           */
 
-          var shotAngleRange = _this5.rotateAngle >= polygon.rotationAxisAngle.whole * degToPi - angleB1 && _this5.rotateAngle <= polygon.rotationAxisAngle.whole * degToPi + angleB2; // 設中距離範圍
+          var shotAngleRange;
+          var bottomJudge = polyRotationAxisAngle <= 180 && (polyRotate % 360 < 75 || polyRotate % 360 >= 255);
+          var topJudge = polyRotationAxisAngle > 180 && (polyRotate % 360 >= 75 || polyRotate % 360 < 255);
 
-          var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= polygon.rotationAxisR.whole && _this5.rotationAxisR + _this5.bodyLength <= polygon.rotationAxisR.whole + 9; // 判斷子彈有無射中多邊形
+          if (bottomJudge || topJudge) {
+            shotAngleRange = _this5.rotateAngle >= polyRotationAxisAngle * degToPi - angleB2 && _this5.rotateAngle <= polyRotationAxisAngle * degToPi + angleB1;
+          } else {
+            shotAngleRange = _this5.rotateAngle >= polyRotationAxisAngle * degToPi - angleB1 && _this5.rotateAngle <= polyRotationAxisAngle * degToPi + angleB2;
+          } // 射中距離範圍
+
+
+          var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= sideA && _this5.rotationAxisR + _this5.bodyLength <= sideA + 9; // 判斷子彈有無射中多邊形
 
           if (shotAngleRange && shotRRange) {
             // 移除子彈
@@ -1184,30 +1198,48 @@ function () {
           // 當多邊形分裂
           // 大分裂
           if (polygon.HP.big) {
+            var _polyRotationAxisAngle = polygon.rotationAxisAngle.big;
+            var _polyRotate = polygon.rotate.big; // 取得兩側射中最大角度
+
             var _sideA = polygon.rotationAxisR.big;
             var _sideB = 34;
             var _sideB2 = 23;
             /**
-             * 202 - 180 = 22
-             * 70 - 0 = 70
-             * (70 + 22) / 2 = 46
-             * 202 - 46 = 156
-             * 70 - 46 = 24 
+             * 兩側點（70°、202°）愈靠近軸心，夾角便愈大
+             * 相同軸半徑下，當多邊形　rotationAxisAngle 0°，rotate 44° 時，兩側點離軸心（幾乎）最近，angleB 相同
+             * 270 - 202 = 68
+             * 90 - 70 = 20
+             * (68 + 20) / 2 = 44
              */
 
-            var _sideC = cosineFormula(_sideA, _sideB, 156 - 90);
+            var _sideC = cosineFormula(_sideA, _sideB, 202 + 44 - 180);
 
-            var _sideC2 = cosineFormula(_sideA, _sideB2, 90 - 24);
+            var _sideC2 = cosineFormula(_sideA, _sideB2, 180 - (70 + 44));
 
             var _angleB = getAngleB(_sideA, _sideB, _sideC);
 
-            var _angleB2 = getAngleB(_sideA, _sideB2, _sideC2); // 射中角度範圍
+            var _angleB2 = getAngleB(_sideA, _sideB2, _sideC2);
+            /**
+             * 射中角度範圍
+             * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
+             * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+             */
 
 
-            var _shotAngleRange = _this5.rotateAngle >= polygon.rotationAxisAngle.big * degToPi - _angleB && _this5.rotateAngle <= polygon.rotationAxisAngle.big * degToPi + _angleB2; // 設中距離範圍
+            var _shotAngleRange;
+
+            var _bottomJudge = _polyRotationAxisAngle <= 180 && (_polyRotate % 360 < 44 || _polyRotate % 360 >= 224);
+
+            var _topJudge = _polyRotationAxisAngle > 180 && (_polyRotate % 360 >= 44 || _polyRotate % 360 < 224);
+
+            if (_bottomJudge || _topJudge) {
+              _shotAngleRange = _this5.rotateAngle >= _polyRotationAxisAngle * degToPi - _angleB2 && _this5.rotateAngle <= _polyRotationAxisAngle * degToPi + _angleB;
+            } else {
+              _shotAngleRange = _this5.rotateAngle >= _polyRotationAxisAngle * degToPi - _angleB && _this5.rotateAngle <= _polyRotationAxisAngle * degToPi + _angleB2;
+            } // 設中距離範圍
 
 
-            var _shotRRange = _this5.rotationAxisR + _this5.bodyLength >= polygon.rotationAxisR.big + 8 && _this5.rotationAxisR + _this5.bodyLength <= polygon.rotationAxisR.big + 16; // 判斷子彈有無射中大分裂
+            var _shotRRange = _this5.rotationAxisR + _this5.bodyLength >= _sideA + 8 && _this5.rotationAxisR + _this5.bodyLength <= _sideA + 16; // 判斷子彈有無射中大分裂
 
 
             if (_shotAngleRange && _shotRRange) {
@@ -1220,30 +1252,48 @@ function () {
 
 
           if (polygon.HP.small) {
+            var _polyRotationAxisAngle2 = polygon.rotationAxisAngle.small;
+            var _polyRotate2 = polygon.rotate.small; // 取得兩側射中最大角度
+
             var _sideA2 = polygon.rotationAxisR.small;
             var _sideB3 = 22;
             var _sideB4 = 23;
             /**
-             * 255 - 180 = 75
-             * 70 - 0 = 70
-             * (70 + 75) / 2 = 72.5
-             * 255 - 72.5 = 182.5
-             * 70 - 72.5 = -2.5 
+             * 兩側點（70°、255°）愈靠近軸心，夾角便愈大
+             * 相同軸半徑下，當多邊形　rotationAxisAngle 0°，rotate 17.5° 時，兩側點離軸心（幾乎）最近，angleB 相同
+             * 270 - 255 = 15
+             * 90 - 70 = 20
+             * (15 + 20) / 2 = 17.5
              */
 
-            var _sideC3 = cosineFormula(_sideA2, _sideB3, 182.5 - 90);
+            var _sideC3 = cosineFormula(_sideA2, _sideB3, 255 + 17.5 - 180);
 
-            var _sideC4 = cosineFormula(_sideA2, _sideB4, 90 - -2.5);
+            var _sideC4 = cosineFormula(_sideA2, _sideB4, 180 - (70 + 17.5));
 
             var _angleB3 = getAngleB(_sideA2, _sideB3, _sideC3);
 
-            var _angleB4 = getAngleB(_sideA2, _sideB4, _sideC4); // 射中角度範圍
+            var _angleB4 = getAngleB(_sideA2, _sideB4, _sideC4);
+            /**
+             * 射中角度範圍
+             * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
+             * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+             */
 
 
-            var _shotAngleRange2 = _this5.rotateAngle >= polygon.rotationAxisAngle.small * degToPi - _angleB3 && _this5.rotateAngle <= polygon.rotationAxisAngle.small * degToPi + _angleB4; // 設中距離範圍
+            var _shotAngleRange2;
+
+            var _bottomJudge2 = _polyRotationAxisAngle2 <= 180 && (_polyRotate2 % 360 < 17.5 || _polyRotate2 % 360 >= 197.5);
+
+            var _topJudge2 = _polyRotationAxisAngle2 > 180 && (_polyRotate2 % 360 >= 17.5 || _polyRotate2 % 360 < 197.5);
+
+            if (_bottomJudge2 || _topJudge2) {
+              _shotAngleRange2 = _this5.rotateAngle >= _polyRotationAxisAngle2 * degToPi - _angleB4 && _this5.rotateAngle <= _polyRotationAxisAngle2 * degToPi + _angleB3;
+            } else {
+              _shotAngleRange2 = _this5.rotateAngle >= _polyRotationAxisAngle2 * degToPi - _angleB3 && _this5.rotateAngle <= _polyRotationAxisAngle2 * degToPi + _angleB4;
+            } // 設中距離範圍
 
 
-            var _shotRRange2 = _this5.rotationAxisR + _this5.bodyLength >= polygon.rotationAxisR.small + 8 && _this5.rotationAxisR + _this5.bodyLength <= polygon.rotationAxisR.small + 16; // 判斷子彈有無射中小分裂
+            var _shotRRange2 = _this5.rotationAxisR + _this5.bodyLength >= _sideA2 + 8 && _this5.rotationAxisR + _this5.bodyLength <= _sideA2 + 16; // 判斷子彈有無射中小分裂
 
 
             if (_shotAngleRange2 && _shotRRange2) {
