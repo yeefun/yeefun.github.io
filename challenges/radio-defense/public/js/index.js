@@ -12,11 +12,11 @@ var updateFPS = 30; // const showMouse = true;
 
 var time = 0;
 var globalColor = {
-  red: "#e7465d",
-  orange: "#f5af5f",
-  blue: "#3676bb",
-  blueDark: "#001d2e",
-  white: "#fff"
+  red: '#e7465d',
+  orange: '#f5af5f',
+  blue: '#3676bb',
+  blueDark: '#001d2e',
+  white: '#fff'
 };
 var startBtn = document.getElementById('start-btn');
 var cover = document.getElementById('cover');
@@ -31,8 +31,8 @@ startBtn.addEventListener('click', function () {
 var controls = {
   splited: false
 };
-var gui = new dat.GUI();
-gui.add(controls, 'splited'); // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
+var gui = new dat.GUI(); // gui.add(controls, 'splited');
+// gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 /* 2D Vector Class */
 
@@ -134,6 +134,45 @@ function initCanvas() {
   wh = document.documentElement.clientHeight;
 } // initCanvas();
 
+/* 道具 class */
+
+
+var Prop =
+/*#__PURE__*/
+function () {
+  function Prop(args) {
+    _classCallCheck(this, Prop);
+
+    var def = {
+      img: new Image(),
+      src: '',
+      p: {
+        x: 0,
+        y: 0
+      }
+    };
+    Object.assign(def, args);
+    Object.assign(this, def);
+  }
+
+  _createClass(Prop, [{
+    key: "draw",
+    value: function draw() {
+      if (!this.img.src) {
+        this.img.src = this.src;
+      }
+
+      if (this.img.complete) {
+        ctx.drawImage(this.img, this.p.x, this.p.y);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update() {}
+  }]);
+
+  return Prop;
+}();
 
 var degToPi = Math.PI / 180;
 var coverCircle;
@@ -143,7 +182,7 @@ var game;
 var circles = [];
 var triangles = [];
 var subTriangles = [];
-var polygons = [];
+var polygons = []; // let props = [];
 
 var Game =
 /*#__PURE__*/
@@ -156,7 +195,8 @@ function () {
       // isGameStart: false,
       shooter: null,
       currentLevel: 1,
-      isInLevel1: false
+      isInLevel1: false,
+      props: []
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -195,8 +235,7 @@ function () {
     value: function render() {
       var _this = this;
 
-      ctx.fillStyle = globalColor.blueDark; // ctx.fillStyle = "rgba(0, 0, 255, 0.1)"
-
+      ctx.fillStyle = globalColor.blueDark;
       ctx.fillRect(0, 0, gameW, gameH);
 
       if (this.isGameStart) {
@@ -213,10 +252,14 @@ function () {
 
         polygons.forEach(function (polygon) {
           polygon.draw();
-        }); // 繪製 sub triangles
+        }); // 繪製每個 sub triangle
 
         subTriangles.forEach(function (subTriangle) {
           subTriangle.draw();
+        }); // 繪製每個 prop
+
+        this.props.forEach(function (prop) {
+          prop.draw();
         });
       } else {
         // this.startGame();
@@ -246,19 +289,25 @@ function () {
 
         circles.forEach(function (circle, idx) {
           circle.update(idx);
-        }); // 更新每個 triangles
+        }); // 更新每個 triangle
 
         triangles.forEach(function (triangle, idx) {
           triangle.update(idx);
-        }); // 更新每個 polygons
+        }); // 更新每個 polygon
 
         polygons.forEach(function (polygon, idx) {
           polygon.update(idx);
-        }); // 更新 sub triangles
+        }); // 更新每個 sub triangle
 
-        subTriangles.forEach(function (subTriangle) {
-          subTriangle.update();
-        });
+        subTriangles.forEach(function (subTriangle, idx) {
+          subTriangle.update(idx);
+        }); // 更新每個 prop
+
+        this.props.forEach(function (prop) {
+          prop.update();
+        }); // 產生道具
+
+        this.generateProp();
       }
 
       setTimeout(function () {
@@ -318,12 +367,22 @@ function () {
       canvas.style.cursor = 'pointer';
     }
   }, {
+    key: "generateProp",
+    value: function generateProp() {}
+  }, {
     key: "setLevelOne",
     value: function setLevelOne() {
-      circles.push(new Circle({
-        axisRotateR: 240,
-        axisRotateAngle: 0
-      })); // triangles.push(new Triangle({
+      this.props.push(new Prop({
+        src: '../../src/assets/laser.png',
+        p: {
+          x: 90,
+          y: 90
+        }
+      })); // circles.push(new Circle({
+      //   axisRotateR: 240,
+      //   axisRotateAngle: 0,
+      // }));
+      // triangles.push(new Triangle({
       //   axisRotateR: 280,
       //   // axisRotateAngle 與 rotate 必須相同
       //   axisRotateAngle: 160,
@@ -440,8 +499,8 @@ function () {
     value: function update(idx) {
       var _this3 = this;
 
-      this.axisRotateR -= 3.2; // 更新圓形子彈
-
+      // this.axisRotateR -= 3.2;
+      // 更新圓形子彈
       this.bullets.forEach(function (bullet, idx, arr) {
         bullet.update(idx, arr);
       }); // 當圓形自身在旋轉時，圓形不要移動
@@ -603,8 +662,8 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      this.axisRotateR -= 2.4; // 更新三角子彈
-
+      // this.axisRotateR -= 2.4;
+      // 更新三角子彈
       this.bullets.forEach(function (bullet, idx, arr) {
         bullet.update(idx, arr);
       }); // 每 4-8 秒，三角移動 + 自身旋轉
@@ -736,7 +795,7 @@ function () {
   _createClass(Polygon, [{
     key: "draw",
     value: function draw() {
-      if (!this.isSplited && !controls.splited) {
+      if (!this.isSplited) {
         ctx.save();
         ctx.translate(this.originalPos.whole.x, this.originalPos.whole.y);
         ctx.rotate(this.rotate.whole * degToPi); // 主體多邊形
@@ -860,7 +919,7 @@ function () {
         this.isSplited = true;
       }
 
-      if (!this.isSplited && !controls.splited) {
+      if (!this.isSplited) {
         this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
         this.rotate.whole = this.rotate.big = this.rotate.small += this.rotateV.whole; // 當多邊形撞上 shooter
 
@@ -930,7 +989,7 @@ function () {
   return Polygon;
 }();
 
-function enemyHitShooter(enemys, enemyIdx, enemyAxisRotateR, enemyAxisRotateAngle, splitedPolygonHP, splitedPolygonName) {
+function enemyHitShooter(enemies, enemyIdx, enemyAxisRotateR, enemyAxisRotateAngle, splitedPolygonHP, splitedPolygonName) {
   var shooterR = 34;
   var shieldR = shooterR + 36;
   var shooterInnerCirLineW = 6;
@@ -939,12 +998,12 @@ function enemyHitShooter(enemys, enemyIdx, enemyAxisRotateR, enemyAxisRotateAngl
 
   function judgeEnemyHit() {
     if (!splitedPolygonName) {
-      enemys.splice(enemyIdx, 1);
+      enemies.splice(enemyIdx, 1);
     } else {
       splitedPolygonName === 'big' ? splitedPolygonHP.big -= 1 : splitedPolygonHP.small -= 1;
 
       if (!splitedPolygonHP.big && !splitedPolygonHP.small) {
-        enemys.splice(enemyIdx, 1);
+        enemies.splice(enemyIdx, 1);
       }
     }
   } // 當敵人撞上 shooter 主體
@@ -1368,18 +1427,12 @@ function () {
         x: gameW / 2,
         y: gameH / 2
       },
-      // axisRotateR: {
-      //   x: 0,
-      //   y: 0,
-      // },
       axisRotateR: 0,
       axisRotateAngle: 0,
       // r: 26 * 0.4,
       r: 10.4,
       rotate: 0,
       rotateV: 4,
-      // v: -0.4,
-      // v: 0,
       color: globalColor.blue,
       HP: 2,
       isReproduceMoving: false,
@@ -1440,38 +1493,27 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
+    value: function update(idx) {
       var _this6 = this;
 
       this.rotate += this.rotateV;
 
       if (!this.isReproduceMoving) {
-        if (this.order === 1) {
-          TweenLite.to(this, 0.8, {
-            axisRotateAngle: '+=10',
-            ease: Power2.easeOut,
-            onComplete: function onComplete() {
-              TweenLite.to(_this6, 1.6, {
-                axisRotateR: 0,
-                ease: Power1.easeIn
-              });
-            }
-          });
-        } else {
-          TweenLite.to(this, 0.8, {
-            axisRotateAngle: '-=10',
-            ease: Power2.easeOut,
-            onComplete: function onComplete() {
-              TweenLite.to(_this6, 1.6, {
-                axisRotateR: 0,
-                ease: Power1.easeIn
-              });
-            }
-          });
-        }
-      }
+        TweenLite.to(this, 0.8, {
+          axisRotateAngle: "".concat(this.order === 1 ? '+=' : '-=', "10"),
+          ease: Power2.easeOut,
+          onComplete: function onComplete() {
+            TweenLite.to(_this6, 1.6, {
+              axisRotateR: 0,
+              ease: Power1.easeIn
+            });
+          }
+        });
+        this.isReproduceMoving = true;
+      } // 當小三角形撞上 shooter
 
-      this.isReproduceMoving = true;
+
+      enemyHitShooter(subTriangles, idx, this.axisRotateR, this.axisRotateAngle);
     }
   }, {
     key: "originalPos",
@@ -1802,7 +1844,6 @@ function handleMouseMove(evt) {
   mouseMovePos.y = evt.y - wh / 2;
   var angle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
   mouseMoveAngle = angle < 0 ? angle + 2 * Math.PI : angle; // mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
-  // console.log(mouseMoveAngle / Math.PI * 180);
 }
 
 ;
