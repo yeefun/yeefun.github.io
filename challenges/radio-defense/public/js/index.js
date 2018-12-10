@@ -166,16 +166,16 @@ function () {
     key: "init",
     value: function init() {
       // coverCircle = new Circle({
-      //   rotationAxisR: 380,
-      //   rotationAxisAngle: -36,
+      //   axisRotateR: 380,
+      //   axisRotateAngle: -36,
       //   r: 39,
       // });
       // coverTriangle = new Triangle({
-      //   rotationAxisR: {
+      //   axisRotateR: {
       //     x: 320,
       //     y: 320,
       //   },
-      //   rotationAxisAngle: 40,
+      //   axisRotateAngle: 40,
       //   rotate: 32,
       //   r: 44,
       // });
@@ -244,16 +244,16 @@ function () {
 
         this.shooter.update(); // 更新每個 circle
 
-        circles.forEach(function (circle) {
-          circle.update();
+        circles.forEach(function (circle, idx) {
+          circle.update(idx);
         }); // 更新每個 triangles
 
-        triangles.forEach(function (triangle) {
-          triangle.update();
+        triangles.forEach(function (triangle, idx) {
+          triangle.update(idx);
         }); // 更新每個 polygons
 
-        polygons.forEach(function (polygon) {
-          polygon.update();
+        polygons.forEach(function (polygon, idx) {
+          polygon.update(idx);
         }); // 更新 sub triangles
 
         subTriangles.forEach(function (subTriangle) {
@@ -320,32 +320,32 @@ function () {
   }, {
     key: "setLevelOne",
     value: function setLevelOne() {
-      // circles.push(new Circle({
-      //   rotationAxisR: 240,
-      //   rotationAxisAngle: 0,
+      circles.push(new Circle({
+        axisRotateR: 240,
+        axisRotateAngle: 0
+      })); // triangles.push(new Triangle({
+      //   axisRotateR: 280,
+      //   // axisRotateAngle 與 rotate 必須相同
+      //   axisRotateAngle: 160,
+      //   rotate: 160,
       // }));
-      // FIXME 如果 rotationAxisAngle 不是 0°，子彈便射不準
-      triangles.push(new Triangle({
-        rotationAxisR: 280,
-        rotationAxisAngle: 160
-      }));
-      polygons.push(new Polygon({
-        rotationAxisR: {
-          whole: 280,
-          big: 280,
-          small: 280
-        },
-        rotationAxisAngle: {
-          whole: 0,
-          big: 0,
-          small: 0
-        } // rotate: {
-        //   whole: 17.5,
-        //   big: 17.5,
-        //   small: 17.5,
-        // },
-
-      }));
+      // polygons.push(new Polygon({
+      //   axisRotateR: {
+      //     whole: 280,
+      //     big: 280,
+      //     small: 280,
+      //   },
+      //   axisRotateAngle: {
+      //     whole: 180,
+      //     big: 180,
+      //     small: 180,
+      //   },
+      //   rotate: {
+      //     whole: 40,
+      //     big: 40,
+      //     small: 40,
+      //   },
+      // }));
     }
   }]);
 
@@ -361,16 +361,16 @@ function () {
     _classCallCheck(this, Circle);
 
     var def = {
-      rotationAxisPos: {
+      axisRotatePos: {
         x: gameW / 2,
         y: gameH / 2
       },
-      rotationAxisR: 0,
-      rotationAxisAngle: 0,
+      axisRotateR: 0,
+      axisRotateAngle: 0,
       r: 22,
       rotate: 0,
-      rotationAxisRV: 0.1,
-      rotationAxisAngleV: 0.4,
+      axisRotateRV: 0.1,
+      axisRotateAngleV: 0.4,
       rotateV: 0.4,
       color: globalColor.orange,
       HP: 2,
@@ -387,7 +387,7 @@ function () {
     value: function draw() {
       var circleBigR = this.r + 5;
       var circleSmallR = this.r - 10;
-      var subRotationAxisR = 14;
+      var subaxisRotateR = 14;
       ctx.save();
       ctx.translate(this.originalPos.x, this.originalPos.y);
       ctx.rotate(this.rotate * degToPi); // 大淡圓
@@ -408,15 +408,15 @@ function () {
       ctx.fill(); // 小三圓
 
       ctx.beginPath();
-      ctx.fillStyle = globalColor.white; // ctx.arc(subRotationAxisR, 0, 2.4, 0, Math.PI * 2);
+      ctx.fillStyle = globalColor.white; // ctx.arc(subaxisRotateR, 0, 2.4, 0, Math.PI * 2);
 
-      ctx.arc(subRotationAxisR * Math.cos(60 * degToPi), subRotationAxisR * Math.sin(60 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.arc(subaxisRotateR * Math.cos(60 * degToPi), subaxisRotateR * Math.sin(60 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(subRotationAxisR * Math.cos(180 * degToPi), subRotationAxisR * Math.sin(180 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.arc(subaxisRotateR * Math.cos(180 * degToPi), subaxisRotateR * Math.sin(180 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(subRotationAxisR * Math.cos(300 * degToPi), subRotationAxisR * Math.sin(300 * degToPi), 2.4, 0, Math.PI * 2);
+      ctx.arc(subaxisRotateR * Math.cos(300 * degToPi), subaxisRotateR * Math.sin(300 * degToPi), 2.4, 0, Math.PI * 2);
       ctx.fill(); // 神經
 
       ctx.beginPath();
@@ -437,28 +437,29 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
+    value: function update(idx) {
       var _this3 = this;
 
-      // 更新圓形子彈
+      this.axisRotateR -= 3.2; // 更新圓形子彈
+
       this.bullets.forEach(function (bullet, idx, arr) {
         bullet.update(idx, arr);
       }); // 當圓形自身在旋轉時，圓形不要移動
 
       if (!this.isRotating) {
-        this.rotationAxisAngle += this.rotationAxisAngleV; // this.rotationAxisAngle += 2;
+        this.axisRotateAngle += this.axisRotateAngleV; // this.axisRotateAngle += 2;
       } // 每 2-4 秒，自身旋轉一次
 
 
       var rotateTime = new Date();
 
       if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
-        this.isRotating = true; // console.log(this.rotationAxisAngle);
+        this.isRotating = true; // console.log(this.axisRotateAngle);
 
         TweenLite.to(this, 0.4, {
-          // rotate: this.rotationAxisAngle - 180,
-          // rotate: this.rotationAxisAngle % 360,
-          rotate: this.rotationAxisAngle,
+          // rotate: this.axisRotateAngle - 180,
+          // rotate: this.axisRotateAngle % 360,
+          rotate: this.axisRotateAngle,
           ease: Power2.easeOut,
           // 自身旋轉完後射擊
           onComplete: function onComplete() {
@@ -468,7 +469,10 @@ function () {
           }
         });
         this.beforeRotateTime = rotateTime;
-      }
+      } // 當圓形撞上 shooter
+
+
+      enemyHitShooter(circles, idx, this.axisRotateR, this.axisRotateAngle);
     }
   }, {
     key: "shoot",
@@ -485,7 +489,7 @@ function () {
             rotateAngle: _this4.rotate,
             moveX: -_this4.r - 10,
             // rotateAngle: Math.sin(this.rotate * degToPi),
-            rotationAxisR: _this4.rotationAxisR
+            axisRotateR: _this4.axisRotateR
           }));
 
           clearTimeout(timer); // 間隔 0.2-0.4 秒
@@ -501,8 +505,8 @@ function () {
     key: "originalPos",
     get: function get() {
       return {
-        x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
-        y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi)
+        x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
+        y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi)
       };
     }
   }]);
@@ -519,20 +523,20 @@ function () {
     _classCallCheck(this, Triangle);
 
     var def = {
-      rotationAxisPos: {
+      axisRotatePos: {
         x: gameW / 2,
         y: gameH / 2
       },
-      // rotationAxisR: {
+      // axisRotateR: {
       //   x: 0,
       //   y: 0,
       // },
-      rotationAxisR: 0,
-      rotationAxisAngle: 0,
+      axisRotateR: 0,
+      axisRotateAngle: 0,
       r: 26,
       rotate: 0,
-      rotationAxisRV: 0.1,
-      rotationAxisAngleV: 0.4,
+      axisRotateRV: 0.1,
+      axisRotateAngleV: 0.4,
       rotateV: -2.4,
       color: globalColor.blue,
       bullets: [],
@@ -598,8 +602,9 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
-      // 更新三角子彈
+    value: function update(idx) {
+      this.axisRotateR -= 2.4; // 更新三角子彈
+
       this.bullets.forEach(function (bullet, idx, arr) {
         bullet.update(idx, arr);
       }); // 每 4-8 秒，三角移動 + 自身旋轉
@@ -610,7 +615,7 @@ function () {
         var randomRotateAngle = (Math.random() > 0.25 ? -1 : 1) * (30 * Math.random() + 45); // 以 0.8 秒移動
 
         TweenLite.to(this, 0.8, {
-          rotationAxisAngle: "+=".concat(randomRotateAngle),
+          axisRotateAngle: "+=".concat(randomRotateAngle),
           ease: Power0.easeNone
         }); // 以 1.2 秒自身旋轉
 
@@ -631,7 +636,7 @@ function () {
             x: this.originalPos.x,
             y: this.originalPos.y
           },
-          rotationAxisR: this.rotationAxisR,
+          axisRotateR: this.axisRotateR,
           rotateAngle: this.rotate // rotate: this.rotate,
 
         }));
@@ -642,26 +647,29 @@ function () {
       if (this.HP === 2 && !this.isReproduce) {
         for (var i = 1; i <= 2; i += 1) {
           subTriangles.push(new TriangleSub({
-            // rotationAxisR: {
-            //   x: this.rotationAxisR.x,
-            //   y: this.rotationAxisR.y,
+            // axisRotateR: {
+            //   x: this.axisRotateR.x,
+            //   y: this.axisRotateR.y,
             // },
-            rotationAxisR: this.rotationAxisR,
-            rotationAxisAngle: this.rotationAxisAngle,
+            axisRotateR: this.axisRotateR,
+            axisRotateAngle: this.axisRotateAngle,
             rotate: this.rotate,
             order: i
           }));
         }
 
         this.isReproduce = true;
-      }
+      } // 當三角形撞上 shooter
+
+
+      enemyHitShooter(triangles, idx, this.axisRotateR, this.axisRotateAngle);
     }
   }, {
     key: "originalPos",
     get: function get() {
       return {
-        x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
-        y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi)
+        x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
+        y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi)
       };
     }
   }]);
@@ -678,42 +686,36 @@ function () {
     _classCallCheck(this, Polygon);
 
     var def = {
-      rotationAxisPos: {
+      axisRotatePos: {
         x: gameW / 2,
         y: gameH / 2
       },
-      rotationAxisR: {
+      axisRotateR: {
         whole: 0,
         big: 0,
-        small: 0 // big: 0,
-        // small: 0,
-
+        small: 0
       },
-      rotationAxisAngle: {
+      axisRotateAngle: {
         whole: 0,
         big: 0,
-        small: 0 // big: 0,
-        // small: 0,
-
+        small: 0
       },
       rotate: {
         whole: 0,
         big: 0,
-        small: 0 // big: 0,
-        // small: 0,
-
+        small: 0
       },
       HP: {
         whole: 1,
         big: 1,
         small: 1
       },
-      rotationAxisRV: {
-        whole: 0.4,
-        big: 0.4,
-        small: 0.4
+      axisRotateRV: {
+        whole: 2.4,
+        big: 2.4,
+        small: 2.4
       },
-      rotationAxisAngleV: {
+      axisRotateAngleV: {
         whole: 0.4,
         big: 0.4,
         small: 0.4
@@ -853,23 +855,22 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {
-      // this.rotationAxisAngle.whole += 0.2;
+    value: function update(idx) {
       if (!this.HP.whole) {
         this.isSplited = true;
       }
 
-      if (!this.isSplited && !controls.splited) {// this.rotationAxisR.whole -= this.rotationAxisRV.whole;
-        // this.rotationAxisR.big -= this.rotationAxisRV.whole;
-        // this.rotationAxisR.small -= this.rotationAxisRV.whole;
-        // this.rotate.whole += this.rotateV.whole;
-        // this.rotate.big += this.rotateV.whole;
-        // this.rotate.small += this.rotateV.whole;
+      if (!this.isSplited && !controls.splited) {
+        this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
+        this.rotate.whole = this.rotate.big = this.rotate.small += this.rotateV.whole; // 當多邊形撞上 shooter
+
+        enemyHitShooter(polygons, idx, this.axisRotateR.whole, this.axisRotateAngle.whole);
       } else {
         if (!this.isSplitedMove) {
-          var rotateOriginPos = 90 - 70;
-          var rotateDirection = this.rotate.whole % 360 >= rotateOriginPos && this.rotate.whole % 360 < 180 + rotateOriginPos ? -1 : 1;
-          TweenLite.to(this.rotationAxisAngle, 2.4, {
+          // const rotateOriginPos = 90 - 70;
+          // const rotateDirection = (((this.rotate.whole % 360) >= rotateOriginPos) && ((this.rotate.whole % 360) < (180 + rotateOriginPos))) ? -1 : 1;
+          var rotateDirection = Math.random() > 0.5 ? 1 : -1;
+          TweenLite.to(this.axisRotateAngle, 2.4, {
             big: "+=".concat((Math.random() * 15 + 15) * rotateDirection),
             small: "-=".concat((Math.random() * 15 + 15) * rotateDirection),
             ease: Circ.easeOut
@@ -880,9 +881,19 @@ function () {
             ease: Power4.easeOut
           });
           this.isSplitedMove = true;
-        } // this.rotationAxisR.big -= this.rotationAxisRV.big;
-        // this.rotationAxisR.small -= this.rotationAxisRV.small;
+        } // 當大分裂撞上 shooter
 
+
+        if (this.HP.big) {
+          this.axisRotateR.big -= this.axisRotateRV.big;
+          enemyHitShooter(polygons, idx, this.axisRotateR.small, this.axisRotateAngle.small, this.HP, 'big');
+        } // 當小分裂撞上 shooter
+
+
+        if (this.HP.small) {
+          this.axisRotateR.small -= this.axisRotateRV.small;
+          enemyHitShooter(polygons, idx, this.axisRotateR.small, this.axisRotateAngle.small, this.HP, 'small');
+        }
       } // if (!this.isInBoundary) {
       //   this.p.x = -48;
       //   this.p.y = -32;
@@ -901,16 +912,16 @@ function () {
     get: function get() {
       return {
         whole: {
-          x: this.rotationAxisPos.x + this.rotationAxisR.whole * Math.cos(this.rotationAxisAngle.whole * degToPi),
-          y: this.rotationAxisPos.y + this.rotationAxisR.whole * Math.sin(this.rotationAxisAngle.whole * degToPi)
+          x: this.axisRotatePos.x + this.axisRotateR.whole * Math.cos(this.axisRotateAngle.whole * degToPi),
+          y: this.axisRotatePos.y + this.axisRotateR.whole * Math.sin(this.axisRotateAngle.whole * degToPi)
         },
         big: {
-          x: this.rotationAxisPos.x + this.rotationAxisR.big * Math.cos(this.rotationAxisAngle.big * degToPi),
-          y: this.rotationAxisPos.y + this.rotationAxisR.big * Math.sin(this.rotationAxisAngle.big * degToPi)
+          x: this.axisRotatePos.x + this.axisRotateR.big * Math.cos(this.axisRotateAngle.big * degToPi),
+          y: this.axisRotatePos.y + this.axisRotateR.big * Math.sin(this.axisRotateAngle.big * degToPi)
         },
         small: {
-          x: this.rotationAxisPos.x + this.rotationAxisR.small * Math.cos(this.rotationAxisAngle.small * degToPi),
-          y: this.rotationAxisPos.y + this.rotationAxisR.small * Math.sin(this.rotationAxisAngle.small * degToPi)
+          x: this.axisRotatePos.x + this.axisRotateR.small * Math.cos(this.axisRotateAngle.small * degToPi),
+          y: this.axisRotatePos.y + this.axisRotateR.small * Math.sin(this.axisRotateAngle.small * degToPi)
         }
       };
     }
@@ -918,6 +929,34 @@ function () {
 
   return Polygon;
 }();
+
+function enemyHitShooter(enemys, enemyIdx, enemyAxisRotateR, enemyAxisRotateAngle, splitedPolygonHP, splitedPolygonName) {
+  var shooterR = 34;
+  var shieldR = shooterR + 36;
+  var shooterInnerCirLineW = 6;
+  var shieldLineW = 4;
+  var shieldAngleRange = Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) <= 225 * degToPi;
+
+  function judgeEnemyHit() {
+    if (!splitedPolygonName) {
+      enemys.splice(enemyIdx, 1);
+    } else {
+      splitedPolygonName === 'big' ? splitedPolygonHP.big -= 1 : splitedPolygonHP.small -= 1;
+
+      if (!splitedPolygonHP.big && !splitedPolygonHP.small) {
+        enemys.splice(enemyIdx, 1);
+      }
+    }
+  } // 當敵人撞上 shooter 主體
+
+
+  if (enemyAxisRotateR <= shooterR + shooterInnerCirLineW / 2) {
+    game.shooter.HP -= 1;
+    judgeEnemyHit(); // 當敵人撞上 shooter 護盾
+  } else if (shieldAngleRange && enemyAxisRotateR <= shieldR + shieldLineW / 2) {
+    judgeEnemyHit();
+  }
+}
 /* Shooter 類別 */
 
 
@@ -1049,7 +1088,7 @@ function () {
     var def = {
       // p: new Vec2(0, 0),
       bodyLength: 15,
-      rotationAxisR: 0,
+      axisRotateR: 0,
       color: globalColor.white,
       v: 8,
       rotateAngle: 0
@@ -1068,26 +1107,26 @@ function () {
 
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.arc(-7 + this.rotationAxisR, 0, 3, 0, Math.PI * 2);
+      ctx.arc(-7 + this.axisRotateR, 0, 3, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.arc(-12 + this.rotationAxisR, 0, 2, 0, Math.PI * 2);
+      ctx.arc(-12 + this.axisRotateR, 0, 2, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.arc(-15 + this.rotationAxisR, 0, 1, 0, Math.PI * 2);
+      ctx.arc(-15 + this.axisRotateR, 0, 1, 0, Math.PI * 2);
       ctx.fill(); // 園底
 
       ctx.beginPath();
       ctx.fillStyle = this.color;
-      ctx.arc(0 + this.rotationAxisR, 0, 4, 0, Math.PI * 2);
+      ctx.arc(0 + this.axisRotateR, 0, 4, 0, Math.PI * 2);
       ctx.fill(); // 尖頭
 
       ctx.beginPath();
-      ctx.moveTo(3 + this.rotationAxisR, 3);
-      ctx.lineTo(this.bodyLength + this.rotationAxisR, 0);
-      ctx.lineTo(3 + this.rotationAxisR, -3);
+      ctx.moveTo(3 + this.axisRotateR, 3);
+      ctx.lineTo(this.bodyLength + this.axisRotateR, 0);
+      ctx.lineTo(3 + this.axisRotateR, -3);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -1098,15 +1137,15 @@ function () {
       var _this5 = this;
 
       // 移動子彈
-      this.rotationAxisR += this.v; // 判斷子彈有無射中圓形
+      this.axisRotateR += this.v; // 判斷子彈有無射中圓形
 
       circles.forEach(function (circle, cirIdx) {
         // 取得兩個外切線所構成角度的一半
-        var anglePan = Math.asin(circle.r / circle.rotationAxisR); // 射中角度範圍
+        var anglePan = Math.asin(circle.r / circle.axisRotateR); // 射中角度範圍
 
-        var shotAngleRange = _this5.rotateAngle >= circle.rotationAxisAngle % 360 * degToPi - anglePan && _this5.rotateAngle <= circle.rotationAxisAngle % 360 * degToPi + anglePan; // 射中距離範圍
+        var shotAngleRange = _this5.rotateAngle >= circle.axisRotateAngle % 360 * degToPi - anglePan && _this5.rotateAngle <= circle.axisRotateAngle % 360 * degToPi + anglePan; // 射中距離範圍
 
-        var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= circle.rotationAxisR - circle.r / 2 && _this5.rotationAxisR + _this5.bodyLength <= circle.rotationAxisR + circle.r / 2; // 判斷子彈有無射中圓形
+        var shotRRange = _this5.axisRotateR + _this5.bodyLength >= circle.axisRotateR - circle.r / 2 && _this5.axisRotateR + _this5.bodyLength <= circle.axisRotateR + circle.r / 2; // 判斷子彈有無射中圓形
 
         if (shotAngleRange && shotRRange) {
           // 移除子彈
@@ -1122,17 +1161,17 @@ function () {
       }); // 判斷子彈有無射中三角形
 
       triangles.forEach(function (triangle, triIdx) {
-        // const lengthX = triangle.rotationAxisR.x * Math.cos(triangle.rotationAxisAngle * degToPi);
-        // const lengthY = triangle.rotationAxisR.y * Math.sin(triangle.rotationAxisAngle * degToPi);
+        // const lengthX = triangle.axisRotateR.x * Math.cos(triangle.axisRotateAngle * degToPi);
+        // const lengthY = triangle.axisRotateR.y * Math.sin(triangle.axisRotateAngle * degToPi);
         // const length = Math.sqrt(lengthX * lengthX + lengthY * lengthY);
         // 取得射中角度範圍的一半
-        var lengthX = triangle.rotationAxisR + triangle.r / 2;
+        var lengthX = triangle.axisRotateR + triangle.r / 2;
         var lengthY = triangle.r / 2 * Math.sqrt(3);
         var anglePan = Math.atan2(lengthY, lengthX); // 射中角度範圍
 
-        var shotAngleRange = _this5.rotateAngle >= (triangle.rotationAxisAngle + 360) % 360 * degToPi - anglePan && _this5.rotateAngle <= (triangle.rotationAxisAngle + 360) % 360 * degToPi + anglePan; // 射中距離範圍
+        var shotAngleRange = _this5.rotateAngle >= (triangle.axisRotateAngle + 360) % 360 * degToPi - anglePan && _this5.rotateAngle <= (triangle.axisRotateAngle + 360) % 360 * degToPi + anglePan; // 射中距離範圍
 
-        var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= triangle.rotationAxisR && _this5.rotationAxisR + _this5.bodyLength <= triangle.rotationAxisR + triangle.r / 2; // 判斷子彈有無射中三角形
+        var shotRRange = _this5.axisRotateR + _this5.bodyLength >= triangle.axisRotateR && _this5.axisRotateR + _this5.bodyLength <= triangle.axisRotateR + triangle.r / 2; // 判斷子彈有無射中三角形
 
         if (shotAngleRange && shotRRange) {
           // 移除子彈
@@ -1146,20 +1185,20 @@ function () {
           }
         }
       }); // 判斷子彈有無射中多邊形
-      // FIXME 當 polygon.rotationAxisAngle 在 0° 附近時，上半部分（角度為負的地方）會出問題，因為 mouseMoveAngle（正數）恆大於負
+      // FIXME 當 polygon.axisRotateAngle 在 0° 附近時，上半部分（角度為負的地方）會出問題，因為 mouseMoveAngle（正數）恆大於負
 
       polygons.forEach(function (polygon, polyIdx) {
         // 當多邊形未分裂
         if (polygon.HP.whole) {
-          var polyRotationAxisAngle = polygon.rotationAxisAngle.whole;
+          var polyaxisRotateAngle = polygon.axisRotateAngle.whole;
           var polyRotate = polygon.rotate.whole; // 取得兩側射中最大角度
 
-          var sideA = polygon.rotationAxisR.whole;
+          var sideA = polygon.axisRotateR.whole;
           var sideB1 = 34;
           var sideB2 = 21;
           /**
            * 兩側點（8°、202°）愈靠近軸心，夾角便愈大
-           * 相同軸半徑下，當多邊形　rotationAxisAngle 180°，rotate 75° 時，兩側點離軸心（幾乎）最近，angleB 相同
+           * 相同軸半徑下，當多邊形　axisRotateAngle 180°，rotate 75° 時，兩側點離軸心（幾乎）最近，angleB 相同
            * 270 - 202 = 68
            * 90 - 8 = 82
            * (68 + 82) / 2 = 75
@@ -1171,22 +1210,22 @@ function () {
           var angleB2 = getAngleB(sideA, sideB2, sideC2);
           /**
            * 射中角度範圍
-           * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
-           * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+           * 當多邊形的 axisRotateAngle、rotate 不同，要加上與減去的角度也不一樣
+           * 多邊形不會繞軸旋轉， axisRotateAngle 固定，不用 % 360
            */
 
           var shotAngleRange;
-          var bottomJudge = polyRotationAxisAngle <= 180 && (polyRotate % 360 < 75 || polyRotate % 360 >= 255);
-          var topJudge = polyRotationAxisAngle > 180 && (polyRotate % 360 >= 75 || polyRotate % 360 < 255);
+          var bottomJudge = polyaxisRotateAngle <= 180 && (polyRotate % 360 < 75 || polyRotate % 360 >= 255);
+          var topJudge = polyaxisRotateAngle > 180 && (polyRotate % 360 >= 75 || polyRotate % 360 < 255);
 
           if (bottomJudge || topJudge) {
-            shotAngleRange = _this5.rotateAngle >= polyRotationAxisAngle * degToPi - angleB2 && _this5.rotateAngle <= polyRotationAxisAngle * degToPi + angleB1;
+            shotAngleRange = _this5.rotateAngle >= polyaxisRotateAngle * degToPi - angleB2 && _this5.rotateAngle <= polyaxisRotateAngle * degToPi + angleB1;
           } else {
-            shotAngleRange = _this5.rotateAngle >= polyRotationAxisAngle * degToPi - angleB1 && _this5.rotateAngle <= polyRotationAxisAngle * degToPi + angleB2;
+            shotAngleRange = _this5.rotateAngle >= polyaxisRotateAngle * degToPi - angleB1 && _this5.rotateAngle <= polyaxisRotateAngle * degToPi + angleB2;
           } // 射中距離範圍
 
 
-          var shotRRange = _this5.rotationAxisR + _this5.bodyLength >= sideA && _this5.rotationAxisR + _this5.bodyLength <= sideA + 9; // 判斷子彈有無射中多邊形
+          var shotRRange = _this5.axisRotateR + _this5.bodyLength >= sideA && _this5.axisRotateR + _this5.bodyLength <= sideA + 9; // 判斷子彈有無射中多邊形
 
           if (shotAngleRange && shotRRange) {
             // 移除子彈
@@ -1198,15 +1237,15 @@ function () {
           // 當多邊形分裂
           // 大分裂
           if (polygon.HP.big) {
-            var _polyRotationAxisAngle = polygon.rotationAxisAngle.big;
+            var _polyaxisRotateAngle = polygon.axisRotateAngle.big;
             var _polyRotate = polygon.rotate.big; // 取得兩側射中最大角度
 
-            var _sideA = polygon.rotationAxisR.big;
+            var _sideA = polygon.axisRotateR.big;
             var _sideB = 34;
             var _sideB2 = 23;
             /**
              * 兩側點（70°、202°）愈靠近軸心，夾角便愈大
-             * 相同軸半徑下，當多邊形　rotationAxisAngle 0°，rotate 44° 時，兩側點離軸心（幾乎）最近，angleB 相同
+             * 相同軸半徑下，當多邊形　axisRotateAngle 0°，rotate 44° 時，兩側點離軸心（幾乎）最近，angleB 相同
              * 270 - 202 = 68
              * 90 - 70 = 20
              * (68 + 20) / 2 = 44
@@ -1221,25 +1260,25 @@ function () {
             var _angleB2 = getAngleB(_sideA, _sideB2, _sideC2);
             /**
              * 射中角度範圍
-             * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
-             * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+             * 當多邊形的 axisRotateAngle、rotate 不同，要加上與減去的角度也不一樣
+             * 多邊形不會繞軸旋轉， axisRotateAngle 固定，不用 % 360
              */
 
 
             var _shotAngleRange;
 
-            var _bottomJudge = _polyRotationAxisAngle <= 180 && (_polyRotate % 360 < 44 || _polyRotate % 360 >= 224);
+            var _bottomJudge = _polyaxisRotateAngle <= 180 && (_polyRotate % 360 < 44 || _polyRotate % 360 >= 224);
 
-            var _topJudge = _polyRotationAxisAngle > 180 && (_polyRotate % 360 >= 44 || _polyRotate % 360 < 224);
+            var _topJudge = _polyaxisRotateAngle > 180 && (_polyRotate % 360 >= 44 || _polyRotate % 360 < 224);
 
             if (_bottomJudge || _topJudge) {
-              _shotAngleRange = _this5.rotateAngle >= _polyRotationAxisAngle * degToPi - _angleB2 && _this5.rotateAngle <= _polyRotationAxisAngle * degToPi + _angleB;
+              _shotAngleRange = _this5.rotateAngle >= _polyaxisRotateAngle * degToPi - _angleB2 && _this5.rotateAngle <= _polyaxisRotateAngle * degToPi + _angleB;
             } else {
-              _shotAngleRange = _this5.rotateAngle >= _polyRotationAxisAngle * degToPi - _angleB && _this5.rotateAngle <= _polyRotationAxisAngle * degToPi + _angleB2;
+              _shotAngleRange = _this5.rotateAngle >= _polyaxisRotateAngle * degToPi - _angleB && _this5.rotateAngle <= _polyaxisRotateAngle * degToPi + _angleB2;
             } // 設中距離範圍
 
 
-            var _shotRRange = _this5.rotationAxisR + _this5.bodyLength >= _sideA + 8 && _this5.rotationAxisR + _this5.bodyLength <= _sideA + 16; // 判斷子彈有無射中大分裂
+            var _shotRRange = _this5.axisRotateR + _this5.bodyLength >= _sideA + 8 && _this5.axisRotateR + _this5.bodyLength <= _sideA + 16; // 判斷子彈有無射中大分裂
 
 
             if (_shotAngleRange && _shotRRange) {
@@ -1252,15 +1291,15 @@ function () {
 
 
           if (polygon.HP.small) {
-            var _polyRotationAxisAngle2 = polygon.rotationAxisAngle.small;
+            var _polyaxisRotateAngle2 = polygon.axisRotateAngle.small;
             var _polyRotate2 = polygon.rotate.small; // 取得兩側射中最大角度
 
-            var _sideA2 = polygon.rotationAxisR.small;
+            var _sideA2 = polygon.axisRotateR.small;
             var _sideB3 = 22;
             var _sideB4 = 23;
             /**
              * 兩側點（70°、255°）愈靠近軸心，夾角便愈大
-             * 相同軸半徑下，當多邊形　rotationAxisAngle 0°，rotate 17.5° 時，兩側點離軸心（幾乎）最近，angleB 相同
+             * 相同軸半徑下，當多邊形　axisRotateAngle 0°，rotate 17.5° 時，兩側點離軸心（幾乎）最近，angleB 相同
              * 270 - 255 = 15
              * 90 - 70 = 20
              * (15 + 20) / 2 = 17.5
@@ -1275,25 +1314,25 @@ function () {
             var _angleB4 = getAngleB(_sideA2, _sideB4, _sideC4);
             /**
              * 射中角度範圍
-             * 當多邊形的 rotationAxisAngle、rotate 不同，要加上與減去的角度也不一樣
-             * 多邊形不會繞軸旋轉， rotationAxisAngle 固定，不用 % 360
+             * 當多邊形的 axisRotateAngle、rotate 不同，要加上與減去的角度也不一樣
+             * 多邊形不會繞軸旋轉， axisRotateAngle 固定，不用 % 360
              */
 
 
             var _shotAngleRange2;
 
-            var _bottomJudge2 = _polyRotationAxisAngle2 <= 180 && (_polyRotate2 % 360 < 17.5 || _polyRotate2 % 360 >= 197.5);
+            var _bottomJudge2 = _polyaxisRotateAngle2 <= 180 && (_polyRotate2 % 360 < 17.5 || _polyRotate2 % 360 >= 197.5);
 
-            var _topJudge2 = _polyRotationAxisAngle2 > 180 && (_polyRotate2 % 360 >= 17.5 || _polyRotate2 % 360 < 197.5);
+            var _topJudge2 = _polyaxisRotateAngle2 > 180 && (_polyRotate2 % 360 >= 17.5 || _polyRotate2 % 360 < 197.5);
 
             if (_bottomJudge2 || _topJudge2) {
-              _shotAngleRange2 = _this5.rotateAngle >= _polyRotationAxisAngle2 * degToPi - _angleB4 && _this5.rotateAngle <= _polyRotationAxisAngle2 * degToPi + _angleB3;
+              _shotAngleRange2 = _this5.rotateAngle >= _polyaxisRotateAngle2 * degToPi - _angleB4 && _this5.rotateAngle <= _polyaxisRotateAngle2 * degToPi + _angleB3;
             } else {
-              _shotAngleRange2 = _this5.rotateAngle >= _polyRotationAxisAngle2 * degToPi - _angleB3 && _this5.rotateAngle <= _polyRotationAxisAngle2 * degToPi + _angleB4;
+              _shotAngleRange2 = _this5.rotateAngle >= _polyaxisRotateAngle2 * degToPi - _angleB3 && _this5.rotateAngle <= _polyaxisRotateAngle2 * degToPi + _angleB4;
             } // 設中距離範圍
 
 
-            var _shotRRange2 = _this5.rotationAxisR + _this5.bodyLength >= _sideA2 + 8 && _this5.rotationAxisR + _this5.bodyLength <= _sideA2 + 16; // 判斷子彈有無射中小分裂
+            var _shotRRange2 = _this5.axisRotateR + _this5.bodyLength >= _sideA2 + 8 && _this5.axisRotateR + _this5.bodyLength <= _sideA2 + 16; // 判斷子彈有無射中小分裂
 
 
             if (_shotAngleRange2 && _shotRRange2) {
@@ -1325,16 +1364,16 @@ function () {
     _classCallCheck(this, TriangleSub);
 
     var def = {
-      rotationAxisPos: {
+      axisRotatePos: {
         x: gameW / 2,
         y: gameH / 2
       },
-      // rotationAxisR: {
+      // axisRotateR: {
       //   x: 0,
       //   y: 0,
       // },
-      rotationAxisR: 0,
-      rotationAxisAngle: 0,
+      axisRotateR: 0,
+      axisRotateAngle: 0,
       // r: 26 * 0.4,
       r: 10.4,
       rotate: 0,
@@ -1409,22 +1448,22 @@ function () {
       if (!this.isReproduceMoving) {
         if (this.order === 1) {
           TweenLite.to(this, 0.8, {
-            rotationAxisAngle: '+=10',
+            axisRotateAngle: '+=10',
             ease: Power2.easeOut,
             onComplete: function onComplete() {
               TweenLite.to(_this6, 1.6, {
-                rotationAxisR: 0,
+                axisRotateR: 0,
                 ease: Power1.easeIn
               });
             }
           });
         } else {
           TweenLite.to(this, 0.8, {
-            rotationAxisAngle: '-=10',
+            axisRotateAngle: '-=10',
             ease: Power2.easeOut,
             onComplete: function onComplete() {
               TweenLite.to(_this6, 1.6, {
-                rotationAxisR: 0,
+                axisRotateR: 0,
                 ease: Power1.easeIn
               });
             }
@@ -1438,8 +1477,8 @@ function () {
     key: "originalPos",
     get: function get() {
       return {
-        x: this.rotationAxisPos.x + this.rotationAxisR * Math.cos(this.rotationAxisAngle * degToPi),
-        y: this.rotationAxisPos.y + this.rotationAxisR * Math.sin(this.rotationAxisAngle * degToPi)
+        x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
+        y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi)
       };
     }
   }]);
@@ -1460,7 +1499,7 @@ function () {
         x: 0,
         y: 0
       },
-      rotationAxisR: 0,
+      axisRotateR: 0,
       color: globalColor.orange,
       moveX: 0,
       moveXV: -3,
@@ -1481,7 +1520,7 @@ function () {
 
       ctx.beginPath(); // ctx.arc(this.moveX + 22 + 10, 0, 4, 0, Math.PI * 2);
 
-      ctx.arc(this.moveX, 0, 4, 0, Math.PI * 2); // ctx.arc(this.rotationAxisR + 16, 0, 4, 0, Math.PI * 2);
+      ctx.arc(this.moveX, 0, 4, 0, Math.PI * 2); // ctx.arc(this.axisRotateR + 16, 0, 4, 0, Math.PI * 2);
 
       ctx.fillStyle = this.color;
       ctx.fill();
@@ -1497,7 +1536,7 @@ function () {
 
       this.moveX += this.moveXV; // 當圓形子彈射中 shooter 主體
 
-      if (-this.moveX >= this.rotationAxisR - shooterR - shooterInnerCirLineW / 2) {
+      if (-this.moveX >= this.axisRotateR - shooterR - shooterInnerCirLineW / 2) {
         // shooter 命減 1
         game.shooter.HP -= 1; // 移除子彈
 
@@ -1507,7 +1546,7 @@ function () {
 
       var shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= 225 * degToPi;
 
-      if (shieldAngleRange && -this.moveX >= this.rotationAxisR - shieldR - shieldLineW / 2) {
+      if (shieldAngleRange && -this.moveX >= this.axisRotateR - shieldR - shieldLineW / 2) {
         // 移除子彈
         arr.splice(idx, 1);
       }
@@ -1575,7 +1614,7 @@ function () {
 
       this.moveX += this.moveXV; // 當三角子彈射中 shooter 主體
 
-      if (-this.moveX >= this.rotationAxisR - (triBulletLength + shooterR + shooterInnerCirLineW / 2)) {
+      if (-this.moveX >= this.axisRotateR - (triBulletLength + shooterR + shooterInnerCirLineW / 2)) {
         // shooter 命減 1
         game.shooter.HP -= 1; // 移除三角子彈
 
@@ -1583,9 +1622,9 @@ function () {
       } // 當三角子彈射中 shooter 的護盾
 
 
-      var shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= 225 * degToPi;
+      var shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle % 360 * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - this.rotateAngle % 360 * degToPi) <= 225 * degToPi;
 
-      if (shieldAngleRange && -this.moveX >= this.rotationAxisR - (triBulletLength + shieldR + shieldLineW / 2)) {
+      if (shieldAngleRange && -this.moveX >= this.axisRotateR - (triBulletLength + shieldR + shieldLineW / 2)) {
         // 移除三角子彈
         arr.splice(idx, 1);
       }
@@ -1777,7 +1816,7 @@ function handleClick() {
     shooterBullets.push(new ShooterBullet({
       // 34 + 12 + 16
       // p: new Vec2(62, 0),
-      rotationAxisR: 62,
+      axisRotateR: 62,
       rotateAngle: mouseMoveAngle
     }));
     beforeShootTime = shootTime;
