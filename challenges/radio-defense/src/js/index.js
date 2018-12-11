@@ -34,6 +34,9 @@ const gui = new dat.GUI();
 // gui.add(controls, 'splited');
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
+const shooterHpBar = document.getElementById('hp');
+// const shooterHeart = document.querySelectorAll('.panel__game-heart');
+// console.log(shooterHpBar.style.width);
 
 
 
@@ -125,10 +128,9 @@ class Prop {
     const def = {
       img: new Image(),
       src: '',
-      p: {
-        x: 0,
-        y: 0,
-      },
+      axisRotateR: 0,
+      axisRotateAngle: 0,
+      r: 32,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -136,13 +138,32 @@ class Prop {
   draw() {
     if (!this.img.src) {
       this.img.src = this.src;
+      // ctx.mozImageSmoothingEnabled = ctx.webkitImageSmoothingEnabled = ctx.msImageSmoothingEnabled = ctx.imageSmoothingEnabled = false;
     }
     if (this.img.complete) {
-      ctx.drawImage(this.img, this.p.x, this.p.y);
+      ctx.save();
+        ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
+        ctx.drawImage(this.img, 0, 0);
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.arc(this.img.width / 2, this.img.height / 2, this.r, 0, Math.PI * 2);
+        ctx.stroke();
+        // ctx.beginPath();
+        // ctx.fillStyle = 'red';
+        // ctx.arc(0, 0, 4, 0, Math.PI * 2);
+        // ctx.fill();
+      ctx.restore();
     }
   }
-  update() {
-
+  update(idx) {
+    this.axisRotateR -= 3.2;
+    // 當道具撞上 shooter 主體
+    const shooter = game.shooter;
+    if ((this.axisRotateR + this.r) <= (shooter.r + (shooter.cirSolidLineW / 2))) {
+      game.props.splice(idx, 1);
+      const propName = this.src.slice(17).split('.')[0];
+      shooter.getProp(propName);
+    }
   }
 }
 
@@ -260,8 +281,8 @@ class Game {
         subTriangle.update(idx);
       });
       // 更新每個 prop
-      this.props.forEach((prop) => {
-        prop.update();
+      this.props.forEach((prop, idx) => {
+        prop.update(idx);
       });
       // 產生道具
       this.generateProp();
@@ -320,17 +341,15 @@ class Game {
 
   }
   setLevelOne() {
-    this.props.push(new Prop({
-      src: '../../src/assets/laser.png',
-      p: {
-        x: 90,
-        y: 90
-      },
-    }));
-    // circles.push(new Circle({
-    //   axisRotateR: 240,
-    //   axisRotateAngle: 0,
+    // this.props.push(new Prop({
+    //   src: '../../src/assets/crackdown.png',
+    //   axisRotateR: 200,
+    //   axisRotateAngle: 40,
     // }));
+    circles.push(new Circle({
+      axisRotateR: 240,
+      axisRotateAngle: 0,
+    }));
     // triangles.push(new Triangle({
     //   axisRotateR: 280,
     //   // axisRotateAngle 與 rotate 必須相同
@@ -363,10 +382,10 @@ class Game {
 class Circle {
   constructor(args) {
     const def = {
-      axisRotatePos: {
-        x: gameW / 2,
-        y: gameH / 2,
-      },
+      // axisRotatePos: {
+      //   x: gameW / 2,
+      //   y: gameH / 2,
+      // },
       axisRotateR: 0,
       axisRotateAngle: 0,
       r: 22,
@@ -383,18 +402,12 @@ class Circle {
     Object.assign(def, args);
     Object.assign(this, def);
   }
-  get originalPos() {
-    return {
-      x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
-      y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi),
-    };
-  }
   draw() {
     const circleBigR = this.r + 5;
     const circleSmallR = this.r - 10;
     const subaxisRotateR = 14;
     ctx.save();
-      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
       ctx.rotate(this.rotate * degToPi);
       // 大淡圓
       ctx.beginPath();
@@ -477,9 +490,9 @@ class Circle {
     for (let i = 0; i < 2 * Math.random(); i += 1) {
       const timer = setTimeout(() => {
         this.bullets.push(new CircleBullet({
-          originalPos: {
-            x: this.originalPos.x,
-            y: this.originalPos.y,
+          p: {
+            x: originalPos(this.axisRotateR, this.axisRotateAngle).x,
+            y: originalPos(this.axisRotateR, this.axisRotateAngle).y,
           },
           rotateAngle: this.rotate,
           moveX: -this.r - 10,
@@ -493,16 +506,14 @@ class Circle {
   }
 }
 
-
-
 /* Triangle Class */
 class Triangle {
   constructor(args) {
     const def = {
-      axisRotatePos: {
-        x: gameW / 2,
-        y: gameH / 2,
-      },
+      // axisRotatePos: {
+      //   x: gameW / 2,
+      //   y: gameH / 2,
+      // },
       // axisRotateR: {
       //   x: 0,
       //   y: 0,
@@ -524,19 +535,13 @@ class Triangle {
     Object.assign(def, args);
     Object.assign(this, def);
   }
-  get originalPos() {
-    return {
-      x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
-      y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi),
-    };
-  }
   draw() {
     const triangleOuterBigR = this.r + 4;
     const triangleInnerBigR = this.r - 16;
     const triangleInnerSmallR = this.r - 22;
     ctx.save();
       // 淡三角
-      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
         ctx.translate(4, 0);
@@ -607,8 +612,8 @@ class Triangle {
     // if (!this.bullets.length) {
       this.bullets.push(new TriangleBullet({
         p: {
-          x: this.originalPos.x,
-          y: this.originalPos.y,
+          x: originalPos(this.axisRotateR, this.axisRotateAngle).x,
+          y: originalPos(this.axisRotateR, this.axisRotateAngle).y,
         },
         axisRotateR: this.axisRotateR,
         rotateAngle: this.rotate,
@@ -643,10 +648,10 @@ class Triangle {
 class Polygon {
   constructor(args) {
     const def = {
-      axisRotatePos: {
-        x: gameW / 2,
-        y: gameH / 2,
-      },
+      // axisRotatePos: {
+      //   x: gameW / 2,
+      //   y: gameH / 2,
+      // },
       axisRotateR: {
         whole: 0,
         big: 0,
@@ -689,26 +694,16 @@ class Polygon {
     Object.assign(def, args);
     Object.assign(this, def);
   }
-  get originalPos() {
+  originalPos(form) {
     return {
-      whole: {
-        x: this.axisRotatePos.x + this.axisRotateR.whole * Math.cos(this.axisRotateAngle.whole * degToPi),
-        y: this.axisRotatePos.y + this.axisRotateR.whole * Math.sin(this.axisRotateAngle.whole * degToPi),
-      },
-      big: {
-        x: this.axisRotatePos.x + this.axisRotateR.big * Math.cos(this.axisRotateAngle.big * degToPi),
-        y: this.axisRotatePos.y + this.axisRotateR.big * Math.sin(this.axisRotateAngle.big * degToPi),
-      },
-      small: {
-        x: this.axisRotatePos.x + this.axisRotateR.small * Math.cos(this.axisRotateAngle.small * degToPi),
-        y: this.axisRotatePos.y + this.axisRotateR.small * Math.sin(this.axisRotateAngle.small * degToPi),
-      },
+      x: (gameW / 2) + this.axisRotateR[form] * Math.cos(this.axisRotateAngle[form] * degToPi),
+      y: (gameH / 2) + this.axisRotateR[form] * Math.sin(this.axisRotateAngle[form] * degToPi),
     };
   }
   draw() {
     if (!this.isSplited) {
       ctx.save();
-        ctx.translate(this.originalPos.whole.x, this.originalPos.whole.y);
+        ctx.translate(this.originalPos('whole').x, this.originalPos('whole').y);
         ctx.rotate(this.rotate.whole * degToPi);
         // 主體多邊形
         ctx.beginPath();
@@ -750,7 +745,7 @@ class Polygon {
       // 大分裂四邊形
       if (this.HP.big) {
         ctx.save();
-          ctx.translate(this.originalPos.big.x, this.originalPos.big.y);
+          ctx.translate(this.originalPos('big').x, this.originalPos('big').y);
           ctx.rotate(this.rotate.big * degToPi);
           // 大分裂主體
           ctx.beginPath();
@@ -780,7 +775,7 @@ class Polygon {
       // 小分裂四邊形
       if (this.HP.small) {
         ctx.save();
-          ctx.translate(this.originalPos.small.x, this.originalPos.small.y);
+          ctx.translate(this.originalPos('small').x, this.originalPos('small').y);
           ctx.rotate(this.rotate.small * degToPi);
           // 小分裂主體
           ctx.beginPath();
@@ -873,11 +868,15 @@ class Polygon {
   // }
 }
 
+
+
+// 敵人撞擊 shooter 判定
 function enemyHitShooter(enemies, enemyIdx, enemyAxisRotateR, enemyAxisRotateAngle, splitedPolygonHP, splitedPolygonName) {
-  const shooterR = 34;
-  const shieldR = shooterR + 36;
-  const shooterInnerCirLineW = 6;
-  const shieldLineW = 4;
+  // const shooterR = 34;
+  // const shieldR = shooterR + 36;
+  // const shooterInnerCirLineW = 6;
+  // const shieldLineW = 4;
+  const shooter = game.shooter;
   const shieldAngleRange = Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) >= (135 * degToPi) && Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) <= (225 * degToPi);
   function judgeEnemyHit() {
     if (!splitedPolygonName) {
@@ -890,29 +889,35 @@ function enemyHitShooter(enemies, enemyIdx, enemyAxisRotateR, enemyAxisRotateAng
     }
   }
   // 當敵人撞上 shooter 主體
-  if (enemyAxisRotateR <= (shooterR + (shooterInnerCirLineW / 2))) {
-    game.shooter.HP -= 1;
+  if (enemyAxisRotateR <= (shooter.r + (shooter.cirSolidLineW / 2))) {
+    shooter.HP -= 1;
     judgeEnemyHit();
     // 當敵人撞上 shooter 護盾
-  } else if (shieldAngleRange && (enemyAxisRotateR <= (shieldR + (shieldLineW / 2)))) {
+  } else if (shieldAngleRange && (enemyAxisRotateR <= (shooter.shieldR + (shooter.shieldLineW / 2)))) {
     judgeEnemyHit();
   }
 }
+
+
 
 /* Shooter 類別 */
 let shooterBullets = [];
 class Shooter {
   constructor(args) {
     const def = {
-      p: {
-        x: gameW / 2,
-        y: gameH / 2,
-      },
+      // p: {
+      //   x: gameW / 2,
+      //   y: gameH / 2,
+      // },
       color: globalColor.white,
       r: 34,
+      shieldR: 34 + 36,
+      cirSolidLineW: 6,
+      shieldLineW: 4,
       rotateAngle: 0,
       bullet: null,
       HP: 9,
+      statuses: [],
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -920,7 +925,7 @@ class Shooter {
   draw() {
     ctx.save(); 
       // 輪圍
-      ctx.translate(this.p.x, this.p.y);
+      ctx.translate(gameW / 2, gameH / 2);
       // ctx.rotate(this.rotateAngle);
       ctx.save();
         ctx.beginPath();
@@ -928,7 +933,7 @@ class Shooter {
         ctx.shadowBlur = 16;
         ctx.arc(0, 0, this.r, 0, Math.PI * 2);
         ctx.strokeStyle = this.color;
-        ctx.lineWidth = 6;
+        ctx.lineWidth = this.cirSolidLineW;
         ctx.stroke();
         // 輪軸
         ctx.beginPath();
@@ -958,10 +963,15 @@ class Shooter {
         }
       }
       // 護盾
-      const shieldR = this.r + 36;
+      // const shieldR = this.r + 36;
       ctx.beginPath();
-      ctx.arc(0, 0, shieldR, 135 * degToPi + this.rotateAngle, 225 * degToPi + this.rotateAngle);
-      ctx.lineWidth = 4;
+      // 如果 shooter 狀態為 shield，護盾變為 180°
+      if (!this.statuses.find((status) => status === 'shield')) {
+        ctx.arc(0, 0, this.shieldR, 135 * degToPi + this.rotateAngle, 225 * degToPi + this.rotateAngle);
+      } else {
+        ctx.arc(0, 0, this.shieldR, 90 * degToPi + this.rotateAngle, 270 * degToPi + this.rotateAngle);
+      }
+      ctx.lineWidth = this.shieldLineW;
       ctx.stroke();
       // 砲口
       ctx.beginPath();
@@ -997,6 +1007,50 @@ class Shooter {
     shooterBullets.forEach((bullet) => {
       bullet.draw();
     });
+  }
+  getProp(prop) {
+    // 持續秒數
+    let lastTime;
+    switch (prop) {
+      case 'shield':
+        lastTime = 10000;
+        break;
+      case 'double':
+        lastTime = 20000;
+        break;
+      default:
+        lastTime = 0;
+    }
+    // 將道具推進 shooter 的狀態
+    this.statuses.push(prop);
+    // 時間到後，移除道具效果
+    setTimeout(() => {
+      for (let i = 0; i < this.statuses.length; i++) {
+        if (this.statuses[i] === prop) {
+          this.statuses.splice(i, 1);
+          break;
+        }
+      }
+    }, lastTime);
+    // 如果 shooter 狀態為 crackdown，就發出清場效果
+    if (this.statuses.find((status) => status === 'crackdown')) {
+      this.drawCrackdownEffect();
+    }
+  }
+  drawCrackdownEffect() {
+    let r = 2;
+    const effect = () => {
+      r += 1;
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(255, 255, 255, ${(100 - r) / 98})`;
+      ctx.lineWidth = 5;
+      ctx.arc(gameW / 2, gameH / 2, 136 * Math.log(r / 2), 0, Math.PI * 2);
+      ctx.stroke();
+      if (r < 100) {
+        requestAnimationFrame(effect);
+      }
+    }
+    requestAnimationFrame(effect);
   }
 }
 
@@ -1241,10 +1295,10 @@ class ShooterBullet {
 class TriangleSub {;
   constructor(args) {
     const def = {
-      axisRotatePos: {
-        x: gameW / 2,
-        y: gameH / 2,
-      },
+      // axisRotatePos: {
+      //   x: gameW / 2,
+      //   y: gameH / 2,
+      // },
       axisRotateR: 0,
       axisRotateAngle: 0,
       // r: 26 * 0.4,
@@ -1259,12 +1313,6 @@ class TriangleSub {;
     Object.assign(def, args);
     Object.assign(this, def);
   }
-  get originalPos() {
-    return {
-      x: this.axisRotatePos.x + this.axisRotateR * Math.cos(this.axisRotateAngle * degToPi),
-      y: this.axisRotatePos.y + this.axisRotateR * Math.sin(this.axisRotateAngle * degToPi),
-    };
-  }
   draw() {
     // const scale = 0.4;
     const triangleOuterBigR = this.r + 1.6;
@@ -1272,7 +1320,7 @@ class TriangleSub {;
     const triangleInnerSmallR = this.r - 8.8;
     ctx.save();
       // 淡三角
-      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
       // ctx.scale(0.4, 0.4);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
@@ -1337,7 +1385,7 @@ class TriangleSub {;
 class CircleBullet {;
   constructor(args) {
     const def = {
-      originalPos: {
+      p: {
         x: 0,
         y: 0,
       },
@@ -1353,7 +1401,7 @@ class CircleBullet {;
   }
   draw() {
     ctx.save();
-      ctx.translate(this.originalPos.x, this.originalPos.y);
+      ctx.translate(this.p.x, this.p.y);
       ctx.rotate(this.rotateAngle * degToPi); 
       // ctx.scale(1.6, 0.68);
       // ctx.scale(1, 0.9);
@@ -1366,22 +1414,32 @@ class CircleBullet {;
     ctx.restore();
   }
   update(idx, arr) {
-    const shooterR = 34;
-    const shieldR = shooterR + 36;
-    const shooterInnerCirLineW = 6;
-    const shieldLineW = 4;
+    // const shooterR = 34;
+    // const shieldR = shooterR + 36;
+    // const shooterInnerCirLineW = 6;
+    // const shieldLineW = 4;
     // 圓形子彈移動
+    const shooter = game.shooter;
     this.moveX += this.moveXV;
     // 當圓形子彈射中 shooter 主體
-    if (-this.moveX >= (this.axisRotateR - shooterR - (shooterInnerCirLineW / 2))) {
+    if (-this.moveX >= (this.axisRotateR - shooter.r - (shooter.cirSolidLineW / 2))) {
+      const shooterHpBarOriginW = 216;
+      const shooterHpW = shooterHpBar.offsetWidth - (shooterHpBarOriginW / 3);
       // shooter 命減 1
-      game.shooter.HP -= 1;
+      shooter.HP -= 1;
+      // 命條減 1/3
+      shooterHpBar.style.width = `${shooterHpW}px`;
+      if (shooterHpW === 0) {
+        const shooterHeart = document.querySelectorAll('.panel__game-heart');
+        shooterHeart[0].parentNode.removeChild(shooterHeart[0]);
+        shooterHpBar.style.width = `${shooterHpBarOriginW}px`;
+      }
       // 移除子彈
       arr.splice(idx, 1);
     }
     // 當圓形子彈射中 shooter 的護盾
     const shieldAngleRange = Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) >= (135 * degToPi) && Math.abs(mouseMoveAngle - this.rotateAngle * degToPi) <= (225 * degToPi);  
-    if (shieldAngleRange && (-this.moveX >= (this.axisRotateR - shieldR - (shieldLineW / 2)))) {
+    if (shieldAngleRange && (-this.moveX >= (this.axisRotateR - shooter.shieldR - (shooter.shieldLineW / 2)))) {
       // 移除子彈
       arr.splice(idx, 1);
     }
@@ -1429,23 +1487,24 @@ class TriangleBullet {;
     ctx.restore();
   }
   update(idx, arr) {
-    const shooterR = 34;
-    const shieldR = shooterR + 36;
-    const shooterInnerCirLineW = 6;
-    const shieldLineW = 4;
+    // const shooterR = 34;
+    // const shieldR = shooterR + 36;
+    // const shooterInnerCirLineW = 6;
+    // const shieldLineW = 4;
+    const shooter = game.shooter;
     const triBulletLength = 37.8;
     // 三角子彈移動
     this.moveX += this.moveXV;
     // 當三角子彈射中 shooter 主體
-    if (-this.moveX >= (this.axisRotateR - (triBulletLength + shooterR + (shooterInnerCirLineW / 2)))) {
+    if (-this.moveX >= (this.axisRotateR - (triBulletLength + shooter.r + (shooter.cirSolidLineW / 2)))) {
       // shooter 命減 1
-      game.shooter.HP -= 1;
+      shooter.HP -= 1;
       // 移除三角子彈
       arr.splice(idx, 1);
     }
     // 當三角子彈射中 shooter 的護盾
     const shieldAngleRange = Math.abs(mouseMoveAngle - (this.rotateAngle % 360) * degToPi) >= (135 * degToPi) && Math.abs(mouseMoveAngle - (this.rotateAngle % 360) * degToPi) <= (225 * degToPi);
-    if (shieldAngleRange && (-this.moveX >= (this.axisRotateR - (triBulletLength + shieldR + (shieldLineW / 2))))) {
+    if (shieldAngleRange && (-this.moveX >= (this.axisRotateR - (triBulletLength + shooter.shieldR + (shooter.shieldLineW / 2))))) {
       // 移除三角子彈
       arr.splice(idx, 1);
     }
@@ -1518,6 +1577,14 @@ function drawBattery(p) {
     // ctx.closePath();
     // ctx.fill();
   ctx.restore();
+}
+
+
+function originalPos(axisRotateR, axisRotateAngle) {
+  return {
+    x: (gameW / 2) + axisRotateR * Math.cos(axisRotateAngle * degToPi),
+    y: (gameH / 2) + axisRotateR * Math.sin(axisRotateAngle * degToPi),
+  };
 }
 
 // 餘弦定理
@@ -1653,12 +1720,23 @@ let beforeShootTime = new Date();
 function handleClick() {
   const shootTime = new Date();
   if (shootTime - beforeShootTime > 400) {
-    shooterBullets.push(new ShooterBullet({
-      // 34 + 12 + 16
-      // p: new Vec2(62, 0),
-      axisRotateR: 62,
-      rotateAngle: mouseMoveAngle,
-    }));
+    let bulletNum;
+    // 如果 shooter 狀態為 double，每次射兩發，兩發之間隔 0.16 秒
+    if (!game.shooter.statuses.find((status) => status === 'double')) {
+      bulletNum = 1;
+    } else {
+      bulletNum = 2;
+    }
+    for (let i = 0; i < bulletNum; i++) {
+      setTimeout(() => {
+        shooterBullets.push(new ShooterBullet({
+          // 34 + 12 + 16
+          // p: new Vec2(62, 0),
+          axisRotateR: 62,
+          rotateAngle: mouseMoveAngle,
+        }));
+      }, 160 * i);
+    }
     beforeShootTime = shootTime;
   }
 };
