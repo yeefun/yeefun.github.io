@@ -7,6 +7,7 @@ let time = 0;
 const globalColor = {
   red: '#e7465d',
   orange: '#f5af5f',
+  yellow: '#f7b52c',
   blue: '#3676bb',
   blueDark: '#001d2e',
   white: '#fff',
@@ -35,8 +36,6 @@ const gui = new dat.GUI();
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 const shooterHpBar = document.getElementById('hp');
-// const shooterHeart = document.querySelectorAll('.panel__game-heart');
-// console.log(shooterHpBar.style.width);
 
 
 
@@ -918,6 +917,7 @@ class Shooter {
       bullet: null,
       HP: 9,
       statuses: [],
+      isShot: false,
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -932,7 +932,13 @@ class Shooter {
         ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
         ctx.shadowBlur = 16;
         ctx.arc(0, 0, this.r, 0, Math.PI * 2);
-        ctx.strokeStyle = this.color;
+        if (!this.isShot) {
+          ctx.strokeStyle = this.color;
+        } else {
+          ctx.strokeStyle = globalColor.red;
+          this.isShot = false;
+        }
+        // ctx.strokeStyle = this.color;
         ctx.lineWidth = this.cirSolidLineW;
         ctx.stroke();
         // 輪軸
@@ -994,7 +1000,7 @@ class Shooter {
         ctx.fill();
       ctx.restore();
     ctx.restore();
-
+    // 發射子彈
     this.shoot();
   }
   update() {
@@ -1018,6 +1024,9 @@ class Shooter {
       case 'double':
         lastTime = 20000;
         break;
+      case 'crackdown':
+        lastTime = 1600;
+        break;
       default:
         lastTime = 0;
     }
@@ -1025,7 +1034,7 @@ class Shooter {
     this.statuses.push(prop);
     // 時間到後，移除道具效果
     setTimeout(() => {
-      for (let i = 0; i < this.statuses.length; i++) {
+      for (let i = 0; i < this.statuses.length; i += 1) {
         if (this.statuses[i] === prop) {
           this.statuses.splice(i, 1);
           break;
@@ -1038,20 +1047,32 @@ class Shooter {
     }
   }
   drawCrackdownEffect() {
-    let r = 2;
+    let crackdownR = 1;
     const effect = () => {
-      r += 1;
+      crackdownR += 1;
       ctx.beginPath();
-      ctx.strokeStyle = `rgba(255, 255, 255, ${(100 - r) / 98})`;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.72)';
+      ctx.shadowBlur = 2;
+      // 透明度從 1 到 0
+      ctx.strokeStyle = `rgba(255, 255, 255, ${(100 - crackdownR) / 98})`;
       ctx.lineWidth = 5;
-      ctx.arc(gameW / 2, gameH / 2, 136 * Math.log(r / 2), 0, Math.PI * 2);
+      /**
+       * baseLog() 從 0 到 3
+       * 所以 (((crackdownR - 2) / 98) * 26) + 1 為從 1 到 27
+       * 清場半徑因此為從 0 到 528
+       */
+      ctx.arc(gameW / 2, gameH / 2, 176 * baseLog(3, (((crackdownR - 2) / 98) * 26) + 1), 0, Math.PI * 2);
       ctx.stroke();
-      if (r < 100) {
+      if (crackdownR < 100) {
         requestAnimationFrame(effect);
       }
     }
     requestAnimationFrame(effect);
   }
+}
+
+function baseLog(x, y) {
+  return Math.log(y) / Math.log(x);
 }
 
 
@@ -1423,6 +1444,8 @@ class CircleBullet {;
     this.moveX += this.moveXV;
     // 當圓形子彈射中 shooter 主體
     if (-this.moveX >= (this.axisRotateR - shooter.r - (shooter.cirSolidLineW / 2))) {
+      // 顯示被子彈擊中效果
+      shooter.isShot = true;
       const shooterHpBarOriginW = 216;
       const shooterHpW = shooterHpBar.offsetWidth - (shooterHpBarOriginW / 3);
       // shooter 命減 1
