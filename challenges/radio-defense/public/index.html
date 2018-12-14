@@ -17,9 +17,11 @@
       <canvas id="game" width="856" height="624"></canvas>
       <div class="panel">
         <section class="panel__cover" id="cover">
-          <div class="logo">R</div>
+          <div class="panel__cover-img-wrapper"><img class="battery" src="../../src/assets/battery.svg" alt=""/><img class="logo" src="../../src/assets/R.svg" alt=""/></div>
           <h1>Radio Defense</h1>
           <button id="start-btn" type="button">Start Game</button>
+          <div class="panel__cover-circle panel__cover-circle--outer"></div>
+          <div class="panel__cover-circle panel__cover-circle--inner"></div>
           <div class="intro">
             <p>你身負著運送能量電池的任務</p>
             <p>卻遭到幾何星人的埋伏</p>
@@ -27,17 +29,24 @@
           </div>
         </section>
         <section class="panel__game" id="info">
-          <div class="panel__game-wrapper-center">
+          <div class="panel__game-part-center">
             <div class="panel__game-time">00:43”</div>
             <div class="panel__game-alert">
-              <p>BOSS COMIMG</p>
+              <p>BOSS COMING</p>
             </div>
             <div class="panel__game-level">Wave 31</div>
           </div>
-          <div class="panel__game-wrapper-right">
+          <div class="panel__game-part-top-right">
             <div class="panel__game-hp" id="hp"></div>
             <div class="panel__game-heart-wrapper" id="heart-wrapper">
               <div class="panel__game-heart mr-0"></div>
+            </div>
+          </div>
+          <div class="panel__game-part-top-left"><img class="logo" src="../../src/assets/R.svg" alt=""/></div>
+          <div class="panel__game-part-bottom-right"><img class="battery battery--panel" src="../../src/assets/battery.svg" alt=""/>
+            <div>
+              <p>已回收</p>
+              <p><span id="battery-num">0</span>個能量電池</p>
             </div>
           </div>
         </section>

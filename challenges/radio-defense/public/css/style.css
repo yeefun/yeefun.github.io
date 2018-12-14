@@ -23,24 +23,48 @@ canvas {
 .container {
   position: relative;
   color: #fff;
-  font-family: Yantramanav, sans-serif;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; }
 
 .panel {
+  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   pointer-events: none; }
+  .panel__cover {
+    height: 100%;
+    display: none; }
+    .panel__cover-img-wrapper {
+      position: absolute;
+      top: 37%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%); }
+    .panel__cover-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      border-radius: 50%; }
+      .panel__cover-circle--outer {
+        width: 528px;
+        height: 528px;
+        border: 1px solid rgba(255, 255, 255, 0.3); }
+      .panel__cover-circle--inner {
+        width: 368px;
+        height: 368px;
+        border: 1.6px solid #fff; }
   .panel__game {
     display: none;
     height: 100%;
     position: relative; }
-    .panel__game-wrapper-center {
+    .panel__game-part-center {
       position: absolute;
       display: -webkit-box;
       display: -ms-flexbox;
@@ -56,7 +80,7 @@ canvas {
       left: 50%;
       -webkit-transform: translateX(-50%);
               transform: translateX(-50%); }
-    .panel__game-wrapper-right {
+    .panel__game-part-top-right {
       position: absolute;
       top: 28px;
       right: 32px;
@@ -70,6 +94,28 @@ canvas {
       -webkit-box-align: end;
           -ms-flex-align: end;
               align-items: flex-end; }
+    .panel__game-part-top-left {
+      position: absolute;
+      top: 22px;
+      left: 24px; }
+    .panel__game-part-bottom-right {
+      position: absolute;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      right: 32px;
+      bottom: 12px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start; }
+      .panel__game-part-bottom-right p:first-child {
+        font-size: 1.4rem; }
+      .panel__game-part-bottom-right span {
+        font-size: 2.4rem;
+        margin-right: 4px;
+        font-weight: 500; }
     .panel__game-time {
       font-size: 4.8rem;
       font-weight: 500;
@@ -128,46 +174,55 @@ canvas {
                 justify-content: flex-end; }
 
 .intro {
-  font-family: "Microsoft JhengHei", sans-serif;
   font-weight: 300;
   position: absolute;
-  bottom: 24px;
+  bottom: 20px;
   left: 24px;
   color: #fff;
   font-size: 1.6rem;
-  line-height: 1.618; }
+  line-height: 1.6; }
+
+.battery {
+  width: 25.5px;
+  height: auto;
+  vertical-align: bottom;
+  margin-right: 10px; }
+  .battery--panel {
+    position: relative;
+    margin-right: 12px;
+    top: -8px; }
 
 .logo {
-  position: absolute;
-  top: 36.5%;
-  left: 48%;
-  font-size: 10rem;
-  font-weight: 500; }
+  width: 51px;
+  height: auto;
+  vertical-align: bottom; }
 
 h1 {
   position: absolute;
-  top: 52%;
+  top: 50.2%;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   font-size: 2.4rem; }
 
 button {
+  width: 112px;
+  height: 34px;
+  line-height: 30px;
   -webkit-box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
           box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
   outline: none;
   position: absolute;
-  top: 60%;
+  top: 60.2%;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background-color: transparent;
   border: 1px solid #fff;
-  padding: 6px 20px;
   color: #fff;
   border-radius: 18px;
   font-size: 1.6rem;
-  font-family: Yantramanav, sans-serif;
+  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
   cursor: pointer;
   -webkit-transition: background-color 0.5s ease-out, color 0.5s ease-out;
   transition: background-color 0.5s ease-out, color 0.5s ease-out;
