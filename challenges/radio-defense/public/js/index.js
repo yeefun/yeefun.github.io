@@ -409,11 +409,11 @@ function () {
         src: '../../src/assets/wave.png',
         axisRotateR: 200,
         axisRotateAngle: 40
-      })); // circles.push(new Circle({
-      //   axisRotateR: 240,
-      //   axisRotateAngle: 90,
-      // }));
-      // triangles.push(new Triangle({
+      }));
+      circles.push(new Circle({
+        axisRotateR: 240,
+        axisRotateAngle: 0
+      })); // triangles.push(new Triangle({
       //   axisRotateR: 280,
       //   // axisRotateAngle 與 rotate 必須相同
       //   axisRotateAngle: 0,
@@ -1350,12 +1350,12 @@ function () {
 
       // 移動子彈
       this.axisRotateR += this.v; // 判斷子彈為哪一類型
-      // 一般類型
+
+      var anglePanFn;
+      var shotRRangeFn; // 一般類型
 
       if (!judgeShooterStatus('wave')) {
         // 判斷子彈有無射中圓形
-        var anglePanFn;
-        var shotRRangeFn;
         var bulletMoveLength = this.axisRotateR + this.bodyLength;
         circles.forEach(function (circle, cirIdx) {
           anglePanFn = function anglePanFn() {
@@ -1428,7 +1428,20 @@ function () {
             }
           }
         });
-      } else {} // 當子彈超出邊界
+      } else {
+        // 波狀類型
+        circles.forEach(function (circle, cirIdx) {
+          anglePanFn = function anglePanFn() {
+            return Math.asin(circle.r / circle.axisRotateR);
+          };
+
+          shotRRangeFn = function shotRRangeFn() {
+            return _this7.axisRotateR >= circle.axisRotateR - circle.r / 2 && _this7.axisRotateR <= circle.axisRotateR + circle.r / 2;
+          };
+
+          _this7.attackEnemy(circle, cirIdx, circles, bulletIdx, anglePanFn, shotRRangeFn, 'wave');
+        });
+      } // 當子彈超出邊界
 
 
       this.beyondBoundary(bulletIdx);
@@ -1465,16 +1478,30 @@ function () {
   }, {
     key: "attackEnemy",
     value: function attackEnemy(enemy, enemyIdx, enemies, bulletIdx, anglePanFn, shotRRangeFn) {
+      var type = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'ordinary';
+
       /**
        * 射中角度範圍
        * 圓形：取得兩個外切線所構成角度的一半
        * 三角形：取得射中角度範圍的一半
        */
-      var anglePan = anglePanFn();
-      var angleMinus = enemy.axisRotateAngle % 360 * degToPi - anglePan;
-      var angleAdd = enemy.axisRotateAngle % 360 * degToPi + anglePan;
-      var shooterRotateAngle = angleMinus < 0 && this.rotateAngle > Math.PI ? this.rotateAngle - Math.PI * 2 : this.rotateAngle;
-      var shotAngleRange = shooterRotateAngle >= angleMinus && shooterRotateAngle <= angleAdd; // 射中距離範圍
+      var enemyAnglePan = anglePanFn();
+      var enemyAngleMinus = enemy.axisRotateAngle % 360 * degToPi - enemyAnglePan;
+      var enemyAngleAdd = enemy.axisRotateAngle % 360 * degToPi + enemyAnglePan;
+      var shooterRotateAngle = enemyAngleMinus < 0 && this.rotateAngle > Math.PI ? this.rotateAngle - Math.PI * 2 : this.rotateAngle;
+      var shotAngleRange; // 判斷子彈為哪一類型
+      // 一般子彈
+
+      if (type !== 'wave') {
+        shotAngleRange = shooterRotateAngle >= enemyAngleMinus && shooterRotateAngle <= enemyAngleAdd;
+      } else {
+        // 波狀子彈
+        var shooterAnglePan = Math.atan2(this.waveLength, this.axisRotateR);
+        var shooterAngleMinus = shooterRotateAngle - shooterAnglePan;
+        var shooterAngleAdd = shooterRotateAngle + shooterAnglePan;
+        shotAngleRange = enemyAngleMinus <= shooterAngleAdd && enemyAngleAdd >= shooterAngleMinus;
+      } // 射中距離範圍
+
 
       var shotRRange = shotRRangeFn(); // 判斷子彈有無射中敵人
 
