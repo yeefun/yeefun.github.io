@@ -171,7 +171,26 @@ canvas {
         display: flex;
         -webkit-box-pack: end;
             -ms-flex-pack: end;
-                justify-content: flex-end; }
+                justify-content: flex-end;
+        height: 24px;
+        margin-bottom: 24px; }
+    .panel__game-prop {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      border: 0.8px solid #fff;
+      padding: 6px 16px 5px 16px;
+      border-radius: 4px; }
+      .panel__game-prop img {
+        width: 20px;
+        height: auto;
+        margin-right: 8px; }
+      .panel__game-prop p {
+        font-size: 2rem;
+        font-weight: 300; }
 
 .intro {
   font-weight: 300;
@@ -184,7 +203,6 @@ canvas {
 
 .battery {
   width: 25.5px;
-  height: auto;
   vertical-align: bottom;
   margin-right: 10px; }
   .battery--panel {
@@ -194,7 +212,6 @@ canvas {
 
 .logo {
   width: 51px;
-  height: auto;
   vertical-align: bottom; }
 
 h1 {
@@ -244,5 +261,8 @@ button {
 
 .mr-0 {
   margin-right: 0 !important; }
+
+img {
+  height: auto; }
 
 /*# sourceMappingURL=style.css.map */

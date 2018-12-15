@@ -170,6 +170,27 @@ canvas {
       &-wrapper {
         display: flex;
         justify-content: flex-end;
+        height: 24px;
+        margin-bottom: 24px;
+      }
+    }
+    &-prop {
+      display: flex;
+      align-items: center;
+      border: 0.8px solid #fff;
+      padding: 6px 16px 5px 16px;
+      // height: 32px;
+      // box-sizing: border-box;
+      border-radius: 4px;
+      & img {
+        width: 20px;
+        height: auto;
+        margin-right: 8px;
+      }
+      & p {
+        font-size: 2rem;
+        // line-height: 1.1;
+        font-weight: 300;
       }
     }
     // &-name {
@@ -193,7 +214,7 @@ canvas {
 .battery {
   width: 25.5px;
   // height: 51px;
-  height: auto;
+  // height: auto;
   vertical-align: bottom;
   margin-right: 10px;
   &--panel {
@@ -206,7 +227,7 @@ canvas {
   // position: absolute;
   width: 51px;
   // height: 64.6px;
-  height: auto;
+  // height: auto;
   vertical-align: bottom;
   // top: 36.5%;
   // left: 48%;
@@ -264,4 +285,8 @@ button {
 
 .mr-0 {
   margin-right: 0 !important;
+}
+
+img {
+  height: auto;
 }

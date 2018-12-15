@@ -177,7 +177,7 @@ function () {
         ctx.drawImage(this.img, 0, 0);
         ctx.beginPath();
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-        ctx.arc(this.img.width / 2, this.img.height / 2, this.r, 0, Math.PI * 2);
+        ctx.arc(this.img.naturalWidth / 2, this.img.naturalHeight / 2, this.r, 0, Math.PI * 2);
         ctx.stroke(); // ctx.beginPath();
         // ctx.fillStyle = 'red';
         // ctx.arc(0, 0, 4, 0, Math.PI * 2);
@@ -189,8 +189,8 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      this.axisRotateR -= 3.2; // 當道具撞上 shooter 主體
-
+      // this.axisRotateR -= 3.2;
+      // 當道具撞上 shooter 主體
       var shooter = game.shooter;
 
       if (this.axisRotateR + this.r <= shooter.r + shooter.cirSolidLineW / 2) {
@@ -419,38 +419,37 @@ function () {
   }, {
     key: "setLevelOne",
     value: function setLevelOne() {
-      // this.props.push(new Prop({
-      //   src: '../../src/assets/wave.png',
-      //   axisRotateR: 200,
-      //   axisRotateAngle: 40,
+      this.props.push(new Prop({
+        src: '../../src/assets/wave.png',
+        axisRotateR: 200,
+        axisRotateAngle: 40
+      })); // circles.push(new Circle({
+      //   axisRotateR: 240,
+      //   axisRotateAngle: 0,
       // }));
-      circles.push(new Circle({
-        axisRotateR: 240,
-        axisRotateAngle: 0
-      })); // triangles.push(new Triangle({
+      // triangles.push(new Triangle({
       //   axisRotateR: 280,
       //   // axisRotateAngle 與 rotate 必須相同
       //   axisRotateAngle: 0,
       //   // rotate: 160,
       // }));
-
-      polygons.push(new Polygon({
-        axisRotateR: {
-          whole: 280,
-          big: 280,
-          small: 280
-        },
-        axisRotateAngle: {
-          whole: 0,
-          big: 0,
-          small: 0
-        } // rotate: {
-        //   whole: 40,
-        //   big: 40,
-        //   small: 40,
-        // },
-
-      }));
+      // polygons.push(new Polygon({
+      //   axisRotateR: {
+      //     whole: 280,
+      //     big: 280,
+      //     small: 280,
+      //   },
+      //   axisRotateAngle: {
+      //     whole: 0,
+      //     big: 0,
+      //     small: 0,
+      //   },
+      //   // rotate: {
+      //   //   whole: 40,
+      //   //   big: 40,
+      //   //   small: 40,
+      //   // },
+      // }));
     }
   }]);
 
