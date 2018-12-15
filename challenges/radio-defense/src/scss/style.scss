@@ -140,7 +140,7 @@ canvas {
       width: 216px;
       height: 14px;
       margin-bottom: 18px;
-      border-radius: 8px;
+      border-radius: 6px;
     }
     &-heart {
       position: relative;
@@ -178,7 +178,9 @@ canvas {
       display: flex;
       align-items: center;
       border: 0.8px solid #fff;
-      padding: 6px 16px 5px 16px;
+      padding: 6px 18px;
+      // display: none;
+      // opacity: 0;
       // height: 32px;
       // box-sizing: border-box;
       border-radius: 4px;
@@ -190,7 +192,7 @@ canvas {
       & p {
         font-size: 2rem;
         // line-height: 1.1;
-        font-weight: 300;
+        // font-weight: 300;
       }
     }
     // &-name {

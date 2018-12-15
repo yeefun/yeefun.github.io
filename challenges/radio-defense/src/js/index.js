@@ -47,6 +47,10 @@ const gui = new dat.GUI();
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 const shooterHpBar = document.getElementById('hp');
+const prop = document.getElementById('prop');
+const propImg = document.getElementById('prop__img');
+const propLastTime = document.getElementById('prop__last-time');
+
 
 
 
@@ -166,7 +170,7 @@ class Prop {
     }
   }
   update(idx) {
-    // this.axisRotateR -= 3.2;
+    this.axisRotateR -= 3.2;
     // 當道具撞上 shooter 主體
     const shooter = game.shooter;
     if ((this.axisRotateR + this.r) <= (shooter.r + (shooter.cirSolidLineW / 2))) {
@@ -368,11 +372,11 @@ class Game {
   }
   // 設定第一關
   setLevelOne() {
-    this.props.push(new Prop({
-      src: '../../src/assets/wave.png',
-      axisRotateR: 200,
-      axisRotateAngle: 40,
-    }));
+    // this.props.push(new Prop({
+    //   src: '../../src/assets/shield.png',
+    //   axisRotateR: 200,
+    //   axisRotateAngle: 40,
+    // }));
     // circles.push(new Circle({
     //   axisRotateR: 240,
     //   axisRotateAngle: 0,
@@ -1059,10 +1063,10 @@ class Shooter {
       bullet.draw();
     });
   }
-  getProp(prop) {
+  getProp(propName) {
     // 持續秒數
     let lastTime;
-    switch (prop) {
+    switch (propName) {
       case 'shield':
         lastTime = 10000;
         break;
@@ -1079,11 +1083,11 @@ class Shooter {
         lastTime = 0;
     }
     // 將道具推入 shooter 的狀態
-    this.statuses.push(prop);
+    this.statuses.push(propName);
     // 時間到後，移除道具效果
     setTimeout(() => {
       for (let i = 0; i < this.statuses.length; i += 1) {
-        if (this.statuses[i] === prop) {
+        if (this.statuses[i] === propName) {
           this.statuses.splice(i, 1);
           break;
         }
@@ -1097,6 +1101,8 @@ class Shooter {
     if (judgeShooterStatus('crackdown')) {
       this.drawCrackdownEffect();
     }
+    // 顯示道具效果持續時間
+    this.displayPropInfo(propName, lastTime);
   }
   drawCrackdownEffect() {
     let crackdownR = 1;
@@ -1127,6 +1133,20 @@ class Shooter {
     const heart = document.createElement('DIV');
     heart.classList.add('panel__game-heart');
     heartWrapper.insertBefore(heart, heartWrapper.firstChild);
+  }
+  displayPropInfo(propName, lastTime) {
+    prop.style.opacity = 1;
+    propImg.src = `../../src/assets/${propName}.svg`;
+    lastTime = lastTime / 1000;
+    propLastTime.textContent = lastTime;
+    setTimeout(function minusLastTime() {
+      lastTime -= 1;
+      propLastTime.textContent = lastTime;
+      if (!lastTime) {
+        prop.style.opacity = 0;
+      }
+      setTimeout(minusLastTime, 1000);
+    }, 1000);
   }
 }
 

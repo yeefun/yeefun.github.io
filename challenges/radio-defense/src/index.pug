@@ -47,9 +47,15 @@ html(lang="zh-Hant")
               //- .panel__game-heart
               //- .panel__game-heart
               .panel__game-heart.mr-0
-            .panel__game-prop
-              img(src="../../src/assets/wave.svg", alt="")
-              p 0:21
+            .panel__game-prop#prop
+              //- div
+              img#prop__img(src="../../src/assets/heart.svg", alt="")
+              //- img#prop__img(src="", alt="")
+              p 0:<span id="prop__last-time">00</span>
+              //- div
+              //-   img#prop__img(src="../../src/assets/heart.svg", alt="")
+              //-   //- img#prop__img(src="", alt="")
+              //-   p 0:<span id="prop__last-time">00</span>
           .panel__game-part-top-left
             img.logo(src="../../src/assets/R.svg", alt="")
             //- p.panel__game-name RADIO Defense

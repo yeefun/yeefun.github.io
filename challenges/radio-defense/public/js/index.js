@@ -44,6 +44,9 @@ var gui = new dat.GUI(); // gui.add(controls, 'length', 0, 200).step(1).onChange
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
 var shooterHpBar = document.getElementById('hp');
+var prop = document.getElementById('prop');
+var propImg = document.getElementById('prop__img');
+var propLastTime = document.getElementById('prop__last-time');
 /* 2D Vector Class */
 
 var Vec2 =
@@ -189,8 +192,8 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      // this.axisRotateR -= 3.2;
-      // 當道具撞上 shooter 主體
+      this.axisRotateR -= 3.2; // 當道具撞上 shooter 主體
+
       var shooter = game.shooter;
 
       if (this.axisRotateR + this.r <= shooter.r + shooter.cirSolidLineW / 2) {
@@ -418,12 +421,12 @@ function () {
 
   }, {
     key: "setLevelOne",
-    value: function setLevelOne() {
-      this.props.push(new Prop({
-        src: '../../src/assets/wave.png',
-        axisRotateR: 200,
-        axisRotateAngle: 40
-      })); // circles.push(new Circle({
+    value: function setLevelOne() {// this.props.push(new Prop({
+      //   src: '../../src/assets/shield.png',
+      //   axisRotateR: 200,
+      //   axisRotateAngle: 40,
+      // }));
+      // circles.push(new Circle({
       //   axisRotateR: 240,
       //   axisRotateAngle: 0,
       // }));
@@ -1192,13 +1195,13 @@ function () {
     }
   }, {
     key: "getProp",
-    value: function getProp(prop) {
+    value: function getProp(propName) {
       var _this6 = this;
 
       // 持續秒數
       var lastTime;
 
-      switch (prop) {
+      switch (propName) {
         case 'shield':
           lastTime = 10000;
           break;
@@ -1219,11 +1222,11 @@ function () {
       } // 將道具推入 shooter 的狀態
 
 
-      this.statuses.push(prop); // 時間到後，移除道具效果
+      this.statuses.push(propName); // 時間到後，移除道具效果
 
       setTimeout(function () {
         for (var i = 0; i < _this6.statuses.length; i += 1) {
-          if (_this6.statuses[i] === prop) {
+          if (_this6.statuses[i] === propName) {
             _this6.statuses.splice(i, 1);
 
             break;
@@ -1238,7 +1241,10 @@ function () {
 
       if (judgeShooterStatus('crackdown')) {
         this.drawCrackdownEffect();
-      }
+      } // 顯示道具效果持續時間
+
+
+      this.displayPropInfo(propName, lastTime);
     }
   }, {
     key: "drawCrackdownEffect",
@@ -1277,6 +1283,24 @@ function () {
       var heart = document.createElement('DIV');
       heart.classList.add('panel__game-heart');
       heartWrapper.insertBefore(heart, heartWrapper.firstChild);
+    }
+  }, {
+    key: "displayPropInfo",
+    value: function displayPropInfo(propName, lastTime) {
+      prop.style.opacity = 1;
+      propImg.src = "../../src/assets/".concat(propName, ".svg");
+      lastTime = lastTime / 1000;
+      propLastTime.textContent = lastTime;
+      setTimeout(function minusLastTime() {
+        lastTime -= 1;
+        propLastTime.textContent = lastTime;
+
+        if (!lastTime) {
+          prop.style.opacity = 0;
+        }
+
+        setTimeout(minusLastTime, 1000);
+      }, 1000);
     }
   }]);
 
