@@ -15,7 +15,7 @@
   <body>
     <div class="container">
       <canvas id="game" width="856" height="624"></canvas>
-      <div class="panel">
+      <div class="panel" id="panel">
         <section class="panel__cover" id="cover">
           <div class="panel__cover-img-wrapper"><img class="battery" src="../../src/assets/battery.svg" alt=""/><img class="logo" src="../../src/assets/R.svg" alt=""/></div>
           <h1>Radio Defense</h1>
@@ -52,10 +52,10 @@
               <p><span id="battery-num">0</span>個能量電池</p>
             </div>
           </div>
-          <div class="panel__game-end"><img src="../../src/assets/battery.svg" alt=""/>
+          <div class="panel__game-end" id="result"><img src="../../src/assets/battery.svg" alt=""/>
             <div>
               <p>你回收了</p>
-              <p><span>27</span>個能量電池</p>
+              <p><span id="result-num">0</span>個能量電池</p>
               <button type="button">Restart</button>
             </div>
           </div>

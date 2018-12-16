@@ -18,7 +18,7 @@ html(lang="zh-Hant")
   body
     .container
       canvas#game(width="856" height="624")
-      .panel
+      .panel#panel
         section.panel__cover#cover
           //- .logo R
           .panel__cover-img-wrapper
@@ -64,12 +64,12 @@ html(lang="zh-Hant")
             div
               p 已回收
               p <span id="battery-num">0</span>個能量電池
-          .panel__game-end
+          .panel__game-end#result
             //- div
             img(src="../../src/assets/battery.svg", alt="")
             div
               p 你回收了
-              p <span>27</span>個能量電池
+              p <span id="result-num">0</span>個能量電池
               button(type="button") Restart
 
     link(rel="stylesheet" href="./css/style.css")

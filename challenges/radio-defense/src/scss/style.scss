@@ -25,7 +25,7 @@ canvas {
 
 .container {
   position: relative;
-  color: #eee;
+  color: #fff;
   // font-family: Yantramanav, sans-serif;
   user-select: none;
 }
@@ -38,7 +38,7 @@ canvas {
   height: 100%;
   top: 0;
   left: 0;
-  // pointer-events: none;
+  pointer-events: none;
   &__cover {
     height: 100%;
     display: none;
@@ -68,14 +68,14 @@ canvas {
       &--inner {
         width: 368px;
         height: 368px;
-        border: 1.6px solid #eee;
+        border: 1.6px solid #fff;
       }
     }
     & button {
       width: 112px;
       height: 34px;
       line-height: 30px;
-      box-shadow: 0 0 4px rgba(#eee, 0.8);
+      box-shadow: 0 0 4px rgba(#fff, 0.8);
       position: absolute;
       top: 60.2%;
       left: 50%;
@@ -85,7 +85,7 @@ canvas {
       animation: shine 1.2s infinite ease-out alternate;
       @keyframes shine {
         100% {
-          box-shadow: 0 0 12px rgba(#eee, 0.8);
+          box-shadow: 0 0 12px rgba(#fff, 0.8);
         }
       }
     }
@@ -208,7 +208,7 @@ canvas {
     &-prop {
       display: flex;
       align-items: center;
-      border: 0.8px solid #eee;
+      border: 0.8px solid #fff;
       padding: 6px 18px;
       // display: none;
       opacity: 0;
@@ -222,18 +222,20 @@ canvas {
         margin-right: 8px;
       }
       & p {
+        position: relative;
+        top: 1px;
         font-size: 2rem;
         // line-height: 1.1;
         // font-weight: 300;
       }
     }
     &-end {
-      background-color: #001d2e;
+      background-color: rgba(0, 29, 46, 0.88);
       display: flex;
       align-items: center;
       font-size: 2.4rem;
       font-weight: 300;
-      border: 0.8px solid #eee;
+      border: 0.8px solid #fff;
       // padding: 24px 64px;
       padding: 28px 56px 32px 88px;
       border-radius: 24px;
@@ -241,6 +243,8 @@ canvas {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.2s ease-in;
       & > div {
         flex-shrink: 0;
         position: relative;
@@ -278,50 +282,28 @@ canvas {
   position: absolute;
   bottom: 20px;
   left: 24px;
-  color: #eee;
+  color: #fff;
   font-size: 1.6rem;
   line-height: 1.6;
 }
 
-// .battery {
-//   width: 25.5px;
-//   vertical-align: bottom;
-  // margin-right: 10px;
-  // &--panel {
-  //   position: relative;
-  //   margin-right: 12px;
-  //   top: -8px;
-  // }
-// }
 .logo {
-  // position: absolute;
   // width: 51px;
   width: 50px;
-  // height: 64.6px;
-  // height: auto;
   vertical-align: bottom;
-  // top: 36.5%;
-  // left: 48%;
-  // font-size: 10rem;
-  // font-weight: 500;
-  // &--panel {
-  //   // width: 32px;
-  //   // height: 32.3px;
-  //   height: auto;
-  // }
 }
 
 button {
   outline: none;
   background-color: transparent;
-  color: #eee;
+  color: #fff;
   font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
   cursor: pointer;
   font-weight: 300;
-  border: 1px solid #eee;
-  transition: background-color 0.5s ease-out, color 0.5s ease-out;
+  border: 1px solid #fff;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
   &:hover {
-    background-color: #eee;
+    background-color: #fff;
     color: #001d2e;
   }
 }

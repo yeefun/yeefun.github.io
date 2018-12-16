@@ -13,20 +13,6 @@ const globalColor = {
   white: '#fff',
 };
 
-const startBtn = document.getElementById('start-btn');
-const cover = document.getElementById('cover');
-const gamePanel = document.getElementById('game-panel');
-const batteryInfo = document.getElementById('battery-info');
-
-startBtn.addEventListener('click',
-  function() {
-    game.startGame();
-  },
-  {
-    once: true,
-  },
-);
-
 
 /* GUI Controls */
 const controls = {
@@ -46,11 +32,27 @@ const gui = new dat.GUI();
 // gui.add(controls, 'splited');
 // gui.add(controls, 'value', -2, 2).step(0.01).onChange((value) => {});
 
+const startBtn = document.getElementById('start-btn');
+const cover = document.getElementById('cover');
+const gamePanel = document.getElementById('game-panel');
+const batteryInfo = document.getElementById('battery-info');
 const shooterHpBar = document.getElementById('hp');
 const prop = document.getElementById('prop');
 const propImg = document.getElementById('prop__img');
 const propLastTime = document.getElementById('prop__last-time');
 const batteryNum = document.getElementById('battery-num');
+const result = document.getElementById('result');
+const resultNum = document.getElementById('result-num');
+const panel = document.getElementById('panel');
+
+startBtn.addEventListener('click',
+  function () {
+    game.startGame();
+  },
+  {
+    once: true,
+  },
+);
 
 
 
@@ -62,7 +64,6 @@ class Vec2 {
     this.x = x;
     this.y = y;
   }
-
   set(x, y) {
     this.x = x;
     this.y = y;
@@ -141,7 +142,7 @@ function initCanvas() {
 class Prop {
   constructor(args) {
     const def = {
-      img: new Image(),
+      img: new Image(44, 44),
       src: '',
       axisRotateR: 0,
       axisRotateAngle: 0,
@@ -158,10 +159,10 @@ class Prop {
     if (this.img.complete) {
       ctx.save();
         ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
-        ctx.drawImage(this.img, 0, 0);
+        ctx.drawImage(this.img, 0, 0, 44, 44);
         ctx.beginPath();
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.arc(this.img.naturalWidth / 2, this.img.naturalHeight / 2, this.r, 0, Math.PI * 2);
+        ctx.arc(this.img.width / 2, this.img.height / 2, this.r, 0, Math.PI * 2);
         ctx.stroke();
         // ctx.beginPath();
         // ctx.fillStyle = 'red';
@@ -371,15 +372,18 @@ class Game {
   startGame() {
     this.isGameStart = true;
     cover.style.display = 'none';
+    panel.style.pointerEvents = 'none';
     gamePanel.style.display = 'block';
     this.shooter = new Shooter();
     canvas.style.cursor = 'pointer';
   }
   // 遊戲結束
   endGame() {
-    // console.log(batteryNum);
     this.isGameEnd = true;
     batteryInfo.style.opacity = 0;
+    resultNum.textContent = this.batteryNum;
+    result.style.opacity = 1;
+    panel.style.pointerEvents = 'auto';
   }
   // 產生道具
   generateProp() {
@@ -387,20 +391,21 @@ class Game {
   }
   // 設定第一關
   setLevelOne() {
-    // this.props.push(new Prop({
-    //   src: '../../src/assets/shield.png',
-    //   axisRotateR: 200,
-    //   axisRotateAngle: 40,
-    // }));
-    circles.push(new Circle({
-      axisRotateR: 240,
-      axisRotateAngle: 0,
+    this.props.push(new Prop({
+      src: '../../src/assets/shield.svg',
+      axisRotateR: 200,
+      axisRotateAngle: 40,
     }));
+    // circles.push(new Circle({
+    //   axisRotateR: 240,
+    //   axisRotateAngle: 40,
+    //   rotate: 235,
+    // }));
     // triangles.push(new Triangle({
     //   axisRotateR: 280,
     //   // axisRotateAngle 與 rotate 必須相同
-    //   axisRotateAngle: 0,
-    //   // rotate: 160,
+    //   axisRotateAngle: 230,
+    //   rotate: 230,
     // }));
     // polygons.push(new Polygon({
     //   axisRotateR: {
@@ -409,15 +414,15 @@ class Game {
     //     small: 280,
     //   },
     //   axisRotateAngle: {
-    //     whole: 0,
-    //     big: 0,
-    //     small: 0,
+    //     whole: 210,
+    //     big: 210,
+    //     small: 210,
     //   },
-    //   // rotate: {
-    //   //   whole: 40,
-    //   //   big: 40,
-    //   //   small: 40,
-    //   // },
+    //   rotate: {
+    //     whole: 56,
+    //     big: 56,
+    //     small: 56,
+    //   },
     // }));
   }
 }
@@ -436,6 +441,7 @@ class Circle {
       axisRotateAngle: 0,
       r: 22,
       rotate: 0,
+      scale: 0,
       axisRotateRV: 0.1,
       axisRotateAngleV: 0.4,
       rotateV: 0.4,
@@ -444,17 +450,21 @@ class Circle {
       bullets: [],
       beforeRotateTime: new Date(),
       isRotating: false,
+      isAppearing: true,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   draw() {
+    this.isAppearing && this.appear();
+    this.isAppearing = false;
     const circleBigR = this.r + 5;
     const circleSmallR = this.r - 10;
     const subaxisRotateR = 14;
     ctx.save();
       ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
       ctx.rotate(this.rotate * degToPi);
+      ctx.scale(this.scale, this.scale);
       // 大淡圓
       ctx.beginPath();
       ctx.arc(4, 0, circleBigR, 0, Math.PI * 2);
@@ -506,10 +516,10 @@ class Circle {
       bullet.update(idx, arr);
     });
     // 當圓形自身在旋轉時，圓形不要移動
-    // if (!this.isRotating) {
-    //   this.axisRotateAngle += this.axisRotateAngleV;
-    //   // this.axisRotateAngle += 2;
-    // }
+    if (!this.isRotating) {
+      this.axisRotateAngle += this.axisRotateAngleV;
+      // this.axisRotateAngle += 2;
+    }
     // 每 2-4 秒，自身旋轉一次
     const rotateTime = new Date();
     if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
@@ -550,6 +560,16 @@ class Circle {
       }, i * (200 * Math.random() + 200));
     }
   }
+  appear() {
+    TweenLite.to(this, 0.8, {
+      scale: 1,
+      ease: Back.easeOut.config(1.7),
+    });
+    TweenLite.from(this, 1.6, {
+      rotate: 0,
+      ease: Back.easeOut.config(1.7),
+    });
+  }
 }
 
 /* Triangle Class */
@@ -568,6 +588,7 @@ class Triangle {
       axisRotateAngle: 0,
       r: 26,
       rotate: 0,
+      scale: 0,
       axisRotateRV: 0.1,
       axisRotateAngleV: 0.4,
       rotateV: -2.4,
@@ -578,17 +599,21 @@ class Triangle {
       HP: 4,
       isReproduce: false,
       shootTimer: null,
+      isAppearing: true,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   draw() {
+    this.isAppearing && this.appear();
+    this.isAppearing = false;
     const triangleOuterBigR = this.r + 4;
     const triangleInnerBigR = this.r - 16;
     const triangleInnerSmallR = this.r - 22;
     ctx.save();
       // 淡三角
       ctx.translate(originalPos(this.axisRotateR, this.axisRotateAngle).x, originalPos(this.axisRotateR, this.axisRotateAngle).y);
+      ctx.scale(this.scale, this.scale);
       ctx.rotate(this.rotate * degToPi);
       ctx.save();
         ctx.translate(4, 0);
@@ -701,6 +726,16 @@ class Triangle {
       // rotate: this.rotate,
     }));
   }
+  appear() {
+    TweenLite.to(this, 0.8, {
+      scale: 1,
+      ease: Back.easeOut.config(1.7),
+    });
+    TweenLite.to(this, 1.6, {
+      rotate: '+=360',
+      ease: Back.easeOut.config(1.7),
+    });
+  }
 }
 
 
@@ -751,6 +786,8 @@ class Polygon {
       color: globalColor.red,
       isSplited: false,
       isSplitedMove: false,
+      scale: 0,
+      isAppearing: true,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -763,9 +800,12 @@ class Polygon {
   }
   draw() {
     if (!this.isSplited) {
+      this.isAppearing && this.appear();
+      this.isAppearing = false;
       ctx.save();
         ctx.translate(this.originalPos('whole').x, this.originalPos('whole').y);
         ctx.rotate(this.rotate.whole * degToPi);
+        ctx.scale(this.scale, this.scale);
         // 主體多邊形
         ctx.beginPath();
         ctx.fillStyle = this.color;
@@ -922,6 +962,16 @@ class Polygon {
     //   this.v.y = 0.5 * Math.random() + 0.5;
     // }
   }
+  appear() {
+    TweenLite.to(this, 0.8, {
+      scale: 1,
+      ease: Back.easeOut.config(1.7),
+    });
+    // TweenLite.from(this.rotate, 1.6, {
+    //   whole: 0,
+    //   ease: Back.easeOut.config(1.7),
+    // });
+  }
   // get isInBoundary() {
   //   const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
   //   const yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
@@ -979,8 +1029,8 @@ class Shooter {
       shieldLineW: 4,
       rotateAngle: 0,
       bullets: [],
-      // HP: 9,
-      HP: 1,
+      HP: 9,
+      // HP: 1,
       statuses: [],
       isAttacked: false,
       beforeShootTime: new Date(),
@@ -1193,7 +1243,7 @@ class Shooter {
       return;
     }
     prop.style.opacity = 1;
-    propImg.src = `../../src/assets/${propName}.svg`;
+    propImg.src = `../../src/assets/${propName}--panel.svg`;
     lastTime = lastTime / 1000;
     propLastTime.textContent = lastTime;
     setTimeout(function minusLastTime() {
