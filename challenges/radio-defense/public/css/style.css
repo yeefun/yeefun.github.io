@@ -22,7 +22,7 @@ canvas {
 
 .container {
   position: relative;
-  color: #fff;
+  color: #eee;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -34,8 +34,7 @@ canvas {
   width: 100%;
   height: 100%;
   top: 0;
-  left: 0;
-  pointer-events: none; }
+  left: 0; }
   .panel__cover {
     height: 100%;
     display: none; }
@@ -45,6 +44,10 @@ canvas {
       left: 50%;
       -webkit-transform: translateX(-50%);
               transform: translateX(-50%); }
+      .panel__cover-img-wrapper .battery {
+        width: 25px;
+        vertical-align: bottom;
+        margin-right: 10px; }
     .panel__cover-circle {
       position: absolute;
       top: 50%;
@@ -59,7 +62,32 @@ canvas {
       .panel__cover-circle--inner {
         width: 368px;
         height: 368px;
-        border: 1.6px solid #fff; }
+        border: 1.6px solid #eee; }
+    .panel__cover button {
+      width: 112px;
+      height: 34px;
+      line-height: 30px;
+      -webkit-box-shadow: 0 0 4px rgba(238, 238, 238, 0.8);
+              box-shadow: 0 0 4px rgba(238, 238, 238, 0.8);
+      position: absolute;
+      top: 60.2%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+      border-radius: 18px;
+      font-size: 1.6rem;
+      -webkit-animation: shine 1.2s infinite ease-out alternate;
+              animation: shine 1.2s infinite ease-out alternate; }
+
+@-webkit-keyframes shine {
+  100% {
+    -webkit-box-shadow: 0 0 12px rgba(238, 238, 238, 0.8);
+            box-shadow: 0 0 12px rgba(238, 238, 238, 0.8); } }
+
+@keyframes shine {
+  100% {
+    -webkit-box-shadow: 0 0 12px rgba(238, 238, 238, 0.8);
+            box-shadow: 0 0 12px rgba(238, 238, 238, 0.8); } }
   .panel__game {
     display: none;
     height: 100%;
@@ -110,6 +138,11 @@ canvas {
       -webkit-box-align: start;
           -ms-flex-align: start;
               align-items: flex-start; }
+      .panel__game-part-bottom-right img {
+        width: 25px;
+        position: relative;
+        margin-right: 12px;
+        top: -8px; }
       .panel__game-part-bottom-right p:first-child {
         font-size: 1.4rem; }
       .panel__game-part-bottom-right span {
@@ -181,37 +214,87 @@ canvas {
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
-      border: 0.8px solid #fff;
+      border: 0.8px solid #eee;
       padding: 6px 18px;
-      border-radius: 4px; }
+      opacity: 0;
+      border-radius: 4px;
+      -webkit-transition: opacity 0.2s ease-in;
+      transition: opacity 0.2s ease-in; }
       .panel__game-prop img {
         width: 20px;
         height: auto;
         margin-right: 8px; }
       .panel__game-prop p {
         font-size: 2rem; }
+    .panel__game-end {
+      background-color: #001d2e;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      font-size: 2.4rem;
+      font-weight: 300;
+      border: 0.8px solid #eee;
+      padding: 28px 56px 32px 88px;
+      border-radius: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%); }
+      .panel__game-end > div {
+        -ms-flex-negative: 0;
+            flex-shrink: 0;
+        position: relative;
+        top: 4px; }
+      .panel__game-end p:first-child {
+        font-size: 1.4rem;
+        margin-bottom: 4px; }
+      .panel__game-end img {
+        width: 56px;
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+        margin-right: 64px; }
+      .panel__game-end span {
+        font-size: 3.2rem;
+        margin-right: 4px;
+        font-weight: 500; }
+      .panel__game-end button {
+        border-radius: 16px;
+        font-size: 1.6rem;
+        width: 88px;
+        height: 30px;
+        line-height: 26px;
+        margin-top: 16px; }
 
 .intro {
   font-weight: 300;
   position: absolute;
   bottom: 20px;
   left: 24px;
-  color: #fff;
+  color: #eee;
   font-size: 1.6rem;
   line-height: 1.6; }
 
-.battery {
-  width: 25.5px;
-  vertical-align: bottom;
-  margin-right: 10px; }
-  .battery--panel {
-    position: relative;
-    margin-right: 12px;
-    top: -8px; }
-
 .logo {
-  width: 51px;
+  width: 50px;
   vertical-align: bottom; }
+
+button {
+  outline: none;
+  background-color: transparent;
+  color: #eee;
+  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
+  cursor: pointer;
+  font-weight: 300;
+  border: 1px solid #eee;
+  -webkit-transition: background-color 0.5s ease-out, color 0.5s ease-out;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out; }
+  button:hover {
+    background-color: #eee;
+    color: #001d2e; }
 
 h1 {
   position: absolute;
@@ -220,43 +303,6 @@ h1 {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   font-size: 2.4rem; }
-
-button {
-  width: 112px;
-  height: 34px;
-  line-height: 30px;
-  -webkit-box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
-          box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
-  outline: none;
-  position: absolute;
-  top: 60.2%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  border-radius: 18px;
-  font-size: 1.6rem;
-  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
-  cursor: pointer;
-  -webkit-transition: background-color 0.5s ease-out, color 0.5s ease-out;
-  transition: background-color 0.5s ease-out, color 0.5s ease-out;
-  -webkit-animation: shine 1.2s infinite ease-out alternate;
-          animation: shine 1.2s infinite ease-out alternate; }
-
-@-webkit-keyframes shine {
-  100% {
-    -webkit-box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); } }
-
-@keyframes shine {
-  100% {
-    -webkit-box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); } }
-  button:hover {
-    background-color: #fff;
-    color: #001d2e; }
 
 .mr-0 {
   margin-right: 0 !important; }

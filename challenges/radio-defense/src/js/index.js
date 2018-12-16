@@ -15,8 +15,8 @@ const globalColor = {
 
 const startBtn = document.getElementById('start-btn');
 const cover = document.getElementById('cover');
-const gameInfo = document.getElementById('info');
-const batteryNum = document.getElementById('battery-num');
+const gamePanel = document.getElementById('game-panel');
+const batteryInfo = document.getElementById('battery-info');
 
 startBtn.addEventListener('click',
   function() {
@@ -50,6 +50,7 @@ const shooterHpBar = document.getElementById('hp');
 const prop = document.getElementById('prop');
 const propImg = document.getElementById('prop__img');
 const propLastTime = document.getElementById('prop__last-time');
+const batteryNum = document.getElementById('battery-num');
 
 
 
@@ -201,6 +202,7 @@ class Game {
   constructor(args) {
     const def = {
       isGameStart: true,
+      isGameEnd: false,
       // isGameStart: false,
       shooter: null,
       currentLevel: 1,
@@ -272,6 +274,9 @@ class Game {
     requestAnimationFrame(() => { this.render() });
   }
   update() {
+    if (!this.shooter.HP) {
+      this.endGame();
+    }
     time += 1;
     if (this.isGameStart) {
       // 判斷現在是第幾關
@@ -304,7 +309,11 @@ class Game {
       // 產生道具
       this.generateProp();
     }
-    setTimeout(() => { this.update() }, 1000 / updateFPS);
+    if (!this.isGameEnd) {
+      setTimeout(() => {
+        this.update();
+      }, 1000 / updateFPS);
+    }
   }
   // 繪製封面
   drawCover() {
@@ -362,9 +371,15 @@ class Game {
   startGame() {
     this.isGameStart = true;
     cover.style.display = 'none';
-    gameInfo.style.display = 'block';
+    gamePanel.style.display = 'block';
     this.shooter = new Shooter();
     canvas.style.cursor = 'pointer';
+  }
+  // 遊戲結束
+  endGame() {
+    // console.log(batteryNum);
+    this.isGameEnd = true;
+    batteryInfo.style.opacity = 0;
   }
   // 產生道具
   generateProp() {
@@ -377,10 +392,10 @@ class Game {
     //   axisRotateR: 200,
     //   axisRotateAngle: 40,
     // }));
-    // circles.push(new Circle({
-    //   axisRotateR: 240,
-    //   axisRotateAngle: 0,
-    // }));
+    circles.push(new Circle({
+      axisRotateR: 240,
+      axisRotateAngle: 0,
+    }));
     // triangles.push(new Triangle({
     //   axisRotateR: 280,
     //   // axisRotateAngle 與 rotate 必須相同
@@ -964,9 +979,11 @@ class Shooter {
       shieldLineW: 4,
       rotateAngle: 0,
       bullets: [],
-      HP: 9,
+      // HP: 9,
+      HP: 1,
       statuses: [],
       isAttacked: false,
+      beforeShootTime: new Date(),
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1021,7 +1038,7 @@ class Shooter {
       // const shieldR = this.r + 36;
       ctx.beginPath();
       // 如果 shooter 狀態為 shield，護盾變為 180°
-      if (!judgeShooterStatus('shield')) {
+    if (!this.judgeStatus('shield')) {
         ctx.arc(0, 0, this.shieldR, 135 * degToPi + this.rotateAngle, 225 * degToPi + this.rotateAngle);
       } else {
         ctx.arc(0, 0, this.shieldR, 90 * degToPi + this.rotateAngle, 270 * degToPi + this.rotateAngle);
@@ -1050,7 +1067,9 @@ class Shooter {
       ctx.restore();
     ctx.restore();
     // 發射子彈
-    this.shoot();
+    this.bullets.forEach((bullet) => {
+      bullet.draw();
+    });
   }
   update() {
     this.rotateAngle = mouseMoveAngle;
@@ -1059,9 +1078,40 @@ class Shooter {
     });
   }
   shoot() {
-    this.bullets.forEach((bullet) => {
-      bullet.draw();
-    });
+    const shootTime = new Date();
+    if (shootTime - beforeShootTime > 400) {
+      let bulletNum;
+      // 如果 shooter 狀態為 double，每次射兩發，兩發之間隔 0.16 秒
+      if (!this.judgeStatus('double')) {
+        bulletNum = 1;
+      } else {
+        bulletNum = 2;
+      }
+      for (let i = 0; i < bulletNum; i++) {
+        if (!this.judgeStatus('wave')) {
+          setTimeout(() => {
+            this.bullets.push(new ShooterBullet({
+              // 34 + 12 + 16
+              // p: new Vec2(62, 0),
+              axisRotateR: 62,
+              rotateAngle: mouseMoveAngle,
+            }));
+          }, 160 * i);
+        } else {
+          setTimeout(() => {
+            this.bullets.push(new ShooterBullet({
+              waveLength: Math.random() * 40 + 40,
+              waveFreq: Math.random() * 0.2 + 0.2,
+              waveAmp: Math.random() * 4 + 4,
+              waveFlow: Math.random() * 4 + 4,
+              axisRotateR: 70,
+              rotateAngle: mouseMoveAngle,
+            }));
+          }, 160 * i);
+        }
+      }
+      beforeShootTime = shootTime;
+    }
   }
   getProp(propName) {
     // 持續秒數
@@ -1094,15 +1144,18 @@ class Shooter {
       }
     }, lastTime);
     // 如果 shooter 狀態為 heart，就恢復一個愛心
-    if (judgeShooterStatus('heart')) {
+    if (this.judgeStatus('heart')) {
       this.recoverOneHeart();
     }
     // 如果 shooter 狀態為 crackdown，就發出清場效果
-    if (judgeShooterStatus('crackdown')) {
+    if (this.judgeStatus('crackdown')) {
       this.drawCrackdownEffect();
     }
     // 顯示道具效果持續時間
     this.displayPropInfo(propName, lastTime);
+  }
+  judgeStatus(shooterStatus) {
+    return this.statuses.find((status) => status === shooterStatus);
   }
   drawCrackdownEffect() {
     let crackdownR = 1;
@@ -1129,12 +1182,16 @@ class Shooter {
   }
   // 恢復一個愛心命
   recoverOneHeart() {
+    this.HP += 3;
     const heartWrapper = document.getElementById('heart-wrapper');
     const heart = document.createElement('DIV');
     heart.classList.add('panel__game-heart');
     heartWrapper.insertBefore(heart, heartWrapper.firstChild);
   }
   displayPropInfo(propName, lastTime) {
+    if (propName === 'crackdown' || propName === 'heart') {
+      return;
+    }
     prop.style.opacity = 1;
     propImg.src = `../../src/assets/${propName}.svg`;
     lastTime = lastTime / 1000;
@@ -1148,10 +1205,6 @@ class Shooter {
       setTimeout(minusLastTime, 1000);
     }, 1000);
   }
-}
-
-function judgeShooterStatus(shooterStatus) {
-  return game.shooter.statuses.find((status) => status === shooterStatus);
 }
 
 // 以 x 為底的 y 的對數：logxy
@@ -1183,7 +1236,7 @@ class ShooterBullet {
       ctx.translate(gameW / 2, gameH / 2);
       ctx.rotate(this.rotateAngle);
       // ctx.translate(this.p.x, this.p.y);
-      if (!judgeShooterStatus('wave')) {
+      if (!game.shooter.judgeStatus('wave')) {
         // 殘影
         ctx.beginPath();
         ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
@@ -1222,7 +1275,7 @@ class ShooterBullet {
     let anglePanFn;
     let shotRRangeFn;
     // 一般類型
-    if (!judgeShooterStatus('wave')) {
+    if (!game.shooter.judgeStatus('wave')) {
       const bulletMoveLength = this.axisRotateR + this.bodyLength;
       // 判斷子彈有無射中圓形
       circles.forEach((circle, cirIdx) => {
@@ -1930,45 +1983,18 @@ function handleMouseMove(evt) {
 };
 
 canvas.addEventListener('click', handleClick);
+window.addEventListener('keyup', handleKeyup);
 
 let beforeShootTime = new Date();
 function handleClick() {
-  const shootTime = new Date();
-  if (shootTime - beforeShootTime > 400) {
-    let bulletNum;
-    // 如果 shooter 狀態為 double，每次射兩發，兩發之間隔 0.16 秒
-    if (!judgeShooterStatus('double')) {
-      bulletNum = 1;
-    } else {
-      bulletNum = 2;
-    }
-    for (let i = 0; i < bulletNum; i++) {
-      if (!judgeShooterStatus('wave')) {
-        setTimeout(() => {
-          game.shooter.bullets.push(new ShooterBullet({
-            // 34 + 12 + 16
-            // p: new Vec2(62, 0),
-            axisRotateR: 62,
-            rotateAngle: mouseMoveAngle,
-          }));
-        }, 160 * i);
-      } else {
-        setTimeout(() => {
-          game.shooter.bullets.push(new ShooterBullet({
-            waveLength: Math.random() * 40 + 40,
-            waveFreq: Math.random() * 0.2 + 0.2,
-            waveAmp: Math.random() * 4 + 4,
-            waveFlow: Math.random() * 4 + 4,
-            axisRotateR: 70,
-            rotateAngle: mouseMoveAngle,
-          }));
-        }, 160 * i);
-      }
-    }
-    beforeShootTime = shootTime;
-  }
+  game.shooter.shoot();
 };
 
+function handleKeyup(evt) {
+  if (evt.key === 's') {
+    game.shooter.shoot();
+  }
+}
 
 // function handleMouseUp(evt) {
 //   mouseUpPos = mouseMovePos.clone();

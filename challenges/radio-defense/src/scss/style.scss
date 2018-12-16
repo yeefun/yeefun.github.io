@@ -25,7 +25,7 @@ canvas {
 
 .container {
   position: relative;
-  color: #fff;
+  color: #eee;
   // font-family: Yantramanav, sans-serif;
   user-select: none;
 }
@@ -38,7 +38,7 @@ canvas {
   height: 100%;
   top: 0;
   left: 0;
-  pointer-events: none;
+  // pointer-events: none;
   &__cover {
     height: 100%;
     display: none;
@@ -47,6 +47,12 @@ canvas {
       top: 37%;
       left: 50%;
       transform: translateX(-50%);
+      & .battery {
+        // width: 25.5px;
+        width: 25px;
+        vertical-align: bottom;
+        margin-right: 10px;
+      }
     }
     &-circle {
       position: absolute;
@@ -62,7 +68,25 @@ canvas {
       &--inner {
         width: 368px;
         height: 368px;
-        border: 1.6px solid #fff;
+        border: 1.6px solid #eee;
+      }
+    }
+    & button {
+      width: 112px;
+      height: 34px;
+      line-height: 30px;
+      box-shadow: 0 0 4px rgba(#eee, 0.8);
+      position: absolute;
+      top: 60.2%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 18px;
+      font-size: 1.6rem;
+      animation: shine 1.2s infinite ease-out alternate;
+      @keyframes shine {
+        100% {
+          box-shadow: 0 0 12px rgba(#eee, 0.8);
+        }
       }
     }
   }
@@ -104,6 +128,13 @@ canvas {
           bottom: 12px;
           display: flex;
           align-items: flex-start;
+          & img {
+            // width: 25.5px;
+            width: 25px;
+            position: relative;
+            margin-right: 12px;
+            top: -8px;
+          }
           & p:first-child {
             font-size: 1.4rem;
           }
@@ -177,13 +208,14 @@ canvas {
     &-prop {
       display: flex;
       align-items: center;
-      border: 0.8px solid #fff;
+      border: 0.8px solid #eee;
       padding: 6px 18px;
       // display: none;
-      // opacity: 0;
+      opacity: 0;
       // height: 32px;
       // box-sizing: border-box;
       border-radius: 4px;
+      transition: opacity 0.2s ease-in;
       & img {
         width: 20px;
         height: auto;
@@ -195,10 +227,48 @@ canvas {
         // font-weight: 300;
       }
     }
-    // &-name {
-    //   font-size: 2.4rem;
-    //   font-size: 300;
-    // }
+    &-end {
+      background-color: #001d2e;
+      display: flex;
+      align-items: center;
+      font-size: 2.4rem;
+      font-weight: 300;
+      border: 0.8px solid #eee;
+      // padding: 24px 64px;
+      padding: 28px 56px 32px 88px;
+      border-radius: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      & > div {
+        flex-shrink: 0;
+        position: relative;
+        top: 4px;
+      }
+      & p:first-child {
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+      }
+      & img {
+        width: 56px;
+        transform: rotate(45deg);
+        margin-right: 64px;
+      }
+      & span {
+        font-size: 3.2rem;
+        margin-right: 4px;
+        font-weight: 500;
+      }
+      & button {
+        border-radius: 16px;
+        font-size: 1.6rem;
+        width: 88px;
+        height: 30px;
+        line-height: 26px;
+        margin-top: 16px;
+      }
+    }
   }
 }
 
@@ -208,26 +278,25 @@ canvas {
   position: absolute;
   bottom: 20px;
   left: 24px;
-  color: #fff;
+  color: #eee;
   font-size: 1.6rem;
   line-height: 1.6;
 }
 
-.battery {
-  width: 25.5px;
-  // height: 51px;
-  // height: auto;
-  vertical-align: bottom;
-  margin-right: 10px;
-  &--panel {
-    position: relative;
-    margin-right: 12px;
-    top: -8px;
-  }
-}
+// .battery {
+//   width: 25.5px;
+//   vertical-align: bottom;
+  // margin-right: 10px;
+  // &--panel {
+  //   position: relative;
+  //   margin-right: 12px;
+  //   top: -8px;
+  // }
+// }
 .logo {
   // position: absolute;
-  width: 51px;
+  // width: 51px;
+  width: 50px;
   // height: 64.6px;
   // height: auto;
   vertical-align: bottom;
@@ -242,6 +311,21 @@ canvas {
   // }
 }
 
+button {
+  outline: none;
+  background-color: transparent;
+  color: #eee;
+  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
+  cursor: pointer;
+  font-weight: 300;
+  border: 1px solid #eee;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out;
+  &:hover {
+    background-color: #eee;
+    color: #001d2e;
+  }
+}
+
 h1 {
   position: absolute;
   top: 50.2%;
@@ -250,39 +334,6 @@ h1 {
   font-size: 2.4rem;
   // font-weight: 300;
   // letter-spacing: 0.4px;
-}
-
-button {
-  width: 112px;
-  height: 34px;
-  line-height: 30px;
-  box-shadow: 0 0 4px rgba(#fff, 0.8);
-  outline: none;
-  position: absolute;
-  top: 60.2%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: transparent;
-  border: 1px solid #fff;
-  // padding: 6px 20px;
-  color: #fff;
-  border-radius: 18px;
-  font-size: 1.6rem;
-  font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
-  cursor: pointer;
-  // font-weight: 300;
-  transition: background-color 0.5s ease-out, color 0.5s ease-out;
-  animation: shine 1.2s infinite ease-out alternate;
-  @keyframes shine {
-    100% {
-      box-shadow: 0 0 12px rgba(#fff, 0.8);
-    }
-  }
-  &:hover {
-    background-color: #fff;
-    color: #001d2e;
-    // border-radius: 8px;
-  }
 }
 
 .mr-0 {

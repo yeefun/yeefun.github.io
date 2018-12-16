@@ -28,7 +28,7 @@
             <p>請從他們手中奪回能量電池！</p>
           </div>
         </section>
-        <section class="panel__game" id="info">
+        <section class="panel__game" id="game-panel">
           <div class="panel__game-part-center">
             <div class="panel__game-time">00:43”</div>
             <div class="panel__game-alert">
@@ -46,10 +46,17 @@
             </div>
           </div>
           <div class="panel__game-part-top-left"><img class="logo" src="../../src/assets/R.svg" alt=""/></div>
-          <div class="panel__game-part-bottom-right"><img class="battery battery--panel" src="../../src/assets/battery.svg" alt=""/>
+          <div class="panel__game-part-bottom-right" id="battery-info"><img class="battery" src="../../src/assets/battery.svg" alt=""/>
             <div>
               <p>已回收</p>
               <p><span id="battery-num">0</span>個能量電池</p>
+            </div>
+          </div>
+          <div class="panel__game-end"><img src="../../src/assets/battery.svg" alt=""/>
+            <div>
+              <p>你回收了</p>
+              <p><span>27</span>個能量電池</p>
+              <button type="button">Restart</button>
             </div>
           </div>
         </section>
