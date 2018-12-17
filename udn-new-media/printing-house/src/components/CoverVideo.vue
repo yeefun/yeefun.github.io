@@ -124,7 +124,7 @@ export default {
           eventValue: this.seekedNem,
         });
         // GA: 讀者跳看影片跳至第幾秒？
-        const skipToTimes = this.skipToTimes[0] ? `跳看至第 ${this.skipToTimes.join(', ')} 秒` : '無跳看';
+        const skipToTimes = this.skipToTimes.length ? `跳看至第 ${this.skipToTimes.join(', ')} 秒` : '無跳看';
         window.ga('newmedia.send', {
           hitType: 'event',
           eventCategory: 'Video',
