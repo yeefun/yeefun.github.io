@@ -448,38 +448,39 @@ function () {
   }, {
     key: "setLevelOne",
     value: function setLevelOne() {
-      this.props.push(new Prop({
-        src: '../../src/assets/wave.svg',
-        axisRotateR: 200,
-        axisRotateAngle: 40
-      }));
-      this.circles.push(new Circle({
-        axisRotateR: 240,
-        axisRotateAngle: 40,
-        rotate: 235
-      }));
-      this.triangles.push(new Triangle({
-        axisRotateR: 280,
-        // axisRotateAngle 與 rotate 必須相同
-        axisRotateAngle: 230,
-        rotate: 230
-      })); // this.polygons.push(new Polygon({
-      //   axisRotateR: {
-      //     whole: 280,
-      //     big: 280,
-      //     small: 280,
-      //   },
-      //   axisRotateAngle: {
-      //     whole: 210,
-      //     big: 210,
-      //     small: 210,
-      //   },
-      //   rotate: {
-      //     whole: 56,
-      //     big: 56,
-      //     small: 56,
-      //   },
+      // this.props.push(new Prop({
+      //   src: '../../src/assets/wave.svg',
+      //   axisRotateR: 200,
+      //   axisRotateAngle: 40,
       // }));
+      // this.circles.push(new Circle({
+      //   axisRotateR: 240,
+      //   axisRotateAngle: 40,
+      //   rotate: 235,
+      // }));
+      // this.triangles.push(new Triangle({
+      //   axisRotateR: 280,
+      //   // axisRotateAngle 與 rotate 必須相同
+      //   axisRotateAngle: 230,
+      //   rotate: 230,
+      // }));
+      this.polygons.push(new Polygon({
+        axisRotateR: {
+          whole: 280,
+          big: 280,
+          small: 280
+        },
+        axisRotateAngle: {
+          whole: 210,
+          big: 210,
+          small: 210
+        },
+        rotate: {
+          whole: 56,
+          big: 56,
+          small: 56
+        }
+      }));
     }
   }]);
 
@@ -903,9 +904,9 @@ function () {
         small: 1
       },
       axisRotateRV: {
-        whole: 0.8,
-        big: 0.8,
-        small: 0.8
+        whole: 4.8,
+        big: 4.8,
+        small: 4.8
       },
       axisRotateAngleV: {
         whole: 0.4,
@@ -1069,7 +1070,7 @@ function () {
         this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
         this.rotate.whole = this.rotate.big = this.rotate.small += this.rotateV.whole; // 當多邊形撞上 shooter
 
-        enemyHitShooter(game.polygons, idx, this.axisRotateR.whole, this.axisRotateAngle.whole);
+        enemyHitShooter(game.polygons, idx, 'whole', this.axisRotateR.whole, this.axisRotateAngle.whole);
       } else {
         if (!this.isSplitedMove) {
           // const rotateOriginPos = 90 - 70;
@@ -1091,13 +1092,13 @@ function () {
 
         if (this.HP.big) {
           this.axisRotateR.big -= this.axisRotateRV.big;
-          enemyHitShooter(game.polygons, idx, this.axisRotateR.big, this.axisRotateAngle.big, this.HP, 'big');
+          enemyHitShooter(game.polygons, idx, 'big', this.axisRotateR.big, this.axisRotateAngle.big);
         } // 當小分裂撞上 shooter
 
 
         if (this.HP.small) {
           this.axisRotateR.small -= this.axisRotateRV.small;
-          enemyHitShooter(game.polygons, idx, this.axisRotateR.small, this.axisRotateAngle.small, this.HP, 'small');
+          enemyHitShooter(game.polygons, idx, 'small', this.axisRotateR.small, this.axisRotateAngle.small);
         }
       } // if (!this.isInBoundary) {
       //   this.p.x = -48;
@@ -1126,25 +1127,30 @@ function () {
 }(); // 敵人撞擊 shooter 判定
 
 
-function enemyHitShooter(enemies, enemyIdx, type, enemyAxisRotateR, enemyAxisRotateAngle, splitedPolygonHP, splitedPolygonName) {
-  // const shooterR = 34;
-  // const shieldR = shooterR + 36;
-  // const shooterInnerCirLineW = 6;
-  // const shieldLineW = 4;
+function enemyHitShooter(enemies, enemyIdx, type, enemyAxisRotateR, enemyAxisRotateAngle) {
   var enemy = enemies[enemyIdx];
   var shooter = game.shooter;
   var shieldAngleRange = Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) >= 135 * degToPi && Math.abs(mouseMoveAngle - enemyAxisRotateAngle * degToPi) <= 225 * degToPi; // 判斷是多邊形或其它敵人撞上 shooter
 
   var judgeWhichEnemyHit = function judgeWhichEnemyHit() {
-    if (!splitedPolygonName) {
+    if (type !== 'big' && type !== 'small') {
       enemies.splice(enemyIdx, 1); // 移除敵人效果
 
-      var colorRGB = type === 'circle' ? '245, 175, 95' : '54, 118, 187';
-      enemyDieEffect(enemy.r, originalPos(enemyAxisRotateR, enemyAxisRotateAngle).x, originalPos(enemyAxisRotateR, enemyAxisRotateAngle).y, colorRGB);
+      if (type !== 'whole') {
+        var colorRGB = type === 'circle' ? '245, 175, 95' : '54, 118, 187';
+        enemyDieEffect(enemy.r, originalPos(enemyAxisRotateR, enemyAxisRotateAngle).x, originalPos(enemyAxisRotateR, enemyAxisRotateAngle).y, colorRGB);
+      } else {
+        var polygonR = (34 + 22) / 2;
+        enemyDieEffect(polygonR, enemy.originalPos(type).x, enemy.originalPos(type).y, '231, 70, 93');
+      }
     } else {
-      splitedPolygonName === 'big' ? splitedPolygonHP.big -= 1 : splitedPolygonHP.small -= 1;
+      enemy.HP[type] -= 1;
 
-      if (!splitedPolygonHP.big && !splitedPolygonHP.small) {
+      var _polygonR = type === 'big' ? (34 + 22) / 2 : (23 + 21) / 2;
+
+      enemyDieEffect(_polygonR, enemy.originalPos(type).x, enemy.originalPos(type).y, '231, 70, 93');
+
+      if (!enemy.HP.big && !enemy.HP.small) {
         enemies.splice(enemyIdx, 1);
       }
     }
