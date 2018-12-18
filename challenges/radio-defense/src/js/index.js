@@ -202,9 +202,9 @@ let game;
 class Game {
   constructor(args) {
     const def = {
-      isGameStart: true,
-      isGameEnd: false,
-      // isGameStart: false,
+      isStart: true,
+      // isEnd: false,
+      // isStart: false,
       shooter: null,
       currentLevel: 1,
       isInLevel1: false,
@@ -213,7 +213,12 @@ class Game {
       circles: [],
       triangles: [],
       polygons: [],
-      subTriangles: []
+      subTriangles: [],
+      isPause: false,
+      blockV: {
+        x: -2,
+        y: 2,
+      }
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -240,16 +245,25 @@ class Game {
     //   },
     //   scale: 1.25,
     // });
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('click', handleClick);
+    window.addEventListener('keyup', handleKeyup);
+
     this.startGame();
     this.render();
     this.update();
+    // 初始化方格移動速率與計時器
+    this.setBlockV();
   }
   render() {
+    // if (this.isPause) {
+    //   return;
+    // }
     ctx.fillStyle = globalColor.blueDark;
     ctx.fillRect(0, 0, gameW, gameH);
-    if (this.isGameStart) {
-      // 繪製遊戲介面
-      this.drawPanel();
+    // if (this.isStart) {
+      // 繪製方格
+      this.drawBlock();
       // 繪製 shooter
       this.shooter.draw();
       // 繪製每個 circle
@@ -271,19 +285,26 @@ class Game {
       // 繪製每個 prop（道具）
       this.props.forEach((prop) => {
         prop.draw();
-      })
-    } else {
+      });
+    // } else {
       // this.startGame();
-      this.drawCover();
-    }
-    requestAnimationFrame(() => { this.render() });
+      // this.drawCover();
+    // }
+    // if (!this.isEnd) {
+      requestAnimationFrame(() => {
+        this.render()
+      });
+    // }
   }
   update() {
+    // if (this.isPause) {
+    //   return;
+    // }
     if (!this.shooter.HP) {
       this.endGame();
     }
     time += 1;
-    if (this.isGameStart) {
+    if (this.isStart && !this.isPause) {
       // 判斷現在是第幾關
       if (this.currentLevel === 1 && !this.isInLevel1) {
         this.setLevelOne();
@@ -314,11 +335,11 @@ class Game {
       // 產生道具
       this.generateProp();
     }
-    if (!this.isGameEnd) {
+    // if (!this.isEnd) {
       setTimeout(() => {
         this.update();
       }, 1000 / updateFPS);
-    }
+    // }
   }
   // 繪製封面
   drawCover() {
@@ -365,29 +386,56 @@ class Game {
     //   ctx.fill();
     // ctx.restore();
   }
-  // 繪製遊戲介面
-  drawPanel() {
-    // drawBattery({
-    //   x: gameW - 152,
-    //   y: gameH - 62,
-    // });
+  // 畫方格
+  drawBlock() {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+    ctx.lineWidth = 0.4;
+    // 畫橫列
+    for (let i = 0; i < 18; i += 1) {
+      ctx.moveTo(i * 56 + ((time * this.blockV.x) % 56), 0);
+      ctx.lineTo(i * 56 + ((time * this.blockV.x) % 56), gameH);
+    }
+    // 畫直行
+    for (let i = 0; i < 14; i += 1) {
+      ctx.moveTo(0, i * 52 + ((time * this.blockV.y) % 52));
+      ctx.lineTo(gameW, i * 52 + ((time * this.blockV.y) % 52));
+    }
+    ctx.stroke();
+  }
+  // 設定方格移動速率
+  setBlockV() {
+    setTimeout(() => {
+      this.blockV.x = Math.random() * 8 - 4;
+      this.blockV.y = Math.random() * 8 - 4;
+      this.setBlockV();
+    }, 8000);
   }
   // 開始遊戲（當讀者按下 'Start Play' 按鈕）
   startGame() {
-    this.isGameStart = true;
+    // this.isEnd = false;
+    this.isStart = true;
     cover.style.display = 'none';
     panel.style.pointerEvents = 'none';
     gamePanel.style.display = 'block';
-    this.shooter = new Shooter();
     canvas.style.cursor = 'pointer';
+    result.style.opacity = 0;
+    this.shooter = new Shooter();
   }
   // 遊戲結束
   endGame() {
-    this.isGameEnd = true;
+    // this.isEnd = true;
+    this.isStart = false;
     batteryInfo.style.opacity = 0;
     resultNum.textContent = this.batteryNum;
     result.style.opacity = 1;
     panel.style.pointerEvents = 'auto';
+  }
+  // 暫停遊戲
+  pauseGame() {
+    this.isPause = this.isPause ? false : true;
+    // this.render();
+    // this.update();
   }
   // 產生道具
   generateProp() {
@@ -396,7 +444,7 @@ class Game {
   // 設定第一關
   setLevelOne() {
     // this.props.push(new Prop({
-    //   src: '../../src/assets/wave.svg',
+    //   src: '../../src/assets/crackdown.svg',
     //   axisRotateR: 200,
     //   axisRotateAngle: 40,
     // }));
@@ -744,17 +792,24 @@ class Triangle {
 
 function enemyDieEffect(enemyR, effectX, effectY, colorRGB) {
   let dieTime = 1;
-  const effect = () => {
-    dieTime += 1;
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(${colorRGB}, ${(32 - dieTime) / 30})`;
-    ctx.shadowColor = `rgba(${colorRGB}, 0.48)`;
-    ctx.shadowBlur = 2;
-    ctx.lineWidth = 4;
-    const effectR = enemyR * baseLog(3, (((dieTime - 2) / 30) * 8) + 1);
-    ctx.arc(effectX, effectY, effectR, 0, Math.PI * 2);
-    ctx.stroke();
-    if (dieTime < 32) {
+  let effect = () => {
+    // FIXME 暫停後再啟動，效果就會直接消失，原因不明
+    if (!game.isPause) {
+      dieTime += 1;
+      ctx.beginPath();
+      ctx.save();
+        ctx.strokeStyle = `rgba(${colorRGB}, ${(48 - dieTime) / 46})`;
+        ctx.fillStyle = `rgba(${colorRGB}, ${(48 - dieTime) / 230})`;
+        ctx.shadowColor = `rgba(${colorRGB}, 0.48)`;
+        ctx.shadowBlur = 2;
+        ctx.lineWidth = 2;
+        const effectR = enemyR * baseLog(3, (((dieTime - 2) / 46) * 8) + 1);
+        ctx.arc(effectX, effectY, effectR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      ctx.restore();
+    }
+    if (dieTime < 48) {
       requestAnimationFrame(effect);
     }
   }
@@ -790,10 +845,15 @@ class Polygon {
         small: 1,
       },
       axisRotateRV: {
-        whole: 4.8,
-        big: 4.8,
-        small: 4.8,
+        whole: 2.4,
+        big: 2.4,
+        small: 2.4,
       },
+      // axisRotateRA: {
+      //   whole: 0.01,
+      //   big: 0.01,
+      //   small: 0.01,
+      // },
       axisRotateAngleV: {
         whole: 0.4,
         big: 0.4,
@@ -809,6 +869,7 @@ class Polygon {
       isSplitedMove: false,
       scale: 0,
       isAppearing: true,
+      isSpliting: false,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -958,20 +1019,29 @@ class Polygon {
           small: `-=${(Math.random() * 15 + 15) * rotateDirection}`,
           ease: Circ.easeOut,
         });
+        TweenLite.to(this.axisRotateR, 2.4, {
+          big: `+=${(Math.random() * 100 + 50)}`,
+          small: `+=${(Math.random() * 100 + 50)}`,
+          ease: Circ.easeOut,
+          onComplete: () => {
+            this.isSpliting = true;
+          }
+        });
         TweenLite.to(this.rotate, 3.2, {
           big: `-=${Math.random() * 90 + 180}`,
           small: `+=${Math.random() * 90 + 180}`,
-          ease: Power4.easeOut,
+          ease: Power2.easeOut,
         });
         this.isSplitedMove = true;
       }
       // 當大分裂撞上 shooter
-      if (this.HP.big) {
+      if (this.HP.big && this.isSpliting) {
         this.axisRotateR.big -= this.axisRotateRV.big;
+        // this.axisRotateRV.big += this.axisRotateRA.big;
         enemyHitShooter(game.polygons, idx, 'big', this.axisRotateR.big, this.axisRotateAngle.big);
       }
       // 當小分裂撞上 shooter
-      if (this.HP.small) {
+      if (this.HP.small && this.isSpliting) {
         this.axisRotateR.small -= this.axisRotateRV.small;
         enemyHitShooter(game.polygons, idx, 'small', this.axisRotateR.small, this.axisRotateAngle.small);
       }
@@ -1032,6 +1102,7 @@ function enemyHitShooter(enemies, enemyIdx, type, enemyAxisRotateR, enemyAxisRot
     // 當敵人撞上 shooter 護盾
   } else if (shieldAngleRange && (enemyAxisRotateR <= (shooter.shieldR + (shooter.shieldLineW / 2)))) {
     judgeWhichEnemyHit();
+    shooter.isProtect = true;
   }
 }
 
@@ -1057,6 +1128,7 @@ class Shooter {
       // HP: 1,
       statuses: [],
       isAttacked: false,
+      isProtect: false,
       beforeShootTime: new Date(),
     };
     Object.assign(def, args);
@@ -1071,6 +1143,7 @@ class Shooter {
         ctx.beginPath();
         ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
         ctx.shadowBlur = 16;
+        ctx.lineWidth = this.cirSolidLineW;
         ctx.arc(0, 0, this.r, 0, Math.PI * 2);
         if (!this.isAttacked) {
           ctx.strokeStyle = this.color;
@@ -1079,7 +1152,6 @@ class Shooter {
           this.isAttacked = false;
         }
         // ctx.strokeStyle = this.color;
-        ctx.lineWidth = this.cirSolidLineW;
         ctx.stroke();
         // 輪軸
         ctx.beginPath();
@@ -1111,13 +1183,19 @@ class Shooter {
       // 護盾
       // const shieldR = this.r + 36;
       ctx.beginPath();
+      ctx.lineWidth = this.shieldLineW;
       // 如果 shooter 狀態為 shield，護盾變為 180°
-    if (!this.judgeStatus('shield')) {
+      if (!this.judgeStatus('shield')) {
         ctx.arc(0, 0, this.shieldR, 135 * degToPi + this.rotateAngle, 225 * degToPi + this.rotateAngle);
       } else {
         ctx.arc(0, 0, this.shieldR, 90 * degToPi + this.rotateAngle, 270 * degToPi + this.rotateAngle);
       }
-      ctx.lineWidth = this.shieldLineW;
+      if (!this.isProtect) {
+        ctx.strokeStyle = this.color;
+      } else {
+        ctx.strokeStyle = globalColor.blue;
+        this.isProtect = false;
+      }
       ctx.stroke();
       // 砲口
       ctx.beginPath();
@@ -1242,6 +1320,7 @@ class Shooter {
         ctx.shadowBlur = 2;
         // 透明度從 1 到 0
         ctx.strokeStyle = `rgba(255, 255, 255, ${(100 - crackdownTime) / 98})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${(100 - crackdownTime) / 490})`;
         ctx.lineWidth = 5;
         /**
          * baseLog() 從 0 到 3
@@ -1250,6 +1329,7 @@ class Shooter {
          */
         const effectR = 176 * baseLog(3, (((crackdownTime - 2) / 98) * 26) + 1);
         ctx.arc(gameW / 2, gameH / 2, effectR, 0, Math.PI * 2);
+        ctx.fill();
         ctx.stroke();
       ctx.restore();
       // 清除敵人
@@ -2101,9 +2181,10 @@ let mouseMoveAngle = 0;
 // window.addEventListener('mousemove', handleMouseMove);
 // window.addEventListener('mouseup', handleMouseUp);
 // window.addEventListener('mousedown', handleMouseDown);
-canvas.addEventListener('mousemove', handleMouseMove);
+// canvas.addEventListener('mousemove', handleMouseMove);
 
 function handleMouseMove(evt) {
+  if (game.isPause) return;
   mouseMovePos.x = evt.x - ww / 2;
   mouseMovePos.y = evt.y - wh / 2;
   const angle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
@@ -2111,8 +2192,8 @@ function handleMouseMove(evt) {
   // mouseMoveAngle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
 };
 
-canvas.addEventListener('click', handleClick);
-window.addEventListener('keyup', handleKeyup);
+// canvas.addEventListener('click', handleClick);
+// window.addEventListener('keyup', handleKeyup);
 
 let beforeShootTime = new Date();
 function handleClick() {
@@ -2122,6 +2203,9 @@ function handleClick() {
 function handleKeyup(evt) {
   if (evt.key === 's') {
     game.shooter.shoot();
+  }
+  if (evt.key === 'p') {
+    game.pauseGame();
   }
 }
 
