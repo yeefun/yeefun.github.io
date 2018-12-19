@@ -28,6 +28,7 @@ canvas {
   color: #fff;
   // font-family: Yantramanav, sans-serif;
   user-select: none;
+  cursor: none;
 }
 
 .panel {
@@ -292,6 +293,7 @@ canvas {
   &-wrapper {
     display: flex;
     align-items: center;
+    // line-height: 0.2;
   }
   &-code {
     display: flex;
@@ -306,8 +308,8 @@ canvas {
     font-weight: 500;
   }
   &-name {
-    font-size: 1.6rem;
-    line-height: 0.2;
+    font-size: 1.4rem;
+    // line-height: 0.2;
   }
 }
 

@@ -46,7 +46,7 @@ html(lang="zh-Hant")
             .panel__game-heart-wrapper#heart-wrapper
               //- .panel__game-heart
               //- .panel__game-heart
-              .panel__game-heart.mr-0
+              //- .panel__game-heart.mr-0
             .panel__game-prop#prop
               img#prop__img(src="../../src/assets/heart.svg", alt="")
               p 0:<span id="prop__last-time">00</span>
@@ -61,16 +61,16 @@ html(lang="zh-Hant")
           .panel__game-keyboard
             .key-wrapper(style="margin-right: 20px;")
               .key-code S
-              .key-name Shot
+              .key-name 射擊
             .key-wrapper
               .key-code P
-              .key-name Pause
+              .key-name 暫停
           .panel__game-end#result
             img(src="../../src/assets/battery.svg", alt="")
             div
               p 你回收了
               p <span id="result-num">0</span>個能量電池
-              button(type="button") Restart
+              button#restart-btn(type="button") Restart
 
     link(rel="stylesheet" href="./css/style.css")
     script(src="./js/index.js")

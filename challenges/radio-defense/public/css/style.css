@@ -26,7 +26,8 @@ canvas {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
+          user-select: none;
+  cursor: none; }
 
 .panel {
   font-family: Yantramanav, "Microsoft JhengHei", sans-serif;
@@ -314,8 +315,7 @@ canvas {
   font-weight: 500; }
 
 .key-name {
-  font-size: 1.6rem;
-  line-height: 0.2; }
+  font-size: 1.4rem; }
 
 .intro {
   font-weight: 300;
