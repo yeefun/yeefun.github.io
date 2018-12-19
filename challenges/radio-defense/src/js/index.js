@@ -45,6 +45,9 @@ const batteryNum = document.getElementById('battery-num');
 const result = document.getElementById('result');
 const resultNum = document.getElementById('result-num');
 const panel = document.getElementById('panel');
+const container = document.getElementById('container');
+const keyboard = document.getElementById('keyboard');
+// const mouseStyle = document.getElementById('mouse-style');
 
 
 
@@ -188,8 +191,6 @@ class Game {
   constructor(args) {
     const def = {
       isStart: true,
-      // isEnd: false,
-      // isStart: false,
       shooter: null,
       currentLevel: 1,
       isInLevel1: false,
@@ -234,9 +235,15 @@ class Game {
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('click', handleClick);
     window.addEventListener('keyup', handleKeyup);
-    startBtn.addEventListener('click', game.startGame, { once: true });
-    restartBtn.addEventListener('click', game.restartGame);
-
+    startBtn.addEventListener('click', () => {
+      this.startGame();
+    }, {
+      once: true
+    });
+    // restartBtn.addEventListener('click', this.restartGame);
+    restartBtn.addEventListener('click', () => {
+      this.restartGame();
+    });
     this.startGame();
     this.render();
     this.update();
@@ -284,11 +291,8 @@ class Game {
     });
   }
   update() {
-    // if (!this.shooter.HP) {
-    //   this.endGame();
-    // }
     time += 1;
-    if (this.isStart && !this.isPause) {
+    if (this.isStart) {
       // 判斷現在是第幾關
       if (this.currentLevel === 1 && !this.isInLevel1) {
         this.setLevelOne();
@@ -391,7 +395,7 @@ class Game {
   drawMouse() {
     const mouseMovePosX = mouseMovePos.x + gameW / 2;
     const mouseMovePosY = mouseMovePos.y + gameH / 2;
-    const length = 16;
+    const length = 12;
     ctx.save();
       ctx.translate(mouseMovePosX, mouseMovePosY);
       ctx.strokeStyle = globalColor.white;
@@ -418,35 +422,64 @@ class Game {
   }
   // 開始遊戲（當讀者按下 'Start Play' 按鈕）
   startGame() {
-    // this.isEnd = false;
     this.isStart = true;
+    // 移除封面
     cover.style.display = 'none';
-    panel.style.pointerEvents = 'none';
+    // 顯示遊戲介面
     gamePanel.style.display = 'block';
-    // canvas.style.cursor = 'pointer';
-    // result.style.opacity = 0;
+    // 初始化 shooter
     this.shooter = new Shooter();
+    // 隱藏預設滑鼠
+    container.style.cursor = 'none';
+    // 讓滑鼠點擊無效
+    panel.style.pointerEvents = 'none';
   }
   restartGame() {
     this.isStart = true;
+    // 重設敵人
+    this.circles = [];
+    this.triangles = [];
+    this.polygons = [];
+    this.subTriangles = [];
+    // 電池資訊歸零
+    batteryNum.textContent = 0;
+    // 重設生命條
+    shooterHpBar.style.width = '216px';
+    // 初始化反患恢復生命條
+    this.recoverShooterHpBar();
+    // 重設 shooter
+    this.shooter = new Shooter();
+    // 隱藏結果
     result.style.opacity = 0;
-    batteryInfo.style.opacity = 1;
+    // 讓滑鼠點擊無效
     panel.style.pointerEvents = 'none';
-    
+    // 顯示獲得電池資訊
+    batteryInfo.style.opacity = 1;
+    // 顯示鍵盤指示
+    keyboard.style.opacity = 1;
+    this.isInLevel1 = false;
   }
   // 遊戲結束
   endGame() {
-    // this.isEnd = true;
     this.isStart = false;
+    // 隱藏獲得電池資訊
     batteryInfo.style.opacity = 0;
+    // 隱藏鍵盤指示
+    keyboard.style.opacity = 0;
+    // 貼上電池數量
     resultNum.textContent = this.batteryNum;
+    // 顯示結果
     result.style.opacity = 1;
+    // 顯示預設滑鼠
+    container.style.cursor = 'auto';
+    // 讓滑鼠可以點擊
     panel.style.pointerEvents = 'auto';
+    // 清除生命條恢復計時器
     clearTimeout(this.recoverHpTimer);
   }
   // 暫停遊戲
   pauseGame() {
-    this.isPause = this.isPause ? false : true;
+    this.isPause = !this.isPause;
   }
   // 產生道具
   generateProp() {
@@ -475,29 +508,29 @@ class Game {
       axisRotateAngle: 40,
       rotate: 235,
     }));
-    this.triangles.push(new Triangle({
-      axisRotateR: 280,
-      // axisRotateAngle 與 rotate 必須相同
-      axisRotateAngle: 230,
-      rotate: 230,
-    }));
-    this.polygons.push(new Polygon({
-      axisRotateR: {
-        whole: 280,
-        big: 280,
-        small: 280,
-      },
-      axisRotateAngle: {
-        whole: 210,
-        big: 210,
-        small: 210,
-      },
-      rotate: {
-        whole: 56,
-        big: 56,
-        small: 56,
-      },
-    }));
+    // this.triangles.push(new Triangle({
+    //   axisRotateR: 280,
+    //   // axisRotateAngle 與 rotate 必須相同
+    //   axisRotateAngle: 230,
+    //   rotate: 230,
+    // }));
+    // this.polygons.push(new Polygon({
+    //   axisRotateR: {
+    //     whole: 280,
+    //     big: 280,
+    //     small: 280,
+    //   },
+    //   axisRotateAngle: {
+    //     whole: 210,
+    //     big: 210,
+    //     small: 210,
+    //   },
+    //   rotate: {
+    //     whole: 56,
+    //     big: 56,
+    //     small: 56,
+    //   },
+    // }));
   }
 }
 
@@ -505,6 +538,9 @@ class Game {
 
 
 
+/* 
+ ** 敵人方法
+ */
 const enemyMethods = {
   // 死亡效果
   dieEffect(enemyR, effectX, effectY, colorRGB) {
@@ -699,7 +735,7 @@ class Circle {
     });
   }
   update(idx) {
-    // this.axisRotateR -= 4.8;
+    this.axisRotateR -= 1;
     // 更新圓形子彈
     this.bullets.forEach((bullet, idx, arr) => {
       bullet.update(idx, arr);
@@ -713,7 +749,6 @@ class Circle {
     const rotateTime = new Date();
     if (rotateTime - this.beforeRotateTime > 2000 * Math.random() + 2000) {
       this.isRotating = true;
-      // console.log(this.axisRotateAngle);
       TweenLite.to(this, 0.4, {
         // rotate: this.axisRotateAngle - 180,
         // rotate: this.axisRotateAngle % 360,

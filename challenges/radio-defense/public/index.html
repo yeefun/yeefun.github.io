@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.3/dat.gui.min.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="container">
       <canvas id="game" width="856" height="624"></canvas>
       <div class="panel" id="panel">
         <section class="panel__cover" id="cover">
@@ -50,7 +50,7 @@
               <p><span id="battery-num">0</span>個能量電池</p>
             </div>
           </div>
-          <div class="panel__game-keyboard">
+          <div class="panel__game-keyboard" id="keyboard">
             <div class="key-wrapper" style="margin-right: 20px;">
               <div class="key-code">S</div>
               <div class="key-name">射擊</div>

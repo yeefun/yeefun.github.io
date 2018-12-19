@@ -16,7 +16,7 @@ html(lang="zh-Hant")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.3/dat.gui.min.js")
 
   body
-    .container
+    .container#container
       canvas#game(width="856" height="624")
       .panel#panel
         section.panel__cover#cover
@@ -58,7 +58,7 @@ html(lang="zh-Hant")
             div
               p 已回收
               p <span id="battery-num">0</span>個能量電池
-          .panel__game-keyboard
+          .panel__game-keyboard#keyboard
             .key-wrapper(style="margin-right: 20px;")
               .key-code S
               .key-name 射擊
@@ -71,6 +71,8 @@ html(lang="zh-Hant")
               p 你回收了
               p <span id="result-num">0</span>個能量電池
               button#restart-btn(type="button") Restart
+      //- .mouse-style#mouse-style
+      //-   .mouse-circle
 
     link(rel="stylesheet" href="./css/style.css")
     script(src="./js/index.js")

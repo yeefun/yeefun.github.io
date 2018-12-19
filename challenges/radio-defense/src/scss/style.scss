@@ -28,7 +28,7 @@ canvas {
   color: #fff;
   // font-family: Yantramanav, sans-serif;
   user-select: none;
-  cursor: none;
+  // cursor: none;
 }
 
 .panel {
@@ -312,6 +312,39 @@ canvas {
     // line-height: 0.2;
   }
 }
+
+// .mouse {
+//   &-style {
+//     position: absolute;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     pointer-events: none;
+//     width: 16px;
+//     height: 16px;
+//     // z-index: 99;
+//     &:before, &:after {
+//       content: '';
+//       display: block;
+//       position: absolute;
+//       width: 16px;
+//       height: 1px;
+//       background-color: #fff;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//     }
+//     &:after {
+//       transform: translate(-50%, -50%) rotate(90deg);
+//     }
+//   }
+//   &-circle {
+//     width: 4px;
+//     height: 4px;
+//     background-color: #fff;
+//     border-radius: 50%;
+//   }
+// }
 
 .intro {
   // font-family: "Microsoft JhengHei", sans-serif;
