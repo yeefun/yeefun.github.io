@@ -300,9 +300,7 @@ function () {
       ctx.fillRect(0, 0, gameW, gameH); // if (this.isStart) {
       // 繪製方格
 
-      this.drawBlock(); // 繪製滑鼠
-
-      this.drawMouse(); // 繪製 shooter
+      this.drawBlock(); // 繪製 shooter
 
       this.shooter.draw(); // 繪製每個 circle
 
@@ -326,7 +324,9 @@ function () {
         prop.draw();
       }); // 繪製魔王
 
-      this.boss && this.boss.draw(); // } else {
+      this.boss && this.boss.draw(); // 繪製滑鼠
+
+      this.drawMouse(); // } else {
       // this.startGame();
       // this.drawCover();
       // }
@@ -581,7 +581,7 @@ function () {
     key: "setLevelOne",
     value: function setLevelOne() {
       this.boss = new Boss({
-        axisRotateR: 220,
+        axisRotateR: 240,
         axisRotateAngle: 90
       }); // this.props.push(new Prop({
       //   src: '../../src/assets/crackdown.svg',
@@ -1386,7 +1386,10 @@ function () {
     var def = {
       axisRotateR: 0,
       axisRotateAngle: 0,
-      rotate: 0
+      rotate: 0,
+      axisRotateRV: 1,
+      axisRotateAngleV: 1,
+      rotateV: 1
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1402,24 +1405,24 @@ function () {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(12, 0);
+      ctx.lineTo(11, 0);
       ctx.lineTo(18, 6);
       ctx.lineTo(18, 15);
       ctx.lineTo(-18, 15);
       ctx.lineTo(-18, 6);
-      ctx.lineTo(-12, 0);
+      ctx.lineTo(-11, 0);
       ctx.closePath();
       ctx.fill(); // 黃頭
 
-      ctx.fillStyle = globalColor.yellow;
+      ctx.fillStyle = globalColor.orange;
       ctx.beginPath();
       ctx.moveTo(0, 9);
-      ctx.lineTo(12, 9);
+      ctx.lineTo(11, 9);
       ctx.lineTo(18, 15);
-      ctx.lineTo(18, 34);
-      ctx.lineTo(-18, 34);
+      ctx.lineTo(18, 36);
+      ctx.lineTo(-18, 36);
       ctx.lineTo(-18, 15);
-      ctx.lineTo(-12, 9);
+      ctx.lineTo(-11, 9);
       ctx.closePath();
       ctx.fill(); // 右白肩
 
@@ -1427,9 +1430,9 @@ function () {
       ctx.beginPath();
       ctx.moveTo(18, -6);
       ctx.lineTo(18 + 8, -6);
-      ctx.lineTo(18 + 8 + 6, 15);
-      ctx.lineTo(18 + 8 + 6, 34 + 6);
-      ctx.lineTo(18, 34 + 6);
+      ctx.lineTo(18 + 8 + 8, 15);
+      ctx.lineTo(18 + 8 + 8, 36 + 6);
+      ctx.lineTo(18, 36 + 6);
       ctx.closePath();
       ctx.fill(); // 左白肩
 
@@ -1437,78 +1440,89 @@ function () {
       ctx.beginPath();
       ctx.moveTo(-18, -6);
       ctx.lineTo(-18 - 8, -6);
-      ctx.lineTo(-18 - 8 - 6, 15);
-      ctx.lineTo(-18 - 8 - 6, 34 + 6);
-      ctx.lineTo(-18, 34 + 6);
+      ctx.lineTo(-18 - 8 - 8, 15);
+      ctx.lineTo(-18 - 8 - 8, 36 + 6);
+      ctx.lineTo(-18, 36 + 6);
       ctx.closePath();
       ctx.fill(); // 右紅翼
 
       ctx.fillStyle = globalColor.red;
       ctx.beginPath();
-      ctx.moveTo(18 + 8 + 6, 9);
-      ctx.lineTo(18 + 8 + 6 + 8, 9);
-      ctx.lineTo(18 + 8 + 6 + 8 + 16, 34 + 6);
-      ctx.lineTo(18 + 8 + 6 + 8 + 16, 34 + 6 + 8);
-      ctx.lineTo(18 + 8 + 6, 34 + 6 + 8);
+      ctx.moveTo(18 + 8 + 8, 9);
+      ctx.lineTo(18 + 8 + 8 + 8, 9);
+      ctx.lineTo(18 + 8 + 8 + 8 + 16, 36 + 6);
+      ctx.lineTo(18 + 8 + 8 + 8 + 16, 36 + 6 + 8);
+      ctx.lineTo(18 + 8 + 8, 36 + 6 + 8);
       ctx.closePath();
       ctx.fill(); // 左藍翼
 
       ctx.fillStyle = globalColor.blue;
       ctx.beginPath();
-      ctx.moveTo(-18 - 8 - 6 + 4, 9);
-      ctx.lineTo(-18 - 8 - 6 - 8 + 4, 9);
-      ctx.lineTo(-18 - 8 - 6 - 8 - 16 + 4, 34 + 6);
-      ctx.lineTo(-18 - 8 - 6 - 8 - 16 + 4, 34 + 6 + 8);
-      ctx.lineTo(-18 - 8 - 6 + 4, 34 + 6 + 8);
+      ctx.moveTo(-18 - 8 - 8 + 4, 9);
+      ctx.lineTo(-18 - 8 - 8 - 8 + 4, 9);
+      ctx.lineTo(-18 - 8 - 8 - 8 - 16 + 4, 36 + 6);
+      ctx.lineTo(-18 - 8 - 8 - 8 - 16 + 4, 36 + 6 + 8);
+      ctx.lineTo(-18 - 8 - 8 + 4, 36 + 6 + 8);
       ctx.closePath();
       ctx.fill(); // 右灰風口
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.beginPath();
-      ctx.moveTo(18 + 8 + 6, 34 + 6 + 8);
-      ctx.lineTo(18 + 8 + 6, 34 + 6 + 8 + 6);
-      ctx.lineTo(18 + 8 + 6 + 16, 34 + 6 + 8 + 6);
-      ctx.lineTo(18 + 8 + 6 + 16, 34 + 6 + 8);
+      ctx.moveTo(18 + 8 + 8, 36 + 6 + 8);
+      ctx.lineTo(18 + 8 + 8, 36 + 6 + 8 + 6);
+      ctx.lineTo(18 + 8 + 8 + 16, 36 + 6 + 8 + 6);
+      ctx.lineTo(18 + 8 + 8 + 16, 36 + 6 + 8);
       ctx.fill(); // 左灰風口
 
       ctx.beginPath();
-      ctx.moveTo(-18 - 8 - 6 + 4, 34 + 6 + 8);
-      ctx.lineTo(-18 - 8 - 6 + 4, 34 + 6 + 8 + 6);
-      ctx.lineTo(-18 - 8 - 6 - 16 + 4, 34 + 6 + 8 + 6);
-      ctx.lineTo(-18 - 8 - 6 - 16 + 4, 34 + 6 + 8);
+      ctx.moveTo(-18 - 8 - 8 + 4, 36 + 6 + 8);
+      ctx.lineTo(-18 - 8 - 8 + 4, 36 + 6 + 8 + 6);
+      ctx.lineTo(-18 - 8 - 8 - 16 + 4, 36 + 6 + 8 + 6);
+      ctx.lineTo(-18 - 8 - 8 - 16 + 4, 36 + 6 + 8);
       ctx.fill(); // 右裝飾白圈
 
       ctx.strokeStyle = globalColor.white;
       ctx.lineWidth = 2.8;
       ctx.beginPath();
-      ctx.arc(18 + 8 + 6 + 11, 34 + 6 - 2, 4.4, 0, Math.PI * 2);
+      ctx.arc(18 + 8 + 8 + 11, 36 + 6 - 2, 4.4, 0, Math.PI * 2);
       ctx.stroke(); // 左裝飾黃叉
 
-      ctx.strokeStyle = globalColor.yellow; // ctx.lineWidth = 2.8;
+      ctx.strokeStyle = globalColor.orange; // ctx.lineWidth = 2.8;
 
       ctx.beginPath();
-      ctx.moveTo(-18 - 8 - 6 + 4 - 4, 9 + 16);
-      ctx.lineTo(-18 - 8 - 6 + 4 - 4 - 9.6, 9 + 16 + 9.6);
-      ctx.moveTo(-18 - 8 - 6 + 4 - 4 - 9.6, 9 + 16);
-      ctx.lineTo(-18 - 8 - 6 + 4 - 4, 9 + 16 + 9.6);
+      ctx.moveTo(-18 - 8 - 8 + 4 - 3.2, 9 + 16);
+      ctx.lineTo(-18 - 8 - 8 + 4 - 3.2 - 9.6, 9 + 16 + 9.6);
+      ctx.moveTo(-18 - 8 - 8 + 4 - 3.2 - 9.6, 9 + 16);
+      ctx.lineTo(-18 - 8 - 8 + 4 - 3.2, 9 + 16 + 9.6);
       ctx.stroke(); // 裝飾內透明頭
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.beginPath();
       ctx.moveTo(0, 9 + 8);
       ctx.lineTo(4, 9 + 8);
-      ctx.lineTo(14, 23);
-      ctx.lineTo(14, 34 - 8);
-      ctx.lineTo(-14, 34 - 8);
-      ctx.lineTo(-14, 23);
+      ctx.lineTo(14, 24);
+      ctx.lineTo(14, 36 - 8);
+      ctx.lineTo(-14, 36 - 8);
+      ctx.lineTo(-14, 24);
       ctx.lineTo(-4, 9 + 8);
+      ctx.closePath();
+      ctx.fill(); // 左裝飾透明四邊形
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.24)';
+      ctx.beginPath();
+      ctx.moveTo(-18 - 8 - 8 - 8 - 16 + 4 + 4, 36 + 6 - 8.25);
+      ctx.lineTo(-18 - 8 - 8 - 8 - 16 + 4, 36 + 6);
+      ctx.lineTo(-18 - 8 - 8 - 8 - 16 + 4, 36 + 6 + 8);
+      ctx.lineTo(-18 - 8 - 8 - 6 + 4, 36 + 6 + 8);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
   }, {
     key: "update",
-    value: function update() {}
+    value: function update() {// this.axisRotateAngle += this.axisRotateAngleV;
+      // this.rotate += this.rotateV;
+    }
   }]);
 
   return Boss;
@@ -1529,10 +1543,14 @@ function () {
       //   y: gameH / 2,
       // },
       color: globalColor.white,
-      r: 34 * 0.85,
-      shieldR: (34 + 36) * 0.85,
-      cirSolidLineW: 6 * 0.85,
-      shieldLineW: 4 * 0.85,
+      // r: 34 * 0.85,
+      r: 28.9,
+      // shieldR: (34 + 36) * 0.85,
+      shieldR: 59.5,
+      // cirSolidLineW: 6 * 0.85,
+      cirSolidLineW: 5.1,
+      // shieldLineW: 4 * 0.85,
+      shieldLineW: 3.4,
       rotateAngle: 0,
       bullets: [],
       // HP: 6,
@@ -1576,13 +1594,15 @@ function () {
       ctx.moveTo(0, 0);
       ctx.$triLineTo(this.r, 120, this.rotateAngle);
       ctx.moveTo(0, 0);
-      ctx.$triLineTo(this.r, 240, this.rotateAngle);
-      ctx.lineWidth = 3 * 0.85;
+      ctx.$triLineTo(this.r, 240, this.rotateAngle); // ctx.lineWidth = 3 * 0.85;
+
+      ctx.lineWidth = 2.55;
       ctx.stroke();
       ctx.restore(); // 輪圍外虛線
 
-      ctx.strokeStyle = this.color;
-      var outerR = this.r + 22 * 0.85;
+      ctx.strokeStyle = this.color; // const outerR = this.r + 22 * 0.85;
+
+      var outerR = this.r + 18.7;
 
       for (var i = 0; i < 360; i += 1) {
         var x1 = outerR * Math.cos(i * degToPi + this.rotateAngle);
@@ -1598,7 +1618,6 @@ function () {
           ctx.stroke();
         }
       } // 護盾
-      // const shieldR = this.r + 36;
 
 
       ctx.beginPath();
@@ -1623,17 +1642,26 @@ function () {
       ctx.save();
       ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
       ctx.shadowBlur = 16;
-      ctx.rotate(this.rotateAngle);
-      ctx.translate(this.r + 8, 0);
+      ctx.rotate(this.rotateAngle); // ctx.translate(this.r + 8, 0);
+
+      ctx.translate(this.r + 6.8, 0);
       ctx.moveTo(0, 0); // 下方長方形長 16、寬（高） 12
       // 上方梯形高 14、上邊寬 8
+      // ctx.lineTo(0, 8 * 0.85);
+      // ctx.lineTo(12 * 0.85, 8 * 0.85);
+      // ctx.lineTo(26 * 0.85, 4 * 0.85);
+      // ctx.lineTo(26 * 0.85, -4 * 0.85);
+      // ctx.lineTo(12 * 0.85, -8 * 0.85);
+      // ctx.lineTo(0, -8 * 0.85);
+      // 下方長方形長 13.6、寬（高） 10.2
+      // 上方梯形高 11.8、上邊寬 6.8
 
-      ctx.lineTo(0, 8 * 0.85);
-      ctx.lineTo(12 * 0.85, 8 * 0.85);
-      ctx.lineTo(26 * 0.85, 4 * 0.85);
-      ctx.lineTo(26 * 0.85, -4 * 0.85);
-      ctx.lineTo(12 * 0.85, -8 * 0.85);
-      ctx.lineTo(0, -8 * 0.85);
+      ctx.lineTo(0, 6.8);
+      ctx.lineTo(10.2, 6.8);
+      ctx.lineTo(22.1, 3.4);
+      ctx.lineTo(22.1, -3.4);
+      ctx.lineTo(10.2, -6.8);
+      ctx.lineTo(0, -6.8);
       ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
@@ -1674,7 +1702,8 @@ function () {
               _this10.bullets.push(new ShooterBullet({
                 // 34 + 12 + 16
                 // p: new Vec2(62, 0),
-                axisRotateR: 62,
+                // axisRotateR: 62 * 0.85,
+                axisRotateR: 52.7,
                 rotateAngle: mouseMoveAngle
               }));
             }, 160 * i);
@@ -1685,7 +1714,8 @@ function () {
                 waveFreq: Math.random() * 0.2 + 0.2,
                 waveAmp: Math.random() * 4 + 4,
                 waveFlow: Math.random() * 4 + 4,
-                axisRotateR: 70,
+                // axisRotateR: 70 * 0.85,
+                axisRotateR: 59.5,
                 rotateAngle: mouseMoveAngle
               }));
             }, 160 * i);
@@ -1882,7 +1912,8 @@ function () {
 
     var def = {
       // p: new Vec2(0, 0),
-      bodyLength: 15,
+      // bodyLength: 15 * 0.85,
+      bodyLength: 12.75,
       axisRotateR: 0,
       color: globalColor.white,
       v: 8,
@@ -1906,27 +1937,33 @@ function () {
       if (!game.shooter.judgeStatus('wave')) {
         // 殘影
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-        ctx.arc((-7 + this.axisRotateR) * 0.85, 0, 3 * 0.85, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; // ctx.arc(-7 * 0.85 + this.axisRotateR, 0, 3 * 0.85, 0, Math.PI * 2);
+
+        ctx.arc(-5.95 + this.axisRotateR, 0, 2.15, 0, Math.PI * 2);
         ctx.fill();
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.arc((-12 + this.axisRotateR) * 0.85, 0, 2 * 0.85, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // ctx.arc(-12 * 0.85 + this.axisRotateR, 0, 2 * 0.85, 0, Math.PI * 2);
+
+        ctx.arc(-10.2 + this.axisRotateR, 0, 1.7, 0, Math.PI * 2);
         ctx.fill();
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.arc((-15 + this.axisRotateR) * 0.85, 0, 1 * 0.85, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // ctx.arc(-15 * 0.85 + this.axisRotateR, 0, 1 * 0.85, 0, Math.PI * 2);
+
+        ctx.arc(-12.75 + this.axisRotateR, 0, 0.85, 0, Math.PI * 2);
         ctx.fill(); // 園底
 
         ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.arc((0 + this.axisRotateR) * 0.85, 0, 4 * 0.85, 0, Math.PI * 2);
+        ctx.fillStyle = this.color; // ctx.arc(0 + this.axisRotateR, 0, 4 * 0.85, 0, Math.PI * 2);
+
+        ctx.arc(0 + this.axisRotateR, 0, 3.4, 0, Math.PI * 2);
         ctx.fill(); // 尖頭
 
-        ctx.beginPath();
-        ctx.moveTo((3 + this.axisRotateR) * 0.85, 3 * 0.85);
-        ctx.lineTo((this.bodyLength + this.axisRotateR) * 0.85, 0);
-        ctx.lineTo((3 + this.axisRotateR) * 0.85, -3 * 0.85);
+        ctx.beginPath(); // ctx.moveTo(3 * 0.85 + this.axisRotateR, 3 * 0.85);
+
+        ctx.moveTo(2.55 + this.axisRotateR, 2.55);
+        ctx.lineTo(this.bodyLength + this.axisRotateR, 0); // ctx.lineTo(3 * 0.85 + this.axisRotateR, -3 * 0.85);
+
+        ctx.lineTo(2.55 + this.axisRotateR, -2.55);
         ctx.closePath();
         ctx.fill(); // 如果 shooter 狀態為 wave
       } else {
