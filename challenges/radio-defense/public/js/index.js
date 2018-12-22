@@ -342,7 +342,7 @@ function () {
 
       time += 1;
 
-      if (this.isStart) {
+      if (this.isStart && !this.isPause) {
         // 判斷現在是第幾關
         if (this.currentLevel === 1 && !this.isInLevel1) {
           this.setLevelOne();
@@ -581,14 +581,14 @@ function () {
     key: "setLevelOne",
     value: function setLevelOne() {
       this.boss = new Boss({
-        axisRotateR: 240,
+        axisRotateR: 200,
         axisRotateAngle: 90
-      }); // this.props.push(new Prop({
-      //   src: '../../src/assets/crackdown.svg',
-      //   axisRotateR: 200,
-      //   axisRotateAngle: 40,
-      // }));
-      // this.circles.push(new Circle({
+      });
+      this.props.push(new Prop({
+        src: '../../src/assets/wave.svg',
+        axisRotateR: 200,
+        axisRotateAngle: 40
+      })); // this.circles.push(new Circle({
       //   axisRotateR: 240,
       //   axisRotateAngle: 40,
       //   rotate: 235,
@@ -762,15 +762,17 @@ function () {
       r: 22,
       rotate: 0,
       scale: 0,
-      axisRotateRV: 0.1,
-      axisRotateAngleV: 0.4,
+      axisRotateRV: -0.4,
+      axisRotateAngleV: -0.8,
       rotateV: 0.4,
       color: globalColor.orange,
       HP: 2,
       bullets: [],
       beforeRotateTime: new Date(),
       isRotating: false,
-      isAppearing: true
+      isBeginAppear: true,
+      isAppear: true,
+      isBossGenerate: false
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -779,8 +781,8 @@ function () {
   _createClass(Circle, [{
     key: "draw",
     value: function draw() {
-      this.isAppearing && this.appear();
-      this.isAppearing = false;
+      // this.isAppearing && this.appear(this.isBossGenerate);
+      // this.isAppearing = false;
       var circleBigR = this.r + 5;
       var circleSmallR = this.r - 10;
       var subaxisRotateR = 14;
@@ -837,7 +839,13 @@ function () {
     value: function update(idx) {
       var _this6 = this;
 
-      this.axisRotateR -= 1; // 更新圓形子彈
+      this.isBeginAppear && this.appear(this.isBossGenerate);
+      this.isBeginAppear = false;
+
+      if (!this.isAppear) {
+        this.axisRotateR += this.axisRotateRV;
+      } // 更新圓形子彈
+
 
       this.bullets.forEach(function (bullet, idx, arr) {
         bullet.update(idx, arr);
@@ -899,7 +907,9 @@ function () {
     }
   }, {
     key: "appear",
-    value: function appear() {
+    value: function appear(isBossGenerate) {
+      var _this8 = this;
+
       TweenLite.to(this, 0.8, {
         scale: 1,
         ease: Back.easeOut.config(1.7)
@@ -908,6 +918,16 @@ function () {
         rotate: 0,
         ease: Back.easeOut.config(1.7)
       });
+
+      if (isBossGenerate) {
+        TweenLite.to(this, 1.6, {
+          axisRotateR: "+=".concat(Math.random() * 80 + 80),
+          ease: Power2.easeOut,
+          onComplete: function onComplete() {
+            _this8.isAppear = false;
+          }
+        });
+      }
     }
   }]);
 
@@ -946,7 +966,8 @@ function () {
       HP: 4,
       isReproduce: false,
       shootTimer: null,
-      isAppearing: true
+      isBeginAppear: true,
+      isBossGenerate: false
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -955,8 +976,8 @@ function () {
   _createClass(Triangle, [{
     key: "draw",
     value: function draw() {
-      this.isAppearing && this.appear();
-      this.isAppearing = false;
+      this.isBeginAppear && this.appear(this.isBossGenerate);
+      this.isBeginAppear = false;
       var triangleOuterBigR = this.r + 4;
       var triangleInnerBigR = this.r - 16;
       var triangleInnerSmallR = this.r - 22;
@@ -1009,7 +1030,7 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      var _this8 = this;
+      var _this9 = this;
 
       // this.axisRotateR -= 4.8;
       // 更新三角子彈
@@ -1020,10 +1041,10 @@ function () {
       var rotateAxisAngleTime = new Date();
       var randomRotateAngle;
 
-      if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > Math.random() * 16000 + 8000) {
+      if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > Math.random() * 8000 + 8000) {
         // 旋轉時不發射子彈
         if (this.shootTimer) clearTimeout(this.shootTimer);
-        randomRotateAngle = (Math.random() > 0.25 ? -1 : 1) * (30 * Math.random() + 45); // 以 0.8 秒移動
+        randomRotateAngle = (Math.random() > 0.25 ? 1 : -1) * (30 * Math.random() + 45); // 以 0.8 秒移動
 
         TweenLite.to(this, 0.8, {
           axisRotateAngle: "+=".concat(randomRotateAngle),
@@ -1035,11 +1056,11 @@ function () {
           ease: Power2.easeInOut,
           onComplete: function onComplete() {
             // 移動完後發射子彈
-            _this8.shoot(); // 發射一顆子彈後，每 2.4 - 10.4 秒發射第二發子彈
+            _this9.shoot(); // 發射一顆子彈後，每 2.4 - 10.4 秒發射第二發子彈
 
 
-            _this8.shootTimer = setTimeout(function () {
-              _this8.shoot();
+            _this9.shootTimer = setTimeout(function () {
+              _this9.shoot();
             }, Math.random() * 8000 + 2400);
           }
         });
@@ -1089,13 +1110,28 @@ function () {
     }
   }, {
     key: "appear",
-    value: function appear() {
+    value: function appear(isBossGenerate) {
       TweenLite.to(this, 0.8, {
         scale: 1,
         ease: Back.easeOut.config(1.7)
       });
+      var rotateNum = 0;
+
+      if (isBossGenerate) {
+        rotateNum = Math.random() * 40 + 40;
+        var rNum = Math.random() * 40 + 40;
+        TweenLite.to(this, 1.6, {
+          axisRotateAngle: "+=".concat(rotateNum),
+          axisRotateR: "+=".concat(rNum),
+          ease: Power2.easeOut // onComplete: () => {
+          //   this.isAppear = false;
+          // },
+
+        });
+      }
+
       TweenLite.to(this, 1.6, {
-        rotate: '+=360',
+        rotate: "+=".concat(rotateNum + 360),
         ease: Back.easeOut.config(1.7)
       });
     }
@@ -1161,8 +1197,9 @@ function () {
       isSplited: false,
       isSplitedMove: false,
       scale: 0,
-      isAppearing: true,
-      isSpliting: false
+      isBeginAppear: true,
+      isSpliting: false,
+      isBossGenerate: false
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1180,8 +1217,8 @@ function () {
     key: "draw",
     value: function draw() {
       if (!this.isSplited) {
-        this.isAppearing && this.appear();
-        this.isAppearing = false;
+        this.isBeginAppear && this.appear(this.isBossGenerate);
+        this.isBeginAppear = false;
         ctx.save();
         ctx.translate(this.originalPos('whole').x, this.originalPos('whole').y);
         ctx.rotate(this.rotate.whole * degToPi);
@@ -1302,14 +1339,14 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      var _this9 = this;
+      var _this10 = this;
 
       if (!this.HP.whole) {
         this.isSplited = true;
       }
 
       if (!this.isSplited) {
-        // this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
+        this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
         this.rotate.whole = this.rotate.big = this.rotate.small += this.rotateV.whole; // 當多邊形撞上 shooter
 
         enemyMethods.hitShooter(game.polygons, idx, 'whole', this.axisRotateR.whole, this.axisRotateAngle.whole);
@@ -1328,7 +1365,7 @@ function () {
             small: "+=".concat(Math.random() * 100 + 50),
             ease: Circ.easeOut,
             onComplete: function onComplete() {
-              _this9.isSpliting = true;
+              _this10.isSpliting = true;
             }
           });
           TweenLite.to(this.rotate, 3.2, {
@@ -1361,11 +1398,28 @@ function () {
     }
   }, {
     key: "appear",
-    value: function appear() {
+    value: function appear(isBossGenerate) {
       TweenLite.to(this, 0.8, {
         scale: 1,
         ease: Back.easeOut.config(1.7)
       });
+
+      if (isBossGenerate) {
+        var rotateNum = Math.random() * 40 + 40;
+        var rNum = Math.random() * 40 + 40;
+        TweenLite.to(this.axisRotateAngle, 1.6, {
+          whole: "-=".concat(rotateNum),
+          big: "-=".concat(rotateNum),
+          small: "-=".concat(rotateNum),
+          ease: Power2.easeOut
+        });
+        TweenLite.to(this.axisRotateR, 1.6, {
+          whole: "+=".concat(rNum),
+          big: "+=".concat(rNum),
+          small: "+=".concat(rNum),
+          ease: Power2.easeOut
+        });
+      }
     } // get isInBoundary() {
     //   const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
     //   const yInRange = -48 <= this.p.y && this.p.y <= gameH + 48;
@@ -1389,7 +1443,8 @@ function () {
       rotate: 0,
       axisRotateRV: 1,
       axisRotateAngleV: 1,
-      rotateV: 1
+      rotateV: 1,
+      beforeGenerateEnemyTime: new Date()
     };
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1520,8 +1575,46 @@ function () {
     }
   }, {
     key: "update",
-    value: function update() {// this.axisRotateAngle += this.axisRotateAngleV;
+    value: function update() {
+      var generateEnemyTime = new Date();
+
+      if (generateEnemyTime - this.beforeGenerateEnemyTime > 2000) {
+        this.generateEnemy();
+        this.beforeGenerateEnemyTime = generateEnemyTime;
+      } // this.axisRotateAngle += this.axisRotateAngleV;
       // this.rotate += this.rotateV;
+
+    }
+  }, {
+    key: "generateEnemy",
+    value: function generateEnemy() {
+      var generateEnemyTime = new Date();
+
+      if (generateEnemyTime - this.beforeGenerateEnemyTime > 2000) {
+        game.circles.push(new Circle({
+          axisRotateR: this.axisRotateR,
+          axisRotateAngle: this.axisRotateAngle % 360,
+          isBossGenerate: true
+        })); // game.triangles.push(new Triangle({
+        //   axisRotateR: this.axisRotateR,
+        //   axisRotateAngle: this.axisRotateAngle % 360,
+        //   rotate: this.axisRotateAngle % 360,
+        //   isBossGenerate: true,
+        // }));
+        // game.polygons.push(new Polygon({
+        //   axisRotateR: {
+        //     whole: this.axisRotateR,
+        //     big: this.axisRotateR,
+        //     small: this.axisRotateR,
+        //   },
+        //   axisRotateAngle: {
+        //     whole: this.axisRotateAngle % 360,
+        //     big: this.axisRotateAngle % 360,
+        //     small: this.axisRotateAngle % 360,
+        //   },
+        //   isBossGenerate: true,
+        // }));
+      }
     }
   }]);
 
@@ -1546,11 +1639,11 @@ function () {
       // r: 34 * 0.85,
       r: 28.9,
       // shieldR: (34 + 36) * 0.85,
-      shieldR: 59.5,
+      shieldR: 60,
       // cirSolidLineW: 6 * 0.85,
-      cirSolidLineW: 5.1,
+      cirSolidLineW: 6,
       // shieldLineW: 4 * 0.85,
-      shieldLineW: 3.4,
+      shieldLineW: 4,
       rotateAngle: 0,
       bullets: [],
       // HP: 6,
@@ -1602,7 +1695,7 @@ function () {
 
       ctx.strokeStyle = this.color; // const outerR = this.r + 22 * 0.85;
 
-      var outerR = this.r + 18.7;
+      var outerR = this.r + 20;
 
       for (var i = 0; i < 360; i += 1) {
         var x1 = outerR * Math.cos(i * degToPi + this.rotateAngle);
@@ -1644,7 +1737,7 @@ function () {
       ctx.shadowBlur = 16;
       ctx.rotate(this.rotateAngle); // ctx.translate(this.r + 8, 0);
 
-      ctx.translate(this.r + 6.8, 0);
+      ctx.translate(this.r + 8, 0);
       ctx.moveTo(0, 0); // 下方長方形長 16、寬（高） 12
       // 上方梯形高 14、上邊寬 8
       // ctx.lineTo(0, 8 * 0.85);
@@ -1683,7 +1776,7 @@ function () {
   }, {
     key: "shoot",
     value: function shoot() {
-      var _this10 = this;
+      var _this11 = this;
 
       var shootTime = new Date();
 
@@ -1699,7 +1792,7 @@ function () {
         for (var i = 0; i < bulletNum; i++) {
           if (!this.judgeStatus('wave')) {
             setTimeout(function () {
-              _this10.bullets.push(new ShooterBullet({
+              _this11.bullets.push(new ShooterBullet({
                 // 34 + 12 + 16
                 // p: new Vec2(62, 0),
                 // axisRotateR: 62 * 0.85,
@@ -1709,7 +1802,7 @@ function () {
             }, 160 * i);
           } else {
             setTimeout(function () {
-              _this10.bullets.push(new ShooterBullet({
+              _this11.bullets.push(new ShooterBullet({
                 waveLength: Math.random() * 40 + 40,
                 waveFreq: Math.random() * 0.2 + 0.2,
                 waveAmp: Math.random() * 4 + 4,
@@ -1728,7 +1821,7 @@ function () {
   }, {
     key: "getProp",
     value: function getProp(propName) {
-      var _this11 = this;
+      var _this12 = this;
 
       // 持續秒數
       var lastTime;
@@ -1757,9 +1850,9 @@ function () {
       this.statuses.push(propName); // 時間到後，移除道具效果
 
       setTimeout(function () {
-        for (var i = 0; i < _this11.statuses.length; i += 1) {
-          if (_this11.statuses[i] === propName) {
-            _this11.statuses.splice(i, 1);
+        for (var i = 0; i < _this12.statuses.length; i += 1) {
+          if (_this12.statuses[i] === propName) {
+            _this12.statuses.splice(i, 1);
 
             break;
           }
@@ -1975,7 +2068,7 @@ function () {
   }, {
     key: "update",
     value: function update(bulletIdx) {
-      var _this12 = this;
+      var _this13 = this;
 
       // 移動子彈
       this.axisRotateR += this.v; // 判斷子彈為哪一類型
@@ -1996,7 +2089,7 @@ function () {
             return bulletMoveLength >= circle.axisRotateR - circle.r / 2 && bulletMoveLength <= circle.axisRotateR + circle.r / 2;
           };
 
-          _this12.attackEnemy(circle, cirIdx, game.circles, bulletIdx, anglePanFn, shotRRangeFn, '245, 175, 95');
+          _this13.attackEnemy(circle, cirIdx, game.circles, bulletIdx, anglePanFn, shotRRangeFn, '245, 175, 95');
         }); // 判斷子彈有無射中三角形
 
         game.triangles.forEach(function (triangle, triIdx) {
@@ -2014,7 +2107,7 @@ function () {
             return bulletMoveLength >= triangle.axisRotateR && bulletMoveLength <= triangle.axisRotateR + triangle.r / 2;
           };
 
-          _this12.attackEnemy(triangle, triIdx, game.triangles, bulletIdx, anglePanFn, shotRRangeFn, '54, 118, 187');
+          _this13.attackEnemy(triangle, triIdx, game.triangles, bulletIdx, anglePanFn, shotRRangeFn, '54, 118, 187');
         }); // 判斷子彈有無射中多邊形
 
         game.polygons.forEach(function (polygon, polyIdx) {
@@ -2026,7 +2119,7 @@ function () {
               return bulletMoveLength >= sideA && bulletMoveLength <= sideA + 9;
             };
 
-            _this12.attackPolygon(polygon, polyIdx, 'whole', 34, 21, 360 - (202 + 75), 8 + 75, 75, bulletIdx, shotRRangeFn, '231, 70, 93');
+            _this13.attackPolygon(polygon, polyIdx, 'whole', 34, 21, 360 - (202 + 75), 8 + 75, 75, bulletIdx, shotRRangeFn, '231, 70, 93');
           } else {
             // 當多邊形分裂
             // 大分裂
@@ -2037,7 +2130,7 @@ function () {
                 return bulletMoveLength >= sideA + 8 && bulletMoveLength <= sideA + 16;
               };
 
-              _this12.attackPolygon(polygon, polyIdx, 'big', 34, 23, 202 + 44 - 180, 180 - (70 + 44), 44, bulletIdx, shotRRangeFn, '231, 70, 93');
+              _this13.attackPolygon(polygon, polyIdx, 'big', 34, 23, 202 + 44 - 180, 180 - (70 + 44), 44, bulletIdx, shotRRangeFn, '231, 70, 93');
             } // 小分裂
 
 
@@ -2048,7 +2141,7 @@ function () {
                 return bulletMoveLength >= sideA + 8 && bulletMoveLength <= sideA + 16;
               };
 
-              _this12.attackPolygon(polygon, polyIdx, 'small', 22, 23, 255 + 17.5 - 180, 180 - (70 + 17.5), 17.5, bulletIdx, shotRRangeFn, '231, 70, 93');
+              _this13.attackPolygon(polygon, polyIdx, 'small', 22, 23, 255 + 17.5 - 180, 180 - (70 + 17.5), 17.5, bulletIdx, shotRRangeFn, '231, 70, 93');
             }
           }
         });
@@ -2062,10 +2155,10 @@ function () {
           };
 
           shotRRangeFn = function shotRRangeFn() {
-            return _this12.axisRotateR >= circle.axisRotateR - circle.r / 2 && _this12.axisRotateR <= circle.axisRotateR + circle.r / 2;
+            return _this13.axisRotateR >= circle.axisRotateR - circle.r / 2 && _this13.axisRotateR <= circle.axisRotateR + circle.r / 2;
           };
 
-          _this12.attackEnemy(circle, cirIdx, game.circles, bulletIdx, anglePanFn, shotRRangeFn, '245, 175, 95', 'wave');
+          _this13.attackEnemy(circle, cirIdx, game.circles, bulletIdx, anglePanFn, shotRRangeFn, '245, 175, 95', 'wave');
         }); // 有無射中三角形
 
         game.triangles.forEach(function (triangle, triIdx) {
@@ -2076,10 +2169,10 @@ function () {
           };
 
           shotRRangeFn = function shotRRangeFn() {
-            return _this12.axisRotateR >= triangle.axisRotateR && _this12.axisRotateR <= triangle.axisRotateR + triangle.r / 2;
+            return _this13.axisRotateR >= triangle.axisRotateR && _this13.axisRotateR <= triangle.axisRotateR + triangle.r / 2;
           };
 
-          _this12.attackEnemy(triangle, triIdx, game.triangles, bulletIdx, anglePanFn, shotRRangeFn, '54, 118, 187', 'wave');
+          _this13.attackEnemy(triangle, triIdx, game.triangles, bulletIdx, anglePanFn, shotRRangeFn, '54, 118, 187', 'wave');
         }); // 有無射中多邊形
 
         game.polygons.forEach(function (polygon, polyIdx) {
@@ -2087,30 +2180,30 @@ function () {
           if (polygon.HP.whole) {
             shotRRangeFn = function shotRRangeFn() {
               var sideA = polygon.axisRotateR.whole;
-              return _this12.axisRotateR >= sideA && _this12.axisRotateR <= sideA + 9;
+              return _this13.axisRotateR >= sideA && _this13.axisRotateR <= sideA + 9;
             };
 
-            _this12.attackPolygon(polygon, polyIdx, 'whole', 34, 21, 360 - (202 + 75), 8 + 75, 75, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
+            _this13.attackPolygon(polygon, polyIdx, 'whole', 34, 21, 360 - (202 + 75), 8 + 75, 75, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
           } else {
             // 當多邊形分裂
             // 大分裂
             if (polygon.HP.big) {
               shotRRangeFn = function shotRRangeFn() {
                 var sideA = polygon.axisRotateR.big;
-                return _this12.axisRotateR >= sideA + 8 && _this12.axisRotateR <= sideA + 16;
+                return _this13.axisRotateR >= sideA + 8 && _this13.axisRotateR <= sideA + 16;
               };
 
-              _this12.attackPolygon(polygon, polyIdx, 'big', 34, 23, 202 + 44 - 180, 180 - (70 + 44), 44, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
+              _this13.attackPolygon(polygon, polyIdx, 'big', 34, 23, 202 + 44 - 180, 180 - (70 + 44), 44, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
             } // 小分裂
 
 
             if (polygon.HP.small) {
               shotRRangeFn = function shotRRangeFn() {
                 var sideA = polygon.axisRotateR.small;
-                return _this12.axisRotateR >= sideA + 8 && _this12.axisRotateR <= sideA + 16;
+                return _this13.axisRotateR >= sideA + 8 && _this13.axisRotateR <= sideA + 16;
               };
 
-              _this12.attackPolygon(polygon, polyIdx, 'small', 22, 23, 255 + 17.5 - 180, 180 - (70 + 17.5), 17.5, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
+              _this13.attackPolygon(polygon, polyIdx, 'small', 22, 23, 255 + 17.5 - 180, 180 - (70 + 17.5), 17.5, bulletIdx, shotRRangeFn, '231, 70, 93', 'wave');
             } // 移除大小分裂效果
             // if (!polygon.HP.big) {
             //   enemyMethods.dieEffect(enemy, enemy.r, colorRGB);
@@ -2390,7 +2483,7 @@ function () {
   }, {
     key: "update",
     value: function update(idx) {
-      var _this13 = this;
+      var _this14 = this;
 
       this.rotate += this.rotateV;
 
@@ -2399,7 +2492,7 @@ function () {
           axisRotateAngle: "".concat(this.order === 1 ? '+=' : '-=', "10"),
           ease: Power2.easeOut,
           onComplete: function onComplete() {
-            TweenLite.to(_this13, 1.6, {
+            TweenLite.to(_this14, 1.6, {
               axisRotateR: 0,
               ease: Power1.easeIn
             });
@@ -2685,7 +2778,7 @@ var mouseMoveAngle = 0; // let mouseUpPos = new Vec2(0, 0);
 // canvas.addEventListener('mousemove', handleMouseMove);
 
 function handleMouseMove(evt) {
-  if (game.isPause) return;
+  // if (game.isPause) return;
   mouseMovePos.x = evt.x - ww / 2;
   mouseMovePos.y = evt.y - wh / 2;
   var angle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
@@ -2698,6 +2791,7 @@ function handleMouseMove(evt) {
 var beforeShootTime = new Date();
 
 function handleClick() {
+  if (game.isPause) return;
   game.shooter.shoot();
 }
 

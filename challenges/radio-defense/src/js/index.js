@@ -295,7 +295,7 @@ class Game {
   }
   update() {
     time += 1;
-    if (this.isStart) {
+    if (this.isStart && !this.isPause) {
       // 判斷現在是第幾關
       if (this.currentLevel === 1 && !this.isInLevel1) {
         this.setLevelOne();
@@ -504,14 +504,14 @@ class Game {
   // 設定第一關
   setLevelOne() {
     this.boss = new Boss({
-      axisRotateR: 240,
+      axisRotateR: 200,
       axisRotateAngle: 90,
     });
-    // this.props.push(new Prop({
-    //   src: '../../src/assets/crackdown.svg',
-    //   axisRotateR: 200,
-    //   axisRotateAngle: 40,
-    // }));
+    this.props.push(new Prop({
+      src: '../../src/assets/wave.svg',
+      axisRotateR: 200,
+      axisRotateAngle: 40,
+    }));
     // this.circles.push(new Circle({
     //   axisRotateR: 240,
     //   axisRotateAngle: 40,
@@ -676,22 +676,24 @@ class Circle {
       r: 22,
       rotate: 0,
       scale: 0,
-      axisRotateRV: 0.1,
-      axisRotateAngleV: 0.4,
+      axisRotateRV: -0.4,
+      axisRotateAngleV: -0.8,
       rotateV: 0.4,
       color: globalColor.orange,
       HP: 2,
       bullets: [],
       beforeRotateTime: new Date(),
       isRotating: false,
-      isAppearing: true,
+      isBeginAppear: true,
+      isAppear: true,
+      isBossGenerate: false,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   draw() {
-    this.isAppearing && this.appear();
-    this.isAppearing = false;
+    // this.isAppearing && this.appear(this.isBossGenerate);
+    // this.isAppearing = false;
     const circleBigR = this.r + 5;
     const circleSmallR = this.r - 10;
     const subaxisRotateR = 14;
@@ -744,7 +746,11 @@ class Circle {
     });
   }
   update(idx) {
-    this.axisRotateR -= 1;
+    this.isBeginAppear && this.appear(this.isBossGenerate);
+    this.isBeginAppear = false;
+    if (!this.isAppear) {
+      this.axisRotateR += this.axisRotateRV;
+    }
     // 更新圓形子彈
     this.bullets.forEach((bullet, idx, arr) => {
       bullet.update(idx, arr);
@@ -793,7 +799,7 @@ class Circle {
       }, i * (200 * Math.random() + 200));
     }
   }
-  appear() {
+  appear(isBossGenerate) {
     TweenLite.to(this, 0.8, {
       scale: 1,
       ease: Back.easeOut.config(1.7),
@@ -802,6 +808,15 @@ class Circle {
       rotate: 0,
       ease: Back.easeOut.config(1.7),
     });
+    if (isBossGenerate) {
+      TweenLite.to(this, 1.6, {
+        axisRotateR: `+=${Math.random() * 80 + 80}`,
+        ease: Power2.easeOut,
+        onComplete: () => {
+          this.isAppear = false;
+        },
+      });
+    }
   }
 }
 
@@ -836,14 +851,15 @@ class Triangle {
       HP: 4,
       isReproduce: false,
       shootTimer: null,
-      isAppearing: true,
+      isBeginAppear: true,
+      isBossGenerate: false,
     }
     Object.assign(def, args);
     Object.assign(this, def);
   }
   draw() {
-    this.isAppearing && this.appear();
-    this.isAppearing = false;
+    this.isBeginAppear && this.appear(this.isBossGenerate);
+    this.isBeginAppear = false;
     const triangleOuterBigR = this.r + 4;
     const triangleInnerBigR = this.r - 16;
     const triangleInnerSmallR = this.r - 22;
@@ -902,10 +918,10 @@ class Triangle {
     // 每 8-16 秒，三角移動 + 自身旋轉
     const rotateAxisAngleTime = new Date();
     let randomRotateAngle;
-    if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > (Math.random() * 16000 + 8000)) {
+    if (rotateAxisAngleTime - this.beforeRotateAxisAngleTime > (Math.random() * 8000 + 8000)) {
       // 旋轉時不發射子彈
       if (this.shootTimer) clearTimeout(this.shootTimer);
-      randomRotateAngle = (Math.random() > 0.25 ? -1 : 1) * (30 * Math.random() + 45);
+      randomRotateAngle = (Math.random() > 0.25 ? 1 : -1) * (30 * Math.random() + 45);
       // 以 0.8 秒移動
       TweenLite.to(this, 0.8, {
         axisRotateAngle: `+=${randomRotateAngle}`,
@@ -963,13 +979,26 @@ class Triangle {
       // rotate: this.rotate,
     }));
   }
-  appear() {
+  appear(isBossGenerate) {
     TweenLite.to(this, 0.8, {
       scale: 1,
       ease: Back.easeOut.config(1.7),
     });
+    let rotateNum = 0;
+    if (isBossGenerate) {
+      rotateNum = Math.random() * 40 + 40;
+      const rNum = Math.random() * 40 + 40;
+      TweenLite.to(this, 1.6, {
+        axisRotateAngle: `+=${rotateNum}`,
+        axisRotateR: `+=${rNum}`,
+        ease: Power2.easeOut,
+        // onComplete: () => {
+        //   this.isAppear = false;
+        // },
+      });
+    }
     TweenLite.to(this, 1.6, {
-      rotate: '+=360',
+      rotate: `+=${rotateNum + 360}`,
       ease: Back.easeOut.config(1.7),
     });
   }
@@ -1029,8 +1058,9 @@ class Polygon {
       isSplited: false,
       isSplitedMove: false,
       scale: 0,
-      isAppearing: true,
+      isBeginAppear: true,
       isSpliting: false,
+      isBossGenerate: false,
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1043,8 +1073,8 @@ class Polygon {
   }
   draw() {
     if (!this.isSplited) {
-      this.isAppearing && this.appear();
-      this.isAppearing = false;
+      this.isBeginAppear && this.appear(this.isBossGenerate);
+      this.isBeginAppear = false;
       ctx.save();
         ctx.translate(this.originalPos('whole').x, this.originalPos('whole').y);
         ctx.rotate(this.rotate.whole * degToPi);
@@ -1166,7 +1196,7 @@ class Polygon {
       this.isSplited = true;
     }
     if (!this.isSplited) {
-      // this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
+      this.axisRotateR.whole = this.axisRotateR.big = this.axisRotateR.small -= this.axisRotateRV.whole;
       this.rotate.whole = this.rotate.big = this.rotate.small += this.rotateV.whole;
       // 當多邊形撞上 shooter
       enemyMethods.hitShooter(game.polygons, idx, 'whole', this.axisRotateR.whole, this.axisRotateAngle.whole);
@@ -1214,11 +1244,27 @@ class Polygon {
     //   this.v.y = 0.5 * Math.random() + 0.5;
     // }
   }
-  appear() {
+  appear(isBossGenerate) {
     TweenLite.to(this, 0.8, {
       scale: 1,
       ease: Back.easeOut.config(1.7),
     });
+    if (isBossGenerate) {
+      const rotateNum = Math.random() * 40 + 40;
+      const rNum = Math.random() * 40 + 40;
+      TweenLite.to(this.axisRotateAngle, 1.6, {
+        whole: `-=${rotateNum}`,
+        big: `-=${rotateNum}`,
+        small: `-=${rotateNum}`,
+        ease: Power2.easeOut,
+      });
+      TweenLite.to(this.axisRotateR, 1.6, {
+        whole: `+=${rNum}`,
+        big: `+=${rNum}`,
+        small: `+=${rNum}`,
+        ease: Power2.easeOut,
+      });
+    }
   }
   // get isInBoundary() {
   //   const xInRange = -48 <= this.p.x && this.p.x <= gameW + 48;
@@ -1240,6 +1286,7 @@ class Boss {
       axisRotateRV: 1,
       axisRotateAngleV: 1,
       rotateV: 1,
+      beforeGenerateEnemyTime: new Date(),
     }
     Object.assign(def, args);
     Object.assign(this, def);
@@ -1366,8 +1413,42 @@ class Boss {
     ctx.restore();
   }
   update() {
+    const generateEnemyTime = new Date();
+    if (generateEnemyTime - this.beforeGenerateEnemyTime > 2000) {
+      this.generateEnemy();
+      this.beforeGenerateEnemyTime = generateEnemyTime;
+    }
     // this.axisRotateAngle += this.axisRotateAngleV;
     // this.rotate += this.rotateV;
+  }
+  generateEnemy() {
+    const generateEnemyTime = new Date();
+    if (generateEnemyTime - this.beforeGenerateEnemyTime > 2000) {
+      game.circles.push(new Circle({
+        axisRotateR: this.axisRotateR,
+        axisRotateAngle: this.axisRotateAngle % 360,
+        isBossGenerate: true,
+      }));
+      // game.triangles.push(new Triangle({
+      //   axisRotateR: this.axisRotateR,
+      //   axisRotateAngle: this.axisRotateAngle % 360,
+      //   rotate: this.axisRotateAngle % 360,
+      //   isBossGenerate: true,
+      // }));
+      // game.polygons.push(new Polygon({
+      //   axisRotateR: {
+      //     whole: this.axisRotateR,
+      //     big: this.axisRotateR,
+      //     small: this.axisRotateR,
+      //   },
+      //   axisRotateAngle: {
+      //     whole: this.axisRotateAngle % 360,
+      //     big: this.axisRotateAngle % 360,
+      //     small: this.axisRotateAngle % 360,
+      //   },
+      //   isBossGenerate: true,
+      // }));
+    }
   }
 }
 
@@ -1385,11 +1466,11 @@ class Shooter {
       // r: 34 * 0.85,
       r: 28.9,
       // shieldR: (34 + 36) * 0.85,
-      shieldR: 59.5,
+      shieldR: 60,
       // cirSolidLineW: 6 * 0.85,
-      cirSolidLineW: 5.1,
+      cirSolidLineW: 6,
       // shieldLineW: 4 * 0.85,
-      shieldLineW: 3.4,
+      shieldLineW: 4,
       rotateAngle: 0,
       bullets: [],
       // HP: 6,
@@ -1436,7 +1517,7 @@ class Shooter {
       // 輪圍外虛線
       ctx.strokeStyle = this.color;
       // const outerR = this.r + 22 * 0.85;
-      const outerR = this.r + 18.7;
+      const outerR = this.r + 20;
       for (let i = 0; i < 360; i += 1) {
         const x1 = outerR * Math.cos(i * degToPi + this.rotateAngle);
         const y1 = outerR * Math.sin(i * degToPi + this.rotateAngle);
@@ -1473,7 +1554,7 @@ class Shooter {
         ctx.shadowBlur = 16;
         ctx.rotate(this.rotateAngle);
         // ctx.translate(this.r + 8, 0);
-        ctx.translate(this.r + 6.8, 0);
+        ctx.translate(this.r + 8, 0);
         ctx.moveTo(0, 0);
         // 下方長方形長 16、寬（高） 12
         // 上方梯形高 14、上邊寬 8
@@ -2394,7 +2475,7 @@ let mouseMoveAngle = 0;
 // canvas.addEventListener('mousemove', handleMouseMove);
 
 function handleMouseMove(evt) {
-  if (game.isPause) return;
+  // if (game.isPause) return;
   mouseMovePos.x = evt.x - ww / 2;
   mouseMovePos.y = evt.y - wh / 2;
   const angle = Math.atan2(mouseMovePos.y, mouseMovePos.x);
@@ -2407,6 +2488,7 @@ function handleMouseMove(evt) {
 
 let beforeShootTime = new Date();
 function handleClick() {
+  if (game.isPause) return;
   game.shooter.shoot();
 };
 
