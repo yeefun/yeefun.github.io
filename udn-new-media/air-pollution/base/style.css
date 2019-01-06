@@ -1,0 +1,102 @@
+.infographic-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    display: block;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.infographic-wrapper h1 {
+    border-bottom: 1px solid #d7d7d7;
+    padding: 0 0 14px;
+    color: #222;
+    font-family: "Microsoft YaHei", "微软雅黑体", "微軟雅黑體", "Microsoft JhengHei", "微軟正黑體", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 1.3;
+}
+
+.infographic-wrapper h2 {
+    line-height: 1.3;
+}
+
+.infographic-wrapper h3 {
+    font-weight: 700;
+}
+
+.infographic-wrapper p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 0;
+    color: #444;
+}
+
+@media screen and (max-width: 768px) {
+    .infographic-wrapper h2 {
+        font-size: 22px;
+    }
+
+    .infographic-wrapper h3 {
+        font-size: 20px;
+    }
+}
+
+.infographic-wrapper .author {
+    float: left;
+    margin: 0 20px 0 0;
+    padding: 6px 0;
+    color: #8d8d8d;
+    font-size: 13px;
+    font-family: Helvetica, Arial, "LiHei Pro", "新細明體", PMingLiU, "新宋体", NSimSun, "Apple LiGothic Medium", Geneva, sans-serif;
+    font-weight: 400;
+}
+
+.infographic-wrapper .description {
+    display: block;
+    padding: 10px 0 30px;
+    color: #444;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.infographic-wrapper .g_description {
+    display: block;
+    color: #a0a0a0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #444;
+}
+
+.infographic-wrapper .information-graphs-image-wrapper {
+    width: 100%;
+}
+
+.infographic-wrapper .information-graphs-image {
+    width: 100%;
+}
+
+.infographic-wrapper .information-graphs-image-svg {
+    height: 100%;
+    width: 100%;
+}
+
+.infographic-wrapper .share-wrapper {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.infographic-wrapper .fb-share-wrapper {
+    margin: 2px;
+    height: 40px;
+}
+
+.infographic-wrapper .line-share-wrapper {
+    margin: 2px;
+    height: 40px;
+}
