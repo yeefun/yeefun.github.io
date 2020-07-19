@@ -69,7 +69,7 @@ const Layout = (props: LayoutPropsType) => {
           <main>{children}</main>
           <footer>
             © {new Date().getFullYear()} JunhoBaik, Built with
-            {` `}
+            {' '}
             <a href="https://www.gatsbyjs.org">Gatsby</a>
           </footer>
         </div>
@@ -97,7 +97,7 @@ const mapStateToProps = ({ isMobile }: { isMobile: boolean }) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setIsMobile: (isMobile: boolean) => dispatch({ type: `SET_IS_MOBILE`, isMobile }),
+    setIsMobile: (isMobile: boolean) => dispatch({ type: 'SET_IS_MOBILE', isMobile }),
   };
 };
 

@@ -1,11 +1,11 @@
-const path = require(`path`);
+const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const config = require('./config');
 
 // Create Pages
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  const blogPostTemplate = path.resolve(`src/templates/Post.tsx`);
+  const blogPostTemplate = path.resolve('src/templates/Post.tsx');
   const result = await graphql(`
     {
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
@@ -27,7 +27,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `);
 
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    reporter.panicOnBuild('Error while running GraphQL query.');
     return;
   }
 
@@ -95,8 +95,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` });
+  if (node.internal.type === 'MarkdownRemark') {
+    const slug = createFilePath({ node, getNode, basePath: 'pages' });
 
     const rewriteSlug = slug => {
       // 폴더 경로에 따라 url에 표시되는 것을 폴더 경로를 제거하고 파일명으로만 url을 지정되도록 하기 위함
@@ -143,7 +143,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     const newNode = rewriteNode(node);
 
     createNodeField({
-      name: `slug`,
+      name: 'slug',
       node: newNode,
       value: newSlug,
     });

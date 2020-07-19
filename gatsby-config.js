@@ -6,41 +6,41 @@ const gatsbyConfig = {
 
   plugins: [
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: googleAnalytics,
       },
     },
 
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-react-helmet',
 
-    `gatsby-plugin-typescript`,
+    'gatsby-plugin-typescript',
 
-    `gatsby-plugin-theme-ui`,
+    'gatsby-plugin-theme-ui',
 
-    `gatsby-plugin-sass`,
+    'gatsby-plugin-sass',
 
-    `gatsby-transformer-sharp`,
+    'gatsby-transformer-sharp',
 
-    `gatsby-plugin-sharp`,
+    'gatsby-plugin-sharp',
 
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `markdown-pages`,
+        name: 'markdown-pages',
         path: `${__dirname}/_posts`,
       },
     },
 
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-transformer-remark',
       options: {
         tableOfContents: {
           maxDepth: 3,
         },
         plugins: [
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 590,
               showCaptions: true,
@@ -49,9 +49,9 @@ const gatsbyConfig = {
               srcSetBreakpoints: [590, 1180],
             },
           },
-          `gatsby-remark-autolink-headers`,
+          'gatsby-remark-autolink-headers',
           {
-            resolve: `gatsby-remark-prismjs`,
+            resolve: 'gatsby-remark-prismjs',
             options: {
               classPrefix: 'language-',
               inlineCodeMarker: null,
@@ -60,30 +60,30 @@ const gatsbyConfig = {
             },
           },
           'gatsby-remark-external-links',
-          `gatsby-remark-copy-linked-files`,
+          'gatsby-remark-copy-linked-files',
         ],
       },
     },
 
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
+        name: 'images',
         path: `${__dirname}/src/images`,
       },
     },
 
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: title,
         short_name: title,
         description: description,
-        start_url: `/`,
+        start_url: '/',
         lang: language,
-        background_color: `#fff`,
-        theme_color: `#fff`,
-        display: `standalone`,
+        background_color: '#fff',
+        theme_color: '#fff',
+        display: 'standalone',
         icon: 'src/images/icon.png',
         legacy: false,
         include_favicon: false,
@@ -91,16 +91,16 @@ const gatsbyConfig = {
     },
 
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: `src/utils/typography.ts`,
+        pathToConfigModule: 'src/utils/typography.ts',
       },
     },
 
     {
-      resolve: `gatsby-plugin-sitemap`,
+      resolve: 'gatsby-plugin-sitemap',
       options: {
-        output: `/sitemap.xml`,
+        output: '/sitemap.xml',
         query: `
           {
           site {
@@ -124,7 +124,7 @@ const gatsbyConfig = {
           return allSitePage.edges.map(edge => {
             return {
               url: site.siteMetadata.siteUrl + edge.node.path,
-              changefreq: `daily`,
+              changefreq: 'daily',
               lastmod: edge.node.context.lastmod,
               priority: 0.7,
             };
@@ -134,7 +134,7 @@ const gatsbyConfig = {
     },
 
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: 'gatsby-plugin-feed',
       options: {
         query: `
           {
@@ -199,7 +199,7 @@ const gatsbyConfig = {
 
 if (process.env.NODE_ENV === 'development') {
   gatsbyConfig.plugins.push({
-    resolve: `gatsby-source-filesystem`,
+    resolve: 'gatsby-source-filesystem',
     options: {
       path: `${__dirname}/_drafts`,
       name: 'markdown-pages',

@@ -169,7 +169,7 @@ const mapStateToProps = ({ path, size, isMobile }: { path: string; size: string;
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    setPath: (path: string, size: string) => dispatch({ type: `SET_PATH`, path, size }),
+    setPath: (path: string, size: string) => dispatch({ type: 'SET_PATH', path, size }),
   };
 };
 
