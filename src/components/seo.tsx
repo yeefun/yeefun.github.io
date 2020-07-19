@@ -7,11 +7,10 @@ export interface SEOPropsType {
   lang: string;
   meta: any[];
   title: string;
-  keywords: string[];
 }
 
 function SEO(props: SEOPropsType) {
-  const { description, lang, meta, title, keywords } = props;
+  const { description, lang, meta, title } = props;
 
   const { site } = useStaticQuery(
     graphql`
@@ -70,10 +69,6 @@ function SEO(props: SEOPropsType) {
           name: `twitter:description`,
           content: metaDescription,
         },
-        {
-          name: `keywords`,
-          content: keywords,
-        },
       ].concat(meta)}
     />
   );
@@ -83,7 +78,6 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-  keywords: [],
 };
 
 export default SEO;

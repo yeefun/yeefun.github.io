@@ -43,7 +43,7 @@ const Post = (props: postProps) => {
   const { data, pageContext, isMobile } = props;
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark;
-  const { title, date, tags, keywords } = frontmatter;
+  const { title, date, tags } = frontmatter;
   let update = frontmatter.update;
   if (Number(update?.split(',')[1]) === 1) update = null;
   const { slug } = fields;
@@ -141,19 +141,6 @@ const Post = (props: postProps) => {
     },
   };
 
-  const metaKeywords: (keywordList: string[], tagList: string[]) => string[] = (
-    keywordList: string[],
-    tagList: string[]
-  ) => {
-    const resultKeywords = new Set();
-
-    for (const v of [...keywordList, ...tagList]) {
-      resultKeywords.add(v);
-    }
-
-    return Array.from(resultKeywords) as string[];
-  };
-
   return (
     <>
       <Helmet>
@@ -196,7 +183,7 @@ const Post = (props: postProps) => {
         </script>
       </Helmet>
 
-      <SEO title={title} description={excerpt} keywords={metaKeywords(keywords, tags)} />
+      <SEO title={title} description={excerpt} />
 
       <Layout>
         <div className="blog-post-container">
@@ -352,7 +339,6 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMM DD, YYYY")
         tags
-        keywords
         update(formatString: "MMM DD, YYYY")
       }
     }

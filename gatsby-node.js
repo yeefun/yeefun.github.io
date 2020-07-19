@@ -115,11 +115,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     };
 
     const rewriteNode = node => {
-      // 마크다운 파일 내 keywords 필드가 비어있을 시 오류가 나지 않도록 하기 위함
-      if (!node.frontmatter.keywords) {
-        node.frontmatter.keywords = [config.title, config.author];
-      }
-
       // 마크다운 파일 내 태그 필드가 비어있을 시 오류가 나지 않도록 하기 위함
       if (!node.frontmatter.tags || node.frontmatter.tags === '') {
         node.frontmatter.tags = ['undefined'];
