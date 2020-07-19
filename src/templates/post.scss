@@ -19,7 +19,7 @@
       font-size: 1.8rem;
       margin: 0;
       line-height: 1.5;
-      word-break: keep-all;
+      font-family: Raleway, 'Noto Serif TC', serif;
 
       @media screen and (max-width: $break-s) {
         font-size: 1.2rem;
@@ -28,6 +28,7 @@
 
     .blog-post-info {
       display: flex;
+      flex-wrap: wrap;
       margin-top: 1rem;
       font-size: 0.84rem;
       align-items: flex-start;
@@ -78,7 +79,6 @@
 
       .blog-post-inside-toc {
         display: none;
-        align-self: flex-end;
 
         @media screen and (max-width: $break-toc) {
           display: inline-block;
@@ -173,22 +173,51 @@
       h3 {
         margin-top: 2rem;
       }
-      li {
-        margin-bottom: 0.25rem;
-        ul {
-          margin-top: 0.25rem;
-        }
+
+      p {
+        margin-top: 1.666rem;
       }
+
+      ul {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+
       code {
-        font-family: 'Nanum Gothic Coding' !important;
+        font-family: 'IBM Plex Mono', monospace !important;
       }
       blockquote {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         border-left: 4px solid #6a737d;
-        margin: 0;
-        margin-bottom: 1rem;
+        margin: 2rem 0;
         padding: 0 1rem 0 1rem;
         opacity: 0.8;
+      }
+
+      hr {
+        width: 12%;
+        margin: 3rem auto;
+      }
+
+      .gatsby-resp-image-figure {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 590px;
+      }
+
+      .gatsby-resp-image-figcaption {
+        width: fit-content;
+        max-width: 66.67%;
+        margin-left: auto;
+        font-size: 0.84rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+        p {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
       }
     }
   }

@@ -43,8 +43,13 @@ const gatsbyConfig = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 590,
+              showCaptions: true,
+              markdownCaptions: ['title'],
+              backgroundColor: 'transparent',
+              srcSetBreakpoints: [590, 1180],
             },
           },
+          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -54,30 +59,7 @@ const gatsbyConfig = {
               showLineNumbers: false,
             },
           },
-          {
-            resolve: 'gatsby-remark-emojis',
-            options: {
-              active: true,
-              class: 'emoji-icon',
-              size: 64,
-              styles: {
-                display: 'inline',
-                margin: '0',
-                'margin-top': '1px',
-                position: 'relative',
-                top: '5px',
-                width: '25px',
-              },
-            },
-          },
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-katex`,
-          {
-            resolve: 'gatsby-remark-external-links',
-            options: {
-              target: '_blank',
-            },
-          },
+          'gatsby-remark-external-links',
           `gatsby-remark-copy-linked-files`,
         ],
       },
@@ -98,7 +80,7 @@ const gatsbyConfig = {
         short_name: title,
         description: description,
         start_url: `/`,
-        lang: 'ko',
+        lang: language,
         background_color: `#fff`,
         theme_color: `#fff`,
         display: `standalone`,

@@ -84,7 +84,7 @@ export const pageQuery = graphql`
       edges {
         node {
           rawMarkdownBody
-          excerpt(format: PLAIN)
+          excerpt(format: PLAIN, truncate: true)
           fields {
             slug
           }
