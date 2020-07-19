@@ -35,6 +35,8 @@ const gatsbyConfig = {
     {
       resolve: 'gatsby-transformer-remark',
       options: {
+        pedantic: false,
+        commonmark: false,
         tableOfContents: {
           maxDepth: 3,
         },
@@ -94,6 +96,7 @@ const gatsbyConfig = {
       resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography.ts',
+        omitGoogleFont: true,
       },
     },
 

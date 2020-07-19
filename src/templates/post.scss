@@ -19,7 +19,7 @@
       font-size: 1.8rem;
       margin: 0;
       line-height: 1.5;
-      font-family: Raleway, 'Noto Serif TC', serif;
+      font-family: ibm-plex-serif, source-han-serif-tc, serif;
 
       @media screen and (max-width: $break-s) {
         font-size: 1.2rem;
@@ -178,13 +178,25 @@
         margin-top: 1.666rem;
       }
 
+      a {
+        opacity: 0.7;
+        transition: opacity 0.3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
+
       ul {
         margin-top: 2rem;
         margin-bottom: 2rem;
       }
 
+      strong {
+        font-weight: 600;
+      }
+
       code {
-        font-family: 'IBM Plex Mono', monospace !important;
+        font-family: ibm-plex-mono, monospace !important;
       }
       blockquote {
         font-size: 1.1rem;
@@ -218,6 +230,11 @@
           margin-top: 0;
           margin-bottom: 0;
         }
+      }
+
+      .gatsby-resp-image-link,
+      .anchor {
+        opacity: 1;
       }
     }
   }

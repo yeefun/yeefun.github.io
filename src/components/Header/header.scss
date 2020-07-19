@@ -103,7 +103,7 @@
       margin: 0;
       font-size: 1.6rem;
       font-weight: normal;
-      font-family: Raleway, sans-serif;
+      font-family: raleway, sans-serif;
       opacity: 0.9;
       transition: opacity 0.3s;
 
@@ -180,10 +180,6 @@
         &:hover {
           opacity: 1;
         }
-      }
-
-      span {
-        font-family: Raleway, sans-serif;
       }
 
       .search-wrap,
