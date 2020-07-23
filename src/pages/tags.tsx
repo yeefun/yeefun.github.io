@@ -79,14 +79,14 @@ const Tags = (props: TagsPageProps) => {
       if (g.fieldValue !== 'undefined' && g.totalCount > large) large = g.totalCount;
     }
     setLargeCount(large);
-
-    return () => {};
   }, [group]);
 
   useEffect(() => {
-    if (location.hash) setTargetTag(location.hash.split('#')[1]);
-    return () => {};
-  }, []);
+    if (location.hash) {
+      const tagName = decodeURIComponent(location.hash.split('#')[1]);
+      setTargetTag(tagName);
+    }
+  });
 
   return (
     <Layout>
