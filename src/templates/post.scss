@@ -19,7 +19,7 @@
       font-size: 1.8rem;
       margin: 0;
       line-height: 1.5;
-      font-family: ibm-plex-serif, source-han-serif-tc, serif;
+      font-family: 'IBM Plex Serif', source-han-serif-tc, serif;
 
       @media screen and (max-width: $break-s) {
         font-size: 1.2rem;
@@ -196,7 +196,7 @@
       }
 
       code {
-        font-family: ibm-plex-mono, monospace !important;
+        font-family: 'IBM Plex Mono', monospace !important;
       }
       blockquote {
         font-size: 1.1rem;

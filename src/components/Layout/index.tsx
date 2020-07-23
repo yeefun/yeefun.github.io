@@ -57,6 +57,7 @@ const Layout = (props: LayoutPropsType) => {
     <>
       <Helmet>
         <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Serif:wght@400;600;700&family=Rubik:wght@300&display=swap" rel="stylesheet" />
         <script>
           {`
             (function(d) {

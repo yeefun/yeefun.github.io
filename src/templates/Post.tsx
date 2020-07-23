@@ -27,7 +27,6 @@ import Layout from '../components/Layout';
 import Toc from '../components/Toc';
 import SEO from '../components/seo';
 
-import 'katex/dist/katex.min.css';
 import './code-theme.scss';
 import './post.scss';
 
