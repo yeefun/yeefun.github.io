@@ -9,10 +9,11 @@ import PostList from '../components/PostList';
 
 export interface TagsPageProps {
   data: any;
+  location: { pathname: string; hash: string; };
 }
 
 const Tags = (props: TagsPageProps) => {
-  const { data } = props;
+  const { data, location } = props;
   const { group } = data.allMarkdownRemark;
 
   const [largeCount, setLargeCount] = useState(0);
@@ -90,7 +91,7 @@ const Tags = (props: TagsPageProps) => {
 
   return (
     <Layout>
-      <SEO title="Tags" />
+      <SEO title="Tags" pathname={location.pathname} />
       <div id="tags">
         <div className="tag-list-wrap">
           <ul>{tagList}</ul>

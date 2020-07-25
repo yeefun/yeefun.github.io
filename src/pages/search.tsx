@@ -11,10 +11,11 @@ import './styles/search.scss';
 
 export interface SearchProps {
   data: any;
+  location: { pathname: string; };
 }
 
 const Search = (props: SearchProps) => {
-  const { data } = props;
+  const { data, location } = props;
   const posts = data.allMarkdownRemark.edges;
 
   const [value, setValue] = useState('');
@@ -33,7 +34,7 @@ const Search = (props: SearchProps) => {
 
   return (
     <Layout>
-      <SEO title="Search" />
+      <SEO title="Search" pathname={location.pathname} />
       <div id="Search">
         <div className="search-inner-wrap">
           <div className="input-wrap">

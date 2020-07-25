@@ -1,83 +1,112 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+
+const {
+  title: defaultTitle,
+  description: defaultDescription,
+  author,
+  language,
+  siteUrl,
+} = require('../../config');
 
 export interface SEOPropsType {
-  description: string;
-  lang: string;
   meta: any[];
   title: string;
+  description: string;
+  pathname: string;
+  ogImage: string;
 }
 
 function SEO(props: SEOPropsType) {
-  const { description, lang, meta, title } = props;
+  const metaTitle = props.title !== defaultTitle ?
+    `${props.title} | ${defaultTitle}` :
+    props.title
 
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-            language
-          }
-        }
-      }
-    `
-  );
-
-  const metaDescription = description ?? site.siteMetadata.description;
+  const ogUrl = `${siteUrl}${props.pathname}`
+  const metaOg = [
+    {
+      property: 'og:title',
+      content: metaTitle,
+    },
+    {
+      property: 'og:description',
+      content: props.description,
+    },
+    {
+      property: 'og:url',
+      content: ogUrl,
+    },
+    {
+      property: 'og:image',
+      content: props.ogImage,
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:locale',
+      content: language !== 'zh-Hant' ? language : 'zh_TW',
+    },
+  ]
+  const metaTwitter = [
+    {
+      name: 'twitter:card',
+      content: 'summary',
+    },
+    {
+      name: 'twitter:creator',
+      content: author,
+    },
+    {
+      name: 'twitter:title',
+      content: metaTitle,
+    },
+    {
+      name: 'twitter:description',
+      content: props.description,
+    },
+  ]
+  const metaWebApp = [
+    {
+      name: 'mobile-web-app-capable',
+      content: 'yes',
+    },
+    {
+      name: 'apple-mobile-web-app-capable',
+      content: 'yes',
+    },
+    {
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'default',
+    },
+  ]
 
   return (
     <Helmet
       htmlAttributes={{
-        lang: site.siteMetadata.language ?? lang,
+        lang: language,
       }}
-      title={title}
-      titleTemplate={title === 'Home' ? site.siteMetadata.title : `%s | ${site.siteMetadata.title}`}
+      title={metaTitle}
       meta={[
         {
           name: 'description',
-          content: metaDescription,
+          content: props.description,
         },
-        {
-          property: 'og:title',
-          content: title,
-        },
-        {
-          property: 'og:description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          name: 'twitter:creator',
-          content: site.siteMetadata.author,
-        },
-        {
-          name: 'twitter:title',
-          content: title,
-        },
-        {
-          name: 'twitter:description',
-          content: metaDescription,
-        },
-      ].concat(meta)}
+        ...metaOg,
+        ...metaTwitter,
+        ...metaWebApp,
+      ].concat(props.meta)}
     />
   );
 }
 
 SEO.defaultProps = {
-  lang: 'en',
   meta: [],
-  description: '',
+  title: defaultTitle,
+  description: defaultDescription,
+  pathname: '',
+  ogImage: '',
 };
 
 export default SEO;

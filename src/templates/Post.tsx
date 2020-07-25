@@ -34,15 +34,16 @@ const config = require('../../config');
 
 export interface postProps {
   data: any;
+  location: { pathname: string; };
   pageContext: { slug: string; series: any[]; lastmod: string };
   isMobile: boolean;
 }
 
 const Post = (props: postProps) => {
-  const { data, pageContext, isMobile } = props;
+  const { data, location, pageContext, isMobile } = props;
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark;
-  const { title, date, tags } = frontmatter;
+  const { title, featuredImage, date, tags } = frontmatter;
   let update = frontmatter.update;
   if (Number(update?.split(',')[1]) === 1) update = null;
   const { slug } = fields;
@@ -182,7 +183,12 @@ const Post = (props: postProps) => {
         </script>
       </Helmet>
 
-      <SEO title={title} description={excerpt} />
+      <SEO
+        title={title}
+        description={excerpt}
+        pathname={location.pathname}
+        ogImage={featuredImage.publicURL}
+      />
 
       <Layout>
         <div className="blog-post-container">
@@ -336,6 +342,9 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        featuredImage {
+          publicURL
+        }
         date(formatString: "MMM DD, YYYY")
         tags
         update(formatString: "MMM DD, YYYY")

@@ -21,7 +21,7 @@ const IndexPage = (props: IndexPageProps) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO />
       <div className="index-wrap">
         <Bio />
         <div className="index-post-list-wrap">

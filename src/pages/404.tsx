@@ -7,7 +7,7 @@ import SEO from '../components/seo';
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404: Not found" />
+    <SEO title="Not found" />
 
     <div id="notFound">
       <div className="icon-wrap">

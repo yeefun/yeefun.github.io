@@ -1,7 +1,7 @@
 module.exports = {
   /** Site MetaData (Required all)*/
   title: 'Yeefun',
-  description: 'Blog Description',
+  description: '👨🏻‍💻👁📚...',
   author: 'Yeefun Lin',
   language: 'zh-Hant',
   siteUrl: 'https://yeefun.github.io',
