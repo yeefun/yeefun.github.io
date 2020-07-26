@@ -1,5 +1,12 @@
 const config = require('./config');
-const { title, description, author, googleAnalytics, siteUrl, language } = config;
+const {
+  title,
+  description,
+  author,
+  googleAnalytics,
+  siteUrl,
+  language,
+} = config;
 
 const gatsbyConfig = {
   siteMetadata: { title, description, author, siteUrl, language },
@@ -122,7 +129,7 @@ const gatsbyConfig = {
           }
       }`,
         serialize: ({ site, allSitePage }) => {
-          return allSitePage.edges.map(edge => {
+          return allSitePage.edges.map((edge) => {
             return {
               url: site.siteMetadata.siteUrl + edge.node.path,
               changefreq: 'daily',
@@ -152,7 +159,7 @@ const gatsbyConfig = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+              return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.frontmatter.description,
                   date: edge.node.frontmatter.date,
@@ -191,7 +198,9 @@ const gatsbyConfig = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: siteUrl,
-        sitemap: `${siteUrl}${siteUrl[siteUrl.length - 1] !== '/' ? '/' : ''}sitemap.xml`,
+        sitemap: `${siteUrl}${
+          siteUrl[siteUrl.length - 1] !== '/' ? '/' : ''
+        }sitemap.xml`,
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },

@@ -53,7 +53,10 @@ const Layout = (props: LayoutPropsType) => {
   return (
     <>
       <Helmet>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Serif:wght@400;600;700&family=Rubik:wght@300&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Serif:wght@400;600;700&family=Rubik:wght@300&display=swap"
+          rel="stylesheet"
+        />
         <script>
           {`
             (function(d) {
@@ -66,7 +69,10 @@ const Layout = (props: LayoutPropsType) => {
             })(document);
           `}
         </script>
-        <meta name="google-site-verification" content={require('../../../config').googleSearchConsole ?? ''} />
+        <meta
+          name="google-site-verification"
+          content={require('../../../config').googleSearchConsole ?? ''}
+        />
       </Helmet>
 
       <div id="layout" className={isDark ? 'dark' : 'light'}>
@@ -74,8 +80,7 @@ const Layout = (props: LayoutPropsType) => {
         <div id="content">
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()} JunhoBaik, Built with
-            {' '}
+            © {new Date().getFullYear()} JunhoBaik, Built with{' '}
             <a href="https://www.gatsbyjs.org">Gatsby</a>
           </footer>
         </div>

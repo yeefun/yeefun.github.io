@@ -19,11 +19,12 @@ export interface SEOPropsType {
 }
 
 function SEO(props: SEOPropsType) {
-  const metaTitle = props.title !== defaultTitle ?
-    `${props.title} | ${defaultTitle}` :
-    props.title
+  const metaTitle =
+    props.title !== defaultTitle
+      ? `${props.title} | ${defaultTitle}`
+      : props.title;
 
-  const ogUrl = `${siteUrl}${props.pathname}`
+  const ogUrl = `${siteUrl}${props.pathname}`;
   const metaOg = [
     {
       property: 'og:title',
@@ -49,7 +50,7 @@ function SEO(props: SEOPropsType) {
       property: 'og:locale',
       content: language !== 'zh-Hant' ? language : 'zh_TW',
     },
-  ]
+  ];
   const metaTwitter = [
     {
       name: 'twitter:card',
@@ -67,7 +68,7 @@ function SEO(props: SEOPropsType) {
       name: 'twitter:description',
       content: props.description,
     },
-  ]
+  ];
   const metaWebApp = [
     {
       name: 'mobile-web-app-capable',
@@ -81,7 +82,7 @@ function SEO(props: SEOPropsType) {
       name: 'apple-mobile-web-app-status-bar-style',
       content: 'default',
     },
-  ]
+  ];
 
   return (
     <Helmet

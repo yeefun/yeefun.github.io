@@ -44,7 +44,10 @@ const IndexPage = (props: IndexPageProps) => {
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 100) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 100
+    ) {
       edges {
         node {
           fields {

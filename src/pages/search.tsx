@@ -11,7 +11,7 @@ import './styles/search.scss';
 
 export interface SearchProps {
   data: any;
-  location: { pathname: string; };
+  location: { pathname: string };
 }
 
 const Search = (props: SearchProps) => {
@@ -27,7 +27,11 @@ const Search = (props: SearchProps) => {
     const { title } = frontmatter;
     const lowerValue = value.toLocaleLowerCase();
 
-    if (!isTitleOnly && rawMarkdownBody.toLocaleLowerCase().includes(lowerValue)) return true;
+    if (
+      !isTitleOnly &&
+      rawMarkdownBody.toLocaleLowerCase().includes(lowerValue)
+    )
+      return true;
 
     return title.toLocaleLowerCase().includes(lowerValue);
   });
@@ -71,7 +75,9 @@ const Search = (props: SearchProps) => {
             </div>
           </div>
 
-          {value !== '' && !filteredPosts.length ? <span className="no-result">No search results</span> : null}
+          {value !== '' && !filteredPosts.length ? (
+            <span className="no-result">No search results</span>
+          ) : null}
           <PostList posts={value === '' ? posts : filteredPosts} />
         </div>
       </div>

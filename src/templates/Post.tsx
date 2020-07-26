@@ -6,7 +6,11 @@ import { graphql, Link } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
 import moment from 'moment';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { faListUl, faLayerGroup, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faListUl,
+  faLayerGroup,
+  faAngleLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import AdSense from 'react-adsense';
 import {
   FacebookShareButton,
@@ -36,7 +40,7 @@ const config = require('../../config');
 
 export interface postProps {
   data: any;
-  location: { pathname: string; };
+  location: { pathname: string };
   pageContext: { slug: string; series: any[]; lastmod: string };
 }
 
@@ -56,7 +60,11 @@ const Post = (props: postProps) => {
     enableSocialShare: boolean;
     disqusShortname?: string;
   }
-  const { enablePostOfContents, disqusShortname, enableSocialShare }: iConfig = config;
+  const {
+    enablePostOfContents,
+    disqusShortname,
+    enableSocialShare,
+  }: iConfig = config;
 
   const [yList, setYList] = useState([] as number[]);
   const [isInsideToc, setIsInsideToc] = useState(false);
@@ -67,9 +75,12 @@ const Post = (props: postProps) => {
   const isSocialShare = enableSocialShare;
 
   useEffect(() => {
-    const hs = Array.from(document.querySelectorAll('h2, h3')) as HTMLHeadingElement[];
-    const minusValue = window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
-    const yPositions = hs.map(h => h.offsetTop - minusValue);
+    const hs = Array.from(
+      document.querySelectorAll('h2, h3')
+    ) as HTMLHeadingElement[];
+    const minusValue =
+      window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
+    const yPositions = hs.map((h) => h.offsetTop - minusValue);
     setYList(yPositions);
 
     return () => {};
@@ -80,7 +91,10 @@ const Post = (props: postProps) => {
       const adDiv = document.querySelector('.ad') as HTMLDivElement;
 
       if (adDiv) {
-        const maxWidth = window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight;
+        const maxWidth =
+          window.innerHeight > window.innerWidth
+            ? window.innerWidth
+            : window.innerHeight;
         adDiv.style.maxWidth = `${maxWidth}px`;
         adDiv.style.display = 'flex';
         adDiv.style.justifyContent = 'flex-end';
@@ -96,7 +110,9 @@ const Post = (props: postProps) => {
             return v < window.pageYOffset;
           }).length - 1;
 
-        const aList = document.querySelectorAll('.toc.outside li a') as NodeListOf<HTMLAnchorElement>;
+        const aList = document.querySelectorAll(
+          '.toc.outside li a'
+        ) as NodeListOf<HTMLAnchorElement>;
 
         for (const i in Array.from(aList)) {
           if (parseInt(i, 10) === index) {
@@ -124,10 +140,15 @@ const Post = (props: postProps) => {
 
   const mapSeries = series.map((s: any) => {
     return (
-      <li key={`${s.slug}-series-${s.num}`} className={`series-item ${slug === s.slug ? 'current-series' : ''}`}>
+      <li
+        key={`${s.slug}-series-${s.num}`}
+        className={`series-item ${slug === s.slug ? 'current-series' : ''}`}
+      >
         <Link to={s.slug}>
           <span>{s.title}</span>
-          <div className="icon-wrap">{slug === s.slug ? <Fa icon={faAngleLeft} /> : null}</div>
+          <div className="icon-wrap">
+            {slug === s.slug ? <Fa icon={faAngleLeft} /> : null}
+          </div>
         </Link>
       </li>
     );
@@ -146,14 +167,19 @@ const Post = (props: postProps) => {
   return (
     <>
       <Helmet>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
         <script type="application/ld+json">
           {`
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "datePublished": "${moment(new Date(date)).toISOString()}",
-  ${update ? `"dateModified": "${moment(new Date(update)).toISOString()}",` : ''}
+  ${
+    update ? `"dateModified": "${moment(new Date(update)).toISOString()}",` : ''
+  }
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "${config.siteUrl}"
@@ -170,10 +196,14 @@ const Post = (props: postProps) => {
     "name" : "${config.name}",
     "logo": {
       "@type": "ImageObject",
-      "url": "${config.siteUrl}${require(`../images/${config.profileImageFileName}`)}"
+      "url": "${
+        config.siteUrl
+      }${require(`../images/${config.profileImageFileName}`)}"
     }
   },
-  "image": ["${config.siteUrl}${require(`../images/${config.profileImageFileName}`)}"]`
+  "image": ["${
+    config.siteUrl
+  }${require(`../images/${config.profileImageFileName}`)}"]`
       : `"publisher": {
     "@type" : "organization",
     "name" : "${config.name}"
@@ -234,7 +264,10 @@ const Post = (props: postProps) => {
             </div>
 
             {!isTableOfContents ? null : (
-              <div className="inside-toc-wrap" style={{ display: isInsideToc ? 'flex' : 'none' }}>
+              <div
+                className="inside-toc-wrap"
+                style={{ display: isInsideToc ? 'flex' : 'none' }}
+              >
                 <Toc isOutside={false} toc={tableOfContents} />
               </div>
             )}
@@ -253,7 +286,10 @@ const Post = (props: postProps) => {
               </>
             ) : null}
 
-            <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: html }} />
+            <div
+              className="blog-post-content"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
           </div>
 
           {isSocialShare ? (
@@ -310,7 +346,9 @@ const Post = (props: postProps) => {
             <>
               <aside className="ad">
                 <AdSense.Google
-                  client={config.googleAdsenseClient || 'ca-pub-5001380215831339'}
+                  client={
+                    config.googleAdsenseClient || 'ca-pub-5001380215831339'
+                  }
                   slot={config.googleAdsenseSlot || '5214956675'}
                   style={{ display: 'block' }}
                   format="auto"
@@ -327,7 +365,9 @@ const Post = (props: postProps) => {
           )}
         </div>
 
-        {!isTableOfContents ? null : <Toc isOutside={true} toc={tableOfContents} />}
+        {!isTableOfContents ? null : (
+          <Toc isOutside={true} toc={tableOfContents} />
+        )}
       </Layout>
     </>
   );

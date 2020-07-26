@@ -9,7 +9,7 @@ import PostList from '../components/PostList';
 
 export interface TagsPageProps {
   data: any;
-  location: { pathname: string; hash: string; };
+  location: { pathname: string; hash: string };
 }
 
 const Tags = (props: TagsPageProps) => {
@@ -66,10 +66,12 @@ const Tags = (props: TagsPageProps) => {
 
   const getPostList: () => any[] = () => {
     if (group.filter((g: groupItem) => g.fieldValue === targetTag).length) {
-      return group.filter((g: groupItem) => g.fieldValue === targetTag)[0].edges;
+      return group.filter((g: groupItem) => g.fieldValue === targetTag)[0]
+        .edges;
     }
     if (group.filter((g: groupItem) => g.fieldValue === 'undefined').length) {
-      return group.filter((g: groupItem) => g.fieldValue === 'undefined')[0].edges;
+      return group.filter((g: groupItem) => g.fieldValue === 'undefined')[0]
+        .edges;
     }
     return [];
   };
@@ -77,7 +79,8 @@ const Tags = (props: TagsPageProps) => {
   useEffect(() => {
     let large = 0;
     for (const g of group) {
-      if (g.fieldValue !== 'undefined' && g.totalCount > large) large = g.totalCount;
+      if (g.fieldValue !== 'undefined' && g.totalCount > large)
+        large = g.totalCount;
     }
     setLargeCount(large);
   }, [group]);

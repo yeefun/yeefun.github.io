@@ -2,7 +2,13 @@ import * as React from 'react';
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'gatsby';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { faTags, faSearch, faMoon, faSun, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTags,
+  faSearch,
+  faMoon,
+  faSun,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { useColorMode } from 'theme-ui';
 
@@ -57,12 +63,15 @@ const Header = (props: headerPropsType) => {
   }, [isHide]);
 
   useEffect(() => {
-    const profile: HTMLImageElement | null = document.querySelector('.header-profile-image-wrap>img');
+    const profile: HTMLImageElement | null = document.querySelector(
+      '.header-profile-image-wrap>img'
+    );
 
     const prevPath: string = path;
     const currPath: string = location.pathname;
 
-    const setPath = (path: string, size?: string) => dispatch(actionCreators.setPath(path, size));
+    const setPath = (path: string, size?: string) =>
+      dispatch(actionCreators.setPath(path, size));
 
     if (profile) {
       if (currPath === prevPath) {
@@ -85,7 +94,7 @@ const Header = (props: headerPropsType) => {
     }
 
     const setVisible: () => void = () => {
-      setYPos(prevYPos => {
+      setYPos((prevYPos) => {
         const currentYPos = window.pageYOffset;
 
         if (currentYPos > 0) setIsHide(prevYPos < currentYPos);
@@ -98,7 +107,10 @@ const Header = (props: headerPropsType) => {
   }, []);
 
   return (
-    <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
+    <header
+      id="Header"
+      className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}
+    >
       <div className="header-title">
         <Link to="/">
           <div className="header-profile-image-wrap">
@@ -118,7 +130,10 @@ const Header = (props: headerPropsType) => {
 
       <nav id="nav">
         <div className="theme-toggle">
-          <div className="theme-toggle-description" style={{ display: isMobile ? 'none' : 'flex' }}>
+          <div
+            className="theme-toggle-description"
+            style={{ display: isMobile ? 'none' : 'flex' }}
+          >
             <Fa
               icon={colorMode === 'dark' ? faMoon : faSun}
               style={{ fontSize: colorMode === 'dark' ? '1.1rem' : '1.2rem' }}
@@ -130,11 +145,15 @@ const Header = (props: headerPropsType) => {
             icon={colorMode === 'dark' ? faSun : faMoon}
             style={{ fontSize: colorMode === 'dark' ? '1.2rem' : '1.1rem' }}
             onMouseEnter={() => {
-              const toggle: HTMLDivElement | null = document.querySelector('.theme-toggle-description');
+              const toggle: HTMLDivElement | null = document.querySelector(
+                '.theme-toggle-description'
+              );
               if (toggle) toggle.style.opacity = '0.5';
             }}
             onMouseLeave={() => {
-              const toggle: HTMLDivElement | null = document.querySelector('.theme-toggle-description');
+              const toggle: HTMLDivElement | null = document.querySelector(
+                '.theme-toggle-description'
+              );
               if (toggle) toggle.style.opacity = '0';
             }}
             onClick={() => {
