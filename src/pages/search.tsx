@@ -34,7 +34,7 @@ const Search = (props: SearchProps) => {
 
   return (
     <Layout>
-      <SEO title="Search" pathname={location.pathname} />
+      <SEO title="Search" description="🔎..." pathname={location.pathname} />
       <div id="Search">
         <div className="search-inner-wrap">
           <div className="input-wrap">
@@ -85,12 +85,12 @@ export const pageQuery = graphql`
       edges {
         node {
           rawMarkdownBody
-          excerpt(format: PLAIN, truncate: true)
           fields {
             slug
           }
           frontmatter {
             date(formatString: "MMM DD, YYYY")
+            description
             title
             tags
             update(formatString: "MMM DD, YYYY")

@@ -91,7 +91,7 @@ const Tags = (props: TagsPageProps) => {
 
   return (
     <Layout>
-      <SEO title="Tags" pathname={location.pathname} />
+      <SEO title="Tags" description="🏷..." pathname={location.pathname} />
       <div id="tags">
         <div className="tag-list-wrap">
           <ul>{tagList}</ul>
@@ -111,12 +111,12 @@ export const pageQuery = graphql`
         totalCount
         edges {
           node {
-            excerpt(format: PLAIN, truncate: true)
             fields {
               slug
             }
             frontmatter {
               date(formatString: "MMM DD, YYYY")
+              description
               update(formatString: "MMM DD, YYYY")
               title
               tags

@@ -44,8 +44,8 @@ const Post = (props: postProps) => {
   const { data, location, pageContext } = props;
   const isMobile = useSelector((state: RootState) => state.isMobile);
   const { markdownRemark } = data;
-  const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark;
-  const { title, featuredImage, date, tags } = frontmatter;
+  const { frontmatter, html, tableOfContents, fields } = markdownRemark;
+  const { title, description, featuredImage, date, tags } = frontmatter;
   let update = frontmatter.update;
   if (Number(update?.split(',')[1]) === 1) update = null;
   const { slug } = fields;
@@ -187,7 +187,7 @@ const Post = (props: postProps) => {
 
       <SEO
         title={title}
-        description={excerpt}
+        description={description}
         pathname={location.pathname}
         ogImage={featuredImage.publicURL}
       />
@@ -337,13 +337,13 @@ export const pageQuery = graphql`
   query($slug: String) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
-      excerpt
       tableOfContents
       fields {
         slug
       }
       frontmatter {
         title
+        description
         featuredImage {
           publicURL
         }

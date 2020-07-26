@@ -49,9 +49,9 @@ const PostList = memo((props: PostListProps) => {
 
   const mapPost = posts.map((post: any, i: number) => {
     const { node } = post;
-    const { excerpt, fields, frontmatter } = node;
+    const { fields, frontmatter } = node;
     const { slug } = fields;
-    const { date, title, tags } = frontmatter;
+    const { date, title, description, tags } = frontmatter;
     let update = frontmatter.update;
     if (Number(update.split(',')[1]) === 1) update = null;
 
@@ -82,7 +82,7 @@ const PostList = memo((props: PostListProps) => {
             <ul className="tag-list">{mapTag}</ul>
           </div>
           <span className="excerpt">
-            <Link to={slug}>{excerpt}</Link>
+            <Link to={slug}>{description}</Link>
           </span>
         </article>
       </li>

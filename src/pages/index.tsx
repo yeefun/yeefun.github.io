@@ -47,12 +47,12 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 100) {
       edges {
         node {
-          excerpt(format: PLAIN, truncate: true)
           fields {
             slug
           }
           frontmatter {
             date(formatString: "MMM DD, YYYY")
+            description
             update(formatString: "MMM DD, YYYY")
             title
             tags

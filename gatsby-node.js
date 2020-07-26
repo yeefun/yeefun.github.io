@@ -1,6 +1,5 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const config = require('./config');
 
 // Create Pages
 exports.createPages = async ({ actions, graphql, reporter }) => {
