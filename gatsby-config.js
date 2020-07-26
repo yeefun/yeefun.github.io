@@ -80,15 +80,13 @@ const gatsbyConfig = {
       options: {
         name: title,
         short_name: title,
-        description: description,
+        description,
         start_url: '/',
         lang: language,
         background_color: '#fff',
         theme_color: '#fff',
         display: 'standalone',
-        icon: 'src/images/icon.png',
-        legacy: false,
-        include_favicon: false,
+        icon: 'src/images/icon.svg',
       },
     },
 
