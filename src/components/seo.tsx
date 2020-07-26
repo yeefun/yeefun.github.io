@@ -8,6 +8,7 @@ const {
   language,
   siteUrl,
 } = require('../../config');
+const defaultOgImage = require('../images/og-default.png');
 
 export interface SEOPropsType {
   meta: any[];
@@ -106,7 +107,7 @@ SEO.defaultProps = {
   title: defaultTitle,
   description: defaultDescription,
   pathname: '',
-  ogImage: '',
+  ogImage: defaultOgImage,
 };
 
 export default SEO;
