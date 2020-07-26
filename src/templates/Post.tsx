@@ -388,9 +388,9 @@ export const pageQuery = graphql`
         featuredImage {
           publicURL
         }
-        date(formatString: "MMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
         tags
-        update(formatString: "MMM DD, YYYY")
+        update(formatString: "YYYY-MM-DD")
       }
     }
   }
