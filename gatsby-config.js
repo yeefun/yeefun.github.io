@@ -108,26 +108,26 @@ const gatsbyConfig = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        output: '/sitemap.xml',
         query: `
           {
-          site {
+            site {
               siteMetadata {
-                  siteUrl
+                siteUrl
               }
-          }
+            }
 
-          allSitePage {
-            edges {
-              node {
-                path
-                context {
-                  lastmod
+            allSitePage {
+              edges {
+                node {
+                  path
+                  context {
+                    lastmod
+                  }
                 }
               }
             }
           }
-      }`,
+        `,
         serialize: ({ site, allSitePage }) => {
           return allSitePage.edges.map((edge) => {
             return {
@@ -160,11 +160,12 @@ const gatsbyConfig = {
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map((edge) => {
+                const fullUrl =
+                  site.siteMetadata.siteUrl + edge.node.fields.slug;
+
                 return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.frontmatter.description,
-                  date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  url: fullUrl,
+                  guid: fullUrl,
                   custom_elements: [{ 'content:encoded': edge.node.html }],
                 });
               });
@@ -197,10 +198,6 @@ const gatsbyConfig = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: siteUrl,
-        sitemap: `${siteUrl}${
-          siteUrl[siteUrl.length - 1] !== '/' ? '/' : ''
-        }sitemap.xml`,
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
