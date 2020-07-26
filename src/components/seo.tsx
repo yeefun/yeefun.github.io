@@ -16,6 +16,7 @@ export interface SEOPropsType {
   description: string;
   pathname: string;
   ogImage: string;
+  ogType: string;
 }
 
 function SEO(props: SEOPropsType) {
@@ -44,7 +45,7 @@ function SEO(props: SEOPropsType) {
     },
     {
       property: 'og:type',
-      content: 'website',
+      content: props.ogType,
     },
     {
       property: 'og:locale',
@@ -109,6 +110,7 @@ SEO.defaultProps = {
   description: defaultDescription,
   pathname: '',
   ogImage: defaultOgImage,
+  ogType: 'website',
 };
 
 export default SEO;

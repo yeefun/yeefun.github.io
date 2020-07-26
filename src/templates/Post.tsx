@@ -220,6 +220,7 @@ const Post = (props: postProps) => {
         description={description}
         pathname={location.pathname}
         ogImage={featuredImage.publicURL}
+        ogType="article"
       />
 
       <Layout>
