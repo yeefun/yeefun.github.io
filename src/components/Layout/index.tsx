@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useStaticQuery, graphql } from 'gatsby';
 import MobileDetect from 'mobile-detect';
+import { config as FaConfig, dom as FaDom } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
 import { useColorMode } from 'theme-ui';
@@ -11,6 +12,8 @@ import { useColorMode } from 'theme-ui';
 import './layout.scss';
 import Header from '../Header';
 import { actionCreators } from '../../state/actions';
+
+FaConfig.autoAddCss = false;
 
 interface LayoutPropsType {
   children: Object;
@@ -28,6 +31,7 @@ const Layout = (props: LayoutPropsType) => {
       site {
         siteMetadata {
           title
+          author
         }
       }
     }
@@ -73,6 +77,7 @@ const Layout = (props: LayoutPropsType) => {
           name="google-site-verification"
           content={require('../../../config').googleSearchConsole ?? ''}
         />
+        <style>{FaDom.css()}</style>
       </Helmet>
 
       <div id="layout" className={isDark ? 'dark' : 'light'}>
@@ -80,7 +85,9 @@ const Layout = (props: LayoutPropsType) => {
         <div id="content">
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()} JunhoBaik, Built with{' '}
+            <span>{`© ${new Date().getFullYear()} ${data.site.siteMetadata.author} | Theme by `}</span>
+            <a href="https://github.com/junhobaik">JunhoBaik</a>
+            <span>{` | Built with `}</span>
             <a href="https://www.gatsbyjs.org">Gatsby</a>
           </footer>
         </div>
