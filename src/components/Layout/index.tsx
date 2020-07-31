@@ -12,11 +12,12 @@ import { useColorMode } from 'theme-ui';
 import './layout.scss';
 import Header from '../Header';
 import { actionCreators } from '../../state/actions';
+import config from '../../../config';
 
 FaConfig.autoAddCss = false;
 
 interface LayoutPropsType {
-  children: Object;
+  children: React.ReactNode;
 }
 
 const Layout = (props: LayoutPropsType) => {
@@ -75,7 +76,7 @@ const Layout = (props: LayoutPropsType) => {
         </script>
         <meta
           name="google-site-verification"
-          content={require('../../../config').googleSearchConsole ?? ''}
+          content={config.googleSearchConsole ?? ''}
         />
         <style>{FaDom.css()}</style>
       </Helmet>

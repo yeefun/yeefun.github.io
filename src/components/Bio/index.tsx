@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import './bio.scss';
-const config = require('../../../config');
+import config from '../../../config';
 
 const Bio = () => {
   const {

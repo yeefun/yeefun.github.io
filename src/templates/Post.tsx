@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
@@ -36,9 +38,9 @@ import SEO from '../components/seo';
 import './code-theme.scss';
 import './post.scss';
 
-const config = require('../../config');
+import config from '../../config';
 
-export interface postProps {
+interface postProps {
   data: any;
   location: { pathname: string };
   pageContext: { slug: string; series: any[]; lastmod: string };
@@ -82,8 +84,6 @@ const Post = (props: postProps) => {
       window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
     const yPositions = hs.map((h) => h.offsetTop - minusValue);
     setYList(yPositions);
-
-    return () => {};
   }, []);
 
   useEffect(() => {

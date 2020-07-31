@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as React from 'react';
-import { memo, useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'gatsby';
 import { throttle } from 'lodash';
 
 import './postList.scss';
 
-export interface PostListProps {
+interface PostListProps {
   posts: any[];
 }
 
-const PostList = memo((props: PostListProps) => {
+const PostList = (props: PostListProps) => {
   const { posts } = props;
   const [showCnt, setShowCnt] = useState(0);
   const [currentPostList, setCurrentPostList] = useState<JSX.Element[]>([]);
@@ -109,6 +111,6 @@ const PostList = memo((props: PostListProps) => {
       <ul>{currentPostList}</ul>
     </div>
   );
-});
+};
 
 export default PostList;
