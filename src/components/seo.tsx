@@ -1,16 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as React from 'react';
 import Helmet from 'react-helmet';
 
-const {
-  title: defaultTitle,
-  description: defaultDescription,
+import {
+  title as defaultTitle,
+  description as defaultDescription,
   author,
   language,
   siteUrl,
-} = require('../../config');
-const defaultOgImage = require('../images/og-default.png');
+} from '../../config';
+import defaultOgImage from '../images/og-default.png';
 
-export interface SEOPropsType {
+interface SEOPropsType {
   meta: any[];
   title: string;
   description: string;

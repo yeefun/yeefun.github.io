@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
@@ -7,7 +9,7 @@ import SEO from '../components/seo';
 import './styles/tags.scss';
 import PostList from '../components/PostList';
 
-export interface TagsPageProps {
+interface TagsPageProps {
   data: any;
   location: { pathname: string; hash: string };
 }
