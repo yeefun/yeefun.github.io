@@ -19,8 +19,6 @@ import config from '../../../config';
 
 FaConfig.autoAddCss = false;
 
-FaConfig.autoAddCss = false;
-
 interface LayoutPropsType {
   children: React.ReactNode;
 }
