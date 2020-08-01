@@ -87,7 +87,7 @@ const PostList = (props: PostListProps) => {
 
   useEffect(() => {
     expendPostList(posts.slice(currentPostList.length, showCnt));
-  }, [showCnt]);
+  }, [posts, showCnt]);
 
   useEffect(() => {
     posts.sort((a: any, b: any) => {
