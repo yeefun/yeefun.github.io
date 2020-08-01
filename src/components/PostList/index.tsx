@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'gatsby';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 import './postList.scss';
 
