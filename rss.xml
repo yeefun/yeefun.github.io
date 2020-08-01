@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Yeefun | Feed]]></title><description><![CDATA[👨🏻‍💻👁📚...]]></description><link>https://yeefun.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 01 Aug 2020 04:41:46 GMT</lastBuildDate><item><title><![CDATA[區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事]]></title><description><![CDATA[透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？]]></description><link>https://yeefun.github.io/first-post/</link><guid isPermaLink="false">https://yeefun.github.io/first-post/</guid><pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;向假新聞宣戰早已不是什麼新鮮事了。獨立檢證、協力查核、智能辨識⋯⋯無論手段新穎或傳統，在假訊息竄增的速度面前，似乎都顯得蒼白無力，一不小心還會惹禍上身。這不禁讓人想問：還有什麼辦法？難道真理終究戰不勝謊言？人類還有救嗎？&lt;/p&gt;
+&lt;p&gt;如果你已經對於當今所有防堵假訊息的手法都感到失望，準備當個極端的懷疑論者（這也不失為一個辦法），那你也許可以稍停一下，看看我底下將要介紹的計畫，也許它能帶給你一絲希望。&lt;/p&gt;
+&lt;p&gt;去年7月，媒體界龍頭紐約時報（The New York Times，以下簡稱紐時）發起&lt;a href=&quot;https://www.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;「新聞溯源計畫」（The News Provenance Project）&lt;/a&gt;，期待透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞。其矛頭第一個對準的就是假照片。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;為什麼是假照片？區塊鏈在這整個計畫中的作用是什麼？「揭露新聞更動源流」是什麼意思？它能怎樣幫助我們辨別資訊？要達成這個目標，需要完成哪些事？&lt;/strong&gt;以下將一一回答。&lt;/p&gt;
+&lt;h2 id=&quot;假照片的破壞力強&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%81%87%E7%85%A7%E7%89%87%E7%9A%84%E7%A0%B4%E5%A3%9E%E5%8A%9B%E5%BC%B7&quot; aria-label=&quot;假照片的破壞力強 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;假照片的破壞力強&lt;/h2&gt;
+&lt;p&gt;為什麼選擇假照片？理由似乎很直觀：照片比文字更容易傳播，且具有更高的可信度，因此破壞力也就愈強。據&lt;a href=&quot;https://www.niemanlab.org/2020/01/heres-how-the-new-york-times-tested-blockchain-to-help-you-identify-faked-photos-on-your-timeline/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;美國獨立智庫研究&lt;/a&gt;顯示，相較於其它形式的假訊息，美國人民對於大眾辨識假圖片或影片的信心和責任都更少。換言之，他們既覺得&lt;strong&gt;大眾沒有能力辨識，也沒有義務辨識&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;低落的防衛意識，使得假照片有大行其道的空間。隨著&lt;a href=&quot;https://opinion.cw.com.tw/blog/profile/51/article/8316&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;「深假」（deepfake）技術的進步&lt;/a&gt;，製造出高水準視覺效果的成本愈來愈低。如何在資訊生態系統崩壞之前，從結構上防制假照片的危害，顯然是當務之急。&lt;/p&gt;
+&lt;h2 id=&quot;區塊鏈溯源&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%8D%80%E5%A1%8A%E9%8F%88%E6%BA%AF%E6%BA%90&quot; aria-label=&quot;區塊鏈溯源 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;區塊鏈溯源&lt;/h2&gt;
+&lt;p&gt;從結構上防制？紐時究竟想怎麼做？最初的想法，是為照片加上一些&lt;strong&gt;元數據（metadata）及編輯紀錄&lt;/strong&gt;。前者如拍攝時間、地點、發布者等；後者則可想像有一條時間軸，上面記錄著誰在何時取用、發布，並做了哪些更動。&lt;/p&gt;
+&lt;p&gt;舉例來說，假設阿帆今天在巴西拍到一張火噬雨林的照片，公布到臉書，並寫下：「天啊，地球之肺在燃燒！貪婪的人類終自食惡果！」阿昱看到了，順手把它載入自己的電腦。四個月後，澳洲森林發生大火，阿昱上傳這張照片，文字卻改為：「極端氣候正在吞噬澳洲！人類何時才要醒悟！」&lt;/p&gt;
+&lt;p&gt;此時悠遊於臉書河道的你，猝不及防地滑到這則貼文。怵目驚心的照片使你的手指停了下來，各種情緒頓時湧上心頭——擔憂、憤怒、恐懼、羞愧——「這麼嚴重的事情，大家應該要知道啊」，你一邊想著，一邊按下分享。&lt;/p&gt;
+&lt;p&gt;「欸？這是什麼？」你看到浮在照片下方的訊息區塊，裡頭有一行被黃色標起的文字：「四個月前拍攝」。&lt;/p&gt;
+&lt;p&gt;「四個月前？什麼鬼？這不是現在正在發生的事嗎？」你點開區塊，看見這張照片最初拍攝的時間、地點，以及發布者（阿帆）當時的貼文內容。&lt;/p&gt;
+&lt;p&gt;「殺小，該不會這是假照片吧？」你愈想愈不對勁，決定先將剛才分享貼文的隱私權限設為「只限本人」，並上網搜尋「澳洲大火」。最終你也許會發現：澳洲是真的有發生大火，但那張照片也是錯的。你不願做假訊息的幫兇，於是刪了貼文。&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1f0cc767f732d707bf90f711048f9e0c/0d0e4/macron-twitter.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 74.40677966101696%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAIAAABr+ngCAAAACXBIWXMAAAsSAAALEgHS3X78AAADlUlEQVQoz2P4+v3HlcuXX71+c//R4wePntx78Ojhk2c3Xn198+HLm/efXr//9Pbjl09ffwDZL958AJJff/z68+//tx+/vv34yfD63YeOusp7t2+dv3Tt9LkL5y9dPnvh0pnr9y5cvnbj9r0rN25dvXH79r0HV67fun7z7q2796/euHXr9r0nz14CDWEAmvH+4+dnL16ePnvhzPmLp86ev3jl2plz54GMsxcunzl/6er1m0BxoFkXLl8FCp44febUmXO3797//PUbw/efv3/8/vv+wycg//qNm1fvP7vx/OPN55+uP/986/mH9+/fv33/Aeipd++A9McPHz99+Pj50+cvb96+B/oXaPPPf//+H794Jby0Piyr0Cslv3TyitkrNk6es6B3+tyFExs2b92xfteR2UvXzV22dueJa6uO3Fqy50Lf6kOX7z1n+Pr95////zcdOS3qGChp6aHqERVdO6mqqaWypqagpKSxuWnJijUrt+yvnboio77HuniCRnqHVmqLRGDRmn2nGIChB9S87+x1g/hK9dB864SS8Myi+Kysuoa6stKCpu6Jk6ZO7e7tauyZ4Jtbz6vjwSlpxCtlyMQmvXz5eqjm/eduOOZ2BdTNjWtZkFg3xSkuN78gr6mto6x1QkN7b3trXVljW2BuE5+IlgiPohiPPAcD34rla6DO3r7/iH9BW0HPosLK5tKOOYkVnX1dbf2Tp+Q0T26fvmjeoiWTZi+t6Jhu7OHDqyQpLCrNzsC5fPkqqObNO3c7plUltc33C/UNi48sKCpduHj59o07V8xb3dLVm1ZfHl6TaxHjLeugw60vJqAmzsbJsWIFSPMPoOZ1G9fbBkUmNvS5JcSYhLo4xXhlNlWmN1YGFsYYRdoJ+igz24uymghzqgrzygsLSAuz8LAtX7kSqnnLjp3KWqr6rnZ6joZiJrK8huI8xiKslqLMliJc5lIirmqCVvL8prICRtICyqLC8mIcPBwrVsFsXrthPQMDAxMXEyM7I4MoE4MMC6M6F4M2D6M2N4MOF7MpH4MuN4MyJ4MaB4MYK5MQK1DxksVLGL7/+PX7z7/bd+43trQ0dbZ19na39XQ29XfUTm9vmNLRuqC3aWZ349yu6smtLbN62yZ1t0zoap/Y3dLWdvPmbYYv339+/PL9y/df3379BSZVoCv+/f//8+//z19///z1B8j98/f/95//Pn75+Q8sBcpTYPDz9x8AyyQfENvMdAUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)&quot;
+        title=&quot;去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)&quot;
+        src=&quot;/static/1f0cc767f732d707bf90f711048f9e0c/fcda8/macron-twitter.png&quot;
+        srcset=&quot;/static/1f0cc767f732d707bf90f711048f9e0c/fcda8/macron-twitter.png 590w,
+/static/1f0cc767f732d707bf90f711048f9e0c/c83ae/macron-twitter.png 1180w,
+/static/1f0cc767f732d707bf90f711048f9e0c/0d0e4/macron-twitter.png 1230w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;&lt;p&gt;去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自&lt;a href=&quot;https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;馬克宏推特&lt;/a&gt;&lt;/p&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;謝天謝地！一場錯誤內容被轉發上萬次的災難被阻止了。&lt;strong&gt;它靠的不是事後通知，也非事前審查，而是在訊息產生（或發布）當下，便在某處烙下一條不可更改的紀錄。它不做判斷，只呈現每次編輯的事實，讓讀者根據這些紀錄，自行決定要多相信這則訊息。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;「聽起來真是不錯，」你可能會問：「但我要怎麼知道這些紀錄沒有被惡意更改過？」這就是區塊鏈發揮作用的地方了。區塊鏈是一種記錄資料的技術，一旦資料「上鏈」，便&lt;strong&gt;難以被竄改&lt;/strong&gt;；同時它也是&lt;strong&gt;透明&lt;/strong&gt;的，任何更改都會被記錄，且可被看見。它能確保照片元數據和編輯紀錄的真實性。&lt;/p&gt;
+&lt;h2 id=&quot;概念驗證&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%A6%82%E5%BF%B5%E9%A9%97%E8%AD%89&quot; aria-label=&quot;概念驗證 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;概念驗證&lt;/h2&gt;
+&lt;p&gt;一個看似簡單的概念，實作起來往往有許多複雜微妙之處。&lt;/p&gt;
+&lt;p&gt;比方說，我們知道這個計畫要在照片旁邊附上一些資訊，但要放哪些資訊？更深入點問：&lt;strong&gt;平常人們在社群媒體上是如何決定一張照片可不可信的？不同背景的人，在判斷資訊方面又有什麼差異？我們所設想的方案，是否真的能幫助民眾更好地辨識新聞品質？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;為了回答上述關鍵問題，紐時找了34位政治傾向、媒體偏好各異的成年人進行深度訪談和原型測試，從中歸納出了幾個值得參考的洞見。&lt;/p&gt;
+&lt;p&gt;首先，關於民眾在社群平台上如何接收、判斷新聞資訊，紐時從「對於貼文脈絡的意識程度」（只看最顯眼的照片和標題？還是也會看發文日期、來源或網友反應？）和「對於主流媒體的信任程度」這兩條軸線，將民眾分成四種類型（來看看你比較偏向哪一種類型吧）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;高意識、低信任——不信任媒體的懷疑者（Distrustful news skeptic）&lt;/strong&gt;：認為主流媒體都是有偏見的，並會試圖從一些線索去證明，很難與特定媒體建立信任關係。值得注意的是，這些人多半是質疑媒體的報導方式，而非事實細節。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高意識、高信任——充滿自信的數位訂戶（Confident digital news subscriber）&lt;/strong&gt;：悠游於網路世界，樂意辨識自己信任的媒體所提供的訊息真假。他們不想與時事脫節或遭到誤導。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;低意識、低信任——討厭媒體的庶民（Media-jaded localist）&lt;/strong&gt;：覺得自己的聲音遭到主流媒體所排擠，毫不遲疑地接受非正式的激昂評論（hot takes）。他們希望新聞能夠既真實又接地氣。當自己信任的非正式來源提供錯誤訊息時，他們需要更清晰的線索才能判定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;低意識、高信任——傳統的數位移民（Late-adopter media traditionalist）&lt;/strong&gt;：相較於網路媒體的喧囂，他們更喜歡透過電視、報紙等舊媒體來接收資訊。這類人需要學習更多的判斷技巧及明確的提示，才有辦法自己區辨訊息是否可信。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;紐時認為，照片溯源計畫至少能讓信任媒體的人受益（即2、4類人）。接著，他們測試多種能表示照片來源的設計，發現：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;認證標章（如臉書或IG的藍勾勾）並不足以讓照片變得可信。&lt;/li&gt;
+&lt;li&gt;關於標示術語，讀者喜愛「附有來源」（sourced）更勝於「已驗證」（verified）。這代表大眾不只想知道照片已被他人驗證，&lt;strong&gt;也希望有可讓自己探索的資訊&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;陳列同一個事件的多張照片，能使讀者相信事件確實發生了。&lt;/li&gt;
+&lt;li&gt;強調為人熟知的照片元數據（如圖說、發布歷史），而非會造成混亂的術語（如加密、存儲於不可更動的資料庫）。&lt;/li&gt;
+&lt;li&gt;展示監督與問責的機制，有助於提升讀者信心。&lt;/li&gt;
+&lt;li&gt;只需清楚呈現照片的編輯歷史，避免使用可能會失準的詞彙，如「真實」、「假」，&lt;strong&gt;因為只要出錯一次，讀者就不會再完全信任這套機制&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;紐時將這些發現整合進一個模擬社群網站的原型，經過兩輪測試，確認了來源資訊確實有效，而且即使是質疑新聞立場的讀者，也沒有懷疑來源資訊的真實性。&lt;/p&gt;
+&lt;p&gt;不過仍有要改善的地方，包括有許多人根本沒注意到錯誤訊息、讀者很難理解為什麼來源訊息與照片描述不符。最有趣的是，對於照片編輯的歷史紀錄，讀者並不怎麼感興趣；反之，他們想瞭解照片所描述事件的相關新聞。這引出了一個洞見：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;民眾上社群網站不是為了查核事實，而是為了娛樂和建立聯繫。他們之所以願意停下來考察更多資訊，不是因為他們想證明這張照片是錯的，而是因為他們被與照片相連的故事引起了興趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;紐時認知到，這種傾向雖造成民眾容易為網路圖片所騙，但他們也能利用這點，讓溯源的過程不只有驗證的功能，還可以幫助讀者對自己關心的事情形成更準確、細緻的認識。&lt;/p&gt;
+&lt;p&gt;吸取以上教訓，最終紐時建出了這個&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;概念原型&lt;/a&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;來源資訊區塊變大了，裡頭增加了一些可引人注意的細節（如照片拍攝距今已多久）。&lt;/li&gt;
+&lt;li&gt;展開資訊區塊，你可以看見上面有一塊醒目的提示，它能喚起讀者對於假照片的警戒。&lt;/li&gt;
+&lt;li&gt;區塊下方列出關於同一事件的其它照片與文章連結，供讀者進一步探索。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/191e1690a5e7a0b0d4cea66aa80eb18d/0d0e4/poc-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 105.08474576271185%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAAEWUlEQVQ4y4VUe0yTVxTv3F/DjJciUGRzMDpLVwoykEeBQqFUXjNGMA5WWh5GpDjfU1EXIWMsMS4bjEXYBBnEtYgrUEpbGIQFdKPUxQm0tGa40RelT7D9vj6+dvcT8I9ly05Ofvndm/u7j3POPRgIghxO1NzAEBTA8B/u3EKny7XhLrcbgmAMmJVIn2i1eqPRpNWumM1W7/8Z2MNmhx2wAwOj6FyzrmmBdEW3qtebjUbD6orZaLCYTRazYd1qsq1ZrOZVxAVvyT3A4Q0xGNnskMFotTx3WGxOk82pM8N6E6TTQ6oVSGVyPVt1KXVOhc4j03rnVJ7ZPzxzy15UDN4MxL/NSju+ap0Qjz9VmRc1a5I5zfiUjMeb5gqWObPeb6eRGyJP/YD3eI/naDuS0ogcbUHskANjt9uBWMzrq6ImdF9mCVuvDLQ1d3z6ydCdjv7b7SLRzMRjZETu4T72fjOJfC7yXOJ5GLc9V/o9INAYyG4DYslgV1uhT0cJtr047E5V7DlaQju7SNrTMCUWCkYeCCcVY4sOwVNvtxT5csJ9aQD5YvyFGIZQsXG2U9b06mJz4O/1AVN1vhwG9iZtR1d1yvlqNvNI1THGSRbzs+/uySb+9AiXvLd+QXokyIuAQei1DY+4g+wQRbO/8JjPfFPweO2On8/4T7C3N9KiKpPj6TGkeFJeZm7TR9cfdo5px565Z3Re6OWbJ4c4Z+lRrcz97WXE/uNR/HOE4cvEwfOEAVZII+0txr7I9zOyabln0rKuhhPqUw938qaWQbFsiqcF909l4y4UJTeUpLcUx7YUx906iGs7SPi6IPJGVuj1QlLVoYJDhYezsxlxqRd2x179oI7rcGyJf+X3XKTu/Dg3/BottIke1pCDbTwQfu3Anot5b5/M31uSHZ2TTkhPeZdCfi8jg0KMI7OqT6PlabOhYi73Lg4XmpmKp6fh6WRcXto7+RRCfhaJRiHmZsbnURMyyaTUJFJSYkzy/hj83ojS0iMw/FLMuYvHhZGT8OkpBEoKPictmpZBpGfG0igkahoxi0xMToxOSiTG7yOQSNERkW+WlZXCL05GU9XV1bltGyZop29wkB82xC8MG/BGeGDEnl27sQEhwb67gl7393stMMDHzw/49lcwGCo1A03Vxsm9vb0FRUUVlZXlTBaTVfFhOZNRzgSEwWQBUs6sqDlRW8uuA1Bzgl3KrGHXnbJaLCBgaG0PDw8/kj7RaPUa7Yparf1rWa1SaZdVGkAAarQ6i9W29twJwW7YidgcXv6wUKPRbEb7Xn/fdLd6Sa6WyeeVCqVSoZDL5Qvz87KFBeAK5dK8dPTh/dMP+s9qlD/BDldfH0etVm/+KolkhvNDn1gkFowI+HxwD4FQKERRJBSPisWjY2IRf2SwZ+jH70UCHhjz+fz19fXN/4wgiMFgBHkHFzEYTCaTBXCAoPP8Vz9xONDyhMA6wEBjAhsBDghoNIBvzIBi+Fe32e1/AzpoXX5hHt1iAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;概念原型：展開前。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        title=&quot;概念原型：展開前。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        src=&quot;/static/191e1690a5e7a0b0d4cea66aa80eb18d/fcda8/poc-1.png&quot;
+        srcset=&quot;/static/191e1690a5e7a0b0d4cea66aa80eb18d/fcda8/poc-1.png 590w,
+/static/191e1690a5e7a0b0d4cea66aa80eb18d/c83ae/poc-1.png 1180w,
+/static/191e1690a5e7a0b0d4cea66aa80eb18d/0d0e4/poc-1.png 1230w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;&lt;p&gt;概念原型：展開前。圖擷自&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;新聞溯源概念原型網頁&lt;/a&gt;&lt;/p&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/78cc90cb492d690d33aae3b16fd64206/0d0e4/poc-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 126.10169491525424%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAIAAAC+dZmEAAAACXBIWXMAAAsSAAALEgHS3X78AAAEh0lEQVQ4y3VUXWxTZRiuXMiFLrIhEgY4QxYlIzIMidERNsMY4sh+cOIgsgs0XBgvjYl6A9HAlV55wQ0yXLfVubrunNF2Y5ERliWuW9uNruv6/39OT7ue/7+e9vT4no5l1eCbJ2++Nt9z3vd5vvf7DIIgapo2NmY6+ubB1pamtlPH2lqOdrQ2fdh2/PwHzefamttbj59tbW55r+n9d98+efLYOyeaGhsbBgauSrJsEAQByEND93e/+ML+/Xvq62sPH9rT8HrdkTf2vtV44EjDq4cP1tYfeGXf3pde21dTV/dybW3Nrl2Gjo52WS4YtiobjcaWU6d7LvZ1917U0aPn3o/7unp6u7p7u2F1qf+TTy9fAvRf6ezq+/yL6yzLGkRRAvLU1NT8k8fRaDARD8WiwUjYH40E4GcsGoiEYBEiyU2GoRiapKnNbJ43TyAYhgFZr4yiD6iAkQr+EVubSa5PJ7z2mMcW99gS3mlsw57xW9NeFPehybXJlBfRqAU7OpLCMs8qoyiaiy8VaB9D6KAyPjKzQeIbedzP5XwyuSaRXpn0Svk1gCaFbQ/M6TT+jIwgKE1ToqIRdDnHaIKsCgIniCLYyQtiuVzWtmNrbZ+eTqXT25Wn0PUZisop+CaLZ9lNkqFpmqSoPElSNM1VguXAI5aiKNg/PTOzQ0ZQJPmUS8Uwp2vJ41ldWXG7XO7FxUWXy+V0Ot1u9zLEksPh+BvH0jq5ujKCIPBVHM84HED2OoHqdgcCgXA4DNnv9wdDkVA0HYlnonHsOWSaYkAhQeD5zVwuR4AFpVKpWImSWlYkkk3MkmFUyK3qmu32Ks0oCmLAC4ZXOEkFw6RCsagohYICSSmqMp9jY1YyZBZzK88hkxUneLFIs3KO5ERZ0StvAYqXSkpJ42WN4WQIm82WTmM7bTOM7jCO47Fo1O/zJZNJ6EU3mWVpBhTxksBXFGVhrqxWazUZhSOBVimuSPMluQDVFAAULKklFaKs/u8564bRdEESaIrkeJEVRHBpZzDUslbWiqqmqBp87b9uWyYRRaTNC9K3d4nbt3/5+ZtrzvmZ0JLV8QidX6cnPFowX34UL/wVkX/1qlMJzWafTleRJ4syNz6XutJ/7ce+Q3cGapyzRsuNj+707P6yt/3q1/f8hBwgmNkFz9CTwBIOhtmryBYLiPtt8G7n2RNfXb/wWf+Zhw+tP9z4vv/C6cu9ZzrPn3Ovro6Y79366ebNW9+h6LDNbv+X27rmQiGT3SRyJA8HXS5TNINlsmmckCQJTjuVSuBYMhGPgvMz1bMN50xks2BqxeGiqpZgd+UuMJIkqrr3MDTwv1qqGFlpe/sxMJvN6JRt1eNbcnkdzrVKfgp52eV1rqwvu70Ah9OzvhFOYQRO5EdMY2lsu+25ubnBwft/TiBDI5ZhEzL8OzpssgyNTgKMJh1DoxbjKGIas0xMWMbHJ4zGYZgcAzyCQAZV/kAQOsdxLBQMhSNhmKVIOAwjJYq8wHP62wDgOZ7Xp06pjL1BlCTQqN8csKgSoEq/R2UNklr1hlQHbIN6/wCpILhrQ8BlzAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;概念原型：照片概觀。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        title=&quot;概念原型：照片概觀。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        src=&quot;/static/78cc90cb492d690d33aae3b16fd64206/fcda8/poc-2.png&quot;
+        srcset=&quot;/static/78cc90cb492d690d33aae3b16fd64206/fcda8/poc-2.png 590w,
+/static/78cc90cb492d690d33aae3b16fd64206/c83ae/poc-2.png 1180w,
+/static/78cc90cb492d690d33aae3b16fd64206/0d0e4/poc-2.png 1230w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;&lt;p&gt;概念原型：照片概觀。圖擷自&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;新聞溯源概念原型網頁&lt;/a&gt;&lt;/p&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f58348e4363a5d89f7608be67216f9b0/0d0e4/poc-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.59322033898305%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsSAAALEgHS3X78AAABp0lEQVQoz3WRXVPaQBSG/f//oR2VltEh2CEgcCVFsTeC9Ko3LViEfIHZkGS/N5vTkwanVcczz7xzdnfefffjiHMBAK7biaNfpQxltkY09RUNNQtRESv+UfAAbDy47Hief1SbO66b7BNtbJqLjAomCy8Gn8AmhiABW0IJz5QoMBgMPc87mHsDdzkl4gmYpDmljLM8p3meZ1m2T/eMMaiqNMZIqV6buz03WJFCgpCCCyHkc6lCKiu1LQrQBRS21Ma8Se67q3kiCSYzzMVsxnBFClVyCRUKl94zdy9X4U9lqVZGKaWNRsHGGKsNVBSVKgMGz/D62G5vEy2FYcGW72IWPgmScs6ZkJYKQJiAnKOWuOkbc9cNt8nShyCKgyjBPojILk4JIXm2h/+qfu3h8IW5u93uMmYXj2S53i9WBHnYZJQro/Gah8LrSFW9dr/fr/+Z46DlOC3ny930+/h2htx8m48n0/FkNrqZXd/ef53g5P3V9d10/mPxsP796Dc+NX0/OCRfjUYfPh6fty5OP7drGs1KT/42jWY9f9E8a7ec9tm5c3xymqbpH0JbUgyGRrNnAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;概念原型：照片歷史紀錄。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        title=&quot;概念原型：照片歷史紀錄。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)&quot;
+        src=&quot;/static/f58348e4363a5d89f7608be67216f9b0/fcda8/poc-3.png&quot;
+        srcset=&quot;/static/f58348e4363a5d89f7608be67216f9b0/fcda8/poc-3.png 590w,
+/static/f58348e4363a5d89f7608be67216f9b0/c83ae/poc-3.png 1180w,
+/static/f58348e4363a5d89f7608be67216f9b0/0d0e4/poc-3.png 1230w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;&lt;p&gt;概念原型：照片歷史紀錄。圖擷自&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;新聞溯源概念原型網頁&lt;/a&gt;&lt;/p&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;大家可以自己點進&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;網頁&lt;/a&gt;玩玩，看這樣的來源標示是否有助於你判斷貼文內容的真假或好壞。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;這是個令人振奮的開始——但也只是開始。目前的原型僅僅是最末端的呈現，要達到預期中的效果，紐時需要跨界合作，&lt;strong&gt;建立一套從拍攝到發布的體系&lt;/strong&gt;，且其運作流程還要好上手，以免排擠較小的新聞機構。這顯然是一項極為艱難的任務。&lt;/p&gt;
+&lt;p&gt;「當前的工作是確保大家以一致的方式來紀錄元數據，並讓這些資料能被其它組織（如社群平台）負責任地使用。」紐時研發團隊執行長Marc Lavallee說。&lt;strong&gt;他們在&lt;a href=&quot;https://www.newsprovenanceproject.com/whats-next&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;官網&lt;/a&gt;公開徵求三種合作夥伴——社群平台、新聞編輯室、事實查核組織——來一起把計畫推展到下一階段——執行。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一個更好的網際網路會是什麼樣子？這是紐時對於這個大哉問的初步回答。即使它最終失敗了，整個設計過程——從問題定義、用戶研究、概念發想到原型測試——仍有許多值得我們深思和借鏡的地方。&lt;/p&gt;
+&lt;h2 id=&quot;相關資料&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99&quot; aria-label=&quot;相關資料 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;相關資料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;The News Provenance Project&lt;/a&gt;——新聞溯源計畫官網，裡頭將計畫目前的成果與潛力做了一個清楚且頗具啟發性的闡述，推薦你把它從頭到尾看完。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://poc.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Proof of Concept&lt;/a&gt;——新聞溯源的概念原型，來玩看看吧！&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://open.nytimes.com/how-do-people-decide-whether-to-trust-a-photo-on-social-media-e0016b6080ae&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How Do People Decide Whether to Trust a Photo on Social Media?&lt;/a&gt;——社群媒體上的讀者是怎麼判斷一張照片可不可信的？這是紐時訪談後的發現。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://open.nytimes.com/what-if-every-news-photo-on-social-media-showed-contextual-information-8936cf4e8c45&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;What If Every News Photo on Social Media Showed Contextual Information?&lt;/a&gt;——紐時測試原型的過程。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://open.nytimes.com/can-publishers-use-metadata-to-regain-the-publics-trust-in-visual-journalism-ee32707c5662&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Can Publishers Use Metadata to Regain the Public’s Trust in Visual Journalism?&lt;/a&gt;——簡單描述了整個新聞溯源計畫及未來展望。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.niemanlab.org/2020/01/heres-how-the-new-york-times-tested-blockchain-to-help-you-identify-faked-photos-on-your-timeline/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Here’s how The New York Times tested blockchain to help you identify faked photos on your timeline&lt;/a&gt;——尼曼新聞實驗室對這個計畫的報導。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://open.nytimes.com/introducing-the-news-provenance-project-723dbaf07c44&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Introducing the News Provenance Project&lt;/a&gt;——去年7月，紐時在Medium上介紹了這個計畫。&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>

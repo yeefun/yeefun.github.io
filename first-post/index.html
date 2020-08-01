@@ -1,0 +1,756 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.666 'IBM Plex Serif','source-han-serif-tc',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.8);font-family:'IBM Plex Serif','source-han-serif-tc',serif;font-weight:normal;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:2rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.51572rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.31951rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.87055rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.81225rem;line-height:1.1;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}ul{margin-left:1.666rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;list-style-position:outside;list-style-image:none;}ol{margin-left:1.666rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;font-size:0.85rem;line-height:1.666rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;font-size:1rem;line-height:1.666rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}blockquote{margin-left:1.666rem;margin-right:1.666rem;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.666rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.666rem;}b{font-weight:bold;}strong{font-weight:bold;}dt{font-weight:bold;}th{font-weight:bold;}li{margin-bottom:calc(1.666rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.666rem;margin-bottom:calc(1.666rem / 2);margin-top:calc(1.666rem / 2);}li > ul{margin-left:1.666rem;margin-bottom:calc(1.666rem / 2);margin-top:calc(1.666rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.666rem / 2);}code{font-size:0.85rem;line-height:1.666rem;}kbd{font-size:0.85rem;line-height:1.666rem;}samp{font-size:0.85rem;line-height:1.666rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.11067rem;padding-right:1.11067rem;padding-top:0.833rem;padding-bottom:calc(0.833rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}</style><style data-href="/styles.bbb1b27e8a63a0520d17.css">#notFound{max-width:720px;padding:1rem;margin:3rem auto 0;text-align:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}#notFound svg{font-size:10rem}#notFound h1{font-size:5rem;margin:.5rem 0 1rem}a{all:unset;cursor:pointer}#layout svg{color:#6a737d;transition:color .8s}@media screen and (max-width:1119px){#layout.light #Header{background-color:#fff}}#layout.dark svg{color:#a3aab3;fill:#a3aab3}@media screen and (max-width:1119px){#layout.dark #Header{background-color:#141414}}#layout.dark .blog-post-content hr{background-color:hsla(0,0%,100%,.2)}a{text-decoration:none}#content{display:flex;flex-direction:column;padding-top:6rem;min-height:100vh}@media screen and (max-width:839px){#content{padding-top:4rem}}@media screen and (max-width:559px){#content{padding-top:2.5rem}}#content main{flex-grow:1}#content footer{padding-top:1rem;padding-bottom:.25rem;text-align:center;font-size:.9rem;opacity:.8}#content footer,#top{-webkit-user-select:none;-ms-user-select:none;user-select:none}#top{display:flex;position:fixed;right:0;bottom:0;width:2.5rem;height:2.5rem;align-items:center;justify-content:center;font-size:2rem;border-radius:100%;margin-right:2rem;margin-bottom:2.2rem;transition:.5s;cursor:pointer}@media screen and (max-width:559px){#top{margin-right:1rem;margin-bottom:1rem}}#top svg{margin:0;opacity:.5;transition:opacity .2s}#top svg:hover{opacity:1}#Header{display:flex;position:fixed;top:0;width:100%;align-items:flex-end;justify-content:space-between;padding:0 2rem 1rem;height:6rem;max-height:6rem;transition:top .3s ease .2s;background-color:transparent;-webkit-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none}@media screen and (max-width:1119px){#Header{padding:0 1.5rem 1rem;z-index:2}}@media screen and (max-width:839px){#Header{padding:0 1rem .5rem;height:4rem}}@media screen and (max-width:559px){#Header{height:2.5rem;padding:0 1rem .25rem;box-shadow:0 1px 2px rgba(0,0,0,.1)}}#Header>*{pointer-events:all}#Header.mobile{top:0!important}#Header.show{top:0}#Header.hide{top:-6rem}#Header .header-title{display:flex;align-items:flex-end}@media screen and (max-width:559px){#Header .header-title{align-items:center;align-self:center;margin-top:.5rem}}#Header .header-title .header-profile-image-wrap{display:flex;align-items:center;border:1px solid #aaa;padding:2px;border-radius:100%;margin-right:.25rem}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap{padding:1px}}#Header .header-title .header-profile-image-wrap img{border-radius:100%;margin:0;opacity:.8;transition:all .5s;transition-timing-function:ease-in-out}@media screen and (max-width:1119px){#Header .header-title .header-profile-image-wrap img{width:25px!important;height:25px!important}}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap img{width:15px!important;height:15px!important}}#Header .header-title .header-profile-image-wrap img:hover{opacity:1}#Header .header-title .header-profile-image-wrap img.inc{width:50px}#Header .header-title .header-profile-image-wrap img.dec{width:25px}#Header .header-title .header-title-text{margin:0;font-size:1.6rem;font-weight:300;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;opacity:.9;transition:opacity .3s;letter-spacing:.8px}@media screen and (max-width:559px){#Header .header-title .header-title-text{font-size:1.1rem}}#Header .header-title .header-title-text:hover{opacity:1}#nav,#nav .theme-toggle{display:flex;align-items:center}#nav .theme-toggle{justify-content:space-between;opacity:.5;margin-right:1.2rem;margin-bottom:2px;transition:opacity .3s}#nav .theme-toggle:hover{opacity:.9}#nav .theme-toggle .theme-toggle-description{display:flex;align-items:center;opacity:0;transition:opacity .3s}#nav .theme-toggle .theme-toggle-description>:last-child{margin:0 5px}#nav .theme-toggle svg{font-size:1.2rem;margin:0;color:#6a737d!important}#nav .theme-toggle>svg{cursor:pointer}#nav ul{display:flex;margin:0;width:3.5rem;justify-content:space-between}#nav ul li{list-style:none;margin:0}#nav ul li svg{margin:0;font-size:1.2rem;transition:opacity .3s;opacity:.7}@media screen and (max-width:559px){#nav ul li svg{font-size:1rem}}#nav ul li svg:hover{opacity:1}#nav ul li .search-wrap,#nav ul li .tag-wrap{display:flex;align-items:center;height:1.5rem}#nav ul li .search-wrap svg,#nav ul li .tag-wrap svg{margin-top:3px}.bio{min-width:14rem;width:14rem;margin-left:2rem;font-weight:300;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.bio p,.bio span{display:block;margin:0;font-size:.9rem}.bio .bio-item{margin-bottom:.8rem;display:flex;font-size:.9rem}.bio .bio-item .icon-wrap{display:inline-flex;font-size:.9rem;margin-right:.4rem;min-width:1.1rem;width:1.1rem;justify-content:center}.bio .bio-item .icon-wrap svg{margin-top:1px;opacity:.9}.bio .bio-item>:nth-child(2){line-height:1.1;overflow:hidden}.bio .bio-item.company,.bio .bio-item.location,.bio .bio-item.name{cursor:default}.bio .comment{margin-bottom:1rem}.bio .social{margin-left:.2rem;margin-top:2rem}.bio .social a{display:inline-flex;font-size:1.3rem;margin-right:.5rem}.bio .social a .facebook,.bio .social a .github,.bio .social a .instagram,.bio .social a .linkedin,.bio .social a .rss{transition:color .3s}.bio .social a:hover .rss{color:#e28f48!important}.bio .social a:hover .linkedin{color:#0077b5!important}.bio .social a:hover .facebook{color:#1877f2!important}.bio .social a:hover .instagram{color:#e4405f!important}.bio .social a:hover .github{color:#666!important}a:visited{color:inherit}.index-wrap{display:flex}@media screen and (max-width:1119px){.index-wrap{margin-top:.5rem}}@media screen and (max-width:839px){.index-wrap{margin-top:1rem}}.index-wrap .bio{position:fixed;top:6rem;left:0;transition:opacity .2s;transition-timing-function:ease-in-out;transition-delay:.1s}@media screen and (max-width:1119px){.index-wrap .bio{display:none}}.index-wrap .index-post-list-wrap{width:100%}.index-wrap .index-post-list-wrap>div{margin:0 auto}.index-wrap .index-post-list-wrap .show-more-posts{display:flex;justify-content:center;margin-top:1rem;margin-bottom:5rem}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn{cursor:pointer;opacity:.5;font-size:.9rem;transition:opacity .2s}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn:hover{opacity:.9}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn span{margin-left:.25rem}#tags{max-width:720px;margin:1rem auto}#tags .tag-list-wrap{margin-bottom:5rem}@media screen and (max-width:559px){#tags .tag-list-wrap{margin-bottom:3rem}}#tags .tag-list-wrap ul{display:flex;flex-wrap:wrap;justify-content:center;margin:0}#tags .tag-list-wrap ul li{display:flex;align-items:center;margin:.25rem .5rem;list-style:none}@media screen and (max-width:559px){#tags .tag-list-wrap ul li{margin:0 .4rem}}#tags .tag-list-wrap ul li span{cursor:pointer;opacity:.5;line-height:1.25}#tags .tag-list-wrap ul li span:hover{opacity:.9!important}#tags .post-list{margin:0 auto}.post-list{max-width:640px}.post-list h2,.post-list li,.post-list ul{margin:0}.post-list li{list-style:none}.post-list .post{display:flex;flex-direction:column;max-width:inherit;margin:6rem 1rem;opacity:.85;transition:opacity .2s}@media screen and (max-width:839px){.post-list .post{margin:4rem 1rem}}.post-list .post:hover{opacity:1}.post-list .post.hide{display:none}.post-list .post:first-child{margin-top:0}.post-list .post>*>*{margin-bottom:.25rem}.post-list .post .title{font-size:1.3rem;font-family:"IBM Plex Serif",source-han-serif-tc,serif}@media screen and (max-width:839px){.post-list .post .title{font-size:1.1rem}}.post-list .post .info{display:flex;flex-wrap:wrap;font-size:.84rem;align-items:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}@media screen and (max-width:839px){.post-list .post .info{font-size:.76rem;line-height:1.3}}.post-list .post .info .date-wrap{display:flex;align-items:center;opacity:.7}.post-list .post .info .date-wrap .date,.post-list .post .info .date-wrap .update{display:block;white-space:nowrap}.post-list .post .info .info-dot{margin:0 .25rem}.post-list .post .info .tag-list{display:flex;flex-wrap:wrap}.post-list .post .info .tag-list .tag{display:inline;margin:0 .5rem 0 0}.post-list .post .info .tag-list .tag span>a{opacity:.7;transition:opacity .2s}.post-list .post .info .tag-list .tag span>a:hover{opacity:1}.post-list .post .excerpt{display:-webkit-box;overflow:hidden;max-width:calc(640px - 2rem);-webkit-line-clamp:2;-webkit-box-orient:vertical;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.95rem}@media screen and (max-width:839px){.post-list .post .excerpt{font-size:.82rem}}#Search{max-width:720px;margin:0 auto}#Search .search-inner-wrap .input-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:4rem;padding:1rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap{margin-bottom:2rem}}#Search .search-inner-wrap .input-wrap input{all:unset;margin:.1rem 1rem 0}#Search .search-inner-wrap .input-wrap .search-toggle{display:flex;flex-direction:row;font-size:.8rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap .search-toggle{flex-direction:column}}#Search .search-inner-wrap .input-wrap .search-toggle span{cursor:pointer;-webkit-user-select:none;-ms-user-select:none;user-select:none;opacity:.8;transition:opacity .2s}#Search .search-inner-wrap .input-wrap .search-toggle span:first-child{margin-right:.5rem}#Search .search-inner-wrap .post-list{margin:0 auto}#Search .search-inner-wrap .no-result{display:block;text-align:center;font-size:1.2rem}.toc{font-size:.8rem;max-width:220px;min-width:220px;max-height:calc(100vh - 6rem);transition:opacity .3s;padding-right:.5rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.toc::-webkit-scrollbar{display:none}.toc ul{margin-top:1.666rem;margin-left:.5rem}.toc ul li{list-style:none;margin:0}.toc p{margin:0}.toc a{display:block;opacity:.4;transition:opacity .1s;max-width:calc(220px - 1.5rem);white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.toc a:hover{opacity:1!important}.toc a img{display:none!important}.toc.outside{position:fixed;top:0;right:0;overflow:auto;margin-top:6rem;opacity:.4;max-height:85%}@media screen and (max-width:1160px){.toc.outside{display:none}}.toc.outside:hover{opacity:.9}.toc.inside a{text-decoration:none}#layout.dark code[class*=language-],#layout.dark pre[class*=language-]{color:#fff;text-shadow:0 1px 1px #000;font-family:Menlo,Monaco,Courier New,monospace;direction:ltr;text-align:left;word-spacing:normal;white-space:pre;word-wrap:normal;line-height:1.4;background:none;border:0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}#layout.dark pre[class*=language-] code{float:left;padding:0 15px 0 0}#layout.dark :not(pre)>code[class*=language-],#layout.dark pre[class*=language-]{background:#222}#layout.dark pre[class*=language-]{padding:15px;margin:1em 0;overflow:auto;border-radius:8px}#layout.dark :not(pre)>code[class*=language-]{padding:5px 10px;line-height:1;border-radius:3px}#layout.dark .token.cdata,#layout.dark .token.comment,#layout.dark .token.doctype,#layout.dark .token.prolog{color:#797979}#layout.dark .token.operator,#layout.dark .token.punctuation,#layout.dark .token.selector{color:#fff}#layout.dark .token.namespace{opacity:.7}#layout.dark .token.boolean,#layout.dark .token.tag{color:#ffd893}#layout.dark .token.atrule,#layout.dark .token.attr-value,#layout.dark .token.hex,#layout.dark .token.string{color:#b0c975}#layout.dark .token.attr-name,#layout.dark .token.entity,#layout.dark .token.keyword,#layout.dark .token.property,#layout.dark .token.url{color:#c27628}#layout.dark .token.regex{color:#9b71c6}#layout.dark .token.entity{cursor:help}#layout.dark .token.constant,#layout.dark .token.function{color:#e5a638}#layout.dark .token.variable{color:#fdfba8}#layout.dark .token.number{color:#8799b0}#layout.dark .token.deliminator,#layout.dark .token.important{color:#e45734}#layout.dark pre[data-line]{position:relative;padding:1em 0 1em 3em}#layout.dark .line-highlight{position:absolute;left:0;right:0;margin-top:1em;background:hsla(0,0%,100%,.2);pointer-events:none;line-height:inherit;white-space:pre}#layout.dark .line-highlight:before,#layout.dark .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.3em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(0,0%,100%,.3);color:#fff;font:700 65%/1.5 sans-serif;text-align:center;border-radius:8px;text-shadow:none}#layout.dark .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}#layout.dark .line-numbers-rows{margin:0}#layout.dark .line-numbers-rows span{padding-right:10px;border-right:3px solid #d9d336}#layout.light code[class*=language-],#layout.light pre[class*=language-]{color:#393a34;font-family:Consolas,Bitstream Vera Sans Mono,Courier New,Courier,monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;font-size:.9em;line-height:1.2em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}#layout.light pre>code[class*=language-]{font-size:1em}#layout.light code[class*=language-]::selection,#layout.light code[class*=language-] ::selection,#layout.light pre[class*=language-]::selection,#layout.light pre[class*=language-] ::selection{background:#b3d4fc}#layout.light pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:1px solid #ddd;background-color:#fff}#layout.light :not(pre)>code[class*=language-]{padding:1px .2em;background:#f8f8f8;border:1px solid #ddd}#layout.light .token.cdata,#layout.light .token.comment,#layout.light .token.doctype,#layout.light .token.prolog{color:#998;font-style:italic}#layout.light .token.namespace{opacity:.7}#layout.light .token.attr-value,#layout.light .token.string{color:#e3116c}#layout.light .token.operator,#layout.light .token.punctuation{color:#393a34}#layout.light .token.boolean,#layout.light .token.constant,#layout.light .token.entity,#layout.light .token.inserted,#layout.light .token.number,#layout.light .token.property,#layout.light .token.regex,#layout.light .token.symbol,#layout.light .token.url,#layout.light .token.variable{color:#36acaa}#layout.light .language-autohotkey .token.selector,#layout.light .token.atrule,#layout.light .token.attr-name,#layout.light .token.keyword{color:#00a4db}#layout.light .language-autohotkey .token.tag,#layout.light .token.deleted,#layout.light .token.function{color:#9a050f}#layout.light .language-autohotkey .token.keyword,#layout.light .token.selector,#layout.light .token.tag{color:#00009f}#layout.light .token.bold,#layout.light .token.function,#layout.light .token.important{font-weight:700}#layout.light .token.italic{font-style:italic}.blog-post-container{margin-bottom:2rem}.blog-post-container .ad,.blog-post-container>div{max-width:720px;margin:0 auto}.blog-post-container .blog-post{padding:1rem}.blog-post-container .blog-post a{-webkit-text-decoration-line:underline;text-decoration-line:underline}.blog-post-container .blog-post .blog-post-title{font-size:1.8rem;margin:0;line-height:1.5;font-family:"IBM Plex Serif",source-han-serif-tc,serif}@media screen and (max-width:559px){.blog-post-container .blog-post .blog-post-title{font-size:1.2rem}}.blog-post-container .blog-post .blog-post-info{display:flex;flex-wrap:wrap;margin-top:1rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.84rem;align-items:flex-start;justify-content:space-between}.blog-post-container .blog-post .blog-post-info>.dot{margin:0 .5rem;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap{display:flex;align-items:center;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap .update-date,.blog-post-container .blog-post .blog-post-info .date-wrap .write-date{display:block;white-space:nowrap}.blog-post-container .blog-post .blog-post-info .date-wrap>:nth-child(2){margin-left:.25rem}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list{display:flex;margin:0;flex-wrap:wrap;flex-grow:1}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag{list-style:none;margin:0 .3rem 0 0}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a{opacity:.7;text-decoration:none;transition:opacity .3s}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a:hover{opacity:1}.blog-post-container .blog-post .blog-post-info .blog-post-inside-toc{display:none}@media screen and (max-width:1160px){.blog-post-container .blog-post .blog-post-info .blog-post-inside-toc{display:inline-block}}.blog-post-container .blog-post .blog-post-info .blog-post-inside-toc .toc-button{cursor:pointer;opacity:.5}.blog-post-container .blog-post .blog-post-info .blog-post-inside-toc .toc-button:hover{opacity:.9}.blog-post-container .blog-post .series{display:flex;flex-direction:column;justify-content:flex-end;margin-top:2rem}.blog-post-container .blog-post .series .series-head{display:flex;align-items:center;justify-content:flex-end}.blog-post-container .blog-post .series .series-head .head{font-weight:700;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .blog-post .series .series-head .icon-wrap{text-align:center;width:1.5rem;font-size:.8rem}.blog-post-container .blog-post .series .series-list{display:flex;margin:.25rem 0 0;flex-direction:column;align-items:flex-end;font-size:.8rem;line-height:1.3}.blog-post-container .blog-post .series .series-list .series-item{list-style:none;margin:0;opacity:.4;transition:opacity all .2s}.blog-post-container .blog-post .series .series-list .series-item:hover{opacity:.9}.blog-post-container .blog-post .series .series-list .series-item>a{text-decoration:none;display:flex}.blog-post-container .blog-post .series .series-list .series-item>a .icon-wrap{min-width:1.5rem;width:1.5rem;text-align:center}.blog-post-container .blog-post .series .series-list .series-item.current-series{opacity:.7}.blog-post-container .blog-post .inside-toc-wrap{display:flex;justify-content:flex-end}.blog-post-container .blog-post .inside-toc-wrap a{text-decoration:none}.blog-post-container .blog-post .blog-post-content{margin-top:3rem}.blog-post-container .blog-post .blog-post-content h1{margin-top:4rem}.blog-post-container .blog-post .blog-post-content h2{margin-top:3rem}.blog-post-container .blog-post .blog-post-content h3{margin-top:2rem}.blog-post-container .blog-post .blog-post-content p{margin-top:1.666rem}.blog-post-container .blog-post .blog-post-content a{opacity:.7;transition:opacity .3s}.blog-post-container .blog-post .blog-post-content a:hover{opacity:1}.blog-post-container .blog-post .blog-post-content ul{margin-top:2rem;margin-bottom:2rem}.blog-post-container .blog-post .blog-post-content strong{font-weight:600}.blog-post-container .blog-post .blog-post-content code{font-family:IBM Plex Mono,monospace!important}.blog-post-container .blog-post .blog-post-content blockquote{font-size:1.1rem;border-left:4px solid #6a737d;margin:2rem 0;padding:0 1rem;opacity:.8;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content hr{width:12%;margin:3rem auto}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figure{margin:3rem auto;max-width:590px}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;max-width:66.67%;margin-left:auto;font-size:.84rem;opacity:.7;margin-top:.5rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption p{margin-top:0;margin-bottom:0}.blog-post-container .blog-post .blog-post-content .anchor,.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-link{opacity:1}.blog-post-container .social-share{display:flex;margin-top:2rem;flex-direction:column;align-items:center}.blog-post-container .social-share ul{display:flex;margin:0}.blog-post-container .social-share ul li.social-share-item{list-style:none;margin:0 .25rem}.blog-post-container .social-share ul li.social-share-item circle{fill:#6a737d;transition:fill .3s}.blog-post-container .social-share ul li.social-share-item:hover.email circle{fill:#b8b8b8}.blog-post-container .social-share ul li.social-share-item:hover.facebook circle{fill:#3b5998}.blog-post-container .social-share ul li.social-share-item:hover.twitter circle{fill:#00aced}.blog-post-container .social-share ul li.social-share-item:hover.linkedin circle{fill:#007fb1}.blog-post-container .social-share ul li.social-share-item:hover.reddit circle{fill:#5f99cf}.blog-post-container .social-share ul li.social-share-item:hover.pocket circle{fill:#ef3f56}.blog-post-container .ad{margin-top:2rem;margin-bottom:2rem}.blog-post-container .ad-dev,.blog-post-container .comments-dev{display:flex;border:1px dotted grey;min-height:15rem;flex-direction:column;align-items:center;justify-content:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .ad-dev>:first-child,.blog-post-container .comments-dev>:first-child{opacity:.8}.blog-post-container .ad-dev>:nth-child(2),.blog-post-container .comments-dev>:nth-child(2){font-size:.9rem;opacity:.5}.blog-post-container .ad-dev.comments-dev,.blog-post-container .comments-dev.comments-dev{min-height:20rem}.blog-post-container .comments{padding:1rem}</style><meta name="generator" content="Gatsby 2.23.11"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><title data-react-helmet="true">區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事 | Yeefun</title><link data-react-helmet="true" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=IBM+Plex+Serif:wght@400;600;700&amp;family=Rubik:wght@300&amp;display=swap" rel="stylesheet"/><meta data-react-helmet="true" name="description" content="透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？"/><meta data-react-helmet="true" property="og:title" content="區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事 | Yeefun"/><meta data-react-helmet="true" property="og:description" content="透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？"/><meta data-react-helmet="true" property="og:url" content="https://yeefun.github.io/first-post/"/><meta data-react-helmet="true" property="og:image" content="/static/191e1690a5e7a0b0d4cea66aa80eb18d/poc-1.png"/><meta data-react-helmet="true" property="og:type" content="article"/><meta data-react-helmet="true" property="og:locale" content="zh_TW"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Yeefun Lin"/><meta data-react-helmet="true" name="twitter:title" content="區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事 | Yeefun"/><meta data-react-helmet="true" name="twitter:description" content="透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？"/><meta data-react-helmet="true" name="mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-status-bar-style" content="default"/><meta data-react-helmet="true" name="google-site-verification" content=""/><script data-react-helmet="true" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script data-react-helmet="true" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "datePublished": "2020-02-04T00:00:00.000Z",
+  "dateModified": "2020-08-01T00:00:00.000Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yeefun.github.io"
+  },
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "headline": "區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事",
+  "publisher": {
+    "@type" : "organization",
+    "name" : "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"
+    }
+  },
+  "image": ["https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"]
+}
+</script><script data-react-helmet="true">
+            (function(d) {
+              var config = {
+                kitId: 'hfy8uue',
+                scriptTimeout: 3000,
+                async: true
+              },
+              h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/wf-loading/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+            })(document);
+          </script><style data-react-helmet="true">svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}
+
+.fad.fa-inverse {
+  color: #fff;
+}</style><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="icon" href="/favicon.svg?v=efcd17939d16df22e16329c67275a6ab" type="image/svg+xml"/><link rel="icon" href="/favicon-32x32.png?v=efcd17939d16df22e16329c67275a6ab" type="image/png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#fff"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="alternate" type="application/rss+xml" title="Yeefun | Feed" href="/rss.xml"/><link as="script" rel="preload" href="/webpack-runtime-b318b1628ec14a144b95.js"/><link as="script" rel="preload" href="/framework-f600a0dcdbbe2ab3be17.js"/><link as="script" rel="preload" href="/app-a2415f001748de38e006.js"/><link as="script" rel="preload" href="/styles-2d82ac8e3afc0c213061.js"/><link as="script" rel="preload" href="/cb1608f2-3facea18a6f38c99d07e.js"/><link as="script" rel="preload" href="/commons-f255187f5153b8bdf5c2.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-f944385309e6e56abe50.js"/><link as="fetch" rel="preload" href="/page-data/first-post/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><script>(function() { try {
+  var mode = localStorage.getItem('theme-ui-color-mode');
+  if (!mode) return
+  document.body.classList.add('theme-ui-' + mode);
+} catch (e) {} })();</script><div id="___gatsby"><style data-emotion-css="l29468">body{--theme-ui-colors-text:var(--theme-ui-colors-text,#24292e);--theme-ui-colors-background:var(--theme-ui-colors-background,#fff);color:var(--theme-ui-colors-text,#24292e);background-color:var(--theme-ui-colors-background,#fff);}body.theme-ui-dark{--theme-ui-colors-text:var(--theme-ui-colors-modes-dark-text,#e4e4e4);--theme-ui-colors-background:var(--theme-ui-colors-modes-dark-background,#141414);}</style><style data-emotion-css="1d7m1w5">*{box-sizing:border-box;}body{margin:0;}</style><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="layout" class="light"><header id="Header" class="show "><div class="header-title"><a href="/"><div class="header-profile-image-wrap"><img src="/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg" alt="title profile picture" width="25px" height="25px"/></div></a><a href="/"><h1 class="header-title-text">Yeefun</h1></a></div><nav id="nav"><div class="theme-toggle"><div class="theme-toggle-description" style="display:flex"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" class="svg-inline--fa fa-sun fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="font-size:1.2rem"><path fill="currentColor" d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-w-10 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="font-size:0.9rem"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg></div><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="font-size:1.1rem"><path fill="currentColor" d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg></div><ul><li><div class="tag-wrap"><a href="/tags"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tags" class="svg-inline--fa fa-tags fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></a></div></li><li><div class="search-wrap"><a class="search" href="/search"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></div></li></ul></nav></header><div id="content"><main><div class="blog-post-container"><div class="blog-post"><h1 class="blog-post-title">區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事</h1><div class="blog-post-info"><div class="date-wrap"><span class="write-date">2020-02-04</span><span>(</span><span class="update-date">Last updated: 2020-08-01</span><span>)</span></div><span class="dot">·</span><ul class="blog-post-tag-list"><li class="blog-post-tag"><a href="/tags#假訊息">#假訊息</a></li><li class="blog-post-tag"><a href="/tags#區塊鏈">#區塊鏈</a></li><li class="blog-post-tag"><a href="/tags#媒體">#媒體</a></li></ul><div class="blog-post-inside-toc"><div class="toc-button" role="button"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list-ul" class="svg-inline--fa fa-list-ul fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M48 48a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm448 16H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"></path></svg></div></div></div><div class="inside-toc-wrap" style="display:none"><div class="toc inside"><ul>
+<li><a href="/first-post/#%E5%81%87%E7%85%A7%E7%89%87%E7%9A%84%E7%A0%B4%E5%A3%9E%E5%8A%9B%E5%BC%B7">假照片的破壞力強</a></li>
+<li><a href="/first-post/#%E5%8D%80%E5%A1%8A%E9%8F%88%E6%BA%AF%E6%BA%90">區塊鏈溯源</a></li>
+<li><a href="/first-post/#%E6%A6%82%E5%BF%B5%E9%A9%97%E8%AD%89">概念驗證</a></li>
+<li><a href="/first-post/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div></div><div class="blog-post-content"><p>向假新聞宣戰早已不是什麼新鮮事了。獨立檢證、協力查核、智能辨識⋯⋯無論手段新穎或傳統，在假訊息竄增的速度面前，似乎都顯得蒼白無力，一不小心還會惹禍上身。這不禁讓人想問：還有什麼辦法？難道真理終究戰不勝謊言？人類還有救嗎？</p>
+<p>如果你已經對於當今所有防堵假訊息的手法都感到失望，準備當個極端的懷疑論者（這也不失為一個辦法），那你也許可以稍停一下，看看我底下將要介紹的計畫，也許它能帶給你一絲希望。</p>
+<p>去年7月，媒體界龍頭紐約時報（The New York Times，以下簡稱紐時）發起<a href="https://www.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">「新聞溯源計畫」（The News Provenance Project）</a>，期待透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞。其矛頭第一個對準的就是假照片。</p>
+<p><strong>為什麼是假照片？區塊鏈在這整個計畫中的作用是什麼？「揭露新聞更動源流」是什麼意思？它能怎樣幫助我們辨別資訊？要達成這個目標，需要完成哪些事？</strong>以下將一一回答。</p>
+<h2 id="假照片的破壞力強" style="position:relative;"><a href="#%E5%81%87%E7%85%A7%E7%89%87%E7%9A%84%E7%A0%B4%E5%A3%9E%E5%8A%9B%E5%BC%B7" aria-label="假照片的破壞力強 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>假照片的破壞力強</h2>
+<p>為什麼選擇假照片？理由似乎很直觀：照片比文字更容易傳播，且具有更高的可信度，因此破壞力也就愈強。據<a href="https://www.niemanlab.org/2020/01/heres-how-the-new-york-times-tested-blockchain-to-help-you-identify-faked-photos-on-your-timeline/" target="_blank" rel="nofollow noopener noreferrer">美國獨立智庫研究</a>顯示，相較於其它形式的假訊息，美國人民對於大眾辨識假圖片或影片的信心和責任都更少。換言之，他們既覺得<strong>大眾沒有能力辨識，也沒有義務辨識</strong>。</p>
+<p>低落的防衛意識，使得假照片有大行其道的空間。隨著<a href="https://opinion.cw.com.tw/blog/profile/51/article/8316" target="_blank" rel="nofollow noopener noreferrer">「深假」（deepfake）技術的進步</a>，製造出高水準視覺效果的成本愈來愈低。如何在資訊生態系統崩壞之前，從結構上防制假照片的危害，顯然是當務之急。</p>
+<h2 id="區塊鏈溯源" style="position:relative;"><a href="#%E5%8D%80%E5%A1%8A%E9%8F%88%E6%BA%AF%E6%BA%90" aria-label="區塊鏈溯源 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>區塊鏈溯源</h2>
+<p>從結構上防制？紐時究竟想怎麼做？最初的想法，是為照片加上一些<strong>元數據（metadata）及編輯紀錄</strong>。前者如拍攝時間、地點、發布者等；後者則可想像有一條時間軸，上面記錄著誰在何時取用、發布，並做了哪些更動。</p>
+<p>舉例來說，假設阿帆今天在巴西拍到一張火噬雨林的照片，公布到臉書，並寫下：「天啊，地球之肺在燃燒！貪婪的人類終自食惡果！」阿昱看到了，順手把它載入自己的電腦。四個月後，澳洲森林發生大火，阿昱上傳這張照片，文字卻改為：「極端氣候正在吞噬澳洲！人類何時才要醒悟！」</p>
+<p>此時悠遊於臉書河道的你，猝不及防地滑到這則貼文。怵目驚心的照片使你的手指停了下來，各種情緒頓時湧上心頭——擔憂、憤怒、恐懼、羞愧——「這麼嚴重的事情，大家應該要知道啊」，你一邊想著，一邊按下分享。</p>
+<p>「欸？這是什麼？」你看到浮在照片下方的訊息區塊，裡頭有一行被黃色標起的文字：「四個月前拍攝」。</p>
+<p>「四個月前？什麼鬼？這不是現在正在發生的事嗎？」你點開區塊，看見這張照片最初拍攝的時間、地點，以及發布者（阿帆）當時的貼文內容。</p>
+<p>「殺小，該不會這是假照片吧？」你愈想愈不對勁，決定先將剛才分享貼文的隱私權限設為「只限本人」，並上網搜尋「澳洲大火」。最終你也許會發現：澳洲是真的有發生大火，但那張照片也是錯的。你不願做假訊息的幫兇，於是刪了貼文。</p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1f0cc767f732d707bf90f711048f9e0c/0d0e4/macron-twitter.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 74.40677966101696%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAIAAABr+ngCAAAACXBIWXMAAAsSAAALEgHS3X78AAADlUlEQVQoz2P4+v3HlcuXX71+c//R4wePntx78Ojhk2c3Xn198+HLm/efXr//9Pbjl09ffwDZL958AJJff/z68+//tx+/vv34yfD63YeOusp7t2+dv3Tt9LkL5y9dPnvh0pnr9y5cvnbj9r0rN25dvXH79r0HV67fun7z7q2796/euHXr9r0nz14CDWEAmvH+4+dnL16ePnvhzPmLp86ev3jl2plz54GMsxcunzl/6er1m0BxoFkXLl8FCp44febUmXO3797//PUbw/efv3/8/vv+wycg//qNm1fvP7vx/OPN55+uP/986/mH9+/fv33/Aeipd++A9McPHz99+Pj50+cvb96+B/oXaPPPf//+H794Jby0Piyr0Cslv3TyitkrNk6es6B3+tyFExs2b92xfteR2UvXzV22dueJa6uO3Fqy50Lf6kOX7z1n+Pr95////zcdOS3qGChp6aHqERVdO6mqqaWypqagpKSxuWnJijUrt+yvnboio77HuniCRnqHVmqLRGDRmn2nGIChB9S87+x1g/hK9dB864SS8Myi+Kysuoa6stKCpu6Jk6ZO7e7tauyZ4Jtbz6vjwSlpxCtlyMQmvXz5eqjm/eduOOZ2BdTNjWtZkFg3xSkuN78gr6mto6x1QkN7b3trXVljW2BuE5+IlgiPohiPPAcD34rla6DO3r7/iH9BW0HPosLK5tKOOYkVnX1dbf2Tp+Q0T26fvmjeoiWTZi+t6Jhu7OHDqyQpLCrNzsC5fPkqqObNO3c7plUltc33C/UNi48sKCpduHj59o07V8xb3dLVm1ZfHl6TaxHjLeugw60vJqAmzsbJsWIFSPMPoOZ1G9fbBkUmNvS5JcSYhLo4xXhlNlWmN1YGFsYYRdoJ+igz24uymghzqgrzygsLSAuz8LAtX7kSqnnLjp3KWqr6rnZ6joZiJrK8huI8xiKslqLMliJc5lIirmqCVvL8prICRtICyqLC8mIcPBwrVsFsXrthPQMDAxMXEyM7I4MoE4MMC6M6F4M2D6M2N4MOF7MpH4MuN4MyJ4MaB4MYK5MQK1DxksVLGL7/+PX7z7/bd+43trQ0dbZ19na39XQ29XfUTm9vmNLRuqC3aWZ349yu6smtLbN62yZ1t0zoap/Y3dLWdvPmbYYv339+/PL9y/df3379BSZVoCv+/f//8+//z19///z1B8j98/f/95//Pn75+Q8sBcpTYPDz9x8AyyQfENvMdAUAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)"
+        title="去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)"
+        src="/static/1f0cc767f732d707bf90f711048f9e0c/fcda8/macron-twitter.png"
+        srcset="/static/1f0cc767f732d707bf90f711048f9e0c/fcda8/macron-twitter.png 590w,
+/static/1f0cc767f732d707bf90f711048f9e0c/c83ae/macron-twitter.png 1180w,
+/static/1f0cc767f732d707bf90f711048f9e0c/0d0e4/macron-twitter.png 1230w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自<a href="https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20" target="_blank" rel="nofollow noopener noreferrer">馬克宏推特</a></p></figcaption>
+  </figure></p>
+<p>謝天謝地！一場錯誤內容被轉發上萬次的災難被阻止了。<strong>它靠的不是事後通知，也非事前審查，而是在訊息產生（或發布）當下，便在某處烙下一條不可更改的紀錄。它不做判斷，只呈現每次編輯的事實，讓讀者根據這些紀錄，自行決定要多相信這則訊息。</strong></p>
+<p>「聽起來真是不錯，」你可能會問：「但我要怎麼知道這些紀錄沒有被惡意更改過？」這就是區塊鏈發揮作用的地方了。區塊鏈是一種記錄資料的技術，一旦資料「上鏈」，便<strong>難以被竄改</strong>；同時它也是<strong>透明</strong>的，任何更改都會被記錄，且可被看見。它能確保照片元數據和編輯紀錄的真實性。</p>
+<h2 id="概念驗證" style="position:relative;"><a href="#%E6%A6%82%E5%BF%B5%E9%A9%97%E8%AD%89" aria-label="概念驗證 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>概念驗證</h2>
+<p>一個看似簡單的概念，實作起來往往有許多複雜微妙之處。</p>
+<p>比方說，我們知道這個計畫要在照片旁邊附上一些資訊，但要放哪些資訊？更深入點問：<strong>平常人們在社群媒體上是如何決定一張照片可不可信的？不同背景的人，在判斷資訊方面又有什麼差異？我們所設想的方案，是否真的能幫助民眾更好地辨識新聞品質？</strong></p>
+<p>為了回答上述關鍵問題，紐時找了34位政治傾向、媒體偏好各異的成年人進行深度訪談和原型測試，從中歸納出了幾個值得參考的洞見。</p>
+<p>首先，關於民眾在社群平台上如何接收、判斷新聞資訊，紐時從「對於貼文脈絡的意識程度」（只看最顯眼的照片和標題？還是也會看發文日期、來源或網友反應？）和「對於主流媒體的信任程度」這兩條軸線，將民眾分成四種類型（來看看你比較偏向哪一種類型吧）：</p>
+<ol>
+<li><strong>高意識、低信任——不信任媒體的懷疑者（Distrustful news skeptic）</strong>：認為主流媒體都是有偏見的，並會試圖從一些線索去證明，很難與特定媒體建立信任關係。值得注意的是，這些人多半是質疑媒體的報導方式，而非事實細節。</li>
+<li><strong>高意識、高信任——充滿自信的數位訂戶（Confident digital news subscriber）</strong>：悠游於網路世界，樂意辨識自己信任的媒體所提供的訊息真假。他們不想與時事脫節或遭到誤導。</li>
+<li><strong>低意識、低信任——討厭媒體的庶民（Media-jaded localist）</strong>：覺得自己的聲音遭到主流媒體所排擠，毫不遲疑地接受非正式的激昂評論（hot takes）。他們希望新聞能夠既真實又接地氣。當自己信任的非正式來源提供錯誤訊息時，他們需要更清晰的線索才能判定。</li>
+<li><strong>低意識、高信任——傳統的數位移民（Late-adopter media traditionalist）</strong>：相較於網路媒體的喧囂，他們更喜歡透過電視、報紙等舊媒體來接收資訊。這類人需要學習更多的判斷技巧及明確的提示，才有辦法自己區辨訊息是否可信。</li>
+</ol>
+<p>紐時認為，照片溯源計畫至少能讓信任媒體的人受益（即2、4類人）。接著，他們測試多種能表示照片來源的設計，發現：</p>
+<ul>
+<li>認證標章（如臉書或IG的藍勾勾）並不足以讓照片變得可信。</li>
+<li>關於標示術語，讀者喜愛「附有來源」（sourced）更勝於「已驗證」（verified）。這代表大眾不只想知道照片已被他人驗證，<strong>也希望有可讓自己探索的資訊</strong>。</li>
+<li>陳列同一個事件的多張照片，能使讀者相信事件確實發生了。</li>
+<li>強調為人熟知的照片元數據（如圖說、發布歷史），而非會造成混亂的術語（如加密、存儲於不可更動的資料庫）。</li>
+<li>展示監督與問責的機制，有助於提升讀者信心。</li>
+<li>只需清楚呈現照片的編輯歷史，避免使用可能會失準的詞彙，如「真實」、「假」，<strong>因為只要出錯一次，讀者就不會再完全信任這套機制</strong>。</li>
+</ul>
+<p>紐時將這些發現整合進一個模擬社群網站的原型，經過兩輪測試，確認了來源資訊確實有效，而且即使是質疑新聞立場的讀者，也沒有懷疑來源資訊的真實性。</p>
+<p>不過仍有要改善的地方，包括有許多人根本沒注意到錯誤訊息、讀者很難理解為什麼來源訊息與照片描述不符。最有趣的是，對於照片編輯的歷史紀錄，讀者並不怎麼感興趣；反之，他們想瞭解照片所描述事件的相關新聞。這引出了一個洞見：</p>
+<blockquote>
+<p>民眾上社群網站不是為了查核事實，而是為了娛樂和建立聯繫。他們之所以願意停下來考察更多資訊，不是因為他們想證明這張照片是錯的，而是因為他們被與照片相連的故事引起了興趣。</p>
+</blockquote>
+<p>紐時認知到，這種傾向雖造成民眾容易為網路圖片所騙，但他們也能利用這點，讓溯源的過程不只有驗證的功能，還可以幫助讀者對自己關心的事情形成更準確、細緻的認識。</p>
+<p>吸取以上教訓，最終紐時建出了這個<a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">概念原型</a>：</p>
+<ul>
+<li>來源資訊區塊變大了，裡頭增加了一些可引人注意的細節（如照片拍攝距今已多久）。</li>
+<li>展開資訊區塊，你可以看見上面有一塊醒目的提示，它能喚起讀者對於假照片的警戒。</li>
+<li>區塊下方列出關於同一事件的其它照片與文章連結，供讀者進一步探索。</li>
+</ul>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/191e1690a5e7a0b0d4cea66aa80eb18d/0d0e4/poc-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 105.08474576271185%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAAEWUlEQVQ4y4VUe0yTVxTv3F/DjJciUGRzMDpLVwoykEeBQqFUXjNGMA5WWh5GpDjfU1EXIWMsMS4bjEXYBBnEtYgrUEpbGIQFdKPUxQm0tGa40RelT7D9vj6+dvcT8I9ly05Ofvndm/u7j3POPRgIghxO1NzAEBTA8B/u3EKny7XhLrcbgmAMmJVIn2i1eqPRpNWumM1W7/8Z2MNmhx2wAwOj6FyzrmmBdEW3qtebjUbD6orZaLCYTRazYd1qsq1ZrOZVxAVvyT3A4Q0xGNnskMFotTx3WGxOk82pM8N6E6TTQ6oVSGVyPVt1KXVOhc4j03rnVJ7ZPzxzy15UDN4MxL/NSju+ap0Qjz9VmRc1a5I5zfiUjMeb5gqWObPeb6eRGyJP/YD3eI/naDuS0ogcbUHskANjt9uBWMzrq6ImdF9mCVuvDLQ1d3z6ydCdjv7b7SLRzMRjZETu4T72fjOJfC7yXOJ5GLc9V/o9INAYyG4DYslgV1uhT0cJtr047E5V7DlaQju7SNrTMCUWCkYeCCcVY4sOwVNvtxT5csJ9aQD5YvyFGIZQsXG2U9b06mJz4O/1AVN1vhwG9iZtR1d1yvlqNvNI1THGSRbzs+/uySb+9AiXvLd+QXokyIuAQei1DY+4g+wQRbO/8JjPfFPweO2On8/4T7C3N9KiKpPj6TGkeFJeZm7TR9cfdo5px565Z3Re6OWbJ4c4Z+lRrcz97WXE/uNR/HOE4cvEwfOEAVZII+0txr7I9zOyabln0rKuhhPqUw938qaWQbFsiqcF909l4y4UJTeUpLcUx7YUx906iGs7SPi6IPJGVuj1QlLVoYJDhYezsxlxqRd2x179oI7rcGyJf+X3XKTu/Dg3/BottIke1pCDbTwQfu3Anot5b5/M31uSHZ2TTkhPeZdCfi8jg0KMI7OqT6PlabOhYi73Lg4XmpmKp6fh6WRcXto7+RRCfhaJRiHmZsbnURMyyaTUJFJSYkzy/hj83ojS0iMw/FLMuYvHhZGT8OkpBEoKPictmpZBpGfG0igkahoxi0xMToxOSiTG7yOQSNERkW+WlZXCL05GU9XV1bltGyZop29wkB82xC8MG/BGeGDEnl27sQEhwb67gl7393stMMDHzw/49lcwGCo1A03Vxsm9vb0FRUUVlZXlTBaTVfFhOZNRzgSEwWQBUs6sqDlRW8uuA1Bzgl3KrGHXnbJaLCBgaG0PDw8/kj7RaPUa7Yparf1rWa1SaZdVGkAAarQ6i9W29twJwW7YidgcXv6wUKPRbEb7Xn/fdLd6Sa6WyeeVCqVSoZDL5Qvz87KFBeAK5dK8dPTh/dMP+s9qlD/BDldfH0etVm/+KolkhvNDn1gkFowI+HxwD4FQKERRJBSPisWjY2IRf2SwZ+jH70UCHhjz+fz19fXN/4wgiMFgBHkHFzEYTCaTBXCAoPP8Vz9xONDyhMA6wEBjAhsBDghoNIBvzIBi+Fe32e1/AzpoXX5hHt1iAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="概念原型：展開前。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        title="概念原型：展開前。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        src="/static/191e1690a5e7a0b0d4cea66aa80eb18d/fcda8/poc-1.png"
+        srcset="/static/191e1690a5e7a0b0d4cea66aa80eb18d/fcda8/poc-1.png 590w,
+/static/191e1690a5e7a0b0d4cea66aa80eb18d/c83ae/poc-1.png 1180w,
+/static/191e1690a5e7a0b0d4cea66aa80eb18d/0d0e4/poc-1.png 1230w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>概念原型：展開前。圖擷自<a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">新聞溯源概念原型網頁</a></p></figcaption>
+  </figure></p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/78cc90cb492d690d33aae3b16fd64206/0d0e4/poc-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 126.10169491525424%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAIAAAC+dZmEAAAACXBIWXMAAAsSAAALEgHS3X78AAAEh0lEQVQ4y3VUXWxTZRiuXMiFLrIhEgY4QxYlIzIMidERNsMY4sh+cOIgsgs0XBgvjYl6A9HAlV55wQ0yXLfVubrunNF2Y5ERliWuW9uNruv6/39OT7ue/7+e9vT4no5l1eCbJ2++Nt9z3vd5vvf7DIIgapo2NmY6+ubB1pamtlPH2lqOdrQ2fdh2/PwHzefamttbj59tbW55r+n9d98+efLYOyeaGhsbBgauSrJsEAQByEND93e/+ML+/Xvq62sPH9rT8HrdkTf2vtV44EjDq4cP1tYfeGXf3pde21dTV/dybW3Nrl2Gjo52WS4YtiobjcaWU6d7LvZ1917U0aPn3o/7unp6u7p7u2F1qf+TTy9fAvRf6ezq+/yL6yzLGkRRAvLU1NT8k8fRaDARD8WiwUjYH40E4GcsGoiEYBEiyU2GoRiapKnNbJ43TyAYhgFZr4yiD6iAkQr+EVubSa5PJ7z2mMcW99gS3mlsw57xW9NeFPehybXJlBfRqAU7OpLCMs8qoyiaiy8VaB9D6KAyPjKzQeIbedzP5XwyuSaRXpn0Svk1gCaFbQ/M6TT+jIwgKE1ToqIRdDnHaIKsCgIniCLYyQtiuVzWtmNrbZ+eTqXT25Wn0PUZisop+CaLZ9lNkqFpmqSoPElSNM1VguXAI5aiKNg/PTOzQ0ZQJPmUS8Uwp2vJ41ldWXG7XO7FxUWXy+V0Ot1u9zLEksPh+BvH0jq5ujKCIPBVHM84HED2OoHqdgcCgXA4DNnv9wdDkVA0HYlnonHsOWSaYkAhQeD5zVwuR4AFpVKpWImSWlYkkk3MkmFUyK3qmu32Ks0oCmLAC4ZXOEkFw6RCsagohYICSSmqMp9jY1YyZBZzK88hkxUneLFIs3KO5ERZ0StvAYqXSkpJ42WN4WQIm82WTmM7bTOM7jCO47Fo1O/zJZNJ6EU3mWVpBhTxksBXFGVhrqxWazUZhSOBVimuSPMluQDVFAAULKklFaKs/u8564bRdEESaIrkeJEVRHBpZzDUslbWiqqmqBp87b9uWyYRRaTNC9K3d4nbt3/5+ZtrzvmZ0JLV8QidX6cnPFowX34UL/wVkX/1qlMJzWafTleRJ4syNz6XutJ/7ce+Q3cGapyzRsuNj+707P6yt/3q1/f8hBwgmNkFz9CTwBIOhtmryBYLiPtt8G7n2RNfXb/wWf+Zhw+tP9z4vv/C6cu9ZzrPn3Ovro6Y79366ebNW9+h6LDNbv+X27rmQiGT3SRyJA8HXS5TNINlsmmckCQJTjuVSuBYMhGPgvMz1bMN50xks2BqxeGiqpZgd+UuMJIkqrr3MDTwv1qqGFlpe/sxMJvN6JRt1eNbcnkdzrVKfgp52eV1rqwvu70Ah9OzvhFOYQRO5EdMY2lsu+25ubnBwft/TiBDI5ZhEzL8OzpssgyNTgKMJh1DoxbjKGIas0xMWMbHJ4zGYZgcAzyCQAZV/kAQOsdxLBQMhSNhmKVIOAwjJYq8wHP62wDgOZ7Xp06pjL1BlCTQqN8csKgSoEq/R2UNklr1hlQHbIN6/wCpILhrQ8BlzAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="概念原型：照片概觀。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        title="概念原型：照片概觀。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        src="/static/78cc90cb492d690d33aae3b16fd64206/fcda8/poc-2.png"
+        srcset="/static/78cc90cb492d690d33aae3b16fd64206/fcda8/poc-2.png 590w,
+/static/78cc90cb492d690d33aae3b16fd64206/c83ae/poc-2.png 1180w,
+/static/78cc90cb492d690d33aae3b16fd64206/0d0e4/poc-2.png 1230w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>概念原型：照片概觀。圖擷自<a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">新聞溯源概念原型網頁</a></p></figcaption>
+  </figure></p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f58348e4363a5d89f7608be67216f9b0/0d0e4/poc-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.59322033898305%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsSAAALEgHS3X78AAABp0lEQVQoz3WRXVPaQBSG/f//oR2VltEh2CEgcCVFsTeC9Ko3LViEfIHZkGS/N5vTkwanVcczz7xzdnfefffjiHMBAK7biaNfpQxltkY09RUNNQtRESv+UfAAbDy47Hief1SbO66b7BNtbJqLjAomCy8Gn8AmhiABW0IJz5QoMBgMPc87mHsDdzkl4gmYpDmljLM8p3meZ1m2T/eMMaiqNMZIqV6buz03WJFCgpCCCyHkc6lCKiu1LQrQBRS21Ma8Se67q3kiCSYzzMVsxnBFClVyCRUKl94zdy9X4U9lqVZGKaWNRsHGGKsNVBSVKgMGz/D62G5vEy2FYcGW72IWPgmScs6ZkJYKQJiAnKOWuOkbc9cNt8nShyCKgyjBPojILk4JIXm2h/+qfu3h8IW5u93uMmYXj2S53i9WBHnYZJQro/Gah8LrSFW9dr/fr/+Z46DlOC3ny930+/h2htx8m48n0/FkNrqZXd/ef53g5P3V9d10/mPxsP796Dc+NX0/OCRfjUYfPh6fty5OP7drGs1KT/42jWY9f9E8a7ec9tm5c3xymqbpH0JbUgyGRrNnAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="概念原型：照片歷史紀錄。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        title="概念原型：照片歷史紀錄。圖擷自[新聞溯源概念原型網頁](https://poc.newsprovenanceproject.com/)"
+        src="/static/f58348e4363a5d89f7608be67216f9b0/fcda8/poc-3.png"
+        srcset="/static/f58348e4363a5d89f7608be67216f9b0/fcda8/poc-3.png 590w,
+/static/f58348e4363a5d89f7608be67216f9b0/c83ae/poc-3.png 1180w,
+/static/f58348e4363a5d89f7608be67216f9b0/0d0e4/poc-3.png 1230w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>概念原型：照片歷史紀錄。圖擷自<a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">新聞溯源概念原型網頁</a></p></figcaption>
+  </figure></p>
+<p>大家可以自己點進<a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">網頁</a>玩玩，看這樣的來源標示是否有助於你判斷貼文內容的真假或好壞。</p>
+<hr>
+<p>這是個令人振奮的開始——但也只是開始。目前的原型僅僅是最末端的呈現，要達到預期中的效果，紐時需要跨界合作，<strong>建立一套從拍攝到發布的體系</strong>，且其運作流程還要好上手，以免排擠較小的新聞機構。這顯然是一項極為艱難的任務。</p>
+<p>「當前的工作是確保大家以一致的方式來紀錄元數據，並讓這些資料能被其它組織（如社群平台）負責任地使用。」紐時研發團隊執行長Marc Lavallee說。<strong>他們在<a href="https://www.newsprovenanceproject.com/whats-next" target="_blank" rel="nofollow noopener noreferrer">官網</a>公開徵求三種合作夥伴——社群平台、新聞編輯室、事實查核組織——來一起把計畫推展到下一階段——執行。</strong></p>
+<p>一個更好的網際網路會是什麼樣子？這是紐時對於這個大哉問的初步回答。即使它最終失敗了，整個設計過程——從問題定義、用戶研究、概念發想到原型測試——仍有許多值得我們深思和借鏡的地方。</p>
+<h2 id="相關資料" style="position:relative;"><a href="#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99" aria-label="相關資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相關資料</h2>
+<ul>
+<li><a href="https://www.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">The News Provenance Project</a>——新聞溯源計畫官網，裡頭將計畫目前的成果與潛力做了一個清楚且頗具啟發性的闡述，推薦你把它從頭到尾看完。</li>
+<li><a href="https://poc.newsprovenanceproject.com/" target="_blank" rel="nofollow noopener noreferrer">Proof of Concept</a>——新聞溯源的概念原型，來玩看看吧！</li>
+<li><a href="https://open.nytimes.com/how-do-people-decide-whether-to-trust-a-photo-on-social-media-e0016b6080ae" target="_blank" rel="nofollow noopener noreferrer">How Do People Decide Whether to Trust a Photo on Social Media?</a>——社群媒體上的讀者是怎麼判斷一張照片可不可信的？這是紐時訪談後的發現。</li>
+<li><a href="https://open.nytimes.com/what-if-every-news-photo-on-social-media-showed-contextual-information-8936cf4e8c45" target="_blank" rel="nofollow noopener noreferrer">What If Every News Photo on Social Media Showed Contextual Information?</a>——紐時測試原型的過程。</li>
+<li><a href="https://open.nytimes.com/can-publishers-use-metadata-to-regain-the-publics-trust-in-visual-journalism-ee32707c5662" target="_blank" rel="nofollow noopener noreferrer">Can Publishers Use Metadata to Regain the Public’s Trust in Visual Journalism?</a>——簡單描述了整個新聞溯源計畫及未來展望。</li>
+<li><a href="https://www.niemanlab.org/2020/01/heres-how-the-new-york-times-tested-blockchain-to-help-you-identify-faked-photos-on-your-timeline/" target="_blank" rel="nofollow noopener noreferrer">Here’s how The New York Times tested blockchain to help you identify faked photos on your timeline</a>——尼曼新聞實驗室對這個計畫的報導。</li>
+<li><a href="https://open.nytimes.com/introducing-the-news-provenance-project-723dbaf07c44" target="_blank" rel="nofollow noopener noreferrer">Introducing the News Provenance Project</a>——去年7月，紐時在Medium上介紹了這個計畫。</li>
+</ul></div></div><div class="social-share"><ul><li class="social-share-item email"><button aria-label="email" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#7f7f7f"></circle><path d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z" fill="white"></path></svg></button></li><li class="social-share-item facebook"><button aria-label="facebook" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#3b5998"></circle><path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" fill="white"></path></svg></button></li><li class="social-share-item twitter"><button aria-label="twitter" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#00aced"></circle><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" fill="white"></path></svg></button></li><li class="social-share-item linkedin"><button aria-label="linkedin" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#007fb1"></circle><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z" fill="white"></path></svg></button></li><li class="social-share-item reddit"><button aria-label="reddit" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#5f99cf"></circle><path d="m 52.8165,31.942362 c 0,-2.4803 -2.0264,-4.4965 -4.5169,-4.4965 -1.2155,0 -2.3171,0.4862 -3.128,1.2682 -3.077,-2.0247 -7.2403,-3.3133 -11.8507,-3.4782 l 2.5211,-7.9373 6.8272,1.5997 -0.0102,0.0986 c 0,2.0281 1.6575,3.6771 3.6958,3.6771 2.0366,0 3.6924,-1.649 3.6924,-3.6771 0,-2.0281 -1.6575,-3.6788 -3.6924,-3.6788 -1.564,0 -2.8968,0.9758 -3.4357,2.3443 l -7.3593,-1.7255 c -0.3213,-0.0782 -0.6477,0.1071 -0.748,0.4233 L 32,25.212062 c -4.8246,0.0578 -9.1953,1.3566 -12.41,3.4425 -0.8058,-0.7446 -1.8751,-1.2104 -3.0583,-1.2104 -2.4905,0 -4.5152,2.0179 -4.5152,4.4982 0,1.649 0.9061,3.0787 2.2389,3.8607 -0.0884,0.4794 -0.1462,0.9639 -0.1462,1.4569 0,6.6487 8.1736,12.0581 18.2223,12.0581 10.0487,0 18.224,-5.4094 18.224,-12.0581 0,-0.4658 -0.0493,-0.9248 -0.1275,-1.377 1.4144,-0.7599 2.3885,-2.2304 2.3885,-3.9406 z m -29.2808,3.0872 c 0,-1.4756 1.207,-2.6775 2.6894,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 -1.4824,0 -2.6894,-1.2002 -2.6894,-2.6758 z m 15.4037,7.9373 c -1.3549,1.3481 -3.4816,2.0043 -6.5008,2.0043 l -0.0221,-0.0051 -0.0221,0.0051 c -3.0209,0 -5.1476,-0.6562 -6.5008,-2.0043 -0.2465,-0.2448 -0.2465,-0.6443 0,-0.8891 0.2465,-0.2465 0.6477,-0.2465 0.8942,0 1.105,1.0999 2.9393,1.6337 5.6066,1.6337 l 0.0221,0.0051 0.0221,-0.0051 c 2.6673,0 4.5016,-0.5355 5.6066,-1.6354 0.2465,-0.2465 0.6477,-0.2448 0.8942,0 0.2465,0.2465 0.2465,0.6443 0,0.8908 z m -0.3213,-5.2615 c -1.4824,0 -2.6877,-1.2002 -2.6877,-2.6758 0,-1.4756 1.2053,-2.6775 2.6877,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 z" fill="white"></path></svg></button></li><li class="social-share-item pocket"><button aria-label="pocket" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#EF3F56"></circle><path d="M41.084 29.065l-7.528 7.882a2.104 2.104 0 0 1-1.521.666 2.106 2.106 0 0 1-1.522-.666l-7.528-7.882c-.876-.914-.902-2.43-.065-3.384.84-.955 2.228-.987 3.1-.072l6.015 6.286 6.022-6.286c.88-.918 2.263-.883 3.102.071.841.938.82 2.465-.06 3.383l-.015.002zm6.777-10.976C47.463 16.84 46.361 16 45.14 16H18.905c-1.2 0-2.289.82-2.716 2.044-.125.363-.189.743-.189 1.125v10.539l.112 2.096c.464 4.766 2.73 8.933 6.243 11.838.06.053.125.102.19.153l.04.033c1.882 1.499 3.986 2.514 6.259 3.014a14.662 14.662 0 0 0 6.13.052c.118-.042.235-.065.353-.087.03 0 .065-.022.098-.042a15.395 15.395 0 0 0 6.011-2.945l.039-.045.18-.153c3.502-2.902 5.765-7.072 6.248-11.852L48 29.674v-10.52c0-.366-.041-.728-.161-1.08l.022.015z" fill="white"></path></svg></button></li></ul></div><aside class="ad"><ins class=" adsbygoogle" style="display:block" data-ad-client="ca-pub-3832807535172594" data-ad-slot="5214956675" data-ad-layout="" data-ad-layout-key="" data-ad-format="auto" data-full-width-responsive="true"></ins></aside><div class="comments"><div shortname="yeefun" config="[object Object]" id="disqus_thread"></div></div></div><div class="toc outside"><ul>
+<li><a href="/first-post/#%E5%81%87%E7%85%A7%E7%89%87%E7%9A%84%E7%A0%B4%E5%A3%9E%E5%8A%9B%E5%BC%B7">假照片的破壞力強</a></li>
+<li><a href="/first-post/#%E5%8D%80%E5%A1%8A%E9%8F%88%E6%BA%AF%E6%BA%90">區塊鏈溯源</a></li>
+<li><a href="/first-post/#%E6%A6%82%E5%BF%B5%E9%A9%97%E8%AD%89">概念驗證</a></li>
+<li><a href="/first-post/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div></main><footer><span>© 2020 Yeefun Lin | Theme by </span><a href="https://github.com/junhobaik">JunhoBaik</a><span> | Built with </span><a href="https://www.gatsbyjs.org">Gatsby</a></footer></div><div id="top" style="opacity:0;pointer-events:none"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-double-up" class="svg-inline--fa fa-angle-double-up fa-w-10 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M177 255.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 351.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 425.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1zm-34-192L7 199.7c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l96.4-96.4 96.4 96.4c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9l-136-136c-9.2-9.4-24.4-9.4-33.8 0z"></path></svg></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-172986408-1', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/first-post/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-a2415f001748de38e006.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-4ffacf8c8031afdc7aca.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-f7121145c9bd91c1738b.js"],"component---src-pages-search-tsx":["/component---src-pages-search-tsx-900d4fb8c2e8071bec8e.js"],"component---src-pages-tags-tsx":["/component---src-pages-tags-tsx-c526cc56f6ad1fb5f55d.js"],"component---src-templates-post-tsx":["/component---src-templates-post-tsx-f944385309e6e56abe50.js"]};/*]]>*/</script><script src="/component---src-templates-post-tsx-f944385309e6e56abe50.js" async=""></script><script src="/commons-f255187f5153b8bdf5c2.js" async=""></script><script src="/cb1608f2-3facea18a6f38c99d07e.js" async=""></script><script src="/styles-2d82ac8e3afc0c213061.js" async=""></script><script src="/app-a2415f001748de38e006.js" async=""></script><script src="/framework-f600a0dcdbbe2ab3be17.js" async=""></script><script src="/webpack-runtime-b318b1628ec14a144b95.js" async=""></script></body></html>
