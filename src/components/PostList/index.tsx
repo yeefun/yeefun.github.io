@@ -63,9 +63,13 @@ const PostList = (props: PostListProps) => {
             <div className="info">
               <div className="date-wrap">
                 <span className="date">{date}</span>
-                {update ? <span className="update">&nbsp;{`(Updated: ${update})`}</span> : null}
+                {update ? (
+                  <span className="update">&nbsp;{`(Updated: ${update})`}</span>
+                ) : null}
               </div>
-              {tags.length && tags[0] !== 'undefined' ? <span className="info-dot">·</span> : null}
+              {tags.length && tags[0] !== 'undefined' ? (
+                <span className="info-dot">·</span>
+              ) : null}
               <ul className="tag-list">{mapTag}</ul>
             </div>
             <span className="excerpt">
