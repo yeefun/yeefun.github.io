@@ -37,7 +37,6 @@
     "gatsby-transformer-sharp": "^2.5.7",
     "lodash": "^4.17.19",
     "mobile-detect": "^1.4.4",
-    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "prism-themes": "^1.4.0",
     "prismjs": "^1.20.0",

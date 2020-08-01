@@ -6,7 +6,6 @@ import Helmet from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { graphql, Link } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
-import moment from 'moment';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import {
   faListUl,
@@ -176,9 +175,9 @@ const Post = (props: postProps) => {
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "datePublished": "${moment(new Date(date)).toISOString()}",
+  "datePublished": "${new Date(date).toISOString()}",
   ${
-    update ? `"dateModified": "${moment(new Date(update)).toISOString()}",` : ''
+    update ? `"dateModified": "${new Date(update).toISOString()}",` : ''
   }
   "mainEntityOfPage": {
     "@type": "WebPage",
