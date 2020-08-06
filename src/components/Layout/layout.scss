@@ -1,6 +1,11 @@
 @import '../../utils/variables.scss';
 
 #layout {
+  a {
+    cursor: pointer;
+    color: inherit;
+  }
+
   svg {
     color: #6a737d;
     transition: color 0.8s;
