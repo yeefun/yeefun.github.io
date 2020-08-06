@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Helmet from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { graphql, Link } from 'gatsby';
-import { DiscussionEmbed } from 'disqus-react';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import {
   faListUl,
@@ -27,16 +26,16 @@ import {
   PocketIcon,
   EmailIcon,
 } from 'react-share';
+import { throttle } from 'lodash';
 
-import { RootState } from '../state/reducer';
+import './post.scss';
+import './code-theme.scss';
 
 import Layout from '../components/Layout';
 import Toc from '../components/Toc';
 import SEO from '../components/seo';
 
-import './code-theme.scss';
-import './post.scss';
-
+import { RootState } from '../state/reducer';
 import config from '../../config';
 
 interface postProps {
@@ -46,6 +45,8 @@ interface postProps {
 }
 
 const Post = (props: postProps) => {
+  const isSSR = typeof window === 'undefined';
+
   const { data, location, pageContext } = props;
   const isMobile = useSelector((state: RootState) => state.isMobile);
   const { markdownRemark } = data;
@@ -69,21 +70,31 @@ const Post = (props: postProps) => {
 
   const [yList, setYList] = useState([] as number[]);
   const [isInsideToc, setIsInsideToc] = useState(false);
+  const [commentEl, setCommentEl] = useState<JSX.Element>();
 
   const isTableOfContents = enablePostOfContents && tableOfContents !== '';
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isDisqus: boolean = disqusShortname ? true : false;
   const isSocialShare = enableSocialShare;
 
-  useEffect(() => {
-    const hs = Array.from(
-      document.querySelectorAll('h2, h3')
-    ) as HTMLHeadingElement[];
-    const minusValue =
-      window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
-    const yPositions = hs.map((h) => h.offsetTop - minusValue);
-    setYList(yPositions);
-  }, []);
+  const mapTags = tags.map((tag: string) => {
+    return (
+      <li key={tag} className="blog-post-tag">
+        <Link to={`/tags#${tag}`}>{`#${tag}`}</Link>
+      </li>
+    );
+  });
+
+  const mapSeries = series.map((s: any) => {
+    return (
+      <li key={`${s.slug}-series-${s.num}`} className={`series-item ${slug === s.slug ? 'current-series' : ''}`}>
+        <Link to={s.slug}>
+          <span>{s.title}</span>
+          <div className="icon-wrap">{slug === s.slug ? <Fa icon={faAngleLeft} /> : null}</div>
+        </Link>
+      </li>
+    );
+  });
 
   useEffect(() => {
     if (isMobile) {
@@ -129,39 +140,32 @@ const Post = (props: postProps) => {
     };
   }, [yList]);
 
-  const mapTags = tags.map((tag: string) => {
-    return (
-      <li key={tag} className="blog-post-tag">
-        <Link to={`/tags#${tag}`}>{`#${tag}`}</Link>
-      </li>
-    );
-  });
+  useEffect(() => {
+    // scroll
+    const postContentOriginTop = document.querySelector('.blog-post')?.getBoundingClientRect().top ?? 0;
+    const removeScrollEvent = () => document.removeEventListener('scroll', scrollEvents);
+    const renderComment = () => {
+      const Comment = React.lazy(() => import('../components/Comment'));
+      setCommentEl(<Comment slug={slug} title={title} />);
+    };
+    const scrollEvents = throttle(() => {
+      const postContentHeight = document.querySelector('.blog-post')?.getBoundingClientRect().height ?? Infinity;
+      if (window.scrollY + window.innerHeight * 1.75 - postContentOriginTop > postContentHeight) {
+        renderComment();
+        removeScrollEvent();
+      }
+    }, 250);
+    scrollEvents();
+    document.addEventListener('scroll', scrollEvents);
 
-  const mapSeries = series.map((s: any) => {
-    return (
-      <li
-        key={`${s.slug}-series-${s.num}`}
-        className={`series-item ${slug === s.slug ? 'current-series' : ''}`}
-      >
-        <Link to={s.slug}>
-          <span>{s.title}</span>
-          <div className="icon-wrap">
-            {slug === s.slug ? <Fa icon={faAngleLeft} /> : null}
-          </div>
-        </Link>
-      </li>
-    );
-  });
+    // toc
+    const hs = Array.from(document.querySelectorAll('h2, h3')) as HTMLHeadingElement[];
+    const minusValue = window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
+    const yPositions = hs.map(h => h.offsetTop - minusValue);
+    setYList(yPositions);
 
-  //disqus
-  const disqusConfig = {
-    shortname: config.disqusShortname,
-    config: {
-      url: `${config.siteUrl + slug}`,
-      identifier: slug,
-      title,
-    },
-  };
+    return () => removeScrollEvent();
+  }, []);
 
   return (
     <>
@@ -356,11 +360,7 @@ const Post = (props: postProps) => {
                 />
               </aside>
 
-              {isDisqus ? (
-                <div className="comments">
-                  <DiscussionEmbed {...disqusConfig} />
-                </div>
-              ) : null}
+              {!isSSR ? <Suspense fallback={<></>}>{commentEl}</Suspense> : null}
             </>
           )}
         </div>
