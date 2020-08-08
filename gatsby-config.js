@@ -64,8 +64,16 @@ const gatsbyConfig = {
             options: {
               classPrefix: 'language-',
               inlineCodeMarker: null,
-              aliases: {},
               showLineNumbers: false,
+              noInlineHighlight: false,
+              escapeEntities: {},
+              aliases: {
+                react: 'jsx',
+                javascriptreact: 'jsx',
+                'javascript react': 'jsx',
+                typescriptreact: 'tsx',
+                'typescript react': 'tsx',
+              },
             },
           },
           'gatsby-remark-external-links',
