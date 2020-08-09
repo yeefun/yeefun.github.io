@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Helmet from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -16,6 +16,7 @@ import './layout.scss';
 import Header from '../Header';
 import { actionCreators } from '../../state/actions';
 import config from '../../../config';
+import throttle from 'lodash/throttle';
 
 FaConfig.autoAddCss = false;
 
@@ -41,19 +42,17 @@ const Layout = (props: LayoutPropsType) => {
     }
   `);
 
+  const setTop = useCallback(
+    throttle(() => setIsTop(window.pageYOffset < window.innerHeight / 2), 250),
+    []
+  );
+
   useEffect(() => {
     const md = new MobileDetect(window.navigator.userAgent);
     if (md.mobile()) {
       dispatch(actionCreators.setIsMobile(true));
     }
 
-    const setTop = () => {
-      if (window.pageYOffset < window.innerHeight / 2) {
-        setIsTop(true);
-      } else {
-        setIsTop(false);
-      }
-    };
     document.addEventListener('scroll', setTop);
     return () => document.removeEventListener('scroll', setTop);
   }, []);

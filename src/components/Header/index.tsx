@@ -49,6 +49,8 @@ const Header = (props: headerPropsType) => {
     }, ms + 100);
   }, [colorMode]);
 
+  const setPath = useCallback((path: string, size?: string) => dispatch(actionCreators.setPath(path, size)), []);
+
   useEffect(() => {
     const bio: HTMLDivElement | null = document.querySelector('.bio');
     if (bio) {
@@ -69,9 +71,6 @@ const Header = (props: headerPropsType) => {
 
     const prevPath: string = path;
     const currPath: string = location.pathname;
-
-    const setPath = (path: string, size?: string) =>
-      dispatch(actionCreators.setPath(path, size));
 
     if (profile) {
       if (currPath === prevPath) {

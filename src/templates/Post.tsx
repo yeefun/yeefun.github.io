@@ -26,7 +26,7 @@ import {
   PocketIcon,
   EmailIcon,
 } from 'react-share';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 import './post.scss';
 import './code-theme.scss';

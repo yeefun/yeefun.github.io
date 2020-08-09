@@ -99,7 +99,7 @@ const gatsbyConfig = {
         start_url: '/',
         lang: language,
         background_color: '#fff',
-        theme_color: '#fff',
+        theme_color: '#6a737d',
         display: 'standalone',
         icon: 'src/images/icon.svg',
       },

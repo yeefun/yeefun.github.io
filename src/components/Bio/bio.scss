@@ -28,13 +28,11 @@
 
       svg {
         margin-top: 1px;
-        // color: #6a737d;
         opacity: 0.9;
       }
     }
 
     & > :nth-child(2) {
-      // border: 1px solid red;
       line-height: 1.1;
       overflow: hidden;
     }
@@ -82,7 +80,7 @@
         }
         .github {
           // color: #181717 !important;
-          color: #666666 !important;
+          color: #999 !important;
         }
       }
     }
