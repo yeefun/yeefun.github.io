@@ -203,6 +203,7 @@ const gatsbyConfig = {
         ],
       },
     },
+
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as React from 'react';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { Link } from 'gatsby';
 import throttle from 'lodash/throttle';
 
@@ -15,18 +15,20 @@ const PostList = (props: PostListProps) => {
   const { posts } = props;
   const [showCnt, setShowCnt] = useState(10);
   const [currentPostList, setCurrentPostList] = useState<JSX.Element[]>([]);
+  const sortedPosts = useMemo(() => {
+    posts.sort((a: any, b: any) => {
+      const af = a.node.frontmatter;
+      const bf = b.node.frontmatter;
 
-  posts.sort((a: any, b: any) => {
-    const af = a.node.frontmatter;
-    const bf = b.node.frontmatter;
+      const aDate = new Date(af.update.includes('0001') ? af.date : af.update);
+      const bDate = new Date(bf.update.includes('0001') ? bf.date : bf.update);
 
-    const aDate = new Date(af.update.includes('0001') ? af.date : af.update);
-    const bDate = new Date(bf.update.includes('0001') ? bf.date : bf.update);
-
-    if (aDate < bDate) return 1;
-    if (aDate > bDate) return -1;
-    return 0;
-  });
+      if (aDate < bDate) return 1;
+      if (aDate > bDate) return -1;
+      return 0;
+    });
+    return posts;
+  }, [posts]);
 
   const throttleScrollHandler = useCallback(
     throttle(() => {
@@ -37,12 +39,12 @@ const PostList = (props: PostListProps) => {
         ) as HTMLDivElement).getBoundingClientRect().bottom
       ) {
         setShowCnt((prev: number) => {
-          if (prev >= posts.length) return prev;
+          if (prev >= sortedPosts.length) return prev;
           return prev + 10;
         });
       }
     }, 250),
-    [posts]
+    [sortedPosts]
   );
 
   const expendPostList = useCallback((list: any) => {
@@ -98,14 +100,14 @@ const PostList = (props: PostListProps) => {
   }, []);
 
   useEffect(() => {
-    if (showCnt > 0 && showCnt !== 10) expendPostList(posts.slice(currentPostList.length, showCnt));
+    if (showCnt > 0 && showCnt !== 10) expendPostList(sortedPosts.slice(currentPostList.length, showCnt));
   }, [showCnt]);
 
   useEffect(() => {
     if (currentPostList.length) setCurrentPostList([]);
 
     setShowCnt((prev: number) => {
-      if (prev === 10) expendPostList(posts.slice(0, 10));
+      if (prev === 10) expendPostList(sortedPosts.slice(0, 10));
       return 10;
     });
 
@@ -114,7 +116,7 @@ const PostList = (props: PostListProps) => {
     return () => {
       window.removeEventListener('scroll', throttleScrollHandler);
     };
-  }, [posts]);
+  }, [sortedPosts]);
 
   return (
     <div className="post-list">
