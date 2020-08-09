@@ -11,7 +11,7 @@ import {
   faLayerGroup,
   faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import AdSense from 'react-adsense';
+// import AdSense from 'react-adsense';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -170,10 +170,10 @@ const Post = (props: postProps) => {
   return (
     <>
       <Helmet>
-        <script
+        {/* <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        ></script>
+        ></script> */}
         <script type="application/ld+json">
           {`
 {
@@ -335,10 +335,10 @@ const Post = (props: postProps) => {
 
           {isDevelopment ? (
             <>
-              <aside className="ad ad-dev">
+              {/* <aside className="ad ad-dev">
                 <span>Ads</span>
                 <span>displayed when you deploy</span>
-              </aside>
+              </aside> */}
               {isDisqus ? (
                 <div className="comments comments-dev">
                   <span>Comments</span>
@@ -348,7 +348,7 @@ const Post = (props: postProps) => {
             </>
           ) : (
             <>
-              <aside className="ad">
+              {/* <aside className="ad">
                 <AdSense.Google
                   client={
                     config.googleAdsenseClient || 'ca-pub-5001380215831339'
@@ -358,7 +358,7 @@ const Post = (props: postProps) => {
                   format="auto"
                   responsive="true"
                 />
-              </aside>
+              </aside> */}
 
               {!isSSR ? <Suspense fallback={<></>}>{commentEl}</Suspense> : null}
             </>
