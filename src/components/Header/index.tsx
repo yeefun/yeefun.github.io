@@ -23,10 +23,10 @@ interface headerPropsType {
 
 const Header = (props: headerPropsType) => {
   const { siteTitle } = props;
-  const dispatch = useDispatch();
   const { isMobile, path, size } = useSelector((state: RootState) => state);
   const [, setYPos] = useState(0);
   const [isHide, setIsHide] = useState(false);
+  const dispatch = useDispatch();
   const [colorMode, setColorMode] = useColorMode();
 
   const toggleTheme = useCallback(() => {
@@ -93,7 +93,7 @@ const Header = (props: headerPropsType) => {
       setPath(location.pathname);
     }
 
-    const setVisible: () => void = () => {
+    const setVisible = () => {
       setYPos((prevYPos) => {
         const currentYPos = window.pageYOffset;
 

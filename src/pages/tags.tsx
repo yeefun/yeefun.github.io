@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
@@ -62,7 +62,7 @@ const Tags = (props: TagsPageProps) => {
     );
   });
 
-  const getPostList = () => {
+  const getPostList = useCallback(() => {
     if (group.filter((g: groupItem) => g.fieldValue === targetTag).length) {
       return group.filter((g: groupItem) => g.fieldValue === targetTag)[0]
         .edges;
@@ -72,7 +72,7 @@ const Tags = (props: TagsPageProps) => {
         .edges;
     }
     return [];
-  };
+  }, [targetTag]);
 
   useEffect(() => {
     setTargetTag(location?.hash ? decodeURIComponent(location.hash.split('#')[1]) : 'undefined');

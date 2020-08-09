@@ -44,11 +44,21 @@ interface postProps {
   pageContext: { slug: string; series: any[]; lastmod: string };
 }
 
+interface iConfig {
+  enablePostOfContents: boolean;
+  enableSocialShare: boolean;
+  disqusShortname?: string;
+}
+
 const Post = (props: postProps) => {
   const isSSR = typeof window === 'undefined';
 
   const { data, location, pageContext } = props;
   const isMobile = useSelector((state: RootState) => state.isMobile);
+  const [yList, setYList] = useState([] as number[]);
+  const [isInsideToc, setIsInsideToc] = useState(false);
+  const [commentEl, setCommentEl] = useState<JSX.Element>();
+
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields } = markdownRemark;
   const { title, description, featuredImage, date, tags } = frontmatter;
@@ -57,21 +67,11 @@ const Post = (props: postProps) => {
   const { slug } = fields;
   const { series } = pageContext;
 
-  interface iConfig {
-    enablePostOfContents: boolean;
-    enableSocialShare: boolean;
-    disqusShortname?: string;
-  }
   const {
     enablePostOfContents,
     disqusShortname,
     enableSocialShare,
   }: iConfig = config;
-
-  const [yList, setYList] = useState([] as number[]);
-  const [isInsideToc, setIsInsideToc] = useState(false);
-  const [commentEl, setCommentEl] = useState<JSX.Element>();
-
   const isTableOfContents = enablePostOfContents && tableOfContents !== '';
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isDisqus: boolean = disqusShortname ? true : false;
