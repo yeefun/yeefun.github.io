@@ -86,9 +86,9 @@ const PostList = (props: PostListProps) => {
               ) : null}
               <ul className="tag-list">{mapTag}</ul>
             </div>
-            <span className="excerpt">
-              <Link to={slug}>{description}</Link>
-            </span>
+            <Link to={slug}>
+              <span className="excerpt">{description}</span>
+            </Link>
           </article>
         </li>
       );

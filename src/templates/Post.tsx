@@ -26,6 +26,7 @@ import {
   PocketIcon,
   EmailIcon,
 } from 'react-share';
+import { useColorMode } from 'theme-ui';
 import throttle from 'lodash/throttle';
 
 import './post.scss';
@@ -57,7 +58,8 @@ const Post = (props: postProps) => {
   const isMobile = useSelector((state: RootState) => state.isMobile);
   const [yList, setYList] = useState([] as number[]);
   const [isInsideToc, setIsInsideToc] = useState(false);
-  const [commentEl, setCommentEl] = useState<JSX.Element>();
+  const [commentEl, setCommentEl] = useState<JSX.Element | null>(null);
+  const [colorMode] = useColorMode();
 
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields } = markdownRemark;
@@ -95,6 +97,11 @@ const Post = (props: postProps) => {
       </li>
     );
   });
+
+  const renderComment = () => {
+    const Comment = React.lazy(() => import('../components/Comment'));
+    setCommentEl(<Comment slug={slug} title={title} />);
+  };
 
   useEffect(() => {
     if (isMobile) {
@@ -141,13 +148,18 @@ const Post = (props: postProps) => {
   }, [yList]);
 
   useEffect(() => {
+    setCommentEl(null);
+
+    setTimeout(() => {
+      renderComment();
+    }, 1000);
+  }, [colorMode]);
+
+  useEffect(() => {
     // scroll
     const postContentOriginTop = document.querySelector('.blog-post')?.getBoundingClientRect().top ?? 0;
     const removeScrollEvent = () => document.removeEventListener('scroll', scrollEvents);
-    const renderComment = () => {
-      const Comment = React.lazy(() => import('../components/Comment'));
-      setCommentEl(<Comment slug={slug} title={title} />);
-    };
+
     const scrollEvents = throttle(() => {
       const postContentHeight = document.querySelector('.blog-post')?.getBoundingClientRect().height ?? Infinity;
       if (window.scrollY + window.innerHeight * 1.75 - postContentOriginTop > postContentHeight) {
@@ -161,7 +173,7 @@ const Post = (props: postProps) => {
     // toc
     const hs = Array.from(document.querySelectorAll('h2, h3')) as HTMLHeadingElement[];
     const minusValue = window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
-    const yPositions = hs.map(h => h.offsetTop - minusValue);
+    const yPositions = hs.map((h) => h.offsetTop - minusValue);
     setYList(yPositions);
 
     return () => removeScrollEvent();
