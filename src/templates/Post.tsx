@@ -234,7 +234,7 @@ const Post = (props: postProps) => {
         title={title}
         description={description}
         pathname={location.pathname}
-        ogImage={featuredImage.publicURL}
+        ogImage={featuredImage?.publicURL}
         ogType="article"
       />
 
