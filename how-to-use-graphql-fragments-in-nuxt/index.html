@@ -586,7 +586,7 @@
 <span class="token punctuation">}</span></code></pre></div>
 <p>若 <code class="language-text">shouldQueryTitle</code> 為 <code class="language-text">true</code>，就會查詢 <code class="language-text">title</code> 這個欄位，反之則不會。這個方法可行，但若需要客製化的欄位不少，實作起來會相當麻煩。</p>
 <p>fragments 能怎麼解決這個問題呢？很簡單，看共用欄位有哪些，把它們抽取成 fragment，再用 <code class="language-text">...</code> 內聯。</p>
-<p>這個方法還有一個好處，就是它能<strong>內聯嵌套查詢</strong>，而非在第一層就整個覆蓋。比方說，下面這塊程式碼，<code class="language-text">allPosts</code> 有兩個 <code class="language-text">heroImage</code> 欄位，但裡頭查詢的欄位不同：</p>
+<p>這個方法還有一個好處，就是它能<strong>內聯嵌套查詢</strong>，而非在第一層就整個覆蓋。比方說，下面這塊程式碼，<code class="language-text">allPosts</code> 有兩個 <code class="language-text">heroImage</code> 欄位，但裡頭查詢的欄位並不同：</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">query</span> posts <span class="token punctuation">{</span>
   allPosts <span class="token punctuation">{</span>
     <span class="token operator">...</span><span class="token fragment function">postFields</span>
@@ -645,7 +645,7 @@
    ├─editor-choices.gql
    ├─collaborations.gql
    └─posts.gql</code></pre></div>
-<p>要怎麼把 <code class="language-text">image-urls.gql</code> 導入到查詢檔案中使用呢？你可能會想說直接 <code class="language-text">import</code>，但電腦會噴錯跟，因為 <code class="language-text">import</code> 是 JS 語法，GraphQL 無法辨識。</p>
+<p>要怎麼把 <code class="language-text">image-urls.gql</code> 導入到查詢檔案中使用呢？你可能會想說直接 <code class="language-text">import</code>，但電腦會噴錯，因為 <code class="language-text">import</code> 是 JS 語法，GraphQL 無法辨識。</p>
 <p>那該怎麼辦？經過我一番搜索，其實你可以這麼做：</p>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token comment">#import '../fragments/image-urls.gql'</span>
 
