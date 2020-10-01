@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Yeefun | Feed]]></title><description><![CDATA[👨🏻‍💻👁📚...]]></description><link>https://yeefun.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 27 Sep 2020 10:47:09 GMT</lastBuildDate><item><title><![CDATA[區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事]]></title><description><![CDATA[透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？]]></description><link>https://yeefun.github.io/what-is-the-news-provenance-project/</link><guid isPermaLink="false">https://yeefun.github.io/what-is-the-news-provenance-project/</guid><pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;向假新聞宣戰早已不是什麼新鮮事了。獨立檢證、協力查核、智能辨識⋯⋯無論手段新穎或傳統，在假訊息竄增的速度面前，似乎都顯得蒼白無力，一不小心還會惹禍上身。這不禁讓人想問：還有什麼辦法？難道真理終究戰不勝謊言？人類還有救嗎？&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Yeefun | Feed]]></title><description><![CDATA[👨🏻‍💻👁📚...]]></description><link>https://yeefun.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 01 Oct 2020 10:44:40 GMT</lastBuildDate><item><title><![CDATA[在 Nuxt.js 共用 GraphQL fragments]]></title><description><![CDATA[GraphQL fragments 是什麼？怎麼在 Nuxt.js 不同檔案間共用？]]></description><link>https://yeefun.github.io/how-to-use-graphql-fragments-in-nuxt/</link><guid isPermaLink="false">https://yeefun.github.io/how-to-use-graphql-fragments-in-nuxt/</guid><pubDate>Thu, 01 Oct 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近公司打 API 的方式換成用 GraphQL，這邊紀錄一下怎麼在 Nuxt.js 使用 GraphQL 的 &lt;a href=&quot;https://graphql.org/learn/queries/#fragments&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;fragments&lt;/a&gt; 特性，來達到重複使用程式碼查詢（query）的效果。&lt;/p&gt;
+&lt;h2 id=&quot;fragments-是什麼&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#fragments-%E6%98%AF%E4%BB%80%E9%BA%BC&quot; aria-label=&quot;fragments 是什麼 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;fragments 是什麼&lt;/h2&gt;
+&lt;p&gt;fragments 是什麼？簡單來說，就是一個可重用的欄位（fields）片段，你可以在裡頭放好幾個查詢欄位，接著就可以拿這個片段放到不同的查詢物件中。&lt;/p&gt;
+&lt;p&gt;最簡單的範例長這樣：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; posts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token attr-name&quot;&gt;rightPosts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;postFields&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;token attr-name&quot;&gt;leftPosts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;postFields&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;fragment&lt;/span&gt; &lt;span class=&quot;token fragment function&quot;&gt;postFields&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  id
+  title
+  heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    title
+    urlMobileSized
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;以 JavaScript 來類比，你可以想像 &lt;code class=&quot;language-text&quot;&gt;postFields&lt;/code&gt; 就是物件，而 &lt;code class=&quot;language-text&quot;&gt;...postFields&lt;/code&gt; 就像是把&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;物件展開（spread）&lt;/a&gt;，能將 &lt;code class=&quot;language-text&quot;&gt;postFields&lt;/code&gt; 內聯到 &lt;code class=&quot;language-text&quot;&gt;rightPosts&lt;/code&gt; 物件中，所以最後 &lt;code class=&quot;language-text&quot;&gt;rightPosts&lt;/code&gt; 實際上是長這樣：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; posts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token attr-name&quot;&gt;rightPosts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    id
+    title
+    heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      title
+      urlMobileSized
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;情境說明&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E6%83%85%E5%A2%83%E8%AA%AA%E6%98%8E&quot; aria-label=&quot;情境說明 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;情境說明&lt;/h2&gt;
+&lt;p&gt;這是我碰上的狀況：我需要在網站的不同頁面去取得最新文章，它們的查詢欄位大致相同，但仍有些欄位不是每個查詢都需要的。&lt;/p&gt;
+&lt;p&gt;最簡單的做法當然就是每個查詢都寫自己的欄位。這個方法很快，但缺點就是重複，之後修改共同欄位需要一次改好幾個地方。&lt;/p&gt;
+&lt;p&gt;另一個方法是使用指令（&lt;a href=&quot;https://graphql.org/learn/queries/#directives&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;directives&lt;/a&gt;），藉由變數（&lt;a href=&quot;https://graphql.org/learn/queries/#variables&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;variables&lt;/a&gt;）來動態地更改欄位，比如這樣：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; posts&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$shouldQueryTitle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Boolean&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  allPosts&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token attr-name&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    id
+    title &lt;span class=&quot;token directive function&quot;&gt;@include&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token attr-name&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$shouldQueryTitle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;若 &lt;code class=&quot;language-text&quot;&gt;shouldHasTitle&lt;/code&gt; 為 &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;，就會查詢 &lt;code class=&quot;language-text&quot;&gt;title&lt;/code&gt; 這個欄位，反之則不會。這個方法可行，但如果需要客製化的欄位不少，使用起來會相當麻煩。&lt;/p&gt;
+&lt;p&gt;fragments 能怎麼解決這個問題？很簡單，看共用欄位有哪些，把它們抽取成 fragment，再用 &lt;code class=&quot;language-text&quot;&gt;...&lt;/code&gt; 內聯。&lt;/p&gt;
+&lt;p&gt;這個方法還有一個好處，就是它能&lt;strong&gt;內聯嵌套查詢&lt;/strong&gt;，而非在第一層就整個覆蓋。比方說，下面這塊程式碼，&lt;code class=&quot;language-text&quot;&gt;allPosts&lt;/code&gt; 有兩個 &lt;code class=&quot;language-text&quot;&gt;heroImage&lt;/code&gt; 欄位，但裡頭查詢的欄位不同：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; posts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;postFields&lt;/span&gt;
+    heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# the first heroImage&lt;/span&gt;
+      urlTabletSized
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;fragment&lt;/span&gt; &lt;span class=&quot;token fragment function&quot;&gt;postFields&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  id
+  title
+  heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# the second heroImage&lt;/span&gt;
+    title
+    urlMobileSized
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最後，&lt;code class=&quot;language-text&quot;&gt;heroImage&lt;/code&gt; 實際上是長這樣：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  title
+  urlMobileSized
+  urlTabletSized
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;這可以讓我們在享受共用欄位的同時，還能客製化出不同的查詢內容。很方便吧！&lt;/p&gt;
+&lt;h2 id=&quot;在多個檔案間共用-fragments&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%E5%9C%A8%E5%A4%9A%E5%80%8B%E6%AA%94%E6%A1%88%E9%96%93%E5%85%B1%E7%94%A8-fragments&quot; aria-label=&quot;在多個檔案間共用 fragments permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;在多個檔案間共用 fragments&lt;/h2&gt;
+&lt;p&gt;如果你是在 Nuxt 中使用 GraphQL，可以參考 &lt;a href=&quot;https://github.com/nuxt-community/apollo-module&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;@nuxtjs/apollo&lt;/a&gt; 這個套件，它裡頭包著 &lt;a href=&quot;https://github.com/vuejs/vue-apollo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vue-apollo&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;要創建一個查詢，可以&lt;a href=&quot;https://apollo.vuejs.org/guide/apollo/queries.html#simple-query&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;利用 &lt;code class=&quot;language-text&quot;&gt;gql&lt;/code&gt; 標籤直接寫在 &lt;code class=&quot;language-text&quot;&gt;apollo&lt;/code&gt; 物件裡&lt;/a&gt;，也可以&lt;a href=&quot;https://github.com/apollographql/graphql-tag#importing-graphql-files&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;另開一個 &lt;code class=&quot;language-text&quot;&gt;.graphql&lt;/code&gt; 或 &lt;code class=&quot;language-text&quot;&gt;.gql&lt;/code&gt; 檔&lt;/a&gt;。我偏好後者，比較好管理。&lt;/p&gt;
+&lt;p&gt;回到 fragments。若是用檔案管理的方法，fragments 一般來說會放在使用它的檔案中。但如果我要在多個檔案間共用一個 fragment，那該怎麼做？&lt;/p&gt;
+&lt;p&gt;情境是這樣：我有好幾個不同的查詢物件，它們都會去查詢 &lt;code class=&quot;language-text&quot;&gt;heroImage&lt;/code&gt; 和 &lt;code class=&quot;language-text&quot;&gt;ogImage&lt;/code&gt;，而這兩個欄位也都是物件，會去查詢 tiny、mobile、tablet、desktop、original 這五種尺寸的圖片。每次查詢都要寫這 5 * 2 個欄位，實在有點麻煩，有沒有辦法把它們抽取成一個 fragment 呢？&lt;/p&gt;
+&lt;p&gt;在單一檔案中很簡單，就放在裡面：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; latestPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token attr-name&quot;&gt;latestPosts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    id
+    title
+    heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;urls&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    ogImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;urls&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;fragment&lt;/span&gt; &lt;span class=&quot;token fragment function&quot;&gt;urls&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Image&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  urlTinySized
+  urlMobileSized
+  urlTabletSized
+  urlDesktopSized
+  urlOriginal
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;但若要在多個檔案間共用，可以把這個 fragment 移到一個獨立的檔案。假設檔案結構長這樣：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;apollo
+├─fragments
+   └─image-urls.gql &amp;lt;-- `urls` fragment is here!
+└─queries
+   ├─editor-choices.gql
+   ├─collaborations.gql
+   └─posts.gql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;要怎麼把 &lt;code class=&quot;language-text&quot;&gt;image-urls.gql&lt;/code&gt; 導入到查詢檔案中使用呢？你可能會想說直接 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt;，但電腦會噴錯跟你說行不通，因為 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt; 是 JS 語法，GraphQL 無法辨識。&lt;/p&gt;
+&lt;p&gt;這個問題卡了我一陣子，直到在 Google 搜尋上看到有人說可以這樣做：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;#import &apos;../fragments/image-urls.gql&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; latestPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token attr-name&quot;&gt;latestPosts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; allPosts &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    id
+    title
+    heroImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;urls&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    ogImage &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token fragment function&quot;&gt;urls&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;只要在 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt; 前加上 &lt;code class=&quot;language-text&quot;&gt;#&lt;/code&gt; 變成註解，就能成功把 fragments 導進來囉（我猜這應該是 &lt;a href=&quot;https://github.com/creditkarma/graphql-loader&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;graphql-loader&lt;/a&gt; 的功勞，但詳細怎麼做的就不清楚了）。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[區塊鏈溯源能否打擊假照片？紐約時報架了一個社群網站來驗證這件事]]></title><description><![CDATA[透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞——紐約時報發起的「新聞溯源計畫」究竟想做什麼？]]></description><link>https://yeefun.github.io/what-is-the-news-provenance-project/</link><guid isPermaLink="false">https://yeefun.github.io/what-is-the-news-provenance-project/</guid><pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;向假新聞宣戰早已不是什麼新鮮事了。獨立檢證、協力查核、智能辨識⋯⋯無論手段新穎或傳統，在假訊息竄增的速度面前，似乎都顯得蒼白無力，一不小心還會惹禍上身。這不禁讓人想問：還有什麼辦法？難道真理終究戰不勝謊言？人類還有救嗎？&lt;/p&gt;
 &lt;p&gt;如果你已經對於當今所有防堵假訊息的手法都感到失望，準備當個極端的懷疑論者（這也不失為一個辦法），那你也許可以稍停一下，看看我底下將要介紹的計畫，也許它能帶給你一絲希望。&lt;/p&gt;
 &lt;p&gt;去年7月，媒體界龍頭紐約時報（The New York Times，以下簡稱紐時）發起&lt;a href=&quot;https://www.newsprovenanceproject.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;「新聞溯源計畫」（The News Provenance Project）&lt;/a&gt;，期待透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞。其矛頭第一個對準的就是假照片。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;為什麼是假照片？區塊鏈在這整個計畫中的作用是什麼？「揭露新聞更動源流」是什麼意思？它能怎樣幫助我們辨別資訊？要達成這個目標，需要完成哪些事？&lt;/strong&gt;以下將一一回答。&lt;/p&gt;
