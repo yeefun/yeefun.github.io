@@ -10,7 +10,6 @@ import {
   language,
   siteUrl,
 } from '../../config';
-import defaultOgImage from '../images/og-default.png';
 
 interface SEOPropsType {
   meta: any[];
@@ -111,7 +110,7 @@ SEO.defaultProps = {
   title: defaultTitle,
   description: defaultDescription,
   pathname: '',
-  ogImage: defaultOgImage,
+  ogImage: '/og-default.png',
   ogType: 'website',
 };
 
