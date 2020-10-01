@@ -71,7 +71,7 @@ query posts($shouldQueryTitle: Boolean!) {
 
 fragments 能怎麼解決這個問題呢？很簡單，看共用欄位有哪些，把它們抽取成 fragment，再用 `...` 內聯。
 
-這個方法還有一個好處，就是它能**內聯嵌套查詢**，而非在第一層就整個覆蓋。比方說，下面這塊程式碼，`allPosts` 有兩個 `heroImage` 欄位，但裡頭查詢的欄位不同：
+這個方法還有一個好處，就是它能**內聯嵌套查詢**，而非在第一層就整個覆蓋。比方說，下面這塊程式碼，`allPosts` 有兩個 `heroImage` 欄位，但裡頭查詢的欄位並不同：
 
 ```graphql
 query posts {
@@ -152,7 +152,7 @@ apollo
    └─posts.gql
 ```
 
-要怎麼把 `image-urls.gql` 導入到查詢檔案中使用呢？你可能會想說直接 `import`，但電腦會噴錯跟，因為 `import` 是 JS 語法，GraphQL 無法辨識。
+要怎麼把 `image-urls.gql` 導入到查詢檔案中使用呢？你可能會想說直接 `import`，但電腦會噴錯，因為 `import` 是 JS 語法，GraphQL 無法辨識。
 
 那該怎麼辦？經過我一番搜索，其實你可以這麼做：
 
