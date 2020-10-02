@@ -4,14 +4,14 @@ description: 透過區塊鏈技術揭露新聞更動源流，來讓大眾更好�
 featuredImage: poc-1.png
 date: 2020-02-04
 tags: [假訊息, 區塊鏈, 媒體]
-update: 2020-08-01 14:43:00
+update: 2020-10-02 17:56:00
 ---
 
 向假新聞宣戰早已不是什麼新鮮事了。獨立檢證、協力查核、智能辨識⋯⋯無論手段新穎或傳統，在假訊息竄增的速度面前，似乎都顯得蒼白無力，一不小心還會惹禍上身。這不禁讓人想問：還有什麼辦法？難道真理終究戰不勝謊言？人類還有救嗎？
 
 如果你已經對於當今所有防堵假訊息的手法都感到失望，準備當個極端的懷疑論者（這也不失為一個辦法），那你也許可以稍停一下，看看我底下將要介紹的計畫，也許它能帶給你一絲希望。
 
-去年7月，媒體界龍頭紐約時報（The New York Times，以下簡稱紐時）發起[「新聞溯源計畫」（The News Provenance Project）](https://www.newsprovenanceproject.com/)，期待透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞。其矛頭第一個對準的就是假照片。
+去年 7 月，媒體界龍頭紐約時報（The New York Times，以下簡稱紐時）發起[「新聞溯源計畫」（The News Provenance Project）](https://www.newsprovenanceproject.com/)，期待透過區塊鏈技術揭露新聞更動源流，來讓大眾更好地區辨訊息真假或好壞。其矛頭第一個對準的就是假照片。
 
 **為什麼是假照片？區塊鏈在這整個計畫中的作用是什麼？「揭露新聞更動源流」是什麼意思？它能怎樣幫助我們辨別資訊？要達成這個目標，需要完成哪些事？**以下將一一回答。
 
@@ -35,7 +35,7 @@ update: 2020-08-01 14:43:00
 
 「殺小，該不會這是假照片吧？」你愈想愈不對勁，決定先將剛才分享貼文的隱私權限設為「只限本人」，並上網搜尋「澳洲大火」。最終你也許會發現：澳洲是真的有發生大火，但那張照片也是錯的。你不願做假訊息的幫兇，於是刪了貼文。
 
-![去年8月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於16年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)](macron-twitter.png)
+![去年 8 月亞馬遜森林大火，便有許多錯誤照片在網路上瘋傳，連法國總統馬克宏都搞錯：他所分享的照片至少攝於 16 年前。圖擷自[馬克宏推特](https://twitter.com/EmmanuelMacron/status/1164617008962527232?s=20)](macron-twitter.png)
 
 謝天謝地！一場錯誤內容被轉發上萬次的災難被阻止了。**它靠的不是事後通知，也非事前審查，而是在訊息產生（或發布）當下，便在某處烙下一條不可更改的紀錄。它不做判斷，只呈現每次編輯的事實，讓讀者根據這些紀錄，自行決定要多相信這則訊息。**
 
@@ -47,7 +47,7 @@ update: 2020-08-01 14:43:00
 
 比方說，我們知道這個計畫要在照片旁邊附上一些資訊，但要放哪些資訊？更深入點問：**平常人們在社群媒體上是如何決定一張照片可不可信的？不同背景的人，在判斷資訊方面又有什麼差異？我們所設想的方案，是否真的能幫助民眾更好地辨識新聞品質？**
 
-為了回答上述關鍵問題，紐時找了34位政治傾向、媒體偏好各異的成年人進行深度訪談和原型測試，從中歸納出了幾個值得參考的洞見。
+為了回答上述關鍵問題，紐時找了 34 位政治傾向、媒體偏好各異的成年人進行深度訪談和原型測試，從中歸納出了幾個值得參考的洞見。
 
 首先，關於民眾在社群平台上如何接收、判斷新聞資訊，紐時從「對於貼文脈絡的意識程度」（只看最顯眼的照片和標題？還是也會看發文日期、來源或網友反應？）和「對於主流媒體的信任程度」這兩條軸線，將民眾分成四種類型（來看看你比較偏向哪一種類型吧）：
 
@@ -56,9 +56,9 @@ update: 2020-08-01 14:43:00
 3. **低意識、低信任——討厭媒體的庶民（Media-jaded localist）**：覺得自己的聲音遭到主流媒體所排擠，毫不遲疑地接受非正式的激昂評論（hot takes）。他們希望新聞能夠既真實又接地氣。當自己信任的非正式來源提供錯誤訊息時，他們需要更清晰的線索才能判定。
 4. **低意識、高信任——傳統的數位移民（Late-adopter media traditionalist）**：相較於網路媒體的喧囂，他們更喜歡透過電視、報紙等舊媒體來接收資訊。這類人需要學習更多的判斷技巧及明確的提示，才有辦法自己區辨訊息是否可信。
 
-紐時認為，照片溯源計畫至少能讓信任媒體的人受益（即2、4類人）。接著，他們測試多種能表示照片來源的設計，發現：
+紐時認為，照片溯源計畫至少能讓信任媒體的人受益（即 2、4 類人）。接著，他們測試多種能表示照片來源的設計，發現：
 
-- 認證標章（如臉書或IG的藍勾勾）並不足以讓照片變得可信。
+- 認證標章（如臉書或 Instagram 的藍勾勾）並不足以讓照片變得可信。
 - 關於標示術語，讀者喜愛「附有來源」（sourced）更勝於「已驗證」（verified）。這代表大眾不只想知道照片已被他人驗證，**也希望有可讓自己探索的資訊**。
 - 陳列同一個事件的多張照片，能使讀者相信事件確實發生了。
 - 強調為人熟知的照片元數據（如圖說、發布歷史），而非會造成混亂的術語（如加密、存儲於不可更動的資料庫）。
@@ -91,7 +91,7 @@ update: 2020-08-01 14:43:00
 
 這是個令人振奮的開始——但也只是開始。目前的原型僅僅是最末端的呈現，要達到預期中的效果，紐時需要跨界合作，**建立一套從拍攝到發布的體系**，且其運作流程還要好上手，以免排擠較小的新聞機構。這顯然是一項極為艱難的任務。
 
-「當前的工作是確保大家以一致的方式來紀錄元數據，並讓這些資料能被其它組織（如社群平台）負責任地使用。」紐時研發團隊執行長Marc Lavallee說。他們在[官網](https://www.newsprovenanceproject.com/whats-next)公開徵求三種合作夥伴——社群平台、新聞編輯室、事實查核組織——來一起把計畫推展到下一階段：執行。
+「當前的工作是確保大家以一致的方式來紀錄元數據，並讓這些資料能被其它組織（如社群平台）負責任地使用。」紐時研發團隊執行長 Marc Lavallee 說。他們在[官網](https://www.newsprovenanceproject.com/whats-next)公開徵求三種合作夥伴——社群平台、新聞編輯室、事實查核組織——來一起把計畫推展到下一階段：執行。
 
 一個更好的網際網路會是什麼樣子？這是紐時對於這個大哉問的初步回答。即使它最終失敗了，整個設計過程——從問題定義、用戶研究、概念發想到原型測試——仍有許多值得我們深思和借鏡的地方。
 
@@ -103,4 +103,4 @@ update: 2020-08-01 14:43:00
 - [What If Every News Photo on Social Media Showed Contextual Information?](https://open.nytimes.com/what-if-every-news-photo-on-social-media-showed-contextual-information-8936cf4e8c45)——紐時測試原型的過程。
 - [Can Publishers Use Metadata to Regain the Public’s Trust in Visual Journalism?](https://open.nytimes.com/can-publishers-use-metadata-to-regain-the-publics-trust-in-visual-journalism-ee32707c5662)——簡單描述了整個新聞溯源計畫及未來展望。
 - [Here’s how The New York Times tested blockchain to help you identify faked photos on your timeline](https://www.niemanlab.org/2020/01/heres-how-the-new-york-times-tested-blockchain-to-help-you-identify-faked-photos-on-your-timeline/)——尼曼新聞實驗室對這個計畫的報導。
-- [Introducing the News Provenance Project](https://open.nytimes.com/introducing-the-news-provenance-project-723dbaf07c44)——去年7月，紐時在Medium上介紹了這個計畫。
+- [Introducing the News Provenance Project](https://open.nytimes.com/introducing-the-news-provenance-project-723dbaf07c44)——去年 7 月，紐時在 Medium 上介紹了這個計畫。

@@ -3,7 +3,7 @@ title: 在 Nuxt.js 共用 GraphQL fragments
 description: GraphQL fragments 是什麼？要怎麼在 Nuxt.js 不同檔案間共用？
 date: 2020-10-01
 tags: [nuxt, graphql, fragments]
-update: 2020-10-01 21:50:00
+update: 2020-10-02 17:57:00
 ---
 
 最近公司打 API 的方式換成 [GraphQL](https://graphql.org/)，這邊紀錄一下怎麼在 [Nuxt.js](https://nuxtjs.org/) 用 GraphQL 的 [fragments](https://graphql.org/learn/queries/#fragments) 特性，來達到重複使用程式碼查詢（query）的效果。
@@ -50,7 +50,7 @@ query posts {
 }
 ```
 
-## 情境闡釋
+## 情境闡述
 
 這是我在專案碰到的情況：我需要在網站的不同頁面去取得最新文章，它們的查詢欄位大致相同，但仍有些欄位不是每個查詢都需要的。
 
