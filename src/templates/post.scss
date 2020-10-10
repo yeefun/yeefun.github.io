@@ -40,7 +40,6 @@
         sans-serif;
       font-size: 0.84rem;
       align-items: flex-start;
-      justify-content: space-between;
       line-height: 1.6;
 
       & > .dot {
@@ -82,24 +81,6 @@
             &:hover {
               opacity: 1;
             }
-          }
-        }
-      }
-
-      .blog-post-inside-toc {
-        display: none;
-
-        @media screen and (max-width: $break-toc) {
-          display: inline-block;
-        }
-
-        .toc-button {
-          cursor: pointer;
-          // color: #6a737d;
-          opacity: 0.5;
-
-          &:hover {
-            opacity: 0.9;
           }
         }
       }
@@ -162,15 +143,6 @@
             opacity: 0.7;
           }
         }
-      }
-    }
-
-    .inside-toc-wrap {
-      display: flex;
-      justify-content: center;
-
-      a {
-        text-decoration: none;
       }
     }
 

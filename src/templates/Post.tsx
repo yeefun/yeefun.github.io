@@ -6,11 +6,7 @@ import Helmet from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { graphql, Link } from 'gatsby';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import {
-  faListUl,
-  faLayerGroup,
-  faAngleLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faLayerGroup, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 // import AdSense from 'react-adsense';
 import {
   FacebookShareButton,
@@ -56,7 +52,6 @@ const Post = (props: postProps) => {
   const { data, location, pageContext } = props;
   const isMobile = useSelector((state: RootState) => state.isMobile);
   const [yList, setYList] = useState([] as number[]);
-  const [isInsideToc, setIsInsideToc] = useState(false);
   const [commentEl, setCommentEl] = useState<JSX.Element | null>(null);
 
   const { markdownRemark } = data;
@@ -264,31 +259,10 @@ const Post = (props: postProps) => {
                   <ul className="blog-post-tag-list">{mapTags}</ul>
                 </>
               ) : null}
-
-              {!isTableOfContents ? null : (
-                <div className="blog-post-inside-toc">
-                  <div
-                    className="toc-button"
-                    role="button"
-                    onClick={() => {
-                      setIsInsideToc((prev: boolean) => {
-                        return !prev;
-                      });
-                    }}
-                  >
-                    <Fa icon={faListUl} />
-                  </div>
-                </div>
-              )}
             </div>
 
             {!isTableOfContents ? null : (
-              <div
-                className="inside-toc-wrap"
-                style={{ display: isInsideToc ? 'flex' : 'none' }}
-              >
-                <Toc isOutside={false} toc={tableOfContents} />
-              </div>
+              <Toc isOutside={false} toc={tableOfContents} />
             )}
 
             {series.length > 1 ? (
