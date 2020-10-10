@@ -20,8 +20,8 @@ const PostList = (props: PostListProps) => {
       const af = a.node.frontmatter;
       const bf = b.node.frontmatter;
 
-      const aDate = new Date(af.update.includes('0001') ? af.date : af.update);
-      const bDate = new Date(bf.update.includes('0001') ? bf.date : bf.update);
+      const aDate = new Date(hasUpdate(af.update) ? af.update : af.date);
+      const bDate = new Date(hasUpdate(bf.update) ? bf.update : bf.date);
 
       if (aDate < bDate) return 1;
       if (aDate > bDate) return -1;
@@ -55,7 +55,7 @@ const PostList = (props: PostListProps) => {
       const { date, title, description, tags } = frontmatter;
       let { update } = frontmatter
 
-      if (update.includes('0001')) {
+      if (!hasUpdate(update)) {
         update = null;
       }
 
@@ -128,5 +128,9 @@ const PostList = (props: PostListProps) => {
     </div>
   );
 };
+
+function hasUpdate(update: string) {
+  return !update.includes('0001');
+}
 
 export default PostList;
