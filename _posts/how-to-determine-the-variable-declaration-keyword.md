@@ -1,5 +1,5 @@
 ---
-title: no-var？決定變數宣告關鍵字的原則與問題
+title: no-var？決定變數宣告關鍵字的方法
 description: 搭配 let，遵守最小暴露原則，var 其實很有用。
 date: 2020-10-10
 tags: [js, variable, scope]
