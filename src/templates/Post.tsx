@@ -57,8 +57,12 @@ const Post = (props: postProps) => {
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields } = markdownRemark;
   const { title, description, featuredImage, date, tags } = frontmatter;
-  let update = frontmatter.update;
-  if (Number(update?.split(',')[1]) === 1) update = null;
+  let { update } = frontmatter;
+
+  if (update.includes('0001')) {
+    update = null;
+  }
+
   const { slug } = fields;
   const { series } = pageContext;
 

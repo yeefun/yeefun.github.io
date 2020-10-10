@@ -53,8 +53,11 @@ const PostList = (props: PostListProps) => {
       const { fields, frontmatter } = node;
       const { slug } = fields;
       const { date, title, description, tags } = frontmatter;
-      let update = frontmatter.update;
-      if (Number(update.split(',')[1]) === 1) update = null;
+      let { update } = frontmatter
+
+      if (update.includes('0001')) {
+        update = null;
+      }
 
       const mapTag = tags.map((tag: string) => {
         if (tag === 'undefined') return;
