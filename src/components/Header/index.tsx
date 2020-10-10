@@ -5,12 +5,8 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import {
   faTags,
   faSearch,
-  faMoon,
-  faSun,
-  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { useColorMode } from 'theme-ui';
 
 import './header.scss';
 import { RootState } from '../../state/reducer';
@@ -27,27 +23,6 @@ const Header = (props: headerPropsType) => {
   const [, setYPos] = useState(0);
   const [isHide, setIsHide] = useState(false);
   const dispatch = useDispatch();
-  const [colorMode, setColorMode] = useColorMode();
-
-  const toggleTheme = useCallback(() => {
-    const ms = 300;
-    const header: HTMLElement | null = document.getElementById('Header');
-    const transition = 'top 0.3s ease 0.2s, background-color ${ms}ms';
-
-    document.body.style.transition = `background-color ${ms}ms`;
-    if (header) header.style.transition = transition;
-
-    if (colorMode === 'dark') {
-      setColorMode('default');
-    } else {
-      setColorMode('dark');
-    }
-
-    setTimeout(() => {
-      document.body.style.transition = 'none';
-      if (header) header.style.transition = transition;
-    }, ms + 100);
-  }, [colorMode]);
 
   const setPath = useCallback((path: string, size?: string) => dispatch(actionCreators.setPath(path, size)), []);
 
@@ -128,39 +103,6 @@ const Header = (props: headerPropsType) => {
       </div>
 
       <nav id="nav">
-        <div className="theme-toggle">
-          <div
-            className="theme-toggle-description"
-            style={{ display: isMobile ? 'none' : 'flex' }}
-          >
-            <Fa
-              icon={colorMode === 'dark' ? faMoon : faSun}
-              style={{ fontSize: colorMode === 'dark' ? '1.1rem' : '1.2rem' }}
-            />
-            <Fa icon={faChevronRight} style={{ fontSize: '0.9rem' }} />
-          </div>
-
-          <Fa
-            icon={colorMode === 'dark' ? faSun : faMoon}
-            style={{ fontSize: colorMode === 'dark' ? '1.2rem' : '1.1rem' }}
-            onMouseEnter={() => {
-              const toggle: HTMLDivElement | null = document.querySelector(
-                '.theme-toggle-description'
-              );
-              if (toggle) toggle.style.opacity = '0.5';
-            }}
-            onMouseLeave={() => {
-              const toggle: HTMLDivElement | null = document.querySelector(
-                '.theme-toggle-description'
-              );
-              if (toggle) toggle.style.opacity = '0';
-            }}
-            onClick={() => {
-              toggleTheme();
-            }}
-          />
-        </div>
-
         <ul>
           <li>
             <div className="tag-wrap">

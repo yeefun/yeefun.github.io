@@ -26,7 +26,6 @@ import {
   PocketIcon,
   EmailIcon,
 } from 'react-share';
-import { useColorMode } from 'theme-ui';
 import throttle from 'lodash/throttle';
 
 import './post.scss';
@@ -59,7 +58,6 @@ const Post = (props: postProps) => {
   const [yList, setYList] = useState([] as number[]);
   const [isInsideToc, setIsInsideToc] = useState(false);
   const [commentEl, setCommentEl] = useState<JSX.Element | null>(null);
-  const [colorMode] = useColorMode();
 
   const { markdownRemark } = data;
   const { frontmatter, html, tableOfContents, fields } = markdownRemark;
@@ -146,14 +144,6 @@ const Post = (props: postProps) => {
       if (isTableOfContents) document.removeEventListener('scroll', setYPos);
     };
   }, [yList]);
-
-  useEffect(() => {
-    setCommentEl(null);
-
-    setTimeout(() => {
-      renderComment();
-    }, 1000);
-  }, [colorMode]);
 
   useEffect(() => {
     // scroll

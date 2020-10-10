@@ -10,7 +10,6 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
-import { useColorMode } from 'theme-ui';
 
 import './layout.scss';
 import Header from '../Header';
@@ -28,8 +27,6 @@ const Layout = (props: LayoutPropsType) => {
   const { children } = props;
   const [isTop, setIsTop] = useState(true);
   const dispatch = useDispatch();
-  const [colorMode] = useColorMode();
-  const isDark = useMemo(() => colorMode === 'dark', [colorMode]);
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -83,7 +80,7 @@ const Layout = (props: LayoutPropsType) => {
         <style>{FaDom.css()}</style>
       </Helmet>
 
-      <div id="layout" className={isDark ? 'dark' : 'light'}>
+      <div id="layout">
         <Header siteTitle={data.site.siteMetadata.title} />
         <div id="content">
           <main>{children}</main>

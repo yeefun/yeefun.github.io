@@ -23,8 +23,6 @@ const gatsbyConfig = {
 
     'gatsby-plugin-typescript',
 
-    'gatsby-plugin-theme-ui',
-
     'gatsby-plugin-sass',
 
     'gatsby-transformer-sharp',
