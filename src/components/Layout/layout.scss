@@ -9,12 +9,6 @@
   svg {
     color: #6a737d;
   }
-
-  @media screen and (max-width: $break-l) {
-    #Header {
-      background-color: $background-color;
-    }
-  }
 }
 
 a {
@@ -39,6 +33,7 @@ a {
   }
 
   footer {
+    line-height: 1.6;
     padding-top: 1rem;
     padding-bottom: 0.25rem;
     text-align: center;

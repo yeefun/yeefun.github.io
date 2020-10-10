@@ -3,10 +3,8 @@
 .toc {
   font-size: 0.8rem;
   max-width: 220px;
-  min-width: 220px;
   max-height: calc(100vh - 6rem);
   transition: opacity 0.3s;
-  padding-right: 0.5rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, 'PingFang TC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 
@@ -14,9 +12,36 @@
     display: none;
   }
 
+  &.outside {
+    position: fixed;
+    min-width: 220px;
+    top: 0;
+    right: 0;
+    overflow: auto;
+    margin-top: $header-height;
+    opacity: 0.4;
+    max-height: 85%;
+  
+    @media screen and (max-width: $break-toc) {
+      display: none;
+    }
+  
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &.inside {
+    a {
+      text-decoration: none;
+    }
+  }
+
   ul {
-    margin-top: 1.666rem;
-    margin-left: 0.5rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0;
+    margin-left: 0;
+
     li {
       list-style: none;
       margin: 0;
@@ -42,29 +67,5 @@
     img {
       display: none !important;
     }
-  }
-}
-
-.toc.outside {
-  position: fixed;
-  top: 0;
-  right: 0;
-  overflow: auto;
-  margin-top: $header-height;
-  opacity: 0.4;
-  max-height: 85%;
-
-  @media screen and (max-width: $break-toc) {
-    display: none;
-  }
-
-  &:hover {
-    opacity: 0.9;
-  }
-}
-
-.toc.inside {
-  a {
-    text-decoration: none;
   }
 }

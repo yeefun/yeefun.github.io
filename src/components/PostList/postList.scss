@@ -4,8 +4,7 @@
   max-width: 640px;
 
   ul,
-  li,
-  h2 {
+  li {
     margin: 0;
   }
 
@@ -37,22 +36,13 @@
       margin-top: 0;
     }
 
-    & > * > * {
-      margin-bottom: 0.25rem;
-      // @media screen and (max-width: $break-m) {
-      //   margin-bottom: 0.2rem;
-      // }
-      // @media screen and (max-width: $break-s) {
-      //   margin-bottom: 0.1rem;
-      // }
-    }
-
-    .title {
-      font-size: 1.3rem;
+    h1 {
+      font-size: 1.8rem;
       font-family: 'IBM Plex Serif', source-han-serif-tc, serif;
-
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
       @media screen and (max-width: $break-m) {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
     }
 
@@ -64,9 +54,10 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Helvetica, Arial, 'PingFang TC', 'Hiragino Sans GB', 'Microsoft Yahei',
         sans-serif;
+      margin-bottom: 0.25rem;
       @media screen and (max-width: $break-m) {
         font-size: 0.76rem;
-        line-height: 1.3;
+        line-height: 1.4;
       }
 
       .date-wrap {
@@ -105,16 +96,12 @@
     }
 
     .excerpt {
-      display: -webkit-box;
-      overflow: hidden;
-      // color: rgba(0, 0, 0, 0.74);
       max-width: calc(640px - 2rem);
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Helvetica, Arial, 'PingFang TC', 'Hiragino Sans GB', 'Microsoft Yahei',
         sans-serif;
       font-size: 0.95rem;
+      line-height: 1.6;
 
       @media screen and (max-width: $break-m) {
         font-size: 0.82rem;

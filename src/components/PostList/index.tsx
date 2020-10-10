@@ -71,9 +71,9 @@ const PostList = (props: PostListProps) => {
       return (
         <li key={slug} className={`post`}>
           <article>
-            <h2 className="title">
+            <h1>
               <Link to={slug}>{title}</Link>
-            </h2>
+            </h1>
             <div className="info">
               <div className="date-wrap">
                 <span className="date">{date}</span>
@@ -86,8 +86,8 @@ const PostList = (props: PostListProps) => {
               ) : null}
               <ul className="tag-list">{mapTag}</ul>
             </div>
-            <Link to={slug}>
-              <span className="excerpt">{description}</span>
+            <Link to={slug} className="excerpt">
+              <p>{description}</p>
             </Link>
           </article>
         </li>
