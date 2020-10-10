@@ -1,17 +1,17 @@
 ---
-title: no-var？決定變數宣告關鍵字的方法
+title: no-var？決定變數宣告關鍵字的原則與問題
 description: 搭配 let，遵守最小暴露原則，var 其實很有用。
 date: 2020-10-10
 tags: [js, variable, scope]
 ---
 
-大家平時都是怎麼決定該用哪個關鍵字（`var`、`let`、`const`）宣告變數的呢？受到 [ESlint 建議規範](https://eslint.org/docs/rules/no-var)的影響，我猜很多人跟我一樣，決定方式很簡單：會被再賦值（reassign）的就用 `let`，不會的就用 `const`。`var` 完全不在我們的選項內，畢竟，`var` 有很多缺點，它的好處完全可以由 `let` 來代替，是吧？
+大家平時都是怎麼決定該用哪個關鍵字（`var`、`let`、`const`）宣告變數的呢？受到 [ESlint 建議規範](https://eslint.org/docs/rules/no-var)的影響，我猜很多人跟我一樣，決定方式很簡單：會被再賦值（reassign）的就用 `let`，不會的就用 `const`。`var` 完全不在我們的選項，畢竟，`var` 有很多缺點，它的好處完全可以由 `let` 來代替，是吧？
 
-我承認我並沒有很認真探討過這個問題，只是跟著 ESlint 規範走，直到在讀書會看了頗有名氣的 [You Don't Know JS Yet: Scope & Closures](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md)（是的，它出第二版了），發現作者 Kyle Simpson 並不派斥 `var`，[甚至認為 `var` 的好處無法取代](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/apA.md#the-case-for-var)，這才讓我重新思考並質疑自己不使用 `var` 的理由。
+我承認我並沒有很認真探討過這個問題，只是照著 ESlint 規範走，直到在讀書會看了頗有名氣的 [You Don't Know JS Yet: Scope & Closures](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md)（是的，它出第二版了），發現作者 Kyle Simpson 並不派斥 `var`，[甚至認為 `var` 的好處無法取代](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/apA.md#the-case-for-var)，這才讓我重新思考並質疑自己不使用 `var` 的理由。
 
 ## `var` 很有用
 
-Simpson 認為，`var` 跟 `let` 都很有用（他沒有很喜歡 `const`，後面會說原因）。前者為函數作用域（function scope），後者為區塊作用域（block scope），因此，當一個變數在整個函數中都會用到，那就該用 `var`，並宣告在**函數最外層**（top-level，也可以說是頂層）；反之，如果一個變數只會在函數中的某個區塊用到，那就該用 `let`，並宣告在**這個區塊內**，讓外層的作用域取用不到。
+Simpson 認為，`var` 跟 `let` 都很有用（他沒有很喜歡 `const`，後面會說原因），前者為函數作用域（function scope），後者為區塊作用域（block scope），因此，當一個變數在整個函數中都會用到，那就該用 `var`，並宣告在**函數最外層**（top-level，也可以說是頂層）；反之，如果一個變數只會在函數中的某個區塊用到，那就該用 `let`，並宣告在**這個區塊內**，讓外層的作用域取用不到。
 
 比方說，假如我現在要寫一個能判斷使用者網頁捲動方向的函數，按照 ESlint 建議的寫法，會是這樣：
 
@@ -192,7 +192,7 @@ function doBigThing() {
 
 我認為這兩個缺點並不足以說服我放棄前面所說的宣告方法。而且相對地，這兩個缺點也給予開發者更大的彈性，只要你謹慎使用（同樣地在[這篇](Simpson)，Simpson 簡單示範了重新宣告作為一種註解的功用，雖然我不怎麼喜歡）。
 
-## 什麼時候要用 `const`？
+## 什麼時候該用 `const`？
 
 你可能會發現，在上面範例中，即使我是在區塊內宣告不會再被賦值的變數，我也是用 `let`。為什麼不用 `const`？這樣語義上不是更清晰嗎？
 
@@ -215,7 +215,7 @@ const SHARE_LINK_NAMES = ['fb', 'line'];
 
 以上是 Simpson 的論點。對我來說，我認同重新賦值的問題並不大，但考量到非 JS 新手應該都能明白 `const` 的「不變」意指為何，我還是會繼續照一般規範走，只是要稍微忍受當看到一個由 `const` 宣告的變數，其內容在之後被修改時所引發的不適感。
 
-## 總結：如何決定變數宣告關鍵字
+## 總結：一個原則，兩個問題
 
 當我在與別人協作時，我會採用由團隊討論出來的代碼規範，或直接引入主流規範（如 [Airbnb](https://github.com/airbnb/javascript) 或 [Standard](https://standardjs.com/)）。畢竟，我喜愛的宣告方式，它的好處還無法勝過降低團隊溝通成本所帶來的優勢。但我仍會在程式碼中盡可能地用 `{..}` 縮小變數的作用域。
 
