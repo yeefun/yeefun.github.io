@@ -2,10 +2,7 @@ import * as React from 'react';
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'gatsby';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import {
-  faTags,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 
 import './header.scss';
@@ -24,7 +21,11 @@ const Header = (props: headerPropsType) => {
   const [isHide, setIsHide] = useState(false);
   const dispatch = useDispatch();
 
-  const setPath = useCallback((path: string, size?: string) => dispatch(actionCreators.setPath(path, size)), []);
+  const setPath = useCallback(
+    (path: string, size?: string) =>
+      dispatch(actionCreators.setPath(path, size)),
+    []
+  );
 
   useEffect(() => {
     const bio: HTMLDivElement | null = document.querySelector('.bio');

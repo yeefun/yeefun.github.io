@@ -87,10 +87,15 @@ const Post = (props: postProps) => {
 
   const mapSeries = series.map((s: any) => {
     return (
-      <li key={`${s.slug}-series-${s.num}`} className={`series-item ${slug === s.slug ? 'current-series' : ''}`}>
+      <li
+        key={`${s.slug}-series-${s.num}`}
+        className={`series-item ${slug === s.slug ? 'current-series' : ''}`}
+      >
         <Link to={s.slug}>
           <span>{s.title}</span>
-          <div className="icon-wrap">{slug === s.slug ? <Fa icon={faAngleLeft} /> : null}</div>
+          <div className="icon-wrap">
+            {slug === s.slug ? <Fa icon={faAngleLeft} /> : null}
+          </div>
         </Link>
       </li>
     );
@@ -147,12 +152,19 @@ const Post = (props: postProps) => {
 
   useEffect(() => {
     // scroll
-    const postContentOriginTop = document.querySelector('.blog-post')?.getBoundingClientRect().top ?? 0;
-    const removeScrollEvent = () => document.removeEventListener('scroll', scrollEvents);
+    const postContentOriginTop =
+      document.querySelector('.blog-post')?.getBoundingClientRect().top ?? 0;
+    const removeScrollEvent = () =>
+      document.removeEventListener('scroll', scrollEvents);
 
     const scrollEvents = throttle(() => {
-      const postContentHeight = document.querySelector('.blog-post')?.getBoundingClientRect().height ?? Infinity;
-      if (window.scrollY + window.innerHeight * 1.75 - postContentOriginTop > postContentHeight) {
+      const postContentHeight =
+        document.querySelector('.blog-post')?.getBoundingClientRect().height ??
+        Infinity;
+      if (
+        window.scrollY + window.innerHeight * 1.75 - postContentOriginTop >
+        postContentHeight
+      ) {
         renderComment();
         removeScrollEvent();
       }
@@ -161,8 +173,11 @@ const Post = (props: postProps) => {
     document.addEventListener('scroll', scrollEvents);
 
     // toc
-    const hs = Array.from(document.querySelectorAll('h2, h3')) as HTMLHeadingElement[];
-    const minusValue = window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
+    const hs = Array.from(
+      document.querySelectorAll('h2, h3')
+    ) as HTMLHeadingElement[];
+    const minusValue =
+      window.innerHeight < 500 ? 100 : Math.floor(window.innerHeight / 5);
     const yPositions = hs.map((h) => h.offsetTop - minusValue);
     setYList(yPositions);
 
@@ -182,9 +197,7 @@ const Post = (props: postProps) => {
   "@context": "https://schema.org",
   "@type": "Article",
   "datePublished": "${new Date(date).toISOString()}",
-  ${
-    update ? `"dateModified": "${new Date(update).toISOString()}",` : ''
-  }
+  ${update ? `"dateModified": "${new Date(update).toISOString()}",` : ''}
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "${config.siteUrl}"
@@ -362,7 +375,9 @@ const Post = (props: postProps) => {
                 />
               </aside> */}
 
-              {!isSSR ? <Suspense fallback={<></>}>{commentEl}</Suspense> : null}
+              {!isSSR ? (
+                <Suspense fallback={<></>}>{commentEl}</Suspense>
+              ) : null}
             </>
           )}
         </div>

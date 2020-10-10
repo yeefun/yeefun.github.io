@@ -30,7 +30,11 @@ const Search = (props: SearchProps) => {
       const { title } = frontmatter;
       const lowerValue = value.toLocaleLowerCase();
 
-      if (!isTitleOnly && rawMarkdownBody.toLocaleLowerCase().includes(lowerValue)) return true;
+      if (
+        !isTitleOnly &&
+        rawMarkdownBody.toLocaleLowerCase().includes(lowerValue)
+      )
+        return true;
 
       return title.toLocaleLowerCase().includes(lowerValue);
     }),

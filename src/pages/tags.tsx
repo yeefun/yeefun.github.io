@@ -75,7 +75,11 @@ const Tags = (props: TagsPageProps) => {
   }, [targetTag]);
 
   useEffect(() => {
-    setTargetTag(location?.hash ? decodeURIComponent(location.hash.split('#')[1]) : 'undefined');
+    setTargetTag(
+      location?.hash
+        ? decodeURIComponent(location.hash.split('#')[1])
+        : 'undefined'
+    );
 
     let large = 0;
     for (const g of group) {

@@ -100,7 +100,8 @@ const PostList = (props: PostListProps) => {
   }, []);
 
   useEffect(() => {
-    if (showCnt > 0 && showCnt !== 10) expendPostList(sortedPosts.slice(currentPostList.length, showCnt));
+    if (showCnt > 0 && showCnt !== 10)
+      expendPostList(sortedPosts.slice(currentPostList.length, showCnt));
   }, [showCnt]);
 
   useEffect(() => {
