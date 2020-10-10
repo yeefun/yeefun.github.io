@@ -3,7 +3,7 @@ title: 在 Nuxt.js 共用 GraphQL fragments
 description: GraphQL fragments 是什麼？要怎麼在 Nuxt.js 不同檔案間共用？
 date: 2020-10-01
 tags: [nuxt, graphql, fragments]
-update: 2020-10-02 17:57:00
+update: 2020-10-10 15:08:00
 ---
 
 最近公司打 API 的方式換成 [GraphQL](https://graphql.org/)，這邊紀錄一下怎麼在 [Nuxt.js](https://nuxtjs.org/) 用 GraphQL 的 [fragments](https://graphql.org/learn/queries/#fragments) 特性，來達到重複使用程式碼查詢（query）的效果。
@@ -77,7 +77,8 @@ fragments 能怎麼解決這個問題呢？很簡單，看共用欄位有哪些�
 query posts {
   allPosts {
     ...postFields
-    heroImage { # the first heroImage
+    // highlight-next-line
+    heroImage {
       urlTabletSized
     }
   }
@@ -86,7 +87,8 @@ query posts {
 fragment postFields on Post {
   id
   title
-  heroImage { # the second heroImage
+  // highlight-next-line
+  heroImage {
     title
     urlMobileSized
   }
@@ -142,7 +144,7 @@ fragment urls on Image {
 
 但若要在多個檔案間共用，可以把這個 fragment 移入一個獨立的檔案。假設檔案結構長這樣：
 
-```text
+```
 apollo
 ├─fragments
    └─image-urls.gql <-- `urls` fragment is here!
@@ -157,6 +159,7 @@ apollo
 那該怎麼辦？經過我一番搜索，其實你可以這麼做：
 
 ```graphql
+# highlight-next-line
 #import '../fragments/image-urls.gql'
 
 query latestPosts {

@@ -3,6 +3,16 @@
   * Inspired by Github syntax coloring
   */
 
+.gatsby-highlight-code-line {
+  background-color: rgb(251, 243, 219);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid rgb(223, 171, 1);
+}
+
 code[class*='language-'],
 pre[class*='language-'] {
   color: #393a34;
