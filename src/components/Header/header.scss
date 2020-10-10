@@ -14,13 +14,13 @@
   height: $header-height;
   max-height: $header-height;
   transition: top 0.3s ease 0.2s; // toggleTheme();
-  background-color: #fff;
   user-select: none;
   pointer-events: none;
 
   @media screen and (max-width: $break-l) {
     padding: 0 1.5rem 1rem 1.5rem;
     z-index: 2;
+    background-color: #fff;
   }
   @media screen and (max-width: $break-m) {
     padding: 0 1rem 0.5rem 1rem;

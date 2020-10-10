@@ -150,7 +150,8 @@
       margin-top: 3rem;
 
       h2 {
-        margin-top: 3rem;
+        margin-top: 3.2rem;
+        margin-bottom: 1.6rem;
         line-height: 1.4;
       }
 
@@ -174,6 +175,21 @@
       ul {
         margin-top: 1.6rem;
         margin-bottom: 1.6rem;
+
+        p {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        ul {
+          margin-top: calc(1.9rem / 4);
+          margin-bottom: calc(1.9rem / 4);
+          list-style: circle;
+
+          li {
+            margin-bottom: calc(1.9rem / 4);
+          }
+        }
       }
 
       strong {
@@ -196,7 +212,7 @@
 
       hr {
         width: 12%;
-        margin: 3rem auto;
+        margin: 3.2rem auto;
       }
 
       .gatsby-resp-image-figure {
