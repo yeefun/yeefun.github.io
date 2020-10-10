@@ -1,5 +1,5 @@
 ---
-title: 在 Nuxt.js 共用 GraphQL fragments
+title: 在 Nuxt.js 共用 GraphQL Fragments
 description: GraphQL fragments 是什麼？要怎麼在 Nuxt.js 不同檔案間共用？
 date: 2020-10-01
 tags: [nuxt, graphql, fragments]
@@ -7,7 +7,7 @@ tags: [nuxt, graphql, fragments]
 
 最近公司打 API 的方式換成 [GraphQL](https://graphql.org/)，這邊紀錄一下怎麼在 [Nuxt.js](https://nuxtjs.org/) 用 GraphQL 的 [fragments](https://graphql.org/learn/queries/#fragments) 特性，來達到重複使用程式碼查詢（query）的效果。
 
-## fragments 是什麼
+## Fragments 是什麼
 
 fragments 是什麼？簡單來說，就是一個可重用的欄位（fields）片段，你可以在裡頭放好幾個查詢欄位，接著就可以拿這個片段放到不同的查詢物件中。
 
@@ -106,7 +106,7 @@ heroImage {
 
 這可以讓我們在享受共用欄位的同時，還能客製化出不同的查詢內容。很方便吧！
 
-## 在多個檔案間共用 fragments
+## 在多個檔案間共用 Fragments
 
 如果你是在 Nuxt 中使用 GraphQL，可以參考 [@nuxtjs/apollo](https://github.com/nuxt-community/apollo-module) 這個套件，它裡頭包著 [vue-apollo](https://github.com/vuejs/vue-apollo)。
 
