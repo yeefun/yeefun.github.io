@@ -24,15 +24,14 @@
         list-style: none;
 
         @media screen and (max-width: $break-s) {
-          margin: 0 0.4rem;
+          margin: 0.2rem 0.4rem;
         }
 
         span {
           cursor: pointer;
           opacity: 0.5;
           line-height: 1.25;
-          transition: font-size 0.6s;
-          transition-delay: font-size 0.3s;
+          transition: font-size 0.6s 0.3s;
 
           &:hover {
             opacity: 0.9 !important;
