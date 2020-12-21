@@ -1,0 +1,832 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.9 'IBM Plex Serif','source-han-serif-tc',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:#24292e;font-family:'IBM Plex Serif','source-han-serif-tc',serif;font-weight:normal;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:2rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.51572rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.31951rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.87055rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.81225rem;line-height:1.1;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}ul{margin-left:1.9rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;list-style-position:outside;list-style-image:none;}ol{margin-left:1.9rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;font-size:0.85rem;line-height:1.9rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;font-size:1rem;line-height:1.9rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}blockquote{margin-left:1.9rem;margin-right:1.9rem;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.9rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}b{font-weight:bold;}strong{font-weight:bold;}dt{font-weight:bold;}th{font-weight:bold;}li{margin-bottom:calc(1.9rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.9rem;margin-bottom:calc(1.9rem / 2);margin-top:calc(1.9rem / 2);}li > ul{margin-left:1.9rem;margin-bottom:calc(1.9rem / 2);margin-top:calc(1.9rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.9rem / 2);}code{font-size:0.85rem;line-height:1.9rem;}kbd{font-size:0.85rem;line-height:1.9rem;}samp{font-size:0.85rem;line-height:1.9rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.26667rem;padding-right:1.26667rem;padding-top:0.95rem;padding-bottom:calc(0.95rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}</style><style data-href="/styles.a2e53980dfc16ffb8500.css">#notFound{max-width:720px;padding:1rem;margin:3rem auto 0;text-align:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}#notFound svg{font-size:10rem}#notFound h1{font-size:5rem;margin:.5rem 0 1rem}.blog-post-container{padding-bottom:2rem}.blog-post-container>div{max-width:720px;margin:0 auto}.blog-post-container .blog-post{padding:1rem}.blog-post-container .blog-post a{-webkit-text-decoration-line:underline;text-decoration-line:underline}.blog-post-container .blog-post .blog-post-title{font-size:1.8rem;margin:0;line-height:1.4;font-family:"IBM Plex Serif",source-han-serif-tc,serif}@media screen and (max-width:559px){.blog-post-container .blog-post .blog-post-title{font-size:1.6rem}}.blog-post-container .blog-post .blog-post-info{display:flex;flex-wrap:wrap;margin-top:1rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.84rem;align-items:flex-start;line-height:1.6}.blog-post-container .blog-post .blog-post-info>.dot{margin:0 .5rem;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap{display:flex;align-items:center;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap .update-date,.blog-post-container .blog-post .blog-post-info .date-wrap .write-date{display:block;white-space:nowrap}.blog-post-container .blog-post .blog-post-info .date-wrap>:nth-child(2){margin-left:.25rem}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list{display:flex;margin:0;flex-wrap:wrap;flex-grow:1}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag{list-style:none;margin:0 .3rem 0 0}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a{opacity:.7;text-decoration:none;transition:opacity .3s}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a:hover{opacity:1}.blog-post-container .blog-post .series{display:flex;flex-direction:column;justify-content:flex-end;margin-top:2rem}.blog-post-container .blog-post .series .series-head{display:flex;align-items:center;justify-content:flex-end}.blog-post-container .blog-post .series .series-head .head{font-weight:700;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .blog-post .series .series-head .icon-wrap{text-align:center;width:1.5rem;font-size:.8rem}.blog-post-container .blog-post .series .series-list{display:flex;margin:.25rem 0 0;flex-direction:column;align-items:flex-end;font-size:.8rem;line-height:1.3}.blog-post-container .blog-post .series .series-list .series-item{list-style:none;margin:0;opacity:.4;transition:opacity all .2s}.blog-post-container .blog-post .series .series-list .series-item:hover{opacity:.9}.blog-post-container .blog-post .series .series-list .series-item>a{text-decoration:none;display:flex}.blog-post-container .blog-post .series .series-list .series-item>a .icon-wrap{min-width:1.5rem;width:1.5rem;text-align:center}.blog-post-container .blog-post .series .series-list .series-item.current-series{opacity:.7}.blog-post-container .blog-post .blog-post-content{margin-top:3rem}.blog-post-container .blog-post .blog-post-content h2{margin-top:3.2rem;margin-bottom:1.6rem;line-height:1.4}.blog-post-container .blog-post .blog-post-content h3{margin-top:2rem}.blog-post-container .blog-post .blog-post-content p{margin-top:1.6rem;margin-bottom:1.6rem}.blog-post-container .blog-post .blog-post-content a{opacity:.7;transition:opacity .3s}.blog-post-container .blog-post .blog-post-content a:hover{opacity:1}.blog-post-container .blog-post .blog-post-content ul{margin-top:1.6rem;margin-bottom:1.6rem}.blog-post-container .blog-post .blog-post-content ul p{margin-top:0;margin-bottom:0}.blog-post-container .blog-post .blog-post-content ul ul{margin-top:.475rem;margin-bottom:.475rem;list-style:circle}.blog-post-container .blog-post .blog-post-content ul ul li{margin-bottom:.475rem}.blog-post-container .blog-post .blog-post-content strong{font-weight:600}.blog-post-container .blog-post .blog-post-content code{font-family:IBM Plex Mono,monospace!important}.blog-post-container .blog-post .blog-post-content blockquote{font-size:1.1rem;border-left:4px solid #6a737d;margin:2rem 0;padding:0 1rem;opacity:.8;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content hr{width:12%;margin:3.2rem auto}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figure{margin:3rem auto;max-width:590px}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;line-height:1.8;max-width:80%;margin-left:auto;font-size:.84rem;opacity:.7;margin-top:.5rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption p{margin-top:0;margin-bottom:0}.blog-post-container .blog-post .blog-post-content .anchor,.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-link{opacity:1}.blog-post-container .social-share{display:flex;margin-top:2rem;flex-direction:column;align-items:center}.blog-post-container .social-share ul{display:flex;margin:0}.blog-post-container .social-share ul li.social-share-item{list-style:none;margin:0 .25rem}.blog-post-container .social-share ul li.social-share-item circle{fill:#6a737d;transition:fill .3s}.blog-post-container .social-share ul li.social-share-item:hover.email circle{fill:#b8b8b8}.blog-post-container .social-share ul li.social-share-item:hover.facebook circle{fill:#3b5998}.blog-post-container .social-share ul li.social-share-item:hover.twitter circle{fill:#00aced}.blog-post-container .social-share ul li.social-share-item:hover.linkedin circle{fill:#007fb1}.blog-post-container .social-share ul li.social-share-item:hover.reddit circle{fill:#5f99cf}.blog-post-container .social-share ul li.social-share-item:hover.pocket circle{fill:#ef3f56}.blog-post-container .comments-dev{display:flex;border:1px dotted grey;min-height:15rem;flex-direction:column;align-items:center;justify-content:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .comments-dev>:first-child{opacity:.8}.blog-post-container .comments-dev>:nth-child(2){font-size:.9rem;opacity:.5}.blog-post-container .comments-dev.comments-dev{min-height:20rem}.blog-post-container .comments{padding:2rem 1rem 1rem}.gatsby-highlight-code-line{background-color:#fbf3db;display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:.75em;border-left:.25em solid #dfab01}code[class*=language-],pre[class*=language-]{color:#393a34;font-family:Consolas,Bitstream Vera Sans Mono,Courier New,Courier,monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;font-size:.9em;line-height:1.2em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre>code[class*=language-]{font-size:1em}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#b3d4fc}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:1px solid #ddd;background-color:#fff}:not(pre)>code[class*=language-]{padding:1px .2em;background:#f8f8f8;border:1px solid #ddd}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#998;font-style:italic}.token.namespace{opacity:.7}.token.attr-value,.token.string{color:#e3116c}.token.operator,.token.punctuation{color:#393a34}.token.boolean,.token.constant,.token.entity,.token.inserted,.token.number,.token.property,.token.regex,.token.symbol,.token.url,.token.variable{color:#36acaa}.language-autohotkey .token.selector,.token.atrule,.token.attr-name,.token.keyword{color:#00a4db}.language-autohotkey .token.tag,.token.deleted,.token.function{color:#9a050f}.language-autohotkey .token.keyword,.token.selector,.token.tag{color:#00009f}.token.bold,.token.function,.token.important{font-weight:700}.token.italic{font-style:italic}#layout a{cursor:pointer;color:inherit}#layout svg{color:#6a737d}a{text-decoration:none}#content{display:flex;flex-direction:column;padding-top:6rem;min-height:100vh}@media screen and (max-width:839px){#content{padding-top:4rem}}@media screen and (max-width:559px){#content{padding-top:2.5rem}}#content main{flex-grow:1}#content footer{line-height:1.6;padding-top:1rem;padding-bottom:.25rem;text-align:center;font-size:.9rem;opacity:.8}#content footer,#top{-webkit-user-select:none;-ms-user-select:none;user-select:none}#top{display:flex;position:fixed;right:0;bottom:0;width:2.5rem;height:2.5rem;align-items:center;justify-content:center;font-size:2rem;border-radius:100%;margin-right:2rem;margin-bottom:2.2rem;transition:.5s;cursor:pointer}@media screen and (max-width:559px){#top{margin-right:1rem;margin-bottom:1rem}}#top svg{margin:0;opacity:.5;transition:opacity .2s}#top svg:hover{opacity:1}#Header{display:flex;position:fixed;top:0;width:100%;align-items:flex-end;justify-content:space-between;padding:0 2rem 1rem;left:50%;transform:translateX(-50%);max-width:1440px;height:6rem;max-height:6rem;transition:top .3s ease .2s;-webkit-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none}@media screen and (max-width:1119px){#Header{padding:0 1.5rem 1rem;z-index:2;background-color:#fff}}@media screen and (max-width:839px){#Header{padding:0 1rem .5rem;height:4rem}}@media screen and (max-width:559px){#Header{height:2.5rem;padding:0 1rem .25rem;box-shadow:0 1px 2px rgba(0,0,0,.1)}}#Header>*{pointer-events:all}#Header.mobile{top:0!important}#Header.show{top:0}#Header.hide{top:-6rem}#Header .header-title{display:flex;align-items:flex-end}@media screen and (max-width:559px){#Header .header-title{align-items:center;align-self:center;margin-top:.5rem}}#Header .header-title .header-profile-image-wrap{display:flex;align-items:center;border:1px solid #aaa;padding:2px;border-radius:100%;margin-right:.25rem}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap{padding:1px}}#Header .header-title .header-profile-image-wrap img{border-radius:100%;margin:0;opacity:.8;transition:all .5s;transition-timing-function:ease-in-out}@media screen and (max-width:1119px){#Header .header-title .header-profile-image-wrap img{width:25px!important;height:25px!important}}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap img{width:15px!important;height:15px!important}}#Header .header-title .header-profile-image-wrap img:hover{opacity:1}#Header .header-title .header-profile-image-wrap img.inc{width:50px}#Header .header-title .header-profile-image-wrap img.dec{width:25px}#Header .header-title .header-title-text{margin:0;font-size:1.6rem;font-weight:300;font-family:Rubik,sans-serif;opacity:.9;transition:opacity .3s;letter-spacing:.8px}@media screen and (max-width:559px){#Header .header-title .header-title-text{font-size:1.1rem}}#Header .header-title .header-title-text:hover{opacity:1}#nav{display:flex;align-items:center}#nav ul{display:flex;margin:0;width:3.5rem;justify-content:space-between}#nav ul li{list-style:none;margin:0}#nav ul li svg{margin:0;font-size:1.2rem;transition:opacity .3s;opacity:.7}@media screen and (max-width:559px){#nav ul li svg{font-size:1rem}}#nav ul li svg:hover{opacity:1}#nav ul li .search-wrap,#nav ul li .tag-wrap{display:flex;align-items:center;height:1.5rem}#nav ul li .search-wrap svg,#nav ul li .tag-wrap svg{margin-top:3px}.bio{min-width:14rem;width:14rem;font-weight:300;font-family:Rubik,sans-serif;padding-left:2rem}@media (min-width:1440px){.bio{margin-left:calc((100vw - 1440px)/2)}}.bio p,.bio span{margin:0;font-size:.9rem}.bio span{display:block}.bio .bio-item{margin-bottom:.8rem;display:flex;font-size:.9rem}.bio .bio-item .icon-wrap{display:inline-flex;font-size:.9rem;margin-right:.4rem;min-width:1.1rem;width:1.1rem;justify-content:center}.bio .bio-item .icon-wrap svg{margin-top:1px;opacity:.9}.bio .bio-item>:nth-child(2){line-height:1.1;overflow:hidden}.bio .bio-item.company,.bio .bio-item.location,.bio .bio-item.name{cursor:default}.bio .comment{margin-bottom:1rem}.bio .social{margin-left:.2rem;margin-top:2rem}.bio .social a{display:inline-flex;font-size:1.3rem;margin-right:.5rem}.bio .social a .facebook,.bio .social a .github,.bio .social a .instagram,.bio .social a .linkedin,.bio .social a .rss{transition:color .3s}.bio .social a:hover .rss{color:#e28f48!important}.bio .social a:hover .linkedin{color:#0077b5!important}.bio .social a:hover .facebook{color:#1877f2!important}.bio .social a:hover .instagram{color:#e4405f!important}.bio .social a:hover .github{color:#999!important}a:visited{color:inherit}.index-wrap{display:flex}@media screen and (max-width:1119px){.index-wrap{margin-top:.5rem}}@media screen and (max-width:839px){.index-wrap{margin-top:1rem}}.index-wrap .bio{position:fixed;top:6rem;left:0;transition:opacity .2s;transition-timing-function:ease-in-out;transition-delay:.1s}@media screen and (max-width:1119px){.index-wrap .bio{display:none}}.index-wrap .index-post-list-wrap{width:100%}.index-wrap .index-post-list-wrap>div{margin:0 auto}.index-wrap .index-post-list-wrap .show-more-posts{display:flex;justify-content:center;margin-top:1rem;margin-bottom:5rem}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn{cursor:pointer;opacity:.5;font-size:.9rem;transition:opacity .2s}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn:hover{opacity:.9}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn span{margin-left:.25rem}#tags{max-width:720px;margin:1rem auto}#tags .tag-list-wrap{margin-bottom:5rem}@media screen and (max-width:559px){#tags .tag-list-wrap{margin-bottom:3rem}}#tags .tag-list-wrap ul{display:flex;flex-wrap:wrap;justify-content:center;margin:0}#tags .tag-list-wrap ul li{display:flex;align-items:center;margin:.25rem .5rem;list-style:none}@media screen and (max-width:559px){#tags .tag-list-wrap ul li{margin:.2rem .4rem}}#tags .tag-list-wrap ul li span{cursor:pointer;opacity:.5;line-height:1.25;transition:font-size .6s .3s}#tags .tag-list-wrap ul li span:hover{opacity:.9!important}#tags .post-list{margin:0 auto}.post-list{max-width:640px}.post-list li,.post-list ul{margin:0}.post-list li{list-style:none}.post-list .post{display:flex;flex-direction:column;max-width:inherit;margin:5rem 1rem;opacity:.85;transition:opacity .2s}@media screen and (max-width:839px){.post-list .post{margin:3rem 1rem}}.post-list .post:hover{opacity:1}.post-list .post.hide{display:none}.post-list .post:first-child{margin-top:0}.post-list .post h1{font-size:1.8rem;font-family:"IBM Plex Serif",source-han-serif-tc,serif;margin-bottom:.25rem;line-height:1.4}@media screen and (max-width:839px){.post-list .post h1{font-size:1.3rem}}.post-list .post .info{display:flex;flex-wrap:wrap;font-size:.84rem;align-items:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;margin-bottom:.25rem}@media screen and (max-width:839px){.post-list .post .info{font-size:.76rem;line-height:1.4}}.post-list .post .info .date-wrap{display:flex;align-items:center;opacity:.7}.post-list .post .info .date-wrap .date,.post-list .post .info .date-wrap .update{display:block;white-space:nowrap}.post-list .post .info .info-dot{margin:0 .25rem}.post-list .post .info .tag-list{display:flex;flex-wrap:wrap}.post-list .post .info .tag-list .tag{display:inline;margin:0 .5rem 0 0}.post-list .post .info .tag-list .tag span>a{opacity:.7;transition:opacity .2s}.post-list .post .info .tag-list .tag span>a:hover{opacity:1}.post-list .post .excerpt{max-width:calc(640px - 2rem);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.95rem;line-height:1.6}@media screen and (max-width:839px){.post-list .post .excerpt{font-size:.82rem}}#Search{max-width:720px;margin:0 auto}#Search .search-inner-wrap .input-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:4rem;padding:1rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap{margin-bottom:2rem}}#Search .search-inner-wrap .input-wrap input{all:unset;margin:.1rem 1rem 0}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap input{min-width:5rem}}#Search .search-inner-wrap .input-wrap .search-toggle{display:flex;flex-direction:row;font-size:.8rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap .search-toggle{flex-direction:column}}#Search .search-inner-wrap .input-wrap .search-toggle span{cursor:pointer;white-space:nowrap;-webkit-user-select:none;-ms-user-select:none;user-select:none;opacity:.8;transition:opacity .2s}#Search .search-inner-wrap .input-wrap .search-toggle span:first-child{margin-right:.5rem}#Search .search-inner-wrap .post-list{margin:0 auto}#Search .search-inner-wrap .no-result{display:block;text-align:center;font-size:1.2rem}.toc{font-size:.8rem;max-height:calc(100vh - 6rem);transition:opacity .3s;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.toc.outside{position:fixed;width:220px;height:100%;top:0;right:0;margin-top:6rem;opacity:.4}@media screen and (max-width:1160px){.toc.outside{display:none}}.toc.outside:hover{opacity:.9}.toc.outside ul{overflow:auto;max-height:85%}.toc.outside a{max-width:calc(220px - 1.5rem)}.toc.inside{display:none;text-align:right}@media screen and (max-width:1160px){.toc.inside{display:block}}.toc.inside li{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;margin-left:auto}.toc.inside a{text-decoration:none}.toc ul{margin-top:1.6rem;margin-bottom:0;margin-left:0}.toc ul li{list-style:none;margin:0}.toc p{margin:0}.toc a{display:block;opacity:.4;transition:opacity .1s;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.toc a:hover{opacity:1!important}</style><meta name="generator" content="Gatsby 2.24.65"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><title data-react-helmet="true">初學者學 KMP 演算法 | Yeefun</title><link data-react-helmet="true" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=IBM+Plex+Serif:wght@400;600;700&amp;family=Rubik:wght@300&amp;display=swap" rel="stylesheet"/><meta data-react-helmet="true" name="description" content="一個初學者看得懂的 KMP 演算法。"/><meta data-react-helmet="true" property="og:title" content="初學者學 KMP 演算法 | Yeefun"/><meta data-react-helmet="true" property="og:description" content="一個初學者看得懂的 KMP 演算法。"/><meta data-react-helmet="true" property="og:url" content="https://yeefun.github.io/kmp-algorithm-for-beginners/"/><meta data-react-helmet="true" property="og:image" content="/og-default.png"/><meta data-react-helmet="true" property="og:type" content="article"/><meta data-react-helmet="true" property="og:locale" content="zh_TW"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Yeefun Lin"/><meta data-react-helmet="true" name="twitter:title" content="初學者學 KMP 演算法 | Yeefun"/><meta data-react-helmet="true" name="twitter:description" content="一個初學者看得懂的 KMP 演算法。"/><meta data-react-helmet="true" name="mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-status-bar-style" content="default"/><meta data-react-helmet="true" name="google-site-verification" content=""/><script data-react-helmet="true" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "datePublished": "2020-12-22T00:00:00.000Z",
+  
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yeefun.github.io"
+  },
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "headline": "初學者學 KMP 演算法",
+  "publisher": {
+    "@type" : "organization",
+    "name" : "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"
+    }
+  },
+  "image": ["https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"]
+}
+</script><script data-react-helmet="true">
+            (function(d) {
+              var config = {
+                kitId: 'hfy8uue',
+                scriptTimeout: 3000,
+                async: true
+              },
+              h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/wf-loading/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+            })(document);
+          </script><style data-react-helmet="true">svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}
+
+.fad.fa-inverse {
+  color: #fff;
+}</style><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="icon" href="/favicon.svg?v=efcd17939d16df22e16329c67275a6ab" type="image/svg+xml"/><link rel="icon" href="/favicon-32x32.png?v=efcd17939d16df22e16329c67275a6ab" type="image/png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#6a737d"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="alternate" type="application/rss+xml" title="Yeefun | Feed" href="/rss.xml"/><link as="script" rel="preload" href="/webpack-runtime-c1dd8df21db12693d109.js"/><link as="script" rel="preload" href="/framework-58f863d6aa18c11a521f.js"/><link as="script" rel="preload" href="/app-4331bacab8c883a61636.js"/><link as="script" rel="preload" href="/styles-7d4153d260c0197f0043.js"/><link as="script" rel="preload" href="/cb1608f2-af5c11d174355a97e951.js"/><link as="script" rel="preload" href="/commons-5aa92924169b5c149a6f.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"/><link as="fetch" rel="preload" href="/page-data/kmp-algorithm-for-beginners/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2326376460.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="layout"><header id="Header" class="show "><div class="header-title"><a href="/"><div class="header-profile-image-wrap"><img src="/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg" alt="title profile picture" width="25px" height="25px"/></div></a><a href="/"><h1 class="header-title-text">Yeefun</h1></a></div><nav id="nav"><ul><li><div class="tag-wrap"><a href="/tags"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tags" class="svg-inline--fa fa-tags fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></a></div></li><li><div class="search-wrap"><a class="search" href="/search"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></div></li></ul></nav></header><div id="content"><main><div class="blog-post-container"><div class="blog-post"><h1 class="blog-post-title">初學者學 KMP 演算法</h1><div class="blog-post-info"><div class="date-wrap"><span class="write-date">2020-12-22</span></div><span class="dot">·</span><ul class="blog-post-tag-list"><li class="blog-post-tag"><a href="/tags#algorithm">#algorithm</a></li><li class="blog-post-tag"><a href="/tags#string">#string</a></li><li class="blog-post-tag"><a href="/tags#kmp">#kmp</a></li></ul></div><div class="toc inside"><ul>
+<li><a href="/kmp-algorithm-for-beginners/#kmp-%E7%AE%97%E6%B3%95">KMP 算法</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#next-%E8%A1%A8">Next 表</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#%E9%82%A3%E4%BA%9B%E9%95%B7%E5%BE%97%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A8%A3%E7%9A%84-next-%E8%A1%A8">那些長得不太一樣的 Next 表</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div><div class="blog-post-content"><p>第一次碰 KMP，被搞得暈頭轉向，花了兩天才搞定。只好趕緊寫下來，以免半小時後就忘記。</p>
+<hr>
+<p>要怎麼在主串裡找到某個子串（模式）呢？</p>
+<p>比如 <code class="language-text">abcabcabe</code> 是主串，要怎麼找到 <code class="language-text">abcabe</code> 這個子串？</p>
+<p>最簡單的想法，就是從主串的第一個字跟子串的第一個字開始比，如果第一個字相同，再接著比第二個字，若第二個字也相同，再接著比第三個字⋯⋯如果不同，則主串回到第二個字、子串回到第一個字，接著主串的第二個字跟子串的第一個字比，如果相同，則主串的第三個字跟子串的第二個字比；如果不同，則主串回到第三個字，子串回到第一個字⋯⋯以此類推。</p>
+<p>用程式碼表示就是這樣：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">indexOfByBf</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token punctuation">,</span> p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> sI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> pI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>sI <span class="token operator">&lt;</span> s<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> pI <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>sI<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>pI<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      pI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      sI <span class="token operator">=</span> sI <span class="token operator">-</span> pI <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      pI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">>=</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sI <span class="token operator">-</span> p<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>這個算法直觀，又叫暴力（Brute Force）算法。暴力儘管好用，但當主串一長，便顯得沒效率。它的時間複雜度最好和最壞分別是 <code class="language-text">O(n + m)</code> 和 <code class="language-text">O(n * m)</code>（假設主串的長度為 <code class="language-text">n</code>，子串的長度為 <code class="language-text">m</code>）。</p>
+<h2 id="kmp-算法" style="position:relative;"><a href="#kmp-%E7%AE%97%E6%B3%95" aria-label="kmp 算法 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KMP 算法</h2>
+<p>要怎麼提高效率呢？首先，我們可以把匹配的時間複雜度分成兩個部分，一個是比較的趟（次）數，另一個是比較的字數。在暴力算法中，前者在最壞情況下為主串的長度，後者則為子串的長度。我們無法降低比較的字數（要找 <code class="language-text">abc</code>，就只能 <code class="language-text">abc</code> 一一比對，不然呢？），但可以減少比較的趟數。</p>
+<p>要怎麼減少呢？這要看我們手上握有什麼資訊。當我們知道這一次比較找不到子串、準備回頭的那一刻，我們究竟獲得了什麼？這些資訊有辦法降低我們接下來比較的趟數嗎？</p>
+<p>讓我們看看一個範例，主串是 <code class="language-text">abcabcabcabe</code>、子串是 <code class="language-text">abcabe</code>。第一次比較：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">✔✔✔✔✔✗
+abcabcabcabe
+abcabe
+✔✔✔✔✔✗</code></pre></div>
+<p>我們可以看到子串的第六個字 <code class="language-text">e</code> 比較失敗了，這時暴力算法的第二次比較會這麼做：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"> ↓
+abcabcabcabe
+ abcabe
+ ↑</code></pre></div>
+<p>將子串向右移一格，也就是從主串的第<strong>二</strong>個字開始跟子串的第<strong>一</strong>個字比。不用一秒，你就知道這次比較不會成功（<code class="language-text">b</code> 跟 <code class="language-text">a</code> 不一樣）；再將子串向右移（從主串的第<strong>三</strong>個字開始跟子串的第<strong>一</strong>個字比），也不會成功⋯⋯我們有沒有辦法直接移到<strong>可能</strong>會成功的位置？</p>
+<p>回到第一次比較失敗的那刻，滿足「可能成功」的主串位置的條件是什麼？至少那個位置開始的第一個字要與子串的第一個字相同吧！當然，第二個字相同也很好，第三個字相同更好⋯⋯依此邏輯，我們可以把我們要找的東西描述為：主串中的某個位置，這個位置開始的字符能<strong>最多地</strong>與子串的字符相同。</p>
+<p>不過，還未比較的主串字符（即主串的倒數六個字符 <code class="language-text">abcabe</code>），由於我們不知道它們的長相，因此也無從得知它們哪個位置能最多地與子串的字符相同。我們只能從已比較過且確認相符的字符去尋找正確的位置，即主串的前五個字符 <code class="language-text">abcab</code>，<strong>而這五個字符，其實也就是子串的前五個字符</strong>。</p>
+<p>單用眼睛看，我們可以很快地發現這個位置：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">   ↓
+abcabcabcabe
+   abcabe
+   ↑</code></pre></div>
+<p>但程式沒辦法這樣「看」，它需要方法去推導出來。這個方法就是，<strong>拿子串匹配成功的部分（即 <code class="language-text">abcab</code>）的前綴去對準自己的後綴</strong>，而且這個對準的字符數要最多；換句話說，我們在找的是 <code class="language-text">abcab</code> 的<strong>次長共同前後綴（Longest Proper Prefix Which Is Also Suffix</strong>，以下簡稱為 LPS。會說次長，是因為這個前後綴不能等於字串本身）。</p>
+<p>一樣，先用簡單的方法來找：<code class="language-text">abcab</code> 的（真）前綴有 <code class="language-text">a</code>、<code class="language-text">ab</code>、<code class="language-text">abc</code>、<code class="language-text">abca</code>；（真）後綴有 <code class="language-text">b</code>、<code class="language-text">ab</code>、<code class="language-text">cab</code>、<code class="language-text">bcab</code>。LPS 顯然是 <code class="language-text">ab</code>，它的長度為 2。</p>
+<p>得到這個數字後，我們就可以知道要從哪個位置開始比了。回到第一次比較失敗的那一刻：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">     ✗
+abcabcabcabe
+abcabe
+     ✗</code></pre></div>
+<p>現在，我們不要動主串指針的位置，只要將子串向右移三位：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">     ↓
+abcabcabcabe
+   abcabe
+     ↑</code></pre></div>
+<p>我們便可以從 <code class="language-text">c</code> 開始比了。省去了跟主串的第二個字和第三個字比較的功（即減少比較的趟數），也跳過了從主串的第四個字開始比較時的頭兩個字 <code class="language-text">ab</code> 的比較——是不是比暴力算法有效率多了？</p>
+<p>到此，我們可以把 KMP 算法的程式寫出來了：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">indexOfByKmp</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token punctuation">,</span> p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> sI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> pI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="gatsby-highlight-code-line">  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token function">getNext</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>sI <span class="token operator">&lt;</span> s<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> pI <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>sI<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>pI<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      pI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 主串指針不動，只動子串指針</span>
+      pI <span class="token operator">=</span> next<span class="token punctuation">[</span>pI <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">>=</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sI <span class="token operator">-</span> p<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>等等，<code class="language-text">getNext</code> 是什麼東西？它回傳的是一個陣列，這個陣列含有一系列部分子串的 LPS 長，它是讓 KMP 算法得以運行的關鍵，接下來就讓我們來看看怎麼求得這個陣列。</p>
+<h2 id="next-表" style="position:relative;"><a href="#next-%E8%A1%A8" aria-label="next 表 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Next 表</h2>
+<p>以子串 <code class="language-text">abcabe</code> 為例：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">abcabe
+000120</code></pre></div>
+<p>這張表的意思是：<code class="language-text">a</code> 的 LPS 長為 0，<code class="language-text">ab</code> 為 0、<code class="language-text">abc</code> 也為 0、<code class="language-text">abca</code> 則為 1、<code class="language-text">abcab</code> 為 2、<code class="language-text">abcabe</code> 為 0。</p>
+<p>要怎麼求得這張表呢？先看最簡單的方法：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getNext</span><span class="token punctuation">(</span><span class="token parameter">p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> pSub <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> pSub<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>pSub<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span> <span class="token operator">===</span> pSub<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token operator">-</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        next<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      next<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>裡頭有兩個迴圈，時間複雜度為 <code class="language-text">O(m^2)</code>，效率顯然不佳，會拖累 KMP 算法的整體速度。</p>
+<p>要怎麼提高建造這張表的效率呢？思路是這樣的：<strong>拿完整字串的前綴去對準部分字串的後綴</strong>。假設有一個字串 p，值為 <code class="language-text">abcabffabcabc</code>，現在我們要求前兩個字符的 LPS 長（第一個字的 LPS 長無論如何都是 0，須先補上）：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">0↓
+ab
+ abcabffabcabc
+ ↑</code></pre></div>
+<p>讓完整字串的前綴去跟 <code class="language-text">ab</code> 的後綴比，若相同，則 LPS 長加一；若不同，且正被比較的完整字串的<strong>前綴索引為 <code class="language-text">0</code></strong>，那 LPS 長便為 0。接著繼續拿完整字串的前綴去跟 <code class="language-text">abc</code> 的後綴比：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">00↓
+abc
+  abcabffabcabc
+  ↑</code></pre></div>
+<p>LPS 長也為 0，再繼續往下：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">000↓
+abca
+   abcabffabcabc
+   ↑</code></pre></div>
+<p>喔！現在 <code class="language-text">abca</code> 的後綴與完整字串的第一個前綴相同了，LPS 長加一。再繼續往下，拿完整字串的第二個前綴跟 <code class="language-text">abcab</code> 的第二個後綴比：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">0001↓
+abcab
+   abcabffabcabc
+    ↑</code></pre></div>
+<p>一樣！LPS 長再加一！</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">00012↓
+abcabf
+   abcabffabcabc
+     ↑</code></pre></div>
+<p>又遇到不同了，這邊也是直接設為 0 嗎？其實不能，中間還需要經過一些計算，但這邊先不細講，因為這次結果的確是 0，計算的效果不明顯。再繼續往下吧！會告訴你答案的！</p>
+<p>讓我們把求 LPS 長度的過程加快，直接到最後一個字符：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">000120012345↓
+abcabffabcabc
+       abcabffabcabc
+            ↑</code></pre></div>
+<p>現在我們又遇到比較失敗的字了，也是直接設為 0 嗎？不能！在這之前，我們還要做一些掙扎——也許我們可以試看看將完整字串向右移幾位（亦即將其指針向左移），再繼續比。但該移多少呢？</p>
+<p>不覺得這個問題有點熟悉嗎？似乎在前面講 KMP 時說過。你可以把現在遇到的問題想像成也是在做字串匹配：<code class="language-text">abcabffabcabc</code> 是主串，<code class="language-text">abcabf</code> 是子串，當比較失敗時，我們要做什麼？</p>
+<p>求 <code class="language-text">abcab</code> 的 LPS 長度！那我們還要再建一個 Next 表嗎？不用！早就建好了！不就是 2 嗎？</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">    ↓
+000120012345
+abcabffabcabc
+    ↑  abcabffabcabc</code></pre></div>
+<p>現在，將完整字串的指針移到索引 <code class="language-text">2</code>：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">000120012345↓
+abcabffabcabc
+          abcabffabcabc
+            ↑</code></pre></div>
+<p>太棒了！再度配對成功！LPS 長為 3（注意，不是 6 喔）。</p>
+<p>（前面沒說明的第六個字符設為 0，其實也要經過同樣的過程，只是因為再次比較時仍失敗，而此時完整字串的前綴索引為 <code class="language-text">0</code>，因此才會結果看起來都一樣）</p>
+<p>把上述過程轉換成程式碼，便是這樣：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getNext</span><span class="token punctuation">(</span><span class="token parameter">p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// 部分字串的指針</span>
+  <span class="token keyword">let</span> iPartial <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  
+  <span class="token comment">// 完整字串的指針</span>
+  <span class="token keyword">let</span> iWhole <span class="token operator">=</span> iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>iPartial <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token punctuation">[</span>iPartial<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>iWhole<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      iPartial <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      iWhole <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+      next<span class="token punctuation">[</span>iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> iWhole<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>iWhole <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      iPartial <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+      next<span class="token punctuation">[</span>iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      iWhole <span class="token operator">=</span> next<span class="token punctuation">[</span>iWhole <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>時間複雜度從 <code class="language-text">O(m^2)</code> 降到 <code class="language-text">O(m)</code>，與前述 KMP 的主體 <code class="language-text">O(n)</code> 加起來，時間複雜度共為 <code class="language-text">O(n + m)</code>。</p>
+<h2 id="那些長得不太一樣的-next-表" style="position:relative;"><a href="#%E9%82%A3%E4%BA%9B%E9%95%B7%E5%BE%97%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A8%A3%E7%9A%84-next-%E8%A1%A8" aria-label="那些長得不太一樣的 next 表 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>那些長得不太一樣的 Next 表</h2>
+<p>你如果看過其它講 KMP 算法的文章，可能會發現它們的 Next 表長得跟這裡的 Next 表不太一樣：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"> abcabe
+ 000120 &lt;- 這裡的
+-100012 &lt;- 別人的</code></pre></div>
+<p>不同之處不過是後者將前者的數字都往右移了一位，並在第一個位置補上 <code class="language-text">-1</code>。為什麼要這麼做呢？其實只是為了計算上的方便。</p>
+<p>仔細看前面寫的 <code class="language-text">indexOfByKmp</code> 和 <code class="language-text">getNext</code> 兩個函數，裡面都有這個處理：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">indexOfByKmp</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token punctuation">,</span> p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> sI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> pI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token function">getNext</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>sI <span class="token operator">&lt;</span> s<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> pI <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>sI<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>pI<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      pI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="gatsby-highlight-code-line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span></span>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      pI <span class="token operator">=</span> next<span class="token punctuation">[</span>pI <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">>=</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sI <span class="token operator">-</span> p<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getNext</span><span class="token punctuation">(</span><span class="token parameter">p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> iPartial <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> iWhole <span class="token operator">=</span> iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>iPartial <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token punctuation">[</span>iPartial<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>iWhole<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      iPartial <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      iWhole <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+      next<span class="token punctuation">[</span>iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> iWhole<span class="token punctuation">;</span>
+<span class="gatsby-highlight-code-line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>iWhole <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">      iPartial <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line"></span><span class="gatsby-highlight-code-line">      next<span class="token punctuation">[</span>iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      iWhole <span class="token operator">=</span> next<span class="token punctuation">[</span>iWhole <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>這是為了防止當 <code class="language-text">pI</code> 或 <code class="language-text">iWhole</code> 等於 <code class="language-text">0</code> 的時候會出的問題。有人覺得這樣額外開一個分支處理很麻煩，於是就做了上述移位補 <code class="language-text">-1</code> 的動作，並把算法改寫如下：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">indexOfByKmp</span><span class="token punctuation">(</span><span class="token parameter">s<span class="token punctuation">,</span> p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> sI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> pI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token function">getNext</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>sI <span class="token operator">&lt;</span> s<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> pI <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">||</span> s<span class="token punctuation">[</span>sI<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>pI<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>      sI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      pI <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">      pI <span class="token operator">=</span> next<span class="token punctuation">[</span>pI<span class="token punctuation">]</span><span class="token punctuation">;</span></span>    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>pI <span class="token operator">>=</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> sI <span class="token operator">-</span> p<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getNext</span><span class="token punctuation">(</span><span class="token parameter">p</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">  <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line">  <span class="token keyword">let</span> iPartial <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line">  <span class="token keyword">let</span> iWhole <span class="token operator">=</span> iPartial <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span></span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>iPartial <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>iWhole <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">||</span> p<span class="token punctuation">[</span>iPartial<span class="token punctuation">]</span> <span class="token operator">===</span> p<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>      iPartial <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      iWhole <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="gatsby-highlight-code-line">      next<span class="token punctuation">[</span>iPartial<span class="token punctuation">]</span> <span class="token operator">=</span> iWhole<span class="token punctuation">;</span></span>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">      iWhole <span class="token operator">=</span> next<span class="token punctuation">[</span>iWhole<span class="token punctuation">]</span><span class="token punctuation">;</span></span>    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>自己實際拿筆跟紙跑過一遍，會發現原理是相同的，答案當然也是一樣的噢。</p>
+<h2 id="相關資料" style="position:relative;"><a href="#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99" aria-label="相關資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相關資料</h2>
+<ul>
+<li><a href="https://www.zhihu.com/question/21923021/answer/281346746" target="_blank" rel="nofollow noopener noreferrer">如何更好地理解和掌握 KMP 算法? - 海纳的回答</a></li>
+<li><a href="https://www.zhihu.com/question/21923021/answer/1032665486" target="_blank" rel="nofollow noopener noreferrer">如何更好地理解和掌握 KMP 算法? - 阮行止的回答</a></li>
+</ul></div></div><div class="social-share"><ul><li class="social-share-item email"><button aria-label="email" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#7f7f7f"></circle><path d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z" fill="white"></path></svg></button></li><li class="social-share-item facebook"><button aria-label="facebook" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#3b5998"></circle><path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" fill="white"></path></svg></button></li><li class="social-share-item twitter"><button aria-label="twitter" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#00aced"></circle><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" fill="white"></path></svg></button></li><li class="social-share-item linkedin"><button aria-label="linkedin" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#007fb1"></circle><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z" fill="white"></path></svg></button></li><li class="social-share-item reddit"><button aria-label="reddit" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#5f99cf"></circle><path d="m 52.8165,31.942362 c 0,-2.4803 -2.0264,-4.4965 -4.5169,-4.4965 -1.2155,0 -2.3171,0.4862 -3.128,1.2682 -3.077,-2.0247 -7.2403,-3.3133 -11.8507,-3.4782 l 2.5211,-7.9373 6.8272,1.5997 -0.0102,0.0986 c 0,2.0281 1.6575,3.6771 3.6958,3.6771 2.0366,0 3.6924,-1.649 3.6924,-3.6771 0,-2.0281 -1.6575,-3.6788 -3.6924,-3.6788 -1.564,0 -2.8968,0.9758 -3.4357,2.3443 l -7.3593,-1.7255 c -0.3213,-0.0782 -0.6477,0.1071 -0.748,0.4233 L 32,25.212062 c -4.8246,0.0578 -9.1953,1.3566 -12.41,3.4425 -0.8058,-0.7446 -1.8751,-1.2104 -3.0583,-1.2104 -2.4905,0 -4.5152,2.0179 -4.5152,4.4982 0,1.649 0.9061,3.0787 2.2389,3.8607 -0.0884,0.4794 -0.1462,0.9639 -0.1462,1.4569 0,6.6487 8.1736,12.0581 18.2223,12.0581 10.0487,0 18.224,-5.4094 18.224,-12.0581 0,-0.4658 -0.0493,-0.9248 -0.1275,-1.377 1.4144,-0.7599 2.3885,-2.2304 2.3885,-3.9406 z m -29.2808,3.0872 c 0,-1.4756 1.207,-2.6775 2.6894,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 -1.4824,0 -2.6894,-1.2002 -2.6894,-2.6758 z m 15.4037,7.9373 c -1.3549,1.3481 -3.4816,2.0043 -6.5008,2.0043 l -0.0221,-0.0051 -0.0221,0.0051 c -3.0209,0 -5.1476,-0.6562 -6.5008,-2.0043 -0.2465,-0.2448 -0.2465,-0.6443 0,-0.8891 0.2465,-0.2465 0.6477,-0.2465 0.8942,0 1.105,1.0999 2.9393,1.6337 5.6066,1.6337 l 0.0221,0.0051 0.0221,-0.0051 c 2.6673,0 4.5016,-0.5355 5.6066,-1.6354 0.2465,-0.2465 0.6477,-0.2448 0.8942,0 0.2465,0.2465 0.2465,0.6443 0,0.8908 z m -0.3213,-5.2615 c -1.4824,0 -2.6877,-1.2002 -2.6877,-2.6758 0,-1.4756 1.2053,-2.6775 2.6877,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 z" fill="white"></path></svg></button></li><li class="social-share-item pocket"><button aria-label="pocket" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#EF3F56"></circle><path d="M41.084 29.065l-7.528 7.882a2.104 2.104 0 0 1-1.521.666 2.106 2.106 0 0 1-1.522-.666l-7.528-7.882c-.876-.914-.902-2.43-.065-3.384.84-.955 2.228-.987 3.1-.072l6.015 6.286 6.022-6.286c.88-.918 2.263-.883 3.102.071.841.938.82 2.465-.06 3.383l-.015.002zm6.777-10.976C47.463 16.84 46.361 16 45.14 16H18.905c-1.2 0-2.289.82-2.716 2.044-.125.363-.189.743-.189 1.125v10.539l.112 2.096c.464 4.766 2.73 8.933 6.243 11.838.06.053.125.102.19.153l.04.033c1.882 1.499 3.986 2.514 6.259 3.014a14.662 14.662 0 0 0 6.13.052c.118-.042.235-.065.353-.087.03 0 .065-.022.098-.042a15.395 15.395 0 0 0 6.011-2.945l.039-.045.18-.153c3.502-2.902 5.765-7.072 6.248-11.852L48 29.674v-10.52c0-.366-.041-.728-.161-1.08l.022.015z" fill="white"></path></svg></button></li></ul></div></div><div class="toc outside"><ul>
+<li><a href="/kmp-algorithm-for-beginners/#kmp-%E7%AE%97%E6%B3%95">KMP 算法</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#next-%E8%A1%A8">Next 表</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#%E9%82%A3%E4%BA%9B%E9%95%B7%E5%BE%97%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A8%A3%E7%9A%84-next-%E8%A1%A8">那些長得不太一樣的 Next 表</a></li>
+<li><a href="/kmp-algorithm-for-beginners/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div></main><footer><span>© 2020 Yeefun Lin | Theme by </span><a href="https://github.com/junhobaik">JunhoBaik</a><span> | Built with </span><a href="https://www.gatsbyjs.org">Gatsby</a></footer></div><div id="top" style="opacity:0;pointer-events:none"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-double-up" class="svg-inline--fa fa-angle-double-up fa-w-10 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M177 255.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 351.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 425.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1zm-34-192L7 199.7c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l96.4-96.4 96.4 96.4c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9l-136-136c-9.2-9.4-24.4-9.4-33.8 0z"></path></svg></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-172986408-1', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/kmp-algorithm-for-beginners/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f1172e2e7b1be26f0281.js"],"app":["/app-4331bacab8c883a61636.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-dd3c70765f8b72ff63ff.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-37ac5997d6a738e8d20d.js"],"component---src-pages-search-tsx":["/component---src-pages-search-tsx-534538228b9b3c1f6642.js"],"component---src-pages-tags-tsx":["/component---src-pages-tags-tsx-bf5a55cbc5da74c321e5.js"],"component---src-templates-post-tsx":["/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"]};/*]]>*/</script><script src="/polyfill-f1172e2e7b1be26f0281.js" nomodule=""></script><script src="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js" async=""></script><script src="/commons-5aa92924169b5c149a6f.js" async=""></script><script src="/cb1608f2-af5c11d174355a97e951.js" async=""></script><script src="/styles-7d4153d260c0197f0043.js" async=""></script><script src="/app-4331bacab8c883a61636.js" async=""></script><script src="/framework-58f863d6aa18c11a521f.js" async=""></script><script src="/webpack-runtime-c1dd8df21db12693d109.js" async=""></script></body></html>
