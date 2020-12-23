@@ -392,7 +392,7 @@ function getNext(p) {
 
   while (iPartial < p.length) {
     // highlight-next-line
-    if (iWhole === -1 || p[iPartial] === p[now]) {
+    if (iWhole === -1 || p[iPartial] === p[iWhole]) {
       iPartial += 1;
       iWhole += 1;
 
