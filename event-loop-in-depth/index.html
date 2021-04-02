@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "datePublished": "2021-04-02T00:00:00.000Z",
-  
+  "dateModified": "2021-04-02T00:00:00.000Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://yeefun.github.io"
@@ -533,7 +533,7 @@
         }
       }
     })
-  </script><link rel="icon" href="/favicon.svg?v=efcd17939d16df22e16329c67275a6ab" type="image/svg+xml"/><link rel="icon" href="/favicon-32x32.png?v=efcd17939d16df22e16329c67275a6ab" type="image/png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#6a737d"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="alternate" type="application/rss+xml" title="Yeefun | Feed" href="/rss.xml"/><link as="script" rel="preload" href="/webpack-runtime-c1dd8df21db12693d109.js"/><link as="script" rel="preload" href="/framework-58f863d6aa18c11a521f.js"/><link as="script" rel="preload" href="/app-4331bacab8c883a61636.js"/><link as="script" rel="preload" href="/styles-7d4153d260c0197f0043.js"/><link as="script" rel="preload" href="/cb1608f2-af5c11d174355a97e951.js"/><link as="script" rel="preload" href="/commons-5aa92924169b5c149a6f.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"/><link as="fetch" rel="preload" href="/page-data/event-loop-in-depth/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2326376460.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="layout"><header id="Header" class="show "><div class="header-title"><a href="/"><div class="header-profile-image-wrap"><img src="/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg" alt="title profile picture" width="25px" height="25px"/></div></a><a href="/"><h1 class="header-title-text">Yeefun</h1></a></div><nav id="nav"><ul><li><div class="tag-wrap"><a href="/tags"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tags" class="svg-inline--fa fa-tags fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></a></div></li><li><div class="search-wrap"><a class="search" href="/search"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></div></li></ul></nav></header><div id="content"><main><div class="blog-post-container"><div class="blog-post"><h1 class="blog-post-title">我知道你懂 Event Loop，但你了解到多深？</h1><div class="blog-post-info"><div class="date-wrap"><span class="write-date">2021-04-02</span></div><span class="dot">·</span><ul class="blog-post-tag-list"><li class="blog-post-tag"><a href="/tags#event loop">#event loop</a></li><li class="blog-post-tag"><a href="/tags#browser">#browser</a></li><li class="blog-post-tag"><a href="/tags#spec">#spec</a></li><li class="blog-post-tag"><a href="/tags#macrotask">#macrotask</a></li><li class="blog-post-tag"><a href="/tags#microtask">#microtask</a></li><li class="blog-post-tag"><a href="/tags#requestAnimationFrame">#requestAnimationFrame</a></li><li class="blog-post-tag"><a href="/tags#requestIdleCallback">#requestIdleCallback</a></li><li class="blog-post-tag"><a href="/tags#timer">#timer</a></li><li class="blog-post-tag"><a href="/tags#js">#js</a></li></ul></div><div class="toc inside"><ul>
+  </script><link rel="icon" href="/favicon.svg?v=efcd17939d16df22e16329c67275a6ab" type="image/svg+xml"/><link rel="icon" href="/favicon-32x32.png?v=efcd17939d16df22e16329c67275a6ab" type="image/png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#6a737d"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="alternate" type="application/rss+xml" title="Yeefun | Feed" href="/rss.xml"/><link as="script" rel="preload" href="/webpack-runtime-c1dd8df21db12693d109.js"/><link as="script" rel="preload" href="/framework-58f863d6aa18c11a521f.js"/><link as="script" rel="preload" href="/app-4331bacab8c883a61636.js"/><link as="script" rel="preload" href="/styles-7d4153d260c0197f0043.js"/><link as="script" rel="preload" href="/cb1608f2-af5c11d174355a97e951.js"/><link as="script" rel="preload" href="/commons-5aa92924169b5c149a6f.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"/><link as="fetch" rel="preload" href="/page-data/event-loop-in-depth/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2326376460.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="layout"><header id="Header" class="show "><div class="header-title"><a href="/"><div class="header-profile-image-wrap"><img src="/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg" alt="title profile picture" width="25px" height="25px"/></div></a><a href="/"><h1 class="header-title-text">Yeefun</h1></a></div><nav id="nav"><ul><li><div class="tag-wrap"><a href="/tags"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tags" class="svg-inline--fa fa-tags fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></a></div></li><li><div class="search-wrap"><a class="search" href="/search"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></div></li></ul></nav></header><div id="content"><main><div class="blog-post-container"><div class="blog-post"><h1 class="blog-post-title">我知道你懂 Event Loop，但你了解到多深？</h1><div class="blog-post-info"><div class="date-wrap"><span class="write-date">2021-04-02</span><span>(</span><span class="update-date">Last updated: 2021-04-02</span><span>)</span></div><span class="dot">·</span><ul class="blog-post-tag-list"><li class="blog-post-tag"><a href="/tags#event loop">#event loop</a></li><li class="blog-post-tag"><a href="/tags#browser">#browser</a></li><li class="blog-post-tag"><a href="/tags#spec">#spec</a></li><li class="blog-post-tag"><a href="/tags#macrotask">#macrotask</a></li><li class="blog-post-tag"><a href="/tags#microtask">#microtask</a></li><li class="blog-post-tag"><a href="/tags#requestAnimationFrame">#requestAnimationFrame</a></li><li class="blog-post-tag"><a href="/tags#requestIdleCallback">#requestIdleCallback</a></li><li class="blog-post-tag"><a href="/tags#timer">#timer</a></li><li class="blog-post-tag"><a href="/tags#js">#js</a></li></ul></div><div class="toc inside"><ul>
 <li><a href="/event-loop-in-depth/#js-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92%E5%8D%BB%E4%B8%8D%E9%98%BB%E5%A1%9E%E7%9A%84%E7%A5%95%E5%AF%86">JS 單執行緒卻不阻塞的祕密</a></li>
 <li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">事件迴圈的基本概念</a></li>
 <li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E6%98%AF%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%E7%9A%84%EF%BC%9F">事件迴圈是怎麼運作的？</a></li>
@@ -587,8 +587,8 @@
     </span>
     <figcaption class="gatsby-resp-image-figcaption"><p>事件迴圈在瀏覽器的角色。圖片原始來源已不可考</p></figcaption>
   </figure></p>
-<p>不要看太久，有個概念就好；等你讀完這篇文章，就能看懂這張圖了。</p>
-<p>首先要闡明，事件迴圈是與 JS 的運行（runtime）環境相關的機制，它與 JS（引擎）本身無關。常見的運行環境有瀏覽器、Node.js，每種運行環境可能都有自己實現事件迴圈的方式，而本文只探討瀏覽器的事件迴圈（Node.js 的事件迴圈也是一個重要的主題，等到有天我搞懂了再來寫）。</p>
+<p>不用看太久，有個概念就好；等你讀完這篇文章，就能看懂這張圖了。</p>
+<p>首先要闡明，事件迴圈是與 JS 的運行（runtime）環境相關的機制，它與 JS（引擎）本身無關。常見的運行環境有瀏覽器、Node.js，每種運行環境可能都有自己實現事件迴圈的方式，而本文只探討瀏覽器的事件迴圈（Node.js 的事件迴圈也是一個重要的主題，等哪天我搞懂了再來寫）。</p>
 <p>為什麼需要事件迴圈？這與 JS 單執行緒的特性有關。單執行緒意味著 JS 一次只能執行一段程式碼，當 JS 在調用（invoke）一個函式時，沒有任何其它程式碼可以<strong>同時</strong>運行，除非這個函式結束或被中斷（suspended）（後者可用 <a href="https://javascript.info/generators" target="_blank" rel="nofollow noopener noreferrer">generator</a> 達成）。</p>
 <p>深入點說，JS 內部有一個呼叫堆疊（call stack），又稱為執行上下文堆疊（execution context stack），這個堆疊是用來追蹤程式所呼叫的函式。每當程式調用一個函式，這個函式所產生的執行上下文便會被壓入（push）堆疊；當這個函式執行完，便會被彈出（pop）。函式的執行順序遵循「後進先出」（LIFO, Last In First Out）的模式。</p>
 <p>單執行緒雖簡單易懂，但卻有一個明顯的問題：假如一個函式執行過久，便會卡住之後函式的執行。如果這些函式恰好是做與 UI rendering 相關的事，那畫面便會延遲更新，這對使用者體驗來說是致命的。</p>
@@ -639,7 +639,7 @@
 <blockquote>
 <p>為了協調事件、使用者互動、腳本、渲染和網路活動（networking）等，<a href="https://tc39.es/ecma262/#sec-agents" target="_blank" rel="nofollow noopener noreferrer">使用者代理（user agents）</a>必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。</p>
 </blockquote>
-<p>接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="nofollow noopener noreferrer">service worker</a> 會有自己的事件循環；第三個代理我不知道是什麼，知道的人可以留言給我。</p>
+<p>接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="nofollow noopener noreferrer">service worker</a> 會有自己的事件循環；第三個代理我不知道是什麼，<a href="https://developer.mozilla.org/en-US/docs/Web/API/Worklet" target="_blank" rel="nofollow noopener noreferrer">worklet</a> 似乎是一個實驗性的 API。</p>
 <p>讓我們往下滑：</p>
 <blockquote>
 <p>一個事件循環會有一到多個任務佇列（task queues）。</p>
@@ -656,12 +656,11 @@
 <li>歷史紀錄尋訪（history traversal）：比如呼叫 <code class="language-text">history.back()</code> API。</li>
 </ul>
 </blockquote>
-<p>（一個期待有人幫我解答的疑問：該怎麼證明某個把元素插入 document 的方式是非阻塞的？）</p>
 <p>那任務佇列又是幹嘛的呢？它是拿來分類任務源用的；換言之，不同的任務源可能會被塞進同一個任務佇列。但為什麼要對任務源進一步分類？這個例子說明得很清楚：</p>
 <blockquote>
 <p>例如，使用者代理可以將任務佇列分為給滑鼠和鍵盤事件（即使用者互動任務源）用的，和給其它任務源用的。藉此，使用者代理可以在<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="nofollow noopener noreferrer">事件循環的處理模型</a>的初始步驟中，給與使用者互動任務源關聯的任務佇列四分之三的優先處理權，以讓介面保持響應性，但又不會卡死其它任務佇列。</p>
 </blockquote>
-<p>換言之，說到任務的處理順序時，並沒有誰先觸發誰就先執行的道理，這一切都要看你的瀏覽器如何實作。</p>
+<p>換言之，<strong>說到任務的處理順序時，並沒有誰先觸發誰就先執行的道理</strong>，這一切都要看你的瀏覽器如何實作。</p>
 <p>最後再講一件事：</p>
 <blockquote>
 <p>微任務佇列（microtask queue）不是任務佇列。</p>
@@ -709,7 +708,7 @@
 </li>
 </ol>
 </blockquote>
-<p>7：開始處理微任務。首先檢查 performing a microtask checkpoint 這個旗幟（flag）。為什麼需要？<strong>因為微任務檢查並不只有在事件循環的這個環節才觸發</strong>，其它觸發時機比如調用回呼後；而為了避免在處理微任務佇列時又施行微任務檢查（這可能在 7.3.3 發生），因此需要一個旗幟來控制（<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">後面</a>會再詳細說明微任務的執行策略）。</p>
+<p>7：開始處理微任務。首先檢查 performing a microtask checkpoint 這個旗幟（flag）。為什麼需要？<strong>因為微任務檢查並不只有在事件循環的這個環節才觸發</strong>，其它觸發時機比如調用回呼後；而為了避免在處理微任務佇列時重複施行微任務檢查（這可能在 7.3.3 發生），因此需要一個旗幟來控制（<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">後面</a>會再詳細說明微任務的執行策略）。</p>
 <p>7.3：檢查微任務佇列是否為空，若不為空，便執行第一個微任務。重複這個過程，直到所有微任務都執行完畢。</p>
 <p>7.4-6：我看不懂在做什麼，知道在幹嘛的人可以留言跟我說。</p>
 <blockquote>
@@ -881,7 +880,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><code class="language-text">onTimeout</code> 執行完畢，彈出。</li>
 </ol>
 <p>你可能會疑惑： 為什麼微任務是在程式執行完畢後便執行？微任務檢查不是應該在調用一個任務後（在此例即是 <code class="language-text">onTimeout</code>）才觸發嗎？</p>
-<p>別忘記我提醒過你的：微任務檢查的觸發時機相當多。<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">下一節</a>我會詳述微任務的執行策略。</p>
+<p>別忘記我提醒過你的：微任務檢查的觸發時機相當多。下一節](#微任務的執行策略)我會詳述微任務的執行策略。</p>
 <p>再來看一個比較複雜的例子：</p>
 <p>HTML：</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click me!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div>
@@ -951,7 +950,7 @@ idle2</code></pre></div>
 <li><code class="language-text">onFulfill1</code> 執行完畢，彈出。</li>
 </ol>
 <p>接下來，分歧產生了：究竟是會先執行計時器的回呼 <code class="language-text">onTimeout</code>，還是 <code class="language-text">requestAnimationFrame</code> 的回呼 <code class="language-text">onAf</code>？端看此時 <code class="language-text">onTimeout</code> 有沒有被排入任務佇列。你可能會說，<code class="language-text">setTimeout</code> 的等待時間既是 <code class="language-text">0</code>，其回呼應該就要被馬上排入任務佇列吧？</p>
-<p>不一定，因為事實上規範在<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps" target="_blank" rel="nofollow noopener noreferrer">計時器初始化步驟</a>中有授與瀏覽器延長時間的權力：</p>
+<p>不一定，因為規範在<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps" target="_blank" rel="nofollow noopener noreferrer">計時器初始化步驟</a>中其實有授與瀏覽器延長時間的權力：</p>
 <blockquote>
 <ol start="17">
 <li>可選擇再等待一個由使用者代理決定的時間長度。</li>
@@ -961,7 +960,7 @@ idle2</code></pre></div>
 <blockquote>
 <p>為了最佳化（optimize）裝置的電力使用（power usage）。例如，一些處理器具有低電量模式，其中定時器的粒度（granularity）會降低。在這種平台上，使用者代理可減慢定時器，而非要求處理器使用更精確的模式、消耗較高的電力。</p>
 </blockquote>
-<p>雖然我不知道 Chrome 為何要在我這台 2017 年出廠的 MacBook Pro 13 上做這件事，但反正理由百百款，我們只要知道有這個可能性就好。</p>
+<p>雖然我不知道 Chrome 為何要對我這台 2017 年出廠的 MacBook Pro 13 做這件事，但反正理由百百款，我們只要知道有這個可能性就好。</p>
 <p>所以，Chrome 的情況應該是：</p>
 <ol>
 <li>呼叫堆疊為空，由於無合格的任務佇列，且微任務佇列為空，事件循環進到更新畫面步驟。</li>
@@ -988,7 +987,7 @@ idle2</code></pre></div>
 <li><code class="language-text">onIdle2</code> 執行完畢，彈出。</li>
 </ol>
 <p>Firefox 的狀況呢，我有點累了（我相信你也累了），有空時可自行推導。</p>
-<p>我只講 Firefox 的第二種結果——<code class="language-text">onIdle1</code> 怎麼會緊接在 <code class="language-text">onTimeout</code> 之後執行？一個合理的猜測是：在這輪事件循環，用戶代理跳過了更新畫面，而且是在 Rendering opportunities 這步就把將被更新畫面的 <code class="language-text">Document</code> 移除了，這樣 hasARenderingOpportunity 才不會被設為 true，<code class="language-text">requestIdleCallback</code> 的回呼也才有辦法被執行。</p>
+<p>我只講 Firefox 的第二種結果——<code class="language-text">onIdle1</code> 怎麼會緊接在 <code class="language-text">onTimeout</code> 之後執行？一個合理的猜測是：在這輪事件循環，用戶代理跳過了更新畫面，而且是在 Rendering opportunities 這步就把本來要被更新畫面的 <code class="language-text">Document</code> 移除了，這樣 hasARenderingOpportunity 才不會被設為 true，<code class="language-text">requestIdleCallback</code> 的回呼也才有辦法被執行。</p>
 <p>現在，你應該對事件循環的運作流程有很清楚的認識了，但本文還沒有要結束⋯⋯因為我還要講前面一直說會講的微任務的執行策略。</p>
 <h2 id="微任務的執行策略" style="position:relative;"><a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5" aria-label="微任務的執行策略 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>微任務的執行策略</h2>
 <p>微任務的觸發時機既簡單又複雜。先講複雜的：前面說過，執行微任務前會先施行微任務檢查，而微任務檢查的觸發時機可參考這張圖：</p>
@@ -1026,7 +1025,7 @@ idle2</code></pre></div>
 <p>點擊<a href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">這個連結</a>，再點擊 perform a microtask checkpoint 粗體字，你也可以看到引用這個關鍵字的其它段落（當然不只這些，比如還有 <a href="https://drafts.csswg.org/web-animations/#update-animations-and-send-events" target="_blank" rel="nofollow noopener noreferrer">update animations and send events</a> 的第 3 步）。</p>
 <p>比較常見的觸發點是 8.1.4.4 的 Calling scripts，它在 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#calling-scripts:perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">clean up after running script 的最後</a>，當呼叫堆疊為空，會施行微任務檢查。</p>
 <p>我沒有很了解 script 在規範中的意義為何，只知道有很多地方都會執行 clean up after running script，最常見的便是<a href="https://heycam.github.io/webidl/#invoke-a-callback-function" target="_blank" rel="nofollow noopener noreferrer">調用回呼的 Return 階段的第 2 步</a>，而這就是為什麼在上一節第二個例子中的 <code class="language-text">onClick</code>、<code class="language-text">onAf</code> 會在執行完畢後，馬上施行微任務檢查 。</p>
-<p> 「太瑣碎了吧！我怎麼可能記得住？」在你喊出這句話之前，我要來講一個簡單的判斷方法：只要當前呼叫堆疊為空，微任務檢查便會立即施行；易言之，微任務的執行策略是：<strong>見縫插針、盡可能早</strong>。</p>
+<p> 「太瑣碎了吧！我怎麼可能記得住？」在你喊出這句話之前，我要來講一個簡單的判斷方法：<strong>只要當前呼叫堆疊為空，微任務檢查便會立即施行</strong>；易言之，微任務的執行策略是：見縫插針、盡可能早。</p>
 <p>這個判斷方法並沒在規範中明確表述（至少我沒找到），但它應能適用 99.9% 的情境，剩下 0.1% 還有待你分享給我。</p>
 <p>只講一個證據：現代瀏覽器已把 <code class="language-text">Promise.then()</code> 看作是一種微任務（至少在 2015 年前不是如此，詳情可見<a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="nofollow noopener noreferrer">這篇文章</a>），而在 ECMAScript 規範裡，有一個與微任務相似的概念，叫作 job，而 <a href="https://262.ecma-international.org/11.0/#sec-promise-jobs" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">Promise.then()</code> 便是一種 job</a>。因此，微任務的執行策略理論上要跟 job 相容。對於 <a href="https://262.ecma-international.org/11.0/#sec-jobs" target="_blank" rel="nofollow noopener noreferrer">job 的執行時機</a>，你會發現它跟我前述的判斷方法是一樣的：</p>
 <blockquote>
@@ -1041,7 +1040,8 @@ idle2</code></pre></div>
 </blockquote>
 <p>幀是組成瀏覽器畫面的基本元素；每個時刻的畫面，都是由一個相同或不同的幀所組成的。想更了解這句話的具體涵義，可查看 <a href="https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#frames" target="_blank" rel="nofollow noopener noreferrer">Chrome 開發者工具 Performance 面板的 Frames 斷面圖</a>。</p>
 <p>幀與更新畫面相關，但並<strong>不等同於</strong>更新畫面。幀包括了事件迴圈、佈局（layout）、繪製（paint）等等。一幀就代表一次畫面更新，但不代表只有一輪事件迴圈，因為瀏覽器能根據各種原因跳過更新畫面。</p>
-<p>本文到此（終於）結束，不知道你是否跟我一樣體驗到了事件迴圈的魅力？</p>
+<p>形象化地說，若瀏覽器畫面是「人」，那幀就像是「一天」這個時間單位——人的一生是由一天又一天所組成的，就像瀏覽器畫面是由一幀又一幀所組成的；人每天都會有固定的行程，且會有一定的順序，比如睡覺、吃飯、上廁所、洗澡等等，就像瀏覽器每一幀都會有函式呼叫、事件迴圈、繪製等等；當然，人有時會因為太累而不洗澡直接睡覺，瀏覽器也能有限度地調整一幀內所發生的事情的順序。</p>
+<p>本文到此（終於）結束，不知道你是否跟我一樣也體驗到了事件迴圈的魅力？</p>
 <p>喂？喂？還有人在嗎⋯⋯？</p>
 <h2 id="相關資料" style="position:relative;"><a href="#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99" aria-label="相關資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相關資料</h2>
 <ul>
