@@ -2,7 +2,8 @@
 title: 我知道你懂 Event Loop，但你了解到多深？
 description: 從規範文件深入了解瀏覽器的事件迴圈及其相關議題
 date: 2021-04-02
-tags: [event loop, browser, spec, macrotask, microtask, requestAnimationFrame, requestIdleCallback, timer, js]
+tags: [event loop, browser, spec, rendering, macrotask, microtask, requestAnimationFrame, requestIdleCallback, timer, js]
+update: 2021-04-03 15:53:00
 ---
 
 事件迴圈（Event Loop）是一個我以為我懂了，但直到最近才發現自己什麼都不懂的概念。
@@ -28,9 +29,9 @@ tags: [event loop, browser, spec, macrotask, microtask, requestAnimationFrame, r
 
 ![事件迴圈在瀏覽器的角色。圖片原始來源已不可考](event-loop-in-browser.png)
 
-不要看太久，有個概念就好；等你讀完這篇文章，就能看懂這張圖了。
+不用看太久，有個概念就好；等你讀完這篇文章，就能看懂這張圖了。
 
-首先要闡明，事件迴圈是與 JS 的運行（runtime）環境相關的機制，它與 JS（引擎）本身無關。常見的運行環境有瀏覽器、Node.js，每種運行環境可能都有自己實現事件迴圈的方式，而本文只探討瀏覽器的事件迴圈（Node.js 的事件迴圈也是一個重要的主題，等到有天我搞懂了再來寫）。
+首先要闡明，事件迴圈是與 JS 的運行（runtime）環境相關的機制，它與 JS（引擎）本身無關。常見的運行環境有瀏覽器、Node.js，每種運行環境可能都有自己實現事件迴圈的方式，而本文只探討瀏覽器的事件迴圈（Node.js 的事件迴圈也是一個重要的主題，等哪天我搞懂了再來寫）。
 
 為什麼需要事件迴圈？這與 JS 單執行緒的特性有關。單執行緒意味著 JS 一次只能執行一段程式碼，當 JS 在調用（invoke）一個函式時，沒有任何其它程式碼可以**同時**運行，除非這個函式結束或被中斷（suspended）（後者可用 [generator](https://javascript.info/generators) 達成）。
 
@@ -66,9 +67,9 @@ tags: [event loop, browser, spec, macrotask, microtask, requestAnimationFrame, r
 
 為什麼需要事件迴圈？開宗明義，規範便說了：
 
-> 為了協調事件、使用者互動，腳本，渲染，網路活動（networking）等，[使用者代理（user agents）](https://tc39.es/ecma262/#sec-agents)必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。
+> 為了協調事件、使用者互動、腳本、渲染和網路活動（networking）等，[使用者代理（user agents）](https://tc39.es/ecma262/#sec-agents)必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。
 
-接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) 會有自己的事件循環；第三個代理我不知道是什麼，知道的人可以留言給我。
+接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) 會有自己的事件循環；第三個代理我不知道是什麼，[worklet](https://developer.mozilla.org/en-US/docs/Web/API/Worklet) 似乎是一個實驗性的 API。
 
 讓我們往下滑：
 
@@ -85,15 +86,13 @@ tags: [event loop, browser, spec, macrotask, microtask, requestAnimationFrame, r
 > - DOM 操作：比如以非阻塞的方式將元素插入 document。
 > - 使用者互動：比如鍵盤輸入或滑鼠點擊。
 > - 網路活動。
-> - 歷史紀錄尋訪（ history traversal）：比如呼叫 `history.back()` API。
-
-（一個期待有人幫我解答的疑問：該怎麼證明某個把元素插入 document 的方式是非阻塞的？）
+> - 歷史紀錄尋訪（history traversal）：比如呼叫 `history.back()` API。
 
 那任務佇列又是幹嘛的呢？它是拿來分類任務源用的；換言之，不同的任務源可能會被塞進同一個任務佇列。但為什麼要對任務源進一步分類？這個例子說明得很清楚：
 
 > 例如，使用者代理可以將任務佇列分為給滑鼠和鍵盤事件（即使用者互動任務源）用的，和給其它任務源用的。藉此，使用者代理可以在[事件循環的處理模型](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)的初始步驟中，給與使用者互動任務源關聯的任務佇列四分之三的優先處理權，以讓介面保持響應性，但又不會卡死其它任務佇列。
 
-換言之，說到任務的處理順序時，並沒有誰先觸發誰就先執行的道理，這一切都要看你的瀏覽器如何實作。
+換言之，**說到任務的處理順序時，並沒有誰先觸發誰就先執行的道理**，這一切都要看你的瀏覽器如何實作。
 
 最後再講一件事：
 
@@ -137,7 +136,7 @@ tags: [event loop, browser, spec, macrotask, microtask, requestAnimationFrame, r
 >    6. Perform [ClearKeptObjects](https://tc39.es/ecma262/#sec-clear-kept-objects)().
 >    7. Set the [event loop](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop)'s [performing a microtask checkpoint](https://html.spec.whatwg.org/multipage/webappapis.html#performing-a-microtask-checkpoint) to false.
 
-7：開始處理微任務。首先檢查 performing a microtask checkpoint 這個旗幟（flag）。為什麼需要？**因為微任務檢查並不只有在事件循環的這個環節才觸發**，其它觸發時機比如調用回呼後；而為了避免在處理微任務佇列時又施行微任務檢查（這可能在 7.3.3 發生），因此需要一個旗幟來控制（[後面](#微任務的執行策略)會再詳細說明微任務的執行策略）。
+7：開始處理微任務。首先檢查 performing a microtask checkpoint 這個旗幟（flag）。為什麼需要？**因為微任務檢查並不只有在事件循環的這個環節才觸發**，其它觸發時機比如調用回呼後；而為了避免在處理微任務佇列時重複施行微任務檢查（這可能在 7.3.3 發生），因此需要一個旗幟來控制（[後面](#微任務的執行策略)會再詳細說明微任務的執行策略）。
 
 7.3：檢查微任務佇列是否為空，若不為空，便執行第一個微任務。重複這個過程，直到所有微任務都執行完畢。
 
@@ -275,7 +274,7 @@ function logSomething() {
 
 當程式執行，會發生什麼事？
 
-1. 建立一個全局執行上下文（global execution stack），壓入呼叫堆疊。
+1. 建立一個全局執行上下文（global execution context），壓入呼叫堆疊。
 2. 遇到 `setTimeout`，由 Web API 接管計時器的處理，時間一到便把 `onTimeout` 排入任務佇列。
 3. 遇到 `Promise.then()`，將 `onFulfill1` 排入微任務佇列。
 4. 在控制台（console）印出 `main`。
@@ -300,7 +299,7 @@ function logSomething() {
 
 你可能會疑惑： 為什麼微任務是在程式執行完畢後便執行？微任務檢查不是應該在調用一個任務後（在此例即是 `onTimeout`）才觸發嗎？
 
-別忘記我提醒過你的：微任務檢查的觸發時機相當多。[下一節](#微任務的執行策略)我會詳述微任務的執行策略。
+別忘記我提醒過你的：微任務檢查的觸發時機相當多。下一節](#微任務的執行策略)我會詳述微任務的執行策略。
 
 再來看一個比較複雜的例子：
 
@@ -381,7 +380,7 @@ idle2
 
 讓我們一步步來：
 
-1. 由 Web API 接管 `click` 事件的處理，將其回呼排入任務佇列。
+1. `click` 事件已由 Web API 接手處理，將其回呼排入任務佇列。
 2. 調用 `onClick`，將其函式執行上下文壓入呼叫堆疊。
 3. 遇到 `setTimeout`，由 Web API 接管計時器的處理，時間一到便把 `onTimeout` 排入任務佇列。
 4. 遇到 `Promise.then()`，將 `onFulfill1` 排入微任務佇列。
@@ -395,7 +394,7 @@ idle2
 
 接下來，分歧產生了：究竟是會先執行計時器的回呼 `onTimeout`，還是 `requestAnimationFrame` 的回呼 `onAf`？端看此時 `onTimeout` 有沒有被排入任務佇列。你可能會說，`setTimeout` 的等待時間既是 `0`，其回呼應該就要被馬上排入任務佇列吧？
 
-不一定，因為事實上規範在[計時器初始化步驟](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps)中有授與瀏覽器延長時間的權力：
+不一定，因為規範在[計時器初始化步驟](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps)中其實有授與瀏覽器延長時間的權力：
 
 > 17. 可選擇再等待一個由使用者代理決定的時間長度。
 
@@ -403,7 +402,7 @@ idle2
 
 > 為了最佳化（optimize）裝置的電力使用（power usage）。例如，一些處理器具有低電量模式，其中定時器的粒度（granularity）會降低。在這種平台上，使用者代理可減慢定時器，而非要求處理器使用更精確的模式、消耗較高的電力。
 
-雖然我不知道 Chrome 為何要在我這台 2017 年出廠的 MacBook Pro 13 上做這件事，但反正理由百百款，我們只要知道有這個可能性就好。
+雖然我不知道 Chrome 為何要對我這台 2017 年出廠的 MacBook Pro 13 做這件事，但反正理由百百款，我們只要知道有這個可能性就好。
 
 所以，Chrome 的情況應該是：
 
@@ -432,7 +431,7 @@ idle2
 
 Firefox 的狀況呢，我有點累了（我相信你也累了），有空時可自行推導。
 
-我只講 Firefox 的第二種結果——`onIdle1` 怎麼會緊接在 `onTimeout` 之後執行？一個合理的猜測是：在這輪事件循環，用戶代理跳過了更新畫面，而且是在 Rendering opportunities 這步就把將被更新畫面的 `Document ` 移除了，這樣 hasARenderingOpportunity 才不會被設為 true，`requestIdleCallback` 的回呼也才有辦法被執行。
+我只講 Firefox 的第二種結果——`onIdle1` 怎麼會緊接在 `onTimeout` 之後執行？一個合理的猜測是：在這輪事件循環，用戶代理跳過了更新畫面，而且是在 Rendering opportunities 這步就把本來要被更新畫面的 `Document ` 移除了，這樣 hasARenderingOpportunity 才不會被設為 true，`requestIdleCallback` 的回呼也才有辦法被執行。
 
 現在，你應該對事件循環的運作流程有很清楚的認識了，但本文還沒有要結束⋯⋯因為我還要講前面一直說會講的微任務的執行策略。
 
@@ -446,9 +445,9 @@ Firefox 的狀況呢，我有點累了（我相信你也累了），有空時可
 
 比較常見的觸發點是 8.1.4.4 的 Calling scripts，它在 [clean up after running script 的最後](https://html.spec.whatwg.org/multipage/webappapis.html#calling-scripts:perform-a-microtask-checkpoint)，當呼叫堆疊為空，會施行微任務檢查。
 
-我沒有很了解 script 在規範中的意義為何，只知道有很多地方都會執行 clean up after running script，最常見的便是[調用回呼的 Return 階段的第 2 步](https://heycam.github.io/webidl/#invoke-a-callback-function)，而這就是為什麼在上一節第二個例子中的 `onClick`、`onAf` 會在執行完畢後，馬上施行微任務檢查 。
+我沒有很了解 script 在規範中的意義為何，只知道有很多地方都會執行 clean up after running script，最常見的便是[調用回呼的 Return 階段的第 2 步](https://heycam.github.io/webidl/#invoke-a-callback-function)，而這就是為什麼在上一節第二個例子中的 `onAf` 會在執行完畢後，馬上施行微任務檢查 。
 
- 「太瑣碎了吧！我怎麼可能記得住？」在你喊出這句話之前，我要來講一個簡單的判斷方法：只要當前呼叫堆疊為空，微任務檢查便會立即施行；易言之，微任務的執行策略是：**見縫插針、盡可能早**。
+ 「太瑣碎了吧！我怎麼可能記得住？」在你喊出這句話之前，我要來講一個簡單的判斷方法：**只要當前呼叫堆疊為空，微任務檢查便會立即施行**；易言之，微任務的執行策略是：見縫插針、盡可能早。
 
 這個判斷方法並沒在規範中明確表述（至少我沒找到），但它應能適用 99.9% 的情境，剩下 0.1% 還有待你分享給我。
 
@@ -470,7 +469,9 @@ Firefox 的狀況呢，我有點累了（我相信你也累了），有空時可
 
 幀與更新畫面相關，但並**不等同於**更新畫面。幀包括了事件迴圈、佈局（layout）、繪製（paint）等等。一幀就代表一次畫面更新，但不代表只有一輪事件迴圈，因為瀏覽器能根據各種原因跳過更新畫面。
 
-本文到此（終於）結束，不知道你是否跟我一樣體驗到了事件迴圈的魅力？
+形象化地說，若瀏覽器畫面是「人」，那幀就像是「一天」這個時間單位——人的一生是由一天又一天所組成的，就像瀏覽器畫面是由一幀又一幀所組成的；人每天都會有固定的行程，且會有一定的順序，比如睡覺、吃飯、上廁所、洗澡等等，就像瀏覽器每一幀都會有函式呼叫、事件迴圈、繪製等等；當然，人有時會因為太累而不洗澡直接睡覺，瀏覽器也能有限度地調整一幀內所發生的事情的順序。
+
+本文到此（終於）結束，不知道你是否跟我一樣也體驗到了事件迴圈的魅力？
 
 喂？喂？還有人在嗎⋯⋯？
 
