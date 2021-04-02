@@ -637,7 +637,7 @@
 <p>（原文是英文，我會以自己覺得重要且能理解的方式翻，不會嚴格地一個字一個字翻。如果我覺得英文能比中文表達得更清楚，那我就會維持原文）</p>
 <p>為什麼需要事件迴圈？開宗明義，規範便說了：</p>
 <blockquote>
-<p>為了協調事件、使用者互動，腳本，渲染，網路活動（networking）等，<a href="https://tc39.es/ecma262/#sec-agents" target="_blank" rel="nofollow noopener noreferrer">使用者代理（user agents）</a>必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。</p>
+<p>為了協調事件、使用者互動、腳本、渲染和網路活動（networking）等，<a href="https://tc39.es/ecma262/#sec-agents" target="_blank" rel="nofollow noopener noreferrer">使用者代理（user agents）</a>必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。</p>
 </blockquote>
 <p>接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="nofollow noopener noreferrer">service worker</a> 會有自己的事件循環；第三個代理我不知道是什麼，知道的人可以留言給我。</p>
 <p>讓我們往下滑：</p>
@@ -653,7 +653,7 @@
 <li>DOM 操作：比如以非阻塞的方式將元素插入 document。</li>
 <li>使用者互動：比如鍵盤輸入或滑鼠點擊。</li>
 <li>網路活動。</li>
-<li>歷史紀錄尋訪（ history traversal）：比如呼叫 <code class="language-text">history.back()</code> API。</li>
+<li>歷史紀錄尋訪（history traversal）：比如呼叫 <code class="language-text">history.back()</code> API。</li>
 </ul>
 </blockquote>
 <p>（一個期待有人幫我解答的疑問：該怎麼證明某個把元素插入 document 的方式是非阻塞的？）</p>
