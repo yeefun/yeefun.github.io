@@ -1,0 +1,1084 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.9 'IBM Plex Serif','source-han-serif-tc',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:#24292e;font-family:'IBM Plex Serif','source-han-serif-tc',serif;font-weight:normal;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:2rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.51572rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1.31951rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.87055rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;color:inherit;font-family:-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','PingFang TC','Hiragino Sans GB','Microsoft Yahei',sans-serif;font-weight:bold;text-rendering:optimizeLegibility;font-size:0.81225rem;line-height:1.1;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}ul{margin-left:1.9rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;list-style-position:outside;list-style-image:none;}ol{margin-left:1.9rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;font-size:0.85rem;line-height:1.9rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;font-size:1rem;line-height:1.9rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}blockquote{margin-left:1.9rem;margin-right:1.9rem;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.9rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.9rem;}b{font-weight:bold;}strong{font-weight:bold;}dt{font-weight:bold;}th{font-weight:bold;}li{margin-bottom:calc(1.9rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.9rem;margin-bottom:calc(1.9rem / 2);margin-top:calc(1.9rem / 2);}li > ul{margin-left:1.9rem;margin-bottom:calc(1.9rem / 2);margin-top:calc(1.9rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.9rem / 2);}code{font-size:0.85rem;line-height:1.9rem;}kbd{font-size:0.85rem;line-height:1.9rem;}samp{font-size:0.85rem;line-height:1.9rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.26667rem;padding-right:1.26667rem;padding-top:0.95rem;padding-bottom:calc(0.95rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}</style><style data-href="/styles.a2e53980dfc16ffb8500.css">#notFound{max-width:720px;padding:1rem;margin:3rem auto 0;text-align:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}#notFound svg{font-size:10rem}#notFound h1{font-size:5rem;margin:.5rem 0 1rem}.blog-post-container{padding-bottom:2rem}.blog-post-container>div{max-width:720px;margin:0 auto}.blog-post-container .blog-post{padding:1rem}.blog-post-container .blog-post a{-webkit-text-decoration-line:underline;text-decoration-line:underline}.blog-post-container .blog-post .blog-post-title{font-size:1.8rem;margin:0;line-height:1.4;font-family:"IBM Plex Serif",source-han-serif-tc,serif}@media screen and (max-width:559px){.blog-post-container .blog-post .blog-post-title{font-size:1.6rem}}.blog-post-container .blog-post .blog-post-info{display:flex;flex-wrap:wrap;margin-top:1rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.84rem;align-items:flex-start;line-height:1.6}.blog-post-container .blog-post .blog-post-info>.dot{margin:0 .5rem;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap{display:flex;align-items:center;opacity:.7}.blog-post-container .blog-post .blog-post-info .date-wrap .update-date,.blog-post-container .blog-post .blog-post-info .date-wrap .write-date{display:block;white-space:nowrap}.blog-post-container .blog-post .blog-post-info .date-wrap>:nth-child(2){margin-left:.25rem}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list{display:flex;margin:0;flex-wrap:wrap;flex-grow:1}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag{list-style:none;margin:0 .3rem 0 0}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a{opacity:.7;text-decoration:none;transition:opacity .3s}.blog-post-container .blog-post .blog-post-info .blog-post-tag-list .blog-post-tag a:hover{opacity:1}.blog-post-container .blog-post .series{display:flex;flex-direction:column;justify-content:flex-end;margin-top:2rem}.blog-post-container .blog-post .series .series-head{display:flex;align-items:center;justify-content:flex-end}.blog-post-container .blog-post .series .series-head .head{font-weight:700;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .blog-post .series .series-head .icon-wrap{text-align:center;width:1.5rem;font-size:.8rem}.blog-post-container .blog-post .series .series-list{display:flex;margin:.25rem 0 0;flex-direction:column;align-items:flex-end;font-size:.8rem;line-height:1.3}.blog-post-container .blog-post .series .series-list .series-item{list-style:none;margin:0;opacity:.4;transition:opacity all .2s}.blog-post-container .blog-post .series .series-list .series-item:hover{opacity:.9}.blog-post-container .blog-post .series .series-list .series-item>a{text-decoration:none;display:flex}.blog-post-container .blog-post .series .series-list .series-item>a .icon-wrap{min-width:1.5rem;width:1.5rem;text-align:center}.blog-post-container .blog-post .series .series-list .series-item.current-series{opacity:.7}.blog-post-container .blog-post .blog-post-content{margin-top:3rem}.blog-post-container .blog-post .blog-post-content h2{margin-top:3.2rem;margin-bottom:1.6rem;line-height:1.4}.blog-post-container .blog-post .blog-post-content h3{margin-top:2rem}.blog-post-container .blog-post .blog-post-content p{margin-top:1.6rem;margin-bottom:1.6rem}.blog-post-container .blog-post .blog-post-content a{opacity:.7;transition:opacity .3s}.blog-post-container .blog-post .blog-post-content a:hover{opacity:1}.blog-post-container .blog-post .blog-post-content ul{margin-top:1.6rem;margin-bottom:1.6rem}.blog-post-container .blog-post .blog-post-content ul p{margin-top:0;margin-bottom:0}.blog-post-container .blog-post .blog-post-content ul ul{margin-top:.475rem;margin-bottom:.475rem;list-style:circle}.blog-post-container .blog-post .blog-post-content ul ul li{margin-bottom:.475rem}.blog-post-container .blog-post .blog-post-content strong{font-weight:600}.blog-post-container .blog-post .blog-post-content code{font-family:IBM Plex Mono,monospace!important}.blog-post-container .blog-post .blog-post-content blockquote{font-size:1.1rem;border-left:4px solid #6a737d;margin:2rem 0;padding:0 1rem;opacity:.8;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content hr{width:12%;margin:3.2rem auto}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figure{margin:3rem auto;max-width:590px}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;line-height:1.8;max-width:80%;margin-left:auto;font-size:.84rem;opacity:.7;margin-top:.5rem;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-figcaption p{margin-top:0;margin-bottom:0}.blog-post-container .blog-post .blog-post-content .anchor,.blog-post-container .blog-post .blog-post-content .gatsby-resp-image-link{opacity:1}.blog-post-container .social-share{display:flex;margin-top:2rem;flex-direction:column;align-items:center}.blog-post-container .social-share ul{display:flex;margin:0}.blog-post-container .social-share ul li.social-share-item{list-style:none;margin:0 .25rem}.blog-post-container .social-share ul li.social-share-item circle{fill:#6a737d;transition:fill .3s}.blog-post-container .social-share ul li.social-share-item:hover.email circle{fill:#b8b8b8}.blog-post-container .social-share ul li.social-share-item:hover.facebook circle{fill:#3b5998}.blog-post-container .social-share ul li.social-share-item:hover.twitter circle{fill:#00aced}.blog-post-container .social-share ul li.social-share-item:hover.linkedin circle{fill:#007fb1}.blog-post-container .social-share ul li.social-share-item:hover.reddit circle{fill:#5f99cf}.blog-post-container .social-share ul li.social-share-item:hover.pocket circle{fill:#ef3f56}.blog-post-container .comments-dev{display:flex;border:1px dotted grey;min-height:15rem;flex-direction:column;align-items:center;justify-content:center;-webkit-user-select:none;-ms-user-select:none;user-select:none}.blog-post-container .comments-dev>:first-child{opacity:.8}.blog-post-container .comments-dev>:nth-child(2){font-size:.9rem;opacity:.5}.blog-post-container .comments-dev.comments-dev{min-height:20rem}.blog-post-container .comments{padding:2rem 1rem 1rem}.gatsby-highlight-code-line{background-color:#fbf3db;display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:.75em;border-left:.25em solid #dfab01}code[class*=language-],pre[class*=language-]{color:#393a34;font-family:Consolas,Bitstream Vera Sans Mono,Courier New,Courier,monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;font-size:.9em;line-height:1.2em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre>code[class*=language-]{font-size:1em}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#b3d4fc}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:1px solid #ddd;background-color:#fff}:not(pre)>code[class*=language-]{padding:1px .2em;background:#f8f8f8;border:1px solid #ddd}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#998;font-style:italic}.token.namespace{opacity:.7}.token.attr-value,.token.string{color:#e3116c}.token.operator,.token.punctuation{color:#393a34}.token.boolean,.token.constant,.token.entity,.token.inserted,.token.number,.token.property,.token.regex,.token.symbol,.token.url,.token.variable{color:#36acaa}.language-autohotkey .token.selector,.token.atrule,.token.attr-name,.token.keyword{color:#00a4db}.language-autohotkey .token.tag,.token.deleted,.token.function{color:#9a050f}.language-autohotkey .token.keyword,.token.selector,.token.tag{color:#00009f}.token.bold,.token.function,.token.important{font-weight:700}.token.italic{font-style:italic}#layout a{cursor:pointer;color:inherit}#layout svg{color:#6a737d}a{text-decoration:none}#content{display:flex;flex-direction:column;padding-top:6rem;min-height:100vh}@media screen and (max-width:839px){#content{padding-top:4rem}}@media screen and (max-width:559px){#content{padding-top:2.5rem}}#content main{flex-grow:1}#content footer{line-height:1.6;padding-top:1rem;padding-bottom:.25rem;text-align:center;font-size:.9rem;opacity:.8}#content footer,#top{-webkit-user-select:none;-ms-user-select:none;user-select:none}#top{display:flex;position:fixed;right:0;bottom:0;width:2.5rem;height:2.5rem;align-items:center;justify-content:center;font-size:2rem;border-radius:100%;margin-right:2rem;margin-bottom:2.2rem;transition:.5s;cursor:pointer}@media screen and (max-width:559px){#top{margin-right:1rem;margin-bottom:1rem}}#top svg{margin:0;opacity:.5;transition:opacity .2s}#top svg:hover{opacity:1}#Header{display:flex;position:fixed;top:0;width:100%;align-items:flex-end;justify-content:space-between;padding:0 2rem 1rem;left:50%;transform:translateX(-50%);max-width:1440px;height:6rem;max-height:6rem;transition:top .3s ease .2s;-webkit-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none}@media screen and (max-width:1119px){#Header{padding:0 1.5rem 1rem;z-index:2;background-color:#fff}}@media screen and (max-width:839px){#Header{padding:0 1rem .5rem;height:4rem}}@media screen and (max-width:559px){#Header{height:2.5rem;padding:0 1rem .25rem;box-shadow:0 1px 2px rgba(0,0,0,.1)}}#Header>*{pointer-events:all}#Header.mobile{top:0!important}#Header.show{top:0}#Header.hide{top:-6rem}#Header .header-title{display:flex;align-items:flex-end}@media screen and (max-width:559px){#Header .header-title{align-items:center;align-self:center;margin-top:.5rem}}#Header .header-title .header-profile-image-wrap{display:flex;align-items:center;border:1px solid #aaa;padding:2px;border-radius:100%;margin-right:.25rem}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap{padding:1px}}#Header .header-title .header-profile-image-wrap img{border-radius:100%;margin:0;opacity:.8;transition:all .5s;transition-timing-function:ease-in-out}@media screen and (max-width:1119px){#Header .header-title .header-profile-image-wrap img{width:25px!important;height:25px!important}}@media screen and (max-width:559px){#Header .header-title .header-profile-image-wrap img{width:15px!important;height:15px!important}}#Header .header-title .header-profile-image-wrap img:hover{opacity:1}#Header .header-title .header-profile-image-wrap img.inc{width:50px}#Header .header-title .header-profile-image-wrap img.dec{width:25px}#Header .header-title .header-title-text{margin:0;font-size:1.6rem;font-weight:300;font-family:Rubik,sans-serif;opacity:.9;transition:opacity .3s;letter-spacing:.8px}@media screen and (max-width:559px){#Header .header-title .header-title-text{font-size:1.1rem}}#Header .header-title .header-title-text:hover{opacity:1}#nav{display:flex;align-items:center}#nav ul{display:flex;margin:0;width:3.5rem;justify-content:space-between}#nav ul li{list-style:none;margin:0}#nav ul li svg{margin:0;font-size:1.2rem;transition:opacity .3s;opacity:.7}@media screen and (max-width:559px){#nav ul li svg{font-size:1rem}}#nav ul li svg:hover{opacity:1}#nav ul li .search-wrap,#nav ul li .tag-wrap{display:flex;align-items:center;height:1.5rem}#nav ul li .search-wrap svg,#nav ul li .tag-wrap svg{margin-top:3px}.bio{min-width:14rem;width:14rem;font-weight:300;font-family:Rubik,sans-serif;padding-left:2rem}@media (min-width:1440px){.bio{margin-left:calc((100vw - 1440px)/2)}}.bio p,.bio span{margin:0;font-size:.9rem}.bio span{display:block}.bio .bio-item{margin-bottom:.8rem;display:flex;font-size:.9rem}.bio .bio-item .icon-wrap{display:inline-flex;font-size:.9rem;margin-right:.4rem;min-width:1.1rem;width:1.1rem;justify-content:center}.bio .bio-item .icon-wrap svg{margin-top:1px;opacity:.9}.bio .bio-item>:nth-child(2){line-height:1.1;overflow:hidden}.bio .bio-item.company,.bio .bio-item.location,.bio .bio-item.name{cursor:default}.bio .comment{margin-bottom:1rem}.bio .social{margin-left:.2rem;margin-top:2rem}.bio .social a{display:inline-flex;font-size:1.3rem;margin-right:.5rem}.bio .social a .facebook,.bio .social a .github,.bio .social a .instagram,.bio .social a .linkedin,.bio .social a .rss{transition:color .3s}.bio .social a:hover .rss{color:#e28f48!important}.bio .social a:hover .linkedin{color:#0077b5!important}.bio .social a:hover .facebook{color:#1877f2!important}.bio .social a:hover .instagram{color:#e4405f!important}.bio .social a:hover .github{color:#999!important}a:visited{color:inherit}.index-wrap{display:flex}@media screen and (max-width:1119px){.index-wrap{margin-top:.5rem}}@media screen and (max-width:839px){.index-wrap{margin-top:1rem}}.index-wrap .bio{position:fixed;top:6rem;left:0;transition:opacity .2s;transition-timing-function:ease-in-out;transition-delay:.1s}@media screen and (max-width:1119px){.index-wrap .bio{display:none}}.index-wrap .index-post-list-wrap{width:100%}.index-wrap .index-post-list-wrap>div{margin:0 auto}.index-wrap .index-post-list-wrap .show-more-posts{display:flex;justify-content:center;margin-top:1rem;margin-bottom:5rem}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn{cursor:pointer;opacity:.5;font-size:.9rem;transition:opacity .2s}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn:hover{opacity:.9}.index-wrap .index-post-list-wrap .show-more-posts .show-more-btn span{margin-left:.25rem}#tags{max-width:720px;margin:1rem auto}#tags .tag-list-wrap{margin-bottom:5rem}@media screen and (max-width:559px){#tags .tag-list-wrap{margin-bottom:3rem}}#tags .tag-list-wrap ul{display:flex;flex-wrap:wrap;justify-content:center;margin:0}#tags .tag-list-wrap ul li{display:flex;align-items:center;margin:.25rem .5rem;list-style:none}@media screen and (max-width:559px){#tags .tag-list-wrap ul li{margin:.2rem .4rem}}#tags .tag-list-wrap ul li span{cursor:pointer;opacity:.5;line-height:1.25;transition:font-size .6s .3s}#tags .tag-list-wrap ul li span:hover{opacity:.9!important}#tags .post-list{margin:0 auto}.post-list{max-width:640px}.post-list li,.post-list ul{margin:0}.post-list li{list-style:none}.post-list .post{display:flex;flex-direction:column;max-width:inherit;margin:5rem 1rem;opacity:.85;transition:opacity .2s}@media screen and (max-width:839px){.post-list .post{margin:3rem 1rem}}.post-list .post:hover{opacity:1}.post-list .post.hide{display:none}.post-list .post:first-child{margin-top:0}.post-list .post h1{font-size:1.8rem;font-family:"IBM Plex Serif",source-han-serif-tc,serif;margin-bottom:.25rem;line-height:1.4}@media screen and (max-width:839px){.post-list .post h1{font-size:1.3rem}}.post-list .post .info{display:flex;flex-wrap:wrap;font-size:.84rem;align-items:center;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;margin-bottom:.25rem}@media screen and (max-width:839px){.post-list .post .info{font-size:.76rem;line-height:1.4}}.post-list .post .info .date-wrap{display:flex;align-items:center;opacity:.7}.post-list .post .info .date-wrap .date,.post-list .post .info .date-wrap .update{display:block;white-space:nowrap}.post-list .post .info .info-dot{margin:0 .25rem}.post-list .post .info .tag-list{display:flex;flex-wrap:wrap}.post-list .post .info .tag-list .tag{display:inline;margin:0 .5rem 0 0}.post-list .post .info .tag-list .tag span>a{opacity:.7;transition:opacity .2s}.post-list .post .info .tag-list .tag span>a:hover{opacity:1}.post-list .post .excerpt{max-width:calc(640px - 2rem);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif;font-size:.95rem;line-height:1.6}@media screen and (max-width:839px){.post-list .post .excerpt{font-size:.82rem}}#Search{max-width:720px;margin:0 auto}#Search .search-inner-wrap .input-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:4rem;padding:1rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap{margin-bottom:2rem}}#Search .search-inner-wrap .input-wrap input{all:unset;margin:.1rem 1rem 0}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap input{min-width:5rem}}#Search .search-inner-wrap .input-wrap .search-toggle{display:flex;flex-direction:row;font-size:.8rem}@media screen and (max-width:559px){#Search .search-inner-wrap .input-wrap .search-toggle{flex-direction:column}}#Search .search-inner-wrap .input-wrap .search-toggle span{cursor:pointer;white-space:nowrap;-webkit-user-select:none;-ms-user-select:none;user-select:none;opacity:.8;transition:opacity .2s}#Search .search-inner-wrap .input-wrap .search-toggle span:first-child{margin-right:.5rem}#Search .search-inner-wrap .post-list{margin:0 auto}#Search .search-inner-wrap .no-result{display:block;text-align:center;font-size:1.2rem}.toc{font-size:.8rem;max-height:calc(100vh - 6rem);transition:opacity .3s;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang TC,Hiragino Sans GB,Microsoft Yahei,sans-serif}.toc.outside{position:fixed;width:220px;height:100%;top:0;right:0;margin-top:6rem;opacity:.4}@media screen and (max-width:1160px){.toc.outside{display:none}}.toc.outside:hover{opacity:.9}.toc.outside ul{overflow:auto;max-height:85%}.toc.outside a{max-width:calc(220px - 1.5rem)}.toc.inside{display:none;text-align:right}@media screen and (max-width:1160px){.toc.inside{display:block}}.toc.inside li{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;margin-left:auto}.toc.inside a{text-decoration:none}.toc ul{margin-top:1.6rem;margin-bottom:0;margin-left:0}.toc ul li{list-style:none;margin:0}.toc p{margin:0}.toc a{display:block;opacity:.4;transition:opacity .1s;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.toc a:hover{opacity:1!important}</style><meta name="generator" content="Gatsby 2.24.65"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><title data-react-helmet="true">我知道你懂 Event Loop，但你了解到多深？ | Yeefun</title><link data-react-helmet="true" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=IBM+Plex+Serif:wght@400;600;700&amp;family=Rubik:wght@300&amp;display=swap" rel="stylesheet"/><meta data-react-helmet="true" name="description" content="從規範文件深入了解瀏覽器的事件迴圈及其相關議題"/><meta data-react-helmet="true" property="og:title" content="我知道你懂 Event Loop，但你了解到多深？ | Yeefun"/><meta data-react-helmet="true" property="og:description" content="從規範文件深入了解瀏覽器的事件迴圈及其相關議題"/><meta data-react-helmet="true" property="og:url" content="https://yeefun.github.io/event-loop-in-depth/"/><meta data-react-helmet="true" property="og:image" content="/og-default.png"/><meta data-react-helmet="true" property="og:type" content="article"/><meta data-react-helmet="true" property="og:locale" content="zh_TW"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Yeefun Lin"/><meta data-react-helmet="true" name="twitter:title" content="我知道你懂 Event Loop，但你了解到多深？ | Yeefun"/><meta data-react-helmet="true" name="twitter:description" content="從規範文件深入了解瀏覽器的事件迴圈及其相關議題"/><meta data-react-helmet="true" name="mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-capable" content="yes"/><meta data-react-helmet="true" name="apple-mobile-web-app-status-bar-style" content="default"/><meta data-react-helmet="true" name="google-site-verification" content=""/><script data-react-helmet="true" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "datePublished": "2021-04-02T00:00:00.000Z",
+  
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yeefun.github.io"
+  },
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "headline": "我知道你懂 Event Loop，但你了解到多深？",
+  "publisher": {
+    "@type" : "organization",
+    "name" : "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"
+    }
+  },
+  "image": ["https://yeefun.github.io/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg"]
+}
+</script><script data-react-helmet="true">
+            (function(d) {
+              var config = {
+                kitId: 'hfy8uue',
+                scriptTimeout: 3000,
+                async: true
+              },
+              h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/wf-loading/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+            })(document);
+          </script><style data-react-helmet="true">svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}
+
+.fad.fa-inverse {
+  color: #fff;
+}</style><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="icon" href="/favicon.svg?v=efcd17939d16df22e16329c67275a6ab" type="image/svg+xml"/><link rel="icon" href="/favicon-32x32.png?v=efcd17939d16df22e16329c67275a6ab" type="image/png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#6a737d"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=efcd17939d16df22e16329c67275a6ab"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="alternate" type="application/rss+xml" title="Yeefun | Feed" href="/rss.xml"/><link as="script" rel="preload" href="/webpack-runtime-c1dd8df21db12693d109.js"/><link as="script" rel="preload" href="/framework-58f863d6aa18c11a521f.js"/><link as="script" rel="preload" href="/app-4331bacab8c883a61636.js"/><link as="script" rel="preload" href="/styles-7d4153d260c0197f0043.js"/><link as="script" rel="preload" href="/cb1608f2-af5c11d174355a97e951.js"/><link as="script" rel="preload" href="/commons-5aa92924169b5c149a6f.js"/><link as="script" rel="preload" href="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"/><link as="fetch" rel="preload" href="/page-data/event-loop-in-depth/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2326376460.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div id="layout"><header id="Header" class="show "><div class="header-title"><a href="/"><div class="header-profile-image-wrap"><img src="/static/profile-dfc0a86e8cd8d343a6789c63bd32af86.jpg" alt="title profile picture" width="25px" height="25px"/></div></a><a href="/"><h1 class="header-title-text">Yeefun</h1></a></div><nav id="nav"><ul><li><div class="tag-wrap"><a href="/tags"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tags" class="svg-inline--fa fa-tags fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"></path></svg></a></div></li><li><div class="search-wrap"><a class="search" href="/search"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></div></li></ul></nav></header><div id="content"><main><div class="blog-post-container"><div class="blog-post"><h1 class="blog-post-title">我知道你懂 Event Loop，但你了解到多深？</h1><div class="blog-post-info"><div class="date-wrap"><span class="write-date">2021-04-02</span></div><span class="dot">·</span><ul class="blog-post-tag-list"><li class="blog-post-tag"><a href="/tags#event loop">#event loop</a></li><li class="blog-post-tag"><a href="/tags#browser">#browser</a></li><li class="blog-post-tag"><a href="/tags#spec">#spec</a></li><li class="blog-post-tag"><a href="/tags#macrotask">#macrotask</a></li><li class="blog-post-tag"><a href="/tags#microtask">#microtask</a></li><li class="blog-post-tag"><a href="/tags#requestAnimationFrame">#requestAnimationFrame</a></li><li class="blog-post-tag"><a href="/tags#requestIdleCallback">#requestIdleCallback</a></li><li class="blog-post-tag"><a href="/tags#timer">#timer</a></li><li class="blog-post-tag"><a href="/tags#js">#js</a></li></ul></div><div class="toc inside"><ul>
+<li><a href="/event-loop-in-depth/#js-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92%E5%8D%BB%E4%B8%8D%E9%98%BB%E5%A1%9E%E7%9A%84%E7%A5%95%E5%AF%86">JS 單執行緒卻不阻塞的祕密</a></li>
+<li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">事件迴圈的基本概念</a></li>
+<li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E6%98%AF%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%E7%9A%84%EF%BC%9F">事件迴圈是怎麼運作的？</a></li>
+<li><a href="/event-loop-in-depth/#%E5%BE%9E%E7%AF%84%E4%BE%8B%E4%BA%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88">從範例了解事件迴圈</a></li>
+<li><a href="/event-loop-in-depth/#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">微任務的執行策略</a></li>
+<li><a href="/event-loop-in-depth/#%E5%9B%9E%E7%AD%94%E9%96%8B%E9%A0%AD%E7%9A%84%E5%95%8F%E9%A1%8C">回答開頭的問題</a></li>
+<li><a href="/event-loop-in-depth/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div><div class="blog-post-content"><p>事件迴圈（Event Loop）是一個我以為我懂了，但直到最近才發現自己什麼都不懂的概念。</p>
+<p>會發現這件事，是因為我在研究 React Fiber 的過程中，獲知了一個能提升網頁性能的 API <code class="language-text">requestIdleCallback</code>，它的回呼（callback）會在瀏覽器空閒（idle）時執行，其中一個時機點是幀尾。</p>
+<p>問題來了，什麼是「幀尾」？要回答這個問題，首先當然要知道什麼是「幀」（frame）？原本我以為，幀就<strong>等同於</strong>網頁畫面更新——每一幀，畫面就更新一次。但若是這樣，哪來的「尾」可以給 <code class="language-text">requestIdleCallback</code> 執行？或許，一幀除了更新，還做了許多事？</p>
+<p>就這樣，我從想瞭解一幀究竟做了哪些事，不小心掉進事件迴圈的漩渦，糾纏了一個多禮拜才爬出來，又花了好幾天才煉成這篇文章。</p>
+<p>本文將從官方規範下手，看完它，你便能回答：</p>
+<ul>
+<li>事件迴圈的運作流程為何？</li>
+<li>「幀」是什麼？</li>
+<li><code class="language-text">setTimeout</code>、<code class="language-text">requestAnimationFrame</code>、<code class="language-text">requestIdleCallback</code> 分別發生在事件迴圈的哪個階段？</li>
+<li>宏任務（macrotask）和微任務（microtask）是什麼？它們與事件迴圈的關係是什麼？</li>
+<li>每輪事件迴圈都會更新畫面嗎？</li>
+<li>JavaScript 是單執行緒（single threaded），但卻能發出 HTTP 請求而不阻塞（non-blocking），這是怎麼辦到的？</li>
+</ul>
+<h2 id="js-單執行緒卻不阻塞的祕密" style="position:relative;"><a href="#js-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92%E5%8D%BB%E4%B8%8D%E9%98%BB%E5%A1%9E%E7%9A%84%E7%A5%95%E5%AF%86" aria-label="js 單執行緒卻不阻塞的祕密 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS 單執行緒卻不阻塞的祕密</h2>
+<p>在開始之前，先來看一張圖：</p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c9fda2d01746574d4d0f2c9bd9204bf5/7a3d6/event-loop-in-browser.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 104.57627118644068%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsSAAALEgHS3X78AAADrElEQVQ4y3VSW28bRRTOjwGEQEGoPPIMglcQoAJSCxUVUq+gqpFqaCoMtA3gECdO80ChuTg0tDR2HN8DjRMnEWnSeB3H1/ia2OusL7vr3fXuzszOsms7TkDq0dnR7Oh8853zzdejdgNjfRHreMOibrZzWN0wH+UTs7o+iPmDdrX29RwDK9qCcovq7Pvq/CnV8bHiPAvcF6DnAnacVh2nVPtJxf8lhuIzwfjJkOI4g7yXsPO06vwUaWDvF8h7UfFcRHOfoO0pfFjZBSsdJJLFrXE+aOJWzPzKELti4leH+FUzp+cwFzRBKt4d8IgZY9zgmhwnMLwMkH4iI6UBIdYvPsr/RY+iIAhYWayR+4nifjaXiTUYUgEM16ShAg+VVBQFok4ipds2hFIjPxpeNpTiRlUI1HbvxFa/ym1eE1miM9GzowcCSdgz8Yk+du28WHNLxUEx/7Vc0MBPuyoKQIhWIkQ+RGS3wqVQWSh3wAiKYnkMZozq2nnA+NDBz2r1hkoZREYHK1jvfDoy8dpo74nrvSf6e18deOlz95l251rbolwalYo3Zeo6qHvF8j2ZtABysMmEW+Pq6k0S9wyevp8Ctwcefzfw+HvDQh8HuJbaSIwmRslMfzpxGdLeetFXLbhrhVm6vtOQZRnKWtHMtvWW/9s7gZGRxSFLwGz8q78DxkgqpEeaJaNauSHXPSzppnJ/0nszAhvXSJuwCbFiJSbGgpbptcnJ4Lh1feLH5VsNmdXBAEi4Ory5c1sqfqMx10qBajFQKbg4JtlqW59tfOu3XzbGHoZn7m9NPSB+v7lkZCWmozYgf2DzBkxelWsO7sBVKzxsFKd5ZqcLjpDhP0L356Nz81G7PfLIHXOilhaaYKBZXUD0HKjaBIZoMjtcPSTzBAJVrNtftyJWcEMUANQCaaniw3duVehWaJ8ASVYBDG+HImGibVv9wRQAkNj1Rpu26239BhGiLNMk8uV/suRd198WuztFS3FGTrKQqHKRuqBtorScbchKl7nlBP0vVKo/d8n0isl5bmnfsJi6tpT5wJO57Iv1+aNnfanP/Omr/uiVhcRH3gwtoTbhMTDFvzweetEavRuh1vPU2h59JbjniZfWcwe/hstjIXJlt7icq5xbzFNNeBys9/CU4p+3xl6Yir5lS5705t5zp19/EH/Xlf7Ql3vbnnzTltQ277jSb8wm/sPcHoEWgXu34k1XHClqNkHZkpRzt2JP6Pu5JOVIVWwJ6lGCWshW4eHQ/wJu5D8QLdyZ5AAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="事件迴圈在瀏覽器的角色。圖片原始來源已不可考"
+        title="事件迴圈在瀏覽器的角色。圖片原始來源已不可考"
+        src="/static/c9fda2d01746574d4d0f2c9bd9204bf5/fcda8/event-loop-in-browser.png"
+        srcset="/static/c9fda2d01746574d4d0f2c9bd9204bf5/fcda8/event-loop-in-browser.png 590w,
+/static/c9fda2d01746574d4d0f2c9bd9204bf5/7a3d6/event-loop-in-browser.png 990w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>事件迴圈在瀏覽器的角色。圖片原始來源已不可考</p></figcaption>
+  </figure></p>
+<p>不要看太久，有個概念就好；等你讀完這篇文章，就能看懂這張圖了。</p>
+<p>首先要闡明，事件迴圈是與 JS 的運行（runtime）環境相關的機制，它與 JS（引擎）本身無關。常見的運行環境有瀏覽器、Node.js，每種運行環境可能都有自己實現事件迴圈的方式，而本文只探討瀏覽器的事件迴圈（Node.js 的事件迴圈也是一個重要的主題，等到有天我搞懂了再來寫）。</p>
+<p>為什麼需要事件迴圈？這與 JS 單執行緒的特性有關。單執行緒意味著 JS 一次只能執行一段程式碼，當 JS 在調用（invoke）一個函式時，沒有任何其它程式碼可以<strong>同時</strong>運行，除非這個函式結束或被中斷（suspended）（後者可用 <a href="https://javascript.info/generators" target="_blank" rel="nofollow noopener noreferrer">generator</a> 達成）。</p>
+<p>深入點說，JS 內部有一個呼叫堆疊（call stack），又稱為執行上下文堆疊（execution context stack），這個堆疊是用來追蹤程式所呼叫的函式。每當程式調用一個函式，這個函式所產生的執行上下文便會被壓入（push）堆疊；當這個函式執行完，便會被彈出（pop）。函式的執行順序遵循「後進先出」（LIFO, Last In First Out）的模式。</p>
+<p>單執行緒雖簡單易懂，但卻有一個明顯的問題：假如一個函式執行過久，便會卡住之後函式的執行。如果這些函式恰好是做與 UI rendering 相關的事，那畫面便會延遲更新，這對使用者體驗來說是致命的。</p>
+<p>現在讓我們來想一下，JS 有什麼操作是相當耗時的？無論你的答案是什麼，我都已經想好了（欸），那就是請求資料。在 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" target="_blank" rel="nofollow noopener noreferrer">AJAX</a> 大行其道的年代，大家都在用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">XMLHttpRequest</code>（XHR）</a> 請求來請求去。如果使用者網路速度慢，可能一次請求就要花費好幾秒，但為什麼使用者的畫面仍能正常渲染（render），而沒有絲毫延宕？</p>
+<p>因為 XHR 並非由 JS 本身，而是由它的運行環境（即瀏覽器）<strong>自身的</strong>執行緒來處理的，因此不會阻塞呼叫堆疊。由瀏覽器負責處理的函式還有計時器 <code class="language-text">setTimeout</code>、與動畫緊密相關的 <code class="language-text">requestAnimationFrame</code>、害我一腳踏入事件迴圈泥淖的 <code class="language-text">requestIdleCallback</code>⋯⋯它們通通統稱為 <a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank" rel="nofollow noopener noreferrer">Web APIs</a>。</p>
+<p>以計時器來舉例，當 JS 引擎執行到 <code class="language-text">setTimeout(func, 3000)</code>，瀏覽器便接手過計時的操作，等三秒一到，便將它的 <code class="language-text">func</code> 回呼塞進呼叫堆疊，讓引擎執行。這可說是一種非同步（asynchronous）的機制。</p>
+<p>一個複雜的網頁，可能會有許多回呼要執行，現在讓我們來問：是誰不停挑出回呼並將回呼塞進呼叫堆疊的？</p>
+<p>那就是今天的主角：事件迴圈。</p>
+<h2 id="事件迴圈的基本概念" style="position:relative;"><a href="#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5" aria-label="事件迴圈的基本概念 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>事件迴圈的基本概念</h2>
+<p>同樣，在進到事件迴圈的流程前，先來看一張統整圖：</p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/e53e7455f561eeb2a702370fc75b7865/0a151/event-loop-process.jpg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 127.79661016949153%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAaABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAECAwX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAH3YhQXPQc2x//EABoQAQACAwEAAAAAAAAAAAAAAAEAIRARMQL/2gAIAQEAAQUCi0c1GsJuNeDmf//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EABQQAQAAAAAAAAAAAAAAAAAAADD/2gAIAQEABj8CT//EAB4QAAMAAgEFAAAAAAAAAAAAAAABESExQSBhgaHB/9oACAEBAAE/Ib3JNPY2HwaGBuWi1qHIoqhiJcmnXjo//9oADAMBAAIAAwAAABCTzjD/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/EB//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/EB//xAAcEAEAAwADAQEAAAAAAAAAAAABABEhMUFREJH/2gAIAQEAAT8Qohsd4rqMxFhtsjqWadrIpsQdf2MILGntEdheDjyDyUpKHpjsmEXzPYTEpRVs+IJSWQAKon//2Q=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="事件迴圈的運作流程。圖片原始來源已不可考"
+        title="事件迴圈的運作流程。圖片原始來源已不可考"
+        src="/static/e53e7455f561eeb2a702370fc75b7865/1c72d/event-loop-process.jpg"
+        srcset="/static/e53e7455f561eeb2a702370fc75b7865/1c72d/event-loop-process.jpg 590w,
+/static/e53e7455f561eeb2a702370fc75b7865/0a151/event-loop-process.jpg 866w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>事件迴圈的運作流程。圖片原始來源已不可考</p></figcaption>
+  </figure></p>
+<p>看得懂在幹嘛嗎？看不懂？沒關係，繼續看下去，一切都會豁然開朗。</p>
+<p>（喂！有人說看得懂啊！不要假裝沒聽到！喂、喂——）</p>
+<p>（消音）</p>
+<p>接下來，我們會跟著這份由 <a href="https://whatwg.org/" target="_blank" rel="nofollow noopener noreferrer">WHATWG（Web Hypertext Application Technology Working Group）</a> 社群（a.k.a. 瀏覽器大佬）編寫的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops" target="_blank" rel="nofollow noopener noreferrer">HTML 規範文件</a>，來理解事件迴圈詳細的運作流程。</p>
+<p>（原文是英文，我會以自己覺得重要且能理解的方式翻，不會嚴格地一個字一個字翻。如果我覺得英文能比中文表達得更清楚，那我就會維持原文）</p>
+<p>為什麼需要事件迴圈？開宗明義，規範便說了：</p>
+<blockquote>
+<p>為了協調事件、使用者互動，腳本，渲染，網路活動（networking）等，<a href="https://tc39.es/ecma262/#sec-agents" target="_blank" rel="nofollow noopener noreferrer">使用者代理（user agents）</a>必須使用本節所描述的事件迴圈。每個代理都有一個相關聯且唯一的事件循環。</p>
+</blockquote>
+<p>接下來，規範根據不同代理對事件循環做了三種分類：window event loop、worker event loop、worklet event loop。第一個代理是我們最常碰到的 Window 物件；第二個代理告訴我們 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="nofollow noopener noreferrer">service worker</a> 會有自己的事件循環；第三個代理我不知道是什麼，知道的人可以留言給我。</p>
+<p>讓我們往下滑：</p>
+<blockquote>
+<p>一個事件循環會有一到多個任務佇列（task queues）。</p>
+<p>每個任務（task）都來自特定的任務源（task source）。每個任務源都必須對應一個特定的任務佇列。</p>
+</blockquote>
+<p>這兩段話出現了三個專有名詞：任務、任務源、任務佇列。</p>
+<p>首先，<strong>任務就是宏任務</strong>，它可以幹的事情相當多，包括發布（dispatch）<a href="https://www.w3schools.com/jsref/obj_event.asp" target="_blank" rel="nofollow noopener noreferrer">Event 物件</a>（想想當事件監聽器觸發時，回呼所拿到的第一個參數）、解析（parse）HTML、呼叫回呼、<a href="https://fetch.spec.whatwg.org/#concept-fetch" target="_blank" rel="nofollow noopener noreferrer">獲取（fetch）</a>資源、響應（reacting）DOM 操作。</p>
+<p>任務源也很多，但大都被歸類為<a href="https://html.spec.whatwg.org/multipage/webappapis.html#generic-task-sources" target="_blank" rel="nofollow noopener noreferrer">以下四種</a>：</p>
+<blockquote>
+<ul>
+<li>DOM 操作：比如以非阻塞的方式將元素插入 document。</li>
+<li>使用者互動：比如鍵盤輸入或滑鼠點擊。</li>
+<li>網路活動。</li>
+<li>歷史紀錄尋訪（ history traversal）：比如呼叫 <code class="language-text">history.back()</code> API。</li>
+</ul>
+</blockquote>
+<p>（一個期待有人幫我解答的疑問：該怎麼證明某個把元素插入 document 的方式是非阻塞的？）</p>
+<p>那任務佇列又是幹嘛的呢？它是拿來分類任務源用的；換言之，不同的任務源可能會被塞進同一個任務佇列。但為什麼要對任務源進一步分類？這個例子說明得很清楚：</p>
+<blockquote>
+<p>例如，使用者代理可以將任務佇列分為給滑鼠和鍵盤事件（即使用者互動任務源）用的，和給其它任務源用的。藉此，使用者代理可以在<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="nofollow noopener noreferrer">事件循環的處理模型</a>的初始步驟中，給與使用者互動任務源關聯的任務佇列四分之三的優先處理權，以讓介面保持響應性，但又不會卡死其它任務佇列。</p>
+</blockquote>
+<p>換言之，說到任務的處理順序時，並沒有誰先觸發誰就先執行的道理，這一切都要看你的瀏覽器如何實作。</p>
+<p>最後再講一件事：</p>
+<blockquote>
+<p>微任務佇列（microtask queue）不是任務佇列。</p>
+<p>微任務是一種通俗的講法，指的是透過 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-microtask" target="_blank" rel="nofollow noopener noreferrer">queue a microtask</a> 演算法創建的任務。</p>
+</blockquote>
+<p>微任務雖是一種任務（它們具有相同的<a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" target="_blank" rel="nofollow noopener noreferrer">結構</a>），但它所形成的佇列與任務佇列不同，而這是因為它們在成為佇列時所使用的演算法不同。</p>
+<p>有了這些基本概念後，接下來，讓我們直接進到事件循環的重頭戲吧！</p>
+<h2 id="事件迴圈是怎麼運作的？" style="position:relative;"><a href="#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E6%98%AF%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%E7%9A%84%EF%BC%9F" aria-label="事件迴圈是怎麼運作的？ permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>事件迴圈是怎麼運作的？</h2>
+<p>在 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="nofollow noopener noreferrer">8.1.6.3 處理模型（Processing model）</a>中，規範描述了事件迴圈的運作流程：</p>
+<blockquote>
+<p>只要事件循環存在，便必須一直運行以下步驟：</p>
+<ol>
+<li>挑出一個任務佇列，要怎麼挑<a href="https://infra.spec.whatwg.org/#implementation-defined" target="_blank" rel="nofollow noopener noreferrer">由使用者代理決定</a>。如果沒有任務佇列，那就直接跳到微任務步驟。</li>
+<li>將 oldestTask 設為該任務佇列中第一個任務，並移除。</li>
+<li>將<a href="https://html.spec.whatwg.org/multipage/webappapis.html#currently-running-task" target="_blank" rel="nofollow noopener noreferrer">當前正在運行的任務</a>設為 oldestTask。</li>
+<li>Let taskStartTime be the <a href="https://w3c.github.io/hr-time/#dfn-current-high-resolution-time" target="_blank" rel="nofollow noopener noreferrer">current high resolution time</a>.</li>
+<li>Perform oldestTask's <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task-steps" target="_blank" rel="nofollow noopener noreferrer">steps</a>.</li>
+<li>將當前正在運行的任務設回 null。</li>
+</ol>
+</blockquote>
+<p>前六步都滿好理解的。</p>
+<p>1：「由使用者代理決定」符合我們前面所說的，使用者代理可自行決定要給哪個任務佇列較高的優先處理權。</p>
+<p>2：由於是任務<strong>佇列</strong>，資料操作當然是遵循先進先出（FIFO, First-In-First-Out）的原則。</p>
+<blockquote>
+<ol start="7">
+<li>
+<p>微任務：<a href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">施行微任務檢查（Perform a microtask checkpoint）</a>。</p>
+<ol>
+<li>If the <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" target="_blank" rel="nofollow noopener noreferrer">event loop</a>'s <a href="https://html.spec.whatwg.org/multipage/webappapis.html#performing-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">performing a microtask checkpoint</a> is true, then return.</li>
+<li>Set the <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" target="_blank" rel="nofollow noopener noreferrer">event loop</a>'s <a href="https://html.spec.whatwg.org/multipage/webappapis.html#performing-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">performing a microtask checkpoint</a> to true.</li>
+<li>
+<p>只要微任務佇列不為空：</p>
+<ol>
+<li>將 oldestMicrotask 設為對微任務佇列<a href="https://infra.spec.whatwg.org/#queue-dequeue" target="_blank" rel="nofollow noopener noreferrer">出列（dequeue）</a>的結果。</li>
+<li>將當前正在運行的任務設為 oldestMicrotask。</li>
+<li>運行 oldestMicrotask。</li>
+<li>將當前正在運行的任務設回 null。</li>
+</ol>
+</li>
+<li>For each <a href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" target="_blank" rel="nofollow noopener noreferrer">environment settings object</a> whose <a href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-event-loop" target="_blank" rel="nofollow noopener noreferrer">responsible event loop</a> is this <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" target="_blank" rel="nofollow noopener noreferrer">event loop</a>, <a href="https://html.spec.whatwg.org/multipage/webappapis.html#notify-about-rejected-promises" target="_blank" rel="nofollow noopener noreferrer">notify about rejected promises</a> on that <a href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" target="_blank" rel="nofollow noopener noreferrer">environment settings object</a>.</li>
+<li><a href="https://w3c.github.io/IndexedDB/#cleanup-indexed-database-transactions" target="_blank" rel="nofollow noopener noreferrer">Cleanup Indexed Database transactions</a>.</li>
+<li>Perform <a href="https://tc39.es/ecma262/#sec-clear-kept-objects" target="_blank" rel="nofollow noopener noreferrer">ClearKeptObjects</a>().</li>
+<li>Set the <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" target="_blank" rel="nofollow noopener noreferrer">event loop</a>'s <a href="https://html.spec.whatwg.org/multipage/webappapis.html#performing-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">performing a microtask checkpoint</a> to false.</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>7：開始處理微任務。首先檢查 performing a microtask checkpoint 這個旗幟（flag）。為什麼需要？<strong>因為微任務檢查並不只有在事件循環的這個環節才觸發</strong>，其它觸發時機比如調用回呼後；而為了避免在處理微任務佇列時又施行微任務檢查（這可能在 7.3.3 發生），因此需要一個旗幟來控制（<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">後面</a>會再詳細說明微任務的執行策略）。</p>
+<p>7.3：檢查微任務佇列是否為空，若不為空，便執行第一個微任務。重複這個過程，直到所有微任務都執行完畢。</p>
+<p>7.4-6：我看不懂在做什麼，知道在幹嘛的人可以留言跟我說。</p>
+<blockquote>
+<ol start="8">
+<li>將 hasARenderingOpportunity 設為 false.</li>
+<li>將 now 設為 <a href="https://w3c.github.io/hr-time/#dfn-current-high-resolution-time" target="_blank" rel="nofollow noopener noreferrer">current high resolution time</a>. [<a href="https://html.spec.whatwg.org/multipage/references.html#refsHRT" target="_blank" rel="nofollow noopener noreferrer">HRT</a>]</li>
+<li>
+<p>Report the <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" target="_blank" rel="nofollow noopener noreferrer">task</a>'s duration by performing the following steps:</p>
+<ol>
+<li>Let top-level browsing contexts be an empty <a href="https://infra.spec.whatwg.org/#ordered-set" target="_blank" rel="nofollow noopener noreferrer">set</a>.</li>
+<li>For each <a href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" target="_blank" rel="nofollow noopener noreferrer">environment settings object</a> settings of oldestTask's <a href="https://html.spec.whatwg.org/multipage/webappapis.html#script-evaluation-environment-settings-object-set" target="_blank" rel="nofollow noopener noreferrer">script evaluation environment settings object set</a>, <a href="https://infra.spec.whatwg.org/#set-append" target="_blank" rel="nofollow noopener noreferrer">append</a> setting's <a href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context" target="_blank" rel="nofollow noopener noreferrer">top-level browsing context</a> to top-level browsing contexts.</li>
+<li><a href="https://w3c.github.io/longtasks/#report-long-tasks" target="_blank" rel="nofollow noopener noreferrer">Report long tasks</a>, passing in taskStartTime, now (the end time of the task), top-level browsing contexts, and oldestTask.</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>8：從字面上理解，hasARenderingOpportunity 便是「是否有渲染機會」，一開始是 false，它將跟等下第 10 步的更新畫面（Update the rendering）有關。</p>
+<p>9：這裡的 now 將成為 <code class="language-text">requestAnimationFrame</code> 回呼的第一個參數。</p>
+<p>10：我看不太懂在幹嘛，但 10.3 回報的 long tasks 似乎會出現在 <a href="https://web.dev/long-tasks-devtools/" target="_blank" rel="nofollow noopener noreferrer">Chrome 開發者工具的 Performance 面板中</a>。</p>
+<blockquote>
+<ol start="11">
+<li>
+<p>更新畫面：如果是 window event loop，則：</p>
+<ol>
+<li>
+<p>Let docs be all <code class="language-text">Document</code> objects whose <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-agent" target="_blank" rel="nofollow noopener noreferrer">relevant agent</a>'s <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-agent-event-loop" target="_blank" rel="nofollow noopener noreferrer">event loop</a> is this event loop, sorted arbitrarily except that the following conditions must be met:</p>
+<ul>
+<li>Any <code class="language-text">Document</code> B whose <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-document-bc" target="_blank" rel="nofollow noopener noreferrer">browsing context</a>'s <a href="https://html.spec.whatwg.org/multipage/browsers.html#bc-container-document" target="_blank" rel="nofollow noopener noreferrer">container document</a> is A must be listed after A in the list.</li>
+<li>If there are two documents A and B whose <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-document-bc" target="_blank" rel="nofollow noopener noreferrer">browsing contexts</a> are both <a href="https://html.spec.whatwg.org/multipage/browsers.html#child-browsing-context" target="_blank" rel="nofollow noopener noreferrer">child browsing contexts</a> whose <a href="https://html.spec.whatwg.org/multipage/browsers.html#bc-container-document" target="_blank" rel="nofollow noopener noreferrer">container documents</a> are another <code class="language-text">Document</code> C, then the order of A and B in the list must match the <a href="https://dom.spec.whatwg.org/#concept-shadow-including-tree-order" target="_blank" rel="nofollow noopener noreferrer">shadow-including tree order</a> of their respective <a href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container" target="_blank" rel="nofollow noopener noreferrer">browsing context containers</a> in C's <a href="https://dom.spec.whatwg.org/#concept-node-tree" target="_blank" rel="nofollow noopener noreferrer">node tree</a>.</li>
+</ul>
+<p>In the steps below that iterate over docs, each <code class="language-text">Document</code> must be processed in the order it is found in the list.</p>
+</li>
+<li>渲染機會（Rendering opportunities）：移除<a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-document-bc" target="_blank" rel="nofollow noopener noreferrer">瀏覽上下文（browsing context）</a>沒有渲染機會的 docs。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>11：這一步做的事情相當多（上面只是一小部分），主要是處理跟畫面渲染相關的事。</p>
+<p>11.1：我沒有全部看懂，但大致上就是選出 <code class="language-text">Document</code> 物件、將它們指定給 docs，並以一定的規則排序。</p>
+<p>11.2：你可能會疑惑：要怎麼決定有無渲染機會？</p>
+<blockquote>
+<p>如果使用者代理當前能夠將瀏覽上下文的內容呈現給使用者，那該瀏覽上下文就有渲染機會，這需考慮硬體刷新率的限制，和使用者代理出於性能考量的節流，也需考慮内容的可呈現性（presentable），即使它在視窗（viewport）外。</p>
+</blockquote>
+<p>規範似乎覺得這裡沒說清楚，於是又補上（跟上句很像的）一句：</p>
+<blockquote>
+<p>瀏覽上下文的渲染機會是基於硬體限制（如顯示刷新率（display refresh rates））和其它因素（如頁面性能或頁面是否在背景（background））來確定的。渲染機會通常會定期出現。</p>
+</blockquote>
+<p>好像還是沒說清楚，再給一個註解：</p>
+<blockquote>
+<p>本規範並沒規定任何特定的模式來選擇渲染機會。但舉例來說，若瀏覽器試圖實現 60Hz 的刷新率，那渲染機會最多每 1/60 秒要出現一次（約 16.7ms）。若瀏覽器發現某個瀏覽上下文無法維持這個速率，它可能會將渲染機會降到可持續的每秒 30 次，而不是偶爾掉幀。同樣，如果一個瀏覽上下文不可見，使用者代理可能會決定將該頁面降到每秒 4 次渲染機會，甚至更少。</p>
+</blockquote>
+<p>說了這麼多，我們大致上可以這麼總結：不是每輪事件循環都會更新畫面，其頻率高低，端看瀏覽器怎麼實作。</p>
+<blockquote>
+<ol start="11">
+<li>
+<p>更新畫面：</p>
+<ol start="3">
+<li>如果 docs 不為空，則將 hasARenderingOpportunity 設為 true。</li>
+<li>
+<p>不必要的渲染（Unnecessary rendering）：移除滿足以下條件的 docs：</p>
+<ul>
+<li>使用者代理認為更新  <code class="language-text">Document</code> 的瀏覽上下文的畫面不會有明顯的（visible）效果。</li>
+<li><code class="language-text">Document</code> 的 map of animation frame callbacks 為空。</li>
+</ul>
+</li>
+<li>移除使用者代理由於其它原因認為最好（preferrable）跳過更新畫面的 docs。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>11.3：hasARenderingOpportunity 在第 8 步曾出現過。</p>
+<p>11.4-5：與 11.2 做的事類似，再「兩」次篩選掉不需渲染的 docs。</p>
+<p>11.4：把篩選條件說得很清楚，值得注意的是，animation frame callback 就是放在 <code class="language-text">requestAnimationFrame</code> 的回呼。</p>
+<p>11.5：有說等於沒說，其目的應是授與瀏覽器決定是否要渲染的權力。不過規範還是舉例了：</p>
+<blockquote>
+<p>比如為確保某些任務緊接著執行，只有微任務檢查交錯其間（而且沒有 animation frame callbacks 參與 ）。具體來說，使用者代理可能希望合併定時器回呼，中間沒有畫面更新。</p>
+</blockquote>
+<p>同時規範也說明了設立 11.2 和 11.4 的目的：</p>
+<blockquote>
+<p>被標註為「渲染機會」的步驟可防止使用者代理在<strong>無法向使用者呈現新内容時</strong>更新畫面。</p>
+<p>被標註為「不必要的渲染」的步驟可防止使用者代理在<strong>没有新内容可繪製時</strong>更新畫面。</p>
+</blockquote>
+<p>到這裡，如果 docs 還有<a href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" target="_blank" rel="nofollow noopener noreferrer">充分活躍（fully active）</a>的 <code class="language-text">Document</code>，那就一一對它們：</p>
+<blockquote>
+<ol start="11">
+<li>
+<p>更新畫面：</p>
+<ol start="6">
+<li><a href="https://html.spec.whatwg.org/multipage/interaction.html#flush-autofocus-candidates" target="_blank" rel="nofollow noopener noreferrer">flush autofocus candidates</a></li>
+<li><a href="https://drafts.csswg.org/cssom-view/#run-the-resize-steps" target="_blank" rel="nofollow noopener noreferrer">run the resize steps</a></li>
+<li><a href="https://drafts.csswg.org/cssom-view/#run-the-scroll-steps" target="_blank" rel="nofollow noopener noreferrer">run the scroll steps</a></li>
+<li><a href="https://drafts.csswg.org/cssom-view/#evaluate-media-queries-and-report-changes" target="_blank" rel="nofollow noopener noreferrer">evaluate media queries and report changes</a></li>
+<li><a href="https://drafts.csswg.org/web-animations/#update-animations-and-send-events" target="_blank" rel="nofollow noopener noreferrer">update animations and send events</a></li>
+<li><a href="https://fullscreen.spec.whatwg.org/#run-the-fullscreen-steps" target="_blank" rel="nofollow noopener noreferrer">run the fullscreen steps</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#run-the-animation-frame-callbacks" target="_blank" rel="nofollow noopener noreferrer">run the animation frame callbacks</a></li>
+<li><a href="https://w3c.github.io/IntersectionObserver/#run-the-update-intersection-observations-steps" target="_blank" rel="nofollow noopener noreferrer">run the update intersection observations steps</a></li>
+<li>Invoke the <a href="https://w3c.github.io/paint-timing/#mark-paint-timing" target="_blank" rel="nofollow noopener noreferrer">mark paint timing</a> algorithm</li>
+<li>更新該 <code class="language-text">Document</code> 的畫面或使用者介面，及其瀏覽上下文以反映當前狀態。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>11.6-13：你可以看到很多熟悉的名字，比如事件類型 <code class="language-text">resize</code> 和 <code class="language-text">scroll</code>、與 RWD（Responsive Web Design）息息相關的 media queries、常被拿來做懶加載（lazy load）的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank" rel="nofollow noopener noreferrer">Intersection Observer</a>。</p>
+<p>11.12：執行 <code class="language-text">requestAnimationFrame</code> 的回呼。</p>
+<p>11.14：不知道在幹嘛，但似乎跟網頁性能指標 <a href="https://web.dev/first-contentful-paint/" target="_blank" rel="nofollow noopener noreferrer">FCP（First Contentful Paint）</a>有關。</p>
+<p>到這裡，事件循環的更新畫面結束，接下來：</p>
+<blockquote>
+<ol start="12">
+<li>
+<p>如果滿足以下條件：</p>
+<ol>
+<li>事件循環是 window event loop；</li>
+<li>在任務佇列中沒有任何任務；</li>
+<li>微任務佇列為空；</li>
+<li>hasARenderingOpportunity 為 false；</li>
+</ol>
+<p>運行 <a href="https://w3c.github.io/requestidlecallback/#start-an-idle-period-algorithm" target="_blank" rel="nofollow noopener noreferrer">start an idle period algorithm</a>。</p>
+</li>
+</ol>
+</blockquote>
+<p>12：若條件都滿足，<code class="language-text">requestIdleCallback</code> 的回呼將在這步執行（終於找到你啦！我找你找得好苦啊！）。</p>
+<p>第 13 步是在講事件循環是 worker event loop 的情況，與本文主題無關，跳過。</p>
+<p>一輪事件迴圈到此運作完畢。現在再回去看本節開頭的統整圖，是不是很清楚了呢？</p>
+<p>還不清楚？沒關係，讓我們結合呼叫堆疊、Web APIs 和事件迴圈，來實際跑一遍流程吧！</p>
+<h2 id="從範例了解事件迴圈" style="position:relative;"><a href="#%E5%BE%9E%E7%AF%84%E4%BE%8B%E4%BA%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88" aria-label="從範例了解事件迴圈 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>從範例了解事件迴圈</h2>
+<p>先來看一個簡單的例子：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onTimeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'timeout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onFulfill1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onFulfill2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'main'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">logSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">logSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>當程式執行，會發生什麼事？</p>
+<ol>
+<li>建立一個全局執行上下文（global execution stack），壓入呼叫堆疊。</li>
+<li>遇到 <code class="language-text">setTimeout</code>，由 Web API 接管計時器的處理，時間一到便把 <code class="language-text">onTimeout</code> 排入任務佇列。</li>
+<li>遇到 <code class="language-text">Promise.then()</code>，將 <code class="language-text">onFulfill1</code> 排入微任務佇列。</li>
+<li>在控制台（console）印出 <code class="language-text">main</code>。</li>
+<li>調用 <code class="language-text">logSomething</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">something</code>。</li>
+<li><code class="language-text">logSomething</code> 執行完畢，彈出。</li>
+<li>程式執行完畢，全局執行上下文彈出。</li>
+<li>施行微任務檢查：微任務佇列不為空，出列。</li>
+<li>調用 <code class="language-text">onFulfill1</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">promise1</code>。</li>
+<li><code class="language-text">onFulfill1</code> 執行完畢，彈出。</li>
+<li>遇到 <code class="language-text">Promise.then()</code>，將 <code class="language-text">onFulfill2</code> 排入微任務佇列。</li>
+<li>微任務佇列不為空，出列。</li>
+<li>調用 <code class="language-text">onFulfill2</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">promise2</code>。</li>
+<li><code class="language-text">onFulfill2</code> 執行完畢，彈出。</li>
+<li>微任務佇列為空，微任務檢查完畢。</li>
+<li>呼叫堆疊為空，事件循環從任務佇列取出最舊的任務。</li>
+<li>調用 <code class="language-text">onTimeout</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">timeout</code>。</li>
+<li><code class="language-text">onTimeout</code> 執行完畢，彈出。</li>
+</ol>
+<p>你可能會疑惑： 為什麼微任務是在程式執行完畢後便執行？微任務檢查不是應該在調用一個任務後（在此例即是 <code class="language-text">onTimeout</code>）才觸發嗎？</p>
+<p>別忘記我提醒過你的：微任務檢查的觸發時機相當多。<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">下一節</a>我會詳述微任務的執行策略。</p>
+<p>再來看一個比較複雜的例子：</p>
+<p>HTML：</p>
+<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click me!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div>
+<p>JS：</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> btn <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'btn'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+btn<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onTimeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'timeout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">requestIdleCallback</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onIdle2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'idle2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onFulfill1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onAf</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'raf'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onFulfill2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">requestIdleCallback</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">onIdle1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'idle1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>當你點擊按鈕，控制台會印出什麼？</p>
+<p>答案不只一種，在不同瀏覽器或同一瀏覽器的不同時間，可能會出現不同結果。若只看最常出現的結果，Chrome 89.0.4389.90 是：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">promise1
+raf
+promise2
+timeout
+idle1
+idle2</code></pre></div>
+<p>Firefox 87.0 是：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">promise1
+timeout
+raf
+promise2
+idle1
+idle2</code></pre></div>
+<p>或是：</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">promise1
+timeout
+idle1
+raf
+promise2
+idle2</code></pre></div>
+<p>但無論是哪種結果，都能被事件循環的處理模型解釋；換言之，差異並不來自規範失效，而來自規範賦予瀏覽器的彈性。</p>
+<p>讓我們一步步來：</p>
+<ol>
+<li>由 Web API 接管 <code class="language-text">click</code> 事件的處理，將其回呼排入任務佇列。</li>
+<li>調用 <code class="language-text">onClick</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>遇到 <code class="language-text">setTimeout</code>，由 Web API 接管計時器的處理，時間一到便把 <code class="language-text">onTimeout</code> 排入任務佇列。</li>
+<li>遇到 <code class="language-text">Promise.then()</code>，將 <code class="language-text">onFulfill1</code> 排入微任務佇列。</li>
+<li>遇到 <code class="language-text">requestAnimationFrame</code>，將其回呼 <code class="language-text">onAf</code> 放入 map of animation frame callbacks。</li>
+<li>遇到 <code class="language-text">requestIdleCallback</code>，將其回呼 <code class="language-text">onIdle1</code> 放入 list of idle request callbacks。</li>
+<li><code class="language-text">onClick</code> 執行完畢，彈出。</li>
+<li>施行微任務檢查：微任務佇列不為空，出列。</li>
+<li>調用 <code class="language-text">onFulfill1</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">promise1</code>。</li>
+<li><code class="language-text">onFulfill1</code> 執行完畢，彈出。</li>
+</ol>
+<p>接下來，分歧產生了：究竟是會先執行計時器的回呼 <code class="language-text">onTimeout</code>，還是 <code class="language-text">requestAnimationFrame</code> 的回呼 <code class="language-text">onAf</code>？端看此時 <code class="language-text">onTimeout</code> 有沒有被排入任務佇列。你可能會說，<code class="language-text">setTimeout</code> 的等待時間既是 <code class="language-text">0</code>，其回呼應該就要被馬上排入任務佇列吧？</p>
+<p>不一定，因為事實上規範在<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timer-initialisation-steps" target="_blank" rel="nofollow noopener noreferrer">計時器初始化步驟</a>中有授與瀏覽器延長時間的權力：</p>
+<blockquote>
+<ol start="17">
+<li>可選擇再等待一個由使用者代理決定的時間長度。</li>
+</ol>
+</blockquote>
+<p>目的是：</p>
+<blockquote>
+<p>為了最佳化（optimize）裝置的電力使用（power usage）。例如，一些處理器具有低電量模式，其中定時器的粒度（granularity）會降低。在這種平台上，使用者代理可減慢定時器，而非要求處理器使用更精確的模式、消耗較高的電力。</p>
+</blockquote>
+<p>雖然我不知道 Chrome 為何要在我這台 2017 年出廠的 MacBook Pro 13 上做這件事，但反正理由百百款，我們只要知道有這個可能性就好。</p>
+<p>所以，Chrome 的情況應該是：</p>
+<ol>
+<li>呼叫堆疊為空，由於無合格的任務佇列，且微任務佇列為空，事件循環進到更新畫面步驟。</li>
+<li>運行 animation frame callbacks。</li>
+<li>調用 <code class="language-text">onAf</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">raf</code>。</li>
+<li>遇到 <code class="language-text">Promise.then()</code>，將 <code class="language-text">onFulfill2</code> 排入微任務佇列。</li>
+<li><code class="language-text">onAf</code> 執行完畢，彈出。</li>
+<li>施行微任務檢查：微任務佇列不為空，出列。</li>
+<li>調用 <code class="language-text">onFulfill2</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">promise2</code>。</li>
+<li><code class="language-text">onFulfill2</code> 執行完畢，彈出。</li>
+<li>由於 hasARenderingOpportunity 為 true，或任務佇列中有任務，跳過 start an idle period algorithm。</li>
+<li>呼叫堆疊為空，事件循環從任務佇列取出最舊的任務。</li>
+<li>調用 <code class="language-text">onTimeout</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">timeout</code>。</li>
+<li>遇到 <code class="language-text">requestIdleCallback</code>，將其回呼 <code class="language-text">onIdle2</code> 放入 list of idle request callbacks。</li>
+<li><code class="language-text">onTimeout</code> 執行完畢，彈出。</li>
+<li>start an idle period algorithm，調用 <code class="language-text">onIdle1</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">idle1</code>。</li>
+<li><code class="language-text">onIdle1</code> 執行完畢，彈出。</li>
+<li>調用 <code class="language-text">onIdle2</code>，將其函式執行上下文壓入呼叫堆疊。</li>
+<li>印出 <code class="language-text">idle2</code>。</li>
+<li><code class="language-text">onIdle2</code> 執行完畢，彈出。</li>
+</ol>
+<p>Firefox 的狀況呢，我有點累了（我相信你也累了），有空時可自行推導。</p>
+<p>我只講 Firefox 的第二種結果——<code class="language-text">onIdle1</code> 怎麼會緊接在 <code class="language-text">onTimeout</code> 之後執行？一個合理的猜測是：在這輪事件循環，用戶代理跳過了更新畫面，而且是在 Rendering opportunities 這步就把將被更新畫面的 <code class="language-text">Document</code> 移除了，這樣 hasARenderingOpportunity 才不會被設為 true，<code class="language-text">requestIdleCallback</code> 的回呼也才有辦法被執行。</p>
+<p>現在，你應該對事件循環的運作流程有很清楚的認識了，但本文還沒有要結束⋯⋯因為我還要講前面一直說會講的微任務的執行策略。</p>
+<h2 id="微任務的執行策略" style="position:relative;"><a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5" aria-label="微任務的執行策略 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>微任務的執行策略</h2>
+<p>微任務的觸發時機既簡單又複雜。先講複雜的：前面說過，執行微任務前會先施行微任務檢查，而微任務檢查的觸發時機可參考這張圖：</p>
+<p><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f8f62e0a1f68feb6668da05dab93ecca/3d4b6/perform-a-microtask-checkpoint.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 76.94915254237287%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAACSUlEQVQ4y1WU525aQRCFef+X4A9CdAOm2wYb04sNooVqTJGSIMVBoRdN/I20CJCOdvbevWfOzJzFsl6vZbvdyuFwUOz3e9ntdhofj0fFdQx4z3cGm81GVquVnE4nsWQyWclms+Lz+SQYDEosFpNkMql7r9crDodDwuGwOJ1OcbvdYrfbJZfLycfHh/T7fRkMBjIcDqXdbiuxRb5/z8/PYrVa5e7uTu7v75X45eVFOp2ONJtNXVutljQaDd1D9Pn5qaQQjkYjPaOEP/tfUqvV5PHxUSKRiCpDRSgUklQqpckgpwrOED89PelZ3qMOwovC1Z+tEkIQCAQUlEp5rDabTVwulxQKBVWHUkAMCWpvSv77a6UHUIAaMj88PEg0GpV0Oq1xPp+X+Xwu0+lUJpPJZb0GxEr4e/Bd8ntNhwEJfYTo7e1NKpWKlMtlTQYYBkqJeU78+vqqCfmGiVuW//ZSr9d1GH6/X8FkAb0kSbFYVKVUAIFZITE9pr9K2Gp8SbfX0Ww02/QSYlZagJrZbKaTNWDC4/FYcVPy6XTUBlMG/kMpvmMgHo/n4k8SmbYkEgkF51B5M5Th+0w63baUSqWLLVBFufQTlSQhAXuScBZn4L1er3drm8P+KN3uD20sSuLxuIKbYQhJwDtIUYqNeEbpxocXY8PMDSArRMaLlGNujkkAYSaT0SqwGn1EIbeFvRKu1xt9CGm1WlW7YA9jEayDemMTBDAIvkEdw8KjxEp4Pp91Sjwg4/X0gNmblXNMFEC2XC4Vi8VC/6n+AxnZ/06kkcdrAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="規範中有引用到 perform a microtask checkpoint 關鍵字的段落。圖擷自 [WHATWG 規範文件](https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint)"
+        title="規範中有引用到 perform a microtask checkpoint 關鍵字的段落。圖擷自 [WHATWG 規範文件](https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint)"
+        src="/static/f8f62e0a1f68feb6668da05dab93ecca/fcda8/perform-a-microtask-checkpoint.png"
+        srcset="/static/f8f62e0a1f68feb6668da05dab93ecca/fcda8/perform-a-microtask-checkpoint.png 590w,
+/static/f8f62e0a1f68feb6668da05dab93ecca/3d4b6/perform-a-microtask-checkpoint.png 712w"
+        sizes="(max-width: 590px) 100vw, 590px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption"><p>規範中有引用到 perform a microtask checkpoint 關鍵字的段落。圖擷自 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">WHATWG 規範文件</a></p></figcaption>
+  </figure></p>
+<p>點擊<a href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">這個連結</a>，再點擊 perform a microtask checkpoint 粗體字，你也可以看到引用這個關鍵字的其它段落（當然不只這些，比如還有 <a href="https://drafts.csswg.org/web-animations/#update-animations-and-send-events" target="_blank" rel="nofollow noopener noreferrer">update animations and send events</a> 的第 3 步）。</p>
+<p>比較常見的觸發點是 8.1.4.4 的 Calling scripts，它在 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#calling-scripts:perform-a-microtask-checkpoint" target="_blank" rel="nofollow noopener noreferrer">clean up after running script 的最後</a>，當呼叫堆疊為空，會施行微任務檢查。</p>
+<p>我沒有很了解 script 在規範中的意義為何，只知道有很多地方都會執行 clean up after running script，最常見的便是<a href="https://heycam.github.io/webidl/#invoke-a-callback-function" target="_blank" rel="nofollow noopener noreferrer">調用回呼的 Return 階段的第 2 步</a>，而這就是為什麼在上一節第二個例子中的 <code class="language-text">onClick</code>、<code class="language-text">onAf</code> 會在執行完畢後，馬上施行微任務檢查 。</p>
+<p> 「太瑣碎了吧！我怎麼可能記得住？」在你喊出這句話之前，我要來講一個簡單的判斷方法：只要當前呼叫堆疊為空，微任務檢查便會立即施行；易言之，微任務的執行策略是：<strong>見縫插針、盡可能早</strong>。</p>
+<p>這個判斷方法並沒在規範中明確表述（至少我沒找到），但它應能適用 99.9% 的情境，剩下 0.1% 還有待你分享給我。</p>
+<p>只講一個證據：現代瀏覽器已把 <code class="language-text">Promise.then()</code> 看作是一種微任務（至少在 2015 年前不是如此，詳情可見<a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="nofollow noopener noreferrer">這篇文章</a>），而在 ECMAScript 規範裡，有一個與微任務相似的概念，叫作 job，而 <a href="https://262.ecma-international.org/11.0/#sec-promise-jobs" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">Promise.then()</code> 便是一種 job</a>。因此，微任務的執行策略理論上要跟 job 相容。對於 <a href="https://262.ecma-international.org/11.0/#sec-jobs" target="_blank" rel="nofollow noopener noreferrer">job 的執行時機</a>，你會發現它跟我前述的判斷方法是一樣的：</p>
+<blockquote>
+<p>在未來的某個時間點，當沒有正在運行的執行上下文，且執行上下文堆疊為空時。</p>
+</blockquote>
+<p>（除了 <code class="language-text">Promise</code>，<a href="https://dom.spec.whatwg.org/#queue-a-mutation-observer-compound-microtask" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">MutationObserver</code></a>、<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-queuemicrotask" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">queueMicrotask</code></a> 也是微任務。有很多文章把 <a href="https://html.spec.whatwg.org/multipage/web-messaging.html#window-post-message-steps" target="_blank" rel="nofollow noopener noreferrer"><code class="language-text">postMessage</code></a> 也當作微任務，<a href="https://html.spec.whatwg.org/multipage/web-messaging.html#window-post-message-steps" target="_blank" rel="nofollow noopener noreferrer">但它其實是宏任務</a>，來自 posted message 任務源 ）</p>
+<h2 id="回答開頭的問題" style="position:relative;"><a href="#%E5%9B%9E%E7%AD%94%E9%96%8B%E9%A0%AD%E7%9A%84%E5%95%8F%E9%A1%8C" aria-label="回答開頭的問題 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>回答開頭的問題</h2>
+<p>本文到這裡已經快 7000 字了，原本還想寫事件迴圈可以怎麼應用，但讀者可能已經跑光了（其實是我手痠啦哈哈），加上我還沒有很了解微任務的使用時機，只好作罷。</p>
+<p>在結束之前，看看我開頭提的問題，有什麼是還沒回答的嗎？有！</p>
+<blockquote>
+<p>「幀」是什麼？</p>
+</blockquote>
+<p>幀是組成瀏覽器畫面的基本元素；每個時刻的畫面，都是由一個相同或不同的幀所組成的。想更了解這句話的具體涵義，可查看 <a href="https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#frames" target="_blank" rel="nofollow noopener noreferrer">Chrome 開發者工具 Performance 面板的 Frames 斷面圖</a>。</p>
+<p>幀與更新畫面相關，但並<strong>不等同於</strong>更新畫面。幀包括了事件迴圈、佈局（layout）、繪製（paint）等等。一幀就代表一次畫面更新，但不代表只有一輪事件迴圈，因為瀏覽器能根據各種原因跳過更新畫面。</p>
+<p>本文到此（終於）結束，不知道你是否跟我一樣體驗到了事件迴圈的魅力？</p>
+<p>喂？喂？還有人在嗎⋯⋯？</p>
+<h2 id="相關資料" style="position:relative;"><a href="#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99" aria-label="相關資料 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相關資料</h2>
+<ul>
+<li><a href="https://github.com/fi3ework/blog/issues/29" target="_blank" rel="nofollow noopener noreferrer">跟着 Event loop 规范理解浏览器中的异步机制</a></li>
+<li><a href="https://github.com/aooy/blog/issues/5" target="_blank" rel="nofollow noopener noreferrer">从event loop规范探究javaScript异步及浏览器更新渲染时机</a></li>
+<li><a href="https://www.404forest.com/2017/07/18/how-javascript-actually-works-eventloop-and-uirendering/" target="_blank" rel="nofollow noopener noreferrer">深入探究 eventloop 与浏览器渲染的时序问题</a></li>
+<li><a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="nofollow noopener noreferrer">Tasks, microtasks, queues and schedules</a></li>
+<li><a href="http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D" target="_blank" rel="nofollow noopener noreferrer">Loupe</a>——動畫演示呼叫堆疊、事件循環和任務佇列之間的互動。</li>
+<li>
+<p>規範文件：</p>
+<ul>
+<li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops" target="_blank" rel="nofollow noopener noreferrer">WHATWG HTML Living Standard: Event loops</a></li>
+<li><a href="https://dev.w3.org/html5/spec-LC/webappapis.html#event-loops" target="_blank" rel="nofollow noopener noreferrer">W3C HTML5: Event loops</a></li>
+</ul>
+</li>
+</ul></div></div><div class="social-share"><ul><li class="social-share-item email"><button aria-label="email" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#7f7f7f"></circle><path d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z" fill="white"></path></svg></button></li><li class="social-share-item facebook"><button aria-label="facebook" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#3b5998"></circle><path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" fill="white"></path></svg></button></li><li class="social-share-item twitter"><button aria-label="twitter" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#00aced"></circle><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" fill="white"></path></svg></button></li><li class="social-share-item linkedin"><button aria-label="linkedin" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#007fb1"></circle><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z" fill="white"></path></svg></button></li><li class="social-share-item reddit"><button aria-label="reddit" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#5f99cf"></circle><path d="m 52.8165,31.942362 c 0,-2.4803 -2.0264,-4.4965 -4.5169,-4.4965 -1.2155,0 -2.3171,0.4862 -3.128,1.2682 -3.077,-2.0247 -7.2403,-3.3133 -11.8507,-3.4782 l 2.5211,-7.9373 6.8272,1.5997 -0.0102,0.0986 c 0,2.0281 1.6575,3.6771 3.6958,3.6771 2.0366,0 3.6924,-1.649 3.6924,-3.6771 0,-2.0281 -1.6575,-3.6788 -3.6924,-3.6788 -1.564,0 -2.8968,0.9758 -3.4357,2.3443 l -7.3593,-1.7255 c -0.3213,-0.0782 -0.6477,0.1071 -0.748,0.4233 L 32,25.212062 c -4.8246,0.0578 -9.1953,1.3566 -12.41,3.4425 -0.8058,-0.7446 -1.8751,-1.2104 -3.0583,-1.2104 -2.4905,0 -4.5152,2.0179 -4.5152,4.4982 0,1.649 0.9061,3.0787 2.2389,3.8607 -0.0884,0.4794 -0.1462,0.9639 -0.1462,1.4569 0,6.6487 8.1736,12.0581 18.2223,12.0581 10.0487,0 18.224,-5.4094 18.224,-12.0581 0,-0.4658 -0.0493,-0.9248 -0.1275,-1.377 1.4144,-0.7599 2.3885,-2.2304 2.3885,-3.9406 z m -29.2808,3.0872 c 0,-1.4756 1.207,-2.6775 2.6894,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 -1.4824,0 -2.6894,-1.2002 -2.6894,-2.6758 z m 15.4037,7.9373 c -1.3549,1.3481 -3.4816,2.0043 -6.5008,2.0043 l -0.0221,-0.0051 -0.0221,0.0051 c -3.0209,0 -5.1476,-0.6562 -6.5008,-2.0043 -0.2465,-0.2448 -0.2465,-0.6443 0,-0.8891 0.2465,-0.2465 0.6477,-0.2465 0.8942,0 1.105,1.0999 2.9393,1.6337 5.6066,1.6337 l 0.0221,0.0051 0.0221,-0.0051 c 2.6673,0 4.5016,-0.5355 5.6066,-1.6354 0.2465,-0.2465 0.6477,-0.2448 0.8942,0 0.2465,0.2465 0.2465,0.6443 0,0.8908 z m -0.3213,-5.2615 c -1.4824,0 -2.6877,-1.2002 -2.6877,-2.6758 0,-1.4756 1.2053,-2.6775 2.6877,-2.6775 1.4824,0 2.6877,1.2019 2.6877,2.6775 0,1.4756 -1.2053,2.6758 -2.6877,2.6758 z" fill="white"></path></svg></button></li><li class="social-share-item pocket"><button aria-label="pocket" class="react-share__ShareButton" style="background-color:transparent;border:none;padding:0;font:inherit;color:inherit;cursor:pointer"><svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="31" fill="#EF3F56"></circle><path d="M41.084 29.065l-7.528 7.882a2.104 2.104 0 0 1-1.521.666 2.106 2.106 0 0 1-1.522-.666l-7.528-7.882c-.876-.914-.902-2.43-.065-3.384.84-.955 2.228-.987 3.1-.072l6.015 6.286 6.022-6.286c.88-.918 2.263-.883 3.102.071.841.938.82 2.465-.06 3.383l-.015.002zm6.777-10.976C47.463 16.84 46.361 16 45.14 16H18.905c-1.2 0-2.289.82-2.716 2.044-.125.363-.189.743-.189 1.125v10.539l.112 2.096c.464 4.766 2.73 8.933 6.243 11.838.06.053.125.102.19.153l.04.033c1.882 1.499 3.986 2.514 6.259 3.014a14.662 14.662 0 0 0 6.13.052c.118-.042.235-.065.353-.087.03 0 .065-.022.098-.042a15.395 15.395 0 0 0 6.011-2.945l.039-.045.18-.153c3.502-2.902 5.765-7.072 6.248-11.852L48 29.674v-10.52c0-.366-.041-.728-.161-1.08l.022.015z" fill="white"></path></svg></button></li></ul></div></div><div class="toc outside"><ul>
+<li><a href="/event-loop-in-depth/#js-%E5%96%AE%E5%9F%B7%E8%A1%8C%E7%B7%92%E5%8D%BB%E4%B8%8D%E9%98%BB%E5%A1%9E%E7%9A%84%E7%A5%95%E5%AF%86">JS 單執行緒卻不阻塞的祕密</a></li>
+<li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">事件迴圈的基本概念</a></li>
+<li><a href="/event-loop-in-depth/#%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88%E6%98%AF%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%E7%9A%84%EF%BC%9F">事件迴圈是怎麼運作的？</a></li>
+<li><a href="/event-loop-in-depth/#%E5%BE%9E%E7%AF%84%E4%BE%8B%E4%BA%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E8%BF%B4%E5%9C%88">從範例了解事件迴圈</a></li>
+<li><a href="/event-loop-in-depth/#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">微任務的執行策略</a></li>
+<li><a href="/event-loop-in-depth/#%E5%9B%9E%E7%AD%94%E9%96%8B%E9%A0%AD%E7%9A%84%E5%95%8F%E9%A1%8C">回答開頭的問題</a></li>
+<li><a href="/event-loop-in-depth/#%E7%9B%B8%E9%97%9C%E8%B3%87%E6%96%99">相關資料</a></li>
+</ul></div></main><footer><span>© 2021 Yeefun Lin | Theme by </span><a href="https://github.com/junhobaik">JunhoBaik</a><span> | Built with </span><a href="https://www.gatsbyjs.org">Gatsby</a></footer></div><div id="top" style="opacity:0;pointer-events:none"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-double-up" class="svg-inline--fa fa-angle-double-up fa-w-10 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M177 255.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 351.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 425.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1zm-34-192L7 199.7c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l96.4-96.4 96.4 96.4c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9l-136-136c-9.2-9.4-24.4-9.4-33.8 0z"></path></svg></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-172986408-1', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/event-loop-in-depth/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f1172e2e7b1be26f0281.js"],"app":["/app-4331bacab8c883a61636.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-dd3c70765f8b72ff63ff.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-37ac5997d6a738e8d20d.js"],"component---src-pages-search-tsx":["/component---src-pages-search-tsx-534538228b9b3c1f6642.js"],"component---src-pages-tags-tsx":["/component---src-pages-tags-tsx-bf5a55cbc5da74c321e5.js"],"component---src-templates-post-tsx":["/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js"]};/*]]>*/</script><script src="/polyfill-f1172e2e7b1be26f0281.js" nomodule=""></script><script src="/component---src-templates-post-tsx-b039ac411f4f7dd7253b.js" async=""></script><script src="/commons-5aa92924169b5c149a6f.js" async=""></script><script src="/cb1608f2-af5c11d174355a97e951.js" async=""></script><script src="/styles-7d4153d260c0197f0043.js" async=""></script><script src="/app-4331bacab8c883a61636.js" async=""></script><script src="/framework-58f863d6aa18c11a521f.js" async=""></script><script src="/webpack-runtime-c1dd8df21db12693d109.js" async=""></script></body></html>
