@@ -880,7 +880,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><code class="language-text">onTimeout</code> 執行完畢，彈出。</li>
 </ol>
 <p>你可能會疑惑： 為什麼微任務是在程式執行完畢後便執行？微任務檢查不是應該在調用一個任務後（在此例即是 <code class="language-text">onTimeout</code>）才觸發嗎？</p>
-<p>別忘記我提醒過你的：微任務檢查的觸發時機相當多。下一節](#微任務的執行策略)我會詳述微任務的執行策略。</p>
+<p>別忘記我提醒過你的：微任務檢查的觸發時機相當多。<a href="#%E5%BE%AE%E4%BB%BB%E5%8B%99%E7%9A%84%E5%9F%B7%E8%A1%8C%E7%AD%96%E7%95%A5">下一節</a>我會詳述微任務的執行策略。</p>
 <p>再來看一個比較複雜的例子：</p>
 <p>HTML：</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click me!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div>
